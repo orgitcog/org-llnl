@@ -1,0 +1,21 @@
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  repos:
+    hubcast: spack/repos/spack_repo/hubcast
+  specs:
+  - py-pip
+  - py-hubcast
+  - py-bandit
+  - py-ruff
+  - smee-client
+  - typos
+  view: true
+  concretizer:
+    unify: true
+  develop:
+    py-hubcast:
+      spec: py-hubcast@=main
+      path: .

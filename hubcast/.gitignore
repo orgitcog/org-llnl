@@ -1,0 +1,7 @@
+__pycache__
+.env
+spack.lock
+.spack-env
+*.pem
+build-*
+.test-users.yml
