@@ -1,0 +1,11 @@
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+Makefile
+*.swp
+build/*
+*.cobaltlog
+*.error
+.vscode/settings.json
+cmake-build-*
+.idea

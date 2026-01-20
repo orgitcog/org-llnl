@@ -1,0 +1,18 @@
+#!/bin/bash
+
+MACPORTS_PATH=/opt/local
+
+INSTALL_PREFIX=${PWD}
+
+rm CMakeCache.txt
+cmake ../../ \
+  -DHAVOQGT_BUILD_TEST=FALSE \
+  -DCMAKE_CXX_COMPILER=g++ \
+  -DCMAKE_C_COMPILER=gcc \
+  -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DMPI_C_COMPILER=mpicc \
+  -DMPI_CXX_COMPILER=mpicxx \
+  -DHAVOQGT_BUILD_TEST="ON" \
+  -DCMAKE_CXX_FLAGS="-std=c++11"
+
