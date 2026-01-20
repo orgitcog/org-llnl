@@ -1,0 +1,47 @@
+integrator               = md
+define                   = -DPOSRES_PROT_SOFT
+nsteps                   = 100000
+dt                       = 0.0002
+comm-mode                = Linear
+nstcomm                  = 100
+
+nstxout                  = 0
+nstlog                   = 1000
+nstcalcenergy            = 1000
+nstenergy                = 1000
+nstxout-compressed       = 1000
+
+cutoff-scheme            = Verlet
+nstlist                  = 10
+ns_type                  = grid
+pbc                      = xyz
+verlet-buffer-tolerance  = -1
+rlist                    = 0.1
+
+coulombtype              = cut-off
+rcoulomb                 = 0.1
+; Method for doing Van der Waals
+vdw_type                 = cutoff
+rvdw                     = 0.1
+DispCorr                 = No
+
+tcoupl                  = v-rescale
+tc_grps                 = System
+nsttcouple              = 1
+ref_t                   = 10
+tau_t                   = 0
+gen-vel                 = yes
+gen-temp                = 10
+
+constraints              = none
+
+; Free energy variables
+free-energy              = yes
+couple-moltype           = System
+couple-lambda0           = vdw-q
+couple-lambda1           = none
+couple-intramol          = yes
+init-lambda              = 1
+delta-lambda             = 0
+sc-alpha                 = 1E3
+nstdhdl                  = 0

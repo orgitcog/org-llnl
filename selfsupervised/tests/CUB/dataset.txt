@@ -1,0 +1,1 @@
+https://gdo-datasci.llnl.gov/selfsupervised/download/image_sets/cub/basic_set_256x256.tgz

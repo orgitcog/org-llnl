@@ -1,0 +1,3 @@
+max_jobs: 10
+infile: "trace.txt"
+outfile: "trace_out.txt"

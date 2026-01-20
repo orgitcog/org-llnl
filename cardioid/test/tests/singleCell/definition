@@ -1,0 +1,31 @@
+#!/bin/bash
+## runtime=0s
+## tags=seq
+
+models="TT06Opt Grandi BetterTT06"
+
+function checkpoint {
+    for model in $models
+    do
+        save $model.stdOut
+    done
+}
+    
+function clean {
+    for model in $models
+    do
+        rm -f $model.stdOut
+    done
+    rm -f func_*
+}
+
+function run {
+    beginTest
+        
+    for model in $models
+    do
+        runBinary singleCell -o $model.data -h 0.01 -N 4 >| $model.stdOut 2>&1
+        numCompare $model.stdOut 1e-7 >> result 2>&1
+    done
+    endTest
+}

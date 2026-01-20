@@ -1,0 +1,45 @@
+define                   = -DPOSRES_PROT
+
+; RUN CONTROL PARAMETERS
+integrator               = steep
+nsteps                   = 50
+
+; ENERGY MINIMIZATION
+; Force tolerance and initial step-size
+emtol                    = 1000
+
+; OUTPUT CONTROL
+nstxout                  = 5
+nstvout                  = 0
+nstfout                  = 0
+nstlog                   = 1
+nstcalcenergy            = 1
+nstenergy                = 1
+nstxout-compressed       = 5
+
+; NEIGHBORSEARCHING PARAMETERS
+cutoff-scheme            = Verlet
+nstlist                  = 20
+ns_type                  = grid
+pbc                      = xyz
+
+; ELECTROSTATICS AND VDW
+coulombtype              = cut-off
+rcoulomb                 = 1
+vdw_type                 = cut-off
+vdw-modifier             = Potential-shift-Verlet
+rvdw                     = 1
+DispCorr                 = No
+
+; CONSTRAINTS
+constraints              = none
+
+; Free energy variables
+free-energy              = yes
+sc-function              = gapsys
+couple-moltype           = system
+couple-intramol          = yes
+couple-lambda0           = vdw-q
+couple-lambda1           = none
+init-lambda              = 1
+nstdhdl                  = 0

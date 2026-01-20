@@ -1,0 +1,2 @@
+https://gdo-datasci.llnl.gov/selfsupervised/download/image_sets/compcars/resize_crop_24_permutes.tgz
+https://gdo-datasci.llnl.gov/selfsupervised/download/image_sets/compcars/resize_int_crop.tgz

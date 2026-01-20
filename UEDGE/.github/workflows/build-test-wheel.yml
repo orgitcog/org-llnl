@@ -1,0 +1,235 @@
+name: Build and test UEDGE - write wheel files if tests pass
+permissions:
+  contents: read
+
+on:
+  push:
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  run-all-tests:
+    name: Runs test ${{ matrix.tests }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9"]
+        tests:
+          - fulltests
+          - unittests/D+C
+          - unittests/D_mols
+          - unittests/D_only
+          - unittests/slab_D_only
+    steps:
+      - name: Check out repo (with tags)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # needed so tags exist locally
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Set up Fortran (gfortran)
+        uses: fortran-lang/setup-fortran@v1
+        with:
+          compiler: gcc
+
+      - name: Install pip dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "forthon>=0.10.7" "numpy==1.26.4" h5py
+          python -m pip install flake8
+          python -m pip install pytest-isolate pytest-xdist
+
+      - name: Build UEDGE
+        run: |
+          python -m pip install .
+
+      - name: Check out pytests branch into subdir
+        uses: actions/checkout@v4
+        with:
+          ref: pytests
+          repository: LLNL/UEDGE
+          path: pytests-src
+
+      - name: Test with pytest
+        run: |
+          # Run tests from the checked-out pytests tree; UEDGE is already installed above.
+          pytest --isolate --tb=native "pytests-src/pytests/${{ matrix.tests }}"
+
+  build_wheels:
+    name: Build CPython wheels on ${{ matrix.os }}
+    # Only build wheels for tags (push) and published releases; never on PRs.
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+    needs: run-all-tests
+    runs-on: ${{ matrix.os }}
+#    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, macos-15-intel]
+
+    steps:
+      - name: Check out repo (with tags)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # needed so tags exist locally
+
+      - name: Set up Fortran (gfortran)
+        uses: fortran-lang/setup-fortran@v1
+        with:
+          compiler: gcc
+
+      - name: Determine latest tag
+        id: latest_tag
+        shell: bash
+        run: |
+          git fetch --tags --force
+          tag=$(git tag -l 'v*' --sort=-v:refname | head -n 1)
+          if [[ -z "$tag" ]]; then
+            echo "No v* tags found." >&2
+            exit 1
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "Latest v* tag is: $tag"
+
+      - name: Check out latest tag (manual runs only)
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          git checkout "refs/tags/${{ steps.latest_tag.outputs.tag }}"
+
+      - name: Build wheels (CPython)
+        uses: pypa/cibuildwheel@v2
+        env:
+          # Build all supported CPython wheels in one run.
+          CIBW_BUILD: "cp3?-*"
+          # Clean skip list: no 32-bit builds; no Linux i686. (We are *not* skipping musllinux.)
+          CIBW_SKIP: "*-manylinux_i686 *-musllinux_i686"
+          CIBW_ARCHS_LINUX: auto
+          CIBW_BUILD_VERBOSITY: 1
+          CIBW_BEFORE_BUILD: >
+            python -m pip install --upgrade pip &&
+            pip install numpy "forthon>=0.10.7" "build<0.10.0"
+          CIBW_TEST_COMMAND: 'python - <<EOF
+          import uedge
+          print("uedge imported OK:", uedge.__version__)
+          EOF'
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-cpython-${{ matrix.os }}-${{ github.event_name == 'workflow_dispatch' && steps.latest_tag.outputs.tag || github.ref_name }}
+          path: ./wheelhouse/*.whl
+
+  build_wheels_pypy:
+    name: Build PyPy wheels on ${{ matrix.os }}
+    # Only build wheels for tags (push) and published releases; never on PRs.
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+    needs: run-all-tests
+    runs-on: ${{ matrix.os }}
+#    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, macos-15-intel]
+
+    steps:
+      - name: Check out repo (with tags)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # needed so tags exist locally
+
+      - name: Set up Fortran (gfortran)
+        uses: fortran-lang/setup-fortran@v1
+        with:
+          compiler: gcc
+
+      - name: Determine latest tag
+        id: latest_tag
+        shell: bash
+        run: |
+          git fetch --tags --force
+          tag=$(git tag -l 'v*' --sort=-v:refname | head -n 1)
+          if [[ -z "$tag" ]]; then
+            echo "No v* tags found." >&2
+            exit 1
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "Latest v* tag is: $tag"
+
+      - name: Check out latest tag (manual runs only)
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          git checkout "refs/tags/${{ steps.latest_tag.outputs.tag }}"
+
+
+
+      - name: Build wheels (PyPy)
+        uses: pypa/cibuildwheel@v2
+        env:
+          CIBW_BUILD: "pp*"
+          CIBW_SKIP: "*-manylinux_i686 *-musllinux_i686"
+          CIBW_ARCHS_LINUX: auto
+          CIBW_BUILD_VERBOSITY: 1
+          CIBW_BEFORE_BUILD: >
+            python -m pip install --upgrade pip &&
+            pip install numpy "forthon>=0.10.7" "build<0.10.0"
+          CIBW_TEST_COMMAND: 'python - <<EOF
+          import uedge
+          print("uedge imported OK:", uedge.__version__)
+          EOF'
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-pypy-${{ matrix.os }}-${{ github.event_name == 'workflow_dispatch' && steps.latest_tag.outputs.tag || github.ref_name }}
+
+          path: ./wheelhouse/*.whl
+
+
+  gather_wheels:
+    name: Gather built wheels
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+    needs: [build_wheels, build_wheels_pypy]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo (with tags)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine latest v* tag (manual runs)
+        id: latest_tag
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          git fetch --tags --force
+          tag=$(git tag -l 'v*' --sort=-v:refname | head -n 1)
+          if [[ -z "$tag" ]]; then
+            echo "No v* tags found." >&2
+            exit 1
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "Latest v* tag is: $tag"
+
+      - name: Download all wheel artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: wheels
+          merge-multiple: true
+
+      - name: Upload combined wheel archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: all_wheels-${{ github.event_name == 'workflow_dispatch' && steps.latest_tag.outputs.tag || github.ref_name }}
+          path: wheels
+
+

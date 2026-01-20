@@ -1,0 +1,153 @@
+1.  The Anatomy class is totally undefined, and is never filled with
+data.
+
+2.  The polymorphic pointers like Diffusion* in the Simulate class and
+Conductivity* in the diffusion classes should be wrapped in a
+templatized goody so that the default copy constructor, destructor, etc
+will just work.
+
+3.  It would really be better if the fibre orientation angles were
+converted to a double (radians) when they are read in and the
+conductivity models don't have to worry about the conversion.
+
+4.  The grid spacing (in mm) appears to be read from input.  Shouldn't
+this travel with the anatomy data?
+
+
+6.  There is output in FibreConductivity.cc that isn't screened for rank
+
+9.  Do something about the long comment in Conductivity.hh
+
+10.  Initialization of Voltages
+
+13.  Base classes need virtual destructors
+
+14.  The process of creating a HaloExchange from a GridRouter involves a
+great deal of copying data.  This could be improved.
+
+15.  I really don't like the way the Simulate class is turning out.  In
+particular the fact that it owns things like GridRouter and
+HaloExchange<double> voltageExchange that can't be easily initialized in
+the constructor is a problem.
+
+16.  There is way too much conversion from gids to tuples going on.
+Should think about the right time to ditch the gids and just store
+tuples.
+
+17.  We allow multiple stimulus objects, but if two objects happen to
+stimulate the same cell the last guy wins.  Is this what we want?  Also,
+if stimuli are additive we need to zero the external stimulus every time
+step.
+
+
+18.  The conductivity classes don't know anything about cell type.  In
+BlueBeats there are explicit checks to make sure that we're only
+computing conductivities for tissue cell.
+
+19.  The system for using the JHU model for conductivities isn't the
+same as in BlueBeats.  In BB we use a parameter on the anatomy reader
+(sort of) to determine whether to read the angles.  Here, we need to set
+the type of the CONDUCTIVITY object.  Should there be some kind of magic
+system that turns on the JHU model if the fiber angles can't be found?
+
+20.  There is a fudge factor of 1e-5 added to the radius of a domain
+in GridRouter when determining whether a cell is inside the domain.  I'd
+feel better if there was a meaningful length scale attached to the fudge.
+
+22.  The size of the simulation cell is stored in both Simulate and
+Anatomy.  This is trouble waiting to happen.
+
+23.  Why does the PointListSensor have a collection of pointers to
+streams instead of just a collection of streams?  With just streams we
+don't need a non-default destructor.
+
+24.  What are reasonable defaults for the printRate and evalRate of a
+Sensor?
+
+25.  It might be nice if the ActivationTimeSensor had a printrate in ms
+instead of timesteps.  What about the other print/eval rate functions?
+should they be in steps or in msec?
+
+26.  We're going down the road of making all of the Sensors depend on
+the cell order in the Anatomy.  Do we want to think about rebuilding all
+of the Sensors if the Anatomy changes?
+
+27.  How is the PointListSensor's output organized?  Should we use
+snapshot directories?  Should each Sensor go in its own special purpose
+directory?
+
+28.  Loop count is currently an int.  Do we need to make it long long?
+
+29.  Figure out arch dependent build stuff.  In particular, the code
+that is inherited from ddcMD has some expectations about what the
+-D$(ARCH) macros should look like and I don't think we're doing the righ
+thing at present
+
+30.  I'm not sold on the checks for zero valued elements of the
+conductivity tensor in the computation of the diffusion weights.
+
+31. The decomposition is setup by two functions: assignCellsToTasks and
+getRemoteCells.  Right now both scan the DECOMPOSITION object.  Perhaps
+these should be brought together somehow.
+
+32. Why does the PointListSensor have a vector of pointers to streams
+instead of just a vector of streams?
+
+33.  The loadState function in TT06_RRG_Reaction silently ignores
+unknown fieldsName.  It also merrily goes about its way when not all of
+the variables that are possible to set are in the BucketOfBits.
+
+34.  The way we have structured the loading of restart files all of the
+data gets tokenized twice.  Once in the cell model when the cell state
+is extracted from the BucketOfBits and a second time when the simulation
+loop gets the membrane voltage.  If this turns out to be a performance
+bottleneck we can instead store each record in tokenized form (or
+perhaps store the token offsets) when we constrcut the BucketOfBits
+
+35.  The CommTable class as revised by Changhoan leaks memory when
+destroyed.  (_offsets)
+
+36.  SPI causes problems with the former design that the remote data was
+appended to the local data and appeared to be a single array.  This is
+especially acute for the membrane voltage.
+
+37.  sigmaLi and sigmaTi are probably crappy choices for keywords since
+they likely evoke bi-domain concepts.
+
+38.  There are at least four places in the code where the name of the
+snapshot directory is constructed.  We should call a common function.
+
+39.  The pio library will choke on checkpoint files where any one of the
+physical files contains no data.  The cause of the crash will be the
+assert(read_len > 0) at line 671 (r1825).  We should think through very
+carefully what will happen if a file has no data and how to be sure that
+case is properly supported.
+
+40.  The intrinsic vec_ld won't accept a const double* as an argument.
+If it did we could throw quite a few more consts into the calc
+function.  Mostly these were removed in r403 to get the code to compile.
+
+41.  FGR diffusion leaks since it does not delete fgrBarrier_.  I'd
+really prefer not to have a raw pointer sitting around.  First I'll need
+to get the fast barrier stuff better designed.
+
+42.  The snapshotCellList_ and coarsedata_ members *must* be removed
+     from the Simulate class.
+
+43.  The place where we call posix_memalign aren't sensitive to the
+     actual simd length.
+
+44.  The handling of the number of files for pio output is not
+adequate.  Each Popen should probably do something inteligent.  Perhaps
+Pclose should reset the default.  The fact that the number of files
+isn't a class member is an even bigger problem.
+
+45.  The nGlobal member of Anatomy probably isn't a very good idea.
+nRemote has problems too since any change to the cell Array can change
+nRemote without actually resetting the class value.  Anatomy is an
+easy class to screw up.
+
+46.  The handling of the nDiffusionCore return value from the
+assignment code completely messes up the ability to set diffusion and
+reaction thread by thread.  This needs to be cleaned up.  I'm in too
+much of a hurry right now.

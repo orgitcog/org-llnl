@@ -1,0 +1,110 @@
+stages:
+  - create_env
+  - install
+  - run_unit_tests
+  - run_integration_tests
+
+    
+.create_env:
+  script:
+    - make create_env
+
+.install:
+  script:
+    - make install
+
+.run_unit_tests:
+  script:
+    - make run_unit_tests
+
+.run_integration_tests:
+  script:
+    - make run_integration_tests
+
+.on_cz:
+  tags:
+    - shell
+    - ruby
+    
+.on_rz:
+  tags:
+    - shell
+    - rztopaz
+
+.on_scf:
+  tags:
+    - shell
+    - magma
+
+.run_on_cz:
+  rules:
+    - if: '$SOURCE_ZONE == "CZ" && $CI_PIPELINE_SOURCE != "merge_request_event"'
+
+.run_on_rz:
+  rules:
+    - if: '$SOURCE_ZONE == "RZ" && $CI_PIPELINE_SOURCE != "merge_request_event"'
+
+.run_on_scf:
+  rules:
+    - if: '$SOURCE_ZONE == "SCF" && $CI_PIPELINE_SOURCE != "merge_request_event"'    
+
+#
+# CZ
+#
+create_env_on_cz:
+  stage: create_env
+  extends: [ .on_cz, .run_on_cz, .create_env ]
+
+install_on_cz:
+  stage: install
+  extends: [ .on_cz, .run_on_cz, .install ]
+  
+run_unit_tests_on_cz:
+  stage: run_unit_tests
+  extends: [ .on_cz, .run_on_cz, .run_unit_tests ]
+  allow_failure: true
+        
+run_integration_tests_on_cz:
+  stage: run_integration_tests
+  extends: [ .on_cz, .run_on_cz, .run_integration_tests ]
+
+#
+# RZ
+#        
+create_env_on_rz:
+  stage: create_env
+  extends: [ .on_rz, .run_on_rz, .create_env ]
+
+install_on_rz:
+  stage: install
+  extends: [ .on_rz, .run_on_rz, .install ]
+  
+run_unit_tests_on_rz:
+  stage: run_unit_tests
+  extends: [ .on_rz, .run_on_rz, .run_unit_tests ]
+  allow_failure: true
+    
+run_integration_tests_on_rz:
+  stage: run_integration_tests
+  extends: [ .on_rz, .run_on_rz, .run_integration_tests ]
+
+#
+# SCF
+#
+
+create_env_on_scf:
+  stage: create_env
+  extends: [ .on_scf, .run_on_scf, .create_env ]
+
+install_on_scf:
+  stage: install
+  extends: [ .on_scf, .run_on_scf, .install ]
+  
+run_unit_tests_on_scf:
+  stage: run_unit_tests
+  extends: [ .on_scf, .run_on_scf, .run_unit_tests ]
+  allow_failure: true
+    
+run_integration_tests_on_scf:
+  stage: run_integration_tests
+  extends: [ .on_scf, .run_on_scf, .run_integration_tests ]

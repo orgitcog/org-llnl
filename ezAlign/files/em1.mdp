@@ -1,0 +1,201 @@
+; VARIOUS PREPROCESSING OPTIONS
+; Preprocessor information: use cpp syntax.
+; e.g.: -I/home/joe/doe -I/home/mary/roe
+include                  = 
+; e.g.: -DPOSRES -DFLEXIBLE (note these variable names are case sensitive)
+define                   =
+
+; RUN CONTROL PARAMETERS
+integrator               = steep
+nsteps                   = 1000
+
+; ENERGY MINIMIZATION OPTIONS
+; Force tolerance and initial step-size
+emtol                    = 1000
+emstep                   = 0.01
+
+; OUTPUT CONTROL OPTIONS
+; Output frequency for coords (x), velocities (v) and forces (f)
+nstxout                  = 0
+nstvout                  = 0
+nstfout                  = 0
+; Output frequency for energies to log file and energy file
+nstlog                   = 50
+nstcalcenergy            = 50
+nstenergy                = 50
+; Output frequency and precision for .xtc file
+nstxout-compressed       = 1000
+compressed-x-precision   = 100
+; This selects the subset of atoms for the compressed
+; trajectory file. You can select multiple groups. By
+; default, all atoms will be written.
+compressed-x-grps        = 
+; Selection of energy groups
+energygrps               = 
+
+; NEIGHBORSEARCHING PARAMETERS
+; cut-off scheme (Verlet: particle based cut-offs, group: using charge groups)
+cutoff-scheme            = Verlet
+; nblist update frequency
+nstlist                  = 20
+; ns algorithm (simple or grid)
+ns_type                  = grid
+; Periodic boundary conditions: xyz, no, xy
+pbc                      = xyz
+periodic-molecules       = no
+; Allowed energy error due to the Verlet buffer in kJ/mol/ps per atom,
+; a value of -1 means: use rlist
+verlet-buffer-tolerance  = 0.005
+; nblist cut-off        
+rlist                    = 1
+; long-range cut-off for switched potentials
+rlistlong                = -1
+nstcalclr                = -1
+
+; OPTIONS FOR ELECTROSTATICS AND VDW
+; Method for doing electrostatics
+coulombtype              = PME
+coulomb-modifier         = Potential-shift-Verlet
+rcoulomb-switch          = 0
+rcoulomb                 = 1.1
+; Relative dielectric constant for the medium and the reaction field
+epsilon_r                = 1
+epsilon_rf               = 0
+; Method for doing Van der Waals
+vdw_type                 = cutoff
+vdw-modifier             = Potential-shift-verlet
+; cut-off lengths       
+rvdw-switch              = 0
+rvdw                     = 1.1
+; Apply long range dispersion corrections for Energy and Pressure
+DispCorr                 = No
+; Extension of the potential lookup tables beyond the cut-off
+table-extension          = 1
+; Separate tables between energy group pairs
+energygrp-table          = 
+; Spacing for the PME/PPPM FFT grid
+fourierspacing           = 0.12
+; FFT grid size, when a value is 0 fourierspacing will be used
+fourier-nx               = 0
+fourier-ny               = 0
+fourier-nz               = 0
+; EWALD/PME/PPPM parameters
+pme-order                = 4
+ewald-rtol               = 1e-05
+ewald-rtol-lj            = 0.001
+lj-pme-comb-rule         = Geometric
+ewald-geometry           = 3d
+epsilon-surface          = 0
+
+; IMPLICIT SOLVENT ALGORITHM
+implicit-solvent         = No
+
+; GENERALIZED BORN ELECTROSTATICS
+; Algorithm for calculating Born radii
+gb-algorithm             = Still
+; Frequency of calculating the Born radii inside rlist
+nstgbradii               = 1
+; Cutoff for Born radii calculation; the contribution from atoms
+; between rlist and rgbradii is updated every nstlist steps
+rgbradii                 = 1
+; Dielectric coefficient of the implicit solvent
+gb-epsilon-solvent       = 80
+; Salt concentration in M for Generalized Born models
+gb-saltconc              = 0
+; Scaling factors used in the OBC GB model. Default values are OBC(II)
+gb-obc-alpha             = 1
+gb-obc-beta              = 0.8
+gb-obc-gamma             = 4.85
+gb-dielectric-offset     = 0.009
+sa-algorithm             = Ace-approximation
+; Surface tension (kJ/mol/nm^2) for the SA (nonpolar surface) part of GBSA
+; The value -1 will set default value for Still/HCT/OBC GB-models.
+sa-surface-tension       = -1
+
+; OPTIONS FOR WEAK COUPLING ALGORITHMS
+; Temperature coupling  
+tcoupl                   = berendsen
+nsttcouple               = -1
+nh-chain-length          = 10
+print-nose-hoover-chain-variables = no
+; Groups to couple separately
+tc-grps                  = system
+; Time constant (ps) and reference temperature (K)
+tau_t                    = 1.0
+ref_t                    = 300
+; pressure coupling     
+Pcoupl                   = berendsen
+Pcoupltype               = isotropic
+nstpcouple               = -1
+; Time constant (ps), compressibility (1/bar) and reference P (bar)
+tau_p                    = 12.0
+compressibility          = 3e-4
+ref_p                    = 1.0
+; Scaling of reference coordinates, No, All or COM
+refcoord-scaling         = No
+
+; OPTIONS FOR QMMM calculations
+QMMM                     = no
+; Groups treated Quantum Mechanically
+QMMM-grps                = 
+; QM method             
+QMmethod                 = 
+; QMMM scheme           
+QMMMscheme               = normal
+; QM basisset           
+QMbasis                  = 
+; QM charge             
+QMcharge                 = 
+; QM multiplicity       
+QMmult                   = 
+; Surface Hopping       
+SH                       = 
+; CAS space options     
+CASorbitals              = 
+CASelectrons             = 
+SAon                     = 
+SAoff                    = 
+SAsteps                  = 
+; Scale factor for MM charges
+MMChargeScaleFactor      = 1
+; Optimization of QM subsystem
+bOPT                     = 
+bTS                      = 
+
+; SIMULATED ANNEALING  
+; Type of annealing for each temperature group (no/single/periodic)
+annealing                = 
+; Number of time points to use for specifying annealing in each group
+annealing-npoints        = 
+; List of times at the annealing points for each group
+annealing-time           = 
+; Temp. at each annealing point, for each group.
+annealing-temp           = 
+
+; GENERATE VELOCITIES FOR STARTUP RUN
+gen_vel                  = no
+gen_temp                 = 320
+gen_seed                 = 473529
+
+; OPTIONS FOR BONDS    
+constraints              = h-bonds
+; Type of constraint algorithm
+constraint_algorithm     = Lincs
+; Do not constrain the start configuration
+continuation             = no
+; Use successive overrelaxation to reduce the number of shake iterations
+Shake-SOR                = no
+; Relative tolerance of shake
+shake-tol                = 0.0001
+; Highest order in the expansion of the constraint coupling matrix
+lincs-order              = 4
+; Number of iterations in the final step of LINCS. 1 is fine for
+; normal simulations, but use 2 to conserve energy in NVE runs.
+; For energy minimization with constraints it should be 4 to 8.
+lincs-iter               = 1
+; Lincs will write a warning to the stderr if in one step a bond
+; rotates over more degrees than
+lincs-warnangle          = 90
+; Convert harmonic bonds to morse potentials
+morse                    = no
+
