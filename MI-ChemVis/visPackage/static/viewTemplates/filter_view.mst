@@ -1,0 +1,29 @@
+<div id="{{id}}container" style="padding: 10px;">
+
+    <div id='{{id}}' class="content">
+
+    <p>
+    <label>Selection</label> <label id="{{id}}selectionCount">  </label>
+    <button type="button" class="btn btn-light btn-sm" id="{{id}}clearSelection">Clear</button>
+
+    <div class="btn-group btn-group-sm">
+      <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="{{id}}material">Material</button>
+    </div>
+
+    <div class="btn-group btn-group-sm">
+      <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="{{id}}morphology">Morphology</button>
+    </div>
+
+
+    <input id='{{id}}selection' type='text' class='tags' value ="">
+    </p>
+
+    <p>
+    <label>Highlight</label> <label id="{{id}}highlightCount">  </label>
+    <button type="button" class="btn btn-light btn-sm" id="{{id}}clearHighlight">Clear</button>
+    <input id='{{id}}highlight' type='text' class='tags' value ="">
+    </p>
+
+    </div>
+
+</div>

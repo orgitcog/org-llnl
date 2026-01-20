@@ -1,0 +1,457 @@
+#! /usr/bin/env python2
+"""This script is ExaMPI job launcher. It either acts as a launcher locally or
+offloads onto scheduling systems."""
+
+import sys
+import os
+import argparse
+import subprocess
+#import signal
+import copy
+import logging
+import random
+import socket
+
+class RuntimeHandler(object):
+	"""The RunetimeHandler class is the ExaMPI job launcher. It parses the mpiexec command arguments
+	and depending on the environment within which it operates launches the MPI application with
+	the FaultDaemons."""
+
+	def __init__(self, arguments):
+		self.arguments = arguments
+
+		self.setup_logger()
+		self.log.info(self.arguments)
+
+		self.detect_environment()
+
+		self.set_head_port()
+		self.set_control_port()
+		self.set_base_udp_port()
+		self.set_base_tcp_port()
+
+		self.errorcode = None
+
+	def setup_logger(self):
+		"""Setup a mpiexec log if needed."""
+
+		if self.arguments.logexec:
+			self.log = logging.getLogger(__name__)
+			self.log.setLevel(logging.INFO)
+
+			logname = 'mpiexec.log'
+
+			handler = logging.FileHandler(logname)
+			handler.setLevel(logging.INFO)
+
+			self.log.addHandler(handler)
+
+		else:
+			self.log = logging.getLogger(__name__)
+			self.log.addHandler(logging.NullHandler())
+
+	def test_bind(self, port):
+		"""Verify that port is bindable on localhost/0th job node. This does not check whether all
+		nodes will be compatible with the port, therefore this test can give a false negative."""
+
+		sokt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+		try:
+			sokt.bind((socket.gethostname(), port))
+
+		except socket.error:
+			self.log.warning('failed to bind socket port %i', port)
+			return False
+
+		else:
+			self.log.info('successful binding on port %i', port)
+			return True
+
+		finally:
+			sokt.close()
+
+	def set_head_port(self):
+		"""Set HeadDaemon communication port."""
+
+		self.log.info('setting head daemon port')
+
+		# argument provided port
+		if self.arguments.headport != None:
+			self.head_daemon_port = self.arguments.headport
+
+			if not self.test_bind(self.head_daemon_port):
+				self.log.error('prescribed head port is not able to be bound!')
+				raise OSError
+
+		# random port needed
+		else:
+			while True:
+				self.head_daemon_port = random.randint(20001, 30000)
+
+				if self.test_bind(self.head_daemon_port):
+					break
+
+		self.log.info('head daemon port set to: %i', self.head_daemon_port)
+
+	def set_control_port(self):
+		"""Set ControllerDaemon communication port."""
+
+		self.log.info('setting controller daemon port')
+
+		# argument provided port
+		if self.arguments.controlport != None:
+			self.controller_daemon_port = self.arguments.controlport
+
+			if not self.test_bind(self.controller_daemon_port):
+				self.log.error('prescribed control port is not able to be bound!')
+				raise OSError
+
+		# random port needed
+		else:
+			while True:
+				self.controller_daemon_port = random.randint(30001, 40000)
+
+				if self.test_bind(self.controller_daemon_port):
+					break
+
+		self.log.info('control daemon port set to: %i', self.controller_daemon_port)
+
+	def set_base_udp_port(self):
+		"""Set UDP base port for MPI session."""
+
+		self.log.info('setting udp base port')
+
+		# argument provided port
+		if self.arguments.udpbaseport != None:
+			self.udp_base_port = self.arguments.udpbaseport
+
+			if not self.test_bind(self.udp_base_port):
+				self.log.error('prescribed udp port is not able to be bound!')
+				raise OSError
+
+		# random port needed
+		else:
+			while True:
+				self.udp_base_port = random.randint(40001, 45000)
+
+				if self.test_bind(self.udp_base_port):
+					break
+
+		self.log.info('udp base port set to: %i', self.udp_base_port)
+	
+	def set_base_tcp_port(self):
+		"""Set TCP base port for MPI session."""
+
+		self.log.info('setting tcp base port')
+
+		# argument provided port
+		if self.arguments.tcpbaseport != None:
+			self.tcp_base_port = self.arguments.tcpbaseport
+
+			if not self.test_bind(self.tcp_base_port):
+				self.log.error('prescribed tcp port is not able to be bound!')
+				raise OSError
+
+		# random port needed
+		else:
+			while True:
+				self.tcp_base_port = random.randint(45001, 50000)
+
+				if self.test_bind(self.tcp_base_port):
+					break
+
+		self.log.info('tcp base port set to: %i', self.tcp_base_port)
+
+	def detect_environment(self):
+		"""Detect what environment is present by environment variables."""
+
+		if os.environ.get('SLURM_JOB_ID'):
+			self.runtime = 'slurm'
+			self.job_id = int(os.environ['SLURM_JOB_ID'])
+
+		# fallback onto local
+		else:
+			self.runtime = 'local'
+			self.job_id = int(os.getpid())
+
+		self.log.info('detected runtime: ' + self.runtime + ' job_id ' + str(self.job_id))
+
+	def launch(self):
+		"""Launch the required environment launcher."""
+
+		# temporary warning
+		executable = self.arguments.program[0]
+
+		#if not os.path.isfile(executable):
+		#	print("Executable", executable, "not found...")
+		#	sys.exit(-1)
+
+		# this fixes the problem silently
+		#executable = os.path.abspath(executable)
+
+		if not os.path.isabs(executable) and executable[0:2] != './':
+			print "Cannot find executable: " + executable
+
+		# check if executable is valid
+		#if self.arguments.nocheckprogram:
+		#	executable = self.arguments.program[0]
+
+		#	if not os.path.isfile(executable):
+		#		sys.stderr.write('executable passed was not valid.')
+
+		#		if self.arguments.extendprogram:
+		#			# file does not exist, try to append cwd
+		#			executable_path = '%s/%s' % (os.getcwd(), executable)
+
+		#			if not os.path.isfile(executable_path):
+		#				raise ValueError
+		#			else:
+		#				# assign executable_path to be used
+		#				sys.stderr.write('prepended cwd: %s' % executable_path)
+
+		#				self.arguments.program = executable_path
+
+		# NOTE could replace with dictionary
+		# runtimes[self.runtime](arguments)
+		if self.runtime == 'slurm':
+			self.log.info('launching slurm execution')
+			self.launch_slurm(self.arguments)
+
+		elif self.runtime == 'local':
+			self.log.info('launching local execution')
+			self.launch_local(self.arguments)
+
+		else:
+			raise ValueError
+
+	def launch_local(self, arguments):
+		"""Launch mpiexec locally. Acts as its own job scheduling system."""
+
+		# act as srun
+		processes = []
+
+	 	# create appropriate output files
+		if not arguments.separate_rank:
+			output_name = 'local-' + str(os.getpid()) + '.out'
+			output_file = open(output_name, 'a')
+
+			# separate stdout and stderr
+			if arguments.separate_error:
+				error_name = 'local-' + str(os.getpid()) + '.out'
+				error_file = open(error_name, 'a')
+
+			# combined stdout and stderr
+			else:
+				error_file = output_file
+
+		for rank in xrange(arguments.processes):
+			# set individual process environment
+			env = dict(copy.deepcopy(os.environ))
+			env['EXAMPI_ENV'] = 'local'
+
+			if arguments.logfault:
+				env['EXAMPI_LOG_FAULT_DAEMON'] = 'TRUE'
+			if arguments.loghead:
+				env['EXAMPI_LOG_HEAD_DAEMON'] = 'TRUE'
+			if arguments.logcontrol:
+				env['EXAMPI_LOG_CONTROLLER_DAEMON'] = 'TRUE'
+				
+			if arguments.enable_stages:
+				env['EXAMPI_STAGES'] = 'TRUE'
+
+			env['EXAMPI_LOCALID'] = str(rank)
+			env['EXAMPI_RANK'] = str(rank)
+			env['EXAMPI_JOB_ID'] = str(os.getpid())
+			env['EXAMPI_WORLD_SIZE'] = str(arguments.processes)
+			env['EXAMPI_HEAD_DAEMON_PORT'] = str(self.head_daemon_port)
+			env['EXAMPI_CONTROLLER_DAEMON_PORT'] = str(self.controller_daemon_port)
+			env['EXAMPI_UDP_TRANSPORT_BASE'] = str(self.udp_base_port)
+			env['EXAMPI_TCP_TRANSPORT_BASE'] = str(self.tcp_base_port)
+
+			self.log.info('created process environment')
+
+			# set up output file
+			if arguments.separate_rank:
+				output_name = 'local-' + str(os.getpid()) + '-' + str(rank) + '.out'
+
+				output_file = open(output_name, 'a')
+
+				if arguments.separate_error:
+					error_name = 'local-' + str(os.getpid()) + '-' + str(rank) + '.err'
+					error_file = open(error_name, 'a')
+
+				else:
+					error_file = output_file
+
+			# construct command
+			command = ['exampi_fault_daemon']
+
+			# check for other
+			if rank > 0 and arguments.other is not None:
+				command.append(arguments.other)				
+
+			else:
+				command.extend(arguments.program)
+
+			self.log.info('mpiexec launching %s', str(command))
+
+			# launch process
+			process = subprocess.Popen(command, env=env, stdout=output_file, stderr=error_file)
+			#process = subprocess.Popen(command, env=env)
+			processes.append(process)
+
+			self.log.info('started process %i', process.pid)
+
+		def wait_processes():
+			"""Process closure for waiting."""
+
+			for process in processes:
+				process.wait()
+
+			output_file.close()
+
+#		# create signal handler
+#		def signal_handler(signal, frame):
+#			self.log.warning('mpiexec received signal' + str(signal))
+#
+#			# forward signal to all processes
+#			for process in processes:
+#				process.send_signal(signal)
+#
+#			self.log.info('sent signal to all child processes.')
+#
+#			# wait for processes to end
+#			wait_processes()
+#
+#			self.log.info('waited for all child processes to die')
+#
+#		signal.signal(signal.SIGINT, signal_handler)
+#		self.log.info('set signal handler')
+
+		# without signal wait for processes
+		wait_processes()
+		self.log.info('waited for all child processes to die')
+
+		self.errorcode = max(process.returncode for process in processes)
+		self.log.info('local return code: %i', self.errorcode)
+
+	def launch_slurm(self, arguments):
+		"""Launch MPI application via Slurm Scheduler."""
+
+		command = ['srun']
+
+		# check for separate error or ranks output
+		if arguments.separate_error and not arguments.separate_rank:
+			command.append('--output=slurm-%J.out')
+			command.append('--error=slurm-%J.err')
+
+		elif arguments.separate_error and arguments.separate_rank:
+			command.append('--output=slurm-%J-%t.out')
+			command.append('--error=slurm-%J-%t.err')
+
+		elif arguments.separate_rank and not arguments.separate_error:
+			command.append('--output=slurm-%J-%t.out')
+
+		command.append('exampi_fault_daemon')
+		command.extend(arguments.program)
+
+		# declare EXAMPI_ENV
+		env = dict(copy.deepcopy(os.environ))
+		env['EXAMPI_ENV'] = 'slurm'
+		env['EXAMPI_HEAD_DAEMON_PORT'] = str(self.head_daemon_port)
+		env['EXAMPI_CONTROLLER_DAEMON_PORT'] = str(self.controller_daemon_port)
+		env['EXAMPI_UDP_TRANSPORT_BASE'] = str(self.udp_base_port)
+		env['EXAMPI_TCP_TRANSPORT_BASE'] = str(self.tcp_base_port)
+
+		if arguments.logfault:
+			env['EXAMPI_LOG_FAULT_DAEMON'] = 'TRUE'
+		if arguments.loghead:
+			env['EXAMPI_LOG_HEAD_DAEMON'] = 'TRUE'
+		if arguments.logcontrol:
+			env['EXAMPI_LOG_CONTROLLER_DAEMON'] = 'TRUE'
+			
+		if arguments.enable_stages:
+			env['EXAMPI_STAGES'] = 'TRUE'
+
+		self.log.info('srun command: %s', str(command))
+
+		# launch srun process
+		process = subprocess.Popen(command, env=env)
+		process.wait()
+
+		self.errorcode = process.returncode
+		self.log.info('srun return code: %i', self.errorcode)
+
+def parse_arguments():
+	"""Construct argument parser and parse arguments for mpiexec."""
+
+	# command line argument parsing
+	parser = argparse.ArgumentParser(description="ExaMPI Process Initiator")
+
+	# number of processes
+	parser.add_argument('-n', '--processes', type=int, required=True)
+
+	# application to execute
+	parser.add_argument('program', metavar='<program>', type=str, nargs=argparse.REMAINDER)
+
+	# to leave all epoch and config files
+	#parser.add_argument('-d', '--dirty', default=False, type=str)
+
+	# program check/extend
+	parser.add_argument('--nocheckprogram', action='store_false')
+	parser.add_argument('--extendprogram', action='store_true')
+
+	# fault tolerance enabled
+	#parser.add_argument('--noft', action='store_false')
+	#parser.add_argument('--retries', type=int)
+	
+	# MPI Stages enabled
+	parser.add_argument('--enable_stages', default=True, action='store_true')
+
+	# connection building
+	# TODO complete dynamic connection building task
+	#parser.add_argument('--static', action='store_true')
+
+	# separate stdout and stderr
+	parser.add_argument('--separate_error', action='store_true')
+	parser.add_argument('--separate_rank', action='store_true')
+
+	# create mpiexec log
+	parser.add_argument('--logexec', action='store_true')
+
+	# create fault daemon logs
+	parser.add_argument('--logfault', action='store_true')
+
+	# create head daemon logs
+	parser.add_argument('--loghead', action='store_true')
+
+	# create head daemon logs
+	parser.add_argument('--logcontrol', action='store_true')
+
+	# allow explicit head daemon port setting
+	parser.add_argument('--headport', type=int, default=None)
+
+	# allow explicit controller daemon port setting
+	parser.add_argument('--controlport', type=int, default=None)
+
+	parser.add_argument('--udpbaseport', type=int, default=None)
+	parser.add_argument('--tcpbaseport', type=int, default=None)
+
+	# separate executable
+	parser.add_argument('--other', type=str, default=None, help='Only supported locally.')
+
+	return parser.parse_args()
+
+def main():
+	"""mpiexec main function"""
+
+	# parse command line arguments
+	arguments = parse_arguments()
+
+	handler = RuntimeHandler(arguments)
+	handler.launch()
+
+	sys.exit(handler.errorcode)
+
+if __name__ == '__main__':
+	main()

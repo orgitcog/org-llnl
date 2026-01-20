@@ -1,0 +1,19 @@
+out_dir: results
+train:  
+    epochs: 20
+    batch_size: 4
+    train_val_ratio: 1.0
+model:
+    file_name: 'snap_model_d2_k6'
+    pooling_rate: -1.0
+    fixed_rate_l: 0.8
+    num_kernels: 6
+    channels: ('30,30')
+    edge_reduction: 'score_adaptive'
+optim:
+    lr: 1e-3
+dataset:
+    elem: 'Ta'
+    feature_type: 'snap_fx'
+test:
+    xyz_dir : 'test_d2_k6'

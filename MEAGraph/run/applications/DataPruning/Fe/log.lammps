@@ -1,0 +1,5 @@
+LAMMPS (28 Mar 2023 - Development)
+WARNING: Using I/O redirection is unreliable with parallel runs. Better to use the -in switch to read input files. (src/lammps.cpp:531)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+Total wall time: 0:00:00

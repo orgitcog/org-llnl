@@ -1,0 +1,35 @@
+cfg_dest: config.yaml
+dataset:
+  dir_name: datasets
+  elem: Nb
+  feature_type: soap
+  threshold: 0.001
+device: cuda:1
+model:
+  channels: 24,24
+  edge_reduction: score_adaptive
+  file_name: soap_model_d2_k6
+  fixed_rate_l: 0.8999900000000001
+  fixed_rate_r: 1.00001
+  num_depth: 2
+  num_kernels: 6
+  pooling_rate: -1.0
+  save_dir: model_saved
+num_threads: 4
+num_workers: 0
+optim:
+  lr: 0.001
+  opt: adam
+  opt_decay_rate: 0.65
+  opt_decay_step: 15
+  opt_restart: 0
+  scheduler: step
+  weight_decay: 0.0005
+out_dir: results/Nb_soap
+test:
+  xyz_dir: test_d2_k6
+torch_real: torch.float32
+train:
+  batch_size: 1
+  epochs: 50
+  train_val_ratio: 1.0

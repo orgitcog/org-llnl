@@ -1,0 +1,19 @@
+out_dir: results
+train:  
+    epochs: 50
+    batch_size: 1
+    train_val_ratio: 1.0
+model:
+    file_name: 'soap_model_d2_k6'
+    pooling_rate: -1.0
+    num_kernels: 6
+    channels: ('24,24')
+    edge_reduction: 'score_adaptive'
+optim:
+    lr: 1e-3
+dataset:
+    elem: 'Nb'
+    feature_type: 'soap'
+test:
+    xyz_dir : 'test_d2_k6'
+

@@ -1,0 +1,39 @@
+{
+	"paths": 	     {
+				"eval_model_base_loc": "/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/04_Eval_Models",
+				"sim_dir": "/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI",
+				"json_extract_base": "InputJson/Extract/json_extract_data",
+				"json_prep_base": "InputJson/Prep/json_prep_data_label",
+				"json_train_base": "InputJson/Train/json_train_model"
+			     },
+	"collection_options": {
+				"json_extract_counts": [39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 51, 52, 53, 55, 56, 59, 60, 61, 62, 63, 64, 65, 66], 
+				"json_prep_train_maps": [
+							 {
+							  "json_label": [6],
+							  "json_train": [3, 6, 7, 8],
+							  "set_info": ["UMag10, T2, RH"],
+							  "subset_info": ["PREC, SW", "PREC", "SW", ""]
+							 },
+							 {
+                                                          "json_label": [6],
+                                                          "json_train": [9, 10, 11, 12],
+							  "set_info": ["HGT, UMag10, T2, RH"],
+                                                          "subset_info": ["PREC, SW", "PREC", "SW", ""]
+                                                         },
+                                                         {
+                                                          "json_label": [7],
+                                                          "json_train": [13, 14, 15, 16],
+                                                          "set_info": ["HGT, UMag10, VPD"],
+                                                          "subset_info": ["PREC, SW", "PREC", "SW", ""]
+                                                         }
+							],
+				"FM_label_type": "Regression",
+				"metric_names": ["r2_score", "ev_score", "mse", "rmse", "max_err", "mae", "medae"],
+				"metric_on_sets": ["train", "test", "test_p90", "test_p95"]
+			      },
+	"evaluation":	     {
+				"count": 1,
+				"identifier_text": "many_cases"
+			     }
+}
