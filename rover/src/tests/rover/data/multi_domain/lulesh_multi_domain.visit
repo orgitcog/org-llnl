@@ -1,0 +1,9 @@
+!NBLOCKS 8
+./lulesh_multi_domain.0.vtk
+./lulesh_multi_domain.1.vtk
+./lulesh_multi_domain.2.vtk
+./lulesh_multi_domain.3.vtk
+./lulesh_multi_domain.4.vtk
+./lulesh_multi_domain.5.vtk
+./lulesh_multi_domain.6.vtk
+./lulesh_multi_domain.7.vtk
