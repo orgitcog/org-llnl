@@ -1,0 +1,59 @@
+name: Scheduled Cache Request
+
+on:
+  schedule:
+    - cron: "45 8 * * *"
+
+env:
+  # GitHub username (owner of BOT_TOKEN, will be credited for updates)
+  BOT_USER: lc-bot
+  # Paths used to store cloned repositories
+  ACTION_REPO: thisrepo
+  DATA_REPO: thisrepo
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  runDataUpdate:
+    name: Run Cache Request
+    runs-on: ubuntu-latest
+    env:
+      TIMESTAMP: X
+    steps:
+      - name: Store timestamp
+        run: |
+          echo "TIMESTAMP=$(date -u +"%F-%H")" >> "$GITHUB_ENV"
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: ${{ env.ACTION_REPO }}
+          token: ${{ secrets.BOT_TOKEN }}
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: "${{ env.DATA_REPO }}/_visualize/scripts/requirements.txt"
+      - name: Install dependencies
+        run: pip install -r $DATA_REPO/_visualize/scripts/requirements.txt
+      - name: Run cache script
+        run: ./$ACTION_REPO/.github/scripts/cache.sh
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      - name: Show health stats
+        if: ${{ always() }}
+        run: |
+          cat $DATA_REPO/_visualize/LAST_CACHE_REQUEST.txt || true
+          echo "Warning Count: $(grep -c 'Warning' $DATA_REPO/_visualize/LAST_CACHE_REQUEST.log)"
+          echo "From Timeouts: $(grep -c 'but failed' $DATA_REPO/_visualize/LAST_CACHE_REQUEST.log)"
+          echo "Limit Reached: $(grep -c 'rate limit exceeded' $DATA_REPO/_visualize/LAST_CACHE_REQUEST.log)"
+      - name: Save log files
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: logfiles_${{ env.TIMESTAMP }}_cache
+          path: |
+            ${{ env.DATA_REPO }}/_visualize/LAST_CACHE_REQUEST.txt
+            ${{ env.DATA_REPO }}/_visualize/LAST_CACHE_REQUEST.log

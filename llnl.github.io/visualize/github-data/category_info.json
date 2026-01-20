@@ -1,0 +1,224 @@
+{
+    "data": {
+        "All Software": {
+            "title": " All Software",
+            "hash": "AllSoftware",
+            "icon": {
+                "path": "/assets/images/logomark-llnl.svg",
+                "alt": "All Software"
+            },
+            "description": {
+                "short": "Browse LLNL projects below",
+                "long": ""
+            },
+            "topics": ""
+        },
+        "AI & Machine Learning": {
+            "title": "AI & Machine Learning",
+            "hash": "AI&ML",
+            "icon": {
+                "fa": "fa-brain-circuit",
+                "alt": "AI & ML"
+            },
+            "description": {
+                "short": "Integrate artificial intelligence and machine learning into scientific applications",
+                "long": ""
+            },
+            "topics":[
+                "artificial-intelligence",
+                "deep-learning",
+                "machine-learning",
+                "neural-network"
+            ]
+        },
+        "App Infrastructure": {
+            "title": "App Infrastructure",
+            "hash": "AppInfrastructure",
+            "icon": {
+                "fa": "fa-gear-complex-code",
+                "alt": "App Infrastructure"
+            },
+            "description": {
+                "short": "Browse tools for basic functionality common in HPC codes",
+                "long": ""
+            },
+            "topics":[
+                "app-infrastructure"
+            ]
+        },
+        "Applications": {
+            "title": "Applications",
+            "hash": "Applications",
+            "icon": {
+                "fa": "fa-laptop-code",
+                "alt": "Applications"
+            },
+            "description": {
+                "short": "Browse scientific simulation codes and IT management tools",
+                "long": ""
+            },
+            "topics": [
+                "application",
+                "applications",
+                "simulation",
+                "simulations"
+            ]
+        },
+        "Build Tools": {
+            "title": "Build Tools",
+            "hash": "BuildTools", 
+            "icon": {
+                "fa": "fa-tools",
+                "alt": "Build Tools"
+            },
+            "description": {
+                "short": "Automate and simplify complex dependencies and deployments",
+                "long": ""
+            },
+            "topics": [
+                "build-tools"
+            ]
+        },
+        "Data Management & Viz": {
+            "title": "Data Management & Viz",
+            "hash": "DataManagement&Viz",
+            "icon": {
+                "fa": "fa-display-chart-up",
+                "alt": "Data Management & Visualization"
+            },
+            "description": {
+                "short": "Manage visualizations with robust features and configurable analysis",
+                "long": ""
+            },
+            "topics": [
+                "data-management",
+                "data-viz"
+            ]
+        },
+        "Docs & Tutorials": {
+            "title": "Docs & Tutorials",
+            "hash": "Docs&Tutorials",
+            "icon": {
+                "fa": "fa-file-lines",
+                "alt": "Docs & Tutorials"
+            },
+            "description": {
+                "short": "Learn more about our software via documentation, examples, and tutorials",
+                "long": ""
+            },
+            "topics": [
+                "docs",
+                "documentation",
+                "tutorial",
+                "tutorials"
+            ]
+        },
+        "File Systems": {
+            "title": "File Systems",
+            "hash": "FileSystems",
+            "icon": {
+                "fa": "fa-folders",
+                "alt": "File Systems"
+            },
+            "description": {
+                "short": "Configure data storage and retrieval for more efficient workloads",
+                "long": ""
+            },
+            "topics": [
+                "file-system"
+            ]
+        },
+        "Math & Physics Libraries": {
+            "title": "Math & Physics Libraries",
+            "hash": "Math&PhysicsLibraries",
+            "icon": {
+                "fa": "fa-books",
+                "alt": "Math & Physics Libraries"
+            },
+            "description": {
+                "short": "Optimize solvers, higher order methods, and AMR frameworks",
+                "long": ""
+            },
+            "topics": [
+                "math-physics"
+            ]
+        },
+        "Performance & Workflow": {
+            "title": "Performance & Workflow",
+            "hash": "Performance&Workflow",
+            "icon": {
+                "fa": "fa-gauge-high",
+                "alt": "Performance & Workflow"
+            },
+            "description" : {
+                "short": "Manage and scale complex workflows, tracking, and data collection",
+                "long": ""
+            },
+            "topics": [
+                "performance",
+                "workflows"
+            ]
+        },
+        "Portable Execution & Memory Mgmt": {
+            "title": "Portable Execution & Memory Mgmt",
+            "hash": "PortableExecution&MemoryMgmt",
+            "icon": {
+                "fa": "fa-briefcase",
+                "alt": "Portable Execution & Memory Management"
+            },
+            "description": {
+                "short": "Automate data motion and memory allocation on advanced architectures",
+                "long": ""
+            },
+            "topics": [
+                "portability",
+                "memory-management"
+            ]
+        },
+        "Proxy Applications": {
+            "title": "Proxy Applications",
+            "hash": "ProxyApplications",
+            "icon": {
+                "fa": "fa-clone",
+                "alt": "Proxy Applications"
+            },
+            "description": {
+                "short": "Prepare for testing and porting applications",
+                "long": ""
+            },
+            "topics": [
+                "proxy-application"
+            ]
+        },
+        "RADIUSS": {
+            "title": "RADIUSS",
+            "hash": "RADIUSS",
+            "icon": {
+                "path": "/assets/images/radiuss-icon-bw.png",
+                "alt": "RADIUSS logo"
+            },
+            "description": {
+                "short": "Rapid Application Development via an Institutional Universal Software Stack",
+                "long": ": LLNL's RADIUSS project aims to broaden usage across LLNL and the open source community of a set of libraries and tools used for HPC scientific application development."
+            },
+                "topics":[
+                "radiuss"
+            ]            
+        },
+        "System Software": {
+            "title": "System Software",
+            "hash": "SystemSoftware",
+            "icon": {
+                "fa": "fa-floppy-disk",
+                "alt": "System Software"
+            },
+            "description": {
+                "short": "Manage laptop and desktop computer systems, HPC clusters, and parallel environments",
+                "long": ""
+            },
+            "topics": [
+                "system-software"
+            ]
+        }
+    }
+}
