@@ -1,0 +1,303 @@
+# This file is part of P^nMPI.
+#
+# Copyright (c)
+#  2008-2019 Lawrence Livermore National Laboratories, United States of America
+#  2011-2016 ZIH, Technische Universitaet Dresden, Federal Republic of Germany
+#  2013-2019 RWTH Aachen University, Federal Republic of Germany
+#
+#
+# P^nMPI is free software; you can redistribute it and/or modify it under the
+# terms of the GNU Lesser General Public License as published by the Free
+# Software Foundation version 2.1 dated February 1999.
+#
+# P^nMPI is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with P^nMPI; if not, write to the
+#
+#   Free Software Foundation, Inc.
+#   51 Franklin St, Fifth Floor
+#   Boston, MA 02110, USA
+#
+#
+# Written by Martin Schulz, schulzm@llnl.gov.
+#
+# LLNL-CODE-402774
+
+language: c
+
+git:
+  depth: 1000
+
+
+# Install all main dependencies for Linux. Additional compilers may be installed
+# as defined in the build matrix.
+addons:
+  apt:
+    sources: &apt_sources
+    - kalakris-cmake
+    packages: &apt_packages
+    - gfortran
+    - cmake
+    - libopenmpi-dev
+    - openmpi-bin
+    - binutils-dev
+    - doxygen
+    - help2man
+
+
+jobs:
+  include:
+    # Compliance checks
+    #
+    # Check the compliance of the code first. If the code doesn't follow the
+    # coding standards, there is no sense in checking it, as the commit will be
+    # rejected anyway.
+
+    # Check coding convention.
+    - stage: compiliance
+      os: linux
+      dist: trusty
+      sudo: false
+      env:
+        FORMAT
+      addons:
+        apt:
+          sources:
+          - llvm-toolchain-trusty
+          packages:
+          - clang-format-3.8
+      git:
+        submodules: false
+        depth: 9999999
+      before_script:
+      - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+      - git fetch
+      script:
+      - >
+        git filter-branch --force --tree-filter '
+          find . \( -name "*.c" -o -name "*.cpp" -o -name "*.h" \)
+            -not -path "./externals/*"
+            -exec clang-format-3.8 -style=file -fallback-style=none -i {} \; ;
+          if test $(git diff | wc -l) -gt 0;
+          then
+            echo "";
+            git --no-pager diff --color=always;
+            exit 1;
+          fi
+        ' --tag-name-filter cat origin/master~1..HEAD
+      after_success:
+
+    # Check license in all files.
+    - os: linux
+      env:
+        LICENSE_HEADER
+      addons:
+        apt:
+      git:
+        submodules: false
+        depth: 9999999
+      before_script:
+        - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+        - git fetch
+      script:
+      - >
+        git filter-branch --force --tree-filter '
+          num=$(wc -l extra/license/header.c | sed "s/[^0-9]*//g") ;
+          find . \( -name "*.c" -o -name "*.cpp" -o -name "*.h"
+              -o -name "*.c.w" -o -name "*.h.w" -o -name "*.h.in" \)
+            -exec sh -c "cat {}
+              | head -n $num
+              | git diff  --no-index -- extra/license/header.c -
+            || (
+              echo \"\";
+              echo \"{} does not contain a valid license header.\";
+              echo 1 > error
+            )" \; ;
+
+          num=$(wc -l extra/license/header.txt | sed "s/[^0-9]*//g") ;
+          find . \( -name "*.txt" -o -name "*.conf" -o -name "*.yml"
+              -o -name "*.cmake" -o -name "*.cmake.in" \)
+              ! -path "./cmakemodules/legacy/*"
+              ! -path "./cmakemodules/Platform/*"
+              ! -path "./cmakemodules/Toolchain/*"
+              ! -path "./cmakemodules/FindBFD.cmake"
+            -exec sh -c "cat {}
+              | head -n $num
+              | git diff  --no-index -- extra/license/header.txt -
+            || (
+              echo \"\";
+              echo \"{} does not contain a valid license header.\";
+              echo 1 > error
+            )" \; ;
+          find . \( -name "*.sh" \)
+            -exec sh -c "cat {}
+              | head -n $((num + 2)) | tail -n $num
+              | git diff  --no-index -- extra/license/header.txt -
+            || (
+              echo \"\";
+              echo \"{} does not contain a valid license header.\";
+              echo 1 > error
+            )" \; ;
+
+            test \! -f error ;
+        ' --tag-name-filter cat origin/master~1..HEAD
+      after_success:
+
+
+    # Regular builds for OpenMPI.
+    #
+    # Check PnMPI builds for numerous versions of Linux with OpenMPI.
+
+    # Ubuntu Trusty (14.04 LTS) GCC builds.
+    - stage: build OpenMPI
+      os: linux
+      dist: trusty
+      sudo: false
+      compiler: gcc-4.6
+      addons:
+        apt:
+          sources: *apt_sources
+          packages:
+          - *apt_packages
+          - gcc-4.6
+          - g++-4.6
+          - gfortran-4.6
+      before_script:
+      - export CC=gcc-4.6; export CXX=g++-4.6; export FC=gfortran-4.6
+    - os: linux
+      dist: trusty
+      sudo: false
+      compiler: gcc-4.7
+      addons:
+        apt:
+          sources: *apt_sources
+          packages:
+          - *apt_packages
+          - gcc-4.7
+          - g++-4.7
+          - gfortran-4.7
+      before_script:
+      - export CC=gcc-4.7; export CXX=g++-4.7; export FC=gfortran-4.7
+    - os: linux
+      dist: trusty
+      sudo: false
+      compiler: gcc-4.8
+      before_script:
+      - export CC=gcc-4.8; export CXX=g++-4.8; export FC=gfortran-4.8
+
+    # Clang builds for Precise and Trusty.
+    - os: linux
+      dist: trusty
+      sudo: false
+      compiler: clang-3.4
+      before_script:
+      - export CC=clang; export CXX=clang++
+    - os: linux
+      dist: trusty
+      sudo: false
+      compiler: clang-3.5
+      before_script:
+      - export CC=clang; export CXX=clang++
+
+
+    # Specialized builds.
+    #
+    # Test some special configurations for PnMPI that influence the behavior of
+    # PnMPI and its test cases.
+
+    # Build without Fortran.
+    - stage: build specialized
+      os: linux
+      dist: trusty
+      compiler: gcc
+      sudo: false
+      before_script:
+      - export CMAKE_EXTRA_FLAGS="-DENABLE_FORTRAN=off"
+      env:
+      - NO_FORTRAN
+
+    # Build with adept-utils.
+    #
+    # NOTE: Some of the compiler warnings will not be converted to errors, as
+    #       they origin from third-party code of adept-utils. However, PnMPI
+    #       will be checked with the all compiler flags in the other jobs.
+    - os: linux
+      dist: trusty
+      compiler: gcc
+      sudo: false
+      before_script:
+      - export CMAKE_EXTRA_FLAGS="-DENABLE_ADEPT_UTILS=on"
+      - export CFLAGS="-Wno-error=format -Wno-error=return-type"
+      env:
+      - WITH_ADEPT
+
+    # Build without PnMPIze.
+    - os: linux
+      dist: trusty
+      compiler: gcc
+      sudo: false
+      before_script:
+      - export CMAKE_EXTRA_FLAGS="-DENABLE_PNMPIZE=off"
+      env:
+      - WITHOUT_PNMPIZE
+
+    # Build with optimized configuration.
+    - os: linux
+      dist: trusty
+      compiler: gcc
+      sudo: false
+      before_script:
+      - >
+        export CMAKE_EXTRA_FLAGS="
+          -DENABLE_DEBUG=OFF
+          -DENABLE_THREAD_SAFETY=OFF
+          -DCMAKE_BUILD_TYPE=Release
+        "
+      env:
+      - OPTIMIZED
+
+    # Build with Python 3 instead of the default Python 2 installed in Travis.
+    - os: linux
+      dist: trusty
+      compiler: gcc
+      sudo: false
+      before_script:
+      - export CMAKE_EXTRA_FLAGS="-DPYTHON_EXECUTABLE=$(which python3)"
+      env:
+      - PYTHON_3
+
+
+    # Deploy checks
+    #
+    # Check release packaging. This will only package the current version,
+    # unpack and change into this directory. The build will be done by the
+    # default script below.
+    - stage: deploy
+      os: linux
+      dist: trusty
+      sudo: false
+      compiler: gcc
+      env:
+      - DEPLOY
+      before_script:
+      - mkdir build && cd build
+      - cmake ..
+      - make package_deploy
+      - tar xfvz *.tar.gz
+      - cd $(echo PnMPI-*)
+      script:
+      - ../../extra/build/ci.sh
+
+
+
+
+script:
+  - extra/build/ci.sh
+
+after_success:
+  - cd travis; make -k gcov
+  - bash <(curl -s https://codecov.io/bash) -X gcov

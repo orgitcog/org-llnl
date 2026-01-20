@@ -1,0 +1,63 @@
+/* This file is part of P^nMPI.
+ *
+ * Copyright (c)
+ *  2008-2019 Lawrence Livermore National Laboratories, United States of America
+ *  2011-2016 ZIH, Technische Universitaet Dresden, Federal Republic of Germany
+ *  2013-2019 RWTH Aachen University, Federal Republic of Germany
+ *
+ *
+ * P^nMPI is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation version 2.1 dated February 1999.
+ *
+ * P^nMPI is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with P^nMPI; if not, write to the
+ *
+ *   Free Software Foundation, Inc.
+ *   51 Franklin St, Fifth Floor
+ *   Boston, MA 02110, USA
+ *
+ *
+ * Written by Martin Schulz, schulzm@llnl.gov.
+ *
+ * LLNL-CODE-402774
+ */
+
+#ifndef PNMPI_CONFIG_H
+#define PNMPI_CONFIG_H
+
+/* Built with Fortran support. */
+#cmakedefine PNMPI_HAVE_FORTRAN
+
+/* Built with Adept Utils. */
+#define PNMPI_HAVE_ADEPT_UTILS @PnMPI_USE_adept_utils@
+
+/* Locations of PnMPI directories in the install tree */
+#define PNMPI_INSTALL_PREFIX       "@CMAKE_INSTALL_PREFIX@"
+#define PNMPI_INCLUDE_DIR          "@CMAKE_INSTALL_PREFIX@/include"
+#define PNMPI_LIBRARY_DIR          "@CMAKE_INSTALL_PREFIX@/lib"
+#define PNMPI_MODULES_DIR          "@PnMPI_MODULES_DIR@"
+
+/* PnMPI version information -- numerical and a version string. */
+#define PNMPI_MAJOR_VERSION @PNMPI_VERSION_MAJOR@
+#define PNMPI_MINOR_VERSION @PNMPI_VERSION_MINOR@
+#define PNMPI_PATCH_VERSION @PNMPI_VERSION_PATCH@
+#define PNMPI_TWEAK_VERSION @PNMPI_VERSION_TWEAK@
+#define PNMPI_VERSION       "@PNMPI_VERSION@"
+
+/* define the array size of fortran MPI_Status, TODO: replace with call to fortran snippet  */
+#ifdef MPI_STATUS_SIZE
+  /* many mpi implementations provide the value in C. The standard states "Fortran only" */
+  #define PNMPI_F_STATUS_SIZE MPI_STATUS_SIZE
+#else
+  /* here some fortran code should be called to get the actual value */
+  #define PNMPI_F_STATUS_SIZE 6
+#endif
+
+
+#endif // PNMPI_CONFIG_H
