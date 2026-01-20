@@ -1,0 +1,12 @@
+dimensions: 3
+shapes:
+  - name: background
+    material: air
+    geometry:
+      format: none
+
+  - name: plane
+    material: steel
+    geometry:
+      format: stl
+      path: ../quest/plane_simp.stl
