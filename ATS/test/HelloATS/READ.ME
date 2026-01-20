@@ -1,0 +1,140 @@
+--------------------------------------------------------------------------------
+--                 READ.ME for hello_ats sample program                       --
+--------------------------------------------------------------------------------
+
+Sample use of lightweight ATS wrapper script
+
+How to use:
+
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.122/bin:$PATH
+    or 
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+
+    ats_hello               <- Lightweight wrapper to ATS for your project
+    hello_ats.c             <- Simple executable -- will be your projects exectuable(s)
+    create_test_ats.py      <- Python script which will create the test.ats file
+                               Enables projects to easily create tests with
+                               variable number of MPI processes, code executables,
+                               code arguments (test decks, etc), sandbox options,
+                               and post test checkers.
+
+Compile hello_ats.c with an mpi C wrapper, such as mpigcc or mpiicc, creating
+an a.out executable in this directory like so:
+
+    mpicc hello_ats.c
+
+If run from a login node (such as Alastor), it will run tests which pass and
+fail, as well as checker scripts, some which pass, fail, are skipped.
+
+It may also present some which are HALTED if errors are detected in slurm
+or mpi init by ATS.
+
+--------------------------------------------------------------------------------
+Toss 4   Testing on slurm based toss4 machines such as rzwhippet
+--------------------------------------------------------------------------------
+    export PATH=${PATH}:/usr/gapps/ats/scripts
+    module load python/3.9.12
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+
+    mpicc hello_ats.c            <- build the code
+    ./create_test_ats.py         <- create the ats test file
+    atslite1 test.ats           <- test using slurm
+    export -n MACHINE_TYPE
+
+    # POODLE TEST LINE (or any other system without cross node MPI)
+    salloc -N1 -p pdebug --exclusive
+    atslite1 test.ats 
+    exit
+
+
+    FAILED:  14 a(a.out_1), a(a.out_3), a(a.out_9), a(a.out_11), ats_check_log#7, ats_check_log#8, a(a.out_17), a(a.out_19), a(a.out_25), a(a.out_27), a(the), a(cat), a(chased), a(big)
+    PASSED:   22
+    SKIPPED:  8
+
+--------------------------------------------------------------------------------
+Toss 4  ATS-4 (rzvernal, rzadams, tioga, etc.)
+--------------------------------------------------------------------------------
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.122/bin:$PATH
+    or 
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+
+    module load python/3.9.12
+    module load rocmcc/6.2.0-cce-18.0.0b-magic
+    export ROCR_VISIBLE_DEVICES=0,1,2,3
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/tce/packages/rocmcc/rocmcc-6.2.0-cce-18.0.0b-magic/llvm/lib
+
+    mpiamdclang++ hello_ats.c        <- build the code
+    ./create_test_ats.py        <- create the ats test file
+    atsflux  test.ats           <- test using flux
+    export -n MACHINE_TYPE
+
+    The end of the run should include:
+
+    ATS SUMMARY May 16, 2023 14:20:16
+    FAILED:  10 a(a.out_1), a(a.out_3), a(a.out_9), a(a.out_11), ats_check_log#7, ats_check_log#8, a(a.out_17), a(a.out_19), a(a.out_25), a(a.out_27)
+    PASSED:   18
+    SKIPPED:  8
+
+--------------------------------------------------------------------------------
+Blueos (rzansel)  Uses LSF
+--------------------------------------------------------------------------------
+    export PATH=${PATH}:/usr/gapps/ats/scripts
+    module load python/3.8.2
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+
+    mpicc hello_ats.c        <- build the code
+    ./create_test_ats.py     <- create the ats test file
+
+                             // --smpi_off may or may not be needed
+                             // in subsequent commands
+    atslite1 --smpi_off test.ats 
+    atslite1 --smpi_off --lrun test.ats 
+    atslite1 --smpi_off --lrun --lrun_pack test.ats
+    atslite1 --smpi_off --lrun --lrun_pack --lrun_np 10 --verbose test.ats
+
+    atslite1 --smpi_off --jsrun --jsrun_exclusive test.ats 
+    atslite1 --smpi_off --jsrun test.ats 
+    atslite1 --smpi_off --jsrun --jsrun_np 20 test.ats
+    atslite1 --smpi_off --jsrun --jsrun_np 20 test.ats
+    atslite1 --smpi_off --jsrun --jsrun_np 20 --verbose test.ats
+
+    ATS SUMMARY May 16, 2023 14:20:16
+    FAILED:  10 a(a.out_1), a(a.out_3), a(a.out_9), a(a.out_11), ats_check_log#7, ats_check_log#8, a(a.out_17), a(a.out_19), a(a.out_25), a(a.out_27)
+    PASSED:   18
+    SKIPPED:  8
+
+--------------------------------------------------------------------------------
+--  Notes on running
+--------------------------------------------------------------------------------
+
+* If run from a front end node, the ats_hello script will salloc 1 nodes and
+  run within that allocation.  If there are not 4 nodes available in the debug
+  queue, it will stall until nodes are available.  See following notes for
+  other options.
+
+* One may override the number of nodes to be used via the --numNodes option
+to ats_hello like so: ./ats_hello --numNodes=.2
+
+* ats_hello --help will show all options.
+
+* One may pre-allocate a set of nodes, and run ats_hello with that allocation.
+  One way to allocate 2 nodes on chaos and reserve all the cores for your
+  use for testing would be:
+
+  salloc -N2 -n2 -p pdebug --exclusive
+
+  Remember to exit and free the reserved nodes when done testing.
+
+* The sample test case runs parallel jobs up to 64 processors.  If one runs
+  in an allocation that has less than the number of processors, then those
+  jobs will be skipped, but others will run.
+
+* This is just a sample to get one started. There are many other ways to run,
+   more checkers can be specified, more ATS options, etc.
+
+* Contact Shawn Dawson for feedback and for questions about using ATS on your project
+
+
+--------------------------------------------------------------------------------
+--                           end of READ.ME                                   --
+--------------------------------------------------------------------------------

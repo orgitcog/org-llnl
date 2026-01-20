@@ -1,0 +1,3 @@
+From gpsd, this directory would contain the following files:
+COPYING          [for distribution terms only]
+ublox-8-time.log [for unit testing only]

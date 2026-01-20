@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block repo %}
+    {% if page.url_to_pdf %}
+        <li class="nav-item">
+            <a href="{{ page.url_to_pdf }}" title="Site PDF" class="nav-link">
+                <i class="fas fa-file-pdf"></i> PDF
+            </a>
+        </li>
+    {% endif %}
+    {% if page.url_to_print_page %}
+        <li class="nav-item">
+            <a href="{{ page.url_to_print_page }}" title="Print Site" class="nav-link">
+                <i class="fa fa-print"></i> Print
+            </a>
+        </li>
+    {% endif %}
+{{ super() }}
+{% endblock repo %}

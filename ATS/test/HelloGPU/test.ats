@@ -1,0 +1,7 @@
+import os
+glue(independent=True)
+glue(keep=True)
+my_checker = '/usr/WS2/dawson/Git-ATS-GitHub/test/HelloATS/ats_check_log.py'
+t1=test  (executable='./a.out', clas='6 30  200', np=1, ngpu=1)
+t2=test  (executable='./a.out', clas='6 15  200', np=2, nt=10, ngpu=1)
+t3=test  (executable='./a.out', clas='6 10  200', np=2, nt=10, ngpu=1)

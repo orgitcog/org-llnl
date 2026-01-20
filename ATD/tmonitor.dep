@@ -1,0 +1,58 @@
+src/main.o: src/main.cxx
+	$(COMPILE.cc) $< -o $@
+src/alerter.o: src/alerter.cxx
+	$(COMPILE.cc) $< -o $@
+src/alert_msg.o: src/alert_msg.cxx
+	$(COMPILE.cc) $< -o $@
+src/clock.o: src/clock.cxx
+	$(COMPILE.cc) $< -o $@
+src/clock_desc.o: src/clock_desc.cxx
+	$(COMPILE.cc) $< -o $@
+src/clock_replay.o: src/clock_replay.cxx
+	$(COMPILE.cc) $< -o $@
+src/detector.o: src/detector.cxx
+	$(COMPILE.cc) $< -o $@
+src/det_alg.o: src/det_alg.cxx
+	$(COMPILE.cc) $< -o $@
+src/det_msg.o: src/det_msg.cxx
+	$(COMPILE.cc) $< -o $@
+src/gm_model.o: src/gm_model.cxx
+	$(COMPILE.cc) $< -o $@
+src/kf.o: src/kf.cxx
+	$(COMPILE.cc) $< -o $@
+src/task.o: src/task.cxx
+	$(COMPILE.cc) $< -o $@
+src/task_container.o: src/task_container.cxx
+	$(COMPILE.cc) $< -o $@
+src/parse_ubx.o: src/parse_ubx.cxx
+	$(COMPILE.cc) $< -o $@
+src/prog_state.o: src/prog_state.cxx
+	$(COMPILE.cc) $< -o $@
+src/serial_dev.o: src/serial_dev.cxx
+	$(COMPILE.cc) $< -o $@
+src/spmc.o: src/spmc.cxx
+	$(COMPILE.cc) $< -o $@
+src/stream_clock.o: src/stream_clock.cxx
+	$(COMPILE.cc) $< -o $@
+src/tcp_alert_handler.o: src/tcp_alert_handler.cxx
+	$(COMPILE.cc) $< -o $@
+src/tdc.o: src/tdc.cxx
+	$(COMPILE.cc) $< -o $@
+src/time_msg.o: src/time_msg.cxx
+	$(COMPILE.cc) $< -o $@
+src/ubx_base.o: src/ubx_base.cxx
+	$(COMPILE.cc) $< -o $@
+src/ubx_clock.o: src/ubx_clock.cxx
+	$(COMPILE.cc) $< -o $@
+src/ubx_file_reader.o: src/ubx_file_reader.cxx
+	$(COMPILE.cc) $< -o $@
+src/ubx_serial.o: src/ubx_serial.cxx
+	$(COMPILE.cc) $< -o $@
+src/ws_server.o: src/ws_server.cxx
+	$(COMPILE.cc) $< -o $@
+src/anomaly.o: src/anomaly.cxx
+	$(COMPILE.cc) $< -o $@
+src/calib.o: src/calib.cxx
+	$(COMPILE.cc) $< -o $@
+src/utility.o: src/utility.cxx
+	$(COMPILE.cc) $< -o $@

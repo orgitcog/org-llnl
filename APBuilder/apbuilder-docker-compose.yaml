@@ -1,0 +1,14 @@
+services:
+  apbuilder: 
+    image: ghcr.io/llnl/apbuilder:1.0.0
+    restart: "no"
+    volumes:
+      - type: bind
+        source: <data-source>
+        target: /home/apbuilder/apbuilder
+    labels:
+      gov.llnl.description: "Atmospheric Profile Builder (APBuilder)"
+      gov.llnl.program: "GMP"
+      gov.llnl.software: "APBuilder"
+      gov.llnl.maintainer: "Raul Viera-Mercado"
+      gov.llnl.email: "vieramercado1@llnl.gov"

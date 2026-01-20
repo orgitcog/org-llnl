@@ -1,0 +1,22 @@
+{
+  "db" : {
+    "dbType" : "@DBTYPE@",
+    "fs_path" : "@FS_PATH@"
+  },
+  "ml_models" : {
+    "model_1": {
+      "model_path": "model_1",
+      "threshold": 0.5,
+      "db_label" : "tatb_eos"
+    }, 
+    "model_2": {
+      "model_path": "model_2",
+      "threshold": 0.5,
+      "db_label" : "tatb_eos"
+    }
+  },
+  "domain_models" : {
+    "test_1": "model_1",
+    "test_2" : "model_2"
+  }
+}

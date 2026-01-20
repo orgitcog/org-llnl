@@ -1,0 +1,16 @@
+From Eigen v. 3.3.4, this directory would contain the following files:
+[The contents of the Eigen subdirectory from the distribution, including:
+    - src [subdirectory]
+    - Cholesky
+    - CholmodSupport
+    - [...]
+    - UmfPackSupport]
+
+and, within the unsupported/Eigen subdirectory, the following files (from the
+corresponding subdirectory of the distribution):
+
+NonLinearOptimization
+NumericalDiff
+src/NonLinearOptimization
+src/NumericalDiff
+

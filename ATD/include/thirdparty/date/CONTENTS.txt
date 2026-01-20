@@ -1,0 +1,5 @@
+This directory would contain date.h from the master branch of the date
+repository by Howard Hinnant (commit 2b6ee63), accessible online at:
+https://github.com/HowardHinnant/date/commit/2b6ee6378c62b2f10b1515ea39bcb49579b56034
+(Header slightly modified to remove wchar_t specializations of the make_string
+class template)

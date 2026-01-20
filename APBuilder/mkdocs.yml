@@ -1,0 +1,54 @@
+site_name: Atmospheric Profile Builder
+site_description: APBuilder User Guide
+site_author: Raul Viera-Mercado, Keehoon Kim
+
+nav:
+  - Home: index.md
+  - Install: install.md
+  - Usage: usage.md
+  - How It Works: how-it-works.md
+  - About: about.md
+  - FAQ: faqs.md
+  - Development: development.md
+  
+theme:
+  name: mkdocs
+  custom_dir: docs/overrides
+  color_mode: auto
+  user_color_mode_toggle: true
+
+markdown_extensions:
+  - toc:
+      permalink: "#"
+
+extra_css:
+  - styles/print-site.css
+
+plugins: 
+  - search
+  - print-site:
+      add_to_navigation: false
+      print_page_title: ''
+      print_page_basename: 'print_page'
+      add_print_site_banner: false
+      # Table of contents
+      add_table_of_contents: true
+      toc_title: 'Table of Contents'
+      toc_depth: 6
+      # Content-related
+      add_full_urls: false
+      enumerate_headings: true
+      enumerate_figures: true
+      add_cover_page: true
+      cover_page_template: "docs/assets/templates/custom-cover-page.tpl"
+      path_to_pdf: "assets/apbuilder-user-guide.pdf"
+      include_css: false # does not include default CSS, instead uses the extra_css above.
+      enabled: true
+      exclude:
+        - development.md
+    
+extra:
+  doc_number: LLNL-CODE-2012226
+  doc_last_updated: October 13, 2025
+  software_version: 1.0.0
+  doi: https://doi.org/10.11578/dc.20251009.4

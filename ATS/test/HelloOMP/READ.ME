@@ -1,0 +1,126 @@
+--------------------------------------------------------------------------------
+--                 READ.ME for omp_test sample program                       --
+--------------------------------------------------------------------------------
+
+Sample use of lightweight ATS wrapper script
+
+How to use:
+
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.122/bin:$PATH
+    or
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+
+    omp_test.c             <- Simple executable -- will be your projects exectuable(s)
+    create_test_ats.py     <- Python script which will create the test.ats file
+                              Enables projects to easily create tests with
+                              variable number of MPI processes, code executables,
+                              code arguments (test decks, etc), sandbox options,
+                              and post test checkers.
+
+How to build:
+    
+    Use the 'Makefile' to build omp_test.  Or use whatevever compiler you want,
+    and compile omp_test.c by hand to generate omp_test.
+    just ensure it has the proper flags to support OpenMP. 
+
+How to run omp_test by hand:
+
+    Sample Runs of the code to familiarize yourself with different rank and thread
+    bindings to cores which may achieved  with various srun options.
+
+    export OMP_NUM_THREADS=9
+    srun -N2 -n4 -p pdebug ./omp_test 100 2
+    srun -N2 -n4 -p pdebug --exclusive ./omp_test 100 2
+    srun -N2 -n4 -c 9 -p pdebug --exclusive ./omp_test 100 2
+    srun -N2 -n4 -c 9 -p pdebug --mpibind=on --exclusive ./omp_test 100 2
+    srun -N2 -n4 -c 9 --cpu-bind=threads -p pdebug --exclusive ./omp_test 100 2
+
+    Note the inefficiency in one or more of the above srun lines.  
+
+
+Sample ATS runs of the code
+
+   atslite1 --exclusive                     <- toss4 version
+   atslite1 --smpi_off                      <- blueos version
+
+--------------------------------------------------------------------------------
+Toss 3 (rzgenie, etc.).
+--------------------------------------------------------------------------------
+    export PATH=${PATH}:/usr/gapps/ats/scripts
+    module load python/3.8.2
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.122/bin:$PATH
+    or
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+
+    mpicxx -g -qopenmp -pthread -O2 -o omp_test omp_test.cc
+    ./create_test_ats.py 
+    atslite1 test.ats   
+
+    # run ats on login node, let each test have
+    # private allocation. This is especially 
+    # useful for performance testing OpenMP
+    ats test.ats --verbose --exclusive  --numNodes=3 
+
+
+--------------------------------------------------------------------------------
+Toss 4  ATS-4 (rzvernal, rzadams, tioga, etc.)
+--------------------------------------------------------------------------------
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.122/bin:$PATH
+    or
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+
+    module load python/3.9.12
+    module load rocmcc/6.2.0-cce-18.0.0b-magic
+    export ROCR_VISIBLE_DEVICES=0,1,2,3
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/tce/packages/rocmcc/rocmcc-6.2.0-cce-18.0.0b-magic/llvm/lib
+
+    module load python/3.9.12
+    module load rocmcc/5.5.0-cce-15.0.1g-magic
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/tce/packages/rocmcc/rocmcc-5.5.0-cce-15.0.1g-magic/llvm/lib
+
+    mpiamdclang++ -g -fopenmp -O2 -o omp_test omp_test.cc
+    ./create_test_ats.py
+    atsflux test.ats
+
+--------------------------------------------------------------------------------
+Toss 4 (rzwhippet, etc.).
+--------------------------------------------------------------------------------
+    export PATH=${PATH}:/usr/gapps/ats/scripts
+    module load python/3.9.12
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+    or 
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.122/bin:$PATH
+
+
+    mpicxx -g -qopenmp -pthread -O2 -o omp_test omp_test.cc
+    ./create_test_ats.py
+    atslite1 --numNodes=3 test.ats
+
+    ats test.ats --verbose --exclusive  --numNodes=3
+
+    # POODLE TEST LINE (or any other system without cross node MPI)
+    salloc -N1 -p pdebug --exclusive
+    atslite1 test.ats
+    exit
+
+    export -n MACHINE_TYPE
+
+--------------------------------------------------------------------------------
+Blueos (rzansel)  Uses LSF
+--------------------------------------------------------------------------------
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.122/bin:$PATH
+    or
+    export PATH=/usr/gapps/ats/${SYS_TYPE}/7.0.${USER}/bin:$PATH
+
+    export PATH=${PATH}:/usr/gapps/ats/scripts
+    module load python/3.8.2
+
+    mpicxx -g -fopenmp -O2 -o omp_test omp_test.cc
+    ./create_test_ats.py
+    atslite1 --smpi_off test.ats
+    atslite1 --smpi_off --jsrun_exclusive --verbose  test.ats 
+
+
+--------------------------------------------------------------------------------
+--                           end of READ.ME                                   --
+--------------------------------------------------------------------------------

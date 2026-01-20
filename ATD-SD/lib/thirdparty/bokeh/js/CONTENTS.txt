@@ -1,0 +1,9 @@
+This directory contains three files constituting the dependency on the Bokeh
+    open-source visualization library.  These files, which are not included
+    in this distribution, are listed below along with their SHA-1 checksum.
+    They can be obtained from the PyData Bokeh CDN; for example, from URL
+    https://cdn.pydata.org/bokeh/release/bokeh-1.3.4.js for the first file.
+
+8696fd2f3ec9305443becbfc64ea671c59172be6 *bokeh-1.3.4.js
+4f4f31d4785492492fd9cadbd5b954f271123903 *bokeh-api-1.3.4.js
+4a0e564c4366540d56d9e5370b1c8783910bbe9c *bokeh-gl-1.3.4.min.js

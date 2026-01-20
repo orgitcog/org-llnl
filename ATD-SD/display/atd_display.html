@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!-- Web-based Status Display for the Assured Timing Detector -->
+<!-- Version: 1.0 -->
+<!-- Copyright (C) 2019, Lawrence Livermore National Security, LLC.
+     All rights reserved. LLNL-CODE-837067 -->
+
+<!-- The Department of Homeland Security sponsored the production of this
+        material under DOE Contract Number DE-AC52-07NA27344 for the management
+        and operation of Lawrence Livermore National Laboratory.  Contract No.
+        DE-AC52-07NA27344 is between the U.S. Department of Energy (DOE) and
+        Lawrence Livermore National Security, LLC (LLNS) for the operation of
+        LLNL.  See license for disclaimers, notice of U.S. Government Rights and
+        license terms and conditions.
+-->
+
+<!-- Includes Bokeh as per its "Charts API" example -->
+<!-- vim: set sw=2 ts=2: -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Assured Timing Detector - Status Display</title>
+    <link rel="stylesheet" href="atd_display.css" type="text/css">
+    <script type="text/javascript" src="../lib/thirdparty/bokeh/js/bokeh-1.3.4.js"></script>
+    <script type="text/javascript" src="../lib/thirdparty/bokeh/js/bokeh-api-1.3.4.js"></script>
+    <script type="text/javascript" src="../lib/thirdparty/bokeh/js/bokeh-gl-1.3.4.min.js"></script>
+    <script type="text/javascript">
+      var require = Bokeh.require;
+      var exports = {};
+    </script>
+
+    <script type="text/javascript" src="atd_display.js"></script>
+  </head>
+
+  <body onLoad="load_plot()" >
+    <noscript>
+      <h1>
+      Your browser has disabled scripting, which is required for this display.
+      Please enable scripting and reload the page.
+      </h1>
+    </noscript>
+
+    <div id="plot_host"></div>
+    <div id="alert_history_tbl_cont"><table id="alert_history_tbl">
+      <thead>
+        <tr>
+          <th id="idx_col">Alert #</th>
+          <th id="timestamp_col">Timestamp</th>
+          <th id="level_col">Level</th>
+          <th id="reason_col">Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table></div>
+    <div id="controls_box">
+      <div id="annunciator" class="widget-box">
+        <div class="widget-box-title">
+          Alert Status
+        </div>
+        <div class="annunciator-item inactive" id="annunciator-red">
+          <h1>Red</h1>
+        </div>
+        <div class="annunciator-item inactive" id="annunciator-yellow">
+          <h1>Yellow</h1>
+        </div>
+        <div class="annunciator-item inactive" id="annunciator-green">
+          <h1>Green</h1>
+        </div>
+      </div>
+
+      <div id="cal_box" class="widget-box">
+        <div class="widget-box-title">
+          Calibration
+        </div>
+        <div id="cal" class="unknown rounded-box">
+        </div>
+        <span id="cal_elapsed" class="widget-label-small">
+        </span>
+      </div>
+
+      <div id="cxn_controls" class="widget-box">
+        <div class="widget-box-title">
+          Connection
+        </div>
+        <button type="button" id="connect_toggle_btn" accesskey="C">
+          Connect
+        </button>
+        <div>
+          <span id="lbl_heartbeat" class="widget-label-small">
+            Heartbeat:
+          </span>
+          <div id="proc_heartbeat"></div>
+        </div>
+      </div>
+
+      <div id="misc_controls" class="widget-box collapsible">
+        <div class="collapse-btn">
+          &blacktriangleright;
+        </div>
+        <div class="widget-box-title">
+          Options
+        </div>
+
+        <fieldset>
+          <legend class="widget-label">
+            Require ACK for:
+          </legend>
+
+          <div class="rb-holder">
+            <input type="radio" id="require_ack_none" name="req_ack"
+              value="none" checked>
+            <label for="require_ack_none" class="widget-label"
+              title="No explicit operator acknowledgement required for any alerts">
+              No alerts
+            </label>
+          </div>
+          <div class="rb-holder">
+            <input type="radio" id="require_ack_red" name="req_ack"
+              value="red-only">
+            <label for="require_ack_red" class="widget-label"
+              title="Operator acknowledgement required for red alerts only">
+              Red alerts
+            </label>
+          </div>
+          <div class="rb-holder">
+            <input type="radio" id="require_ack_all" name="req_ack" value="all">
+            <label for="require_ack_all" class="widget-label"
+              title="Operator acknowledgement required for all alerts (red + yellow)">
+              All alerts
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset id="fs_vol">
+          <div class="cb-holder">
+              <input type="checkbox" id="cb_audible" checked>
+              <label for="cb_audible" class="widget-label">
+                  Audible Alert
+              </label>
+          </div>
+          <div id="vol_cont">
+            <span class="widget-label-small">Min</span>
+            <input type="range" id="vol" min="0" max="1" step="0.02"
+              value="0.02">
+            <span class="widget-label-small">Max</span>
+          </div>
+          <label for="vol" class="widget-label slider-label">
+            Alert Volume
+          </label>
+        </fieldset>
+      </div>
+    </div>
+
+    <div id="masthead">
+      <!--img id="llnl_logo" src="llnl_icon.gif" width="30" height="30"
+        alt="Lawrence Livermore National Laboratory"-->
+      <div id="llnl_logo">
+      </div>
+      <span id="codename">
+        Assured Timing Detector
+      </span>
+    </div>
+
+    <div id="footer">
+      Copyright &copy; 2019, Lawrence Livermore National Security, LLC.
+      All rights reserved. <a id="footer_toggle"
+        href="javascript:handle_footer_toggle();">More &raquo;</a>
+      <p id="footer_more" class="hidden">
+        The Department of Homeland Security sponsored the production of this
+        material under DOE Contract Number DE-AC52-07NA27344 for the management
+        and operation of Lawrence Livermore National Laboratory.  Contract No.
+        DE-AC52-07NA27344 is between the U.S. Department of Energy (DOE) and
+        Lawrence Livermore National Security, LLC (LLNS) for the operation of
+        LLNL.  See license for disclaimers, notice of U.S. Government Rights and
+        license terms and conditions.
+      </p>
+    </div>
+
+    <div id="alert_info_box" class="hidden">
+      <h4 id="alert_info_type"></h4>
+      <div>
+        <span id="alert_info_timestamp_lbl" class="label">Timestamp:</span>
+        <span id="alert_info_timestamp"></span>
+        <br>
+        <span id="alert_info_rx_timestamp_lbl" class="label">Received at:</span>
+        <span id="alert_info_rx_timestamp"></span>
+        <br>
+        <span id="alert_info_acked_lbl" class="label">Ack'd at:</span>
+        <span id="alert_info_acked"></span>
+      </div>
+      <div>
+        <span class="label">Alert Reason: </span>
+        <span id="alert_info_reason"></span>
+      </div>
+      <div>
+        <span class="label">Alert Detail: </span>
+        <span id="alert_info_reason_extra"></span>
+      </div>
+      <span id="callout_triangle">&blacktriangledown;</span>
+    </div>
+
+    <div id="alert_ack_box" class="hidden">
+      <h1><span class="warning-icon"></span>Timing Anomaly Alert</h1>
+      <h2>Acknowledgement Required</h2>
+      <h5 id="unack_elapsed"></h5>
+      <button id="alert_ack_btn" type="button">
+        Acknowledge
+      </button>
+    </div>
+
+    <div id="error_box" class="hidden">
+      <span class="warning-icon"></span>
+      <span id="error_text">ERROR</span>
+      <div id="error_box_close_btn">&times;</div>
+    </div>
+
+  </body>
+</html>
+

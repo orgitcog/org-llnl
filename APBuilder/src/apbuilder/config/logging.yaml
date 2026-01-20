@@ -1,0 +1,38 @@
+version: 1
+disable_existing_loggers: false
+formatters:
+    # Log record attributes:
+    # https://docs.python.org/3/library/logging.html#logrecord-attributes
+  simple:
+    format: '%(asctime)s - %(levelname)s - %(name)s:%(lineno)s - %(message)s'
+handlers:
+    # Log handlers:
+    # https://docs.python.org/3/library/logging.handlers.html#module-logging.handlers
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+  # rotatingFile:
+  #   class: logging.handlers.RotatingFileHandler
+  #   level: DEBUG
+  #   formatter: simple
+  #   filename: apb.log
+  #   maxBytes: 10240000     # 10MB
+  #   backupCount: 3
+loggers:
+  cfgrib:
+    level: INFO
+    handlers: [console]
+    propagate: no
+  matplotlib:
+    level: INFO
+    handlers: [console]
+    propagate: no
+  PIL:
+    level: INFO
+    handlers: [console]
+    propagate: no
+root:
+  level: INFO
+  handlers: [console]

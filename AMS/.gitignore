@@ -1,0 +1,16 @@
+#mmp-*
+#mfem
+
+## build directories
+build*
+
+## temporaries
+CMakeLists.txt.user
+Makefile.user
+
+**.autosave
+
+## mac temps
+**.DS_Store
+
+__pycache__
