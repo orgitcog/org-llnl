@@ -1,0 +1,22 @@
+*.pyc
+*~
+*.pkl
+*.gzip
+*.gz
+*.swp
+*.so
+build
+dist
+*.egg-info
+eggs/
+.DS_Store
+.idea
+cli
+# Sphinx documentation
+docs/_build
+*generated/
+work/
+pyinstaller/
+.tox
+extensions/*.c
+.coverage

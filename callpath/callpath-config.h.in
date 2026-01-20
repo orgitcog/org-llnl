@@ -1,0 +1,13 @@
+#ifndef CALLPATH_CONFIG_H_
+#define CALLPATH_CONFIG_H_
+
+// Define if the callpath library was built with MPI.
+#cmakedefine CALLPATH_HAVE_MPI
+
+// Muster version information -- numerical and a version string.
+#define CALLPATH_MAJOR_VERSION @CALLPATH_MAJOR_VERSION@
+#define CALLPATH_MINOR_VERSION @CALLPATH_MINOR_VERSION@
+#define CALLPATH_PATCH_VERSION @CALLPATH_PATCH_VERSION@
+#define CALLPATH_VERSION       "@CALLPATH_VERSION@"
+
+#endif // CALLPATH_CONFIG_H_

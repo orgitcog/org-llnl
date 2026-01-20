@@ -1,0 +1,36 @@
+# This file is part of adept-utils.
+#
+# Copyright (C)
+#   2010-2018 Lawrence Livermore National Laboratories, United States of America
+#
+# Written by Todd Gamblin, tgamblin@llnl.gov.
+# LLNL-CODE-417602
+#
+# See the LICENSE file in the package base directory for details.
+
+language: c
+
+compiler:
+  - gcc
+  - clang
+
+addons:
+  apt:
+    packages:
+    - cmake
+    - libboost-math-dev
+
+
+install:
+  - cd ..
+  - git clone https://github.com/scalability-llnl/llnl-hires-timers.git
+  - cd llnl-hires-timers && mkdir build && cd build
+  - cmake .. -DCMAKE_INSTALL_PREFIX=../install
+  - make install
+  - cd ../../adept-utils
+
+script:
+  - mkdir build && cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=Debug
+             -DCMAKE_PREFIX_PATH=../../llnl-hires-timers/install
+  - make

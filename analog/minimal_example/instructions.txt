@@ -1,0 +1,25 @@
+Please run setup.sh to:
+	1. Download libopenblas-dev
+	2. Install aihwkit to a Python virtual environment
+	3. Run minimal_example.py to test your installation
+
+I had some issues installing aihwkit in PyCharm since the package was unable to find my OpenBLAS implementation; 
+however, I had no issues installing/using it in Linux (specifically WSL in Windows).
+
+BUILD DEPENDENCIES
+
+cmake>=3.18
+scikit-build>=0.11.1
+scikit-learn
+pybind11>=2.6.2
+
+RUNTIME DEPENDENCIES
+
+torch>=1.9
+torchvision
+scipy
+requests>=2.25,<3
+numpy>=1.22,<2
+protobuf>=4.21.6
+tqdm
+mypy==0.991
