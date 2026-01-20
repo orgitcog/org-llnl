@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spot 2 Documentation</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma;
+            line-height: 1.5;
+            color: #222;
+        }
+        .out_inner {
+            margin: 0 auto;
+            width: 1024px;
+            padding: 25px;
+            border-left: 1px solid #e2e2e2;
+            border-right: 1px solid #e2e2e2;
+            background-color: white;
+        }
+        .url_params {
+            padding: 0 0 0 40px;
+        }
+        h3 {
+            margin-top: 100px;
+        }
+        h3:first-child {
+            margin-top: 0;
+        }
+        h4 {
+            margin: 30px 0 2px 0;
+            padding: 0;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+        table tr:first-child td {
+            font-weight: bold;
+            background-color: #bbbbbb;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table td {
+            border-bottom: 1px solid #e2e2e2;
+            padding: 8px;
+        }
+
+        .doc_table img {
+            width: 38px;
+        }
+
+        p {
+            padding: 9px 0 9px 0;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="../web/css/dc.css">
+</head>
+<body>
+
+<div class="out_inner">
+
+    <h1>Spot 2 Documentation</h1>
+
+    <h3>Usage</h3>
+
+    <p>
+        Make selections on the four chart types.  For example, for barcharts or scatter charts, you can click and drag the chart to select entries which meet that condition.
+        For PieCharts and Horizontal bar charts, you can click the bars or the pie slices to make selections.
+    </p>
+
+    <p>
+        Every time a selection has been made, the rest of the charts will update, reflecting the aggregate selections already made.
+        Also the Run table below will update showing the selections made.
+    </p>
+
+    <p>
+        From the Run table entry, you will have up to three buttons on the right: A jupyter notebook, a durations page, and a memory line graph page (currently in development).
+    </p>
+
+    <h3>Jupyter Notebooks</h3>
+    <table>
+        <tr>
+            <td>
+                <img src="../img/docs/jup.png" alt="Jupyter Button" style="width:35px;height:35px;">
+            </td>
+            <td>
+                <img src="../img/docs/multi.png" alt="Multi Jupyter Button" style="width:35px;height:35px;">
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        There are two options for interfacing with Spot's jupyter notebooks.
+        Clicking on the jupyter icon (left image above) for a run will open a
+        notebook containing the corresponding run in a new webpage (depending
+        on which entry in the table was selected). Alternatively, clicking on
+        the jupyter icon with an "M" at the top of the Run table (right image
+        above) will open a notebook containing all runs.
+    </p>
+    <p>
+        The notebooks use <a href="https://github.com/llnl/hatchet">Hatchet</a>, a Python-based library for analyzing hierarchical performance data, such as profiles that represent calling context trees or call graphs. These notebooks include sample Hatchet analyses that can be used to analyze a single run or multiple runs. Please see the <a href="https://hatchet.readthedocs.io/en/latest/">Hatchet Documentation</a> for more example analyses.
+    </p>
+
+    <h3>Durations</h3>
+    <p>Clicking on the durations icon for a run will open the walltimes page.</p>
+
+    <h3>Memory Line Graph</h3>
+    <p>Clicking on the line graph icon for a run will open the memory line graph page.</p>
+
+
+
+    <h3>Chart Types</h3>
+    <p>
+        Your run data attributes will be shown in four different chart
+types.<!--, as histograms which count the occurrence of each data value.-->
+    <table class="doc_table">
+        <tr>
+            <td>Chart type</td>
+            <td>When it's used</td>
+        </tr>
+
+        <tr>
+            <td>BarChart</td>
+            <td>Used for numbers and integers</td>
+        </tr>
+        <tr>
+            <td>Horizontal BarChart</td>
+            <td>Used for string values that have more than 12 unique string values</td>
+        </tr>
+        <tr>
+            <td>PieChart</td>
+            <td>Used for string values that have less than 12 unique string values</td>
+        </tr>
+        <tr>
+            <td>ScatterChart</td>
+            <td>Used for values with two axis.</td>
+        </tr>
+    </table>
+    </p>
+
+
+    <h3>Primary Functionality</h3>
+
+    <table class="doc_table">
+        <tr>
+            <td>
+                Button
+            </td>
+            <td>
+                Function
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="../img/docs/plus.png"/>
+            </td>
+            <td>
+                Use this to add a new chart to your dashboard.  Currently, we support ScatterCharts.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="../img/docs/check.png"/>
+            </td>
+            <td>
+                You may show or hide charts using the checkboxes.  First, click the checkbox icon at the top right.  That will open the checkbox drawer.  Then, check or uncheck to show or hide charts.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Input box at the top left.
+            </td>
+            <td>
+                The input box at the top left allows you to choose a data source directory which should contain cali files to be used as inputs.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="../img/docs/jup.png"/>
+            </td>
+            <td>
+                At the bottom, in the table section which shows run data, you'll see up to three buttons per row.  The planet shaped icon will take you to a jupyter notebook.
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="../img/docs/dur.png"/>
+            </td>
+            <td>
+                The durations icon will show you the walltime for a given run.
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="../img/docs/memory.png"/>
+            </td>
+            <td>
+                This will open up a new window showing memory usage details.
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="../img/docs/multi.png"/>
+            </td>
+            <td>
+                This opens a new jupyter notebook with all your runs combined.
+            </td>
+        </tr>
+
+    </table>
+
+
+    <h3>URL Parameters</h3>
+
+    <div class="url_params">
+        <h4>max</h4>
+        <p>You can specify the <b>max</b> with max= in the url bar.  Max is the maximum number of iterations to make.  If you set it to 50, it will ignore all runs after the 50th run.  This helps with very large data sets.  A typical value for this might be max=18000
+        </p>
+
+        <h4>machine</h4>
+        <p>
+            You can specify the <b>machine</b> with machine= in the url bar.  Machine tells which machine to run it on.  You may need to run on a machine that you have access to.  Typical values for machine are rzgenie, rzslic, etc.
+        </p>
+
+        <h4>spot file</h4>
+        <p>
+            You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.
+            sf= is the directory/file sf is short for the data set (short for Spot File)
+            <br><br>
+            Typical values for this are:
+        <pre>/usr/gapps/spot/datasets/lulesh2small</pre>
+        <pre>/usr/gapps/wf/web/spot/data/lulesh_maximal/</pre>
+        </p>
+
+        <!--
+        <h3>layout</h3>
+        <p>
+            You can specify the <b>layout</b> with layout= in the url bar.
+            The layout file tells the dashboard how to display it.
+            <br><br>
+            Typical values for this are:
+        <pre>/usr/gapps/spot/datasets/enhanced_layout.json</pre>
+        <pre></pre>
+        </p>
+
+        <h3>get_rundata_url</h3>
+        <p>
+            Using get_rundata_url URL: <span class="machine">https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp</span>
+
+            <br><br>You can specify the <b>get_rundata_url</b> with get_rundata_url= in the url bar.  The get_rundata_url tells where to make the back end call to.
+        </p>
+        -->
+
+
+        <h4>command</h4>
+        <p>
+            Typical value for command is: /usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py
+            <br><br>You can specify the <b>command</b> with command= in the url bar.  It sends this command to the backend, where it gets run.
+        </p>
+
+        <h3>Color of charts</h3>
+        <p>You can change the color of the charts with the URL parameter <b>color</b>.
+            Simply set color=1 or any number between 0 and 17.  These colors only
+            apply to Vertical Bar charts.</p>
+
+    </div>
+
+
+    <h3>Table Column Sorting</h3>
+    <p>
+        By default, the table columns will be sorted either as a string or as numbers based on the type of the data.  Hence "GNU" would be sorted as a string, but 238438 would be sorted as a number.  If
+        the string only contains numbers, such as "234234", we'll typecast it
+to a number and sort it as a number.
+    </p>
+
+
+    <h3>last_days</h3>
+    <p>This is a URL parameter which lets you specify the last X number of days.
+    </p>
+
+
+    <br><br><br><br><br><br><br>
+
+    <hr>
+    <h1>Developer Docs</h1>
+    <p>
+        The rest of the documentation is for developers.
+    </p>
+
+
+    <h2>Getting Started</h2>
+    <p>
+        Here's the <a href="../web/" target="_blank">Home</a>
+    </p>
+    <p>
+        If someone wanted to start playing with this, they could leave all the default parameters and simply pass in sf=/directory/to/your/data.
+        You’ll need to make sure that the data is the same format as this: (/usr/gapps/spot/datasets/lulesh2small) to begin with.
+
+        Then you can create your own data sets.  At that point, you’ll need to start specifying a layout file.
+
+    </p>
+
+
+    <h2>DataSet</h2>
+    <p>The Data set is an array in this format for each object.  This is the data that is returned from the server's <b>getData / Summary</b> call.
+    <pre>
+    0:
+    Cluster: "rzalastor"
+    Code Builder: "dzpolia"
+    Compiler Flags: "-O3"
+    Compiler Name: "Intel"
+    Compiler Version: "18.0.1.20171018"
+    FigureOfMerit: "0.050350"
+    Hostname: "rzalastor2"
+    Inclusive Duration: 20335
+    Iterations: "3700000"
+    Number of Regions: "6"
+    Problem Size: "1"
+    Region Balance: "2"
+    Region Cost: "1"
+    cali.caliper.version: "2.0.0-dev"
+    cali.experiment: "default"
+    date: "10/11/2018"
+    drilldown: (3) ["Jupyter", "mpi", "walltime"]
+    epoch_date: 1539283462
+    key: "190115-143834_166759_queH4QIMBwAG.cali"
+    run_id: "id_9268"
+
+    </pre>
+
+    There are several special attributes above that do specific things.
+
+    <h3>drilldown</h3>
+    <p>
+        This will provide buttons on the right for specific drilldown cases.
+    </p>
+
+    <h3>key</h3>
+    <p>Key is a unique identifier that will get passed to the next page.  For our use case, it's a cali file, but it can be any identifier you want.</p>
+
+
+    <h2>Table Sorting</h2>
+    <p>Dev notes: If you wish to coerce a string to be sorted as a number, for instance "234.44", then
+        you can use a "sort_as_number": true in the table definition, in the layout spec.
+    </p>
+
+
+    <h2>DataSet Object Attributes</h2>
+    <p>
+        Most of the attributes above are arbitrary labels of things being plotted.  These labels need to match the layout file.  For example, "Compiler Name" in the layout spec as an
+        attribute of "dimension" must match the DataSet attribute "Compiler Name", etc.
+    </p>
+
+    <p>
+        The <b>Drilldown</b> option has a special function.  It will show the buttons listed in the drilldown array.  Currently, only 3 drilldowns are supported:
+    <Ul>
+        <li>Jupyter</li>
+        <li>MPI (Ravel traces)</li>
+        <li>Walltime</li>
+    </Ul>
+
+    Each of these will open a new window calling the backend with the cali-key to retrieve the correct data.
+    </p>
+
+    <p>
+        The <b>key</b> is the cali-key and it is used by some of the drilldown options, in order to tell the back end what charts to open up.
+    </p>
+
+
+    <h2>Bar Chart Bucketed vs Linear</h2>
+    <p>
+        There are two conditions which must be met for sub-integer bucketing:
+    <ul>
+        <li>At least one of the data values must be a decimal value.</li>
+        <li>The difference between the lowest value and the highest value must be below the SUB_INTEGER_LIMIT, currently set to 12.</li>
+    </ul>
+    </p>
+
+
+    <h2>Layout Spec</h2>
+    <p>Here is an example of a layout file that shows what you can currently set: (currently: dimension and labels need to match for now, but later we’ll support differences).
+        This layout spec is designed to be extended, such that we can add x-axis titles, etc.
+    <pre>
+    {
+    "charts": [
+        {
+            "dimension": "Compiler Name",
+            "title": "Compiler names + Compiler Version",
+            "viz": "PieChart"
+        },
+        {
+            "dimension": "Hostname",
+            "title": "Hostname",
+            "viz": "PieChart"
+        },
+        {
+            "dimension": "Cluster",
+            "title": "Cluster",
+            "viz": "PieChart"
+        },
+        {
+            "dimension": "Code Builder",
+            "title": "Code Builder",
+            "viz": "LeftHorizontalBarChart"
+        },
+        {
+            "dimension": "Compiler Flags",
+            "title": "Compiler Flags",
+            "viz": "PieChart"
+        },
+        {
+            "dimension": "Iterations",
+            "viz": "BarChart"
+        },
+        {
+            "dimension": "FigureOfMerit",
+            "viz": "BarChart",
+            "buckets": "['0-5', '6-10', '11-15', '16-20']"
+            "buckets": "['0-2', '3-4', '5-6', '7-10', '11-200']"
+        },
+        {
+            "dimension": "Number of Regions",
+            "title": "Number of Regions",
+            "viz": "BarChart",
+			"y-label": "Num. of runs for our Figure of merit ch.",
+			"x-label": "figure x label",
+            "x-ticks": 8,
+            "y-ticks": 12
+        }
+    ],
+    "table": [
+        {
+            "dimension": "date",
+            "label": "date"
+        },
+        {
+            "dimension": "cali.caliper.version",
+            "label": "cali.caliper.version"
+        },
+        {
+            "dimension": "Problem Size",
+            "label": "Problem Size",
+            "sort_as_number": true
+        },
+        {
+            "dimension": "Region Balance",
+            "label": "Region Balance"
+        }
+    ]
+}
+</pre>
+
+    </p>
+
+    <h3>Labels</h3>
+    <p>You can specify labels in any of the BarChart graphs by adding "x-label", or "y-label".</p>
+
+
+    <h2>Ticks</h2>
+    <p>You can specify the number of ticks you would like on the x-axis or the y-axis via "x-ticks", or "y-ticks".</p>
+
+
+    <h2></h2>
+    <p></p>
+
+
+
+</div>
+</body>
+</html>

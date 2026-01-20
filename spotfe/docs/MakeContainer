@@ -1,0 +1,1133 @@
+After Release:
+- Add Test Case for non-writable directory.
+- Give david a write up on the new interface that JSOn gets sent back to FE.
+
+
+FIXED - make it so that write error passes.
+Then afterwards;
+DONE -    * Walltime does not work, in a non-writable directory.
+
+
+/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml getTimeseriesData /data/lul_sept_28_timeseries /data/lul_sept_28_timeseries/200924-16330964138.cali
+/opt/conda/bin/python3+/usr/gapps/spot/backend.py+--config+/usr/gapps/spot/backend_config.yaml+getTimeseriesData+/data/lul_sept_28_timeseries//data/lul_sept_28_timeseries/200924-16383266200.cali
+/usr/global/tools/lorenz/python/optvis-env2/bin/python+/usr/gapps/spot/dev/spot.py+getTimeseriesData+/usr/gapps/spot/datasets/lulesh_gen/lul_sept_28_timeseries+/usr/gapps/spot/datasets/lulesh_gen/lul_sept_28_timeseries/200924-16383266200.cali
+# Deploy FE
+cp -r /usr/global/web-pages/lc/www/spot/dcvis/* /usr/global/web-pages/lc/www/spot2/
+
+# Deploy BE
+cp /usr/gapps/spot/dev/*.py /usr/gapps/spot/live/
+
+# set permissions
+
+
+
+Next:
+- Repo Clean up.
+- deal with "no title issue" (corner case blank issue)
+- fix select drop down issue. preselecting the avg#inclusive won't work.
+    * need to find finish event, know when it's finished rendering.
+
+
+- make sure that dictionary.json can still be auto-made, even if you dont have a cacheToFE.js file.
+
+DONE - Retest the container.
+
+1) DONE - got it working on padebug account
+2) still not working for marti -> I think it's because he's on "new private window"
+3) DONE - did better error handling to catch junk JSON files and junk CALI files
+4) DONE - Date limiter research
+5) DONE (waiting for feedback) - Levels optimization from 5 layers to 3 layers.
+
+
+As soon as optvis bug is done, roll out.
+
+/usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/ '{}' --maxLevels=2 --writeToFile=1
+run alias sp
+
+
+- make option for limiting number of layers on the command line:
+    * this limits the sie of the file.
+    * use this on the martyMCF data.
+
+
+
+DONE - Catch junk JSON file
+- Catch Firefox out of memory
+
+DONE - Junk Cali file catch error
+DONE - Catch dictionary.json inside or cacheToFE.json, don't read it as another json file
+- directory where you don't have read permission for a file or for the dictionary.json file.
+DONE - Catch error that occurs inside execption handler.
+DONE - pass ERROR string to allow front end to display error from exception handler.
+
+- Date Limiter: deal with big Data ->
+    * Works: does improve crossfilter responsiveness
+    * does not make BE call faster
+    * does not seem to make compare rendering faster.
+    (because, the dates are only filtered on the FE, but not for the compare data,
+    it was meant to operate on the crossfilter stuff)
+
+
+- Redeploy to RZ and get feedback.
+
+Issues in firefox:
+- it keeps saying "wait"
+- Out of memory error.
+
+- FIXED -> localStorage running out of space
+
+Next step:
+-> Error handling:
+    * detect condition of where all values returned 0 from server
+    * most likely due to insufficient file permissions, let user know.
+    * Exception to error.
+
+Handle:
+    * Junk Cali file.
+    * Or a read error.
+
+Next:
+    * Repo clean up.
+
+
+
+DOMException:
+code: 0
+columnNumber: 0
+data: null
+filename: "https://rzlc.llnl.gov/spot/dcvis/web/js/DBStorage.js"
+lineNumber: 32​
+message: "IDBObjectStore.put: The serialized value is too large (size=286471320 bytes, max=267386880 bytes)."
+
+1.3month test
+
+Regression test.
+redeploy to RZ and CZ
+
+/usr/gapps/spot/sand/spot.py getData /usr/gapps/spot/datasets/lulesh_gen/100 '{}' --writeToFile=1
+
+Next -
+When you click on a jupyter button or multi jupyter button do a popup modal.
+in that modal, have a select drop down for all the available templates
+    * USE case 1: we want olga and stephanie to easily be able to add templates
+    * Use case 2: we want some other scientist to be able to add templates
+        * but these templates are only intended for him and his team, no one else
+    * at some point we can check in 3 different locations to look in a person's home directory.
+-> want to be able to add new templates without editing source files.
+    * backend components goes and looks in the 3 locations (static)
+       * for example: user's home directory (~/notebooks)
+       * /usr/gapps/spot/templates (everybody already has read permissions) - stephanie could drop one in there for everyone
+       * one will be the "notebook" directory beneath the (SF) input directory.
+        * the name could come from the filename or within the file, the first line.
+        *
+
+
+
+DONE - BUG - Be able to save new charts and chart tile edits.
+    * when adding a new chart, need to add it to the URL parameters.
+    * test case where you're starting fresh and are given a URL with checkboxes in it.
+DONE - RangeError -> there was a undefined value in count_unique_values_in_chart_
+    * this fix allows us to load the spot2 dashboard on marty's new data.
+DONE - async issue -> intermittent loading issue with walltime code.
+
+DEPLOY - RZ/CZ and regression test heavily.
+CFG -> implement integration for file loading.
+
+BUG - https://rzlc.llnl.gov/spot/dcvis/sankey/index.html?runSetId=/usr/workspace/spotdev/martymcf/ale3d/spot_data/&runId=spot1.3month/sedov_a3d8.8d.8p-1&title=sedov_a3d8.8d.8p
+    * it can't find the data in localforage, is the key incorrect?
+    * or is the data not there?  was it never put there in the first place?
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?ch_launchdate=1&ch_user=1&sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month
+                props:{
+                    filename: runId,
+                    data: fileData.Data ,
+                    meta: fileData.Globals
+                },
+    fileData.Data is empty.
+
+/usr/workspace/spotdev/martymcf/ale3d/spot_data/
+
+it happens even with just 1 file:
+https://rzlc.llnl.gov/spot/dcvis/?ch_launchdate=1&ch_user=1&sf=/g/g0/pascal/zdeb/twoDbug
+Callspot.js 346:
+RangeError: Maximum call stack size exceeded
+    at https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2970:17
+    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3007:9)
+    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
+    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:12)
+    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
+    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:12)
+    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
+    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:1
+It even happens when the data is almost entirely empty with nothing but
+one string "cluster" in the object!
+
+Let's try updating the crossfilter library!!  get the latest version
+    * will need to retest heavily.
+
+problem is between
+6763 and 6766
+
+Firefox seems unaffected -> 10K is fine there.
+                    /*$.Deferred(function( deferred ){
+                        $( deferred.resolve );
+                    })*/
+
+
+Redeploy to CZ and Regression test thoroughly.
+
+
+CFG - integration work.  try to do more for the integration work.
+
+Data should load from here:
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?ch_launchdate=1&ch_user=1&sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month
+
+spot1.3month -> 5051
+
+“Maximum call stack size exceeded” crossfilter
+https://stackoverflow.com/questions/35119862/maximum-call-stack-size-exceeded-crossfilter#35137485
+
+                for( var z=0; z < ST.newp.length; z++ ) {
+                    ST.newp[z] = {
+                        cluster: ST.newp[z].cluster,
+                        "test8": "yes"
+                    };
+                }
+
+
+Run this from the command line:
+need to figure out why "Data" is not being populated.
+/usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/ '{}' --writeToFile=1
+
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/am-gen '{}' --writeToFile=1 | more
+
+After that's fixed, redeploy and notify matt and marty.
+Then continue on CFG.
+
+/usr/gapps/spot/sand/spot.py getData /usr/gapps/spot/datasets/lulesh_gen/100 '{}' --writeToFile=1
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/combine '{}' --writeToFile=1
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/combine4 '{}' --writeToFile=1
+/usr/gapps/spot/sand/spot.py getData /usr/gapps/spot/datasets/demos/mpi '{}' --writeToFile=1
+/usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2/  '{}' --writeToFile=1
+
+DONE - CGI work to make output so much faster
+    * https://lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi
+    * this can send 400mb in 3.6 seconds using just cgi without a wrapper.
+    * DONE - confirmed it in the browser
+    * confirmed it in our spot app with a stub file.
+DONE - work on walltime first.
+    *WalltimeApp.vue line 338 - this ajax request fails, i don't know if this is the cause of the issue
+    * the next two functions that happen after are immaterial to the rendering
+    * i think those are just for aliases.
+    * WalltimeApp.vue line 20 - maybe investigate here to see why it's not rendering.
+ISSUE - can we get rid of setTimeout?
+
+
+1) Deploy dev/ latest spot.py abd test cat.cgi there.
+TEST- container.
+    * FIXED - 2 bugs
+
+
+FIXED - Still the walltime in container is broken.
+1) FIXED Container:   * getData call does not work.
+    index.js Line 246 -> there's a JSON parse error from ,,,,,
+2) BUG - walltime page for marty's data.
+        metricNames: function metricNames() {
+      return Object.keys(this.data[this.funcPaths[0]]).filter(function (name) {
+        return !name.startsWith('any#any#');
+      });
+    },
+    * the issue is "Data" is not in the object sotred i the localforage.  let's check what goes into the localforage.
+https://rzlc.llnl.gov/spot/dcvis/sankey/index.html?runSetId=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month&runId=sedov_a3d8.8d.8p-2&title=sedov_a3d8.8d.8p
+
+    this.data and this.funcPaths is empty.
+    localforage.getItem() -> the object is there with it's Global but no "Data"
+    able to access var fileData = runSet.Runs[runId];  but "Data" not present.
+3) BUG - multi directory levels. doesn't work for top level directory with
+    * /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
+
+- https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=
+/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
+
+DONE - Get numpy working for rzgenie and rzslic.
+
+
+2022 -> try to get spot to a place where it becomes wrapped up.
+    * cut in money.
+    * maintenance mode.
+
+docker run -it --entrypoint /bin/bash -p 5000:5000/tcp optvis_d
+
+DOCKER
+docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
+
+~/install/spot2_container/spotfe/compare-src: npm run watch-walltime
+
+# do this if you need to change any source code files.  if source files change need to rm and rebuild and rerun.
+docker rm spot2_debug6
+
+cd ~/install/spot2_container/
+docker build -t spot2 .
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name b0 spot2
+
+http://localhost:8080/?sf=lul_sept_28_timeseries
+http://localhost:8080/?sf=sqlite/newdemo_mpi_number.sqlite
+http://localhost:8080/?sf=sqlite/newdemo_user_number.sqlite
+
+docker exec -it spot2_9 /bin/bash
+
+- run this from the command line in order to test the backend getData call:
+docker exec -it spot2_da5 /bin/bash
+/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config  /usr/gapps/spot/backend_config.yaml getData /data/lul_sept_28_timeseries '{}'
+
+
+
+JUPYTER LOCALHOST
+----------------------------------------------------------------------------------------------------------------------------
+docker run --rm --name spot -p 8080:8080/tcp -p 8888:8888/tcp -v /Users/aschwanden1/spotconf:/etc/spot -v /Users/aschwanden1/jupyterconf:/etc/jupyterhub spot2
+
+This is how you build and run for the jupyter case on localhost:
+docker build -t spot2 .; docker run --rm --name spot -p 8080:8080/tcp -p 8888:8888/tcp -v /Users/aschwanden1/spotconf:/etc/spot -v /Users/aschwanden1/jupyterconf:/etc/jupyterhub spot2
+
+Then in browser:
+http://localhost:8080/?sf=/demos/mpi&ch_launchdate=1&ch_user=1&launchdate=1616614532.0094914,1616614718.7708476
+
+~/ECPSPOTTutorialConfig: cat run_spot.sh
+~/spotconf
+~/jupyterconf
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+- permissions for Venv: umask 0002
+- Don't use personal venv, use default at the top of spot.py
+    * to reproduce the error.
+- import numpy
+- also put imports at the top.
+
+python3 -c "import numpy; print(numpy.__version__)"
+
+TEST - multi directory, multi level.
+
+- spot1 Data - it might be years before people stop caring about that.
+- spot1 infrastructure we will kill in a few months
+
+DONE - need to rerender the walltime page, so that dictionary will be rendered.
+DONE - Regression Test for combos/ and combos2/
+DONE - catch file not found error.  case where user enters wrong directory OR no permission.
+DONE * make walltime work with our dictionary translation for cali files.
+    * make an ajax call to get the dictionary
+    * ST.RunDictionaryTranslator.set( newData.dictionary );
+    * Sample getDictinoary works: /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
+DONE - the multiJupyter should only use the files which are cali, skip the other ones
+DONE * need to fix jupyter button on per row basis.
+    * jupyter button needs to show up for cali files but not JSON files
+
+DONE - fixed a json_runs reporting error (count lines), I thought was marty's issue but wasnt
+    * in response to marty's error.
+DONE - if there's an error message then pass it up to FE - this way we can diagnose marty's error
+    * Default: if nothing selected show the checkboxes
+    * CAllspot.js: set_up_params_()
+    * right now bug, if you: https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/usr/gapps/spot/datasets/lulesh_gen/100
+        * it will try to select the wrong thing.
+
+
+Fall 2022 Spot2 GUI will end, maintenance after that.
+After that I will go back to lorenz.
+Caliper will keep going.
+
+
+DONE - refactor "ch_"+ into a function.
+
+
+
+Last week:
+1) DONE - implement cache invalidation for that one file:
+        * still need to save cache Date
+        * get cache Date
+        * retrieve mtime.
+        * compare cache date to mtime to see if we should bust the cache.
+    /usr/gapps/spot/sand/spot.py getCacheFileDate /g/g0/pascal/zdeb/a0/
+TEST - make sure that container still works.
+Done - deploy to dev and let marty/legendre try it out.
+2) DONE - cali & JSON file mixed support.
+    * Need to fix layout_used so that checkboxes for both types show up.  after sq.reset(), the layout was corrected because now based on new data.
+Do: don't use sq.layout cache unless there's none coming from the BE.
+    * Always use fresh values if available.
+
+3) DONE Checkbox what is checked - encode that in the URL, so that checkboxes get checked.
+
+Next:
+    * https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/WS1/ale3d/perf_tracking/perf/SIERRA_CLANG/blueos_sierra_clang/develop/performance_profiles.spot2&ch_problem%20name=1&ch_walltime=1&ch_jobsize=1
+    * Goto old defaults (later on change those).
+    * Is walltime supposed to work for ale3D data?  Walltime should work for ale3d.
+        * [Lorenz::REST::Command::runApprovedCommand] Failed to run command: '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/dev/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/pipe/pipe-gen.4d.4p-1' on rzgenie: cali-query: Error: Could not read file /g/g0/pascal/zdeb/ale3d_regr/pipe/pipe-gen.4d.4p-1"
+    * support for running our script in their build system.
+    * /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
+
+
+
+
+DONE - initial implementation: lazy load dictionary lookups.
+    * just load without dictionaryTranslation.  then only do dictionary lookups for things that are being displayed.
+
+Was able to get it down to 2 minutes
+- the larger run of everything: still takes 2m to run.
+- 12 TTFB, 10 - 50 sec to send to FE.
+- 46 Seconds on the front end due to double for loop of Runs, followed by data within those runs
+- needs to make 13 million loops.
+- smaller runs that can fit in the localSTorage cache limit: 5MB or 25MB are very fast now: just 5 to 6 sec.
+    * this is because we no longer have to make an ajax request anymore
+
+
+Next do after Ale3d:
+    * pop up or list of other run based buttons (like walltime)
+
+
+IndexedDB on FE:
+- implement indexedDB: DBStorage.js in order to replace:
+    sq.saveSummary and sq.getSummary()
+- by bypassing the AJAX call, was able to get to get it down to 1 min.
+* still need to implement cache invalidation:
+    * make an ajax call to figure out the last time that file was updated.
+
+Next:
+- let's try caching newData: can not because localStorage has a limit of 25MB total, 5 MB per key.
+    * this is by design and can not be changed.
+- investigate caching the entire ajax load, instead of making an ajax load on every page load.
+    * just use "cachedData"
+- investigate caching the: peeledMetricData and the runsData.
+- should we implement indexedDB?
+
+Advantages of indexedDB:
+1) should be nearly unlimited storage amount
+2) can store objects, rather than limit to strings, so should not need to serialize.
+3) asynchronous, so won't lock up the browser.
+
+
+
+BUG: [Vue warn]: Error in render: "TypeError: Cannot read property '85' of undefined"
+    * Can not hover over the X position on compare view.
+    * only the middle two points are clickable (is this because our screen isn't wide enough?)
+    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/ale3d_regr/pipe&cache=0&groupby=title&aggregate=sum&launchdate=1582131012.2211015,1593337317.7673728
+
+Lazy load:
+    * groupedAndAggregated()
+    * it's a computed field.  first truncate this.runs to 200 entries.  this will allow for the rest of the page to load.
+    * then do setInterval, 1 second later run this.runs, add 1000 entries per second.
+    * Next: Need to get runs() to be recalculated or AggregatedGrouped() func, in setInterval.
+
+Feature: Add support for JSON + Cali
+    - don't disable the whole set, just do each run individually.
+
+DONE - Hatchet deploy stuff
+DONE - Disable Jupyter button for spot1 - if it's spot1 -> ale3D that should not get jupyter button.
+spot2 -> cali files -> jupyter button
+DONE - write to file caching
+DONE - able to read file for caching and return it.
+DONE - 1. Hook up BE to FE
+DONE - Translate dictionary so we're not showing "ab" anymore, show the actual strings
+
+2:38s
+TTFB        13s
+Download    60s
+Process run data    46s (2 sections, where double for loop yields 13661648)
+Other stuff 15s - 30s.
+
+/usr/gapps/spot/datasets/newdemo/user
+- Ale 3d performance:
+    * start working on a converter that would write something to disk.
+    /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
+    https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?cache=0&sf=/g/g0/pascal/zdeb/a0
+
+Good News:
+    - File size reduced from 700 mb to 120mb
+    - 12s TTFB, can be improved with a JSONP include to less than 1 sec.
+    - Was able to load the entire data set onto the FE, in just a couple of minutes
+        (now the DictionaryTRanslator is taking forever)
+
+Bad News:
+    - FE is sluggish with all that data in there.
+    - FE loading time takes forever due to DictionaryTranslator
+
+
+
+Still to do:
+    * start a process to do the JSON file write. (otherwise it will need to do a new fetch).
+    * use include request instead of starting a process?
+
+
+
+
+DONE - Blue Bar with the 1 in it.
+DONE - Fixed the "jobsize" issue. ~ unsigned int, so it wasn't in dropdown.
+DONE - added cache busting parameter.  cache="0"
+DONE - Do the yAxis dropdown and try to use the alias.
+    * did the backend to pass back alias info to FE, and the FE part and connected them together.
+    * I recommend we get more test data for this!
+DONE - BUG: unsigned int (numhosts, jobsize) should not come up as a pieChart.
+
+Performance Ale3D stuff:
+Update Dev with Marty's code:
+
+1) was able to use the Pools to make a function call.
+1.5) Creted a smaller dataset to work with, for easier debugging, since i'm reworking  a lot of stuff on Be.
+2) wrote an algorithm to break up the workload into X arrays to be sent to each pool process
+3) now, reworking the algorithm which sends the YAxis data because currently it's just sending 1 run, but we want all 50 or all 300 runs.
+    * in that process, to get the maximum space savings, i am restructuring how the data gets sent to FE. (only showing function path one time per 300/Y runs)
+
+** made a new paramter called : "poolCount"
+
+Ale3d:
+DONE * need to make it JSON again, and compare size difference with not JSON.  this way FE won't have to turn it into JSON.  let's make it look like what the FE was using before.
+* make sure runs_subsets is being split up correctly
+    - let's create smaller data files that will make it easier to debug.
+* Line 153 -> still need to combine the pools and return total, not just pool_res[1]
+    - do this after we fix the performance problems.
+* create a test to make sure it's correct. pool timing don't make sense.
+
+- parallelize multiple files using the technique in spot.py
+    * table string is currently at the end, after all subprocessing has completed.
+    * there needs to be a table string for each subprocess
+    * make_table_str needs to be inside the subprocess.
+    try:
+        cali_json = multiprocessing.Pool(18).map( _cali_to_json, _prependDir(filepath, subpaths))
+    except:
+    python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}' | more
+
+- verify size difference.
+- Try Marty's Ale3D - entire set and see what the reduction would be.
+    * keeping each one separate.
+- str replace -> make sure that it replaces the entire contents between the slashes, not just a sub part of it.
+- Add JSON wrapper, so it looks just like it looked before.
+
+
+1. Figure out the ratio of Performance (compare.js) vs Meta Data (crossfilter)
+    * let's write a script to actually calculate the difference.
+    * ~/zdeb/globals_vs_meta (tow2) / ~/zdeb/globals_vs_meta2 ( all in sub0)
+2. Turn it into a table with strings on BE and then print out as a string and not rely on json.dumps.
+    watch /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}'
+    /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}' >> ~/zdeb/compressed
+    * the new method takes 12 sec.
+    * old: 0.53 sec, before we did
+
+Now with Multi porcessing: (depending on number of pools)
+    * 8 xno files takes 12 seconds, 18, 9 sec
+    * tow2 takes 3 sec, 4.6 sec 262 dictionary values, 372 data values
+    * xn1 takes 11 sec (TTFB), dictionary = 239, data values = 377
+    * xn1 with 18 sub, 38 pools, takes 8.8 sec, xn1 48/48  takes 16 seconds, 28/28 takes 11 sec
+    * a0: 95 seconds (58 splits, 58 pools), 93 sec (18 splits, 18 pools)
+
+With JSON vs without:
+-rw------- 1 pascal pascal   18233 Mar  8 16:32 /g/g0/pascal/zdeb/not_json
+-rw------- 1 pascal pascal   20045 Mar  8 18:05 /g/g0/pascal/zdeb/with_json
+
+
+(base) [pascal@rzslic7:zdeb]$ du -skh xn1
+5.3M	xn1
+(base) [pascal@rzslic7:zdeb]$ du -skh sedov
+6.5M	sedov
+(base) [pascal@rzslic7:zdeb]$ du -skh a0
+43M	a0
+
+
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/tow2
+- Fix a bug, it can be both: json or cali.
+    * python, find a way to combine two lists, deep recursive.
+
+Find out why there's an exception when we use json.dumps: index.js Line 156
+    * aschwanden1@doc (master *) ~/install/spot2_github/spotfe/compare-src: npm run watch
+1) json.dumps OR other libraries.
+    * json.dumps is almost x4 times faster!
+    * Other libraries areonly a little faster.
+    https://brett.is/writing/about/fastest-python-json-library/
+DONE 2) Fix bug:
+if newRuns:
+    * don't overwrite
+2) explore caching.
+
+
+DONE - need to join "LLNL computing" on mattermost => then email Matt Legendre.
+- figure out how spot1 does it so fast?
+    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/xn  31/57 files
+    * https://rzlc.llnl.gov/spot/#/charts/%2Fusr%2Fworkspace%2Fspotdev%2Fmartymcf%2Fale3d%2Fale3dtest%2Fall%2Fperformance_profiles
+    * Two Reasons:
+        1) Spot1 can start rendering before all the data has been transferred, because it asks for each file individually.  so, after just 2% of the data is transferred it can already start rendering
+            whereas spot2 needs to wait until all data has been transfered.
+        2) Another Big reason: simply requesting a JSON file is much easier for the web server to load, rather than opening up a request and doing a bunch of data operations and transmitting all that data through a process.
+
+- why no caching on the front end for spot2?
+    * seems like FE augments results from last requests with the newest request and just asks for a smaller set of data.
+    * for our JSON implementation it returns the whole data set regardless whereas for the other requests, it returns a smaller subset of data to augment the existing data.
+
+SOLUTION:
+- ChartCollection.js Line: 477
+    * Just do an FE cache in localStorage for every file.
+    * if something already exists then render it: ST.CallSpot.handle_success2(cached_summary);
+    * otherwise make the BE call.
+    * Need some way for user to force a refresh.
+    * Or just fetch a new call in the background every 15 minutes.
+
+Solution 2:
+    * Request JSON files without doing any kind of processing.
+    * this is fairly significant:
+    * need to collect a list of files from BE.
+    * then make individual requests for each of those files.
+    * then collect all the requests on the FE and synchronize their returns
+    * then need to process them in a way that's equivalent to what the current spot.py is doing
+    * then feed them into the existing FE summary handling code.
+
+
+Another thing I’ve been investigating:
+why is there no caching for the ale3d json data.
+The way our caching works: It seems like FE augments results from last requests with the newest request and just asks for a smaller set of data.  At least, for our JSON implementation, it returns the whole data set regardless whereas for caching to work it should return a smaller subset of data to augment the existing data.
+
+- when doing the npm build, need to make sure we get the debug mapping in there so we can debug our own app in vue.
+    * by default, you can't debug compiled code.
+
+* Matt thinks that removing < 0.3 values is not a good solution.
+
+    2. BE/FE api clean up issues.
+    3. sorting horiz bar charts (needs more discussion)
+    4. error reporting / no-directory warning message
+    5. column sorting - column major
+
+
+
+
+
+- fixed alert box issue.
+- need to investigate git issues
+    * commit my FE change hotfix, 1 line console.log from alert.
+
+    1. performance issues
+    xn* takes about 8 seconds, if which 1 second is roughly getAllJsonRuns
+    but, most of it is json.dump!!
+    It's dumping about 1.2 million lines of code and needs to send that to FE.
+    but why should that take 8 seconds?
+    Potential Fix:
+        * Write that JSON to a file, with a date extension.  then have the FE include it as a script from the FE.
+        * Delete all the 0 entries?  and see if that will reduce the amount of data and fix the issue.
+        * reducing the number of values output to 0.3 or greater for all xn0 entries, seems to reduce exec time from 8 sec to 1.1 sec!
+        * the entire data set can be sent in 13 seconds, instead of 60 seconds + using this strategy.
+        * 0.3 or greater => 13 sec, 0.5 or greater => 11 sec.
+
+0. solve the issue where it gives a 504 gateway timeout:
+This link produces “I got 0 data objects” after about a minute: https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/workspace/spotdev/martymcf/ale3d/ale3dtest/all/performance_profiles
+This spot1 link works: https://rzlc.llnl.gov/spot/#/charts/%2Fusr%2Fworkspace%2Fspotdev%2Fmartymcf%2Fale3d%2Fale3dtest%2Fall%2Fperformance_profiles
+
+Profile it like this:
+rm ~/zdeb/perf/xn; python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn '{}' >> ~/zdeb/perf/xn
+cat ~/zdeb/perf/xn | grep -v 'problem' | grep -v 'generator' | awk '$4 > 0.1'
+
+getAllJsonRuns is only 7 out of 53 seconds.
+encoder.py:413(_iterencode)  33 sec
+
+
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/xn1
+Profiling: from FE: just TTFB
+all xno -> 8 files
+with S => 3.54 seco, 3.69s, 3.15s
+without S => 9.33, 43s, 11s
+
+a0 -> the entire data set of Ale3d.
+with S = 23s, 18s, 24s, 18s, 23s
+without S => timeout. (60s+).
+
+
+1. Solve sorting issue - marty
+2. Clean up work for the api, data that's returned, communicate with david for this.
+
+
+
+- commit the 2 changes:
+    * steph's fix to the spot.py
+    * the push+script changes.
+
+check spot2_container and update the FE/BE branch to point to the latest.
+
+
+set a UMASK before we start.
+umask 0002
+that modifies in the current shell.
+
+
+When doing deploy: do CZ first.  Test.  Then do RZ.
+Need to remove old github, contact Matt if permission issues.
+do deploy at 1pm
+
+
+
+Clean up: Delete dot files: check github to see the dot files and delete them.
+.sasscache
+.idea
+
+
+
+Clean up the interface between spotBE and spotFE.
+
+
+
+
+DONE - Deploy latest to CZ Dev: clone new repo there.  Smoke Test.
+- Do full regression test for deploy.
+
+Issues with Ale3d:
+    1) last layer doesn't appear -> non-issue because same thing happens on live for ALL other data sets.
+    2) why doesn't it break it apart by title "/g/g0/pascal/zdeb/ale3d_all" -> because there are only 4 different titles: /usr/gapps/spot/sand/spot.py getData ~/zdeb/ale3d_all '{}' | grep 'title'
+
+    3) Pipe Gen - https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/workspace/spotdev/martymcf/ale3d/perf/2021-01-13/performance_profiles/spot2&aggregate=sum&groupby=problem%20name&problem_name=pipe-gen
+            * the first pipe gen graph does not show up.
+            * perhaps this is because the values are all 0.
+- Caching is an issue -> everytime want to start clean, need to create a new dir and copy files.
+
+
+
+DONE - 2) Move over changes -> the 2 Ale3D fixes
+DONE - Ale3D data set -> Marty Spot1 files: https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot1-files
+- why is it graphing 55 for all the values?  instead of all the different values
+    * subset datasets https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?xaxis=launchdate&sf=/g/g0/pascal/tes4&groupby=dataSetKey&aggregate=sum
+    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/tes6
+    * https://rzlc.llnl.gov/spot/#/charts/%2Fusr%2Fworkspace%2Fspotdev%2Fmartymcf%2Fale3d%2Fspot1-files
+    * at the 4th layers something is still not right:
+    "generator/build ghost elem/exchange and finalize/breakdown ghost elements": {
+                    "yAxis": 0.0
+                },
+    *
+
+DONE - Redeploy RZ Dev with new BE clone ->
+DONE - Create subsets of the Ale3D dataset, with just 4 files in it.
+DONE - sort the checkboxes at the top of the page of the spot2 dashboard.
+    * although sorting is done, need to regression test and see if it didn't break anything
+    * because it was commented out, means that it was probably breaking something.
+DONE - EtcBucket limit to 200.
+
+
+
+https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot1-files&groupby=title&aggregate=sum
+/usr/gapps/spot/dev/spot.py getData /usr/gapps/spot/datasets/test_marty '{}' | more
+    * resolve 0 issues.
+/Users/aschwanden1/spot_my_changes.py
+
+- recheck everything out into new clone and then integrate spot_my_changes
+    * make sure we don't overwite existing changes.
+
+DONE - Container -> got walltime working
+DONE - Container -> got timeseries working -> had to implement ajax call in a way that worked for the container.
+DONE - fixed Environment issues - fix the environemnt.js
+DONE - /demos/mem - this does not work for some reason, need to find out why
+DONE - Container: MultiJupyter on container -> if URL string too long from too many selections, causes hanging without error message
+    * Lowered the limit on the number of characters, which should mitigate the issue.
+    * but not sure where the character limit in the docker server is coming from.
+
+
+- Need to reclone the whole repo and copy changes to it.
+
+
+
+- fix walltime for container that jsonP call need ot use the URL host
+
+DONE - currently it's trying to use: lc.llnl.gov which is not right, it should use the current host. (dont hard code localhost)
+
+- app.js only add "/data/" if it's not present in that string that's given
+    * don't want people to be able to supply ../etc/
+    * realpath -> changes it into actual location
+    * translate realpath into an absolute location
+    * add /data/ if not exists.
+- I'll need to test both spotfe/spotbe in both Container and Noncontainer
+    * don't worry about which user is testing.
+    * Matt will test charliecloud.
+
+- consider moving to prod mode for Vue.
+- possibly look into websocket error
+    * who knows if its important or not.
+
+Debuging the python command line:
+    from pprint import pprint
+    pprint(subpaths)
+
+        except:
+            error_me = sys.exc_info()
+            pprint(error_me)
+            print("Next entry.")
+            print()
+
+
+
+SPOTPW=see  docker run -e SPOTPW -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_d32 spot2
+
+
+The above will start a debugging session where you or on the docker image:
+(base) root@bbe7b70e2409:/usr/gapps/spot# ls /data/lul_sept_28_timeseries/
+200924-16330964138.cali  200924-16420956733.cali  200924-16475759479.cali
+200924-16383266200.cali  200924-16435357269.cali  200924-17012261057.cali
+200924-16394856104.cali  200924-16444657823.cali  200924-17025362173.cali
+200924-16401756144.cali  200924-16454258362.cali
+200924-16410956192.cali  200924-16465458917.cali
+
+Then you can see all the cali files in your /data/lul_sept_28_timeseries dir:
+
+Works:
+http://localhost:8080/?sf=lul_sept_28_timeseries
+
+In Input field only need to enter: lul_sept_28_timeseries
+
+Put data in here: /install/spot2_container/spotbe/demos
+
+From Legendre:
+I’ve updated Joe’s SPOT container and added instructions in the README.md for how to build and run it.  It mostly works, but I’m hitting a couple issues:
+
+
+
+Docker: I’m getting a build error on this command: docker build -t spot2 .
+#14 0.470 CMake Error: The source directory "/usr/gapps/spot/Caliper" does not appear to contain CMakeLists.txt.
+
+Once i checked out the submodules this error message went away:
+git submodule update --init --recursive
+
+
+
+
+Container:
+- https://lc.llnl.gov/bitbucket/projects/SPOT2/repos/spot2_container/browse
+- https://github.com/hpc/charliecloud
+- https://hpc.github.io/charliecloud/
+
+Left off trying to install charliecloud
+* i tried to install:
+aschwanden1@doc ~/Downloads/charliecloud-master: ./autogen.sh
+but there was a problem with
++ autoreconf --force --install -Wall -Werror
+./autogen.sh: line 56: autoreconf: command not found
+
+- need to find out how to install autoreconf and try to reinstall it.
+After that install charliecloud.
+- then after that follow the directions for the spot2_container: https://lc.llnl.gov/bitbucket/projects/SPOT2/repos/spot2_container/browse
+
+
+
+
+
+Ok, so I was able to change the URL such that It calls from http://localhost:8080 in the container for the failing jsonP callback.  But, it’s now calling lora.cgi/jsonp.
+
+So, I’m going to use the app.js file to specify a new endpoint that will call backend.py, just like the /getData call in app.js.
+
+There’s a memory call which returns all the info needed for the front end, (the call for noncontainer is:
+
+/usr/gapps/spot/venv_python/bin/python3 /usr/gapps/spot/dev/spot.py memory lul_sept_28_timeseries/200924-16410956192.cali
+
+
+
+Parcel not found:
+Answer:
+This means you need to run:
+From here: ~/install/spot2_github/spotfe/compare-src
+npm install
+
+
+
+
+tow2: (2 files)
+with dumps: 3.49, 3.49, 3.41, 3.03, 3.65
+with dump: 4.71, 5.14, 4.53, 5.16, 4.51 ~ avg 4.75
+
+
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/ale3d_regr/sedov&groupby=title&aggregate=sum
+sedov: (12 files)
+with dumps: 6.82, 6.98, 6.63
+with dump: 11.35, 10.11
+1.8 mb / 46 mb
+
+with all the files:
+with dumps: still timing out, 46s, 41s
+
+
+xn_no_s: 23 files, just tow files:
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/xn_no_s&groupby=title&aggregate=sum
+with dumps: 25s, 30.7s, 25.4s
+
+
+
+
+watch /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}'
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}' >> ~/zdeb/compressed
+
+
+Update May 2020: Chrome now lets an origin use 60% of the storage device's space (Real nitty gritty: "storage device" is the partition containing the chrome profile directory). Updated article here https://web.dev/storage-for-the-web/#how-much
+
+The rule of thumb is 6% (edit 2015-Jul: was 10%) of the available space on the user's hard drive, less if your origin is using websql, appcache or the filesystem api. The MDN doc mentioning 5mb was outdated and has been updated. The gory details about the current policy are here: https://developer.chrome.com/apps/offline_storage
+
+Note some annoying subtleties:
+
+There is no PERSISTENT storage for indexeddb, only the stuff in the link above about TEMPORARY applies.
+
+
+
+Walltime call:
+{
+    "series": {
+        "records": [],
+        "globals": {
+            "spot.metrics": "#sum.sum#duration#inclusive",
+            "figure_of_merit": "7200.000000",
+            "elapsed_time": "64.000000",
+            "region_balance": "10",
+            "region_cost": "4",
+            "num_regions": "11",
+            "problem_size": "72",
+            "iterations": "1920000",
+            "threads": "31",
+            "jobsize": "5",
+            "cluster": "treetops",
+            "cmdline": "[-runflag -f",
+            "libraries": "GCC-4.93",
+            "executablepath": "/hosts/bin/serv",
+            "launchdate": "1566467749",
+            "user": "boehme3",
+            "cali.channel": "spot",
+            "cali.caliper.version": "2.2.0-dev"
+        },
+        "attributes": {
+            "adiak.category": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "adiak.category",
+                "cali.attribute.prop": "12",
+                "cali.attribute.type": "string"
+            },
+            "adiak.type": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "adiak.type",
+                "cali.attribute.prop": "12",
+                "cali.attribute.type": "string"
+            },
+            "avg#inclusive#sum#time.duration": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "avg#inclusive#sum#time.duration",
+                "cali.attribute.prop": "65",
+                "cali.attribute.type": "double"
+            },
+            "cali.attribute.name": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "cali.attribute.name",
+                "cali.attribute.type": "string"
+            },
+            "cali.attribute.prop": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "cali.attribute.prop",
+                "cali.attribute.type": "int"
+            },
+            "cali.attribute.type": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "cali.attribute.type",
+                "cali.attribute.type": "type"
+            },
+            "cali.caliper.version": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "cali.caliper.version",
+                "cali.attribute.prop": "588",
+                "cali.attribute.type": "string"
+            },
+            "cali.channel": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "cali.channel",
+                "cali.attribute.prop": "588",
+                "cali.attribute.type": "string"
+            },
+            "cluster": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "cluster",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "string",
+                "cali.attribute.type": "string"
+            },
+            "cmdline": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "cmdline",
+                "cali.attribute.prop": "524",
+                "adiak.category": "runinfo",
+                "adiak.type": "set of string",
+                "cali.attribute.type": "string"
+            },
+            "elapsed_time": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "elapsed_time",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "double",
+                "cali.attribute.type": "double"
+            },
+            "executablepath": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "executablepath",
+                "cali.attribute.prop": "524",
+                "adiak.category": "binary",
+                "adiak.type": "path",
+                "cali.attribute.type": "string"
+            },
+            "figure_of_merit": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "figure_of_merit",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "double",
+                "cali.attribute.type": "double"
+            },
+            "iterations": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "iterations",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "jobsize": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "jobsize",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "launchdate": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "launchdate",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "date",
+                "cali.attribute.type": "uint"
+            },
+            "libraries": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "libraries",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "set of path",
+                "cali.attribute.type": "string"
+            },
+            "max#inclusive#sum#time.duration": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "max#inclusive#sum#time.duration",
+                "cali.attribute.prop": "65",
+                "cali.attribute.type": "double"
+            },
+            "min#inclusive#sum#time.duration": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "min#inclusive#sum#time.duration",
+                "cali.attribute.prop": "65",
+                "cali.attribute.type": "double"
+            },
+            "num_regions": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "num_regions",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "problem_size": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "problem_size",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "region_balance": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "region_balance",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "region_cost": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "region_cost",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "spot.metrics": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "spot.metrics",
+                "cali.attribute.prop": "512",
+                "cali.attribute.type": "string"
+            },
+            "threads": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "threads",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "user": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "user",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "string",
+                "cali.attribute.type": "string"
+            }
+        }
+    },
+    "cali_path": "/usr/gapps/spot/datasets/lulesh_gen/100/33.cali"
+}
+
+
+3.7s    12 mb
+8.2s,10,7s    49 mb
+26s        196 mb
+
+
+
+data is empty here:
+cachedData.Runs = Object.assign(cachedData.Runs, runs0);
+                cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
+                cachedData.RunGlobalMeta = Object.assign(cachedData.RunGlobalMeta, newData.RunGlobalMeta);
+                cachedData.RunSetMeta = Object.assign(cachedData.RunSetMeta, newData.RunSetMeta);
+                cachedData.runCtimes = newData.runCtimes; // delete runs from cache that were deleted on backend
+
+                deletedRuns = newData.deletedRuns || [];
+                deletedRuns.forEach(function (deletedRun) {
+                  return delete cachedData.Runs[deletedRun];
+                });
+                window.cachedData = cachedData; // cache newest version of data
+
+                _context3.next = 91;
+                return _localforage.default.setItem(dataSetKey, cachedData);
