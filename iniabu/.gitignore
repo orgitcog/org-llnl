@@ -1,0 +1,7 @@
+cleanall
+build
+dist
+.idea
+iniabu.egg-info
+PyPi_release_instructions.md
+make_pypi

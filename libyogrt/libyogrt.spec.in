@@ -1,0 +1,103 @@
+# libyogrt.spec
+
+# Declare rpmbuild --with/--without parameters
+%bcond_without slurm
+%bcond_without flux
+%bcond_with lsf
+
+%global tarball_version @PACKAGE_VERSION@
+
+Summary: @PACKAGE_NAME@
+Name: @PACKAGE_TARNAME@
+Version: %(echo %{tarball_version} | tr '-' '_')
+Release: 1%{?dist}
+License: Proprietary
+Group: System Environment/Base
+URL: @PACKAGE_URL@
+Packager: Christopher J. Morrone <morrone2@llnl.gov>
+Source0: %{name}-%{tarball_version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+%if %{with lsf}
+BuildRequires: lsf-common
+Requires: lsf-common
+# The LSF RPM packages are poorly built.  lsf-common contains two libraries
+# that we use, libbat.so and liblsf.so.  However the lsf-common package
+# neither declares that it provides them, nor installs them in sane
+# locations.  We need to prevent the internal dependency generator
+# from including rpm requires for those two libraries to work around
+# lsf-common's packaging deficiencies.
+%global __requires_exclude ^lib\(bat|lsf\)\.so.*$
+%endif
+
+%description
+A simple wrapper library that provides a unified get-remaining-time
+interface for multiple parallel job scheduling systems.
+
+%prep
+%setup -q -n %{name}-%{tarball_version}
+
+%build
+%configure LDFLAGS=-Wl,--build-id \
+        %{?with_lsf:--with-lsf LSF_LIBDIR=/opt/ibm/spectrumcomputing/lsf/10.1/linux3.10-glibc2.17-ppc64le-csm/lib LSF_ENVDIR=/opt/ibm/spectrumcomputing/lsf/conf LSF_INCLUDEDIR=/opt/ibm/spectrumcomputing/lsf/10.1/include} \
+        %{!?with_lsf:--without-lsf}
+make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT
+DESTDIR="$RPM_BUILD_ROOT" make install
+mv $RPM_BUILD_ROOT%{_sysconfdir}/yogrt.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/yogrt.conf
+
+%files
+%defattr(-,root,root,-)
+%doc
+%doc DISCLAIMER
+%doc COPYING
+%doc COPYING.LESSER
+%doc INSTALL
+%{_includedir}/yogrt.h
+%{_libdir}/*.*
+%{_libdir}/libyogrt/*
+%if %{with_slurm}
+%exclude %{_libdir}/libyogrt/libyogrt-slurm*
+%endif
+%if %{with_flux}
+%exclude %{_libdir}/libyogrt/libyogrt-flux*
+%endif
+%{_mandir}/*/*
+%config(noreplace) %{_sysconfdir}/yogrt.conf
+
+%if %{with slurm}
+%package slurm
+Summary: libyogrt plugin for SLURM
+Group: System Environment/Base
+BuildRequires: slurm slurm-devel
+Requires: slurm
+Requires: libyogrt = %{version}
+%description slurm
+SLURM plugin for libyogrt
+%files slurm
+%defattr(-,root,root,-)
+%{_libdir}/libyogrt/libyogrt-slurm*
+%endif
+
+%if %{with flux}
+%package flux
+Summary: libyogrt plugin for Flux
+Group: System Environment/Base
+BuildRequires: flux-core >= 0.47.0
+Requires: flux-core
+Requires: libyogrt = %{version}
+%description flux
+Flux plugin for libyogrt
+%files flux
+%defattr(-,root,root,-)
+%{_libdir}/libyogrt/libyogrt-flux*
+%endif
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%changelog
+* Mon Feb 12 2007 Christopher J. Morrone <morrone2@llnl.gov> - 
+- Initial build.

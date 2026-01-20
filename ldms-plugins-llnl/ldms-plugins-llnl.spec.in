@@ -1,0 +1,79 @@
+# Declare rpmbuild --with/--without parameters
+%bcond_with dcgm
+%bcond_without infiniband
+
+%global tarball_version @PACKAGE_VERSION@
+
+Summary: Miscellaneous LDMS plugins from LLNL
+Name: @PACKAGE_NAME@
+Version: %(echo %{tarball_version} | tr '-' '_')
+Release: 1%{?dist}
+License: GPL
+Group: System Environment/Base
+URL: https://github.com/llnl/ldms-plugins-llnl
+Packager: Christopher J. Morrone <morrone2@llnl.gov>
+Source0: %{name}-%{tarball_version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires: ovis-ldms-devel >= 4.3.4
+Requires: ovis-ldms >= 4.3.4
+%if %{with infiniband}
+BuildRequires: infiniband-diags-devel
+BuildRequires: rdma-core-devel
+BuildRequires: opensm-devel
+Requires: infiniband-diags-devel
+Requires: rdma-core-devel
+%endif
+BuildRequires: openssl-devel
+Requires: openssl-devel
+
+%if %{with dcgm}
+%package dcgm
+Summary: LDMS sampler plugin that supports Nvidia DCGM
+Group: System Environment/Base
+BuildRequires: datacenter-gpu-manager >= 1.6.3
+Requires: datacenter-gpu-manager >= 1.6.3
+%endif
+
+%description
+
+%if %{with dcgm}
+%description dcgm
+%endif
+
+%prep
+%setup -q -n %{name}-%{tarball_version}
+
+%build
+# The --build-id flag is necessary to make find-debuginfo.sh happy with
+# the shared libraries that are built.
+%configure LDFLAGS=-Wl,--build-id \
+    %{?with_dcgm:--with-dcgm}%{!?with_dcgm:--without-dcgm} \
+    %{?with_infiniband:--with-infiniband}%{!?with_infiniband:--without-infiniband}
+make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+DESTDIR="$RPM_BUILD_ROOT" make install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+%{_libdir}/*/*lustre*
+%{_mandir}/*/*lustre*
+%if %{with infiniband}
+%{_libdir}/*/*ibmad*
+%{_mandir}/*/*ibmad*
+%endif
+
+%if %{with dcgm}
+%files dcgm
+%defattr(-,root,root,-)
+%{_libdir}/*/*dcgm*
+%{_mandir}/*/*dcgm*
+%endif
+
+%changelog
+* Mon May 06 2019 Christopher J. Morrone <morrone2@llnl.gov> - ldms-plugins-llnl
+- Initial build.

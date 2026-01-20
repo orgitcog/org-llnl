@@ -1,0 +1,14 @@
+/*
+ * ldap_otp_jni_version.h
+ *
+ *  Created on: Sept 21, 2011
+ *      Author: meier3
+ */
+
+#ifndef LDAP_OTP_JNI_VERSION_H_
+#define LDAP_OTP_JNI_VERSION_H_
+
+#define LDAPOTP_JNI_VERSION "LDAPOTP_JNI @VERSION@"
+
+
+#endif /* LDAP_OTP_JNI_VERSION_H_ */

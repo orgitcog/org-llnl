@@ -1,0 +1,43 @@
+Summary: Miscellaneous lustre tools from LLNL
+Name: @PACKAGE_NAME@
+Version: @PACKAGE_VERSION@
+Release: 1%{?dist}
+License: GPL-2.0 AND GPL-3.0
+Group: System Environment/Base
+URL: https://github.com/llnl/lustre-tools-llnl
+Packager: Christopher J. Morrone <morrone2@llnl.gov>
+Source0: %{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires: /usr/include/linux/lustre/lustre_user.h
+Requires: lustre >= 2.12
+
+%description
+
+%prep
+%setup -q
+
+%build
+%configure
+make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+DESTDIR="$RPM_BUILD_ROOT" make install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+%doc
+# lustre_fssync is GPL-3.0
+# remaining installed scripts and binaries are GPL-2.0
+%{_sbindir}/*
+%{_mandir}/*/*
+%{_prefix}/lib/ocf/resource.d/llnl/lustre
+%{_prefix}/lib/ocf/resource.d/llnl/zpool
+
+%changelog
+* Mon Dec  6 2010 Christopher J. Morrone <morrone@butters.llnl.gov> - tools-llnl
+- Initial build.
+

@@ -1,0 +1,25 @@
+*.vtu
+*.pvtu
+*.pvd
+*.vtk
+*.msh
+.cache
+.vim
+__pycache__
+build/
+dist/
+old_scripts/
+gallery/
+.vscode/
+.devcontainer/
+lestofire.*
+examples/heat_exchanger/2D_mesh.geo
+
+# TS history data
+**/TS*
+
+.eggs/
+
+*.txt
+
+**/.coverage

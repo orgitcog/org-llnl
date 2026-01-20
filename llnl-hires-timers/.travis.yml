@@ -1,0 +1,13 @@
+language: c
+compiler:
+  - gcc
+  - clang
+before_install:
+  - echo "yes" | sudo add-apt-repository ppa:kalakris/cmake
+  - sudo apt-get update -qq
+  - sudo apt-get install cmake
+script:
+  - mkdir build && cd build
+  - cmake .. -DENABLE_TESTS=true
+  - make
+  - make test

@@ -1,0 +1,33 @@
+name: linux builds
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -yqq gcc g++ gfortran lua5.1 lua5.1-dev make
+    - name: Build IREP
+      run: |
+        mkdir build && cd build
+        cmake ..
+        make -j8
+    - name: C Example
+      run: |
+        cd examples && make c LUA_INCLUDE=-I/usr/include/lua5.1 LUA_LIBRARIES="-L/usr/lib/x86_64-linux-gnu -llua5.1"
+    - name: C++/CMake Example
+      run: |
+        cd examples && make cxx LUA_INCLUDE=-I/usr/include/lua5.1 LUA_LIBRARIES="-L/usr/lib/x86_64-linux-gnu -llua5.1"
+    - name: Fortran Example
+      run: |
+        cd examples && make fortran LUA_INCLUDE=-I/usr/include/lua5.1 LUA_LIBRARIES="-L/usr/lib/x86_64-linux-gnu -llua5.1"

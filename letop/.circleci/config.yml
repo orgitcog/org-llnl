@@ -1,0 +1,35 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: miguelsalazartroya/miguelsalazartroya-letop:latest
+    steps:
+      - checkout # check out the code in the project directory
+      - run:
+          name: install dependencies
+          command: |
+            source /home/firedrake/firedrake/bin/activate
+            pip3 install roltrilinos ROL
+            pip3 install protobuf==3.8.0
+            pip3 install --upgrade numpy
+            pip3 install pytest-cov
+
+      # run tests!
+      - run:
+          name: Run tests
+          no_output_timeout: 30m
+          working_directory: test/
+          command: |
+            source /home/firedrake/firedrake/bin/activate
+            pip3 install -e ../
+            gmsh -2 2D_mesh.geo
+            gmsh -3 3D_mesh.geo
+            gmsh -2 -option unstructured_rectangle.geo.opt unstructured_rectangle.geo
+            ./build_example_meshes.sh ${VIRTUAL_ENV}
+            pytest --cov=../letop/ .
+            bash <(curl -s https://codecov.io/bash)
+workflows:
+  version: 2
+  all:
+    jobs:
+      - build

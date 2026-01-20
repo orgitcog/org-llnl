@@ -1,0 +1,81 @@
+.TH YOGRT_SETGET 3 2007-02-28 "" "LIBYOGRT"
+
+.SH NAME
+yogrt_set_interval1, yogrt_get_interval1 \- set/get interval1
+.br
+yogrt_set_interval2, yogrt_get_interval2 \- set/get interval2
+.br
+yogrt_set_interval2_start, yogrt_get_interval2_start \- set/get interval2_start
+.br
+yogrt_set_fudge_factor, yogrt_get_fudge_factor \- set/get fudge_factor
+
+.SH SYNOPSIS
+.nf
+.B #include <yogrt.h>
+.sp
+.BI "void yogrt_set_interval1(int seconds)"
+.br
+.BI "int yogrt_get_interval1(void)"
+.br
+.BI "void yogrt_set_interval2(int seconds)"
+.br
+.BI "int yogrt_get_interval2(void)"
+.br
+.BI "void yogrt_set_interval2_start(int seconds_before_end)"
+.br
+.BI "int yogrt_get_interval2_start(void)"
+.br
+.BI "void yogrt_set_fudge_factor(int seconds)"
+.br
+.BI "int yogrt_get_fudge_factor(void)"
+.fi
+.BI "void yogrt_set_remaining(int seconds_remaining)"
+.fi
+.BI "void yogrt_set_debug(int verbosity)"
+.fi
+.BI "int yogrt_get_debug(void)"
+.fi
+.sp
+Link with -lyogrt.
+
+.SH "FORTRAN EXTENSIONS"
+INTEGER SECONDS
+.br
+IYOGRT_SET_INTERVAL1(SECONDS)
+.br
+SECONDS = IYOGRT_GET_INTERVAL1()
+.br
+IYOGRT_SET_INTERVAL2(SECONDS)
+.br
+SECONDS = IYOGRT_GET_INTERVAL2()
+.br
+IYOGRT_SET_INTERVAL2_START(SECONDS)
+.br
+SECONDS = IYOGRT_GET_INTERVAL2_START()
+.br
+IYOGRT_SET_FUDGE_FACTOR(SECONDS)
+.br
+SECONDS = IYOGRT_GET_FUDGE_FACTOR()
+.br
+IYOGRT_SET_REMAINING(SECONDS)
+.br
+IYOGRT_SET_DEBUG(VERBOSITY)
+.br
+VERBOSIRT = IYOGRT_GET_DEBUG()
+
+.SH DESCRIPTION
+These libyogrt library calls allow one to get and set internal library
+variables to control the frequency of cache updates (among other things).  See
+.BR libyogrt (7)
+for a full description of the effects of these variables.
+
+.SH "RETURN VALUE"
+The yogrt_get_* functions return the current value of their corresponding
+variable.
+
+.SH NOTES
+These functions may be called by an application, and the values of the three
+variables changed, as often as desired.
+
+.SH "SEE ALSO"
+.BR libyogrt (7)

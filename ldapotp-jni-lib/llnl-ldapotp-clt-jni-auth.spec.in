@@ -1,0 +1,109 @@
+##=========================================================================== #
+## Local Variables
+##=========================================================================== #
+
+# Set the location for the library and header
+%define ldapotp_libdir 		%{_libdir}/ldapotp
+%define ldapotp_incdir 		%{_includedir}/ldapotp
+%define ldapotp_prefix 		ldapotp
+
+##=========================================================================== #
+## Header/ Summary Section
+##=========================================================================== #
+Name: @PROJECT@
+Version: @VERSION@
+Release: @RELEASE@%{?dist}
+
+Summary: LDAPTOTP Java Native Interface Wrapper
+License: GPL/BSD
+Group: System Environment/Libraries
+BuildRoot: %{_tmppath}/@PROJECT@-@VERSION@-@RELEASE@
+Source: @PROJECT@-@VERSION@.tar.gz
+Requires: llnl-ldapotp-clt-auth-libs
+BuildRequires: llnl-ldapotp-clt-auth-libs llnl-ldapotp-clt-auth-devel java-devel
+##Requires: llnl-ldapotp-clt-auth-libs libgcj
+##BuildRequires: llnl-ldapotp-clt-auth-libs llnl-ldapotp-clt-auth-devel libgcj libgcj-devel
+
+%description
+llnl-ldapotp-clt-jni-auth-libs provides an simple java wrapper around the ldapotp client libraries
+
+%prep
+%setup -q
+
+##=========================================================================== #
+## Build Section
+##=========================================================================== #
+
+%build
+## Symbols (-D)
+
+## Includes (-I)
+
+## Libraries (-L/-l)
+LDFLAGS="-L%{ldapotp_libdir} $LDFLAGS"; 
+export LDFLAGS
+
+%configure \
+        --libdir=%{ldapotp_libdir}
+
+make
+
+##=========================================================================== #
+##  Installation Section
+##=========================================================================== #
+
+%install
+[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+make DESTDIR=${RPM_BUILD_ROOT} install
+# remove unpackaged files from the buildroot
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+
+# Standardize the location of LDAP/OTP libs
+( cd $RPM_BUILD_ROOT
+        mkdir -p $RPM_BUILD_ROOT%{_libdir}
+        cd $RPM_BUILD_ROOT%{_libdir}
+        ln -sf ../..%{ldapotp_libdir}/libLdapOtpJni.so .
+)
+
+%ifos linux
+mkdir -p %{buildroot}/etc/ld.so.conf.d
+echo "%{ldapotp_libdir}" > %{buildroot}/etc/ld.so.conf.d/@PROJECT@.conf
+%endif
+
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+##=========================================================================== #
+## Files to Install
+##=========================================================================== #
+
+%files
+%defattr(-,root,root)
+# LDAP/OTP Java Client Library 
+%{ldapotp_libdir}/libLdapOtpJni.*
+# Adding the standardize location for libraries
+%{_libdir}/libLdapOtpJni.so
+#/%{_lib}/ldapotp/libLdapOtpJni.*
+%doc ChangeLog
+%doc INSTALL
+%doc LICENSE
+%doc DISCLAIMER
+%doc COPYING
+%doc README.md
+%{_mandir}/man8/*
+%defattr(640,root,root)
+%ifos linux
+%attr(644,root,root) /etc/ld.so.conf.d/@PROJECT@.conf
+%endif
+
+%config(noreplace)
+
+%changelog
+* Wed Jun 24 2015 Tim Meier <meier3@llnl.gov> 1.0.0-9
+- added LGPL headers
+* Fri Oct 17 2014 Tim Meier <meier3@llnl.gov> 1.0.0-7
+- convert to README.md, but no code change
+* Wed Oct  9 2014 Tim Meier <meier3@llnl.gov> 1.0.0-5
+- convert to configure.ac, but no code change
+

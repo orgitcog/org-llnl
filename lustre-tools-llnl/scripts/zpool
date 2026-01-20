@@ -1,0 +1,227 @@
+#!/bin/sh
+#
+#   Resource Agent for managing ZFS zpool resources.
+#
+# This file is part of lustre-tools-llnl.
+#
+# SPDX-License-Identifier: GPL-2.0
+# See [LICENSE-GPL-2.0](https://github.com/LLNL/lustre-tools-llnl/LICENSE-GPL-2.0)
+#
+# Copyright (c) 2011, Lawrence Livermore National Security, LLC.
+# Produced at the Lawrence Livermore National Laboratory.
+# LLNL-CODE-468512
+
+# Initialization:
+: ${OCF_FUNCTIONS_DIR=${OCF_ROOT}/lib/heartbeat}
+. ${OCF_FUNCTIONS_DIR}/ocf-shellfuncs
+
+zpool_meta_data() {
+    cat <<EOF
+<?xml version="1.0"?>
+<!DOCTYPE resource-agent SYSTEM "ra-api-1.dtd">
+<resource-agent name="zpool" version="0.1">
+  <version>0.1</version>
+  <longdesc lang="en">
+This is a resource agent that manages ZFS zpools.
+  </longdesc>
+  <shortdesc lang="en">ZFS zpool resource agent</shortdesc>
+  <parameters>
+    <parameter name="pool" unique="0" required="1">
+      <longdesc lang="en">
+      Name of the ZFS pool.
+      </longdesc>
+      <shortdesc lang="en">Number of eggs</shortdesc>
+      <content type="integer"/>
+    </parameter>
+    <parameter name="import_options" unique="0" required="0">
+      <longdesc lang="en">
+      Additional command line options for the zfs import command.
+      </longdesc>
+      <shortdesc lang="en">zpool import command line options</shortdesc>
+      <content type="string"/>
+    </parameter>
+    <parameter name="post_import_cmd" unique="0" required="0">
+      <longdesc lang="en">
+      Command run after importing the pool. Failure results in pool export.
+      </longdesc>
+      <shortdesc lang="en">command run after pool import</shortdesc>
+      <content type="string"/>
+    </parameter>
+  </parameters>
+  <actions>
+    <action name="start"        timeout="60" />
+    <action name="stop"         timeout="60" />
+    <action name="monitor"      timeout="60"
+                                interval="10" depth="0" />
+    <action name="meta-data"    timeout="5" />
+    <action name="validate-all"   timeout="20" />
+  </actions>
+</resource-agent>
+EOF
+}
+
+zpool_monitor() {
+    local rc
+    rc=$OCF_NOT_RUNNING
+
+    # exit immediately if configuration is not valid
+    zpool_validate_all || exit $?
+
+    if [ -e /proc/spl/kstat/zfs/$OCF_RESKEY_pool/state ] ; then
+        # Best case, we can read the pool health locklessly from the proc file.
+        state=$(cat /proc/spl/kstat/zfs/$OCF_RESKEY_pool/state)
+
+        if [ "$state" = "SUSPENDED" -o "$state" = "FAULTED" -o "$state" = "UNAVAIL" ] ; then
+            ocf_log info "ZFS pool $OCF_RESKEY_pool is $state"
+
+            # Log zpool status to syslog for post-mortem.  Run in it the
+            # background in case zpool status hangs.  Wait 2 seconds for it to
+            # log.
+            ocf_log info "$(zpool status)" &
+            sleep 2
+
+            rc=$OCF_ERR_GENERIC
+        else
+            rc=$OCF_SUCCESS
+        fi
+    elif [ -d /proc/spl/kstat/zfs/$OCF_RESKEY_pool ] ; then
+        ocf_log info "$OCF_RESKEY_pool exists but no state set"
+        # 2nd best case, we see a /proc entry for the pool so
+        # we at least know it's imported.
+        rc=$OCF_SUCCESS
+    fi
+
+    return $rc
+}
+
+zpool_validate_all() {
+    # Test for configuration errors first
+    #if ! ocf_is_decimal $OCF_RESKEY_eggs; then
+    #   ocf_log err "eggs is not numeric!"
+    #   exit $OCF_ERR_CONFIGURED
+    #fi
+
+    # Test for required binaries
+    check_binary zpool
+
+    # Check for data directory (this may be on shared storage, so
+    # disable this test during probes)
+    #if ! ocf_is_probe; then
+    #   if ! [ -d $OCF_RESKEY_datadir ]; then
+    #      ocf_log err "$OCF_RESKEY_datadir does not exist or is not a directory!"
+    #      exit $OCF_ERR_INSTALLED
+    #   fi
+    #fi
+
+    return $OCF_SUCCESS
+}
+
+
+zpool_start() {
+    # exit immediately if configuration is not valid
+    zpool_validate_all || exit $?
+
+    if zpool_monitor; then
+        ocf_log info "ZFS pool $OCF_RESKEY_pool already imported"
+        return $OCF_SUCCESS
+    fi
+
+    # actually start up the resource here (make sure to immediately
+    # exit with an $OCF_ERR_ error code if anything goes seriously
+    # wrong)
+    # Note that OCF_ERR_GENERIC is a soft error, and the resource manager
+    # may attempt to try this again on the same node.
+    ocf_run -q zpool import $OCF_RESKEY_import_options $OCF_RESKEY_pool \
+	|| exit $OCF_ERR_GENERIC
+
+    # After the resource has been started, check whether it started up
+    # correctly. If the resource starts asynchronously, the agent may
+    # spin on the monitor function here -- if the resource does not
+    # start up within the defined timeout, the cluster manager will
+    # consider the start action failed
+    while ! zpool_monitor; do
+        ocf_log debug "ZFS pool $OCF_RESKEY_pool net yet imported"
+        sleep 1
+    done
+
+    if [ -n "$OCF_RESKEY_post_import_cmd" ]; then
+        ocf_run $OCF_RESKEY_post_import_cmd $OCF_RESKEY_pool
+        if [ $? -ne 0 ]; then
+            ocf_log err "FATAL ERROR: exporting ZFS pool $OCF_RESKEY_pool due to $OCF_RESKEY_post_import_cmd failure"
+            ocf_run -q zpool export $OCF_RESKEY_pool
+            exit $OCF_ERR_GENERIC
+        fi
+    fi
+
+    # only return $OCF_SUCCESS if _everything_ succeeded as expected
+    return $OCF_SUCCESS
+}
+
+zpool_stop() {
+    local rc
+
+    # exit immediately if configuration is not valid
+    zpool_validate_all || exit $?
+
+    zpool_monitor
+    rc=$?
+    case "$rc" in
+        "$OCF_SUCCESS")
+            # Currently running. Normal, expected behavior.
+            ocf_log debug "ZFS pool $OCF_RESKEY_pool is currently imported"
+            ;;
+        "$OCF_NOT_RUNNING")
+            # Currently not running. Nothing to do.
+            ocf_log info "Resource is already stopped"
+            return $OCF_SUCCESS
+            ;;
+    esac
+
+    # actually shut down the resource here (make sure to immediately
+    # exit with an $OCF_ERR_ error code if anything goes seriously
+    # wrong)
+    ocf_run -q zpool export $OCF_RESKEY_pool || exit $OCF_ERR_GENERIC
+
+    # After the resource has been stopped, check whether it shut down
+    # correctly. If the resource stops asynchronously, the agent may
+    # spin on the monitor function here -- if the resource does not
+    # shut down within the defined timeout, the cluster manager will
+    # consider the stop action failed
+    while zpool_monitor; do
+        ocf_log debug "Resource has not stopped yet, waiting"
+        sleep 1
+    done
+
+    # only return $OCF_SUCCESS if _everything_ succeeded as expected
+    return $OCF_SUCCESS
+
+}
+
+# Make sure meta-data and usage always succeed
+case $__OCF_ACTION in
+meta-data)      zpool_meta_data
+                exit $OCF_SUCCESS
+                ;;
+usage|help)     zpool_usage
+                exit $OCF_SUCCESS
+                ;;
+esac
+
+# Anything other than meta-data and usage must pass validation
+zpool_validate_all || exit $?
+
+# Translate each action into the appropriate function call
+case $__OCF_ACTION in
+start)          zpool_start;;
+stop)           zpool_stop;;
+status|monitor) zpool_monitor;;
+validate-all)   ;;
+*)              zpool_usage
+                exit $OCF_ERR_UNIMPLEMENTED
+                ;;
+esac
+rc=$?
+
+# The resource agent may optionally log a debug message
+ocf_log debug "${OCF_RESOURCE_INSTANCE} $__OCF_ACTION returned $rc"
+exit $rc

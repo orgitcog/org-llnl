@@ -1,0 +1,7 @@
+*.a
+*.o
+*.mod
+*_prog
+cxx-cmake/build
+build
+irep
