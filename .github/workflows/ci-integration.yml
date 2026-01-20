@@ -1,0 +1,204 @@
+name: CI Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Domain to test (e.g., 01-hpc-parallel, all)'
+        required: false
+        default: 'all'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Validate repository structure and index files
+  validate-structure:
+    name: Validate Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            INDEX.json
+            TAGS.json
+            README.md
+            .github
+
+      - name: Validate INDEX.json
+        run: |
+          python3 -c "import json; json.load(open('INDEX.json'))"
+          echo "INDEX.json is valid JSON"
+
+      - name: Validate TAGS.json
+        run: |
+          python3 -c "import json; json.load(open('TAGS.json'))"
+          echo "TAGS.json is valid JSON"
+
+      - name: Check domain directories
+        run: |
+          for domain in 01-hpc-parallel 02-ml-ai 03-simulation 04-scientific-libs 05-data-viz 06-devtools 07-bioinformatics 08-web-apps 09-infrastructure 10-security 99-misc; do
+            if [ ! -d "$domain" ]; then
+              echo "Missing domain directory: $domain"
+              exit 1
+            fi
+          done
+          echo "All domain directories present"
+
+  # Lint Python projects
+  lint-python:
+    name: Lint Python Projects
+    runs-on: ubuntu-latest
+    needs: validate-structure
+    strategy:
+      fail-fast: false
+      matrix:
+        domain: [02-ml-ai, 05-data-viz, 06-devtools]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: ${{ matrix.domain }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install linters
+        run: pip install ruff black isort
+
+      - name: Find Python files
+        id: find-python
+        run: |
+          count=$(find ${{ matrix.domain }} -name "*.py" -type f | wc -l)
+          echo "count=$count" >> $GITHUB_OUTPUT
+          echo "Found $count Python files in ${{ matrix.domain }}"
+
+      - name: Run ruff check
+        if: steps.find-python.outputs.count > 0
+        continue-on-error: true
+        run: |
+          find ${{ matrix.domain }} -name "*.py" -type f | head -100 | xargs ruff check --select=E,F,W --ignore=E501 || true
+
+  # Build sample C/C++ projects
+  build-cpp:
+    name: Build C++ Samples
+    runs-on: ubuntu-latest
+    needs: validate-structure
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - domain: 01-hpc-parallel
+            projects: 5
+          - domain: 03-simulation
+            projects: 3
+          - domain: 04-scientific-libs
+            projects: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: ${{ matrix.domain }}
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential
+
+      - name: Find CMake projects
+        id: find-cmake
+        run: |
+          projects=$(find ${{ matrix.domain }} -maxdepth 2 -name "CMakeLists.txt" -exec dirname {} \; | head -${{ matrix.projects }})
+          echo "projects<<EOF" >> $GITHUB_OUTPUT
+          echo "$projects" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Configure CMake projects
+        continue-on-error: true
+        run: |
+          for project in ${{ steps.find-cmake.outputs.projects }}; do
+            echo "=== Configuring $project ==="
+            mkdir -p "$project/build" && cd "$project/build"
+            cmake .. -DCMAKE_BUILD_TYPE=Release 2>&1 | head -50 || true
+            cd - > /dev/null
+          done
+
+  # Test Python package imports
+  test-python-imports:
+    name: Test Python Imports
+    runs-on: ubuntu-latest
+    needs: validate-structure
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            02-ml-ai
+            05-data-viz
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install common dependencies
+        run: pip install numpy scipy pandas matplotlib
+
+      - name: Test imports
+        continue-on-error: true
+        run: |
+          for project in $(find 02-ml-ai 05-data-viz -maxdepth 1 -type d | head -10); do
+            if [ -f "$project/setup.py" ] || [ -f "$project/pyproject.toml" ]; then
+              echo "=== Testing $project ==="
+              cd "$project"
+              pip install -e . 2>&1 | tail -5 || true
+              cd - > /dev/null
+            fi
+          done
+
+  # Generate integration report
+  integration-report:
+    name: Integration Report
+    runs-on: ubuntu-latest
+    needs: [validate-structure, lint-python, build-cpp, test-python-imports]
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: INDEX.json
+
+      - name: Generate report
+        run: |
+          echo "# Integration Report" > report.md
+          echo "" >> report.md
+          echo "**Run:** ${{ github.run_id }}" >> report.md
+          echo "**Commit:** ${{ github.sha }}" >> report.md
+          echo "**Date:** $(date -u)" >> report.md
+          echo "" >> report.md
+          echo "## Job Status" >> report.md
+          echo "" >> report.md
+          echo "| Job | Status |" >> report.md
+          echo "|-----|--------|" >> report.md
+          echo "| Validate Structure | ${{ needs.validate-structure.result }} |" >> report.md
+          echo "| Lint Python | ${{ needs.lint-python.result }} |" >> report.md
+          echo "| Build C++ | ${{ needs.build-cpp.result }} |" >> report.md
+          echo "| Test Python Imports | ${{ needs.test-python-imports.result }} |" >> report.md
+          echo "" >> report.md
+          echo "## Project Statistics" >> report.md
+          echo "" >> report.md
+          python3 -c "
+          import json
+          idx = json.load(open('INDEX.json'))
+          print(f'- **Total Projects:** {idx[\"total_projects\"]}')
+          for domain, info in idx['domains'].items():
+              print(f'- **{info[\"name\"]}:** {info[\"project_count\"]} projects')
+          "
+          cat report.md
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-report
+          path: report.md

@@ -1,0 +1,159 @@
+name: Build Domain
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Domain to build'
+        required: true
+        type: choice
+        options:
+          - 01-hpc-parallel
+          - 02-ml-ai
+          - 03-simulation
+          - 04-scientific-libs
+          - 05-data-viz
+          - 06-devtools
+          - 07-bioinformatics
+          - 08-web-apps
+          - 09-infrastructure
+          - 10-security
+          - 99-misc
+      max_projects:
+        description: 'Maximum projects to build'
+        required: false
+        default: '10'
+
+jobs:
+  discover:
+    name: Discover Projects
+    runs-on: ubuntu-latest
+    outputs:
+      cmake_projects: ${{ steps.discover.outputs.cmake }}
+      python_projects: ${{ steps.discover.outputs.python }}
+      node_projects: ${{ steps.discover.outputs.node }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: ${{ inputs.domain }}
+
+      - name: Discover buildable projects
+        id: discover
+        run: |
+          # CMake projects
+          cmake_projects=$(find ${{ inputs.domain }} -maxdepth 2 -name "CMakeLists.txt" -exec dirname {} \; | head -${{ inputs.max_projects }} | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "cmake=$cmake_projects" >> $GITHUB_OUTPUT
+          
+          # Python projects
+          python_projects=$(find ${{ inputs.domain }} -maxdepth 2 \( -name "setup.py" -o -name "pyproject.toml" \) -exec dirname {} \; | sort -u | head -${{ inputs.max_projects }} | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "python=$python_projects" >> $GITHUB_OUTPUT
+          
+          # Node projects
+          node_projects=$(find ${{ inputs.domain }} -maxdepth 2 -name "package.json" -exec dirname {} \; | head -${{ inputs.max_projects }} | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "node=$node_projects" >> $GITHUB_OUTPUT
+
+  build-cmake:
+    name: Build CMake
+    runs-on: ubuntu-latest
+    needs: discover
+    if: needs.discover.outputs.cmake_projects != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.cmake_projects) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: ${{ matrix.project }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential libopenmpi-dev
+
+      - name: Configure
+        working-directory: ${{ matrix.project }}
+        continue-on-error: true
+        run: |
+          mkdir -p build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release 2>&1 | tee cmake_output.log
+
+      - name: Build
+        working-directory: ${{ matrix.project }}/build
+        continue-on-error: true
+        run: make -j$(nproc) 2>&1 | tail -100
+
+  build-python:
+    name: Build Python
+    runs-on: ubuntu-latest
+    needs: discover
+    if: needs.discover.outputs.python_projects != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.python_projects) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: ${{ matrix.project }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install
+        working-directory: ${{ matrix.project }}
+        continue-on-error: true
+        run: |
+          pip install --upgrade pip wheel setuptools
+          pip install -e . 2>&1 | tail -50
+
+      - name: Test import
+        continue-on-error: true
+        run: |
+          project_name=$(basename ${{ matrix.project }} | tr '-' '_')
+          python -c "import $project_name" 2>&1 || echo "Import test skipped"
+
+  build-node:
+    name: Build Node
+    runs-on: ubuntu-latest
+    needs: discover
+    if: needs.discover.outputs.node_projects != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.node_projects) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: ${{ matrix.project }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install
+        working-directory: ${{ matrix.project }}
+        continue-on-error: true
+        run: npm install 2>&1 | tail -50
+
+      - name: Build
+        working-directory: ${{ matrix.project }}
+        continue-on-error: true
+        run: npm run build 2>&1 || echo "No build script"
+
+  summary:
+    name: Build Summary
+    runs-on: ubuntu-latest
+    needs: [discover, build-cmake, build-python, build-node]
+    if: always()
+    steps:
+      - name: Summary
+        run: |
+          echo "# Build Summary for ${{ inputs.domain }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Type | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| CMake | ${{ needs.build-cmake.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Python | ${{ needs.build-python.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Node | ${{ needs.build-node.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY

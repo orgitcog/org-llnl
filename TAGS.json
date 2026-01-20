@@ -1,0 +1,2915 @@
+{
+  "amg": [
+    "01-hpc-parallel/AMG"
+  ],
+  "c-c++": [
+    "01-hpc-parallel/AMG",
+    "01-hpc-parallel/AMG2023",
+    "01-hpc-parallel/Adagio",
+    "01-hpc-parallel/BinFPE",
+    "01-hpc-parallel/Caliper",
+    "01-hpc-parallel/ExaCA",
+    "01-hpc-parallel/ExaConstit",
+    "01-hpc-parallel/FPChecker",
+    "01-hpc-parallel/FTTN",
+    "01-hpc-parallel/GPU-FPX",
+    "01-hpc-parallel/Kripke",
+    "01-hpc-parallel/MACSio",
+    "01-hpc-parallel/MPIDiff",
+    "01-hpc-parallel/PF3DCOMM",
+    "01-hpc-parallel/PF3DK",
+    "01-hpc-parallel/RAJAPerf",
+    "01-hpc-parallel/STREAMSTAT",
+    "01-hpc-parallel/WRF-IBM",
+    "01-hpc-parallel/WarpX",
+    "01-hpc-parallel/ac-mpibind",
+    "01-hpc-parallel/b-mpi3",
+    "01-hpc-parallel/backstroke",
+    "01-hpc-parallel/benchpark",
+    "01-hpc-parallel/cardioid",
+    "01-hpc-parallel/croquis",
+    "01-hpc-parallel/direct-fuse",
+    "01-hpc-parallel/gtest-mpi-listener",
+    "01-hpc-parallel/hiop",
+    "01-hpc-parallel/loupe",
+    "01-hpc-parallel/matred",
+    "01-hpc-parallel/muster",
+    "01-hpc-parallel/nami",
+    "01-hpc-parallel/simul",
+    "02-ml-ai/AMPE",
+    "02-ml-ai/AMS",
+    "02-ml-ai/LEAP",
+    "02-ml-ai/MultiMatTest",
+    "02-ml-ai/RAJA-SDP",
+    "02-ml-ai/SAMRAI",
+    "02-ml-ai/SBLLmalloc",
+    "02-ml-ai/SSAPy",
+    "02-ml-ai/apollo",
+    "02-ml-ai/iirabm",
+    "02-ml-ai/mgmol",
+    "02-ml-ai/open-ai-co-scientist",
+    "02-ml-ai/weave_docs",
+    "02-ml-ai/yorick-gl",
+    "02-ml-ai/yorick-mpeg",
+    "03-simulation/ContinuationSolvers",
+    "03-simulation/ExaCMech",
+    "03-simulation/GridKit",
+    "03-simulation/adept-utils",
+    "03-simulation/gretl",
+    "03-simulation/metall-tutorial",
+    "03-simulation/parelag",
+    "03-simulation/parelagmc",
+    "03-simulation/scaleupROM",
+    "03-simulation/smith",
+    "03-simulation/smoothG",
+    "03-simulation/spheral",
+    "04-scientific-libs/minq",
+    "04-scientific-libs/slapi",
+    "04-scientific-libs/sundials",
+    "04-scientific-libs/yorick",
+    "05-data-viz/AnalyticMGOpac",
+    "05-data-viz/Wintap-Analytics",
+    "05-data-viz/datacrumbs",
+    "05-data-viz/graph-embed",
+    "05-data-viz/hdtopology",
+    "05-data-viz/refex-rolx",
+    "05-data-viz/trestles",
+    "06-devtools/ADAPT",
+    "06-devtools/AMM",
+    "06-devtools/ATD",
+    "06-devtools/Adiak",
+    "06-devtools/Aluminum",
+    "06-devtools/AutomaDeD",
+    "06-devtools/CARE",
+    "06-devtools/CDash",
+    "06-devtools/CHAI",
+    "06-devtools/Comb",
+    "06-devtools/CompilerGPT",
+    "06-devtools/CxxPolyFit",
+    "06-devtools/ERF",
+    "06-devtools/Elemental",
+    "06-devtools/ExaEpi",
+    "06-devtools/GOTCHA",
+    "06-devtools/GOTCHA-tracer",
+    "06-devtools/Gremlins",
+    "06-devtools/GridDyn",
+    "06-devtools/H5Z-ZFP",
+    "06-devtools/LULESH",
+    "06-devtools/MAT",
+    "06-devtools/MPI-Stages",
+    "06-devtools/MemAxes",
+    "06-devtools/Open-Facility-Viewer",
+    "06-devtools/PENNANT",
+    "06-devtools/PYB11Generator",
+    "06-devtools/Perroht",
+    "06-devtools/PnMPI",
+    "06-devtools/PolyClipper",
+    "06-devtools/Privateer",
+    "06-devtools/RAJA",
+    "06-devtools/RAJA-project-template",
+    "06-devtools/RAJAProxies",
+    "06-devtools/ROSE-LCOM-Tools",
+    "06-devtools/Rescal-snow",
+    "06-devtools/SAC2000",
+    "06-devtools/SNLS",
+    "06-devtools/SW4CK",
+    "06-devtools/Silo",
+    "06-devtools/Skywing",
+    "06-devtools/Tool-Gear",
+    "06-devtools/TopoMS",
+    "06-devtools/Tribol",
+    "06-devtools/Umpire",
+    "06-devtools/adapt-fp",
+    "06-devtools/bindee",
+    "06-devtools/caliper-compiler",
+    "06-devtools/callpath",
+    "06-devtools/camp",
+    "06-devtools/coreFPUtest",
+    "06-devtools/cram",
+    "06-devtools/cxxopts",
+    "06-devtools/dftracer",
+    "06-devtools/dftracer-utils",
+    "06-devtools/dr_evt",
+    "06-devtools/exadis",
+    "06-devtools/fpzip",
+    "06-devtools/gecko",
+    "06-devtools/geometry-mesher",
+    "06-devtools/gidiplus",
+    "06-devtools/graphlib",
+    "06-devtools/havoqgt",
+    "06-devtools/inq",
+    "06-devtools/irep",
+    "06-devtools/krowkee",
+    "06-devtools/legion",
+    "06-devtools/libROM",
+    "06-devtools/libmsr",
+    "06-devtools/lime",
+    "06-devtools/lime-apps",
+    "06-devtools/llnl-hires-timers",
+    "06-devtools/llnl.github.io",
+    "06-devtools/mdtest",
+    "06-devtools/metall",
+    "06-devtools/mimir",
+    "06-devtools/mitos",
+    "06-devtools/mpy1",
+    "06-devtools/msr-safe",
+    "06-devtools/op",
+    "06-devtools/paraDIS_lib",
+    "06-devtools/perf-dump",
+    "06-devtools/phloem",
+    "06-devtools/polytope",
+    "06-devtools/psuade",
+    "06-devtools/psuade-lite",
+    "06-devtools/pylibROM",
+    "06-devtools/quandary",
+    "06-devtools/radiuss-ci",
+    "06-devtools/radiuss-clingo-install",
+    "06-devtools/radiuss-spack-testing",
+    "06-devtools/raja-suite-tutorial",
+    "06-devtools/ravel",
+    "06-devtools/saltatlas",
+    "06-devtools/saltatlas_h5_io",
+    "06-devtools/scr",
+    "06-devtools/scr-top",
+    "06-devtools/simpool",
+    "06-devtools/simutil",
+    "06-devtools/spify",
+    "06-devtools/tripoll",
+    "06-devtools/uberenv",
+    "06-devtools/umap",
+    "06-devtools/umap-apps",
+    "06-devtools/units",
+    "06-devtools/wcs",
+    "06-devtools/ygm-project-template",
+    "06-devtools/ygm-tools",
+    "06-devtools/ygm-tutorial",
+    "06-devtools/yorick-z",
+    "06-devtools/zero-rk",
+    "06-devtools/zfp",
+    "06-devtools/zhw",
+    "99-misc/PIPS-SBB",
+    "99-misc/XPL",
+    "99-misc/clippy-cpp",
+    "99-misc/ddcMD",
+    "99-misc/flume-plugins",
+    "99-misc/mib",
+    "99-misc/mtinv",
+    "99-misc/ygm",
+    "99-misc/ygm-bench",
+    "99-misc/yorick-ml4"
+  ],
+  "amg2023": [
+    "01-hpc-parallel/AMG2023"
+  ],
+  "adagio": [
+    "01-hpc-parallel/Adagio"
+  ],
+  "autoparbench": [
+    "01-hpc-parallel/AutoParBench"
+  ],
+  "unknown": [
+    "01-hpc-parallel/AutoParBench",
+    "01-hpc-parallel/CUDAMicroBench",
+    "01-hpc-parallel/CerebrasTrilabs-SC24AD",
+    "01-hpc-parallel/FAROS",
+    "01-hpc-parallel/FGPU",
+    "01-hpc-parallel/FastGlobalFileStatus",
+    "01-hpc-parallel/GPS-Z",
+    "01-hpc-parallel/GpuMatMatPaper",
+    "01-hpc-parallel/HPAC",
+    "01-hpc-parallel/HPC-Tutorials",
+    "01-hpc-parallel/HPCCEA",
+    "01-hpc-parallel/LAST",
+    "01-hpc-parallel/LCUSS",
+    "01-hpc-parallel/LIGR",
+    "01-hpc-parallel/LaunchMON",
+    "01-hpc-parallel/MPI-Usage",
+    "01-hpc-parallel/MUPPET",
+    "01-hpc-parallel/MerlinWorkflows",
+    "01-hpc-parallel/NPB",
+    "01-hpc-parallel/OMSClient",
+    "01-hpc-parallel/PF3DIO",
+    "01-hpc-parallel/STAT",
+    "01-hpc-parallel/ScrubJay",
+    "01-hpc-parallel/Spindle",
+    "01-hpc-parallel/Task-Time-Tracker",
+    "01-hpc-parallel/TourRobotDance",
+    "01-hpc-parallel/USER-EPH",
+    "01-hpc-parallel/Varity",
+    "01-hpc-parallel/Xscope",
+    "01-hpc-parallel/benchmarking-BoF-SC22",
+    "01-hpc-parallel/burstfs",
+    "01-hpc-parallel/devil_ray",
+    "01-hpc-parallel/exajugo",
+    "01-hpc-parallel/ferdinand",
+    "01-hpc-parallel/geopm",
+    "01-hpc-parallel/googletest-mpi-listener",
+    "01-hpc-parallel/ldms-plugins-llnl",
+    "01-hpc-parallel/magpie",
+    "01-hpc-parallel/microbenchmarks",
+    "01-hpc-parallel/mpi-tools",
+    "01-hpc-parallel/mpiBench",
+    "01-hpc-parallel/mpiGraph",
+    "01-hpc-parallel/mpibind",
+    "01-hpc-parallel/mpibind-1",
+    "01-hpc-parallel/mpileaks",
+    "01-hpc-parallel/pylulesh",
+    "01-hpc-parallel/radiuss-spack-configs",
+    "01-hpc-parallel/radiuss-stack",
+    "01-hpc-parallel/recbis",
+    "01-hpc-parallel/rover",
+    "01-hpc-parallel/system-noise",
+    "01-hpc-parallel/thicket-tutorial",
+    "01-hpc-parallel/toss-configs",
+    "01-hpc-parallel/umpire-interactive-tutorial",
+    "01-hpc-parallel/variorum-spack-mirrors",
+    "02-ml-ai/AMP",
+    "02-ml-ai/ATD-SD",
+    "02-ml-ai/Analytic_Deflection_of_Asteroids_by_NEDs",
+    "02-ml-ai/BAnD",
+    "02-ml-ai/BCML-COVID19",
+    "02-ml-ai/CRADL",
+    "02-ml-ai/CREPE",
+    "02-ml-ai/CRPCA",
+    "02-ml-ai/CcNav",
+    "02-ml-ai/Copson_Expansion_Solution",
+    "02-ml-ai/DNN-MFBO",
+    "02-ml-ai/DeltaUQ",
+    "02-ml-ai/DynamicSimCCS",
+    "02-ml-ai/GPP",
+    "02-ml-ai/GWAP",
+    "02-ml-ai/LUAR",
+    "02-ml-ai/LaSDI",
+    "02-ml-ai/MDAS",
+    "02-ml-ai/MLAP",
+    "02-ml-ai/MTL-suite",
+    "02-ml-ai/NED_Asteroid_Energy_Deposition",
+    "02-ml-ai/NM-ROM",
+    "02-ml-ai/NSBC",
+    "02-ml-ai/Neuralcap",
+    "02-ml-ai/OODmedic",
+    "02-ml-ai/OpenRES",
+    "02-ml-ai/PDBspheres",
+    "02-ml-ai/PECAN2",
+    "02-ml-ai/PairScore",
+    "02-ml-ai/PhyML",
+    "02-ml-ai/RAJA-tutorials",
+    "02-ml-ai/SCR-model",
+    "02-ml-ai/SYNDATA",
+    "02-ml-ai/Sedov-ML",
+    "02-ml-ai/SmallMolEval",
+    "02-ml-ai/Tizona",
+    "02-ml-ai/UFNet",
+    "02-ml-ai/UMT_TPLS",
+    "02-ml-ai/XNAS",
+    "02-ml-ai/al_nlp",
+    "02-ml-ai/anchoring",
+    "02-ml-ai/benchpark-tutorial",
+    "02-ml-ai/bmsl",
+    "02-ml-ai/cryoH2vehicle",
+    "02-ml-ai/denodo-ai-sdk",
+    "02-ml-ai/fastcam",
+    "02-ml-ai/fountainpen",
+    "02-ml-ai/fpp",
+    "02-ml-ai/goulash",
+    "02-ml-ai/hwo1dGUI",
+    "02-ml-ai/ibtopo",
+    "02-ml-ai/invisorg",
+    "02-ml-ai/iris",
+    "02-ml-ai/ldapotp-jni-lib",
+    "02-ml-ai/macc",
+    "02-ml-ai/narrows",
+    "02-ml-ai/paraview_mcp",
+    "02-ml-ai/redwoods_pwfs",
+    "02-ml-ai/rhizome",
+    "02-ml-ai/ross-matrix-models",
+    "02-ml-ai/scr-fe",
+    "02-ml-ai/selfsupervised",
+    "02-ml-ai/sepsense",
+    "02-ml-ai/serac_tests",
+    "02-ml-ai/trainGMM",
+    "02-ml-ai/weave-demos",
+    "03-simulation/2DHEVF",
+    "03-simulation/AC2Dr",
+    "03-simulation/CoMD-Chapel",
+    "03-simulation/Collabmaps",
+    "03-simulation/LH2Transfer",
+    "03-simulation/Lintap",
+    "03-simulation/MappgeneSummary",
+    "03-simulation/MultiscaleTopOpt",
+    "03-simulation/NFSDM",
+    "03-simulation/PruningAMR",
+    "03-simulation/TOPE",
+    "03-simulation/TOPEFC",
+    "03-simulation/Wintap-Plugins",
+    "03-simulation/Yet-Another-Hauser-Feshbach-Code",
+    "03-simulation/clippy-tutorial",
+    "03-simulation/hypar-lightweight",
+    "03-simulation/meco",
+    "03-simulation/mhysa",
+    "03-simulation/pyPICfusion",
+    "03-simulation/quandary-examples",
+    "03-simulation/radiuss-automation",
+    "03-simulation/risingMicrobubbleLattice",
+    "03-simulation/strawman",
+    "04-scientific-libs/DysectAPI",
+    "04-scientific-libs/Exaworks-SDK",
+    "04-scientific-libs/Wintap",
+    "04-scientific-libs/caliper-examples",
+    "04-scientific-libs/ldapotp-java-api",
+    "04-scientific-libs/productivity-frameworks",
+    "04-scientific-libs/qball",
+    "05-data-viz/ANS",
+    "05-data-viz/DD-NM-ROM",
+    "05-data-viz/DeepAL",
+    "05-data-viz/Downscaled-Climate-Data-Dashboard",
+    "05-data-viz/DragonView",
+    "05-data-viz/ExaCA-Data",
+    "05-data-viz/HyDAGS",
+    "05-data-viz/LLNL-ASTM",
+    "05-data-viz/MI-ChemVis",
+    "05-data-viz/NDDAV",
+    "05-data-viz/PNE_MTINV",
+    "05-data-viz/Ryugu-publication",
+    "05-data-viz/SSAPy-Data",
+    "05-data-viz/Sina",
+    "05-data-viz/TargetID",
+    "05-data-viz/TreeScope",
+    "05-data-viz/Wintap-Data",
+    "05-data-viz/axom_data",
+    "05-data-viz/boxfish",
+    "05-data-viz/cmvl",
+    "05-data-viz/cowc",
+    "05-data-viz/dataracebench",
+    "05-data-viz/fdtree",
+    "05-data-viz/gLaSDI",
+    "05-data-viz/hatchet-notebooks-sc19",
+    "05-data-viz/hatchet-tutorial",
+    "05-data-viz/lmt",
+    "05-data-viz/omi_data_tools_open_source",
+    "05-data-viz/radiuss",
+    "05-data-viz/spotbe",
+    "06-devtools/Babel",
+    "06-devtools/CAP",
+    "06-devtools/CIGEN",
+    "06-devtools/COGENT",
+    "06-devtools/Ciel",
+    "06-devtools/DECIDER",
+    "06-devtools/DFTT",
+    "06-devtools/FRS",
+    "06-devtools/FloatGuard",
+    "06-devtools/Frescox",
+    "06-devtools/GRAPE",
+    "06-devtools/Gula",
+    "06-devtools/H2OI95",
+    "06-devtools/Jekyll-LLNL-Theme",
+    "06-devtools/Juqbox.jl",
+    "06-devtools/LOKI",
+    "06-devtools/LOPE",
+    "06-devtools/MTLRecSys",
+    "06-devtools/MacPatch",
+    "06-devtools/MahonFitting",
+    "06-devtools/MountPointAttributes",
+    "06-devtools/ParaDiS",
+    "06-devtools/QRUS",
+    "06-devtools/Quicksilver",
+    "06-devtools/RASE",
+    "06-devtools/RadSim",
+    "06-devtools/SAFIRE",
+    "06-devtools/STKAddressConverter",
+    "06-devtools/Saloon",
+    "06-devtools/Thomson-Scattering-Cross-Section-Calculator",
+    "06-devtools/UMT",
+    "06-devtools/UQ_combustion",
+    "06-devtools/UnifyFS",
+    "06-devtools/WVL",
+    "06-devtools/Wemul",
+    "06-devtools/acrotensor",
+    "06-devtools/axom",
+    "06-devtools/benchmarks",
+    "06-devtools/blockbuster",
+    "06-devtools/blt",
+    "06-devtools/blt-phpmd",
+    "06-devtools/blt_test",
+    "06-devtools/clippy",
+    "06-devtools/coda-calibration-tool",
+    "06-devtools/core_stack_merge",
+    "06-devtools/cruise",
+    "06-devtools/ctm",
+    "06-devtools/ddd",
+    "06-devtools/dftf",
+    "06-devtools/dtcmp",
+    "06-devtools/ez-Quench",
+    "06-devtools/fence-agents",
+    "06-devtools/gitlab-runner-auth",
+    "06-devtools/hscs",
+    "06-devtools/hypre",
+    "06-devtools/ior",
+    "06-devtools/json-cwx",
+    "06-devtools/jsonlogic",
+    "06-devtools/ldms",
+    "06-devtools/libjustify",
+    "06-devtools/libyogrt",
+    "06-devtools/lustre",
+    "06-devtools/lustre-tools-llnl",
+    "06-devtools/lwgrp",
+    "06-devtools/maestro_sheetmusic",
+    "06-devtools/mpiP",
+    "06-devtools/msr-genie",
+    "06-devtools/nfs-directory-source",
+    "06-devtools/ns3-if77-module",
+    "06-devtools/omnibus-gitlab",
+    "06-devtools/open-source-guidelines",
+    "06-devtools/pLiner",
+    "06-devtools/polycube",
+    "06-devtools/quantkriging",
+    "06-devtools/radiuss-ci-info-action-go",
+    "06-devtools/radiuss-docker",
+    "06-devtools/radiuss-shared-ci",
+    "06-devtools/radiuss-shared-ci-test",
+    "06-devtools/radiuss-uberenv",
+    "06-devtools/rollerball",
+    "06-devtools/rst2slides",
+    "06-devtools/saamge",
+    "06-devtools/sc-foi",
+    "06-devtools/simplexdesign",
+    "06-devtools/spark-hdf5",
+    "06-devtools/spawnnet",
+    "06-devtools/tox",
+    "06-devtools/typeforge",
+    "06-devtools/unum",
+    "06-devtools/variorum",
+    "06-devtools/variorum-integrations",
+    "06-devtools/wrap",
+    "06-devtools/yorick-doc",
+    "06-devtools/zfpy-wheels",
+    "06-devtools/zfs",
+    "07-bioinformatics/2022_DVRFS_microbiome",
+    "07-bioinformatics/2022_PondB_microbiome",
+    "07-bioinformatics/bioimage-agent",
+    "07-bioinformatics/ezAlign",
+    "08-web-apps/Rflow",
+    "08-web-apps/f-strings",
+    "08-web-apps/flood_changes",
+    "08-web-apps/romweb",
+    "09-infrastructure/axom-docker",
+    "09-infrastructure/mstk-docker",
+    "09-infrastructure/radiuss-aws-tutorials",
+    "09-infrastructure/spheral-docker",
+    "10-security/remote-mirror-security",
+    "99-misc/DFDiagnoser",
+    "99-misc/EQ3_6",
+    "99-misc/FAS",
+    "99-misc/FAST",
+    "99-misc/JSAC",
+    "99-misc/LIST",
+    "99-misc/LibPowerMon",
+    "99-misc/MacPatch-AutoPKG",
+    "99-misc/MacPatch-Docs",
+    "99-misc/MacPatch-Docs-gh",
+    "99-misc/analog",
+    "99-misc/ap",
+    "99-misc/avalaunch",
+    "99-misc/dfoptimizer",
+    "99-misc/dftracer-bak",
+    "99-misc/dftracer-traces",
+    "99-misc/geno-prot",
+    "99-misc/pmgr_collective",
+    "99-misc/pynamic",
+    "99-misc/raja-suite-dev-env",
+    "99-misc/response",
+    "99-misc/spl",
+    "99-misc/test-mirror",
+    "99-misc/weave"
+  ],
+  "binfpe": [
+    "01-hpc-parallel/BinFPE"
+  ],
+  "cudamicrobench": [
+    "01-hpc-parallel/CUDAMicroBench"
+  ],
+  "caliper": [
+    "01-hpc-parallel/Caliper",
+    "04-scientific-libs/caliper-examples",
+    "06-devtools/caliper-compiler"
+  ],
+  "cerebrastrilabs": [
+    "01-hpc-parallel/CerebrasTrilabs-SC24AD"
+  ],
+  "sc24ad": [
+    "01-hpc-parallel/CerebrasTrilabs-SC24AD"
+  ],
+  "exaca": [
+    "01-hpc-parallel/ExaCA",
+    "05-data-viz/ExaCA-Data"
+  ],
+  "exaconstit": [
+    "01-hpc-parallel/ExaConstit"
+  ],
+  "faros": [
+    "01-hpc-parallel/FAROS"
+  ],
+  "fgpu": [
+    "01-hpc-parallel/FGPU"
+  ],
+  "fpchecker": [
+    "01-hpc-parallel/FPChecker"
+  ],
+  "fttn": [
+    "01-hpc-parallel/FTTN"
+  ],
+  "fastglobalfilestatus": [
+    "01-hpc-parallel/FastGlobalFileStatus"
+  ],
+  "gps": [
+    "01-hpc-parallel/GPS-Z"
+  ],
+  "gpu": [
+    "01-hpc-parallel/GPU-FPX"
+  ],
+  "fpx": [
+    "01-hpc-parallel/GPU-FPX"
+  ],
+  "gpumatmatpaper": [
+    "01-hpc-parallel/GpuMatMatPaper"
+  ],
+  "hpac": [
+    "01-hpc-parallel/HPAC"
+  ],
+  "hpc": [
+    "01-hpc-parallel/HPC-Tutorials"
+  ],
+  "tutorials": [
+    "01-hpc-parallel/HPC-Tutorials",
+    "02-ml-ai/RAJA-tutorials",
+    "09-infrastructure/radiuss-aws-tutorials"
+  ],
+  "hpccea": [
+    "01-hpc-parallel/HPCCEA"
+  ],
+  "kripke": [
+    "01-hpc-parallel/Kripke"
+  ],
+  "last": [
+    "01-hpc-parallel/LAST"
+  ],
+  "lcuss": [
+    "01-hpc-parallel/LCUSS"
+  ],
+  "ligr": [
+    "01-hpc-parallel/LIGR"
+  ],
+  "launchmon": [
+    "01-hpc-parallel/LaunchMON"
+  ],
+  "macsio": [
+    "01-hpc-parallel/MACSio"
+  ],
+  "mpi": [
+    "01-hpc-parallel/MPI-Usage",
+    "01-hpc-parallel/googletest-mpi-listener",
+    "01-hpc-parallel/gtest-mpi-listener",
+    "01-hpc-parallel/mpi-tools",
+    "06-devtools/MPI-Stages"
+  ],
+  "usage": [
+    "01-hpc-parallel/MPI-Usage"
+  ],
+  "mpidiff": [
+    "01-hpc-parallel/MPIDiff"
+  ],
+  "muppet": [
+    "01-hpc-parallel/MUPPET"
+  ],
+  "merlinworkflows": [
+    "01-hpc-parallel/MerlinWorkflows"
+  ],
+  "npb": [
+    "01-hpc-parallel/NPB"
+  ],
+  "omsclient": [
+    "01-hpc-parallel/OMSClient"
+  ],
+  "pf3dcomm": [
+    "01-hpc-parallel/PF3DCOMM"
+  ],
+  "pf3dio": [
+    "01-hpc-parallel/PF3DIO"
+  ],
+  "pf3dk": [
+    "01-hpc-parallel/PF3DK"
+  ],
+  "rajaperf": [
+    "01-hpc-parallel/RAJAPerf"
+  ],
+  "stat": [
+    "01-hpc-parallel/STAT"
+  ],
+  "streamstat": [
+    "01-hpc-parallel/STREAMSTAT"
+  ],
+  "scrubjay": [
+    "01-hpc-parallel/ScrubJay"
+  ],
+  "sora": [
+    "01-hpc-parallel/SoRa"
+  ],
+  "python": [
+    "01-hpc-parallel/SoRa",
+    "01-hpc-parallel/aiida-flux-scheduler",
+    "01-hpc-parallel/hubcast",
+    "01-hpc-parallel/maestrowf",
+    "01-hpc-parallel/mappertrac",
+    "01-hpc-parallel/mappgene",
+    "01-hpc-parallel/merlin",
+    "01-hpc-parallel/multiwfs",
+    "01-hpc-parallel/prorad",
+    "02-ml-ai/ATS",
+    "02-ml-ai/AutoCog",
+    "02-ml-ai/BayesMTL",
+    "02-ml-ai/BinCFG",
+    "02-ml-ai/DJINN",
+    "02-ml-ai/MTNN",
+    "02-ml-ai/MuyGPyS",
+    "02-ml-ai/OGhidra",
+    "02-ml-ai/PyDV",
+    "02-ml-ai/SC-PD-FED",
+    "02-ml-ai/SEAMsurrogates",
+    "02-ml-ai/SHOCK-UQ",
+    "02-ml-ai/SImSiT",
+    "02-ml-ai/UETOOLS",
+    "02-ml-ai/Wintap-PyUtil",
+    "02-ml-ai/aiida-inq",
+    "02-ml-ai/autoatlas",
+    "02-ml-ai/barni",
+    "02-ml-ai/ddcMDconverter",
+    "02-ml-ai/deepopt",
+    "02-ml-ai/fast3",
+    "02-ml-ai/graphite",
+    "02-ml-ai/gridds",
+    "02-ml-ai/hdbind",
+    "02-ml-ai/ibis",
+    "02-ml-ai/interpML",
+    "02-ml-ai/kosh",
+    "02-ml-ai/ltau-ff",
+    "02-ml-ai/marl-amr",
+    "02-ml-ai/melodee",
+    "02-ml-ai/merlin-spellbook",
+    "02-ml-ai/mphys-surrogate-model",
+    "02-ml-ai/popclass",
+    "02-ml-ai/ppo_and_friends",
+    "02-ml-ai/protlib-designer",
+    "02-ml-ai/pySigma-pipeline-wintap",
+    "02-ml-ai/pysaber",
+    "02-ml-ai/python-lora",
+    "02-ml-ai/python-lora",
+    "02-ml-ai/scraper",
+    "02-ml-ai/slewpy",
+    "02-ml-ai/spdlayers",
+    "02-ml-ai/spnet",
+    "02-ml-ai/systems2atoms",
+    "02-ml-ai/themis",
+    "02-ml-ai/toss-stig",
+    "02-ml-ai/trata",
+    "03-simulation/UEDGE",
+    "03-simulation/codechecker",
+    "03-simulation/echemfem",
+    "03-simulation/firecat",
+    "03-simulation/pefile-tests",
+    "03-simulation/pyMMAopt",
+    "03-simulation/pyorick",
+    "03-simulation/pyranda",
+    "03-simulation/pytaridx",
+    "03-simulation/tango",
+    "05-data-viz/DFDashboard",
+    "05-data-viz/GPLaSDI",
+    "05-data-viz/ISO-DART",
+    "05-data-viz/MEAGraph",
+    "05-data-viz/SSHSpawner",
+    "05-data-viz/dbComm",
+    "05-data-viz/elastic-stacker",
+    "05-data-viz/hatchet",
+    "05-data-viz/jupyterhub",
+    "05-data-viz/mttime",
+    "05-data-viz/ossp-ingest-tool",
+    "05-data-viz/treescape",
+    "06-devtools/APBuilder",
+    "06-devtools/Abmarl",
+    "06-devtools/CallFlow",
+    "06-devtools/Curvallis",
+    "06-devtools/FLORA",
+    "06-devtools/INGRID",
+    "06-devtools/Surfactant",
+    "06-devtools/bridge-kernel",
+    "06-devtools/certipy",
+    "06-devtools/conduit",
+    "06-devtools/csld",
+    "06-devtools/dfanalyzer",
+    "06-devtools/dmx-learn",
+    "06-devtools/dynim",
+    "06-devtools/fudge",
+    "06-devtools/improvwf",
+    "06-devtools/letop",
+    "06-devtools/orchestrator",
+    "06-devtools/pEyeON",
+    "06-devtools/pefile",
+    "06-devtools/py-hostlist",
+    "06-devtools/pydftracer",
+    "06-devtools/pysolate",
+    "06-devtools/qnd",
+    "06-devtools/repligit",
+    "06-devtools/rubik",
+    "06-devtools/scisample",
+    "06-devtools/shroud",
+    "06-devtools/sonar-driver",
+    "06-devtools/thicket",
+    "07-bioinformatics/protein_tune_rl",
+    "08-web-apps/pySigma-backend-duckdb",
+    "10-security/iniabu",
+    "99-misc/MemSurfer"
+  ],
+  "spindle": [
+    "01-hpc-parallel/Spindle"
+  ],
+  "task": [
+    "01-hpc-parallel/Task-Time-Tracker"
+  ],
+  "time": [
+    "01-hpc-parallel/Task-Time-Tracker"
+  ],
+  "tracker": [
+    "01-hpc-parallel/Task-Time-Tracker"
+  ],
+  "tourrobotdance": [
+    "01-hpc-parallel/TourRobotDance"
+  ],
+  "user": [
+    "01-hpc-parallel/USER-EPH"
+  ],
+  "eph": [
+    "01-hpc-parallel/USER-EPH"
+  ],
+  "varity": [
+    "01-hpc-parallel/Varity"
+  ],
+  "wrf": [
+    "01-hpc-parallel/WRF-IBM"
+  ],
+  "ibm": [
+    "01-hpc-parallel/WRF-IBM"
+  ],
+  "warpx": [
+    "01-hpc-parallel/WarpX"
+  ],
+  "xscope": [
+    "01-hpc-parallel/Xscope"
+  ],
+  "mpibind": [
+    "01-hpc-parallel/ac-mpibind",
+    "01-hpc-parallel/mpibind",
+    "01-hpc-parallel/mpibind-1"
+  ],
+  "aiida": [
+    "01-hpc-parallel/aiida-flux-scheduler",
+    "02-ml-ai/aiida-inq"
+  ],
+  "flux": [
+    "01-hpc-parallel/aiida-flux-scheduler"
+  ],
+  "scheduler": [
+    "01-hpc-parallel/aiida-flux-scheduler"
+  ],
+  "mpi3": [
+    "01-hpc-parallel/b-mpi3"
+  ],
+  "backstroke": [
+    "01-hpc-parallel/backstroke"
+  ],
+  "benchmarking": [
+    "01-hpc-parallel/benchmarking-BoF-SC22"
+  ],
+  "bof": [
+    "01-hpc-parallel/benchmarking-BoF-SC22"
+  ],
+  "sc22": [
+    "01-hpc-parallel/benchmarking-BoF-SC22"
+  ],
+  "benchpark": [
+    "01-hpc-parallel/benchpark",
+    "02-ml-ai/benchpark-tutorial"
+  ],
+  "burstfs": [
+    "01-hpc-parallel/burstfs"
+  ],
+  "cardioid": [
+    "01-hpc-parallel/cardioid"
+  ],
+  "croquis": [
+    "01-hpc-parallel/croquis"
+  ],
+  "cyme": [
+    "01-hpc-parallel/cyme-launcher"
+  ],
+  "launcher": [
+    "01-hpc-parallel/cyme-launcher"
+  ],
+  "go": [
+    "01-hpc-parallel/cyme-launcher",
+    "06-devtools/goTLS"
+  ],
+  "devil": [
+    "01-hpc-parallel/devil_ray"
+  ],
+  "ray": [
+    "01-hpc-parallel/devil_ray"
+  ],
+  "direct": [
+    "01-hpc-parallel/direct-fuse"
+  ],
+  "fuse": [
+    "01-hpc-parallel/direct-fuse"
+  ],
+  "exajugo": [
+    "01-hpc-parallel/exajugo"
+  ],
+  "ferdinand": [
+    "01-hpc-parallel/ferdinand"
+  ],
+  "geopm": [
+    "01-hpc-parallel/geopm"
+  ],
+  "googletest": [
+    "01-hpc-parallel/googletest-mpi-listener"
+  ],
+  "listener": [
+    "01-hpc-parallel/googletest-mpi-listener",
+    "01-hpc-parallel/gtest-mpi-listener"
+  ],
+  "gtest": [
+    "01-hpc-parallel/gtest-mpi-listener"
+  ],
+  "hiop": [
+    "01-hpc-parallel/hiop"
+  ],
+  "hubcast": [
+    "01-hpc-parallel/hubcast"
+  ],
+  "ldms": [
+    "01-hpc-parallel/ldms-plugins-llnl",
+    "06-devtools/ldms"
+  ],
+  "plugins": [
+    "01-hpc-parallel/ldms-plugins-llnl",
+    "03-simulation/Wintap-Plugins",
+    "99-misc/flume-plugins"
+  ],
+  "llnl": [
+    "01-hpc-parallel/ldms-plugins-llnl",
+    "05-data-viz/LLNL-ASTM",
+    "06-devtools/Jekyll-LLNL-Theme",
+    "06-devtools/llnl-hires-timers",
+    "06-devtools/lustre-tools-llnl"
+  ],
+  "loupe": [
+    "01-hpc-parallel/loupe"
+  ],
+  "maestrowf": [
+    "01-hpc-parallel/maestrowf"
+  ],
+  "magpie": [
+    "01-hpc-parallel/magpie"
+  ],
+  "mappertrac": [
+    "01-hpc-parallel/mappertrac"
+  ],
+  "mappgene": [
+    "01-hpc-parallel/mappgene"
+  ],
+  "matred": [
+    "01-hpc-parallel/matred"
+  ],
+  "merlin": [
+    "01-hpc-parallel/merlin",
+    "02-ml-ai/merlin-spellbook"
+  ],
+  "microbenchmarks": [
+    "01-hpc-parallel/microbenchmarks"
+  ],
+  "tools": [
+    "01-hpc-parallel/mpi-tools",
+    "05-data-viz/omi_data_tools_open_source",
+    "06-devtools/ROSE-LCOM-Tools",
+    "06-devtools/lustre-tools-llnl",
+    "06-devtools/ygm-tools"
+  ],
+  "mpibench": [
+    "01-hpc-parallel/mpiBench"
+  ],
+  "mpigraph": [
+    "01-hpc-parallel/mpiGraph"
+  ],
+  "mpileaks": [
+    "01-hpc-parallel/mpileaks"
+  ],
+  "multiwfs": [
+    "01-hpc-parallel/multiwfs"
+  ],
+  "muster": [
+    "01-hpc-parallel/muster"
+  ],
+  "nami": [
+    "01-hpc-parallel/nami"
+  ],
+  "prorad": [
+    "01-hpc-parallel/prorad"
+  ],
+  "pylulesh": [
+    "01-hpc-parallel/pylulesh"
+  ],
+  "radiuss": [
+    "01-hpc-parallel/radiuss-spack-configs",
+    "01-hpc-parallel/radiuss-stack",
+    "03-simulation/radiuss-automation",
+    "05-data-viz/radiuss",
+    "06-devtools/radiuss-ci",
+    "06-devtools/radiuss-ci-info-action",
+    "06-devtools/radiuss-ci-info-action-go",
+    "06-devtools/radiuss-clingo-install",
+    "06-devtools/radiuss-docker",
+    "06-devtools/radiuss-shared-ci",
+    "06-devtools/radiuss-shared-ci-test",
+    "06-devtools/radiuss-spack-testing",
+    "06-devtools/radiuss-uberenv",
+    "09-infrastructure/radiuss-aws-tutorials",
+    "09-infrastructure/radiuss-slackin-extended"
+  ],
+  "spack": [
+    "01-hpc-parallel/radiuss-spack-configs",
+    "01-hpc-parallel/variorum-spack-mirrors",
+    "06-devtools/radiuss-spack-testing"
+  ],
+  "configs": [
+    "01-hpc-parallel/radiuss-spack-configs",
+    "01-hpc-parallel/toss-configs"
+  ],
+  "stack": [
+    "01-hpc-parallel/radiuss-stack",
+    "06-devtools/core_stack_merge"
+  ],
+  "recbis": [
+    "01-hpc-parallel/recbis"
+  ],
+  "rover": [
+    "01-hpc-parallel/rover"
+  ],
+  "simul": [
+    "01-hpc-parallel/simul"
+  ],
+  "system": [
+    "01-hpc-parallel/system-noise"
+  ],
+  "noise": [
+    "01-hpc-parallel/system-noise"
+  ],
+  "thicket": [
+    "01-hpc-parallel/thicket-tutorial",
+    "06-devtools/thicket"
+  ],
+  "tutorial": [
+    "01-hpc-parallel/thicket-tutorial",
+    "01-hpc-parallel/umpire-interactive-tutorial",
+    "02-ml-ai/benchpark-tutorial",
+    "03-simulation/clippy-tutorial",
+    "03-simulation/metall-tutorial",
+    "05-data-viz/hatchet-tutorial",
+    "06-devtools/raja-suite-tutorial",
+    "06-devtools/ygm-tutorial"
+  ],
+  "toss": [
+    "01-hpc-parallel/toss-configs",
+    "02-ml-ai/toss-stig"
+  ],
+  "umpire": [
+    "01-hpc-parallel/umpire-interactive-tutorial",
+    "06-devtools/Umpire"
+  ],
+  "interactive": [
+    "01-hpc-parallel/umpire-interactive-tutorial"
+  ],
+  "variorum": [
+    "01-hpc-parallel/variorum-spack-mirrors",
+    "06-devtools/variorum",
+    "06-devtools/variorum-integrations"
+  ],
+  "mirrors": [
+    "01-hpc-parallel/variorum-spack-mirrors"
+  ],
+  "amp": [
+    "02-ml-ai/AMP"
+  ],
+  "ampe": [
+    "02-ml-ai/AMPE"
+  ],
+  "ams": [
+    "02-ml-ai/AMS"
+  ],
+  "atd": [
+    "02-ml-ai/ATD-SD",
+    "06-devtools/ATD"
+  ],
+  "ats": [
+    "02-ml-ai/ATS"
+  ],
+  "analytic": [
+    "02-ml-ai/Analytic_Deflection_of_Asteroids_by_NEDs"
+  ],
+  "deflection": [
+    "02-ml-ai/Analytic_Deflection_of_Asteroids_by_NEDs"
+  ],
+  "asteroids": [
+    "02-ml-ai/Analytic_Deflection_of_Asteroids_by_NEDs"
+  ],
+  "neds": [
+    "02-ml-ai/Analytic_Deflection_of_Asteroids_by_NEDs"
+  ],
+  "autocog": [
+    "02-ml-ai/AutoCog"
+  ],
+  "band": [
+    "02-ml-ai/BAnD"
+  ],
+  "bcml": [
+    "02-ml-ai/BCML-COVID19"
+  ],
+  "covid19": [
+    "02-ml-ai/BCML-COVID19"
+  ],
+  "bayesmtl": [
+    "02-ml-ai/BayesMTL"
+  ],
+  "bincfg": [
+    "02-ml-ai/BinCFG"
+  ],
+  "cradl": [
+    "02-ml-ai/CRADL"
+  ],
+  "crepe": [
+    "02-ml-ai/CREPE"
+  ],
+  "crpca": [
+    "02-ml-ai/CRPCA"
+  ],
+  "ccnav": [
+    "02-ml-ai/CcNav"
+  ],
+  "copson": [
+    "02-ml-ai/Copson_Expansion_Solution"
+  ],
+  "expansion": [
+    "02-ml-ai/Copson_Expansion_Solution"
+  ],
+  "solution": [
+    "02-ml-ai/Copson_Expansion_Solution"
+  ],
+  "djinn": [
+    "02-ml-ai/DJINN"
+  ],
+  "dnn": [
+    "02-ml-ai/DNN-MFBO"
+  ],
+  "mfbo": [
+    "02-ml-ai/DNN-MFBO"
+  ],
+  "deltauq": [
+    "02-ml-ai/DeltaUQ"
+  ],
+  "dynamicsimccs": [
+    "02-ml-ai/DynamicSimCCS"
+  ],
+  "gpp": [
+    "02-ml-ai/GPP"
+  ],
+  "gwap": [
+    "02-ml-ai/GWAP"
+  ],
+  "leap": [
+    "02-ml-ai/LEAP"
+  ],
+  "luar": [
+    "02-ml-ai/LUAR"
+  ],
+  "lasdi": [
+    "02-ml-ai/LaSDI"
+  ],
+  "mdas": [
+    "02-ml-ai/MDAS"
+  ],
+  "mlap": [
+    "02-ml-ai/MLAP"
+  ],
+  "mtl": [
+    "02-ml-ai/MTL-suite"
+  ],
+  "suite": [
+    "02-ml-ai/MTL-suite",
+    "06-devtools/raja-suite-tutorial",
+    "99-misc/raja-suite-dev-env"
+  ],
+  "mtnn": [
+    "02-ml-ai/MTNN"
+  ],
+  "multimattest": [
+    "02-ml-ai/MultiMatTest"
+  ],
+  "muygpys": [
+    "02-ml-ai/MuyGPyS"
+  ],
+  "ned": [
+    "02-ml-ai/NED_Asteroid_Energy_Deposition"
+  ],
+  "asteroid": [
+    "02-ml-ai/NED_Asteroid_Energy_Deposition"
+  ],
+  "energy": [
+    "02-ml-ai/NED_Asteroid_Energy_Deposition"
+  ],
+  "deposition": [
+    "02-ml-ai/NED_Asteroid_Energy_Deposition"
+  ],
+  "rom": [
+    "02-ml-ai/NM-ROM",
+    "05-data-viz/DD-NM-ROM"
+  ],
+  "nsbc": [
+    "02-ml-ai/NSBC"
+  ],
+  "neuralcap": [
+    "02-ml-ai/Neuralcap"
+  ],
+  "oghidra": [
+    "02-ml-ai/OGhidra"
+  ],
+  "oodmedic": [
+    "02-ml-ai/OODmedic"
+  ],
+  "openres": [
+    "02-ml-ai/OpenRES"
+  ],
+  "pdbspheres": [
+    "02-ml-ai/PDBspheres"
+  ],
+  "pecan2": [
+    "02-ml-ai/PECAN2"
+  ],
+  "pairscore": [
+    "02-ml-ai/PairScore"
+  ],
+  "phyml": [
+    "02-ml-ai/PhyML"
+  ],
+  "pydv": [
+    "02-ml-ai/PyDV"
+  ],
+  "raja": [
+    "02-ml-ai/RAJA-SDP",
+    "02-ml-ai/RAJA-tutorials",
+    "06-devtools/RAJA",
+    "06-devtools/RAJA-project-template",
+    "06-devtools/raja-suite-tutorial",
+    "99-misc/raja-suite-dev-env"
+  ],
+  "sdp": [
+    "02-ml-ai/RAJA-SDP"
+  ],
+  "samrai": [
+    "02-ml-ai/SAMRAI"
+  ],
+  "sbllmalloc": [
+    "02-ml-ai/SBLLmalloc"
+  ],
+  "fed": [
+    "02-ml-ai/SC-PD-FED"
+  ],
+  "scr": [
+    "02-ml-ai/SCR-model",
+    "02-ml-ai/scr-fe",
+    "06-devtools/scr",
+    "06-devtools/scr-top"
+  ],
+  "model": [
+    "02-ml-ai/SCR-model",
+    "02-ml-ai/mphys-surrogate-model"
+  ],
+  "seamsurrogates": [
+    "02-ml-ai/SEAMsurrogates"
+  ],
+  "shock": [
+    "02-ml-ai/SHOCK-UQ"
+  ],
+  "simsit": [
+    "02-ml-ai/SImSiT"
+  ],
+  "ssapy": [
+    "02-ml-ai/SSAPy",
+    "05-data-viz/SSAPy-Data"
+  ],
+  "syndata": [
+    "02-ml-ai/SYNDATA"
+  ],
+  "sedov": [
+    "02-ml-ai/Sedov-ML"
+  ],
+  "smallmoleval": [
+    "02-ml-ai/SmallMolEval"
+  ],
+  "tizona": [
+    "02-ml-ai/Tizona"
+  ],
+  "uetools": [
+    "02-ml-ai/UETOOLS"
+  ],
+  "ufnet": [
+    "02-ml-ai/UFNet"
+  ],
+  "umt": [
+    "02-ml-ai/UMT_TPLS",
+    "06-devtools/UMT"
+  ],
+  "tpls": [
+    "02-ml-ai/UMT_TPLS"
+  ],
+  "wintap": [
+    "02-ml-ai/Wintap-PyUtil",
+    "02-ml-ai/pySigma-pipeline-wintap",
+    "03-simulation/Wintap-Plugins",
+    "04-scientific-libs/Wintap",
+    "05-data-viz/Wintap-Analytics",
+    "05-data-viz/Wintap-Data",
+    "08-web-apps/Wintap-Workbench"
+  ],
+  "pyutil": [
+    "02-ml-ai/Wintap-PyUtil"
+  ],
+  "xnas": [
+    "02-ml-ai/XNAS"
+  ],
+  "inq": [
+    "02-ml-ai/aiida-inq",
+    "06-devtools/inq"
+  ],
+  "nlp": [
+    "02-ml-ai/al_nlp"
+  ],
+  "anchoring": [
+    "02-ml-ai/anchoring"
+  ],
+  "apollo": [
+    "02-ml-ai/apollo"
+  ],
+  "autoatlas": [
+    "02-ml-ai/autoatlas"
+  ],
+  "barni": [
+    "02-ml-ai/barni"
+  ],
+  "bmsl": [
+    "02-ml-ai/bmsl"
+  ],
+  "cryoh2vehicle": [
+    "02-ml-ai/cryoH2vehicle"
+  ],
+  "ddcmdconverter": [
+    "02-ml-ai/ddcMDconverter"
+  ],
+  "deepopt": [
+    "02-ml-ai/deepopt"
+  ],
+  "denodo": [
+    "02-ml-ai/denodo-ai-sdk"
+  ],
+  "sdk": [
+    "02-ml-ai/denodo-ai-sdk",
+    "04-scientific-libs/Exaworks-SDK"
+  ],
+  "fast3": [
+    "02-ml-ai/fast3"
+  ],
+  "fastcam": [
+    "02-ml-ai/fastcam"
+  ],
+  "fountainpen": [
+    "02-ml-ai/fountainpen"
+  ],
+  "fpp": [
+    "02-ml-ai/fpp"
+  ],
+  "goulash": [
+    "02-ml-ai/goulash"
+  ],
+  "graphite": [
+    "02-ml-ai/graphite"
+  ],
+  "gridds": [
+    "02-ml-ai/gridds"
+  ],
+  "hdbind": [
+    "02-ml-ai/hdbind"
+  ],
+  "hwo1dgui": [
+    "02-ml-ai/hwo1dGUI"
+  ],
+  "ibis": [
+    "02-ml-ai/ibis"
+  ],
+  "ibtopo": [
+    "02-ml-ai/ibtopo"
+  ],
+  "iirabm": [
+    "02-ml-ai/iirabm"
+  ],
+  "interpml": [
+    "02-ml-ai/interpML"
+  ],
+  "invisorg": [
+    "02-ml-ai/invisorg"
+  ],
+  "iris": [
+    "02-ml-ai/iris"
+  ],
+  "kosh": [
+    "02-ml-ai/kosh"
+  ],
+  "ldapotp": [
+    "02-ml-ai/ldapotp-jni-lib",
+    "04-scientific-libs/ldapotp-java-api"
+  ],
+  "jni": [
+    "02-ml-ai/ldapotp-jni-lib"
+  ],
+  "lib": [
+    "02-ml-ai/ldapotp-jni-lib",
+    "06-devtools/paraDIS_lib"
+  ],
+  "ltau": [
+    "02-ml-ai/ltau-ff"
+  ],
+  "macc": [
+    "02-ml-ai/macc"
+  ],
+  "marl": [
+    "02-ml-ai/marl-amr"
+  ],
+  "amr": [
+    "02-ml-ai/marl-amr"
+  ],
+  "melodee": [
+    "02-ml-ai/melodee"
+  ],
+  "spellbook": [
+    "02-ml-ai/merlin-spellbook"
+  ],
+  "mgmol": [
+    "02-ml-ai/mgmol"
+  ],
+  "mphys": [
+    "02-ml-ai/mphys-surrogate-model"
+  ],
+  "surrogate": [
+    "02-ml-ai/mphys-surrogate-model"
+  ],
+  "narrows": [
+    "02-ml-ai/narrows"
+  ],
+  "open": [
+    "02-ml-ai/open-ai-co-scientist",
+    "05-data-viz/omi_data_tools_open_source",
+    "06-devtools/Open-Facility-Viewer",
+    "06-devtools/open-source-guidelines"
+  ],
+  "scientist": [
+    "02-ml-ai/open-ai-co-scientist"
+  ],
+  "paraview": [
+    "02-ml-ai/paraview_mcp"
+  ],
+  "mcp": [
+    "02-ml-ai/paraview_mcp",
+    "06-devtools/playwright-mcp"
+  ],
+  "popclass": [
+    "02-ml-ai/popclass"
+  ],
+  "ppo": [
+    "02-ml-ai/ppo_and_friends"
+  ],
+  "and": [
+    "02-ml-ai/ppo_and_friends"
+  ],
+  "friends": [
+    "02-ml-ai/ppo_and_friends"
+  ],
+  "protlib": [
+    "02-ml-ai/protlib-designer"
+  ],
+  "designer": [
+    "02-ml-ai/protlib-designer"
+  ],
+  "pysigma": [
+    "02-ml-ai/pySigma-pipeline-wintap",
+    "08-web-apps/pySigma-backend-duckdb"
+  ],
+  "pipeline": [
+    "02-ml-ai/pySigma-pipeline-wintap"
+  ],
+  "pysaber": [
+    "02-ml-ai/pysaber"
+  ],
+  "lora": [
+    "02-ml-ai/python-lora"
+  ],
+  "redwoods": [
+    "02-ml-ai/redwoods_pwfs"
+  ],
+  "pwfs": [
+    "02-ml-ai/redwoods_pwfs"
+  ],
+  "rhizome": [
+    "02-ml-ai/rhizome"
+  ],
+  "ross": [
+    "02-ml-ai/ross-matrix-models"
+  ],
+  "matrix": [
+    "02-ml-ai/ross-matrix-models"
+  ],
+  "models": [
+    "02-ml-ai/ross-matrix-models"
+  ],
+  "scraper": [
+    "02-ml-ai/scraper"
+  ],
+  "selfsupervised": [
+    "02-ml-ai/selfsupervised"
+  ],
+  "sepsense": [
+    "02-ml-ai/sepsense"
+  ],
+  "serac": [
+    "02-ml-ai/serac_tests"
+  ],
+  "tests": [
+    "02-ml-ai/serac_tests",
+    "03-simulation/pefile-tests"
+  ],
+  "slewpy": [
+    "02-ml-ai/slewpy"
+  ],
+  "spdlayers": [
+    "02-ml-ai/spdlayers"
+  ],
+  "spnet": [
+    "02-ml-ai/spnet"
+  ],
+  "systems2atoms": [
+    "02-ml-ai/systems2atoms"
+  ],
+  "themis": [
+    "02-ml-ai/themis"
+  ],
+  "stig": [
+    "02-ml-ai/toss-stig"
+  ],
+  "traingmm": [
+    "02-ml-ai/trainGMM"
+  ],
+  "trata": [
+    "02-ml-ai/trata"
+  ],
+  "weave": [
+    "02-ml-ai/weave-demos",
+    "02-ml-ai/weave_docs",
+    "99-misc/weave"
+  ],
+  "demos": [
+    "02-ml-ai/weave-demos"
+  ],
+  "docs": [
+    "02-ml-ai/weave_docs",
+    "99-misc/MacPatch-Docs",
+    "99-misc/MacPatch-Docs-gh"
+  ],
+  "yorick": [
+    "02-ml-ai/yorick-gl",
+    "02-ml-ai/yorick-mpeg",
+    "04-scientific-libs/yorick",
+    "06-devtools/yorick-doc",
+    "06-devtools/yorick-z",
+    "99-misc/yorick-ml4"
+  ],
+  "mpeg": [
+    "02-ml-ai/yorick-mpeg"
+  ],
+  "2dhevf": [
+    "03-simulation/2DHEVF"
+  ],
+  "ac2dr": [
+    "03-simulation/AC2Dr"
+  ],
+  "comd": [
+    "03-simulation/CoMD-Chapel"
+  ],
+  "chapel": [
+    "03-simulation/CoMD-Chapel"
+  ],
+  "collabmaps": [
+    "03-simulation/Collabmaps"
+  ],
+  "continuationsolvers": [
+    "03-simulation/ContinuationSolvers"
+  ],
+  "exacmech": [
+    "03-simulation/ExaCMech"
+  ],
+  "gridkit": [
+    "03-simulation/GridKit"
+  ],
+  "lh2transfer": [
+    "03-simulation/LH2Transfer"
+  ],
+  "lintap": [
+    "03-simulation/Lintap"
+  ],
+  "mappgenesummary": [
+    "03-simulation/MappgeneSummary"
+  ],
+  "multiscaletopopt": [
+    "03-simulation/MultiscaleTopOpt"
+  ],
+  "nfsdm": [
+    "03-simulation/NFSDM"
+  ],
+  "pruningamr": [
+    "03-simulation/PruningAMR"
+  ],
+  "tope": [
+    "03-simulation/TOPE"
+  ],
+  "topefc": [
+    "03-simulation/TOPEFC"
+  ],
+  "uedge": [
+    "03-simulation/UEDGE"
+  ],
+  "yet": [
+    "03-simulation/Yet-Another-Hauser-Feshbach-Code"
+  ],
+  "another": [
+    "03-simulation/Yet-Another-Hauser-Feshbach-Code"
+  ],
+  "hauser": [
+    "03-simulation/Yet-Another-Hauser-Feshbach-Code"
+  ],
+  "feshbach": [
+    "03-simulation/Yet-Another-Hauser-Feshbach-Code"
+  ],
+  "code": [
+    "03-simulation/Yet-Another-Hauser-Feshbach-Code"
+  ],
+  "adept": [
+    "03-simulation/adept-utils"
+  ],
+  "utils": [
+    "03-simulation/adept-utils",
+    "06-devtools/dftracer-utils"
+  ],
+  "clippy": [
+    "03-simulation/clippy-tutorial",
+    "06-devtools/clippy",
+    "99-misc/clippy-cpp"
+  ],
+  "codechecker": [
+    "03-simulation/codechecker"
+  ],
+  "echemfem": [
+    "03-simulation/echemfem"
+  ],
+  "firecat": [
+    "03-simulation/firecat"
+  ],
+  "gretl": [
+    "03-simulation/gretl"
+  ],
+  "hypar": [
+    "03-simulation/hypar-lightweight"
+  ],
+  "lightweight": [
+    "03-simulation/hypar-lightweight"
+  ],
+  "meco": [
+    "03-simulation/meco"
+  ],
+  "metall": [
+    "03-simulation/metall-tutorial",
+    "06-devtools/metall"
+  ],
+  "mhysa": [
+    "03-simulation/mhysa"
+  ],
+  "parelag": [
+    "03-simulation/parelag"
+  ],
+  "parelagmc": [
+    "03-simulation/parelagmc"
+  ],
+  "pefile": [
+    "03-simulation/pefile-tests",
+    "06-devtools/pefile"
+  ],
+  "pymmaopt": [
+    "03-simulation/pyMMAopt"
+  ],
+  "pypicfusion": [
+    "03-simulation/pyPICfusion"
+  ],
+  "pyorick": [
+    "03-simulation/pyorick"
+  ],
+  "pyranda": [
+    "03-simulation/pyranda"
+  ],
+  "pytaridx": [
+    "03-simulation/pytaridx"
+  ],
+  "quandary": [
+    "03-simulation/quandary-examples",
+    "06-devtools/quandary"
+  ],
+  "examples": [
+    "03-simulation/quandary-examples",
+    "04-scientific-libs/caliper-examples"
+  ],
+  "automation": [
+    "03-simulation/radiuss-automation"
+  ],
+  "risingmicrobubblelattice": [
+    "03-simulation/risingMicrobubbleLattice"
+  ],
+  "scaleuprom": [
+    "03-simulation/scaleupROM"
+  ],
+  "smith": [
+    "03-simulation/smith"
+  ],
+  "smoothg": [
+    "03-simulation/smoothG"
+  ],
+  "spheral": [
+    "03-simulation/spheral",
+    "09-infrastructure/spheral-docker"
+  ],
+  "strawman": [
+    "03-simulation/strawman"
+  ],
+  "tango": [
+    "03-simulation/tango"
+  ],
+  "dysectapi": [
+    "04-scientific-libs/DysectAPI"
+  ],
+  "exaworks": [
+    "04-scientific-libs/Exaworks-SDK"
+  ],
+  "java": [
+    "04-scientific-libs/ldapotp-java-api"
+  ],
+  "api": [
+    "04-scientific-libs/ldapotp-java-api"
+  ],
+  "minq": [
+    "04-scientific-libs/minq"
+  ],
+  "productivity": [
+    "04-scientific-libs/productivity-frameworks"
+  ],
+  "frameworks": [
+    "04-scientific-libs/productivity-frameworks"
+  ],
+  "qball": [
+    "04-scientific-libs/qball"
+  ],
+  "slapi": [
+    "04-scientific-libs/slapi"
+  ],
+  "sundials": [
+    "04-scientific-libs/sundials"
+  ],
+  "ans": [
+    "05-data-viz/ANS"
+  ],
+  "analyticmgopac": [
+    "05-data-viz/AnalyticMGOpac"
+  ],
+  "dfdashboard": [
+    "05-data-viz/DFDashboard"
+  ],
+  "deepal": [
+    "05-data-viz/DeepAL"
+  ],
+  "downscaled": [
+    "05-data-viz/Downscaled-Climate-Data-Dashboard"
+  ],
+  "climate": [
+    "05-data-viz/Downscaled-Climate-Data-Dashboard"
+  ],
+  "data": [
+    "05-data-viz/Downscaled-Climate-Data-Dashboard",
+    "05-data-viz/ExaCA-Data",
+    "05-data-viz/SSAPy-Data",
+    "05-data-viz/Wintap-Data",
+    "05-data-viz/axom_data",
+    "05-data-viz/omi_data_tools_open_source"
+  ],
+  "dashboard": [
+    "05-data-viz/Downscaled-Climate-Data-Dashboard"
+  ],
+  "dragonview": [
+    "05-data-viz/DragonView"
+  ],
+  "gplasdi": [
+    "05-data-viz/GPLaSDI"
+  ],
+  "hydags": [
+    "05-data-viz/HyDAGS"
+  ],
+  "iso": [
+    "05-data-viz/ISO-DART"
+  ],
+  "dart": [
+    "05-data-viz/ISO-DART"
+  ],
+  "astm": [
+    "05-data-viz/LLNL-ASTM"
+  ],
+  "meagraph": [
+    "05-data-viz/MEAGraph"
+  ],
+  "chemvis": [
+    "05-data-viz/MI-ChemVis"
+  ],
+  "nddav": [
+    "05-data-viz/NDDAV"
+  ],
+  "pne": [
+    "05-data-viz/PNE_MTINV"
+  ],
+  "mtinv": [
+    "05-data-viz/PNE_MTINV",
+    "99-misc/mtinv"
+  ],
+  "ryugu": [
+    "05-data-viz/Ryugu-publication"
+  ],
+  "publication": [
+    "05-data-viz/Ryugu-publication"
+  ],
+  "sshspawner": [
+    "05-data-viz/SSHSpawner"
+  ],
+  "sina": [
+    "05-data-viz/Sina"
+  ],
+  "targetid": [
+    "05-data-viz/TargetID"
+  ],
+  "treescope": [
+    "05-data-viz/TreeScope"
+  ],
+  "analytics": [
+    "05-data-viz/Wintap-Analytics"
+  ],
+  "axom": [
+    "05-data-viz/axom_data",
+    "06-devtools/axom",
+    "09-infrastructure/axom-docker"
+  ],
+  "boxfish": [
+    "05-data-viz/boxfish"
+  ],
+  "cmvl": [
+    "05-data-viz/cmvl"
+  ],
+  "cowc": [
+    "05-data-viz/cowc"
+  ],
+  "datacrumbs": [
+    "05-data-viz/datacrumbs"
+  ],
+  "dataracebench": [
+    "05-data-viz/dataracebench"
+  ],
+  "dbcomm": [
+    "05-data-viz/dbComm"
+  ],
+  "elastic": [
+    "05-data-viz/elastic-stacker"
+  ],
+  "stacker": [
+    "05-data-viz/elastic-stacker"
+  ],
+  "fdtree": [
+    "05-data-viz/fdtree"
+  ],
+  "glasdi": [
+    "05-data-viz/gLaSDI"
+  ],
+  "graph": [
+    "05-data-viz/graph-embed"
+  ],
+  "embed": [
+    "05-data-viz/graph-embed"
+  ],
+  "hatchet": [
+    "05-data-viz/hatchet",
+    "05-data-viz/hatchet-notebooks-sc19",
+    "05-data-viz/hatchet-tutorial"
+  ],
+  "notebooks": [
+    "05-data-viz/hatchet-notebooks-sc19"
+  ],
+  "sc19": [
+    "05-data-viz/hatchet-notebooks-sc19"
+  ],
+  "hdtopology": [
+    "05-data-viz/hdtopology"
+  ],
+  "jupyterhub": [
+    "05-data-viz/jupyterhub"
+  ],
+  "lmt": [
+    "05-data-viz/lmt"
+  ],
+  "mttime": [
+    "05-data-viz/mttime"
+  ],
+  "omi": [
+    "05-data-viz/omi_data_tools_open_source"
+  ],
+  "source": [
+    "05-data-viz/omi_data_tools_open_source",
+    "06-devtools/nfs-directory-source",
+    "06-devtools/open-source-guidelines"
+  ],
+  "ossp": [
+    "05-data-viz/ossp-ingest-tool"
+  ],
+  "ingest": [
+    "05-data-viz/ossp-ingest-tool"
+  ],
+  "tool": [
+    "05-data-viz/ossp-ingest-tool",
+    "06-devtools/Tool-Gear",
+    "06-devtools/coda-calibration-tool"
+  ],
+  "refex": [
+    "05-data-viz/refex-rolx"
+  ],
+  "rolx": [
+    "05-data-viz/refex-rolx"
+  ],
+  "spotbe": [
+    "05-data-viz/spotbe"
+  ],
+  "treescape": [
+    "05-data-viz/treescape"
+  ],
+  "trestles": [
+    "05-data-viz/trestles"
+  ],
+  "adapt": [
+    "06-devtools/ADAPT",
+    "06-devtools/adapt-fp"
+  ],
+  "amm": [
+    "06-devtools/AMM"
+  ],
+  "apbuilder": [
+    "06-devtools/APBuilder"
+  ],
+  "abmarl": [
+    "06-devtools/Abmarl"
+  ],
+  "adiak": [
+    "06-devtools/Adiak"
+  ],
+  "aluminum": [
+    "06-devtools/Aluminum"
+  ],
+  "automaded": [
+    "06-devtools/AutomaDeD"
+  ],
+  "babel": [
+    "06-devtools/Babel"
+  ],
+  "cap": [
+    "06-devtools/CAP"
+  ],
+  "care": [
+    "06-devtools/CARE"
+  ],
+  "cdash": [
+    "06-devtools/CDash"
+  ],
+  "chai": [
+    "06-devtools/CHAI"
+  ],
+  "cigen": [
+    "06-devtools/CIGEN"
+  ],
+  "cogent": [
+    "06-devtools/COGENT"
+  ],
+  "callflow": [
+    "06-devtools/CallFlow"
+  ],
+  "ciel": [
+    "06-devtools/Ciel"
+  ],
+  "comb": [
+    "06-devtools/Comb"
+  ],
+  "compilergpt": [
+    "06-devtools/CompilerGPT"
+  ],
+  "curvallis": [
+    "06-devtools/Curvallis"
+  ],
+  "cxxpolyfit": [
+    "06-devtools/CxxPolyFit"
+  ],
+  "decider": [
+    "06-devtools/DECIDER"
+  ],
+  "dftt": [
+    "06-devtools/DFTT"
+  ],
+  "erf": [
+    "06-devtools/ERF"
+  ],
+  "elemental": [
+    "06-devtools/Elemental"
+  ],
+  "exaepi": [
+    "06-devtools/ExaEpi"
+  ],
+  "flora": [
+    "06-devtools/FLORA"
+  ],
+  "frs": [
+    "06-devtools/FRS"
+  ],
+  "floatguard": [
+    "06-devtools/FloatGuard"
+  ],
+  "frescox": [
+    "06-devtools/Frescox"
+  ],
+  "gotcha": [
+    "06-devtools/GOTCHA",
+    "06-devtools/GOTCHA-tracer"
+  ],
+  "tracer": [
+    "06-devtools/GOTCHA-tracer"
+  ],
+  "grape": [
+    "06-devtools/GRAPE"
+  ],
+  "gremlins": [
+    "06-devtools/Gremlins"
+  ],
+  "griddyn": [
+    "06-devtools/GridDyn"
+  ],
+  "gula": [
+    "06-devtools/Gula"
+  ],
+  "h2oi95": [
+    "06-devtools/H2OI95"
+  ],
+  "h5z": [
+    "06-devtools/H5Z-ZFP"
+  ],
+  "zfp": [
+    "06-devtools/H5Z-ZFP",
+    "06-devtools/zfp"
+  ],
+  "ingrid": [
+    "06-devtools/INGRID"
+  ],
+  "jekyll": [
+    "06-devtools/Jekyll-LLNL-Theme"
+  ],
+  "theme": [
+    "06-devtools/Jekyll-LLNL-Theme"
+  ],
+  "juqbox.jl": [
+    "06-devtools/Juqbox.jl"
+  ],
+  "loki": [
+    "06-devtools/LOKI"
+  ],
+  "lope": [
+    "06-devtools/LOPE"
+  ],
+  "lulesh": [
+    "06-devtools/LULESH"
+  ],
+  "mat": [
+    "06-devtools/MAT"
+  ],
+  "stages": [
+    "06-devtools/MPI-Stages"
+  ],
+  "mtlrecsys": [
+    "06-devtools/MTLRecSys"
+  ],
+  "macpatch": [
+    "06-devtools/MacPatch",
+    "99-misc/MacPatch-AutoPKG",
+    "99-misc/MacPatch-Docs",
+    "99-misc/MacPatch-Docs-gh"
+  ],
+  "mahonfitting": [
+    "06-devtools/MahonFitting"
+  ],
+  "memaxes": [
+    "06-devtools/MemAxes"
+  ],
+  "mountpointattributes": [
+    "06-devtools/MountPointAttributes"
+  ],
+  "facility": [
+    "06-devtools/Open-Facility-Viewer"
+  ],
+  "viewer": [
+    "06-devtools/Open-Facility-Viewer"
+  ],
+  "pennant": [
+    "06-devtools/PENNANT"
+  ],
+  "pyb11generator": [
+    "06-devtools/PYB11Generator"
+  ],
+  "paradis": [
+    "06-devtools/ParaDiS",
+    "06-devtools/paraDIS_lib"
+  ],
+  "perroht": [
+    "06-devtools/Perroht"
+  ],
+  "pnmpi": [
+    "06-devtools/PnMPI"
+  ],
+  "polyclipper": [
+    "06-devtools/PolyClipper"
+  ],
+  "privateer": [
+    "06-devtools/Privateer"
+  ],
+  "qrus": [
+    "06-devtools/QRUS"
+  ],
+  "quicksilver": [
+    "06-devtools/Quicksilver"
+  ],
+  "project": [
+    "06-devtools/RAJA-project-template",
+    "06-devtools/ygm-project-template"
+  ],
+  "template": [
+    "06-devtools/RAJA-project-template",
+    "06-devtools/ygm-project-template"
+  ],
+  "rajaproxies": [
+    "06-devtools/RAJAProxies"
+  ],
+  "rase": [
+    "06-devtools/RASE"
+  ],
+  "rose": [
+    "06-devtools/ROSE-LCOM-Tools"
+  ],
+  "lcom": [
+    "06-devtools/ROSE-LCOM-Tools"
+  ],
+  "radsim": [
+    "06-devtools/RadSim"
+  ],
+  "rescal": [
+    "06-devtools/Rescal-snow"
+  ],
+  "snow": [
+    "06-devtools/Rescal-snow"
+  ],
+  "sac2000": [
+    "06-devtools/SAC2000"
+  ],
+  "safire": [
+    "06-devtools/SAFIRE"
+  ],
+  "snls": [
+    "06-devtools/SNLS"
+  ],
+  "stkaddressconverter": [
+    "06-devtools/STKAddressConverter"
+  ],
+  "sw4ck": [
+    "06-devtools/SW4CK"
+  ],
+  "saloon": [
+    "06-devtools/Saloon"
+  ],
+  "silo": [
+    "06-devtools/Silo"
+  ],
+  "skywing": [
+    "06-devtools/Skywing"
+  ],
+  "surfactant": [
+    "06-devtools/Surfactant"
+  ],
+  "thomson": [
+    "06-devtools/Thomson-Scattering-Cross-Section-Calculator"
+  ],
+  "scattering": [
+    "06-devtools/Thomson-Scattering-Cross-Section-Calculator"
+  ],
+  "cross": [
+    "06-devtools/Thomson-Scattering-Cross-Section-Calculator"
+  ],
+  "section": [
+    "06-devtools/Thomson-Scattering-Cross-Section-Calculator"
+  ],
+  "calculator": [
+    "06-devtools/Thomson-Scattering-Cross-Section-Calculator"
+  ],
+  "gear": [
+    "06-devtools/Tool-Gear"
+  ],
+  "topoms": [
+    "06-devtools/TopoMS"
+  ],
+  "tribol": [
+    "06-devtools/Tribol"
+  ],
+  "combustion": [
+    "06-devtools/UQ_combustion"
+  ],
+  "unifyfs": [
+    "06-devtools/UnifyFS"
+  ],
+  "wvl": [
+    "06-devtools/WVL"
+  ],
+  "wemul": [
+    "06-devtools/Wemul"
+  ],
+  "acrotensor": [
+    "06-devtools/acrotensor"
+  ],
+  "benchmarks": [
+    "06-devtools/benchmarks"
+  ],
+  "bindee": [
+    "06-devtools/bindee"
+  ],
+  "blockbuster": [
+    "06-devtools/blockbuster"
+  ],
+  "blt": [
+    "06-devtools/blt",
+    "06-devtools/blt-phpmd",
+    "06-devtools/blt_test"
+  ],
+  "phpmd": [
+    "06-devtools/blt-phpmd"
+  ],
+  "test": [
+    "06-devtools/blt_test",
+    "06-devtools/radiuss-shared-ci-test",
+    "99-misc/test-mirror"
+  ],
+  "bridge": [
+    "06-devtools/bridge-kernel"
+  ],
+  "kernel": [
+    "06-devtools/bridge-kernel"
+  ],
+  "compiler": [
+    "06-devtools/caliper-compiler"
+  ],
+  "callpath": [
+    "06-devtools/callpath"
+  ],
+  "camp": [
+    "06-devtools/camp"
+  ],
+  "certipy": [
+    "06-devtools/certipy"
+  ],
+  "coda": [
+    "06-devtools/coda-calibration-tool"
+  ],
+  "calibration": [
+    "06-devtools/coda-calibration-tool"
+  ],
+  "conduit": [
+    "06-devtools/conduit"
+  ],
+  "corefputest": [
+    "06-devtools/coreFPUtest"
+  ],
+  "core": [
+    "06-devtools/core_stack_merge"
+  ],
+  "merge": [
+    "06-devtools/core_stack_merge"
+  ],
+  "cram": [
+    "06-devtools/cram"
+  ],
+  "cruise": [
+    "06-devtools/cruise"
+  ],
+  "csld": [
+    "06-devtools/csld"
+  ],
+  "ctm": [
+    "06-devtools/ctm"
+  ],
+  "cxxopts": [
+    "06-devtools/cxxopts"
+  ],
+  "dapper": [
+    "06-devtools/dapper"
+  ],
+  "rust": [
+    "06-devtools/dapper"
+  ],
+  "ddd": [
+    "06-devtools/ddd"
+  ],
+  "dfanalyzer": [
+    "06-devtools/dfanalyzer"
+  ],
+  "dftf": [
+    "06-devtools/dftf"
+  ],
+  "dftracer": [
+    "06-devtools/dftracer",
+    "06-devtools/dftracer-utils",
+    "99-misc/dftracer-bak",
+    "99-misc/dftracer-traces"
+  ],
+  "dmx": [
+    "06-devtools/dmx-learn"
+  ],
+  "learn": [
+    "06-devtools/dmx-learn"
+  ],
+  "evt": [
+    "06-devtools/dr_evt"
+  ],
+  "dtcmp": [
+    "06-devtools/dtcmp"
+  ],
+  "dynim": [
+    "06-devtools/dynim"
+  ],
+  "exadis": [
+    "06-devtools/exadis"
+  ],
+  "quench": [
+    "06-devtools/ez-Quench"
+  ],
+  "fence": [
+    "06-devtools/fence-agents"
+  ],
+  "agents": [
+    "06-devtools/fence-agents"
+  ],
+  "fpzip": [
+    "06-devtools/fpzip"
+  ],
+  "fudge": [
+    "06-devtools/fudge"
+  ],
+  "gecko": [
+    "06-devtools/gecko"
+  ],
+  "geometry": [
+    "06-devtools/geometry-mesher"
+  ],
+  "mesher": [
+    "06-devtools/geometry-mesher"
+  ],
+  "gidiplus": [
+    "06-devtools/gidiplus"
+  ],
+  "gitlab": [
+    "06-devtools/gitlab-runner-auth",
+    "06-devtools/omnibus-gitlab"
+  ],
+  "runner": [
+    "06-devtools/gitlab-runner-auth"
+  ],
+  "auth": [
+    "06-devtools/gitlab-runner-auth"
+  ],
+  "gotls": [
+    "06-devtools/goTLS"
+  ],
+  "graphlib": [
+    "06-devtools/graphlib"
+  ],
+  "havoqgt": [
+    "06-devtools/havoqgt"
+  ],
+  "hscs": [
+    "06-devtools/hscs"
+  ],
+  "hypre": [
+    "06-devtools/hypre"
+  ],
+  "improvwf": [
+    "06-devtools/improvwf"
+  ],
+  "ior": [
+    "06-devtools/ior"
+  ],
+  "irep": [
+    "06-devtools/irep"
+  ],
+  "json": [
+    "06-devtools/json-cwx"
+  ],
+  "cwx": [
+    "06-devtools/json-cwx"
+  ],
+  "jsonlogic": [
+    "06-devtools/jsonlogic"
+  ],
+  "krowkee": [
+    "06-devtools/krowkee"
+  ],
+  "legion": [
+    "06-devtools/legion"
+  ],
+  "letop": [
+    "06-devtools/letop"
+  ],
+  "librom": [
+    "06-devtools/libROM"
+  ],
+  "libjustify": [
+    "06-devtools/libjustify"
+  ],
+  "libmsr": [
+    "06-devtools/libmsr"
+  ],
+  "libyogrt": [
+    "06-devtools/libyogrt"
+  ],
+  "lime": [
+    "06-devtools/lime",
+    "06-devtools/lime-apps"
+  ],
+  "apps": [
+    "06-devtools/lime-apps",
+    "06-devtools/umap-apps"
+  ],
+  "hires": [
+    "06-devtools/llnl-hires-timers"
+  ],
+  "timers": [
+    "06-devtools/llnl-hires-timers"
+  ],
+  "llnl.github.io": [
+    "06-devtools/llnl.github.io"
+  ],
+  "lustre": [
+    "06-devtools/lustre",
+    "06-devtools/lustre-tools-llnl"
+  ],
+  "lwgrp": [
+    "06-devtools/lwgrp"
+  ],
+  "maestro": [
+    "06-devtools/maestro_sheetmusic"
+  ],
+  "sheetmusic": [
+    "06-devtools/maestro_sheetmusic"
+  ],
+  "mdtest": [
+    "06-devtools/mdtest"
+  ],
+  "mimir": [
+    "06-devtools/mimir"
+  ],
+  "mitos": [
+    "06-devtools/mitos"
+  ],
+  "mpip": [
+    "06-devtools/mpiP"
+  ],
+  "mpy1": [
+    "06-devtools/mpy1"
+  ],
+  "msr": [
+    "06-devtools/msr-genie",
+    "06-devtools/msr-safe"
+  ],
+  "genie": [
+    "06-devtools/msr-genie"
+  ],
+  "safe": [
+    "06-devtools/msr-safe"
+  ],
+  "nfs": [
+    "06-devtools/nfs-directory-source"
+  ],
+  "directory": [
+    "06-devtools/nfs-directory-source"
+  ],
+  "ns3": [
+    "06-devtools/ns3-if77-module"
+  ],
+  "if77": [
+    "06-devtools/ns3-if77-module"
+  ],
+  "module": [
+    "06-devtools/ns3-if77-module"
+  ],
+  "omnibus": [
+    "06-devtools/omnibus-gitlab"
+  ],
+  "guidelines": [
+    "06-devtools/open-source-guidelines"
+  ],
+  "orchestrator": [
+    "06-devtools/orchestrator"
+  ],
+  "peyeon": [
+    "06-devtools/pEyeON"
+  ],
+  "pliner": [
+    "06-devtools/pLiner"
+  ],
+  "perf": [
+    "06-devtools/perf-dump"
+  ],
+  "dump": [
+    "06-devtools/perf-dump"
+  ],
+  "phloem": [
+    "06-devtools/phloem"
+  ],
+  "playwright": [
+    "06-devtools/playwright",
+    "06-devtools/playwright-crx-ai",
+    "06-devtools/playwright-mcp",
+    "06-devtools/playwright-tracegen"
+  ],
+  "javascript": [
+    "06-devtools/playwright",
+    "06-devtools/playwright-crx-ai",
+    "06-devtools/playwright-mcp",
+    "06-devtools/playwright-tracegen",
+    "06-devtools/radiuss-ci-info-action",
+    "06-devtools/session-recorder",
+    "08-web-apps/Wintap-Workbench",
+    "08-web-apps/configurable-http-proxy",
+    "08-web-apps/spotfe",
+    "09-infrastructure/radiuss-slackin-extended",
+    "09-infrastructure/spot2_container"
+  ],
+  "crx": [
+    "06-devtools/playwright-crx-ai"
+  ],
+  "tracegen": [
+    "06-devtools/playwright-tracegen"
+  ],
+  "polycube": [
+    "06-devtools/polycube"
+  ],
+  "polytope": [
+    "06-devtools/polytope"
+  ],
+  "psuade": [
+    "06-devtools/psuade",
+    "06-devtools/psuade-lite"
+  ],
+  "lite": [
+    "06-devtools/psuade-lite"
+  ],
+  "hostlist": [
+    "06-devtools/py-hostlist"
+  ],
+  "pydftracer": [
+    "06-devtools/pydftracer"
+  ],
+  "pylibrom": [
+    "06-devtools/pylibROM"
+  ],
+  "pysolate": [
+    "06-devtools/pysolate"
+  ],
+  "qnd": [
+    "06-devtools/qnd"
+  ],
+  "quantkriging": [
+    "06-devtools/quantkriging"
+  ],
+  "info": [
+    "06-devtools/radiuss-ci-info-action",
+    "06-devtools/radiuss-ci-info-action-go"
+  ],
+  "action": [
+    "06-devtools/radiuss-ci-info-action",
+    "06-devtools/radiuss-ci-info-action-go"
+  ],
+  "clingo": [
+    "06-devtools/radiuss-clingo-install"
+  ],
+  "install": [
+    "06-devtools/radiuss-clingo-install"
+  ],
+  "docker": [
+    "06-devtools/radiuss-docker",
+    "09-infrastructure/axom-docker",
+    "09-infrastructure/mstk-docker",
+    "09-infrastructure/spheral-docker"
+  ],
+  "shared": [
+    "06-devtools/radiuss-shared-ci",
+    "06-devtools/radiuss-shared-ci-test"
+  ],
+  "testing": [
+    "06-devtools/radiuss-spack-testing"
+  ],
+  "uberenv": [
+    "06-devtools/radiuss-uberenv",
+    "06-devtools/uberenv"
+  ],
+  "ravel": [
+    "06-devtools/ravel"
+  ],
+  "repligit": [
+    "06-devtools/repligit"
+  ],
+  "rollerball": [
+    "06-devtools/rollerball"
+  ],
+  "rst2slides": [
+    "06-devtools/rst2slides"
+  ],
+  "rubik": [
+    "06-devtools/rubik"
+  ],
+  "saamge": [
+    "06-devtools/saamge"
+  ],
+  "saltatlas": [
+    "06-devtools/saltatlas",
+    "06-devtools/saltatlas_h5_io"
+  ],
+  "foi": [
+    "06-devtools/sc-foi"
+  ],
+  "scisample": [
+    "06-devtools/scisample"
+  ],
+  "top": [
+    "06-devtools/scr-top"
+  ],
+  "session": [
+    "06-devtools/session-recorder"
+  ],
+  "recorder": [
+    "06-devtools/session-recorder"
+  ],
+  "shroud": [
+    "06-devtools/shroud"
+  ],
+  "simplexdesign": [
+    "06-devtools/simplexdesign"
+  ],
+  "simpool": [
+    "06-devtools/simpool"
+  ],
+  "simutil": [
+    "06-devtools/simutil"
+  ],
+  "sonar": [
+    "06-devtools/sonar-driver"
+  ],
+  "driver": [
+    "06-devtools/sonar-driver"
+  ],
+  "spark": [
+    "06-devtools/spark-hdf5"
+  ],
+  "hdf5": [
+    "06-devtools/spark-hdf5"
+  ],
+  "spawnnet": [
+    "06-devtools/spawnnet"
+  ],
+  "spify": [
+    "06-devtools/spify"
+  ],
+  "tox": [
+    "06-devtools/tox"
+  ],
+  "tripoll": [
+    "06-devtools/tripoll"
+  ],
+  "typeforge": [
+    "06-devtools/typeforge"
+  ],
+  "umap": [
+    "06-devtools/umap",
+    "06-devtools/umap-apps"
+  ],
+  "units": [
+    "06-devtools/units"
+  ],
+  "unum": [
+    "06-devtools/unum"
+  ],
+  "integrations": [
+    "06-devtools/variorum-integrations"
+  ],
+  "wcs": [
+    "06-devtools/wcs"
+  ],
+  "wrap": [
+    "06-devtools/wrap"
+  ],
+  "ygm": [
+    "06-devtools/ygm-project-template",
+    "06-devtools/ygm-tools",
+    "06-devtools/ygm-tutorial",
+    "99-misc/ygm",
+    "99-misc/ygm-bench"
+  ],
+  "doc": [
+    "06-devtools/yorick-doc"
+  ],
+  "zero": [
+    "06-devtools/zero-rk"
+  ],
+  "zfpy": [
+    "06-devtools/zfpy-wheels"
+  ],
+  "wheels": [
+    "06-devtools/zfpy-wheels"
+  ],
+  "zfs": [
+    "06-devtools/zfs"
+  ],
+  "zhw": [
+    "06-devtools/zhw"
+  ],
+  "2022": [
+    "07-bioinformatics/2022_DVRFS_microbiome",
+    "07-bioinformatics/2022_PondB_microbiome"
+  ],
+  "dvrfs": [
+    "07-bioinformatics/2022_DVRFS_microbiome"
+  ],
+  "microbiome": [
+    "07-bioinformatics/2022_DVRFS_microbiome",
+    "07-bioinformatics/2022_PondB_microbiome"
+  ],
+  "pondb": [
+    "07-bioinformatics/2022_PondB_microbiome"
+  ],
+  "bioimage": [
+    "07-bioinformatics/bioimage-agent"
+  ],
+  "agent": [
+    "07-bioinformatics/bioimage-agent"
+  ],
+  "ezalign": [
+    "07-bioinformatics/ezAlign"
+  ],
+  "protein": [
+    "07-bioinformatics/protein_tune_rl"
+  ],
+  "tune": [
+    "07-bioinformatics/protein_tune_rl"
+  ],
+  "rflow": [
+    "08-web-apps/Rflow"
+  ],
+  "workbench": [
+    "08-web-apps/Wintap-Workbench"
+  ],
+  "configurable": [
+    "08-web-apps/configurable-http-proxy"
+  ],
+  "http": [
+    "08-web-apps/configurable-http-proxy"
+  ],
+  "proxy": [
+    "08-web-apps/configurable-http-proxy"
+  ],
+  "strings": [
+    "08-web-apps/f-strings"
+  ],
+  "flood": [
+    "08-web-apps/flood_changes"
+  ],
+  "changes": [
+    "08-web-apps/flood_changes"
+  ],
+  "backend": [
+    "08-web-apps/pySigma-backend-duckdb"
+  ],
+  "duckdb": [
+    "08-web-apps/pySigma-backend-duckdb"
+  ],
+  "romweb": [
+    "08-web-apps/romweb"
+  ],
+  "spotfe": [
+    "08-web-apps/spotfe"
+  ],
+  "mstk": [
+    "09-infrastructure/mstk-docker"
+  ],
+  "aws": [
+    "09-infrastructure/radiuss-aws-tutorials"
+  ],
+  "slackin": [
+    "09-infrastructure/radiuss-slackin-extended"
+  ],
+  "extended": [
+    "09-infrastructure/radiuss-slackin-extended"
+  ],
+  "spot2": [
+    "09-infrastructure/spot2_container"
+  ],
+  "container": [
+    "09-infrastructure/spot2_container"
+  ],
+  "iniabu": [
+    "10-security/iniabu"
+  ],
+  "remote": [
+    "10-security/remote-mirror-security"
+  ],
+  "mirror": [
+    "10-security/remote-mirror-security",
+    "99-misc/test-mirror"
+  ],
+  "security": [
+    "10-security/remote-mirror-security"
+  ],
+  "dfdiagnoser": [
+    "99-misc/DFDiagnoser"
+  ],
+  "eq3": [
+    "99-misc/EQ3_6"
+  ],
+  "fas": [
+    "99-misc/FAS"
+  ],
+  "fast": [
+    "99-misc/FAST"
+  ],
+  "jsac": [
+    "99-misc/JSAC"
+  ],
+  "list": [
+    "99-misc/LIST"
+  ],
+  "libpowermon": [
+    "99-misc/LibPowerMon"
+  ],
+  "autopkg": [
+    "99-misc/MacPatch-AutoPKG"
+  ],
+  "memsurfer": [
+    "99-misc/MemSurfer"
+  ],
+  "pips": [
+    "99-misc/PIPS-SBB"
+  ],
+  "sbb": [
+    "99-misc/PIPS-SBB"
+  ],
+  "xpl": [
+    "99-misc/XPL"
+  ],
+  "analog": [
+    "99-misc/analog"
+  ],
+  "avalaunch": [
+    "99-misc/avalaunch"
+  ],
+  "cpp": [
+    "99-misc/clippy-cpp"
+  ],
+  "ddcmd": [
+    "99-misc/ddcMD"
+  ],
+  "dfoptimizer": [
+    "99-misc/dfoptimizer"
+  ],
+  "bak": [
+    "99-misc/dftracer-bak"
+  ],
+  "traces": [
+    "99-misc/dftracer-traces"
+  ],
+  "flume": [
+    "99-misc/flume-plugins"
+  ],
+  "geno": [
+    "99-misc/geno-prot"
+  ],
+  "prot": [
+    "99-misc/geno-prot"
+  ],
+  "mib": [
+    "99-misc/mib"
+  ],
+  "pmgr": [
+    "99-misc/pmgr_collective"
+  ],
+  "collective": [
+    "99-misc/pmgr_collective"
+  ],
+  "pynamic": [
+    "99-misc/pynamic"
+  ],
+  "dev": [
+    "99-misc/raja-suite-dev-env"
+  ],
+  "env": [
+    "99-misc/raja-suite-dev-env"
+  ],
+  "response": [
+    "99-misc/response"
+  ],
+  "spl": [
+    "99-misc/spl"
+  ],
+  "bench": [
+    "99-misc/ygm-bench"
+  ],
+  "ml4": [
+    "99-misc/yorick-ml4"
+  ]
+}

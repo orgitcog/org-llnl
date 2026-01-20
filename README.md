@@ -1,101 +1,161 @@
 # LLNL Open Source Gestalt Monorepo
 
-This repository integrates **633 open-source projects** from Lawrence Livermore National Laboratory (LLNL) into a cohesive monorepo structure for unified access, analysis, and development.
+A unified repository containing **632 open-source projects** from Lawrence Livermore National Laboratory (LLNL), organized by domain for efficient agent navigation and integration.
 
-## Overview
-
-Lawrence Livermore National Laboratory is a premier research institution focused on national security, energy, and scientific discovery. This monorepo consolidates their extensive open-source portfolio spanning:
-
-- **High-Performance Computing (HPC)** frameworks and tools
-- **Scientific Simulation** codes and solvers
-- **Machine Learning & AI** libraries
-- **Performance Analysis** and profiling tools
-- **Numerical Methods** and mathematical libraries
-- **Data Management** and visualization tools
-- **System Administration** utilities
-
-## Repository Structure
-
-Each subdirectory corresponds to an individual LLNL project, preserving its original structure:
+## Quick Navigation for Agents
 
 ```
 org-llnl/
-├── RAJA/                 # Performance Portability Layer (C++)
-├── sundials/             # Nonlinear/Differential Equation Solvers
-├── Caliper/              # Performance Profiling Library
-├── conduit/              # Simplified Data Exchange for HPC
-├── axom/                 # CS Infrastructure for HPC Applications
-├── zfp/                  # Compressed Numerical Arrays
-├── Umpire/               # Memory Management for NUMA & GPU
-├── merlin/               # ML for HPC Workflows
-├── hypre/                # Parallel Sparse Linear Solvers
-├── ... (633 projects total)
-└── README.md
+├── 01-hpc-parallel/     # 98 projects  - MPI, CUDA, GPU, Parallel Computing
+├── 02-ml-ai/            # 127 projects - Machine Learning, Deep Learning, AI
+├── 03-simulation/       # 45 projects  - Physics, CFD, FEM, Numerical Methods
+├── 04-scientific-libs/  # 11 projects  - Math Libraries, Linear Algebra
+├── 05-data-viz/         # 49 projects  - Data Analysis, Visualization
+├── 06-devtools/         # 246 projects - Compilers, Debuggers, Testing
+├── 07-bioinformatics/   # 5 projects   - Genomics, Molecular Biology
+├── 08-web-apps/         # 8 projects   - Web Applications, APIs
+├── 09-infrastructure/   # 6 projects   - Containers, Cloud, DevOps
+├── 10-security/         # 2 projects   - Security, Cryptography
+└── 99-misc/             # 35 projects  - Miscellaneous
 ```
 
-## Key Project Categories
+## Agent Instructions
 
-### Performance Portability
-- **RAJA** - Performance portability layer for C++
-- **CHAI** - Copy-hiding array abstraction for memory spaces
-- **Umpire** - Memory management for heterogeneous architectures
-- **camp** - Compiler agnostic metaprogramming library
+### Finding Projects by Capability
 
-### Numerical Solvers
-- **sundials** - Suite of nonlinear and differential/algebraic solvers
-- **hypre** - Parallel multigrid solvers
-- **hiop** - HPC nonlinear optimization solver
-- **libROM** - Data-driven model reduction library
+| Need | Domain | Key Projects |
+|------|--------|--------------|
+| MPI parallelization | `01-hpc-parallel` | `mpi-tools`, `PnMPI`, `mpiBench` |
+| GPU computing | `01-hpc-parallel` | `RAJA`, `Umpire`, `CHAI`, `CUDA*` |
+| ML/AI models | `02-ml-ai` | `deepopt`, `MLAP`, `Gremlins` |
+| Physics simulation | `03-simulation` | `SAMRAI`, `sundials`, `Caliper` |
+| Data visualization | `05-data-viz` | `Conduit`, `Ascent`, `VisIt` |
+| Build/test tools | `06-devtools` | `Spack`, `BLT`, `RADIUSS` |
 
-### Simulation Codes
-- **WarpX** - Electromagnetic Particle-In-Cell code
-- **SAMRAI** - Structured Adaptive Mesh Refinement
-- **spheral** - Meshfree hydrodynamics
-- **ExaCA** - Cellular automata for alloy solidification
+### Project Structure Convention
 
-### Performance Analysis
-- **Caliper** - Instrumentation and profiling library
-- **hatchet** - Graph-indexed performance data analysis
-- **STAT** - Stack Trace Analysis Tool
-- **mpiP** - Lightweight MPI profiler
+Each project follows this structure:
+```
+project-name/
+├── README.md           # Project documentation
+├── LICENSE             # License information
+├── CMakeLists.txt      # C/C++ build (if applicable)
+├── setup.py            # Python package (if applicable)
+├── pyproject.toml      # Modern Python config
+├── src/                # Source code
+├── include/            # Headers (C/C++)
+├── tests/              # Test suite
+└── docs/               # Documentation
+```
 
-### Machine Learning & AI
-- **merlin** - ML for HPC workflows
-- **GPLaSDI** - Gaussian process latent space dynamics
-- **MuyGPyS** - Fast Gaussian process implementation
-- **DJINN** - Deep jointly-informed neural networks
+### Language Detection
 
-### Data Management
-- **conduit** - Simplified data exchange for HPC
-- **Silo** - Mesh and field I/O library
-- **kosh** - Data storage and query via Python
-- **Sina** - Simulation metadata management
+| File Present | Primary Language |
+|--------------|------------------|
+| `CMakeLists.txt` | C/C++ |
+| `setup.py` or `pyproject.toml` | Python |
+| `package.json` | JavaScript/TypeScript |
+| `Cargo.toml` | Rust |
+| `go.mod` | Go |
+| `Makefile` only | C/C++ (legacy) |
 
-## Integration Notes
+## Domain Descriptions
 
-This monorepo was created by:
-1. Cloning all 633 LLNL repositories with shallow depth
-2. Removing individual `.git` directories
-3. Integrating into a unified version control structure
+### 01-hpc-parallel (98 projects)
+High-Performance Computing frameworks including MPI wrappers, CUDA utilities, GPU programming abstractions, and parallel computing tools. Key projects: RAJA, Umpire, CHAI, Flux.
 
-Original repository histories are preserved in the source LLNL GitHub organization: https://github.com/LLNL
+### 02-ml-ai (127 projects)
+Machine learning and artificial intelligence libraries, deep learning frameworks, neural network implementations, and AI-assisted tools.
 
-## License
+### 03-simulation (45 projects)
+Physics simulation codes, computational fluid dynamics, finite element methods, molecular dynamics, and numerical solvers.
 
-Individual projects retain their original licenses. Most LLNL projects use permissive open-source licenses (MIT, BSD, Apache 2.0). Refer to each project's LICENSE file for specifics.
+### 04-scientific-libs (11 projects)
+Core scientific libraries for mathematics, linear algebra, sparse matrices, and numerical computing foundations.
 
-## Contributing
+### 05-data-viz (49 projects)
+Data analysis tools, visualization libraries, dashboards, and data management utilities for scientific computing.
 
-For contributions to individual projects, please refer to the original LLNL repositories. This monorepo serves as a consolidated reference and integration point.
+### 06-devtools (246 projects)
+Developer tools including compilers, debuggers, profilers, testing frameworks, documentation generators, and build systems.
 
-## Links
+### 07-bioinformatics (5 projects)
+Bioinformatics tools for genomics, proteomics, molecular biology, and computational biology applications.
 
-- **LLNL GitHub**: https://github.com/LLNL
-- **LLNL Software Portal**: https://software.llnl.gov
-- **RADIUSS Project**: https://computing.llnl.gov/projects/radiuss
+### 08-web-apps (8 projects)
+Web applications, frontend frameworks, backend services, and API implementations.
+
+### 09-infrastructure (6 projects)
+Infrastructure tools including container definitions, cloud deployment scripts, and DevOps utilities.
+
+### 10-security (2 projects)
+Security-focused tools for cryptography, vulnerability analysis, and secure computing.
+
+### 99-misc (35 projects)
+Miscellaneous projects that don't fit neatly into other categories.
+
+## Integration Patterns
+
+### Using as Git Submodule
+```bash
+git submodule add https://github.com/orgitcog/org-llnl.git vendor/llnl
+```
+
+### Selective Import (Sparse Checkout)
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/orgitcog/org-llnl.git
+cd org-llnl
+git sparse-checkout set 01-hpc-parallel/RAJA
+```
+
+### CMake Integration
+```cmake
+add_subdirectory(vendor/llnl/01-hpc-parallel/RAJA)
+target_link_libraries(myapp RAJA)
+```
+
+### Python Integration
+```python
+import sys
+sys.path.insert(0, 'vendor/llnl/02-ml-ai/project-name')
+```
+
+## Index Files
+
+| File | Purpose |
+|------|---------|
+| `INDEX.json` | Machine-readable project index with metadata |
+| `CATALOG.md` | Human-readable project catalog |
+| `TAGS.json` | Project tags and keywords for search |
+
+## CI/CD Integration
+
+GitHub Actions workflows included for:
+- **Lint Check**: Code style validation
+- **Build Matrix**: C/C++ and Python builds
+- **Integration Tests**: Cross-project dependency validation
+- **Documentation**: Unified docs generation
+
+See `.github/workflows/` for workflow definitions.
+
+## Statistics
+
+| Metric | Value |
+|--------|-------|
+| Total Projects | 632 |
+| C/C++ Projects | 142 |
+| Python Projects | 147 |
+| JavaScript Projects | 14 |
+| Rust Projects | 1 |
+| Total Size | ~22 GB |
+
+## Source
+
+Projects sourced from [LLNL GitHub Organization](https://github.com/LLNL).
+
+Individual projects retain their original licenses. See each project's LICENSE file for details.
 
 ---
 
 *Generated: January 2026*
-*Total Projects: 633*
-*Source: Lawrence Livermore National Laboratory Open Source Portfolio*
+*Organization: orgitcog*

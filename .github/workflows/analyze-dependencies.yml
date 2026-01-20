@@ -1,0 +1,144 @@
+name: Analyze Dependencies
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+
+jobs:
+  analyze:
+    name: Analyze Project Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Analyze dependencies
+        run: |
+          python3 << 'EOF'
+          import os
+          import json
+          import re
+          from pathlib import Path
+          from collections import defaultdict
+
+          REPO_PATH = Path(".")
+          
+          # Known LLNL project names for cross-reference detection
+          llnl_projects = set()
+          for domain in REPO_PATH.iterdir():
+              if domain.is_dir() and not domain.name.startswith('.'):
+                  for project in domain.iterdir():
+                      if project.is_dir():
+                          llnl_projects.add(project.name.lower())
+
+          dependencies = defaultdict(lambda: {"depends_on": [], "depended_by": []})
+
+          def find_cmake_deps(cmake_file):
+              """Extract dependencies from CMakeLists.txt"""
+              deps = []
+              try:
+                  content = cmake_file.read_text(errors='ignore')
+                  # find_package calls
+                  for match in re.finditer(r'find_package\s*\(\s*(\w+)', content, re.IGNORECASE):
+                      pkg = match.group(1).lower()
+                      if pkg in llnl_projects:
+                          deps.append(pkg)
+                  # target_link_libraries
+                  for match in re.finditer(r'target_link_libraries\s*\([^)]*\b(\w+)\b', content, re.IGNORECASE):
+                      lib = match.group(1).lower()
+                      if lib in llnl_projects:
+                          deps.append(lib)
+              except:
+                  pass
+              return list(set(deps))
+
+          def find_python_deps(project_path):
+              """Extract dependencies from Python project files"""
+              deps = []
+              for req_file in ['requirements.txt', 'setup.py', 'pyproject.toml']:
+                  req_path = project_path / req_file
+                  if req_path.exists():
+                      try:
+                          content = req_path.read_text(errors='ignore').lower()
+                          for proj in llnl_projects:
+                              if proj in content:
+                                  deps.append(proj)
+                      except:
+                          pass
+              return list(set(deps))
+
+          # Analyze all projects
+          for domain in sorted(REPO_PATH.iterdir()):
+              if not domain.is_dir() or domain.name.startswith('.'):
+                  continue
+              
+              for project in domain.iterdir():
+                  if not project.is_dir():
+                      continue
+                  
+                  project_name = project.name.lower()
+                  project_deps = []
+                  
+                  # Check CMake
+                  cmake_file = project / "CMakeLists.txt"
+                  if cmake_file.exists():
+                      project_deps.extend(find_cmake_deps(cmake_file))
+                  
+                  # Check Python
+                  project_deps.extend(find_python_deps(project))
+                  
+                  # Remove self-references
+                  project_deps = [d for d in project_deps if d != project_name]
+                  
+                  if project_deps:
+                      dependencies[project_name]["depends_on"] = list(set(project_deps))
+                      for dep in project_deps:
+                          dependencies[dep]["depended_by"].append(project_name)
+
+          # Clean up empty entries
+          dependencies = {k: v for k, v in dependencies.items() if v["depends_on"] or v["depended_by"]}
+
+          # Generate report
+          report = {
+              "generated": "auto",
+              "total_with_deps": len(dependencies),
+              "dependencies": dict(dependencies)
+          }
+
+          with open("DEPENDENCIES.json", "w") as f:
+              json.dump(report, f, indent=2)
+
+          print(f"Found {len(dependencies)} projects with dependencies")
+          
+          # Print most depended-on projects
+          most_depended = sorted(
+              [(k, len(v["depended_by"])) for k, v in dependencies.items()],
+              key=lambda x: x[1],
+              reverse=True
+          )[:10]
+          
+          print("\nMost depended-on projects:")
+          for proj, count in most_depended:
+              print(f"  {proj}: {count} dependents")
+          EOF
+
+      - name: Upload dependency report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-analysis
+          path: DEPENDENCIES.json
+
+      - name: Update summary
+        run: |
+          echo "# Dependency Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          python3 -c "
+          import json
+          with open('DEPENDENCIES.json') as f:
+              data = json.load(f)
+          print(f'**Projects with dependencies:** {data[\"total_with_deps\"]}')
+          "

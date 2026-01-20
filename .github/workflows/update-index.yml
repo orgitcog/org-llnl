@@ -1,0 +1,141 @@
+name: Update Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*/*/README.md'
+      - '*/*/setup.py'
+      - '*/*/pyproject.toml'
+      - '*/*/CMakeLists.txt'
+      - '*/*/package.json'
+  workflow_dispatch:
+
+jobs:
+  update-index:
+    name: Update Index Files
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate INDEX.json
+        run: |
+          python3 << 'EOF'
+          import os
+          import json
+          from pathlib import Path
+          from datetime import datetime
+
+          REPO_PATH = Path(".")
+
+          DOMAIN_INFO = {
+              "01-hpc-parallel": {"name": "HPC & Parallel Computing", "keywords": ["mpi", "cuda", "gpu", "parallel"]},
+              "02-ml-ai": {"name": "Machine Learning & AI", "keywords": ["ml", "ai", "deep-learning"]},
+              "03-simulation": {"name": "Simulation & Physics", "keywords": ["simulation", "physics", "cfd"]},
+              "04-scientific-libs": {"name": "Scientific Libraries", "keywords": ["math", "linear-algebra"]},
+              "05-data-viz": {"name": "Data & Visualization", "keywords": ["data", "visualization"]},
+              "06-devtools": {"name": "Developer Tools", "keywords": ["compiler", "debugger", "testing"]},
+              "07-bioinformatics": {"name": "Bioinformatics", "keywords": ["bio", "genomics"]},
+              "08-web-apps": {"name": "Web Applications", "keywords": ["web", "api"]},
+              "09-infrastructure": {"name": "Infrastructure", "keywords": ["docker", "kubernetes"]},
+              "10-security": {"name": "Security", "keywords": ["security", "crypto"]},
+              "99-misc": {"name": "Miscellaneous", "keywords": []}
+          }
+
+          def detect_language(project_path):
+              files = [f.name for f in project_path.iterdir() if f.is_file()]
+              if "CMakeLists.txt" in files: return "C/C++"
+              if "setup.py" in files or "pyproject.toml" in files: return "Python"
+              if "package.json" in files: return "JavaScript"
+              if "Cargo.toml" in files: return "Rust"
+              if "go.mod" in files: return "Go"
+              return "Unknown"
+
+          index = {
+              "version": "1.0",
+              "generated": datetime.now().isoformat(),
+              "repository": "orgitcog/org-llnl",
+              "total_projects": 0,
+              "domains": {},
+              "projects": []
+          }
+
+          for domain_dir in sorted(REPO_PATH.iterdir()):
+              if not domain_dir.is_dir() or domain_dir.name.startswith('.'):
+                  continue
+              if domain_dir.name not in DOMAIN_INFO:
+                  continue
+              
+              domain_info = DOMAIN_INFO[domain_dir.name]
+              domain_projects = []
+              
+              for project in sorted(domain_dir.iterdir()):
+                  if not project.is_dir():
+                      continue
+                  
+                  proj_info = {
+                      "name": project.name,
+                      "path": str(project),
+                      "language": detect_language(project),
+                      "domain": domain_dir.name
+                  }
+                  domain_projects.append(proj_info)
+                  index["projects"].append(proj_info)
+              
+              index["domains"][domain_dir.name] = {
+                  **domain_info,
+                  "project_count": len(domain_projects),
+                  "projects": [p["name"] for p in domain_projects]
+              }
+
+          index["total_projects"] = len(index["projects"])
+
+          with open("INDEX.json", "w") as f:
+              json.dump(index, f, indent=2)
+
+          print(f"Updated INDEX.json with {index['total_projects']} projects")
+          EOF
+
+      - name: Generate TAGS.json
+        run: |
+          python3 << 'EOF'
+          import json
+
+          with open("INDEX.json") as f:
+              index = json.load(f)
+
+          tags = {}
+          for proj in index["projects"]:
+              name_parts = proj["name"].lower().replace("-", " ").replace("_", " ").split()
+              for part in name_parts:
+                  if len(part) > 2:
+                      if part not in tags:
+                          tags[part] = []
+                      tags[part].append(proj["path"])
+              
+              lang = proj["language"].lower().replace("/", "-").replace(" ", "-")
+              if lang not in tags:
+                  tags[lang] = []
+              tags[lang].append(proj["path"])
+
+          with open("TAGS.json", "w") as f:
+              json.dump(tags, f, indent=2)
+
+          print(f"Updated TAGS.json with {len(tags)} tags")
+          EOF
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add INDEX.json TAGS.json
+          git diff --staged --quiet || git commit -m "chore: update index files [skip ci]"
+          git push
