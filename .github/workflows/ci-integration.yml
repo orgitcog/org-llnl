@@ -40,15 +40,42 @@ jobs:
           python3 -c "import json; json.load(open('TAGS.json'))"
           echo "TAGS.json is valid JSON"
 
-      - name: Check domain directories
+      - name: Validate domain structure in INDEX.json
         run: |
-          for domain in 01-hpc-parallel 02-ml-ai 03-simulation 04-scientific-libs 05-data-viz 06-devtools 07-bioinformatics 08-web-apps 09-infrastructure 10-security 99-misc; do
-            if [ ! -d "$domain" ]; then
-              echo "Missing domain directory: $domain"
-              exit 1
-            fi
-          done
-          echo "All domain directories present"
+          python3 << 'EOF'
+          import json
+          import sys
+          
+          expected_domains = [
+              '01-hpc-parallel', '02-ml-ai', '03-simulation', '04-scientific-libs',
+              '05-data-viz', '06-devtools', '07-bioinformatics', '08-web-apps',
+              '09-infrastructure', '10-security', '99-misc'
+          ]
+          
+          with open('INDEX.json') as f:
+              idx = json.load(f)
+          
+          domains = idx.get('domains', {})
+          missing = [d for d in expected_domains if d not in domains]
+          
+          if missing:
+              print(f"Missing domains in INDEX.json: {missing}")
+              sys.exit(1)
+          
+          print(f"All {len(expected_domains)} domain entries present in INDEX.json")
+          print(f"Total projects indexed: {idx.get('total_projects', 0)}")
+          
+          # Validate each domain has required fields
+          for domain, info in domains.items():
+              if 'project_count' not in info:
+                  print(f"Domain {domain} missing project_count")
+                  sys.exit(1)
+              if 'projects' not in info:
+                  print(f"Domain {domain} missing projects list")
+                  sys.exit(1)
+          
+          print("All domain entries have valid structure")
+          EOF
 
   # Lint Python projects
   lint-python:
