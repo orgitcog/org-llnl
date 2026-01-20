@@ -1,0 +1,17 @@
+dockerbuild:
+  container_basename: radiuss
+
+  build_args:
+    gcc_version:
+      key: gcc
+      versions:
+       - "11"
+       - "12"
+       - "13"
+       - "14"
+
+    # Look for ubuntu versions for our base builds
+    ubuntu_version:
+      key: ubuntu
+      versions:
+        - "24.04"

@@ -1,0 +1,10 @@
+# vim cruft
+*.sw*
+
+# cached gems
+vendor/*
+tmp/
+coverage
+
+# generated files
+pkg/

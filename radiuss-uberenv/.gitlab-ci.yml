@@ -1,0 +1,22 @@
+##############################################################################
+# Copyright (c) 2020, Lawrence Livermore National Security, LLC and
+# RADIUSS Uberenv project contributors. See the LICENSE file for details.
+#
+# SPDX-License-Identifier: MIT
+##############################################################################
+
+variables:
+  SLURM_ALLOC_NAME: ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}
+  BUILD_ROOT: ${CI_PROJECT_DIR}
+
+# There are no tests for now
+stages:
+  - allocate_resources
+  - build
+  - release_resources
+
+# This is where jobs are included
+include:
+  - local: .gitlab/quartz.yml
+
+

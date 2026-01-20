@@ -1,0 +1,10 @@
+name: 'ci-info'
+description: 'Populate an LGTM trigger comment with useful information'
+inputs:
+  repoToken:
+    required: true
+  eventName:
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

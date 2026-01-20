@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'optparse'
+require 'fileutils'
+
+STAGES = %w[pre-receive update post-receive].freeze
+
+# rubocop:disable Style/MutableConstant
+OPTIONS = {
+  enable: true,
+  status: false,
+  config: '/etc/gitlab/mirror-config.json',
+  prefix: '/opt/gitlab/embedded/service/gitlab-shell'
+}
+# rubocop:enable Style/MutableConstant
+
+OptionParser.new do |opt|
+  opt.on('-c', '--config CONFIG') { |o| OPTIONS[:config] = File.expand_path(o) }
+  opt.on('-p', '--gitlab-shell-prefix PREFIX') { |o| OPTIONS[:prefix] = o }
+  opt.on('-d', '--disable') { OPTIONS[:enable] = false }
+  opt.on('-e', '--enable') { OPTIONS[:enable] = true }
+  opt.on('-s', '--status') { OPTIONS[:status] = true }
+end.parse!
+
+def hooks
+  STAGES.map do |s|
+    hook_dir = "#{OPTIONS[:prefix]}/hooks/#{s}.d"
+    [s, hook_dir, "#{hook_dir}/hook"]
+  end
+end
+
+def existing_hooks
+  hooks.map { |_, _, f| f }.select { |f| FileTest.exist?(f) }
+end
+
+def status
+  existing_hooks.empty? ? 'disabled' : 'enabled'
+end
+
+if OPTIONS[:status]
+  p status
+  exit 0
+end
+
+unless OPTIONS[:enable]
+  FileUtils.rm_f(existing_hooks)
+  exit 0
+end
+
+hooks.each do |stage, hook_dir, hook_file|
+  hook = <<~HOOK
+    #!/usr/bin/env ruby
+
+    require 'secure_mirror'
+
+    exit SecureMirror.evaluate_changes(
+      '#{stage}',
+      'gitlab',
+      config_file: '#{OPTIONS[:config]}'
+    )
+  HOOK
+  FileUtils.mkdir_p(hook_dir)
+  File.open(hook_file, 'w') { |f| f.write(hook) }
+  FileUtils.chmod(0o755, hook_file)
+end

@@ -1,0 +1,17 @@
+dockerbuild:
+  container_basename: radiuss
+
+  matrix:
+    ubuntu_version:
+       - "24.04"
+    hip_version:
+       - "6.4.3"
+       
+  build_args:
+    hip_version:
+      key: hip
+      name: hip
+
+    ubuntu_version:
+      key: ubuntu
+      name: ubuntu

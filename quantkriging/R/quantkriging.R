@@ -1,0 +1,23 @@
+# Copyright 2017-2019 Lawrence Livermore National Security, LLC and other
+# quantkriging Project Developers. See the top-level LICENSE file for details.
+#
+# SPDX-License-Identifier: MIT
+#' quantkriging
+#'
+#' Quantile Kriging is a method to model the uncertainty of a stochastic simulation by modelling both the overall simulation response and the output distribution at each sample point.  The output distribution is characterized by dividing it into quantiles, where the division of each quantile is determined by kriging.
+#'
+#' This library is our re-implementation of Quantile Kriging as described by Matthew Plumlee & Rui Tuo in their 2014 paper "Building Accurate Emulators for Stochastic Simulations via Quantile Kriging."  With computational savings when dealing with replication from the recent paper "Practical heteroskedastic Gaussian process modeling for large simulation experiments " by Binois, M., Gramacy, R., and Ludovski, M. it is now possible to apply Quantile Kriging to a wider class of problems.  In addition to fitting the model, other useful tools are provided such as the ability to automatically perform leave-one-out cross validation.
+#'
+#' @section quantkriging functions:
+#' \itemize{
+#'  \item quantKrig : Implements Quantile Kriging
+#'  \item quantPlot : Plots the Quantile output from quantKrig if there is only one input.
+#'  \item newQuants : Generates new quantiles from a quantile object
+#'  \item LOOquants : Generates Leave-One-Out predictions for each location and quantile.
+#' }
+#'
+#' @docType package
+#' @name quantkriging
+NULL
+
+## NULL

@@ -1,0 +1,25 @@
+dockerbuild:
+  container_basename: radiuss
+
+  matrix:
+    cuda_version:
+       - "12-5"
+       - "12-6"
+       - "12-8"
+       - "12-9"
+       - "13-0"
+    ubuntu_version:
+       - "24.04"
+       - "24.04"
+       - "24.04"
+       - "24.04"
+       - "24.04"
+       
+  build_args:
+    cuda_version:
+      key: cuda
+      name: cuda
+
+    ubuntu_version:
+      key: ubuntu
+      name: ubuntu

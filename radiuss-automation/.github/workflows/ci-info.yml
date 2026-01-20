@@ -1,0 +1,17 @@
+on:
+  issue_comment:
+      types: [created]
+  status:
+  push:
+
+jobs:
+  ci_info_job:
+    runs-on: ubuntu-latest
+    name: Populate CI info
+    steps:
+    - name: CI info step
+      id: ci-info
+      uses: LLNL/radiuss-ci-info-action@master
+      with:
+        repoToken: ${{ secrets.GITHUB_TOKEN }}
+        eventName: ${{ github.event_name }}
