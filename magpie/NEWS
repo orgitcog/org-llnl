@@ -1,0 +1,1145 @@
+Magpie 3.3
+----------
+- Support Hadoop 3.3.6, 3.4.0
+  - Update Hadoop default to 3.4.0
+- Support Spark 3.2.4, 3.3.3, 3.4.0, 3.4.1, 3.4.2, 3.4.3, 3.5.0, 3.5.1
+  - Update Spark default to 3.5.1-bin-hadoop3
+
+Magpie 3.2
+----------
+Add support for job submission via Flux.
+- Note that Flux is currently in development and interfaces may vary
+  between Flux versions.  This support tested on flux-core v0.49.0.
+
+Magpie 3.1
+----------
+- Support new MAGPIE_HOSTNAME_CMD configuration, a simpler version of
+  MAGPIE_HOSTNAME_CMD_MAP.
+- Support Hadoop 3.2.4, 3.3.4, 3.3.5
+  - Update Hadoop default to 3.3.5
+- Support Spark 3.2.2, 3.2.3, 3.3.0, 3.3.1, 3.3.2
+  - Update Spark default to 3.3.2-bin-hadoop3
+
+Magpie 3.0
+----------
+
+Magpie 3.0 includes some new software support, but primarily removes a
+lot of older support.
+
+New Support
+- Support Spark 3.2.1-bin-hadoop2.7, 3.2.1-bin-hadoop3.2,
+  Spark 3.2.0-bin-hadoop2.7, 3.2.0-bin-hadoop3.2,
+  Spark 3.1.3-bin-hadoop2.7, 3.1.3-bin-hadoop3.2,
+  Spark 3.1.2-bin-hadoop2.7, 3.1.2-bin-hadoop3.2,
+  Spark 3.1.1-bin-hadoop2.7, 3.1.1-bin-hadoop3.2
+  - Update Spark default to 3.2.1-bin-hadoop3.2
+- Support Hadoop 3.3.3, 3.3.2, 3.2.3
+  - Update Hadoop default to 3.3.3
+
+Update default MAGPIE_PYTHON to python3.
+
+Legacy support Removed
+- Spark 0.9.X support
+- Hbase 0.98.X and 0.99.X support
+- Mahout
+
+Backwards Compatibility Notes
+- Rename SPARK_SLAVE_COUNT to SPARK_WORKER_COUNT
+- Rename SPARK_SLAVE_CORE_COUNT to SPARK_WORKER_CORE_COUNT
+- Remove legacy support for HADOOP_SLAVE_COUNT and
+  HADOOP_SLAVE_CORE_COUNT.  HADOOP_WORKER_COUNT and
+  HADOOP_WORKER_CORE_COUNT should be used.
+- SPARK_JOB_CLASSPATH, SPARK_JOB_LIBRARY_PATH, and SPARK_JOB_JAVA_OPTS
+  environment variables are removed.  Users should use
+  --driver-class-path, --driver-library-path, and
+  --driver-java-options in spark-submit instead.
+- Remove legacy support of STORM_WORKERS_COUNT (plural), users should
+  use STORM_WORKER_COUNT.
+
+Magpie 2.6
+----------
+Support Hadoop 3.1.4, 3.2.2, 3.3.0, 3.3.1
+- Update Hadoop default to 3.3.1
+Support Spark 3.0.3-bin-hadoop2.7, 3.0.3-bin-hadoop3.2,
+  Spark 3.0.2-bin-hadoop2.7, 3.0.2-bin-hadoop3.2,
+  Spark 3.0.1-bin-hadoop2.7, 3.0.1-bin-hadoop3.2,
+  Spark 2.4.7-bin-hadoop2.6, 2.4.7-bin-hadoop2.7,
+  Spark 2.4.8-bin-hadoop2.6, 2.4.8-bin-hadoop2.7
+- Update Spark default to 3.0.3-bin-hadoop3.2
+- Misc fixes
+- Documentation updates
+
+Magpie 2.5
+----------
+Add Alluxio support.
+Support Spark 3.0.0-bin-hadoop2.7, 3.0.0-bin-hadoop3.2,
+  Spark 2.4.6-bin-hadoop2.6, 2.4.6-bin-hadoop2.7
+- Update Spark default to 3.0.0-bin-hadoop3.2
+Support Hbase 1.2.7, 1.3.3, 1.3.4, 1.3.5, 1.5.0, 1.6.0.
+- Update Hbase default to 1.6.0
+
+Magpie 2.4
+----------
+Support Hadoop 3.1.3, 3.2.1
+- Update Hadoop default to 3.2.1
+Add support for Storm 1.2.3.
+- Update default Storm to 1.2.3.
+Add support for Hbase 1.4.10, 1.4.13
+- Update default Hbase to 1.4.10, 1.4.13
+Add support for Zeppelin 0.8.2.
+- Update default Zeppelin to 0.8.2.
+Support Spark 2.3.3-bin-hadoop2.6, 2.3.3-bin-hadoop2.7, Spark
+ 2.3.4-bin-hadoop2.6, 2.3.4-bin-hadoop2.7, Spark 2.4.5-bin-hadoop2.6,
+ 2.4.5-bin-hadoop2.7
+- Update Spark default to 2.4.4-bin-hadoop2.7
+
+Magpie 2.3
+----------
+Add experimental support Ray.
+Support Spark 2.4.2-bin-hadoop2.6, 2.4.2-bin-hadoop2.7,
+  2.4.3-bin-hadoop2.6, 2.4.3-bin-hadoop2.7
+- Update Spark default to 2.4.3-bin-hadoop2.7
+Add support for Zookeeper 3.4.14.
+- Update default Zookeeper to 3.4.14.
+
+Magpie 2.2
+----------
+Support SPARK_IO_COMPRESSION_CODEC in Spark.
+With sbatch & srun, add experimental support for distributed
+ tensorflow support.
+Add new submission script type "sbatchmpirun"
+With sbatch & mpirun, add experimental support for Tensorflow with Horovod
+Support new MAGPIE_PRE_EXECUTION_RUN and MAGPIE_POST_EXECUTION_RUN
+ options.  These options are similar to MAGPIE_PRE_JOB_RUN and
+ MAGPIE_POST_JOB_RUN, but run before/after the entire software stack
+ has been brought up / torn down.
+Support Spark 2.4.1-bin-hadoop2.6, 2.4.1-bin-hadoop2.7
+- Update Spark default to 2.4.1-bin-hadoop2.7
+
+Magpie 2.1
+----------
+Support SPARK_NETWORK_TIMEOUT configuration option.
+Support SPARK_RDD_COMPRESS configuration option.
+Fix various deprecated warnings.
+Fix broken Zeppelin dependencies.
+Alter default Spark webui ports to avoid conflicts with other web services.
+Support Hbase 1.4.7, 1.4.8, 1.4.9
+- Update Hbase default to 1.4.9
+Support Spark 2.4.0-bin-hadoop2.6, 2.4.0-bin-hadoop2.7, Spark
+  2.3.2-bin-hadoop2.6, 2.3.2-bin-hadoop2.7
+- Update Spark default to 2.4.0-bin-hadoop2.7
+Support Hadoop 2.7.6, 2.7.7, 2.8.5, 2.9.2, 3.1.2, 3.2.0
+- Update Hadoop default to 3.2.0
+Support Zeppelin 0.8.0, 0.8.1
+- Update Zeppelin default to 0.8.1
+- Implement Shiro basic auth for Zeppelin, default requires a password being set
+
+Magpie 2.0
+----------
+
+Magpie 2.0 includes new software support, but primarily involves a
+large amount of re-architecture and removal of legacy experimental
+support.  Job submission scripts from Magpie 1.X versions will be
+incompatible with Magpie 2.0.  So please read details below for
+highlights.
+
+New Support
+
+o Support Hadoop version 3
+
+  - Support new HADOOP_WORKER_COUNT & HADOOP_WORKER_CORE_COUNT
+    environment variables.
+
+  - Update default Hadoop version to 3.1.1.
+
+o Support Hive, initially with Hive v2.3.0
+
+Re-architecture and changes
+
+o Rearchitect MAGPIE_JOB_TYPE to be overarching job configuration
+  variable.
+
+  - "setuponly" and "interactive" jobs are now configured by
+    MAGPIE_JOB_TYPE and not through any of the former "MODE" variables
+    (e.g. HADOOP_MODE, SPARK_MODE, etc.)
+
+  - Generic "script" jobs are now configured by MAGPIE_JOB_TYPE and
+    not through any of the former "MODE" variables.
+    (e.g. HADOOP_MODE, SPARK_MODE, etc.)
+
+    However, "script" is still available for those projects that run a
+    script through a specific service, e.g. PIG and PHOENIX.
+
+o Rearchitect HADOOP_SETUP_TYPE to be version agnostic.  It now takes
+  "MR", "YARN", or "HDFS" as inputs.
+
+  - A new submission script variant to support Spark w/ Yarn and w/o
+    HDFS is now available.
+
+o "MODE" variables (e.g. HADOOP_MODE, SPARK_MODE, etc.) are now named
+  "JOB" (e.g. HADOOP_JOB, SPARK_JOB, etc.).  This change was done to
+  indicate that they truly only run jobs and are not meant for
+  configuring the project in any way.
+
+  - As a result the following configurations have been removed.
+
+    "launch" from HADOOP_JOB
+    "hdfsonly" from HADOOP_JOB
+    "server" from KAFKA_JOB
+    "server" from PHOENIX_JOB
+    "launch" from ZOOKEEPER_JOB
+    "server" from ZEPPELIN_JOB
+
+  - The Phoenix mode "server" is now available through the
+    configuration variable PHOENIX_START_QUERYSERVER.
+
+o SPARK_USE_YARN has been removed and replaced with SPARK_SETUP_TYPE
+  with settings options of "STANDALONE" or "YARN".
+
+o HADOOP_PER_JOB_HDFS_PATH and ZOOKEEPER_PER_JOB_DATA_DIR have been
+  removed, the behavior has been collapsed into MAGPIE_ONE_TIME_RUN.
+
+o Remove experimental features and experimental/non-heavily used
+  projects.  If you wish for these features to be brought back beyond
+  an 'experimental' nature, please submit an issue request.  Features
+  & projects listed below.
+
+  - Hadoop 1.X versions
+  - Tachyon
+  - UDA
+  - 'MagpieNetworkFS' Filesystem
+  - 'IntelLustre' Filesystem
+  - HDFS Federation
+
+o Older "quirky" version numbers in Hadoop (e.g. 0.21.0 in Hadoop) are
+  no longer supported.
+
+o Older legacy MAGPIE_SUBMISSION_TYPE values no longer support
+  (slurmsbatch, msubslurm, msubtorque).  Users should convert to the
+  newer values of sbatchsrun, msubslurmsrun, msubtorquepdsh.
+
+o Older legacy support of setting SBATCH_TIMELIMIT or
+  MAGPIE_TIMELIMIT_MINUTES in scripts removed.  Users should set job
+  time length using normal submission mechanisms (e.g. --time via
+  sbatch).
+
+o Older legacy support of HADOOP_RAWNETWORKFS_BLOCKSIZE is no longer
+  supported.  Users should use HADOOP_LOCAL_FILESYSTEM_BLOCKSIZE.
+
+Misc Features & Changes
+
+- Support new MAGPIE_HOSTNAME_CMD_MAP and
+  MAGPIE_HOSTNAME_SCHEDULER_MAP configuration.  These variables allow
+  users to configure a mechanism to "map" the hostname/nodenames that
+  come from the 'hostname' command or scheduler to another value.
+  This can be useful in unique environments where the output of the
+  'hostname' command does not map to the nodenames configured into the
+  scheduler/resource manager and when the scheduler/resource manager
+  does not indicate which host/address/interface Magpie should
+  actually configure.
+
+- MAGPIE_PRE_JOB_RUN and MAGPIE_POST_JOB_RUN can have multiple scripts
+  listed by comma.
+
+- MAGPIE_PRE_JOB_RUN and MAGPIE_POST_JOB_RUN can have arguments passed
+  to each script.
+
+- MAGPIE_SCRIPT_PATH and MAGPIE_SCRIPT_ARGS have been collapsed into
+  one environment variable MAGPIE_JOB_SCRIPT.
+
+- magpie-gather-config-files-and-logs-script.sh: Takes an argument to
+  store log files to an alternate location other than $HOME.
+
+- Default HDFS namenode port is now 8020 instead of 54310
+
+- Update default Java to 1.8 in submission scripts.
+
+Misc Documentation Changes
+
+- No longer list support for versions that require re-compilation.
+
+- No longer list support for versions that are not included in Magpie
+  testsuite.
+
+Backwards Compatibility Notes
+
+o The following are possible changes users may need to make in older
+  job submission scripts.
+
+  - "MODE" variables (e.g. HADOOP_MODE, SPARK_MODE, etc.) are now
+    named "JOB" (e.g. HADOOP_JOB, SPARK_JOB, etc.).
+
+  - "JOB" variables no longer support "interactive" or "setuponly"
+    options.  These are now controlled via MAGPIE_JOB_TYPE.
+
+  - "JOB" variables no longer support "server", "launch", or
+    "hdfsonly" options.  A service "launching" is always assumed
+    unless MAGPIE_JOB_TYPE is set to "setuponly".
+
+  - Many "JOB" variables no longer support "script" options, these are
+    done via MAGPIE_JOB_TYPE.
+
+  - "PHOENIX_MODE"'s "server" option is now configured through
+    PHOENIX_START_QUERYSERVER.
+
+  - HADOOP_SETUP_TYPE no longer takes input of "MR1", "MR2", "HDFS1",
+    or "HDFS2".  It now only takes "MR", "YARN", or "HDFS".
+
+  - SPARK_USE_YARN is now configured through SPARK_SETUP_TYPE.
+
+  - HADOOP_FILESYSTEM_MODE no longer takes input of "magpienetworkfs"
+    or "intellustre".
+
+  - MAGPIE_SCRIPT_PATH and MAGPIE_SCRIPT_ARGS should be converted to
+    MAGPIE_JOB_SCRIPT.
+
+magpie 1.85
+-----------
+- Fix corner case, where if user sets identical LOCAL_DIR for all
+  projects and NO_LOCAL_DIR is set, some file conflicts can occur.
+- Fix corner case, where child process was killed properly, but not
+  ancestor processes.
+Add support for Zeppelin 0.8.0.
+- Update default Zeppelin to 0.8.0.
+Add support for Storm 1.2.2.
+- Update default Storm to 1.2.2.
+Add support for Phoenix 4.14.0-Hbase-1.1, Phoenix 4.14.0-Hbase-1.2,
+  Phoenix 4.14.0-Hbase-1.3, Phoenix 4.14.0-Hbase-1.4,
+- Update default Phoenix to 4.14.0-Hbase-1.4.
+Add support for Spark 2.3.1.
+- Update default Spark to 2.3.0-hadoop2.7
+Add support for Hbase 1.2.6.1, 1.3.2, 1.3.2.1, 1.4.5, 1.4.6.
+- Update default Hbase to 1.4.6.
+Add support for Zookeeper 3.4.13.
+- Update default Zookeeper to 3.4.13.
+
+magpie 1.84
+-----------
+Adjust setting of spark.default.parallelism.  In versions < 1.3.0, set
+  to number of nodes in allocation.  In versions >= 1.3.0, do not set
+  this setting.  Let Spark decided on parallelism.
+Update Spark default memory fractions to be identical to Spark
+  defaults, not a unique default picked by Magpie.
+Update lfs usage to use --stripe-count over deprecated --count option.
+Add support of MAGPIE_ONE_TIME_RUN option.
+Add support for HADOOP_LOCAL_FILESYSTEM_BLOCKSIZE option.
+- Legacy support HADOOP_RAWNETWORKFS_BLOCKSIZE support.
+Add support for Hadoop 2.7.4, 2.7.5, 2.8.4, 2.9.1.
+- Update default Hadoop to 2.9.1
+Add support for Hbase 1.1.10, 1.1.11, 1.1.12, 1.1.13, 1.4.0, 1.4.1,
+ 1.4.2, 1.4.3, 1.4.4.
+- Update default Hbase to 1.4.4
+Add support for Zookeeper 3.4.11, 3.4.12.
+- Update default Zookeeper to 3.4.12.
+Add support for Spark 2.3.0.
+- Update default Spark to Spark 2.3.0-hadoop2.7
+Add support for Storm 1.1.2, 1.2.0, 1.2.1.
+- Update default Storm to 1.2.1.
+Documentation updates.
+
+magpie 1.83
+-----------
+Add check for multiple HDFS instances being run simultaneously out of the
+ same Lustre/NetworkFS path, so that jobs can die more quickly and provide more
+ useful information, instead of just timing out.
+Add input check to ensure number of nodes specified by user is enough
+ to meet HDFS replication count.
+Add job id in to spark local scratch dir, to prevent issues with scratch space
+ being used by multiple jobs in parallel.
+Add fixes for Yarn + Spark + Zeppelin functionality.
+Add YARN_PMEM_CHECK and YARN_VMEM_CHECK options, to disable Yarn
+ physical and virtual memory checks.
+Add support for Storm 1.1.1.
+- Update default Storm to 1.1.1.
+Add support for Zeppelin 0.7.3.
+- Update default Zeppelin to 0.7.3.
+Add support for Phoenix 4.12.0-Hbase-1.1, 4.12.0-Hbase-1.2,
+ 4.12.0-Hbase-1.3, Phoenix 4.13.0-Hbase-1.3, Phoenix 4.13.1-Hbase-1.1, 4.13.1-Hbase-1.2,
+ 4.13.1-Hbase-1.3
+- Update default Phoenix to 4.13.1-Hbase-1.3.
+Add support for Spark 2.1.2-hadoop2.6, 2.1.2-hadoop2.7,
+ 2.2.1-hadoop2.6, 2.2.1-hadoop2.7
+- Update default Spark to 2.2.1-hadoop2.7.
+Add support for Hadoop 2.8.2, 2.8.3, 2.9.0
+- Update default Hadoop to 2.9.0.
+
+magpie 1.82
+-----------
+Update Hadoop fs.defaultFS to full writeable path instead of
+  "file:///" when using rawnetworkfs.
+Update default JAVA_HOME to /usr/lib/jvm/jre-1.7.0/.
+Add support for Hbase 1.2.6, 1.3.1
+- Update default Hbase to 1.3.1
+Add support for Spark 2.1.1-hadoop2.6, Spark 2.1.1-hadoop2.7,
+  2.2.0-hadoop2.6, Spark 2.2.0-hadoop2.7.
+- Update default Spark to 2.2.0-hadoop2.7.
+- Update default Java for Spark to Java 1.8.
+- Note using Yarn w/ rawnetworkfs may not work with Spark 2.2.0, see
+  documentation for details.
+Add support for Mahout 0.13.0.
+- Update default Mahout to 0.13.0
+Add support for Pig 0.17.0
+- Update default Pig to 0.17.0
+Add support for Zeppelin 0.7.1, 0.7.2.
+- Update default Zeppelin to 0.7.2.
+Add support for Phoenix 4.11.0-Hbase-1.1, 4.11.0-Hbase-1.2,
+ 4.11.0-Hbase-1.3
+- Update default Phoenix to 4.11.0-Hbase-1.3.
+Add support for Zookeeper 3.4.10
+- Update default Zookeeper to 3.4.10
+Add support for Storm 1.0.4
+Add support for Hadoop 2.8.1
+- Update default Hadoop to 2.8.1.
+
+magpie 1.81
+-----------
+Update lfs usage to use --stripe-size over deprecated --size option.
+  lfs will no longer work with Lustre versions prior to 2.2.51.
+Add support for Hadoop 2.8.0
+- Update default Hadoop to 2.8.0.
+Add support for Zeppelin 0.7.0, 0.7.1.
+- Update default Zeppelin to 0.7.1.
+Add support for Storm 0.9.7, 1.0.3, 1.1.0.
+- Update default Storm to 1.1.0.
+Add support for Hbase 1.1.9, 1.2.5.
+Add support for Phoenix 4.10.0-Hbase-1.1, 4.10.0-Hbase-1.2.
+- Update default Phoenix to 4.10.0-Hbase-1.2.
+Increase default
+  yarn.nodemanager.disk-health-checker.max-disk-utilization-per-disk-percentage
+  in Hadoop to 98%.
+Fix bug in calculation of MAGPIE_CLUSTER_NODERANK for submission type
+  'lsfmpirun'.
+When calculating user file descriptor limits and process limits to
+  use, do not decrease the number if the system provides a much higher
+  default.
+
+magpie 1.80
+-----------
+Fix bug in which all script ARGS variables were not passed to scripts
+  that were executed.
+Add support for Spark 2.1.0-hadoop2.6, Spark 2.1.0-hadoop2.7.
+- Update default Spark to 2.1.0-hadoop2.7.
+Add support for Hbase 1.3.0
+- Update default Hbase to 1.3.0
+Add support for Hbase 0.98.24
+Update default Spark used w/ Zeppelin to 1.6.3-bin-hadoop2.6.
+
+magpie 1.79
+-----------
+Fix corner case in job name into paths for HADOOP_PER_JOB_HDFS_PATH or
+  ZOOKEEPER_PER_JOB_DATA_DIR from 1.78.
+Add support for Spark 2.0.2-hadoop2.6, Spark 2.0.2-hadoop2.7.
+- Update default Spark to 2.0.2-hadoop2.7.
+Add support for Spark 1.6.3.
+Add support for Hbase 1.2.4.
+- Update default Hbase to 1.2.4.
+Add support for Hbase 1.1.7, 1.1.8.
+Add support for Hbase 0.98.23
+Add support for Phoenix 4.8.2-Hbase-1.0, 4.8.2-Hbase-1.1,
+  4.8.2-Hbase-1.2, 4.9.0-Hbase-1.1, 4.9.0-Hbase-1.2.
+- Update default Phoenix to 4.9.0-Hbase-1.2.
+
+magpie 1.78
+-----------
+Add job name into paths for HADOOP_PER_JOB_HDFS_PATH or
+  ZOOKEEPER_PER_JOB_DATA_DIR paths.
+Use SLURM_CPUS_ON_NODE for cpu count if using slurm and available
+Add support for Zookeeper 3.4.9.
+- Update default Zookeeper to 3.4.9.
+Add support for Spark 2.0.1
+- Update default Spark to 2.0.1-bin-hadoop2.7.
+Add support for Phoenix 4.8.1-Hbase-1.0, 4.8.1-Hbase-1.1,
+  4.8.1-Hbase-1.2.
+- Update default Phoenix to 4.8.1-Hbase-1.2.
+Add support for Zeppelin 0.6.2.
+- Update default Zeppelin to 0.6.2.
+Add support for Storm 0.10.2.
+Add support for Hadoop 2.6.5.
+
+magpie 1.77
+-----------
+Add support for Hadoop 2.7.3.
+- Update default Hadoop to 2.7.3.
+Add support for Zeppelin 0.6.1.
+- Update default Zeppelin to 0.6.1.
+Add Zeppelin ZEPPELIN_NOTEBOOK_DIR option.
+Add support for Hbase 0.98.21, 0.98.22, 1.1.6, 1.2.3
+- Update default Hbase to 1.2.3.
+Fix corner case in "walltime to minutes" calculation for formats that
+  includes a number of days.
+Fix corner case in Zeppelin & Phoenix loading jars from Spark 2.0
+  correctly.
+
+magpie 1.76
+-----------
+Add new "spark-with-zeppelin" submission scripts.
+Add support for Zeppelin 0.6.0.
+- Update default Zeppelin to 0.6.0.
+- Make default Zeppelin work with Spark 1.6.2-bin-hadoop2.6.
+Add support for Phoenix 4.8.0-Hbase-1.0, 4.8.0-Hbase-1.1,
+  4.8.0-Hbase-1.2.
+- Update default Phoenix to 4.8.0-Hbase-1.2.
+Add support for Storm 1.0.2.
+- Update default Storm to 1.0.2.
+Add older support for
+- Hbase 1.0.3 and 1.1.5.
+- Phoenix 4.5.0-Hbase-1.0, 4.5.0-Hbase-1.1, 4.5.1-Hbase-1.0,
+  4.5.2-Hbase-1.0, 4.6.0-Hbase-1.0, 4.7.0-Hbase-1.0
+- Spark 1.1.0-bin-hadoop2.3, 1.1.0-bin-hadoop2.4, 1.1.1-bin-hadoop2.3,
+  1.1.1-bin-hadoop2.4, 1.2.0-bin-hadoop2.3, 1.2.1-bin-hadoop2.3,
+  1.2.2-bin-hadoop2.3, 1.3.0-bin-hadoop2.3, 1.3.1-bin-hadoop2.3,
+  1.3.1-bin-hadoop2.6, 1.4.0-bin-hadoop2.3, 1.4.0-bin-hadoop2.4,
+  1.4.1-bin-hadoop2.3, 1.4.1-bin-hadoop2.4.
+- Hbase 0.98.0-hadoop2 0.98.1-hadoop2 0.98.2-hadoop2 0.98.4-hadoop2
+  0.98.5-hadoop2 0.98.6-hadoop2 0.98.6.1-hadoop2 0.98.7-hadoop2
+  0.98.8-hadoop2 0.98.10-hadoop2 0.98.10.1-hadoop2 0.98.11-hadoop2
+  0.98.12-hadoop2 0.98.12.1-hadoop2 0.98.13-hadoop2 0.98.14-hadoop2
+  0.98.15-hadoop2 0.98.16-hadoop2 0.98.16.1-hadoop2 0.98.17-hadoop2
+  0.98.18-hadoop2 0.98.19-hadoop2 0.98.20-hadoop2
+
+magpie 1.75
+-----------
+Remove 'classifywikipedia' example with Mahout.
+Support Spark 2.0.0.
+Update default Spark to 2.0.0 w/ Hadoop 2.7.
+Support new SPARK_YARN_STAGING_DIR option.
+Support Pig 0.16.0.
+Update default Pig to 0.16.0
+Support Hbase 1.2.2.
+Update default Hbase to 1.2.2
+Support Mahout 0.12.2.
+Update default Mahout to 0.12.2
+
+magpie 1.74
+-----------
+Major refactoring and code cleanup within Magpie.
+
+Years of adding features, adding projects, cutting & pasting,
+experiments, and patches have run its course for a set of "play
+scripts" that were originally only to support Hadoop 1.0.  A major
+refactoring & code cleanup was needed.
+
+Apologies to anyone anyone looking through the git log.  One tiny
+cleanup beget another one.  For all intents and purposes, you should
+consider the scripts to have stopped at tag 1.73 and started anew at
+tag 1.74.
+
+Highlights:
+
+- General code cleanup throughout: function-ize common code, split
+  functions into different lib files to remove dependencies, split up
+  large files into project specific ones, remove strange dependencies
+  in different files, rename files to make more sense, rename
+  variables to be consistent, rename functions to indicate "public" vs
+  "private" ones, add consistency to error messages, cleanup help
+  output, add "assert" checks in various locations with dependencies,
+  consistent file creation of masters & slaves files, do not export
+  variables that aren't required to be exported, fix a variety of
+  deprecated situations, fix outputs that go into
+  MAGPIE_ENVIRONMENT_VARIABLE_SCRIPT, fix inconsistencies on support
+  in various MODE options, move various files into subdirs to cleanup
+  number of files in a single dir.
+
+- Attempt to be consistent with use of Bash code style throughout.
+  e.g. using backticks instead of $() for subshells.
+
+  In an attempt to avoid flame wars on style decisions, I simply
+  looked at what had been most commonly done thus far and used those
+  styles.
+
+- Support 'setuponly' option for PHOENIX_MODE.
+
+- Fix many minor corner cases
+
+- Add many additional corner case checks
+
+- Testsuite
+
+  - Add large suite of corner case tests & functionality tests
+
+- New exports
+
+  Export ZOOKEEPER_CLIENT_PORT for jobs.
+  Export KAFKA_PORT for jobs.
+
+- Potential compatibility issues with older job submission scripts:
+
+  Before, a number of variables were errantly exported.  Most notably
+  port numbers and such that should have only been used internally
+  within Magpie.  If by chance you used one of these environment
+  variables in scripts, you may need to adjust for it.
+
+  Hadoop terasort may no longer do the "right" thing under Hadoop 1.0.
+  Users should set HADOOP_TERAGEN_MAP_COUNT and
+  HADOOP_TERASORT_REDUCER_COUNT appropriately.
+
+  Remove scripts/job-scripts/zookeeper-ruok-script.sh script
+
+- Potential issues if you scripted against the Magpie code base
+
+  Rename start/stop scripts in bin/ for consistency to many big data
+  projects.
+
+  Files in conf/ are now stored in subdirectories.  So paths may have
+  changed.
+
+  Rename some conf files in conf/.
+
+  Rename a number of patches for consistency.
+
+magpie 1.73
+-----------
+Support "args" options to Magpie, Hadoop, Hbase, Spark, Storm script
+  options.
+Support Spark 1.6.2-bin-hadoop2.6.
+Update default Spark to 1.6.2-bin-hadoop2.6.
+Support Storm 0.10.1, 1.0.0, and 1.0.1.
+Update default Storm to 1.0.1.
+When users want to use alternate config files, instead of copying all
+  files from ${MAGPIE_SCRIPTS_HOME}/conf, into a project's alternate
+  CONF_FILES director (e.g. HADOOP_CONF_FILES), users can copy only the
+  files they wish to modify.
+Fix magpie-gather-config-files-and-logs-script.sh to gather Pig,
+  Zeppelin, Phoenix, and Kafka conf/log files.
+Support HADOOP_LOCALSTORE_CLEAR option.
+Support SPARK_LOCAL_SCRATCH_DIR_CLEAR option.
+Support multiple paths for SPARK_LOCAL_SCRATCH_DIR.
+Various minor bug fixes regarding Spark w/ Yarn use.
+
+magpie 1.72
+-----------
+Support SPARK_USE_YARN option for Spark to default to using Yarn.
+
+magpie 1.71
+-----------
+Adjust Yarn yarn.scheduler.maximum-allocation-mb to be same as yarn.nodemanager.resource.memory-mb.
+Support Mahout 0.12.0, 0.12.1
+Update default Mahout to 0.12.1
+Support Phoenix 4.7.0
+Update default Phoenix to 4.7.0.
+Support Hbase 1.2.1
+Update default Hbase to 1.2.1.
+
+magpie 1.70
+-----------
+Handle corner cases where job name contains dollar sign or whitespace.
+  Can lead to problems because job name is used internally within Magpie
+  for file paths, etc.
+Support setting MAGPIE_PYTHON, to configure Python paths in projects
+  appropriately.  Currently used to set PYSPARK_PYTHON in Spark.
+Support ability to kill scripts early and all Yarn jobs cleanly.
+Exit job if an error occurs during magpie-setup phase.
+Adjust defaults of some projects based on dependency requirements.
+- default of Spark w/ HDFS to Hadoop 2.6.4
+- default of Phoenix w/ Hbase to Hbase 1.1.4
+
+magpie 1.69
+-----------
+Output warning as time for interactive and setuponly jobs is running
+  down.
+Support ability to kill scripts and other jobs early and begin
+  teardown early.  Similar to ability within interactive mode.
+Support new 'decommissionhdfsnodes' option to HADOOP_MODE.
+Remove convenience
+  job-scripts/hadoop-hdfs-over-lustre-or-hdfs-over-networkfs-nodes-decommission-script.sh
+  and
+  hbase-hdfs-over-lustre-or-hdfs-over-networkfs-nodes-decommission-script.sh
+  script which is now obsoleted by 'decommissionhdfsnodes' option.
+Increase default Kafka Zookeeper timeout from 6000 to 30000
+Support Hadoop 2.6.2, 2.6.3, 2.6.4, 2.7.2.
+Update default Hadoop to 2.7.2.
+Support Spark 1.6.1.
+Update default Spark to 1.6.1.
+Support Hbase 1.1.4, 1.2.0.
+Update default Hbase to 1.2.0.
+Support Storm 0.9.6, 0.10.0.
+Update default Storm to 0.10.0.
+Support Mahout 0.11.2
+Update default Mahout to 0.11.2.
+Support Zookeeper 3.4.8.
+Update default Zookeeper to 3.4.8.
+
+magpie 1.68
+-----------
+Fix use of SPARK_LOCAL_SCRATCH_DIR.
+Support Hbase 1.1.3, update default Hbase to 1.1.3.
+Support Zeppelin 0.5.6.
+
+magpie 1.67
+-----------
+Support Kafka, initially with version 2_11-0.9.0.0.
+Support HADOOP_TERASORT_OUTPUT_REPLICATION option.
+Support HADOOP_TERASORT_RUN_TERAVALIDATE option.
+Support HADOOP_TERASORT_RUN_TERACHECKSUM option.
+Move most documentation to doc/ subdirectory.
+
+magpie 1.66
+-----------
+Support Spark 1.6.0, update default Spark to 1.6.0.
+Fix bug in Phoenix launch due to mis-setting of ssh.
+
+magpie 1.65
+-----------
+Support Spark 1.5.2, update default Spark to 1.5.2.
+Support Zookeeper 3.4.7, update default Zookeeper to 3.4.7.
+
+magpie 1.64
+-----------
+Support Phoenix 4.6.0.  Update default to 4.6.0.
+On initial HDFS setup, create user home directory if it does not exist (/user/$USER).
+Support basic support for Mahout (BETA), initial version supported 0.11.0, 0.11.1.
+
+magpie 1.63
+-----------
+Support easy mechanism to kill jobs running in interactive mode.
+Add MAGPIE_REMOTE_CMD_OPTS to run output as needed.
+Support Phoenix 4.5.1, 4.5.2
+Support Spark 1.5.1, update default Spark to 1.5.1.
+Support new convenience environment variables ZOOKEEPER_NODES and
+  ZOOKEEPER_NODES_FIRST.
+
+magpie 1.62
+-----------
+Support Spark 1.5.0, update default Spark to 1.5.0-bin-hadoop2.6
+Support No Local Dir in Hadoop 2.4.0
+Support No Local Dir in Spark 1.2.0
+Support No Local Dir in Hbase 0.98.3
+Support various older Spark versions, 0.9.2, 1.2.1, 1.2.2, 1.3.1, 1.4.0.
+Support various older Pig versions, 0.13.0.
+Support various older Hadoop versions, 2.3.0, 2.4.1, 2.5.0, 2.5.1, 2.5.2, 2.6.1, 2.7.0.
+Support various older Zookeeper versions, 3.4.0, 3.4.1, 3.4.2, 3.4.3, 3.4.4.
+Support various older Hbase versions, 0.99.0, 0.99.1, 1.0.0, 1.0.1, 1.0.1.1, 1.0.2, 1.1.0, 1.1.0.1.
+Fix corner case in spark word count w/ rawnetworkfs
+Fix corner case in in No Local Dir with history server teardown in Hadoop.
+
+magpie 1.61
+-----------
+Default Java is now 1.7.
+Support Hadoop 2.7.1, update default Hadoop to 2.7.1.
+Support Spark 1.4.1, update default Spark to 1.4.1-bin-hadoop2.6.
+Support Storm 0.9.5, update default Storm to 0.9.5.
+Support Pig 0.15.0, update default Pig to 0.15.0.
+Support Hbase 0.99.2, Hbase 1.1.1.
+Support Hbase 1.1.2, update default Hbase to 1.1.2.
+Support ZOOKEEPER_DATA_DIR_CLEAR.
+Fix corner case in Storm wordcount test.
+Support ZOOKEEPER_DATA_DIR_TYPE for timeout optimization.
+Increase Zookeeper timeouts on Hbase & Storm if Zookeeper is on a network file system.
+Wait for Hbase Master to come up w/ status checks before running job.
+Fix corner case in Hadoop & Hbase shutdown path.
+
+magpie 1.60
+-----------
+Add support for job submission via LSF+Mpirun.
+Support HADOOP_PER_JOB_HDFS_PATH and ZOOKEEPER_PER_JOB_DATA_DIR.
+Support HADOOP_HDFS_PATH_CLEAR
+Adjust MAGPIE_SUBMISSION_TYPE names given new script directories in 1.59
+  - slurmsbatch -> sbatchsrun
+  - msubslurm -> msubslurmsrun
+  - msubtorque -> msubtorquepdsh
+  - Backwards compatibility with older names is still supported.
+Support the ability to run Magpie in environments without /tmp or a
+  very small amount of space in /tmp.
+  - Support MAGPIE_NO_LOCAL_DIR option.  See README.no-local-dir for details.
+  - Remove ZOOKEEPER_FILESYSTEM_MODE setting.
+    - Add node rank into all ZOOKEEPER_DATA_DIR paths, ensuring it is unique
+      regardless if it is a network or local fs path.
+    *** This may potentially break backwards compatability with Zookeeper
+        data that may already exist on network file systems. ***
+  - Remove SPARK_LOCAL_SCRATCH_DIR_TYPE setting.
+    - Add node rank into all scratch directory paths, ensuring it is
+      unique regardless if it is a network or local fs path.
+  - By default, set java.io.tmpdir to a local scratch space in all projects
+  - By default, set java.io.tmpdir in PIG_OPTS when running Pig.
+  - Disable Java hsperfdata if MAGPIE_NO_LOCAL_DIR set.
+
+magpie 1.59
+-----------
+Rename submission script directories to include launching mechansim
+  script-msub-slurm/ -> script-msub-slurm-srun/
+  script-msub-torque/ -> script-msub-torque-pdsh/
+  script-sbatch/ -> script-sbatch-srun/
+Various documentation fixes
+Few minor bug fixes
+
+magpie 1.58
+-----------
+Default teragen to use reasonable number of map tasks given blocksize.
+Support HADOOP_TERAGEN_MAP_COUNT terasort configuration.
+Support enabling thrift server with Hbase.
+Support the ability to add localized configuration, see README for details.
+
+magpie 1.57
+-----------
+Use --time instead of SBATCH_TIMELIMIT in sbatch scripts
+Fix corner case in MAGPIE_TIMELIMIT_MINUTES calculation if job < 1 hour
+When resource manager is slurm, calculate time left in job dynamically instead of using fixed MAGPIE_STARTUP_TIME
+In Hadoop terasort, check for old directories before removing them
+Add various error checks for HDFS over Lustre/NetworkFS, including varying node counts and mounting with different Hadoop versions.
+Fix up setup/cleanup/teardown code to fix various corner cases
+Clean up setup code into a new script, reducing number of calls to srun, etc.
+Fix msub-torque submission scripts to be able to use Tachyon.
+Various README/documentation updates/upgrades.
+Various other minor fixes
+
+magpie 1.56
+-----------
+Various minor fixes.
+
+magpie 1.55
+-----------
+Add basic acl checks for Hadoop.
+Set default HDFS umask 077.
+Add shared secret to Spark.
+
+magpie 1.54
+-----------
+Add basic support for Tachyon (ALPHA).
+Support HADOOP_MODE of "launch" for convenience.
+Support MAGPIE_ENVIRONMENT_VARIABLE_SCRIPT_SHELL option.
+Output additional environment variables into MAGPIE_ENVIRONMENT_VARIABLE_SCRIPT.
+Update primary Spark to 1.3.0.
+
+magpie 1.53
+-----------
+Update various path defaults in scripts and submission-scripts.
+Remove MAGPIE_USERNAME, just use USER instead.
+Use HOME instead of /home/${USER} in various locations.
+Documentation updates.
+
+magpie 1.52
+-----------
+Support MAGPIE_USERNAME environment variable.
+Default most paths to use MAGPIE_USERNAME instead of generic 'username'.
+No longer require users to set MAGPIE_TIMELIMIT_MINUTES when using Moab.
+Make default SPARK_LOCAL_SCRATCH_DIR a Lustre path.
+In Spark w/o HDFS submission script, default to setting up network
+  based scratch space.
+
+magpie 1.51
+-----------
+Support Storm 0.9.3.
+Update primary Hadoop support to 2.6.0.
+Update primary Pig to 0.14.0.
+Update primary Spark to 1.2.0.  Add appropriate patches for support.
+Update primary Hbase to 0.98.9.
+Add new magpie-apache-download-and-setup.sh convenience script.
+Various re-org of script files and script directories.
+
+magpie 1.50
+-----------
+Support SPARK_DEPLOY_SPREADOUT option.
+
+magpie 1.49
+-----------
+Support Moab scheduler w/ Torque resource manager through msubtorque submission type.
+- See new submission scripts in script-msub-torque
+Fix scripts/magpie-gather-config-files-and-logs-script.sh to gather all Spark work stderr/stdout.
+
+magpie 1.48
+-----------
+Fix build for correct release.
+
+magpie 1.47
+-----------
+Support HADOOP_SLAVE_CORE_COUNT and SPARK_SLAVE_CORE_COUNT environment
+  variables.
+Support 'hdfsonly' option to HADOOP_MODE for clarity.
+Support convenience environment variables HADOOP_NAMENODE & HADOOP_NAMENODE_PORT.
+Add additional environment variables into MAGPIE_ENVIRONMENT_VARIABLE_SCRIPT.
+Support HDFS federation (experimental)
+Support Spark configuration of spark storage memory fraction.
+Support Spark configuration of spark shuffle memory fraction.
+Default akkathreads = core count in Spark setup.
+
+magpie 1.46
+-----------
+Support Spark wordcount test.
+Various default submission file template cleanup.
+- Remove Hadoop job info from Hbase & Spark + HDFS files
+- Default MAGPIE_JOB_TYPE is now 'script'
+msub-slurm scripts require MAGPIE_TIMELIMIT_MINUTES now, instead of SBATCH_TIMELIMIT.
+Remove required configuration of SLURM_JOB_NAME in msub-slurm scriptts.
+Remove 'intellustre' and 'magpienetworkfs' config options from templates by default.
+
+magpie 1.45
+-----------
+Support MAGPIE_ENVIRONMENT_VARIABLE_SCRIPT option.
+Support HADOOP_NAMENODE_DAEMON_HEAP_MAX option.
+
+magpie 1.44
+-----------
+Support 'upgradehdfs' HADOOP_MODE to update HDFS as you move to newer
+ versions.
+Support Storm 0.9.2.
+
+magpie 1.43
+-----------
+Default Spark worker directory is now SPARK_LOCAL_DIR/work.
+Make default Spark akka.threads is processor count / 2.
+Update Magpie to support Spark 1.0.0.
+
+magpie 1.42
+-----------
+Configure/output info on Spark job application dashboard.
+Support configuration of number of slices for SparkPi test.
+
+magpie 1.41
+-----------
+Fix bug in spark local scratch dir calculation.
+
+magpie 1.40
+-----------
+Make default storm worker heap 1024.
+Make default storm slots 50% of cores.
+
+magpie 1.39
+-----------
+Support Storm in Magpie (Beta Support)
+
+magpie 1.38
+-----------
+Rename 'testzookeeper' to 'zookeeperruok'
+
+magpie 1.37
+-----------
+Support Zookeeper run mode and 'testzookeeper' sanity check job.
+Support 'testall' job mode for basic testing/sanity checks.
+Various documentation updates.
+
+magpie 1.36
+-----------
+Re-arch Zookeeper code to be start/stop-able on the master node.
+
+magpie 1.35
+-----------
+Support SPARK_LOCAL_SCRATCH_DIR_TYPE to indicate if
+SPARK_LOCAL_SCRATCH_DIR points to a network drive or local drive.
+
+magpie 1.34
+-----------
+Support Spark in Magpie
+
+magpie 1.33
+-----------
+Create new convenience script escripts/magpie-output-config-files-script.sh.
+Various minor bug fixes / cleanup fixes.
+
+magpie 1.32
+-----------
+Support HADOOP_HDFSOVERLUSTRE_REMOVE_LOCKS and
+  HADOOP_HDFSOVERNETWORKFS_REMOVE_LOCKS, ability to cleanup lock files
+  in HDFS if necessary.
+Various documentation and code organization cleanup.
+
+magpie 1.31
+-----------
+Support PIG_MODE variable for consistency to Hadoop/Hbase.
+Minor bug fixes.
+
+magpie 1.30
+-----------
+Support sequential vs random Hbase write/read tests.
+Support threaded vs mapreduce Hbase write/read tests.
+Fix several corner cases.
+
+magpie 1.29
+-----------
+Support binary bin/magpie-zookeeper.sh, to emulate start/stop scripts
+  in Hadoop/Hbase.
+Support 'interactive' mode in MAGPIE_JOB_TYPE.
+Decrease default hbase.server.thread.wakefrequency to 500ms per online
+  suggestions.
+Configure hbase.regionserver.handler.count appropriately depending on
+  node count.
+Support HBASE_PERFORMANCEEVAL_MODE, to allow sequential or random
+  read/write performance evaluation.
+Adjust tasks/per node default if Hbase is running.
+Minor cleanup of help output.
+
+magpie 1.28
+-----------
+Support Hbase in Magpie
+
+magpie 1.27
+-----------
+Fix corner cases with IntelLustre shuffling and UDA shuffling.
+Make default slowstart .05 just like default Hadoop.
+Require MAGPIE_SHUTDOWN_TIME >= 10 minutes if MAGPIE_POST_JOB_RUN is set
+Add check for MAGPIE_STARTUP_TIME and MAGPIE_SHUTDOWN_TIME to be minimum 5 minutes.
+Rename scripts/hadoop-rebalance-hdfs-over-lustre-if-increasing-nodes-script.sh to
+  scripts/hadoop-rebalance-hdfs-over-lustre-or-hdfs-over-networkfs-if-increasing-nodes-script.sh.
+Rename scripts/hadoop-hdfs-over-lustre-nodes-decomission-script.sh to
+  scripts/hadoop-hdfs-over-lustre-or-hdfs-over-networkfs-nodes-decomission-script.sh.
+Add hdfs over networkfs support to scripts/hadoop-hdfs-over-lustre-or-hdfs-over-networkfs-nodes-decomission-script.sh.
+
+magpie 1.26
+-----------
+Default intellustre stripesize now 128M.
+
+magpie 1.25
+-----------
+Change default memory from 90% to 80% of system memory.
+Determine default container size based on size of heap instead of fixed value.
+Calculate default io.sort.mb based on mapheapsize instead of fixed value.
+Default reducer heap size is now 2X the map heap size.
+
+magpie 1.24
+-----------
+Turn off speculative execution by default.
+Make parallel copies in Hadoop configurable.
+Make default tasks per node 1.5X number of cores.
+
+magpie 1.23
+-----------
+Support new 'hdfsovernetworkfs' filesystem option.
+Re-architect internally to be scheduler/resource manager agnostic
+- Will allow extensibility in the future.
+
+magpie 1.22
+-----------
+Support UDA.
+Change default memory from 80% to 90% of system memory.
+Change default container to be extra 128M instead of extra 256M.
+
+magpie 1.21
+-----------
+Fix Hadoop 1.2.1 issue w/ hosts-include usage.
+
+magpie 1.20
+-----------
+Lower MAGPIE_SHUTDOWN_TIME default to 15 minutes.
+Update default Hadoop version to 2.2.0.
+
+magpie 1.19
+-----------
+Support changed configuration settings in yarn-site.xml for Hadoop 2.2.0.
+Launch and run job history server when Hadoop setup is enabled.
+Various code cleanup.
+
+magpie 1.18
+-----------
+Add support for running Pig scripts.
+
+magpie 1.17
+-----------
+Increase default MAGPIE_STARTUP_TIME & MAGPIE_SHUTDOWN_TIME.
+Adjust stop timeout in hadoop stop-xxx.sh scripts.
+
+magpie 1.16
+-----------
+Support new HADOOP_SETUP option, to run Hadoop or not.
+Require new local dir variable MAGPIE_LOCAL_DIR.
+Support new MAGPIE_JOB_TYPE and MAGPIE_SCRIPT_PATH options
+Support new MAGPIE_STARTUP_TIME & MAGPIE_SHUTDOWN_TIME environment variables.
+Add new example script hadoop-put-into-hdfs-over-lustre.sh.
+Add convenience script zookeeper-ruok-script.sh.
+Add convenience script hadoop-hdfs-fsck-cleanup-corrupted-blocks-script.sh.
+Do not require ZOOKEEPER_SETUP to be set.
+Enable autopurging in zookeeper by default.
+Add documentation on using Moab.
+Require interactive/setup job length to be a minimum of 30 minutes.
+Before shutting down HDFS, execute dfsadmin -saveNamespace to prevent potential corruption on shutdown .
+Do not start job until after namenode has exited safe mode.
+Do not execute job if pre-run script fails with exit code 0.
+Add various additional templates for easier setup.
+Add msub files for those who use Slurm via Moab job submissions.
+Various re-org and cleanup.
+
+magpie 1.15
+-----------
+Increase file and process limit default calculation.
+Support HADOOP_SETUP_TYPE HDFS1 or HDFS2.
+
+magpie 1.14
+-----------
+Add hadoop-env.sh output to magpie-example-pre-job-script.
+Fix corner case in HADOOP_ENVIRONMENT_EXTRA_PATH setting
+Create new HADOOP_MASTER_NODE envrionment variable.
+Add support for Zookeeper.
+Update comments/documentation.
+
+magpie 1.13
+-----------
+Split magpie-run into numerous run files.
+Exit on input errors and don't run rest of job.
+Rename some scripts/examples as needed.
+Rename HADOOP_REMOTE_CMD to MAGPIE_REMOTE_CMD
+Support MAGPIE_REMOTE_CMD_OPTS environment variable.
+
+magpie 1.12
+-----------
+Clarify text and rename many files/environment files.
+Add sbatch --output to make sbatch file.
+
+magpie 1.11
+-----------
+Support magpie network fs scheme.
+
+magpie 1.10
+-----------
+Support Intel Lustre scheme in IDH.
+
+magpie 1.9
+----------
+Minor corner case fixes.
+
+magpie 1.8
+----------
+General code cleanup/code-reorg and documentation fixes.
+
+magpie 1.7
+----------
+Support HADOOP_RAWNETWORKFS_BLOCKSIZE option.
+
+magpie 1.6
+----------
+Support inputting multiple paths for HDFS and local store fs.
+Code re-org, move common exports to new file hadoop-common-exports.
+Rename HADOOP_BUILD_HOME to HADOOP_HOME for legacy purposes.
+
+magpie 1.5
+----------
+Increase HDFS bandwidthPerSec to 4G, which is ~QDR ipoib speed.
+
+magpie 1.4
+----------
+Make default HDFS over Lustre replication 3
+Document trade offs of replication.
+Increase HDFS bandwidthPerSec.
+Fix hadoop-hdfs-over-lustre-nodes-decomission-script.sh path bug.
+Fix hadoop-create-files-script.sh to work w/ Hadoop 1.0 & 2.0.
+Add convenience script hadoop-remove-all-files-script.sh.
+
+magpie 1.3
+----------
+Remove slurm job name from hdfs over lustre created path. Use path
+given directly by user.
+
+magpie 1.2
+----------
+Move hadoop-gather into generic post run script
+hadoop-gather-config-files-and-logs-script.sh.
+
+Fix environment variable export in post scripts
+
+General documentation updates.
+
+magpie 1.1
+----------
+Add ability to rebalance HDFS data on HDFS over Lustre if user changes
+node count.
+
+Added convenience scripts
+hadoop-create-files-script.sh,
+hadoop-list-files-script.sh,
+hadoop-rebalance-hdfs-over-lustre-if-increasing-nodes-script.sh, and
+hadoop-hdfs-over-lustre-nodes-decomission-script.sh.
+
+export new environment variable HADOOP_SLAVE_COUNT
+
+Various code cleanup, file organization, and documentation updates
+
+magpie 1.0
+----------
+Initial release

@@ -1,0 +1,104 @@
+#!/bin/bash
+#############################################################################
+#  Copyright (C) 2013-2015 Lawrence Livermore National Security, LLC.
+#  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
+#  Written by Albert Chu <chu11@llnl.gov>
+#  LLNL-CODE-644248
+#
+#  This file is part of Magpie, scripts for running Hadoop on
+#  traditional HPC systems.  For details, see https://github.com/llnl/magpie.
+#
+#  Magpie is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  Magpie is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with Magpie.  If not, see <http://www.gnu.org/licenses/>.
+#############################################################################
+
+# This script executes post magpie run cleanup.  For the most part, it
+# shouldn't be editted.  See job submission files for configuration
+# details.
+
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-node-identification
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-helper
+
+Magpie_get_magpie_hostname
+myhostname=${magpie_hostname}
+
+if [ "${HADOOP_FILESYSTEM_MODE}" == "hdfs" ] \
+    && [ "${HADOOP_HDFS_PATH_CLEAR}" == "yes" ]
+then
+    if Magpie_am_I_a_hadoop_node
+    then
+        IFSORIG=${IFS}
+        IFS=","
+        for hdfspath in ${HADOOP_HDFS_PATH}
+        do
+            if [ -d "${hdfspath}" ]
+            then
+                echo "${myhostname}: Clearing directory ${hdfspath}"
+                rm -rf ${hdfspath}
+            fi
+        done
+        IFS=${IFSORIG}
+    fi
+fi
+
+if [ "${HADOOP_LOCALSTORE}X" != "X" ] \
+    && [ "${HADOOP_LOCALSTORE_CLEAR}" == "yes" ]
+then
+    if Magpie_am_I_a_hadoop_node
+    then
+        IFSORIG=${IFS}
+        IFS=","
+        for localstorepath in ${HADOOP_LOCALSTORE}
+        do
+            if [ -d "${localstorepath}" ]
+            then
+                echo "${myhostname}: Clearing directory ${localstorepath}"
+                rm -rf ${localstorepath}
+            fi
+        done
+        IFS=${IFSORIG}
+    fi
+fi
+
+if [ "${SPARK_LOCAL_SCRATCH_DIR}X" != "X" ] \
+    && [ "${SPARK_LOCAL_SCRATCH_DIR_CLEAR}" == "yes" ]
+then
+    # sparknoderank set if succeed
+    if Magpie_am_I_a_spark_node
+    then
+        IFSORIG=${IFS}
+        IFS=","
+        for localscratchpath in ${SPARK_LOCAL_SCRATCH_DIR}
+        do
+            localscratchpathtmp="${localscratchpath}/node-${sparknoderank}"
+
+            if [ -d "${localscratchpathtmp}" ]
+            then
+                echo "${myhostname}: Clearing directory ${localscratchpathtmp}"
+                rm -rf ${localscratchpathtmp}
+            fi
+        done
+        IFS=${IFSORIG}
+    fi
+fi
+
+if [ "${ZOOKEEPER_DATA_DIR_CLEAR}" == "yes" ]
+then
+    if Magpie_am_I_a_zookeeper_node
+    then
+        echo "${myhostname}: Clearing directory ${ZOOKEEPER_DATA_DIR}"
+        rm -rf ${ZOOKEEPER_DATA_DIR}
+    fi
+fi
+
+exit 0

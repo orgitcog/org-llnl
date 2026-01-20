@@ -1,0 +1,400 @@
+############################################################################
+# Spark Core Configurations
+############################################################################
+
+# Should Spark be run
+#
+# Specify yes or no.  Defaults to no.
+#
+export SPARK_SETUP=no
+
+# Set Spark Setup Type
+#
+# Will inform scripts on how to setup config files and what daemons to
+# launch/setup.
+#
+# STANDALONE - Launch Spark stand alone scheduler
+# YARN - do not setup stand alone scheduler, use Yarn scheduler
+#
+# For most users, the stand alone scheduler is likely preferred.
+# Resources do not need to be competed for in a Magpie environment
+# (you the user have all the resources allocated via the
+# scheduler/resource manager of your cluster).
+#
+# However, portability and integration with other services may require
+# Spark to work with Yarn instead.  If SPARK_SETUP_TYPE is set to
+# YARN:
+#
+# - The Spark standalone scheduler will not be launched
+# - The default Spark master will be set to 'yarn-client' (Spark 1.X)
+#   or 'yarn' (Spark [2-3].X) in all appropriate locations
+#   (e.g. spark-defaults.conf)
+# - All situations that would otherwise use the standalone scheduler
+#   (e.g. SPARK_JOB="sparkpi") will now use Yarn instead.
+#
+# Make sure that HADOOP_SETUP_TYPE is set to MR or YARN for the
+# SPARK_SETUP_TYPE="YARN".
+#
+export SPARK_SETUP_TYPE="STANDALONE"
+
+# Version
+#
+export SPARK_VERSION="SPARKVERSIONDEFAULT"
+
+# Path to your Spark build/binaries
+#
+# This should be accessible on all nodes in your allocation. Typically
+# this is in an NFS mount.
+#
+# Ensure the build matches the Hadoop/HDFS version this will run against.
+#
+export SPARK_HOME="SPARKDIRPREFIX/spark-${SPARK_VERSION}"
+
+# Path to store data local to each cluster node, typically something
+# in /tmp.  This will store local conf files and log files for your
+# job.  If local scratch space is not available, consider using the
+# MAGPIE_NO_LOCAL_DIR option.  See README for more details.
+#
+export SPARK_LOCAL_DIR="LOCALDIRPREFIX/spark"
+
+# Directory where alternate Spark configuration templates are stored
+#
+# If you wish to tweak the configuration files used by Magpie, set
+# SPARK_CONF_FILES below, copy configuration templates from
+# $MAGPIE_SCRIPTS_HOME/conf/spark into SPARK_CONF_FILES, and modify as
+# you desire.  Magpie will still use configuration files in
+# $MAGPIE_SCRIPTS_HOME/conf/spark if any of the files it needs are not
+# found in SPARK_CONF_FILES.
+#
+# export SPARK_CONF_FILES="${HOME}/myconf"
+
+# Worker Cores per Node
+#
+# If not specified, a reasonable estimate will be calculated based on
+# number of CPUs on the system.
+#
+# Be aware of the number of tasks and the amount of memory that may be
+# needed by other software.
+#
+# export SPARK_WORKER_CORES_PER_NODE=8
+
+# Worker Memory
+#
+# Specified in M.  If not specified, a reasonable estimate will be
+# calculated based on total memory available and number of CPUs on the
+# system.
+#
+# Be aware of the number of tasks and the amount of memory that may be
+# needed by other software.
+#
+# export SPARK_WORKER_MEMORY_PER_NODE=16000
+
+# Worker Directory
+#
+# Directory to run applications in, which will include both logs and
+# scratch space for local jars.  If not specified, defaults to
+# SPARK_LOCAL_DIR/work.
+#
+# Generally speaking, this is best if this is a tmp directory such as
+# in /tmp
+#
+# export SPARK_WORKER_DIRECTORY=LOCALDIRPREFIX/spark/work
+
+# SPARK_JOB_MEMORY
+#
+# Memory for spark jobs.  Defaults to being set equal to
+# SPARK_WORKER_MEMORY_PER_NODE, but users may wish to lower it if
+# multiple Spark jobs will be submitted at the same time.
+#
+# In Spark parlance, this will set both the executor and driver memory
+# for Spark.
+#
+# export SPARK_JOB_MEMORY="2048"
+
+# SPARK_DRIVER_MEMORY
+#
+# Beginning in Spark 1.0, driver memory could be configured separately
+# from executor memory.  If SPARK_DRIVER_MEMORY is set below, driver
+# memory will be configured differently than the executor memory
+# indicated above with SPARK_JOB_MEMORY.
+#
+# If running Spark < 1.0, this option does nothing.
+#
+# export SPARK_DRIVER_MEMORY="2048"
+
+# Daemon Heap Max
+#
+# Heap maximum for Spark daemons, specified in megs.
+#
+# If not specified, defaults to 1000
+#
+# May need to be increased if you are scaling large, get OutofMemory
+# errors, or perhaps have a lot of cores on a node.
+#
+# export SPARK_DAEMON_HEAP_MAX=2000
+
+# Environment Extra
+#
+# Specify extra environment information that should be passed into
+# Spark.  This file will simply be appended into the spark-env.sh.
+#
+# By default, a reasonable estimate for max user processes and open
+# file descriptors will be calculated and put into spark-env.sh.
+# However, it's always possible they may need to be set
+# differently. Everyone's cluster/situation can be slightly different.
+#
+# See the example example-environment-extra for examples on
+# what you can/should do with adding extra environment settings.
+#
+# export SPARK_ENVIRONMENT_EXTRA_PATH="${HOME}/spark-my-environment"
+
+############################################################################
+# Spark Job/Run Configurations
+############################################################################
+
+# Set spark job for MAGPIE_JOB_TYPE = spark
+#
+# "sparkpi" - run sparkpi example. Useful for making sure things are
+#             setup the way you like.
+#
+#             There are additional configuration options for this
+#             example listed below.
+#
+# "sparkwordcount" - run wordcount example.  Useful for making sure
+#                    things are setup the way you like.
+#
+#                    See below for additional required configuration
+#                    for this example.
+#
+export SPARK_JOB="sparkpi"
+
+# SPARK_DEFAULT_PARALLELISM
+#
+# Default number of tasks to use across the cluster for distributed
+# shuffle operations (groupByKey, reduceByKey, etc) when not set by
+# user.
+#
+# For Spark versions < 1.3.0.  Defaults to number compute nodes
+# (i.e. 1 per node) This is something you (the user) almost definitely
+# want to set as this is non-optimal for most jobs.
+#
+# For Spark versions >= 1.3.0, will not be set by Magpie if the below
+# is commented out.  Internally, Spark defaults this to the largest
+# number of partitions in a parent RDD.  Or for operations without a
+# parent, defaults to nodes X cores.
+#
+# export SPARK_DEFAULT_PARALLELISM=8
+
+# SPARK_MEMORY_FRACTION
+#
+# Fraction of heap space used for execution and storage. The lower
+# this is, the more frequently spills and cached data eviction occur.
+#
+# This configuration only works for Spark versions >= 1.6.0.  See
+# SPARK_STORAGE_MEMORY_FRACTION and SPARK_SHUFFLE_MEMORY_FRACTION for
+# older versions.
+#
+# Defaults to 0.6
+#
+# export SPARK_MEMORY_FRACTION=0.6
+
+# SPARK_MEMORY_STORAGE_FRACTION
+#
+# Amount of storage memory immune to eviction, expressed as a fraction
+# of the size of the region set aside by SPARK_MEMORY_FRACTION.  The
+# higher this is, the less working memory may be available to
+# executiona nd tasks may spill to disk more often.
+#
+# This configuration only works for Spark versions >= 1.6.0.  See
+# SPARK_STORAGE_MEMORY_FRACTION and SPARK_SHUFFLE_MEMORY_FRACTION for
+# older versions.
+#
+# Defaults to 0.5
+#
+# export SPARK_MEMORY_STORAGE_FRACTION=0.5
+
+# SPARK_STORAGE_MEMORY_FRACTION
+#
+# Configure fraction of Java heap to use for Spark's memory cache.
+# This should not be larger than the "old" generation of objects in
+# the JVM.  This can highly affect performance due to interruption due
+# to JVM garbage collection.  If a large amount of time is spent in
+# garbage collection, consider shrinking this value, such as to 0.5 or
+# 0.4.
+#
+# This configuration only works for Spark versions < 1.6.0.  Starting
+# with 1.6.0, see SPARK_MEMORY_FRACTION and
+# SPARK_MEMORY_STORAGE_FRACTION.
+#
+# Defaults to 0.6
+#
+# export SPARK_STORAGE_MEMORY_FRACTION=0.6
+
+# SPARK_SHUFFLE_MEMORY_FRACTION
+#
+# Fraction of Java heap to use for aggregation and cogroups during
+# shuffles.  At any given time, the collective size of all in-memory
+# maps used for shuffles is bounded by this limit, beyond which the
+# contents will begin to spill to disk.  If spills are often, consider
+# increasing this value at the expense of storage memory fraction
+# (SPARK_STORAGE_MEMORY_FRACTION above).
+#
+# This configuration only works for Spark versions < 1.6.0.  Starting
+# with 1.6.0, see SPARK_MEMORY_FRACTION and
+# SPARK_MEMORY_STORAGE_FRACTION.
+#
+# Defaults to 0.2
+#
+# export SPARK_SHUFFLE_MEMORY_FRACTION=0.2
+
+# SPARK_RDD_COMPRESS
+#
+# Should RDD's be compressed by default?  Defaults to true.  In HPC
+# environments with parallel file systems or local storage, the cost
+# of compressing / decompressing RDDs is likely a be a net win over
+# writing data to a parallel file system or using up the limited
+# amount of local storage space available.  However, for some users
+# this cost may not be worthwhile and should be disabled.
+#
+# Note that only serialized RDDs are compressed, such as with storage
+# level MEMORY_ONLY_SER or MEMORY_AND_DISK_SER.  All python RDDs are
+# serialized by default.
+#
+# Defaults to true.
+#
+# export SPARK_RDD_COMPRESS=true
+
+# SPARK_IO_COMPRESSION_CODEC
+#
+# Defaults to lz4, can specify snappy, lz4, lzf, snappy, or zstd
+#
+# export SPARK_IO_COMPRESSION_CODEC=lz4
+
+# SPARK_DEPLOY_SPREADOUT
+#
+# Per Spark documentation, "Whether the standalone cluster manager
+# should spread applications out across nodes or try to consolidate
+# them onto as few nodes as possible. Spreading out is usually better
+# for data locality in HDFS, but consolidating is more efficient for
+# compute-intensive workloads."
+#
+# If you are hard coding parallelism in certain parts of your
+# application because those individual actions do not scale well, it
+# may be beneficial to disable this.
+#
+# Defaults to true
+#
+# export SPARK_DEPLOY_SPREADOUT=true
+
+# SPARK_LOCAL_SCRATCH_DIR
+#
+# By default, if Hadoop is setup with a file system, the Spark local
+# scratch directory, where scratch data is placed, will automatically
+# be calculated and configured.  If Hadoop is not setup, the following
+# must be specified.
+#
+# If you have local SSDs or NVRAM stored on the nodes of your system,
+# it may be in your interest to set this to a local drive.  It can
+# improve performance of both shuffling and disk based RDD
+# persistence.  If you want to specify multiple paths (such as
+# multiple drives), make them comma separated
+# (e.g. /dir1,/dir2,/dir3).
+#
+# Note that this field will not work if SPARK_SETUP_TYPE="YARN".
+# Please set HADOOP_LOCALSTORE to inform Yarn to set a local SSD for
+# Yarn to use for local scratch.
+#
+# export SPARK_LOCAL_SCRATCH_DIR="LUSTREDIRPREFIX/sparkscratch/"
+
+# SPARK_LOCAL_SCRATCH_DIR_CLEAR
+#
+# After your job has completed, if SPARK_LOCAL_SCRATCH_DIR_CLEAR is
+# set to yes, Magpie will do a rm -rf on all directories in
+# SPARK_LOCAL_SCRATCH_DIR.  This is particularly useful if the local
+# scratch directory is on local storage and you want to clean up your
+# work before the next user uses the node.
+#
+# export SPARK_LOCAL_SCRATCH_DIR_CLEAR="yes"
+
+# SPARK_NETWORK_TIMEOUT
+#
+# This will configure many network timeout configurations within
+# Spark.  If you see that your jobs are regularly failing with timeout
+# issues, try increasing this value.  On large HPC systems, timeouts
+# may occur more often, such as on loaded parallel file systems or
+# busy networks.
+#
+# As of this version, this will configure:
+#
+# spark.network.timeout
+# spark.files.fetchTimeout
+# spark.rpc.askTimeout
+# spark.rpc.lookupTimeout
+# spark.core.connection.ack.wait.timeout
+# spark.shuffle.registration.timeout
+# spark.network.auth.rpcTimeout
+# spark.shuffle.sasl.timeout
+#
+# Note that some of this fields will only effect newer spark versions.
+#
+# Specified in seconds, by default 120.
+#
+# export SPARK_NETWORK_TIMEOUT=120
+
+# SPARK_YARN_STAGING_DIR
+#
+# By default, Spark w/ Yarn will use your home directory for staging
+# files for a job.  This home directory must be accessible by all
+# nodes.
+#
+# This may pose a problem if you are not using HDFS and your home
+# directory is not NFS or network mounted.  Set this value to a
+# network location as your staging directory.  Be sure to prefix this
+# path the appropriate scheme, such as file://.
+#
+# This option is only available beginning in Spark 2.0.
+#
+# export SPARK_YARN_STAGING_DIR="file://LUSTREDIRPREFIX/sparkStaging/"
+
+############################################################################
+# Spark SparkPi Configuration
+############################################################################
+
+# SparkPi Slices
+#
+# Number of "slices" to parallelize in Pi estimation.  Generally
+# speaking, more should lead to more accurate estimates.
+#
+# If not specified, equals number of nodes.
+#
+# export SPARK_SPARKPI_SLICES=4
+
+############################################################################
+# Spark SparkWordCount Configuration
+############################################################################
+
+# SparkWordCount File
+#
+# Specify the file to do the word count on.  Specify the scheme, such
+# as hdfs://, alluxio:// or file://, appropriately.
+#
+# export SPARK_SPARKWORDCOUNT_FILE="file:///path/mywordcountfile"
+
+# SparkWordCount Copy In File
+#
+# In some cases, a file must be copied in before it can be used.  Most
+# notably, this can be the case if the file is not yet in HDFS or Alluxio.
+#
+# If specified below, the file will be copied to the location
+# specified by SPARK_SPARKWORDCOUNT_FILE before the word count is
+# executed.
+#
+# Specify the scheme appropriately.  At this moment, the schemes of
+# file://, alluxio://, and hdfs:// are recognized for this option.
+#
+# Note that this is not required.  The file could be copied in any
+# number of other ways, such as through a previous job or through a
+# script specified via MAGPIE_PRE_JOB_RUN.
+#
+# export SPARK_SPARKWORDCOUNT_COPY_IN_FILE="file:///mywordcountinfile"
+

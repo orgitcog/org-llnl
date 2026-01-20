@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# This script executes a basic Hbase job.  It is an example of how you
+# can setup a script to run an Hbase job.  It is set by setting
+# MAGPIE_JOB_TYPE to "script" and setting MAGPIE_JOB_SCRIPT
+# environment variable to the script.  See the job submission file for
+# details.
+#
+# Please adjust to whatever you would want to do with Hbase
+
+cd ${HBASE_HOME}
+
+command="bin/hbase org.apache.hadoop.hbase.PerformanceEvaluation sequentialWrite 1"
+echo "Running $command" >&2
+$command
+
+exit 0

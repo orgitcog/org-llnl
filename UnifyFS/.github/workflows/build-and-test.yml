@@ -1,0 +1,151 @@
+name: UnifyFS Build and Test
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+  push:
+
+jobs:
+  checkpatch:
+    runs-on: [ ubuntu-latest ]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+
+    - name: Checkpatch
+      run: |
+        eval $(git log HEAD^..HEAD | sed "s/^ *//g" | grep '^TEST_.*=')
+        export TEST_CHECKPATCH_SKIP_FILES
+        (git diff HEAD^..HEAD | ./scripts/checkpatch.sh origin/dev..HEAD) || test "$TEST_CHECKPATCH_ALLOW_FAILURE" = yes
+
+  build-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+        compiler: [ gcc ]
+        gcc: [ 9, 10, 11 ]
+
+    name: ${{ matrix.os }}-${{ matrix.compiler }}-${{ matrix.gcc }}
+
+    runs-on: ${{ matrix.os }}
+
+    env:
+      CC: gcc-${{ matrix.gcc }}
+      CXX: g++-${{ matrix.gcc }}
+
+    steps:
+    - name: Push checkout
+      if: github.event_name == 'push'
+      uses: actions/checkout@v4
+
+    - name: PR checkout
+      if: github.event_name == 'pull_request'
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Set up GCC
+      uses: egor-tensin/setup-gcc@v1
+      with:
+        version: ${{ matrix.gcc }}
+
+    - name: Install additional packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install libtool-bin
+        sudo apt-get install openmpi-bin
+        sudo apt-get install libopenmpi-dev
+
+    - name: Install Spack
+      uses: spack/setup-spack@v2
+      with:
+        ref: develop
+        path: spack
+
+    - name: Set up packages.yaml
+      run: |
+        test -f $GITHUB_WORKSPACE/spack/etc/spack/packages.yaml || cat > $GITHUB_WORKSPACE/spack/etc/spack/packages.yaml << 'EOF'
+        packages:
+          all:
+            target: [x86_64]
+            providers:
+              mpi: [openmpi]
+          autoconf:
+            buildable: False
+            externals:
+            - spec: "autoconf@2.71"
+              prefix: /usr
+          automake:
+            buildable: False
+            externals:
+            - spec: "automake@1.16.5"
+              prefix: /usr
+          libtool:
+            buildable: False
+            externals:
+            - spec: "libtool@2.4.7"
+              prefix: /usr
+          m4:
+            buildable: False
+            externals:
+            - spec: "m4@1.4.19"
+              prefix: /usr
+          openmpi:
+            buildable: False
+            externals:
+            - spec: "openmpi@4.1.6"
+              prefix: /usr
+          openssl:
+            buildable: False
+            externals:
+            - spec: "openssl@3.0.13"
+              prefix: /usr
+          pkg-config:
+            buildable: False
+            externals:
+            - spec: "pkg-config@0.29.2"
+              prefix: /usr
+        EOF
+        spack compiler find /usr/local/bin
+        if [[ $CC == 'gcc-9' ]]; then
+          spack config add "packages:all:compiler:[gcc@9.5.0]"
+        elif [[ $CC == 'gcc-10' ]]; then
+          spack config add "packages:all:compiler:[gcc@10.5.0]"
+        else
+          spack config add "packages:all:compiler:[gcc@11.5.0]"
+        fi
+        spack external find
+        spack config add modules:prefix_inspections:lib64:[LD_LIBRARY_PATH]
+        spack config add modules:prefix_inspections:lib:[LD_LIBRARY_PATH]
+
+    - name: Install UnifyFS dependencies
+      run: |
+        spack install gotcha@1.0.4
+        spack install mochi-margo@0.13.1 ^mercury~boostsys ^libfabric@1.13.2 fabrics=rxm,sockets,tcp
+        spack install spath~mpi
+        echo "GOTCHA_INSTALL=$(spack location -i gotcha)" >> $GITHUB_ENV
+        echo "SPATH_INSTALL=$(spack location -i spath)" >> $GITHUB_ENV
+
+    - name: Configure and Build
+      shell: spack-sh {0}
+      run: |
+        export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+        spack load gotcha && spack load argobots && spack load mercury && spack load mochi-margo && spack load spath
+        ./autogen.sh
+        ./configure CC=$CC --with-gotcha=$GOTCHA_INSTALL --with-spath=$SPATH_INSTALL --enable-fortran
+        make V=1
+
+    - name: Unit Tests
+      shell: spack-sh {0}
+      run: |
+        spack load gotcha && spack load argobots && spack load mercury && spack load mochi-margo && spack load spath
+        cd t && make check
+
+    - name: After failure
+      if: ${{ failure() }}
+      run: |
+        cat $GITHUB_WORKSPACE/config.log
+        cat $GITHUB_WORKSPACE/t/test-suite.log

@@ -1,0 +1,400 @@
+#!/bin/bash
+#############################################################################
+#  Copyright (C) 2013-2015 Lawrence Livermore National Security, LLC.
+#  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
+#  Written by Albert Chu <chu11@llnl.gov>
+#  LLNL-CODE-644248
+#
+#  This file is part of Magpie, scripts for running Hadoop on
+#  traditional HPC systems.  For details, see https://github.com/llnl/magpie.
+#
+#  Magpie is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  Magpie is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with Magpie.  If not, see <http://www.gnu.org/licenses/>.
+#############################################################################
+
+# This is used by scripts, don't edit this
+#
+# This file has common node setup functions. Should be sourced and
+# used only by magpie-setup files, after magpie-setup-core has
+# completed.
+
+source ${MAGPIE_SCRIPTS_HOME}/magpie/exports/magpie-exports-submission-type
+source ${MAGPIE_SCRIPTS_HOME}/magpie/exports/magpie-exports-dirs
+source ${MAGPIE_SCRIPTS_HOME}/magpie/exports/magpie-exports-user
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-defaults
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-calculate-values
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-hadoop-helper
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-log
+
+Magpie_calculate_hadoop_filesystem_paths () {
+    local noderank=$1
+    if [ "${HADOOP_FILESYSTEM_MODE}" == "hdfs" ]
+    then
+        magpie_hadooptmpdir=`echo ${HADOOP_HDFS_PATH} | awk -F, '{print $1}'`
+        magpie_fsdefault="hdfs://${HADOOP_MASTER_NODE}:${default_hadoop_hdfs_namenode_address}"
+    elif [ "${HADOOP_FILESYSTEM_MODE}" == "hdfsoverlustre" ]
+    then
+        if [ "${MAGPIE_ONE_TIME_RUN}" == "yes" ]
+        then
+            magpie_hadooptmpdir="${HADOOP_HDFSOVERLUSTRE_PATH}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/node-${noderank}"
+        else
+            magpie_hadooptmpdir="${HADOOP_HDFSOVERLUSTRE_PATH}/node-${noderank}"
+        fi
+        magpie_fsdefault="hdfs://${HADOOP_MASTER_NODE}:${default_hadoop_hdfs_namenode_address}"
+    elif [ "${HADOOP_FILESYSTEM_MODE}" == "hdfsovernetworkfs" ]
+    then
+        if [ "${MAGPIE_ONE_TIME_RUN}" == "yes" ]
+        then
+            magpie_hadooptmpdir="${HADOOP_HDFSOVERNETWORKFS_PATH}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/node-${noderank}"
+        else
+            magpie_hadooptmpdir="${HADOOP_HDFSOVERNETWORKFS_PATH}/node-${noderank}"
+        fi
+        magpie_fsdefault="hdfs://${HADOOP_MASTER_NODE}:${default_hadoop_hdfs_namenode_address}"
+    elif [ "${HADOOP_FILESYSTEM_MODE}" == "rawnetworkfs" ]
+    then
+        if [ "${MAGPIE_ONE_TIME_RUN}" == "yes" ]
+        then
+            magpie_hadooptmpdir="${HADOOP_RAWNETWORKFS_PATH}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/node-${noderank}"
+        else
+            magpie_hadooptmpdir="${HADOOP_RAWNETWORKFS_PATH}/node-${noderank}"
+        fi
+        magpie_fsdefault="file://${HADOOP_RAWNETWORKFS_PATH}"
+    else
+        Magpie_output_internal_error "Illegal HADOOP_FILESYSTEM_MODE \"${HADOOP_FILESYSTEM_MODE}\" specified"
+        exit 1
+    fi
+}
+
+Magpie_calculate_hdfs_format_file_path () {
+    local noderank=$1
+    Magpie_calculate_hadoop_filesystem_paths ${noderank}
+    magpie_hdfs_format_file="${magpie_hadooptmpdir}/magpie.hdfs_formatted"
+}
+
+Magpie_calculate_stop_timeouts () {
+    local shutdowntimeseconds=`expr ${magpie_shutdown_time_value} \* 60`
+
+    if [ "${MAGPIE_POST_JOB_RUN}X" != "X" ]
+    then
+        # Minimum 5 minutes or 1/3rd of time for MAGPIE_POST_JOB_RUN
+        local magpiepostrunallocate=`expr ${shutdowntimeseconds} \/ 3`
+        if [ "${magpiepostrunallocate}" -lt 300 ]
+        then
+            magpiepostrunallocate=300
+        fi
+
+        shutdowntimeseconds=`expr ${shutdowntimeseconds} - ${magpiepostrunallocate}`
+    fi
+ 
+    if [ "${MAGPIE_POST_EXECUTE_RUN}X" != "X" ]
+    then
+        # Minimum 5 minutes or 1/3rd of time for MAGPIE_POST_EXECUTE_RUN
+        local magpiepostrunallocate=`expr ${shutdowntimeseconds} \/ 3`
+        if [ "${magpiepostrunallocate}" -lt 300 ]
+        then
+            magpiepostrunallocate=300
+        fi
+
+        shutdowntimeseconds=`expr ${shutdowntimeseconds} - ${magpiepostrunallocate}`
+    fi
+
+    if [ "${HBASE_SETUP}" == "yes" ]
+    then
+        if [ "${MAGPIE_ONE_TIME_RUN}" == "yes" ]
+        then
+            # IF MAGPIE_ONE_TIME_RUN is yes, screw all the calculations below
+            # we set to 5 seconds.
+            magpie_hbase_slave_timeout=5
+        else
+            # Need to give Hbase more time b/c of compaction.  We'll say
+            # Hbase always gets 50% of the time, Half for regionserver
+            # timeout and half for compaction .  Input checks ensure
+            # shutdowntimeseconds >= 1200
+
+            local hbase_time=`expr ${shutdowntimeseconds} \/ 2`
+            magpie_hbase_slave_timeout=`expr ${hbase_time} \/ 2`
+            shutdowntimeseconds=${hbase_time}
+        fi
+    fi
+
+    local stoptimeoutdivisor=1
+
+    if [ "${HADOOP_SETUP}" == "yes" ]
+    then
+        if [ ${HADOOP_SETUP_TYPE}  == "MR" ]
+        then
+            # Need to split timeout time between namenode, datanodes,
+            # secondary namenode, jobtracker/resource manager,
+            # tasktracker/nodemanagers, jobhistory server, & saveNameSpace
+            # time
+            stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 7`
+        elif [ ${HADOOP_SETUP_TYPE}  == "YARN" ]
+        then
+            # Need to split timeout time between jobtracker/resource
+            # manager, tasktracker/nodemanagers, jobhistory server
+            stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 3`
+        else
+            if Magpie_hadoop_filesystem_mode_is_hdfs_type
+            then
+                # Need to split timeout time between namenode, datanodes,
+                # secondary namenode, & saveNameSpace time
+                stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 4`
+            fi
+        fi
+
+        # + 2 for scratch extra time in scripts and what not
+        stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 2`
+    fi
+
+    if [ "${SPARK_SETUP}" == "yes" ]
+    then
+        # +2 for extra misc shutdown time
+        stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 2`
+    fi
+
+    if [ "${STORM_SETUP}" == "yes" ]
+    then
+        # +2 for extra misc shutdown time
+        stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 2`
+    fi
+
+    if [ "${ZEPPELIN_SETUP}" == "yes" ]
+    then
+        # +2 for extra misc shutdown time
+        stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 2`
+    fi
+
+    if [ "${KAFKA_SETUP}" == "yes" ]
+    then
+        # +2 for extra misc shutdown time
+        stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 2`
+    fi
+
+    if [ "${PHOENIX_SETUP}" == "yes" ]
+    then
+        # +2 for extra misc shutdown time
+        stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 2`
+    fi
+
+    if [ "${ZOOKEEPER_SETUP}" == "yes" ]
+    then
+        # +2 for extra misc shutdown time
+        stoptimeoutdivisor=`expr ${stoptimeoutdivisor} + 2`
+    fi
+
+    local stoptimeout=`expr ${shutdowntimeseconds} \/ ${stoptimeoutdivisor}`
+
+    if [ "${stoptimeout}" -lt 5 ]
+    then
+        stoptimeout=5
+    fi
+
+    if [ "${MAGPIE_ONE_TIME_RUN}" == "yes" ]
+    then
+        # IF MAGPIE_ONE_TIME_RUN is yes, screw all the calculations above.
+        # we set to 5 seconds.
+        magpie_hadoop_stop_timeout=5
+    else
+        magpie_hadoop_stop_timeout=${stoptimeout}
+    fi
+}
+
+# Count how many big data systems we're using that can run jobs
+# Pig wraps around Hadoop, so it doesn't count
+__Magpie_calculate_canrunjobscount () {
+    __canrunjobscount=0
+
+    if [ "${HADOOP_SETUP}" == "yes" ] && Magpie_hadoop_setup_type_enables_yarn
+    then
+        __canrunjobscount=`expr ${__canrunjobscount} + 1`
+    fi
+
+    if [ "${HBASE_SETUP}" == "yes" ]
+    then
+        __canrunjobscount=`expr ${__canrunjobscount} + 1`
+    fi
+
+    if [ "${SPARK_SETUP}" == "yes" ] && [ "${SPARK_SETUP_TYPE}" == "STANDALONE" ]
+    then
+        __canrunjobscount=`expr ${__canrunjobscount} + 1`
+    fi
+
+    if [ "${STORM_SETUP}" == "yes" ]
+    then
+        __canrunjobscount=`expr ${__canrunjobscount} + 1`
+    fi
+
+    # Could be zero in weird test scenarios
+    if [ "${__canrunjobscount}" == "0" ]
+    then
+        __canrunjobscount=1
+    fi
+}
+
+Magpie_calculate_processor_count () {
+    if ([ "${MAGPIE_SUBMISSION_TYPE}" == "msubslurmsrun" ] \
+        || [ "${MAGPIE_SUBMISSION_TYPE}" == "sbatchmpirun" ] \
+        || [ "${MAGPIE_SUBMISSION_TYPE}" == "sbatchsrun" ]) \
+        && [ -n "${SLURM_CPUS_ON_NODE}" ]
+    then
+        magpie_processor_count=${SLURM_CPUS_ON_NODE}
+    else
+        magpie_processor_count=`cat /proc/cpuinfo | grep processor | wc -l`
+    fi
+}
+
+Magpie_calculate_threads_to_use () {
+    # Sets magpie_processor_count
+    Magpie_calculate_processor_count
+
+    # Sets __canrunjobscount
+    __Magpie_calculate_canrunjobscount
+
+    # If only one system to run jobs, estimate 1.5X cores
+    # If > 1, split cores evenly amongst job running stuff
+
+    if [ "${__canrunjobscount}" == "1" ]
+    then
+        magpie_threads_to_use=`expr ${magpie_processor_count} + ${magpie_processor_count} \/ 2`
+    else
+        magpie_threads_to_use=`expr ${magpie_processor_count} \/ ${__canrunjobscount}`
+
+        if [ "${magpie_threads_to_use}" == "0" ]
+        then
+            magpie_threads_to_use="1"
+        fi
+    fi
+}
+
+Magpie_calculate_memory_to_use () {
+    local memtotal=`cat /proc/meminfo | grep MemTotal | awk '{print $2}'`
+    local memtotalgig=`echo "(${memtotal} / 1048576)" | bc -l | xargs printf "%1.0f"`
+
+    # Sets canrunjobscount
+    __Magpie_calculate_canrunjobscount
+
+    # We start w/ 80% of system memory
+    magpie_memory_to_use=`echo "${memtotalgig} * .8" | bc -l | xargs printf "%1.0f"`
+    magpie_memory_to_use=`expr $magpie_memory_to_use \/ ${__canrunjobscount}`
+
+    magpie_memory_to_use=`echo "${magpie_memory_to_use} * 1024" | bc -l | xargs printf "%1.0f"`
+}
+
+Magpie_find_conffile () {
+    local magpieconffiledir=${MAGPIE_SCRIPTS_HOME}/conf
+    local project=$1
+    local conffiledir=$2
+    local conffiledesired=$3
+    local __returnvar=$4
+    local conffilefound=""
+    local projectlowercase=`echo ${project} | tr '[:upper:]' '[:lower:]'`
+
+    if [ "${conffiledir}X" != "X" ]
+    then
+        if [ -f "${conffiledir}/${conffiledesired}" ]
+        then
+            conffilefound="${conffiledir}/${conffiledesired}"
+        fi
+    fi
+
+    if [ "${conffilefound}X" == "X" ]
+    then
+        conffilefound="${magpieconffiledir}/${projectlowercase}/${conffiledesired}"
+    fi
+
+    if [ ! -f ${conffilefound} ]
+    then
+        Magpie_output_internal_error "Missing ${project} configuration file ${conffiledesired}"
+        exit 1
+    fi
+
+    eval $__returnvar="${conffilefound}"
+}
+
+Magpie_calculate_openfiles () {
+    local workercount=$1
+
+    local openfiles=`ulimit -n`
+    if [ "${openfiles}" != "unlimited" ]
+    then
+        local openfileshardlimit=`ulimit -H -n`
+
+        # we estimate 4096 per 100 nodes, minimum 8192, max 65536.
+        # Obviously depends on many factors such as core count, but it's a
+        # reasonble and safe over-estimate calculated based on experience.
+        local openfilesworkercount=`expr ${workercount} \/ 100`
+        magpie_openfilescount=`expr ${openfilesworkercount} \* 4096`
+        if [ "${magpie_openfilescount}" -lt "8192" ]
+        then
+            magpie_openfilescount=8192
+        fi
+        if [ "${magpie_openfilescount}" -gt "65536" ]
+        then
+            magpie_openfilescount=65536
+        fi
+
+	# if system places higher default, don't change it
+        if [ "${magpie_openfilescount}" -lt "${openfiles}" ]
+        then
+            magpie_openfilescount=${openfiles}
+        fi
+
+        if [ "${openfileshardlimit}" != "unlimited" ]
+        then
+            if [ ${magpie_openfilescount} -gt ${openfileshardlimit} ]
+            then
+                magpie_openfilescount=${openfileshardlimit}
+            fi
+        fi
+    else
+        magpie_openfilescount="unlimited"
+    fi
+}
+
+Magpie_calculate_userprocesses () {
+    local workercount=$1
+
+    local userprocesses=`ulimit -u`
+    if [ "${userprocesses}" != "unlimited" ]
+    then
+        local userprocesseshardlimit=`ulimit -H -u`
+
+        # we estimate 2048 per 100 nodes, minimum 4096, max 32768.
+        local userprocessesworkercount=`expr ${workercount} \/ 100`
+        magpie_userprocessescount=`expr ${userprocessesworkercount} \* 2048`
+        if [ "${magpie_userprocessescount}" -lt "4096" ]
+        then
+            magpie_userprocessescount=4096
+        fi
+        if [ "${magpie_userprocessescount}" -gt "32768" ]
+        then
+            magpie_userprocessescount=32768
+        fi
+
+	# if system places higher default, don't change it
+        if [ "${magpie_userprocessescount}" -lt "${userprocesses}" ]
+        then
+            magpie_userprocessescount=${userprocesses}
+        fi
+
+        if [ "${userprocesseshardlimit}" != "unlimited" ]
+        then
+            if [ ${magpie_userprocessescount} -gt ${userprocesseshardlimit} ]
+            then
+                magpie_userprocessescount=${userprocesseshardlimit}
+            fi
+        fi
+    else
+        magpie_userprocessescount="unlimited"
+    fi
+}

@@ -1,0 +1,9 @@
+##TOSS4 options
+module load intel/2022.1.0
+module load hdf5-parallel/1.14.0
+module load mkl
+module load cmake/3.14.5
+module load python
+module load boost
+## manually add boost path
+setenv LD_LIBRARY_PATH ${BOOST_ROOT}/lib:$LD_LIBRARY_PATH

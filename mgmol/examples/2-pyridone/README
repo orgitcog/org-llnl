@@ -1,0 +1,6 @@
+ln -s ../../potentials/pseudo.N_ONCV_PBE_SG15
+ln -s ../../potentials/pseudo.O_ONCV_PBE_SG15
+ln -s ../../potentials/pseudo.C_ONCV_PBE_SG15
+ln -s ../../potentials/pseudo.H_ONCV_PBE_SG15
+
+srun -ppdebug -n32 mgmol-opt -c 2-pyridone.cfg -l lrs.in -i coords.in

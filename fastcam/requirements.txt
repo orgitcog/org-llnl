@@ -1,0 +1,7 @@
+numpy
+jupyterlab
+notebook
+torch
+torchvision
+opencv-python-nonfree
+pytorch_gradcam

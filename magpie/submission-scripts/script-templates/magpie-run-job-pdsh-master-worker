@@ -1,0 +1,13 @@
+ENV=$(env | grep -E '^MAGPIE|^HADOOP|^PIG|^ZOOKEEPER|^KAFKA|^ZEPPELIN|^PHOENIX|^HBASE|^SPARK|^STORM|^JAVA|^LD_LIBRARY_PATH|^MOAB|^PATH|^PBS|RAMDISK'\
+          | sed 's/^/export /;s/=/="/;s/$/"/')
+
+pdsh "$ENV;
+      $MAGPIE_SCRIPTS_HOME/magpie-check-inputs &&
+      $MAGPIE_SCRIPTS_HOME/magpie-setup-core &&
+      $MAGPIE_SCRIPTS_HOME/magpie-setup-projects &&
+      $MAGPIE_SCRIPTS_HOME/magpie-setup-post &&
+      $MAGPIE_SCRIPTS_HOME/magpie-pre-run &&
+      $MAGPIE_SCRIPTS_HOME/magpie-run &&
+      $MAGPIE_SCRIPTS_HOME/magpie-cleanup &&
+      $MAGPIE_SCRIPTS_HOME/magpie-post-run
+     "

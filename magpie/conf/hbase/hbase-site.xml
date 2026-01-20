@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration>
+  <!--Configs you will likely change are listed here at the top of the file.
+  -->
+  <property >
+    <name>hbase.tmp.dir</name>
+    <value>HBASETMPDIR</value>
+    <description>Temporary directory on the local filesystem.
+    Change this setting to point to a location more permanent
+    than '/tmp', the usual resolve for java.io.tmpdir, as the
+    '/tmp' directory is cleared on machine restart.</description>
+  </property>
+  <property >
+    <name>hbase.rootdir</name>
+    <value>HBASEROOTDIR</value>
+    <description>The directory shared by region servers and into
+    which HBase persists.  The URL should be 'fully-qualified'
+    to include the filesystem scheme.  For example, to specify the
+    HDFS directory '/hbase' where the HDFS instance's namenode is
+    running at namenode.example.org on port 9000, set this value to:
+    hdfs://namenode.example.org:9000/hbase.  By default, we write
+    to whatever ${hbase.tmp.dir} is set too -- usually /tmp --
+    so change this configuration or else all data will be lost on
+    machine restart.</description>
+  </property>
+  <property >
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+    <description>The mode the cluster will be in. Possible values are
+      false for standalone mode and true for distributed mode.  If
+      false, startup will run all HBase and ZooKeeper daemons together
+      in the one JVM.</description>
+  </property>
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>HBASEZOOKEEPERQUORUM</value>
+    <description>Comma separated list of servers in the ZooKeeper ensemble
+    (This config. should have been named hbase.zookeeper.ensemble).
+    For example, "host1.mydomain.com,host2.mydomain.com,host3.mydomain.com".
+    By default this is set to localhost for local and pseudo-distributed modes
+    of operation. For a fully-distributed setup, this should be set to a full
+    list of ZooKeeper ensemble servers. If HBASE_MANAGES_ZK is set in hbase-env.sh
+    this is the list of servers which hbase will start/stop ZooKeeper on as
+    part of cluster start/stop.  Client-side, we will take this list of
+    ensemble members and put it together with the hbase.zookeeper.clientPort
+    config. and pass it into zookeeper constructor as the connectString
+    parameter.</description>
+  </property>
+
+  <!--Master configurations-->
+  <property >
+    <name>hbase.master.port</name>
+    <value>HBASEMASTERPORT</value>
+    <description>The port the HBase Master should bind to.</description>
+  </property>
+  <property>
+    <name>hbase.master.info.port</name>
+    <value>HBASEMASTERINFOPORT</value>
+    <description>The port for the HBase Master web UI.
+    Set to -1 if you do not want a UI instance run.</description>
+  </property>
+  <property>
+    <name>hbase.master.info.bindAddress</name>
+    <value>HBASEMASTERHOST</value>
+    <description>The bind address for the HBase Master web UI
+    </description>
+  </property>
+
+    <!--RegionServer configurations-->
+  <property>
+    <name>hbase.regionserver.port</name>
+    <value>HBASEREGIONSERVERPORT</value>
+    <description>The port the HBase RegionServer binds to.</description>
+  </property>
+  <property>
+    <name>hbase.regionserver.info.port</name>
+    <value>HBASEREGIONSERVERINFOPORT</value>
+    <description>The port for the HBase RegionServer web UI
+    Set to -1 if you do not want the RegionServer UI to run.</description>
+  </property>
+  <property>
+    <name>hbase.regionserver.info.bindAddress</name>
+    <value>HBASE_HOST</value>
+    <description>The address for the HBase RegionServer web UI</description>
+  </property>
+
+  <!-- Adjust appropriately given cluster size -->
+  <property>
+    <name>hbase.regionserver.handler.count</name>
+    <value>HBASEREGIONSERVERHANDLERCOUNT</value>
+    <description>Count of RPC Listener instances spun up on RegionServers.
+    Same property is used by the Master for count of master handlers.</description>
+  </property>
+
+  <!--ZooKeeper configuration-->
+
+  <property>
+    <name>hbase.zookeeper.property.clientPort</name>
+    <value>HBASEZOOKEEPERPROPERTYCLIENTPORT</value>
+    <description>Property from ZooKeeper's config zoo.cfg.
+    The port at which the clients will connect.</description>
+  </property>
+
+ <property>
+    <name>zookeeper.session.timeout</name>
+    <value>ZOOKEEPERSESSIONTIMEOUT</value>
+    <description>ZooKeeper session timeout in milliseconds. It is used in two different ways.
+      First, this value is used in the ZK client that HBase uses to connect to the ensemble.
+      It is also used by HBase when it starts a ZK server and it is passed as the 'maxSessionTimeout'. See
+      http://hadoop.apache.org/zookeeper/docs/current/zookeeperProgrammers.html#ch_zkSessions.
+      For example, if a HBase region server connects to a ZK ensemble that's also managed by HBase, then the
+      session timeout will be the one specified by this configuration. But, a region server that connects
+      to an ensemble managed with a different configuration will be subjected that ensemble's maxSessionTimeout. So,
+      even though HBase might propose using 90 seconds, the ensemble can have a max timeout lower than this and
+      it will take precedence. The current default that ZK ships with is 40 seconds, which is lower than HBase's.
+    </description>
+  </property>
+
+  <!--Miscellaneous configuration-->
+
+  <!-- Effectively disable major compaction by setting to 4 weeks,
+  make user controled -->
+
+  <property>
+    <name>hbase.hregion.majorcompaction</name>
+    <value>2419200000</value>
+    <description>The time (in miliseconds) between 'major' compactions of all
+    HStoreFiles in a region.  Default: Set to 7 days.  Major compactions tend to
+    happen exactly when you need them least so enable them such that they run at
+    off-peak for your deploy; or, since this setting is on a periodicity that is
+    unlikely to match your loading, run the compactions via an external
+    invocation out of a cron job or some such.</description>
+  </property>
+
+  <!-- Default 10000 way to big, go down to 500 -->
+  <property>
+      <name>hbase.server.thread.wakefrequency</name>
+      <value>500</value>
+      <description>Time to sleep in between searches for work (in milliseconds).
+      Used as sleep interval by service threads such as log roller.</description>
+  </property>
+
+  @PHOENIX@
+
+</configuration>

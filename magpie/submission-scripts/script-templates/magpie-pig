@@ -1,0 +1,89 @@
+############################################################################
+# Pig Configurations
+############################################################################
+
+# Should Pig be setup
+#
+# Specify yes or no.  Defaults to no.
+#
+# Note that unlike Hadoop or Zookeeper, Pig does not need to be
+# enabled/disabled to be run with Hadoop.  For example, no daemons are setup.
+#
+# If PIG_SETUP is enabled, this will inform Magpie to setup a
+# configuration files and environment variables that will hopefully
+# make it easier to run Pig w/ Hadoop.  You could leave this disabled
+# and setup/config Pig as you need.
+#
+export PIG_SETUP=no
+
+# Pig Version
+#
+export PIG_VERSION="PIGVERSIONDEFAULT"
+
+# Path to your Pig build/binaries
+#
+# This should be accessible on all nodes in your allocation. Typically
+# this is in an NFS mount.
+#
+# Ensure the build matches the Hadoop version this will run against.
+#
+export PIG_HOME="PIGDIRPREFIX/pig-${PIG_VERSION}"
+
+# Directory where alternate Pig configuration templates are stored
+#
+# If you wish to tweak the configuration files used by Magpie, set
+# PIG_CONF_FILES below, copy configuration templates from
+# $MAGPIE_SCRIPTS_HOME/conf/pig into PIG_CONF_FILES, and modify as you
+# desire.  Magpie will still use configuration files in
+# $MAGPIE_SCRIPTS_HOME/conf/pig if any of the files it needs are not found
+# in PIG_CONF_FILES.
+#
+# export PIG_CONF_FILES="${HOME}/myconf"
+
+# Path to store data local to each cluster node, typically something
+# in /tmp.  This will store local conf files and log files for your
+# job.  If local scratch space is not available, consider using the
+# MAGPIE_NO_LOCAL_DIR option.  See README for more details.
+#
+export PIG_LOCAL_DIR="LOCALDIRPREFIX/pig"
+
+# Set pig job for MAGPIE_JOB_TYPE = pig
+#
+# "testpig" - Run a quick sanity test to see that pig is setup
+#             correctly.  Testpig will do a simple ls of the root
+#             directory of whatever filesytem you setup (e.g. hdfs,
+#             lustre, etc.).
+#
+# "script" - execute a pig script indicated by PIG_SCRIPT_PATH.
+#            Unlike "script" in MAGPIE_JOB_TYPE, this script is
+#            executed via the 'pig' command.
+#
+export PIG_JOB="testpig"
+
+# Specify script to execute for "script" mode in PIG_JOB.  This pig
+# script will be fed into pig via "pig ${PIG_SCRIPT_OPTS} ${PIG_SCRIPT_PATH}"
+#
+# export PIG_SCRIPT_PATH="${HOME}/my-pig-script"
+
+# Specify options to specify when calling pig.
+#
+# A particularly useful option is -l <logfile>, to indicate where you
+# would like the pig log file to go.
+#
+# Another useful option is -F or -stop_on_failure
+#
+# export PIG_SCRIPT_OPTS="-l HOMEDIRPREFIX/mypig.log"
+
+# Pig Classpath
+#
+# Set the classpath you desire for pig.  This is the CLASSPATH you
+# likely want to set to add additional jars for your run.
+#
+# export PIG_CLASSPATH="HOMEDIRPREFIX/myjarfiles.jar"
+
+# Pig Opts
+#
+# Extra Java runtime options
+#
+# export PIG_OPTS="-Djava.io.tmpdir=${PIG_LOCAL_JOB_DIR}/tmp"
+

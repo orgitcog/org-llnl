@@ -1,0 +1,9 @@
+sphinx==7.2.6
+sphinx_rtd_theme==2.0.0
+myst-parser==2.0.0
+ipython==8.22.2
+ipykernel==6.29.3
+nbsphinx==0.9.3
+breathe==4.35.0
+sphinx-markdown-tables==0.0.17
+sphinxcontrib-svg2pdfconverter==1.2.2

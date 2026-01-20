@@ -1,0 +1,677 @@
+#!/bin/bash
+#############################################################################
+#  Copyright (C) 2013-2015 Lawrence Livermore National Security, LLC.
+#  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
+#  Written by Albert Chu <chu11@llnl.gov>
+#  LLNL-CODE-644248
+#
+#  This file is part of Magpie, scripts for running Hadoop on
+#  traditional HPC systems.  For details, see https://github.com/llnl/magpie.
+#
+#  Magpie is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  Magpie is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with Magpie.  If not, see <http://www.gnu.org/licenses/>.
+#############################################################################
+
+# This is used by scripts, don't edit this
+#
+# Export directories promised by user documentation.
+
+source ${MAGPIE_SCRIPTS_HOME}/magpie/exports/magpie-exports-submission-type
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-log
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-helper
+
+# Do not ever "use" the LOCAL_JOB_DIR variables.  They should only be
+# referenced when setting SCRATCHSPACE_DIR or CONF_DIR or LOG_DIR variables.
+
+__Magpie_make_magpie_local_dirs () {
+    local which=$1
+
+    if [ "${MAGPIE_LOCAL_JOB_DIR}X" == "X" ]
+    then
+        Magpie_output_internal_error "__Magpie_make_magpie_local_dirs called without MAGPIE_LOCAL_JOB_DIR set"
+        exit 1
+    fi
+
+    export MAGPIE_LOCAL_CONF_DIR=${MAGPIE_LOCAL_JOB_DIR}/conf
+    export MAGPIE_LOCAL_LOG_DIR=${MAGPIE_LOCAL_JOB_DIR}/log
+    export MAGPIE_LOCAL_PID_DIR=${MAGPIE_LOCAL_JOB_DIR}/pid
+    export MAGPIE_LOCAL_SCRATCHSPACE_DIR=${MAGPIE_LOCAL_JOB_DIR}/scratch
+
+    if [ "${which}" == "specific" ]
+    then
+        Magpie_get_magpie_hostname
+        myhostname=${magpie_hostname}
+        export MAGPIE_LOCAL_CONF_DIR=`echo $MAGPIE_LOCAL_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        export MAGPIE_LOCAL_LOG_DIR=`echo $MAGPIE_LOCAL_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        export MAGPIE_LOCAL_PID_DIR=`echo $MAGPIE_LOCAL_PID_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        export MAGPIE_LOCAL_SCRATCHSPACE_DIR=`echo $MAGPIE_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+    fi
+}
+
+Magpie_make_magpie_local_dirs_unspecified () {
+    __Magpie_make_magpie_local_dirs "generic"
+}
+
+Magpie_make_magpie_local_dirs_node_specific () {
+    __Magpie_make_magpie_local_dirs "specific"
+}
+
+__Magpie_make_hadoop_local_dirs () {
+    local which=$1
+
+    if [ "${HADOOP_SETUP}" == "yes" ]
+    then
+        if [ "${HADOOP_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_hadoop_local_dirs called without HADOOP_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export HADOOP_CONF_DIR=${HADOOP_LOCAL_JOB_DIR}/conf
+        export HADOOP_LOG_DIR=${HADOOP_LOCAL_JOB_DIR}/log
+        export HADOOP_LOCAL_SCRATCHSPACE_DIR=${HADOOP_LOCAL_JOB_DIR}/scratch
+        export HADOOP_PID_DIR=${HADOOP_LOCAL_JOB_DIR}/pid
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export HADOOP_CONF_DIR=`echo $HADOOP_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HADOOP_LOG_DIR=`echo $HADOOP_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HADOOP_LOCAL_SCRATCHSPACE_DIR=`echo $HADOOP_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HADOOP_PID_DIR=`echo $HADOOP_PID_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+
+        # Hadoop 3.0 only wants primary ones, no extra ones
+        if echo ${HADOOP_VERSION} | grep -q -E "2\.[0-9]\.[0-9]"
+        then
+            export YARN_CONF_DIR=${HADOOP_CONF_DIR}
+            export YARN_LOG_DIR=${HADOOP_LOG_DIR}
+            export YARN_LOCAL_SCRATCHSPACE_DIR=${HADOOP_LOCAL_SCRATCHSPACE_DIR}
+            export YARN_PID_DIR=${HADOOP_PID_DIR}
+
+            # Hadoop has this completely random other one
+            export HADOOP_MAPRED_PID_DIR=${HADOOP_PID_DIR}
+        fi
+    fi
+}
+
+Magpie_make_hadoop_local_dirs_unspecified () {
+    __Magpie_make_hadoop_local_dirs "generic"
+}
+
+Magpie_make_hadoop_local_dirs_node_specific () {
+    __Magpie_make_hadoop_local_dirs "specific"
+}
+
+__Magpie_make_pig_local_dirs () {
+    local which=$1
+
+    if [ "${PIG_SETUP}" == "yes" ]
+    then
+        if [ "${PIG_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_pig_local_dirs called without PIG_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export PIG_CONF_DIR=${PIG_LOCAL_JOB_DIR}/conf
+        export PIG_LOCAL_SCRATCHSPACE_DIR=${PIG_LOCAL_JOB_DIR}/scratch
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export PIG_CONF_DIR=`echo $PIG_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export PIG_LOCAL_SCRATCHSPACE_DIR=`echo $PIG_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_pig_local_dirs_unspecified () {
+    __Magpie_make_pig_local_dirs "generic"
+}
+
+Magpie_make_pig_local_dirs_node_specific () {
+    __Magpie_make_pig_local_dirs "specific"
+}
+
+__Magpie_make_hbase_local_dirs () {
+    local which=$1
+
+    if [ "${HBASE_SETUP}" == "yes" ]
+    then
+        if [ "${HBASE_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_hbase_local_dirs called without HBASE_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export HBASE_CONF_DIR=${HBASE_LOCAL_JOB_DIR}/conf
+        export HBASE_LOG_DIR=${HBASE_LOCAL_JOB_DIR}/log
+        export HBASE_LOCAL_SCRATCHSPACE_DIR=${HBASE_LOCAL_JOB_DIR}/scratch
+        export HBASE_PID_DIR=${HBASE_LOCAL_JOB_DIR}/pid
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export HBASE_CONF_DIR=`echo $HBASE_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HBASE_LOG_DIR=`echo $HBASE_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HBASE_LOCAL_SCRATCHSPACE_DIR=`echo $HBASE_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HBASE_PID_DIR=`echo $HBASE_PID_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_hbase_local_dirs_unspecified () {
+    __Magpie_make_hbase_local_dirs "generic"
+}
+
+Magpie_make_hbase_local_dirs_node_specific () {
+    __Magpie_make_hbase_local_dirs "specific"
+}
+
+__Magpie_make_hive_local_dirs () {
+    local which=$1
+
+    if [ "${HIVE_SETUP}" == "yes" ]
+    then
+        if [ "${HIVE_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_hive_local_dirs called without HIVE_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export HIVE_CONF_DIR=${HIVE_LOCAL_JOB_DIR}/conf
+        export HIVE_LOG_DIR=${HIVE_LOCAL_JOB_DIR}/log
+        export HIVE_PID_DIR=${HIVE_LOCAL_JOB_DIR}/pid
+        export HIVE_LOCAL_SCRATCHSPACE_DIR=${HIVE_LOCAL_JOB_DIR}/scratch
+
+        if [ "${which}" == "specific" ]
+        then
+            myhostname=`hostname`
+            export HIVE_CONF_DIR=`echo $HIVE_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HIVE_LOG_DIR=`echo $HIVE_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HIVE_PID_DIR=`echo $HIVE_PID_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export HIVE_LOCAL_SCRATCHSPACE_DIR=`echo $HIVE_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_hive_local_dirs_unspecified () {
+    __Magpie_make_hive_local_dirs "generic"
+}
+
+Magpie_make_hive_local_dirs_node_specific () {
+    __Magpie_make_hive_local_dirs "specific"
+}
+
+
+__Magpie_make_phoenix_local_dirs () {
+    local which=$1
+
+    if [ "${PHOENIX_SETUP}" == "yes" ]
+    then
+        if [ "${PHOENIX_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_phoenix_local_dirs called without PHOENIX_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export PHOENIX_CONF_DIR=${PHOENIX_LOCAL_JOB_DIR}/conf
+        export PHOENIX_LOG_DIR=${PHOENIX_LOCAL_JOB_DIR}/log
+        export PHOENIX_LOCAL_SCRATCHSPACE_DIR=${PHOENIX_LOCAL_JOB_DIR}/scratch
+        export PHOENIX_PID_DIR=${PHOENIX_LOCAL_JOB_DIR}/pid
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export PHOENIX_CONF_DIR=`echo $PHOENIX_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export PHOENIX_LOG_DIR=`echo $PHOENIX_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export PHOENIX_LOCAL_SCRATCHSPACE_DIR=`echo $PHOENIX_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export PHOENIX_PID_DIR=`echo $PHOENIX_PID_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_phoenix_local_dirs_unspecified () {
+    __Magpie_make_phoenix_local_dirs "generic"
+}
+
+Magpie_make_phoenix_local_dirs_node_specific () {
+    __Magpie_make_phoenix_local_dirs "specific"
+}
+
+__Magpie_make_spark_local_dirs () {
+    local which=$1
+
+    if [ "${SPARK_SETUP}" == "yes" ]
+    then
+        if [ "${SPARK_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_spark_local_dirs called without SPARK_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export SPARK_CONF_DIR=${SPARK_LOCAL_JOB_DIR}/conf
+        export SPARK_LOG_DIR=${SPARK_LOCAL_JOB_DIR}/log
+        export SPARK_LOCAL_SCRATCHSPACE_DIR=${SPARK_LOCAL_JOB_DIR}/scratch
+        export SPARK_PID_DIR=${SPARK_LOCAL_JOB_DIR}/pid
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export SPARK_CONF_DIR=`echo $SPARK_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export SPARK_LOG_DIR=`echo $SPARK_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export SPARK_LOCAL_SCRATCHSPACE_DIR=`echo $SPARK_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export SPARK_PID_DIR=`echo $SPARK_PID_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_spark_local_dirs_unspecified () {
+    __Magpie_make_spark_local_dirs "generic"
+}
+
+Magpie_make_spark_local_dirs_node_specific () {
+    __Magpie_make_spark_local_dirs "specific"
+}
+
+__Magpie_make_kafka_local_dirs () {
+    local which=$1
+
+    if [ "${KAFKA_SETUP}" == "yes" ]
+    then
+        if [ "${KAFKA_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_kafka_local_dirs called without KAFKA_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export KAFKA_CONF_DIR=${KAFKA_LOCAL_JOB_DIR}/conf
+        export KAFKA_LOG_DIR=${KAFKA_LOCAL_JOB_DIR}/log
+        export KAFKA_LOCAL_SCRATCHSPACE_DIR=${KAFKA_LOCAL_JOB_DIR}/scratch
+        export KAFKA_PID_DIR=${KAFKA_LOCAL_JOB_DIR}/pid
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export KAFKA_CONF_DIR=`echo $KAFKA_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export KAFKA_LOG_DIR=`echo $KAFKA_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export KAFKA_LOCAL_SCRATCHSPACE_DIR=`echo $KAFKA_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export KAFKA_PID_DIR=`echo $KAFKA_PID_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_kafka_local_dirs_unspecified () {
+    __Magpie_make_kafka_local_dirs "generic"
+}
+
+Magpie_make_kafka_local_dirs_node_specific () {
+    __Magpie_make_kafka_local_dirs "specific"
+}
+
+Magpie_make_zeppelin_local_dirs () {
+    local which=$1
+
+    if [ "${ZEPPELIN_SETUP}" == "yes" ]
+    then
+        if [ "${ZEPPELIN_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "Magpie_make_zeppelin_local_dirs called without ZEPPELIN_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export ZEPPELIN_CONF_DIR=${ZEPPELIN_LOCAL_JOB_DIR}/conf
+        export ZEPPELIN_LOG_DIR=${ZEPPELIN_LOCAL_JOB_DIR}/log
+        export ZEPPELIN_LOCAL_SCRATCHSPACE_DIR=${ZEPPELIN_LOCAL_JOB_DIR}/scratch
+        export ZEPPELIN_PID_DIR=${ZEPPELIN_LOCAL_JOB_DIR}/pid
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export ZEPPELIN_CONF_DIR=`echo $ZEPPELIN_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export ZEPPELIN_LOG_DIR=`echo $ZEPPELIN_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export ZEPPELIN_LOCAL_SCRATCHSPACE_DIR=`echo $ZEPPELIN_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export ZEPPELIN_PID_DIR=`echo $ZEPPELIN_PID_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_zeppelin_local_dirs_unspecified () {
+    Magpie_make_zeppelin_local_dirs "generic"
+}
+
+Magpie_make_zeppelin_local_dirs_node_specific () {
+    Magpie_make_zeppelin_local_dirs "specific"
+}
+
+__Magpie_make_storm_local_dirs () {
+    local which=$1
+
+    if [ "${STORM_SETUP}" == "yes" ]
+    then
+        if [ "${STORM_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_storm_local_dirs called without STORM_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export STORM_CONF_DIR=${STORM_LOCAL_JOB_DIR}/conf
+        export STORM_LOG_DIR=${STORM_LOCAL_JOB_DIR}/log
+        export STORM_LOCAL_SCRATCHSPACE_DIR=${STORM_LOCAL_JOB_DIR}/scratch
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export STORM_CONF_DIR=`echo $STORM_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export STORM_LOG_DIR=`echo $STORM_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export STORM_LOCAL_SCRATCHSPACE_DIR=`echo $STORM_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_storm_local_dirs_unspecified () {
+    __Magpie_make_storm_local_dirs "generic"
+}
+
+Magpie_make_storm_local_dirs_node_specific () {
+    __Magpie_make_storm_local_dirs "specific"
+}
+
+__Magpie_make_zookeeper_local_dirs () {
+    local which=$1
+
+    if [ "${ZOOKEEPER_SETUP}" == "yes" ]
+    then
+        if [ "${ZOOKEEPER_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_zookeeper_local_dirs called without ZOOKEEPER_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export ZOOKEEPER_CONF_DIR=${ZOOKEEPER_LOCAL_JOB_DIR}/conf
+        export ZOOKEEPER_LOG_DIR=${ZOOKEEPER_LOCAL_JOB_DIR}/log
+        export ZOOKEEPER_LOCAL_SCRATCHSPACE_DIR=${ZOOKEEPER_LOCAL_JOB_DIR}/scratch
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export ZOOKEEPER_CONF_DIR=`echo $ZOOKEEPER_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export ZOOKEEPER_LOG_DIR=`echo $ZOOKEEPER_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export ZOOKEEPER_LOCAL_SCRATCHSPACE_DIR=`echo $ZOOKEEPER_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_zookeeper_local_dirs_unspecified () {
+    __Magpie_make_zookeeper_local_dirs "generic"
+}
+
+Magpie_make_zookeeper_local_dirs_node_specific () {
+    __Magpie_make_zookeeper_local_dirs "specific"
+}
+
+__Magpie_make_ray_local_dirs () {
+    local which=$1
+
+    if [ "${RAY_SETUP}" == "yes" ]
+    then
+        if [ "${RAY_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_ray_local_dirs called without RAY_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export RAY_CONF_DIR=${RAY_LOCAL_JOB_DIR}/conf
+        export RAY_LOG_DIR=${RAY_LOCAL_JOB_DIR}/log
+        export RAY_LOCAL_SCRATCHSPACE_DIR=${RAY_LOCAL_JOB_DIR}/scratch
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export RAY_CONF_DIR=`echo $RAY_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export RAY_LOG_DIR=`echo $RAY_LOG_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export RAY_LOCAL_SCRATCHSPACE_DIR=`echo $RAY_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_ray_local_dirs_unspecified () {
+    __Magpie_make_ray_local_dirs "generic"
+}
+
+Magpie_make_ray_local_dirs_node_specific () {
+    __Magpie_make_ray_local_dirs "specific"
+}
+
+__Magpie_make_alluxio_local_dirs () {
+    local which=$1
+
+    if [ "${ALLUXIO_SETUP}" == "yes" ]
+    then
+        if [ "${ALLUXIO_LOCAL_JOB_DIR}X" == "X" ]
+        then
+            Magpie_output_internal_error "__Magpie_make_alluxio_local_dirs called without ALLUXIO_LOCAL_JOB_DIR set"
+            exit 1
+        fi
+
+        export ALLUXIO_CONF_DIR=${ALLUXIO_LOCAL_JOB_DIR}/conf
+        export ALLUXIO_LOGS_DIR=${ALLUXIO_LOCAL_JOB_DIR}/log
+        export ALLUXIO_LOCAL_SCRATCHSPACE_DIR=${ALLUXIO_LOCAL_JOB_DIR}/scratch
+
+        if [ "${which}" == "specific" ]
+        then
+            Magpie_get_magpie_hostname
+            myhostname=${magpie_hostname}
+            export ALLUXIO_CONF_DIR=`echo $ALLUXIO_CONF_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export ALLUXIO_LOGS_DIR=`echo $ALLUXIO_LOGS_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+            export ALLUXIO_LOCAL_SCRATCHSPACE_DIR=`echo $ALLUXIO_LOCAL_SCRATCHSPACE_DIR | sed "s/MAGPIEHOSTNAMESUBSTITUTION/${myhostname}/g"`
+        fi
+    fi
+}
+
+Magpie_make_alluxio_local_dirs_unspecified () {
+    __Magpie_make_alluxio_local_dirs "generic"
+}
+
+Magpie_make_alluxio_local_dirs_node_specific () {
+    __Magpie_make_alluxio_local_dirs "specific"
+}
+
+__Magpie_make_all_local_dirs () {
+    __Magpie_make_magpie_local_dirs $1
+    __Magpie_make_hadoop_local_dirs $1
+    __Magpie_make_pig_local_dirs $1
+    __Magpie_make_hbase_local_dirs $1
+    __Magpie_make_hive_local_dirs $1
+    __Magpie_make_phoenix_local_dirs $1
+    __Magpie_make_spark_local_dirs $1
+    __Magpie_make_kafka_local_dirs $1
+    __Magpie_make_storm_local_dirs $1
+    __Magpie_make_zookeeper_local_dirs $1
+    __Magpie_make_ray_local_dirs $1
+    __Magpie_make_alluxio_local_dirs $1
+}
+
+Magpie_make_all_local_dirs_unspecified () {
+    __Magpie_make_all_local_dirs "generic"
+}
+
+Magpie_make_all_local_dirs_node_specific () {
+    __Magpie_make_all_local_dirs "specific"
+}
+
+if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+then
+    export MAGPIE_LOCAL_JOB_DIR=${MAGPIE_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/magpie
+else
+    export MAGPIE_LOCAL_JOB_DIR=${MAGPIE_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/magpie
+fi
+
+# MAGPIE_LOCAL_SCRATCHSPACE_DIR & MAGPIE_LOCAL_CONF_DIR set
+Magpie_make_magpie_local_dirs_node_specific
+
+if [ "${HADOOP_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export HADOOP_LOCAL_JOB_DIR=${HADOOP_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/hadoop
+    else
+        export HADOOP_LOCAL_JOB_DIR=${HADOOP_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/hadoop
+    fi
+    # HADOOP_LOCAL_SCRATCHSPACE_DIR & HADOOP_CONF_DIR & HADOOP_LOG_DIR set
+    # YARN_LOCAL_SCRATCHSPACE_DIR & YARN_CONF_DIR & YARN_LOG_DIR set
+    Magpie_make_hadoop_local_dirs_node_specific
+fi
+
+if [ "${PIG_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export PIG_LOCAL_JOB_DIR=${PIG_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/pig
+    else
+        export PIG_LOCAL_JOB_DIR=${PIG_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/pig
+    fi
+    # PIG_LOCAL_SCRATCHSPACE_DIR & PIG_CONF_DIR set
+    Magpie_make_pig_local_dirs_node_specific
+fi
+
+if [ "${HBASE_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export HBASE_LOCAL_JOB_DIR=${HBASE_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/hbase
+    else
+        export HBASE_LOCAL_JOB_DIR=${HBASE_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/hbase
+    fi
+    # HBASE_LOCAL_SCRATCHSPACE_DIR & HBASE_CONF_DIR & HBASE_LOG_DIR set
+    Magpie_make_hbase_local_dirs_node_specific
+fi
+
+if [ "${HIVE_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export HIVE_LOCAL_JOB_DIR=${HIVE_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}
+    else
+        export HIVE_LOCAL_JOB_DIR=${HIVE_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}
+    fi
+    # HIVE_LOCAL_SCRATCHSPACE_DIR & HIVE_CONF_DIR & HIVE_LOG_DIR set
+    Magpie_make_hive_local_dirs_node_specific
+fi
+
+if [ "${PHOENIX_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export PHOENIX_LOCAL_JOB_DIR=${PHOENIX_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/phoenix
+    else
+        export PHOENIX_LOCAL_JOB_DIR=${PHOENIX_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/phoenix
+    fi
+    # PHOENIX_LOCAL_SCRATCHSPACE_DIR & PHOENIX_CONF_DIR & PHOENIX_LOG_DIR set
+    Magpie_make_phoenix_local_dirs_node_specific
+fi
+
+if [ "${SPARK_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export SPARK_LOCAL_JOB_DIR=${SPARK_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/spark
+    else
+        export SPARK_LOCAL_JOB_DIR=${SPARK_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/spark
+    fi
+    # SPARK_LOCAL_SCRATCHSPACE_DIR & SPARK_CONF_DIR & SPARK_LOG_DIR set
+    Magpie_make_spark_local_dirs_node_specific
+fi
+
+if [ "${KAFKA_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export KAFKA_LOCAL_JOB_DIR=${KAFKA_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/kafka
+    else
+        export KAFKA_LOCAL_JOB_DIR=${KAFKA_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/kafka
+    fi
+    # KAFKA_LOCAL_SCRATCHSPACE_DIR & KAFKA_CONF_DIR & KAFKA_LOG_DIR set
+    Magpie_make_kafka_local_dirs_node_specific
+fi
+
+if [ "${ZEPPELIN_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export ZEPPELIN_LOCAL_JOB_DIR=${ZEPPELIN_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/zeppelin
+    else
+        export ZEPPELIN_LOCAL_JOB_DIR=${ZEPPELIN_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/zeppelin
+    fi
+    # ZEPPELIN_LOCAL_SCRATCHSPACE_DIR & ZEPPELIN_CONF_DIR & ZEPPELIN_LOG_DIR set
+    Magpie_make_zeppelin_local_dirs_node_specific
+fi
+
+if [ "${STORM_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export STORM_LOCAL_JOB_DIR=${STORM_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/storm
+    else
+        export STORM_LOCAL_JOB_DIR=${STORM_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/storm
+    fi
+    # STORM_LOCAL_SCRATCHSPACE_DIR & STORM_CONF_DIR & STORM_LOG_DIR set
+    Magpie_make_storm_local_dirs_node_specific
+fi
+
+if [ "${ZOOKEEPER_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export ZOOKEEPER_LOCAL_JOB_DIR=${ZOOKEEPER_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/zookeeper
+    else
+        export ZOOKEEPER_LOCAL_JOB_DIR=${ZOOKEEPER_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/zookeeper
+    fi
+    # ZOOKEEPER_LOCAL_SCRATCHSPACE_DIR & ZOOKEEPER_CONF_DIR & ZOOKEEPER_LOG_DIR set
+    Magpie_make_zookeeper_local_dirs_node_specific
+fi
+
+if [ "${RAY_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export RAY_LOCAL_JOB_DIR=${RAY_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/ray
+    else
+        export RAY_LOCAL_JOB_DIR=${RAY_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/ray
+    fi
+    # RAY_LOCAL_SCRATCHSPACE_DIR & RAY_CONF_DIR & RAY_LOG_DIR set
+    Magpie_make_ray_local_dirs_node_specific
+fi
+
+if [ "${ALLUXIO_SETUP}" == "yes" ]
+then
+    if [ "${MAGPIE_NO_LOCAL_DIR}" == "yes" ]
+    then
+        export ALLUXIO_LOCAL_JOB_DIR=${ALLUXIO_LOCAL_DIR}/MAGPIEHOSTNAMESUBSTITUTION/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/alluxio
+    else
+        export ALLUXIO_LOCAL_JOB_DIR=${ALLUXIO_LOCAL_DIR}/${MAGPIE_JOB_NAME}/${MAGPIE_JOB_ID}/alluxio
+    fi
+    # ALLUXIO_LOCAL_SCRATCHSPACE_DIR & ALLUXIO_CONF_DIR & ALLUXIO_LOGS_DIR set
+    Magpie_make_alluxio_local_dirs_node_specific
+fi

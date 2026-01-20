@@ -1,0 +1,36 @@
+#!/usr/bin/python
+
+"""
+
+template.param
+
+Brief:  Templates used by prepare.py to setup directory structure
+and prepare initial scripts.
+
+Authors:  Guy Cohen, Yevgeny Bar Lev; Columbia University, 
+          Ian S. Dunn; Lawrence Livermore National Laboratory
+
+"""
+
+run_array_template="""#!/bin/bash
+
+maindir=$(pwd)
+
+for i in {{1..{num_jobs}}}
+do
+
+    # Change working directory
+    workdir=`sed -n ${{i}}p < $maindir/array_job_list_{tag}`
+
+    echo $workdir
+    cd $workdir
+    bash runfile
+
+done
+"""
+
+runfile_template="""#!/bin/bash
+rm -f queued
+{executable}
+echo ' ' > running
+"""

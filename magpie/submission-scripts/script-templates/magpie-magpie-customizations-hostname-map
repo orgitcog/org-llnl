@@ -1,0 +1,36 @@
+# Map Hostnames
+#
+# The MAGPIE_HOSTNAME_CMD may be insufficient for setting the correct
+# hostname to use in some situations.  For example, if the high speed
+# interconnect is set to a hostname that is very different compared to
+# the hostname configured in the scheduler/resource manager.
+#
+# Below commands can be set that will map
+# hostnames/addresses/interfaces to the correct ones to use.  The
+# commands you provide below should take a single argument as input,
+# and return a single line of output with the host that should be
+# used.
+#
+# The MAGPIE_HOSTNAME_CMD_MAP command will be given the hostname as
+# returned from the `hostname` command.  For example, if the scheduler
+# uses the nodename "foobar", but you would like to use "foobar-ib",
+# the script can simply return the hostname appended with "-ib".
+#
+# The MAGPIE_HOSTNAME_SCHEDULER_MAP command will be given the hostname
+# returned from the scheduler.  For example, if your job has been
+# given the nodes "foobar[0-4]", but you want to use the IPs attached
+# to "foobar-ib[0-4]", your script can simply return the appropriate
+# "foobar-ib" interface for each nodename passed in.
+#
+# The user is not required to set both of these commands, but the end
+# result is that Magpie requires the output of:
+#
+# - the `hostname` command or MAGPIE_HOSTNAME_CMD_MAP
+# and
+# - the scheduler nodes or MAGPIE_HOSTNAME_SCHEDULER_MAP
+#
+# to map to the same hostnames/addresses
+#
+# export MAGPIE_HOSTNAME_CMD_MAP="${MAGPIE_SCRIPTS_HOME}/scripts/hostname-map-scripts/my-script"
+#
+# export MAGPIE_HOSTNAME_SCHEDULER_MAP="${MAGPIE_SCRIPTS_HOME}/scripts/hostname-map-scripts/my-script"

@@ -1,0 +1,131 @@
+#!/bin/bash
+#############################################################################
+#  Copyright (C) 2013-2015 Lawrence Livermore National Security, LLC.
+#  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
+#  Written by Albert Chu <chu11@llnl.gov>
+#  LLNL-CODE-644248
+#
+#  This file is part of Magpie, scripts for running Hadoop on
+#  traditional HPC systems.  For details, see https://github.com/llnl/magpie.
+#
+#  Magpie is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  Magpie is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with Magpie.  If not, see <http://www.gnu.org/licenses/>.
+#############################################################################
+
+# Various defaults
+#
+# This is used by scripts, don't edit this
+
+default_startup_time=30
+default_shutdown_time=30
+
+if [ "${HADOOP_SETUP}" == "yes" ]
+then
+    default_yarn_resourcemanager_address="8032"
+    default_yarn_resourcemanager_scheduler_address="8030"
+    default_yarn_resourcemanager_webapp_address="8088"
+    default_yarn_resourcemanager_webapp_https_address="8090"
+    default_yarn_resourcemanager_resourcetracker_address="8031"
+    default_yarn_resourcemanager_admin_address="8033"
+    default_yarn_nodemanager_localizer_address="8040"
+    default_yarn_nodemanager_webapp_address="8042"
+    default_hadoop_hdfs_namenode_address="8020"
+    default_hadoop_hdfs_namenode_httpaddress="50070"
+    default_hadoop_hdfs_namenode_secondary_http_address="50090"
+    default_hadoop_hdfs_namenode_secondary_https_address="50091"
+    default_hadoop_hdfs_namenode_backup_address="50100"
+    default_hadoop_hdfs_namenode_backup_http_address="50100"
+    default_hadoop_hdfs_datanode_address="50010"
+    default_hadoop_hdfs_datanode_httpaddress="50075"
+    default_hadoop_hdfs_datanode_ipcaddress="50020"
+    default_hadoop_jobhistoryserver_address="10020"
+    default_hadoop_jobhistoryserver_webapp_address="19888"
+    default_mapred_job_tracker_address="54311"
+
+    default_hdfs_replication=3
+fi
+
+if [ "${PIG_SETUP}" == "yes" ]
+then
+    :
+fi
+
+if [ "${HBASE_SETUP}" == "yes" ]
+then
+    default_hbase_master_port="60000"
+    default_hbase_master_info_port="60010"
+    default_hbase_regionserver_port="60020"
+    default_hbase_regionserver_info_port="60030"
+fi
+
+if [ "${PHOENIX_SETUP}" == "yes" ]
+then
+    default_phoenix_queryserver_port="8765"
+fi
+
+if [ "${HIVE_SETUP}" == "yes" ]
+then
+    default_hive_port="10000"
+    default_hive_db_name="hive_default_db"
+    default_postgres_port="11115"
+fi
+
+if [ "${SPARK_SETUP}" == "yes" ]
+then
+    # Add 100 to all default ports to avoid any conflicts with common
+    # 8080/8081 usage
+    default_spark_master_port="7177"
+    default_spark_master_webui_port="8180"
+    default_spark_worker_webui_port="8181"
+    default_spark_application_dashboard_port="4140"
+fi
+
+if [ "${KAFKA_SETUP}" == "yes" ]
+then
+    default_kafka_port="6667"
+fi
+
+if [ "${ZEPPELIN_SETUP}" == "yes" ]
+then
+    default_zeppelin_port="18080"
+fi
+
+if [ "${STORM_SETUP}" == "yes" ]
+then
+    # Add 200 to all default ports to avoid any conflicts with common
+    # 8080/8081 usage
+    default_storm_ui_port="8280"
+    default_storm_logviewer_port="8200"
+
+    default_storm_supervisor_slots_starting_port="6700"
+fi
+
+if [ "${ZOOKEEPER_SETUP}" == "yes" ]
+then
+    default_zookeeper_client_port="2181"
+    default_zookeeper_peer_port="2888"
+    default_zookeeper_leader_port="3888"
+fi
+
+if [ "${RAY_SETUP}" == "yes" ]
+then
+    default_ray_port="6380"
+fi
+
+if [ "${ALLUXIO_SETUP}" == "yes" ]
+then
+    default_alluxio_master_rpc_port="19998"
+    default_alluxio_master_web_port="19999"
+    default_alluxio_worker_rpc_port="29999"
+    default_alluxio_worker_web_port="30000"
+fi

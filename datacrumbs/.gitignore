@@ -1,0 +1,81 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Ouput
+hydra_log
+build
+
+#VSCode
+.cache
+.DS_Store
+
+# Log files
+*.log
+
+# Py Cache
+__pycache__
+*.pyc
+
+# Dependency
+venv
+.venv
+dependency
+install 
+
+# Data
+*.pfw
+*.pfw.gz
+trace.c
+profile.c
+*.core
+logs/*
+poc/test
+
+#hdf5 tests
+create_hdf5_c
+
+# Montage cloned source
+install_init
+apps/Montage/Montage-*
+poc/bpf-core/example
+poc/bpf-core/example.skel.h
+file
+dlio_env
+data/file_0_0.dat
+*.csv
+*.pfw*
+poc/bpf-core/vmlinux.h
+deps
+
+#nfs
+*.nfs*

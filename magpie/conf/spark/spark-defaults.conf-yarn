@@ -1,0 +1,27 @@
+spark.yarn.am.memory	 1g
+
+# For yarn-cluster mode
+spark.driver.cores	 1
+
+# For yarn-client mode
+spark.yarn.am.cores	 1
+
+# Set to number of cores, to emulate standalone mode
+spark.executor.cores     SPARKYARNEXECUTORCORES
+
+# Set to number of nodes, use all resources available
+spark.executor.instances SPARKYARNEXECUTORINSTANCES
+
+# magpie-setup-spark will comment out
+# spark.yarn.executor.memoryOverhead or spark.executor.memoryOverhead
+# depending on version
+
+spark.yarn.executor.memoryOverhead SPARKYARNEXECUTOROVERHEAD
+
+spark.executor.memoryOverhead SPARKYARNEXECUTOROVERHEAD
+
+# Used w/ yarn-client on driver
+spark.local.dir          SPARKLOCALDIR
+
+# So Spark won't assume home directory if we aren't using HDFS
+# spark.yarn.stagingDir    SPARKYARNSTAGINGDIR

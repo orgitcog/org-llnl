@@ -1,0 +1,12 @@
+# This environment file be sourced by the magpie-storm-daemon.sh
+# script.
+
+export JAVA_HOME=MAGPIEJAVAHOME
+export STORM_LOG_DIR=STORMLOGDIR
+export STORM_CONF_DIR=STORMCONFDIR
+
+export STORM_HOME=STORMHOME
+export STORM_LOCAL_SCRATCHSPACE_DIR=STORMLOCALDIR
+
+export MAGPIE_SCRIPTS_HOME=MAGPIESCRIPTSHOME
+

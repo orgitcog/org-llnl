@@ -1,0 +1,58 @@
+//////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2016-26, Lawrence Livermore National Security, LLC and Umpire
+// project contributors. See the COPYRIGHT file for details.
+//
+// SPDX-License-Identifier: (MIT)
+//////////////////////////////////////////////////////////////////////////////
+#include "umpire/Allocator.hpp"
+#include "umpire/ResourceManager.hpp"
+#include "umpire/strategy/QuickPool.hpp"
+#include "umpire/util/Macros.hpp"
+#include "umpire/util/wrap_allocator.hpp"
+
+int main(int, char**)
+{
+  auto& rm = umpire::ResourceManager::getInstance();
+
+  auto allocator = rm.getAllocator("HOST");
+
+  // _sphinx_tag_tut_creat_heuristic_fun_start
+  //
+  // Create a heuristic function that will return true to the QuickPool
+  // object when the threshold of releasable size to total size is 75%.
+  //
+  auto heuristic_function = umpire::strategy::QuickPool::percent_releasable(75);
+  // _sphinx_tag_tut_creat_heuristic_fun_end
+
+  // _sphinx_tag_tut_use_heuristic_fun_start
+  //
+  // Create a pool with an initial block size of 1 Kb and 1 Kb block size for
+  // all subsequent allocations and with our previously created heuristic
+  // function.
+  //
+  auto pooled_allocator = rm.makeAllocator<umpire::strategy::QuickPool>( "HOST_POOL", allocator,
+      1024ul, 1024ul, 16, heuristic_function );
+  // _sphinx_tag_tut_use_heuristic_fun_end
+
+  //
+  // Obtain a pointer to our specific QuickPool instance in order to see the
+  // QuickPool-specific statistics
+  //
+  auto quick_pool = umpire::util::unwrap_allocator<umpire::strategy::QuickPool>(pooled_allocator);
+
+  void* a[4];
+  for (int i = 0; i < 4; ++i)
+    a[i] = pooled_allocator.allocate(1024);
+
+  for (int i = 0; i < 4; ++i) {
+    pooled_allocator.deallocate(a[i]);
+    std::cout << "Pool has " << pooled_allocator.getActualSize() << " bytes of memory. "
+              << pooled_allocator.getCurrentSize() << " bytes are used. "
+              << quick_pool->getBlocksInPool() << " blocks are in the pool. "
+              << quick_pool->getReleasableSize() << " bytes are releaseable. "
+              << std::endl;
+  }
+
+  return 0;
+}
+

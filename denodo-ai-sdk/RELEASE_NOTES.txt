@@ -1,0 +1,497 @@
+version 0.12 - 20251126
+------------------------
+
+- Added OpenAI reasoning effort none for GPT-5.1 compatibility
+- Fixed error in chatbot login when associations are set to false on getMetadata
+- Fixed 'proxies' error when starting with Groq as LLM provider
+- Fixed chatbot UI incorrectly showing success when incremental sync has no updates (204 No Content)
+
+version 0.12-beta - 20251120
+-------------------------
+
+- Included LLM provider/model in chatbot additional information
+- Implemented fallback to original VQL query if query reviewer's fix fails
+- Upgraded Langfuse SDK to v3
+- Clarified LLM_MAX_TOKENS variable
+- Changed DeepQuery report generation from PDF to HTML
+- Fixed bug where AI SDK with multiple workers would crash
+- Added parameter to disable DeepQuery in the chatbot
+- Added support for database and tag-based data filtering in the chatbot
+- Fixed bug where AI SDK Root Path appeared empty when unconfigured
+
+version 0.11 - 20251030
+------------------------
+
+- Improved language consistency in the chatbot
+- Fixed bug in metadata questions when using streamAnswerQuestion endpoint
+- Fixed bug in MCP server for MCP clients that required annotated parameters
+
+version 0.11-beta - 20251023
+------------------------
+
+- Changed AWS Bedrock/Vertex thinking models to have reasoning enabled by appending "-enablethinking" to the model ID.
+- Added thinking model as an optional parameter in sdk_config.env
+- Fixed graph generation being too compressed
+- Increased default base LLM max output tokens to 4096
+- Reduced errors in DeepQuery PDF report generation
+- Added feature to specify user created AWS Bedrock inference profile for LLM_MODEL environment variable
+- Included Langfuse docs in the AI SDK config files
+- Added support for Dynamic Client Registration in the AI SDK's MCP server
+- Fixed bug where chatbot would login even when Data Catalog had no connection
+- Fixed async Windows PDF generation bug in DeepQuery
+- Improved runner debugging and added venv checker
+- Fixed bug where DEEPQUERY_EXECUTION_MODEL is always set to thinking in the chatbot
+- Fixed chatbot failure to launch in production mode on Windows
+- Fixed API not generating log files in production mode
+- Added VIEWS_PER_REQUEST parameter to getMetadata to handle big databases
+- Clarified spatial VQL functions
+- Added file size limit to chatbot report
+- Added Generate PDF Report button click feedback
+- Added LLM_TEMPERATURE parameter in chatbot_config.env to make changes in temperature as per the LLM model
+- Integrated remote MCP server with AI SDK API runner
+- Fixed typos in AI SDK/chatbot prompts
+- Fixed bug where logout is not cleaning the list of queries
+- Fixed divergent SQL_CATEGORY and DIRECT_SQL_CATEGORY prompts
+- Fixed SUBSTR/SUBSTRING confusion in VQL generation prompt
+- Fixed errors when using an HTTP to HTTPS redirect
+- Fixed bug where QuestionForm buttons don't work using a ROOT_PATH for the chatbot
+- Added support for custom HTTP headers
+- Reduced DeepQuery clarification length
+- Fixed AttributeError: 'str' object has no attribute 'get' in the chatbot UI
+- Fixed invalid XML input error when LLM generates two <tools> tags calls in DeepQuery
+
+version 0.10.2 - 20251023
+------------------------
+
+- Changed behavior of custom instructions. If CUSTOM_INSTRUCTIONS is set in sdk_config.env, 
+it will be used as base instructions for all questions. Any custom_instructions parameter sent
+in requests will be appended to the base instructions.
+
+version 0.10.1 - 20250919
+------------------------
+
+- Fixed bug when using OpenSearch as vector store with any answerQuestion endpoint.
+- Fixed bug with query fixer that would yield 'Getting error unexpected { in field name'.
+- Fixed bug with streamAnswerQuestion endpoint when asking a metadata question.
+- Added better clarity when calling similaritySearch endpoint with n_results = 0.
+- Fixed bug in MCP remote server where the bearer token would be ignored and forced basic auth.
+- Enhanced accuracy and speed in plot generation.
+- Fixed bug where LLM edit button would show up in the chatbot UI even when CHATBOT_USER_EDIT_LLM = 0.
+
+version 0.10 - 20250911
+------------------------
+
+- Added support for plots in Arabic (mirrored for right-to-left languages)
+- Implemented complete chatbot UI overhaul to become more similar to the Denodo platform UI.
+- Fixed bug in DeepQuery where it would fail to correctly render Markdown tables.
+- Fixed bug in DeepQuery where it would fail to generate specific sections.
+- Added auth control to deleteMetadata endpoint.
+- Fixed bug in getMetadata when using tags and insert = False.
+
+version 0.10-beta - 20250904
+------------------------
+
+- Included feature to excluded views associated to certain tags from vectorizing
+- Fixed breaking errors for Ollama models
+- Added blocking mechanism for new queries while a previous one is processing in the chatbot UI
+- Added remote MCP support
+- Added custom SSL certificate variables to config files for external endpoints
+- Clarified between union and intersection between databases and tags in getMetadata
+- Updated the prompts and VQL restrictions to consider function types other than Arithmetic and Date-related
+- Added an option in the Chatbot UI to delete metadata
+- Fixed issue where the new DeepQuery reports button overlapped with the "Clear Results" button
+- Fixed error on getMetadata API when both insert and incremental set to False
+- Added capability to run AI SDK as a service with systemd
+- Added verbose logging for AI SDK
+- Updated example.py
+- Updated Langchain Ollama connector to support latest gpt-oss model
+- Added Transaction ID to SDK Logs for End-to-End Tracking
+- Created AI_SDK_VERIFY_SSL variable to allow AI SDK/DeepQuery calls to verify SSL
+- Added DATA_CATALOG_URL parameter used by SDK and Chatbot
+- Increased M and _ef values and changed views to tables for closer similarity and avoid errors with Chroma
+- Added LLM early exit capability if no relevant schema found
+- Specified limit of only 1 VQL query
+- Added prompt improvements to ask for granularity and expected output
+- Added support for OpenAI reasoning efforts in a standardized way
+- Added DeepQuery functionality
+- Fixed issue where untagged views should be deleted from the vector store or updated during synchronization
+- Fixed ROOT_PATH parameters not being usable as environment variables in the Docker container
+- Added translation of Query explanation displayed in the chatbot UI to desired language
+- Made Azure OpenAI Embedding Endpoint API version configurable in two (or multiple) different providers
+
+version 0.9 - 20250714
+------------------------
+
+- Added support for AWS instance credentials authentication for Amazon Bedrock
+- Added SENSITIVE_DATA_LOGGING to obfuscate sensitive data.
+- Added an error to /answerQuestion when the vector search result is empty
+
+version 0.9-beta - 20250703
+------------------------
+
+- Fixed VQL generation pipeline issues with ORDER BY and LIMIT clauses
+- Added new deleteMetadata endpoint
+- Added script to stop AI SDK and chatbot processes (provides clean shutdown mechanism via stop.py command)
+- Added support for reverse proxy deployment (via AI_SDK_ROOT_PATH and CHATBOT_ROOT_PATH)
+- Added option to configure incremental vector database from the chatbot UI
+- Exposed execution result limits and llm viewable result limits in both API and Chatbot
+- Added parameter to configure AWS STS endpoint as global or regional
+- Fixed slowness in login process
+- Improved performance with better state management system that preloads vectorDB, LLM and embeddings on API startup
+- Fixed metadata queries with blank question bug
+- Fixed graphics generated through Chatbot appearing blank
+- Fixed index not found error when using certain versions of OpenSearch
+- Fixed issue with production flag in run.py
+- Fixed prefix/suffix filter functionality
+- Fixed bug where last_update vector would be overwritten in PGVector
+- Suppressed Chroma warnings related to embedding deletion
+- Changed log level from ERROR to INFO for Data Catalog 204 responses (empty results)
+- Improved error message parsing and readability in VQL execution
+- Updated requirements.txt to remove security vulnerabilities
+- Enhanced network-restricted environment support with offline Swagger docs
+- Deprecated VDB_NAMES and VDB_TAGS environment variables
+- Removed data complexity filter in graph generation
+- Fixed sample data bug in getMetadata
+
+version 0.8.2 - 20250616
+------------------------
+
+- Fixed bug with some LLMs that would return a blank graph
+
+version 0.8.1 - 20250515
+------------------------
+
+- Fixed error when chunking a view in PGVector that some chunks would be skipped
+
+version 0.8 - 20250515
+------------------------
+
+- Fixed error when vectorizing a tag with views from multiple DBs
+- Fixed sample_data_search_k parameter not being respected
+- Only added associations component in the textual representation when there were associations
+- Fixed endpoint answerMetadataQuestion that was failing to run
+- Fixed prompt issues
+- Added example MCP server JSON configuration file
+- Resolved dependency conflicts
+
+version 0.8-beta - 20250506
+------------------------
+
+- Implemented STDIO MCP Server for the AI SDK
+- Completed incremental update integration
+- Improved LLM client object re-utilization for better performance
+- Fixed 'streamAnswerQuestion object has no attribute vector_search_sample_data_k' error
+- Improved graph generation: removed LLM complexity determination, pre-defined Python template, dataset description 
+- Added parameter CHATBOT_AUTO_GRAPH to control graph generation in the chatbot UI
+- Fixed issue where deleting IDs failed when the number of IDs was too big in Chroma SQLite
+
+version 0.7.1 - 20250424
+------------------------
+
+- Fixed bug in the answerQuestion with default mode that would fail to answer metadata questions
+- Fixed prompt that would slow down SQL query generation
+
+version 0.7 - 20250421
+------------------------
+
+- Fixed bug in the chatbot UI where the container would overflow when rendering a horizontal table
+- Forced chatbot LLM to correctly format numbers and percentages
+- Fixed bug in Windows where the chatbot would not automatically detect the encoding of CSV files
+- Change AI_SDK_HOST environment variable to AI_SDK_URL in the sample chatbot to not clash with the AI SDK HOST environment variable
+- Added dependency Uvicorn for production deployment on Windows
+
+version 0.7-beta - 20250411
+------------------------
+
+- Added dependency Gunicorn for production deployment
+- Added thumbs up/down feedback functionality in the sample chatbot
+- Added high availability setup/support for AI SDK
+- Added user context to queries for personalized results in the sample chatbot UI
+- Added support for OpenRouter provider
+- Included the Denodo Community (9.2-beta) CSV as an example of unstructured data
+- Incorporated a new report system to track user queries in the sample chatbot. Reports are saved in the reports folder.
+- Added option to sync tags in the SyncVectorDB button in the sample chatbot
+- Added possibility to disable the "Sync VectorDB" button in the sample chatbot
+- Added semantic search capability for sample data to improve accuracy
+- Extended view search across all databases with user permissions
+- Included additional information in the chatbot UI, like AI SDK token usage and execution time
+- Reduce chatbot history automatically based on token limits
+- Fixed error on Unstructured Data Load
+- Fixed AI SDK compatibility with AzureOpenAI when using proxy
+- Fixed embeddings_token_limit parameter functionality
+- Fixed vectorization issues with Unicode field names in metadata examples
+- Fixed issue where chatbot didn't respect /data /metadata forced routing
+
+version 0.6.2 - 20250403
+------------------------
+
+## MAIN CHANGES
+
+- Completed async functionality of the AI SDK endpoints for single-threaded performance
+- Added AI_SDK_WORKERS parameter to the AI SDK to be able to run multiple threads
+
+version 0.6.1 - 20250328
+------------------------
+
+## MAIN CHANGES
+
+- Fixed bug where embedding models with a ":" in the name made the cache crash
+- Fixed bug where the view description would not be sent to the LLM
+
+version 0.6 - 20250318
+
+## MAIN CHANGES
+
+- Added links to the views in the Data Catalog from the chatbot UI
+- Included randomized wait phrases in the chatbot UI
+- Improved speed in the chatbot
+
+version 0.6-beta - 20250310
+------------------------
+
+## MAIN CHANGES
+
+- Added support for view chunking for views with schema over the token limit
+- Implemented query review system to improve SQL generation
+- Added support for SambaNova LLMs
+- Transitioned from multiprocessing to async for improved performance
+- Added support for filtering views by tag name in getMetadata
+- Implemented embedding model caching system
+- Removed support for Data Catalog versions without user permissions
+
+## PERFORMANCE & OPTIMIZATION
+
+- Enhanced getMetadata by parallelizing embeddings
+- Parallelized related questions and natural response generation
+- Optimized Query to VQL process and prompts
+- Optimized text schema representation for reduced token usage
+- Implemented log rotation feature
+- Included cached tokenizer in the AI SDK for use in offline mode
+
+## BUG FIXES
+
+- Fixed token counter that was always returning 0
+- Fixed table filtering failures in LLM
+- Resolved garbled axis values in graph view
+- Fixed PGVector compatibility in container version
+
+## SECURITY & AUTHENTICATION
+
+- Added support for simultaneous OAuth and HTTP Basic authentication
+
+## DEPENDENCIES & COMPATIBILITY
+
+- Upgraded Langchain OpenAI dependencies for reasoning models
+- Upgraded dependencies for Bedrock, Ollama and Vertex AI
+- Implemented single OS-dynamic requirements file
+- Enhanced support for models returning backticks instead of XML tags
+
+## MODEL & PROMPT IMPROVEMENTS
+
+- Set reasoning effort directly from Model ID for OpenAI thinking models
+- Automatically increased max output tokens for thinking models
+- Improved Query to VQL prompt wording
+- Added second chance with memory for Query Fixer/Reviewer
+- Implemented XML tag format for final responses
+- Added view schema to query fixer process
+
+## MONITORING & LOGGING
+
+- Added Session ID support in Langfuse logging
+- Added disclaimer to distinguish between Google AI Studio and Vertex AI
+- Improved AI SDK run.py launcher visualization
+- Added quota limit handling for embedding API
+
+## DATA VISUALIZATION
+
+- Enhanced graph generation to use first 3 rows instead of 1
+
+## DEPRECATED FEATURES
+
+- Deprecated getConcepts endpoint
+- Removed no-execution capabilities
+
+## OTHER IMPROVEMENTS
+
+- Updated .gitignore file
+- Added option to disable getMetadata call for sample chatbot
+- Reorganized tags in AI SDK swagger documentation
+
+version 0.5 - 20250113
+------------------------
+
+## CHANGES
+
+- Fixed graph generator bug that had caused it to never work
+- Updated recommended models for each provider
+- Added platform information to the logs for improved debugging
+
+version 0.5-beta - 20250109
+------------------------
+
+## CHANGES
+
+- Added POST compatibility to answerQuestion, answerDataQuestion, answerMetadataQuestion, streamAnswerQuestion
+- Changed GET to POST for answerQuestionUsingViews and streamAnswerQuestionUsingViews
+- Organized endpoints by categories in Swagger docs
+- Added support for Google AI Studio LLM's and embeddings
+- Fixed bug where broken graph image would have been shown in the chatbot
+- Improved the start message to show AI SDK version
+- Added support for external Ollama endpoints
+- Added healthcheck endpoint to the AI SDK
+- Fixed SQL generation of reserved words in Denodo
+- Fixed SQL generation fixer agent
+- Fixed instance where smaller LLM's would have wrongly not executed the SQL after generating it
+- Added Docker files to main repository
+- Improved chatbot speed
+- Added compatibility with the new pagination architecture in the getMetadata Data Catalog endpoints
+
+version 0.4 -  20241209
+------------------------
+
+## MAIN CHANGES
+
+- Fixed bug when no description was provided for a view
+- Enabled SSL configuration in sample chatbot
+- Fixed blank screen error bug when the execution result was a string
+- Updated Langchain AWS to support new Amazon Nova models
+- Adjusted related questions when user did not have permissions
+- Added new parameter in AI SDK API getMetadata endpoint for column_descriptions
+
+version 0.4-beta -  20241203
+------------------------
+
+## MAIN CHANGES
+
+- Improved response flow in the sample chatbot
+- Added ability to have multiple, different OpenAI-API compatible providers
+- Added encoding support for emojis, thai, chinese, japanase and korean
+- Disabled Langchain OpenAI feature that would have sent input as an array of tokens instead of as a string
+
+version 0.3 -  20241101
+------------------------
+
+## MAIN CHANGES
+
+- Added CUSTOM_INSTRUCTIONS to the API to supply specific additional knowledge to the LLM
+- Added use_views and expand_set_views parameters to answerQuestion
+- Added Oauth support to the endpoints
+- Integrated PGVector and Opensearch as compatible vector stores
+- Added support for Mistral AI
+- Added support for NVIDIA NIM in LLM & Embeddings
+
+## DETAILED CHANGES
+
+- Added organization ID parameter for OpenAI
+- Moved .db to vector store folder
+- Moved .log files to logs folder
+- Enhanced Langfuse usage
+- Highlighted used tables in the context tables
+- Fixed response overflow from container
+- Fixed white screen bug
+- Changed color of clear tables in the chatbot UI
+- Added timestamp to the logs
+
+version 0.3-beta -  20241022
+------------------------
+
+## MAIN CHANGES
+
+- Added graph generation in both API and chatbot
+- Added multiple VDBs support in both API and chatbot
+- Revamped vector store system to support multiple VDBs
+- Revamped unstructured mode in the chatbot
+- Completed code re-structure to support new features
+
+## DETAILED CHANGES
+
+- Added support for custom base URL in OpenAI-compatible providers
+- Added Ollama compatibility for Embeddings and LLM
+- Added support for proxy using OpenAI and AzureOpenAI
+- Updated run.py to be api, chatbot or both as parameters
+- Included new environment variable CHATBOT_OVERWRITE_ON_LOAD
+- Fixed bug that ensured uniqueness in the vector database
+- Integrated Langfuse for better logging, tracing and analytics
+
+### API
+
+- Added plot and plot_details parameters to the endpoints
+- Added support for CamelCase
+- Added SSL support
+- Added new endpoint similaritySearch to the AI SDK
+- Added new endpoints answerDataQuestion and answerMetadataQuestion
+- Increased default vector_search_k from 3 to 5
+- Added DISCLAIMER automatically to API
+- Changed VDP_DB_NAME to VDB_NAMES
+
+### Chatbot
+
+- Added ability to type command /sql /metadata /schema /data
+- Added support for Control + Enter
+- Moved clear results to the header
+- Rewrote conversation history management
+- Fixed unstructured bugs
+- Added query explanation to a data query
+
+version 0.2 -  20240916
+------------------------
+
+- Renamed folder structure
+- Included version numbers in requirements.txt
+- Added new versioning system
+- Included RELEASE_NOTES.txt
+- Redid context generation system
+- Added DATA_CATALOG_VERIFY_SSL
+- Removed example data from the metadata
+- Detected bug from Google's LLM
+- Added new way of running the chatbot
+- Rewrote Vector Store system
+- Removed need for CHROMA_PATH, VECTOR_INDEX_UNSTRUCTURED or STRUCTURED environment variables
+
+api
+---
+- Added more detailed execution times
+- Added mode parameter to the API
+- Updated Swagger docs API version
+- Added overwrite parameter to getMetadata
+- Added new environment variables API_HOST and API_PORT
+
+sample-chatbot
+--------------
+- Added dummy request execution upon first login
+- Added Multi-user support BETA
+- Added logout button
+- Added new environment variables CHATBOT_PORT and CHATBOT_HOST
+
+version 0.2-beta -  20240903
+------------------------
+
+- Added Metadata conversation ensuring user permissions
+- Changed setting examples_per_table to 0
+- Updated improved config and README files
+- Made slight tweaks to metadata prompting
+
+api
+---
+- Improved error debugging from Data Catalog
+
+sample-chatbot
+--------------
+- Included related questions in metadata exploration
+
+version 0.1 -  20240822
+------------------------
+
+- Added Support for user permissions
+- Added HTTP Basic AUTH
+- Added PGVector support
+
+api
+---
+- Added Speed optimizations for single-thread and multi-thread concurrency
+
+sample-chatbot
+--------------
+- Fixed table rendering of markdown
+- Added Download execution result as CSV
+- Added Related questions
