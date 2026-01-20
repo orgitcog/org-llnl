@@ -1,0 +1,1940 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F37E8 [Fri Oct  7 17:33:28 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x10C600  
+0x90       0xC   NumberOfSymbols:               0xE5      
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x58000   
+0xA0       0x8   SizeOfInitializedData:         0xC000    
+0xA4       0xC   SizeOfUninitializedData:       0xC1000   
+0xA8       0x10  AddressOfEntryPoint:           0x119720  
+0xAC       0x14  BaseOfCode:                    0xC2000   
+0xB0       0x18  BaseOfData:                    0x11A000  
+0xB4       0x1C  ImageBase:                     0x685C0000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x126000  
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0xC1000   
+0x180      0x8   Misc_PhysicalAddress:          0xC1000   
+0x180      0x8   Misc_VirtualSize:              0xC1000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x58000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x58000   
+0x1A8      0x8   Misc_VirtualSize:              0x58000   
+0x1AC      0xC   VirtualAddress:                0xC2000   
+0x1B0      0x10  SizeOfRawData:                 0x57A00   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.942981 (Min=0.0, Max=8.0)
+MD5     hash: b6f87c4c9b6d79ce340f5c0e8cad11d7
+SHA-1   hash: 7617954df1a5b36362e99c4f2d6a444f508b9b9b
+SHA-256 hash: caf1615b6a51eb0c6a4a66c59be79adce44d13751167cdac137bbf84cbf95077
+SHA-512 hash: b5fd47855e77e554f741af8ebfddf007c3e227aa83b0580a77b7e219c85dd4272db1692268668da71f12cbec1293459d5882ad68838a4196b9b0b5d804c4278d
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          .rsrc
+0x1D0      0x8   Misc:                          0xC000    
+0x1D0      0x8   Misc_PhysicalAddress:          0xC000    
+0x1D0      0x8   Misc_VirtualSize:              0xC000    
+0x1D4      0xC   VirtualAddress:                0x11A000  
+0x1D8      0x10  SizeOfRawData:                 0xBE00    
+0x1DC      0x14  PointerToRawData:              0x57C00   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.544746 (Min=0.0, Max=8.0)
+MD5     hash: 6ae41530c1299c0ee9bc1933e3ab88df
+SHA-1   hash: 7c14711258882aa0d8e439d22933329f13bc26d2
+SHA-256 hash: df8d691b029eb95eafe10d3d3e375f3e96c0cb068dcdce26d60a25788fd0f842
+SHA-512 hash: 9053b9cc8d1c0a83772b74902ed256fa675d5f770ac2f9f38da577e86f44c4f29e6a8712022fa15253d6010a47eeba98afaf2450f5f681c5edc84b3db146ea32
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x11A5B4  
+0xFC       0x4   Size:                          0xB6B0    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x11A3A8  
+0x104      0x4   Size:                          0x20C     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x11A000  
+0x10C      0x4   Size:                          0x3A8     
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x125C64  
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x119948  
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Version Information----------
+
+[VS_VERSIONINFO]
+0x57C5C    0x0   Length:                        0x34C     
+0x57C5E    0x2   ValueLength:                   0x34      
+0x57C60    0x4   Type:                          0x0       
+
+[VS_FIXEDFILEINFO]
+0x57C84    0x0   Signature:                     0xFEEF04BD
+0x57C88    0x4   StrucVersion:                  0x10000   
+0x57C8C    0x8   FileVersionMS:                 0x2001E   
+0x57C90    0xC   FileVersionLS:                 0x0       
+0x57C94    0x10  ProductVersionMS:              0x2001E   
+0x57C98    0x14  ProductVersionLS:              0x0       
+0x57C9C    0x18  FileFlagsMask:                 0x0       
+0x57CA0    0x1C  FileFlags:                     0x0       
+0x57CA4    0x20  FileOS:                        0x4       
+0x57CA8    0x24  FileType:                      0x2       
+0x57CAC    0x28  FileSubtype:                   0x0       
+0x57CB0    0x2C  FileDateMS:                    0x0       
+0x57CB4    0x30  FileDateLS:                    0x0       
+
+[StringFileInfo]
+0x57CB8    0x0   Length:                        0x2AA     
+0x57CBA    0x2   ValueLength:                   0x0       
+0x57CBC    0x4   Type:                          0x0       
+
+  [StringTable]
+  0x57CDC    0x0   Length:                        0x286     
+  0x57CDE    0x2   ValueLength:                   0x0       
+  0x57CE0    0x4   Type:                          0x0       
+  LangID: 040904B0
+
+    CompanyName: The GLib developer community
+    FileDescription: GLib
+    FileVersion: 2.30.0.0
+    InternalName: libglib-2.0-0
+    LegalCopyright: Copyright \xc2\xa9 1995-2011 Peter Mattis, Spencer Kimball, Josh MacDonald and others.
+    OriginalFilename: libglib-2.0-0.dll
+    ProductName: GLib
+    ProductVersion: 2.30.0
+
+[VarFileInfo]
+0x57F64    0x0   Length:                        0x44      
+0x57F66    0x2   ValueLength:                   0x0       
+0x57F68    0x4   Type:                          0x0       
+
+  [Var]
+  0x57F84    0x0   Length:                        0x24      
+  0x57F86    0x2   ValueLength:                   0x4       
+  0x57F88    0x4   Type:                          0x0       
+    Translation: 0x0409 0x04b0
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x581B4    0x0   Characteristics:               0x0       
+0x581B8    0x4   TimeDateStamp:                 0x4E8F37E3 [Fri Oct  7 17:33:23 2011 UTC]
+0x581BC    0x8   MajorVersion:                  0x0       
+0x581BE    0xA   MinorVersion:                  0x0       
+0x581C0    0xC   Name:                          0x11E150  
+0x581C4    0x10  Base:                          0x1       
+0x581C8    0x14  NumberOfFunctions:             0x5F2     
+0x581CC    0x18  NumberOfNames:                 0x5F2     
+0x581D0    0x1C  AddressOfFunctions:            0x11A5DC  
+0x581D4    0x20  AddressOfNames:                0x11BDA4  
+0x581D8    0x24  AddressOfNameOrdinals:         0x11D56C  
+
+Ordinal      RVA         Name
+1          0x000F91A8    _g_debug_flags
+2          0x000F91AC    _g_debug_initialized
+3          0x000603C0    _glib_get_locale_dir
+4          0x0004A840    g_access
+5          0x00035860    g_allocator_free
+6          0x00035850    g_allocator_new
+7          0x00001820    g_array_append_vals
+8          0x00001720    g_array_free
+9          0x000016E0    g_array_get_element_size
+10         0x00001970    g_array_insert_vals
+11         0x00001670    g_array_new
+12         0x000018C0    g_array_prepend_vals
+13         0x000016A0    g_array_ref
+14         0x00001B40    g_array_remove_index
+15         0x00001C20    g_array_remove_index_fast
+16         0x00001CF0    g_array_remove_range
+17         0x00001A50    g_array_set_size
+18         0x000015C0    g_array_sized_new
+19         0x00001E50    g_array_sort
+20         0x00001EA0    g_array_sort_with_data
+21         0x000017D0    g_array_unref
+22         0x0004C940    g_ascii_digit_value
+23         0x0004C180    g_ascii_dtostr
+24         0x0004BF10    g_ascii_formatd
+25         0x0004C9B0    g_ascii_strcasecmp
+26         0x0004C660    g_ascii_strdown
+27         0x0004CAA0    g_ascii_strncasecmp
+28         0x0004BA30    g_ascii_strtod
+29         0x0004C1E0    g_ascii_strtoll
+30         0x0004C1B0    g_ascii_strtoull
+31         0x0004C6F0    g_ascii_strup
+32         0x000AFC38    g_ascii_table
+33         0x0004C900    g_ascii_tolower
+34         0x0004C920    g_ascii_toupper
+35         0x0004C970    g_ascii_xdigit_value
+36         0x00036BF0    g_assert_warning
+37         0x00050B70    g_assertion_message
+38         0x00050EB0    g_assertion_message_cmpnum
+39         0x00050D80    g_assertion_message_cmpstr
+40         0x00050CA0    g_assertion_message_error
+41         0x00051010    g_assertion_message_expr
+42         0x00003330    g_async_queue_length
+43         0x000033C0    g_async_queue_length_unlocked
+44         0x00002DE0    g_async_queue_lock
+45         0x00002B90    g_async_queue_new
+46         0x00002BE0    g_async_queue_new_full
+47         0x000030F0    g_async_queue_pop
+48         0x00003170    g_async_queue_pop_unlocked
+49         0x00002F20    g_async_queue_push
+50         0x00003060    g_async_queue_push_sorted
+51         0x00002FD0    g_async_queue_push_sorted_unlocked
+52         0x00002E80    g_async_queue_push_unlocked
+53         0x00002C00    g_async_queue_ref
+54         0x00002C40    g_async_queue_ref_unlocked
+55         0x00003480    g_async_queue_sort
+56         0x00003400    g_async_queue_sort_unlocked
+57         0x00003270    g_async_queue_timed_pop
+58         0x000032F0    g_async_queue_timed_pop_unlocked
+59         0x000031B0    g_async_queue_try_pop
+60         0x00003230    g_async_queue_try_pop_unlocked
+61         0x00002E30    g_async_queue_unlock
+62         0x00002C80    g_async_queue_unref
+63         0x00002D80    g_async_queue_unref_and_unlock
+64         0x0005D380    g_atexit
+65         0x000035F0    g_atomic_int_add
+66         0x00003600    g_atomic_int_and
+67         0x000035D0    g_atomic_int_compare_and_exchange
+68         0x000035B0    g_atomic_int_dec_and_test
+69         0x00003780    g_atomic_int_exchange_and_add
+70         0x00003570    g_atomic_int_get
+71         0x000035A0    g_atomic_int_inc
+72         0x00003630    g_atomic_int_or
+73         0x00003580    g_atomic_int_set
+74         0x00003660    g_atomic_int_xor
+75         0x000036E0    g_atomic_pointer_add
+76         0x000036F0    g_atomic_pointer_and
+77         0x000036C0    g_atomic_pointer_compare_and_exchange
+78         0x00003690    g_atomic_pointer_get
+79         0x00003720    g_atomic_pointer_or
+80         0x000036A0    g_atomic_pointer_set
+81         0x00003750    g_atomic_pointer_xor
+82         0x00003EB0    g_base64_decode
+83         0x00003F90    g_base64_decode_inplace
+84         0x00003D30    g_base64_decode_step
+85         0x00003C30    g_base64_encode
+86         0x00003AB0    g_base64_encode_close
+87         0x00003810    g_base64_encode_step
+88         0x0005D610    g_basename
+89         0x00004240    g_bit_lock
+90         0x0005D170    g_bit_nth_lsf
+91         0x0005D1B0    g_bit_nth_msf
+92         0x0005D200    g_bit_storage
+93         0x000042B0    g_bit_trylock
+94         0x000042D0    g_bit_unlock
+95         0x00035840    g_blow_chunks
+96         0x000085E0    g_bookmark_file_add_application
+97         0x00007B20    g_bookmark_file_add_group
+98         0x00004F90    g_bookmark_file_error_quark
+99         0x00005010    g_bookmark_file_free
+100        0x00007620    g_bookmark_file_get_added
+101        0x00008730    g_bookmark_file_get_app_info
+102        0x00008AD0    g_bookmark_file_get_applications
+103        0x00007000    g_bookmark_file_get_description
+104        0x00007F80    g_bookmark_file_get_groups
+105        0x00008FF0    g_bookmark_file_get_icon
+106        0x00007420    g_bookmark_file_get_is_private
+107        0x00007200    g_bookmark_file_get_mime_type
+108        0x000077C0    g_bookmark_file_get_modified
+109        0x00008CB0    g_bookmark_file_get_size
+110        0x00006E70    g_bookmark_file_get_title
+111        0x00006CB0    g_bookmark_file_get_uris
+112        0x00007960    g_bookmark_file_get_visited
+113        0x00008110    g_bookmark_file_has_application
+114        0x00007A30    g_bookmark_file_has_group
+115        0x00005FC0    g_bookmark_file_has_item
+116        0x00005040    g_bookmark_file_load_from_data
+117        0x00005340    g_bookmark_file_load_from_data_dirs
+118        0x00005210    g_bookmark_file_load_from_file
+119        0x00008CF0    g_bookmark_file_move_item
+120        0x00004FB0    g_bookmark_file_new
+121        0x000084F0    g_bookmark_file_remove_application
+122        0x00007C80    g_bookmark_file_remove_group
+123        0x00005EA0    g_bookmark_file_remove_item
+124        0x00007540    g_bookmark_file_set_added
+125        0x00008200    g_bookmark_file_set_app_info
+126        0x00006F30    g_bookmark_file_set_description
+127        0x00007E00    g_bookmark_file_set_groups
+128        0x00008ED0    g_bookmark_file_set_icon
+129        0x00007320    g_bookmark_file_set_is_private
+130        0x000070C0    g_bookmark_file_set_mime_type
+131        0x000076F0    g_bookmark_file_set_modified
+132        0x00006DA0    g_bookmark_file_set_title
+133        0x00007890    g_bookmark_file_set_visited
+134        0x00005600    g_bookmark_file_to_data
+135        0x00005D80    g_bookmark_file_to_file
+136        0x0001D6C0    g_build_filename
+137        0x0001D6A0    g_build_filenamev
+138        0x0001D650    g_build_path
+139        0x0001D630    g_build_pathv
+140        0x00002860    g_byte_array_append
+141        0x00002800    g_byte_array_free
+142        0x000027A0    g_byte_array_new
+143        0x00002890    g_byte_array_prepend
+144        0x00002820    g_byte_array_ref
+145        0x000028F0    g_byte_array_remove_index
+146        0x00002920    g_byte_array_remove_index_fast
+147        0x00002950    g_byte_array_remove_range
+148        0x000028C0    g_byte_array_set_size
+149        0x000027D0    g_byte_array_sized_new
+150        0x00002A00    g_byte_array_sort
+151        0x00002A20    g_byte_array_sort_with_data
+152        0x00002840    g_byte_array_unref
+153        0x00009490    g_cache_destroy
+154        0x00009500    g_cache_insert
+155        0x000096D0    g_cache_key_foreach
+156        0x000092C0    g_cache_new
+157        0x000095D0    g_cache_remove
+158        0x00009740    g_cache_value_foreach
+159        0x0004AC80    g_chdir
+160        0x0000DD60    g_checksum_copy
+161        0x0000DDE0    g_checksum_free
+162        0x0000E280    g_checksum_get_digest
+163        0x0000E1B0    g_checksum_get_string
+164        0x0000DD20    g_checksum_new
+165        0x0000DBE0    g_checksum_reset
+166        0x0000DBC0    g_checksum_type_get_length
+167        0x0000DE10    g_checksum_update
+168        0x00030E00    g_child_watch_add
+169        0x00030D50    g_child_watch_add_full
+170        0x000A1204    g_child_watch_funcs
+171        0x00030D00    g_child_watch_source_new
+172        0x0004A8E0    g_chmod
+173        0x0001BC80    g_clear_error
+174        0x0000E5E0    g_completion_add_items
+175        0x0000E710    g_completion_clear_items
+176        0x0000E780    g_completion_complete
+177        0x0000EAA0    g_completion_complete_utf8
+178        0x0000EB30    g_completion_free
+179        0x0000E5A0    g_completion_new
+180        0x0000E670    g_completion_remove_items
+181        0x0000EB80    g_completion_set_compare
+182        0x0000E430    g_compute_checksum_for_data
+183        0x0000E510    g_compute_checksum_for_string
+184        0x0001FB80    g_compute_hmac_for_data
+185        0x0001FC30    g_compute_hmac_for_string
+186        0x00011820    g_convert
+187        0x00010FA0    g_convert_error_quark
+188        0x00011960    g_convert_with_fallback
+189        0x00011580    g_convert_with_iconv
+190        0x0004AA10    g_creat
+191        0x000129F0    g_datalist_clear
+192        0x00013340    g_datalist_foreach
+193        0x00014260    g_datalist_get_data
+194        0x00013BC0    g_datalist_get_flags
+195        0x00013150    g_datalist_id_get_data
+196        0x00013020    g_datalist_id_remove_no_notify
+197        0x00012B80    g_datalist_id_set_data_full
+198        0x00013620    g_datalist_init
+199        0x00013B00    g_datalist_set_flags
+200        0x00013B60    g_datalist_unset_flags
+201        0x00012AA0    g_dataset_destroy
+202        0x00013480    g_dataset_foreach
+203        0x00013220    g_dataset_id_get_data
+204        0x00012E10    g_dataset_id_remove_no_notify
+205        0x00013660    g_dataset_id_set_data_full
+206        0x00016170    g_date_add_days
+207        0x00015530    g_date_add_months
+208        0x000152C0    g_date_add_years
+209        0x00016DA0    g_date_clamp
+210        0x00014FB0    g_date_clear
+211        0x00016A20    g_date_compare
+212        0x000163C0    g_date_days_between
+213        0x00014C60    g_date_free
+214        0x00014F20    g_date_get_day
+215        0x00015730    g_date_get_day_of_year
+216        0x00016710    g_date_get_days_in_month
+217        0x00016200    g_date_get_iso8601_week_of_year
+218        0x00016340    g_date_get_julian
+219        0x00016620    g_date_get_monday_week_of_year
+220        0x000167A0    g_date_get_monday_weeks_in_year
+221        0x00014E00    g_date_get_month
+222        0x00016500    g_date_get_sunday_week_of_year
+223        0x000168E0    g_date_get_sunday_weeks_in_year
+224        0x00016450    g_date_get_weekday
+225        0x00014E90    g_date_get_year
+226        0x00015090    g_date_is_first_of_month
+227        0x00015660    g_date_is_last_of_month
+228        0x00015120    g_date_is_leap_year
+229        0x00014C40    g_date_new
+230        0x00015E00    g_date_new_dmy
+231        0x00014CE0    g_date_new_julian
+232        0x00016F20    g_date_order
+233        0x00015A40    g_date_set_day
+234        0x00015880    g_date_set_dmy
+235        0x00015020    g_date_set_julian
+236        0x00015B30    g_date_set_month
+237        0x00017E10    g_date_set_parse
+238        0x00015DE0    g_date_set_time
+239        0x00015C40    g_date_set_time_t
+240        0x00015DC0    g_date_set_time_val
+241        0x00015960    g_date_set_year
+242        0x00016FE0    g_date_strftime
+243        0x000160B0    g_date_subtract_days
+244        0x00015380    g_date_subtract_months
+245        0x000151B0    g_date_subtract_years
+246        0x00019270    g_date_time_add
+247        0x000192B0    g_date_time_add_days
+248        0x00019760    g_date_time_add_full
+249        0x00019360    g_date_time_add_hours
+250        0x000193A0    g_date_time_add_minutes
+251        0x00019B90    g_date_time_add_months
+252        0x000193D0    g_date_time_add_seconds
+253        0x00019310    g_date_time_add_weeks
+254        0x00019D80    g_date_time_add_years
+255        0x00019490    g_date_time_compare
+256        0x00019410    g_date_time_difference
+257        0x000194D0    g_date_time_equal
+258        0x0001A8E0    g_date_time_format
+259        0x0001A200    g_date_time_get_day_of_month
+260        0x0001A360    g_date_time_get_day_of_week
+261        0x0001A430    g_date_time_get_day_of_year
+262        0x0001A480    g_date_time_get_hour
+263        0x0001A5C0    g_date_time_get_microsecond
+264        0x0001A4E0    g_date_time_get_minute
+265        0x0001A1A0    g_date_time_get_month
+266        0x0001A550    g_date_time_get_second
+267        0x0001A620    g_date_time_get_seconds
+268        0x0001A7A0    g_date_time_get_timezone_abbreviation
+269        0x0001A750    g_date_time_get_utc_offset
+270        0x0001A3C0    g_date_time_get_week_numbering_year
+271        0x0001A320    g_date_time_get_week_of_year
+272        0x00019F20    g_date_time_get_year
+273        0x00019500    g_date_time_get_ymd
+274        0x000194C0    g_date_time_hash
+275        0x0001A7F0    g_date_time_is_daylight_savings
+276        0x00018EB0    g_date_time_new
+277        0x00018E30    g_date_time_new_from_timeval_local
+278        0x00018E70    g_date_time_new_from_timeval_utc
+279        0x00018D50    g_date_time_new_from_unix_local
+280        0x00018DC0    g_date_time_new_from_unix_utc
+281        0x000191B0    g_date_time_new_local
+282        0x00018CA0    g_date_time_new_now
+283        0x00018CD0    g_date_time_new_now_local
+284        0x00018D10    g_date_time_new_now_utc
+285        0x00019210    g_date_time_new_utc
+286        0x00018870    g_date_time_ref
+287        0x0001A860    g_date_time_to_local
+288        0x0001A6E0    g_date_time_to_timeval
+289        0x0001A840    g_date_time_to_timezone
+290        0x0001A6A0    g_date_time_to_unix
+291        0x0001A8A0    g_date_time_to_utc
+292        0x000188E0    g_date_time_unref
+293        0x00016C20    g_date_to_struct_tm
+294        0x00014CA0    g_date_valid
+295        0x00014DB0    g_date_valid_day
+296        0x00015810    g_date_valid_dmy
+297        0x00014DF0    g_date_valid_julian
+298        0x00014D80    g_date_valid_month
+299        0x00014DD0    g_date_valid_weekday
+300        0x00014DA0    g_date_valid_year
+301        0x0004DF20    g_dcgettext
+302        0x0004DD60    g_dgettext
+303        0x0001B820    g_dir_close
+304        0x0001D5F0    g_dir_make_tmp
+305        0x0001B610    g_dir_open
+306        0x0001B4F0    g_dir_open_utf8
+307        0x0001B760    g_dir_read_name
+308        0x0001B680    g_dir_read_name_utf8
+309        0x0001B7E0    g_dir_rewind
+310        0x00060280    g_direct_equal
+311        0x00060270    g_direct_hash
+312        0x0004DF80    g_dngettext
+313        0x00060300    g_double_equal
+314        0x00060320    g_double_hash
+315        0x0004DE70    g_dpgettext
+316        0x0004DDB0    g_dpgettext2
+317        0x0001BA90    g_error_copy
+318        0x0001BA30    g_error_free
+319        0x0001BB10    g_error_matches
+320        0x0001B910    g_error_new
+321        0x0001B980    g_error_new_literal
+322        0x0001B8D0    g_error_new_valist
+323        0x0001CE60    g_file_error_from_errno
+324        0x0001C7F0    g_file_error_quark
+325        0x0001DF40    g_file_get_contents
+326        0x0001CE80    g_file_get_contents_utf8
+327        0x0001DFF0    g_file_open_tmp
+328        0x0001D590    g_file_open_tmp_utf8
+329        0x0001DE90    g_file_read_link
+330        0x0001D080    g_file_set_contents
+331        0x0001DED0    g_file_test
+332        0x0001C460    g_file_test_utf8
+333        0x00012800    g_filename_display_basename
+334        0x00012760    g_filename_display_name
+335        0x00012370    g_filename_from_uri
+336        0x00012150    g_filename_from_uri_utf8
+337        0x000120C0    g_filename_from_utf8
+338        0x00012090    g_filename_from_utf8_utf8
+339        0x000125A0    g_filename_to_uri
+340        0x000123E0    g_filename_to_uri_utf8
+341        0x00011FE0    g_filename_to_utf8
+342        0x00011F90    g_filename_to_utf8_utf8
+343        0x00060500    g_find_program_in_path
+344        0x0005E830    g_find_program_in_path_utf8
+345        0x0004AFF0    g_fopen
+346        0x0001DC90    g_format_size
+347        0x0001DCC0    g_format_size_for_display
+348        0x0001D6E0    g_format_size_full
+349        0x0006DC80    g_fprintf
+350        0x00035000    g_free
+351        0x0004B0D0    g_freopen
+352        0x0005F4B0    g_get_application_name
+353        0x00059E30    g_get_charset
+354        0x00060390    g_get_codeset
+355        0x00060590    g_get_current_dir
+356        0x0005DD10    g_get_current_dir_utf8
+357        0x0002DE20    g_get_current_time
+358        0x0005EEE0    g_get_environ
+359        0x00011F60    g_get_filename_charsets
+360        0x000608C0    g_get_home_dir
+361        0x0005F0F0    g_get_home_dir_utf8
+362        0x0005F230    g_get_host_name
+363        0x000600D0    g_get_language_names
+364        0x00060050    g_get_locale_variants
+365        0x0002DF30    g_get_monotonic_time
+366        0x0005F2D0    g_get_prgname
+367        0x00060820    g_get_real_name
+368        0x0005F050    g_get_real_name_utf8
+369        0x0002DEF0    g_get_real_time
+370        0x0005FF60    g_get_system_config_dirs
+371        0x0005FEA0    g_get_system_data_dirs
+372        0x00060960    g_get_tmp_dir
+373        0x0005F190    g_get_tmp_dir_utf8
+374        0x0005F890    g_get_user_cache_dir
+375        0x0005F770    g_get_user_config_dir
+376        0x0005F630    g_get_user_data_dir
+377        0x00060780    g_get_user_name
+378        0x0005EFB0    g_get_user_name_utf8
+379        0x0005F9C0    g_get_user_runtime_dir
+380        0x0005FAD0    g_get_user_special_dir
+381        0x000605F0    g_getenv
+382        0x0005DDD0    g_getenv_utf8
+383        0x0001F230    g_hash_table_destroy
+384        0x0001F4A0    g_hash_table_find
+385        0x0001F3F0    g_hash_table_foreach
+386        0x0001F310    g_hash_table_foreach_remove
+387        0x0001F380    g_hash_table_foreach_steal
+388        0x0001F5A0    g_hash_table_get_keys
+389        0x0001F620    g_hash_table_get_values
+390        0x0001F120    g_hash_table_insert
+391        0x0001EC10    g_hash_table_iter_get_hash_table
+392        0x0001EA90    g_hash_table_iter_init
+393        0x0001EB00    g_hash_table_iter_next
+394        0x0001EC50    g_hash_table_iter_remove
+395        0x0001EC70    g_hash_table_iter_replace
+396        0x0001ED60    g_hash_table_iter_steal
+397        0x0001EE60    g_hash_table_lookup
+398        0x0001EFB0    g_hash_table_lookup_extended
+399        0x0001EA60    g_hash_table_new
+400        0x0001E9B0    g_hash_table_new_full
+401        0x0001ED80    g_hash_table_ref
+402        0x0001F160    g_hash_table_remove
+403        0x0001F1A0    g_hash_table_remove_all
+404        0x0001F140    g_hash_table_replace
+405        0x0001F560    g_hash_table_size
+406        0x0001F180    g_hash_table_steal
+407        0x0001F280    g_hash_table_steal_all
+408        0x0001EDC0    g_hash_table_unref
+409        0x0001F870    g_hmac_copy
+410        0x0001FA30    g_hmac_get_digest
+411        0x0001FB10    g_hmac_get_string
+412        0x0001F6A0    g_hmac_new
+413        0x0001F8F0    g_hmac_ref
+414        0x0001F930    g_hmac_unref
+415        0x0001F9B0    g_hmac_update
+416        0x0001FD60    g_hook_alloc
+417        0x00020E00    g_hook_compare_ids
+418        0x00020900    g_hook_destroy
+419        0x00020090    g_hook_destroy_link
+420        0x00020990    g_hook_find
+421        0x00020A80    g_hook_find_data
+422        0x00020AF0    g_hook_find_func
+423        0x00020B80    g_hook_find_func_data
+424        0x00020460    g_hook_first_valid
+425        0x0001FE00    g_hook_free
+426        0x00020880    g_hook_get
+427        0x00020230    g_hook_insert_before
+428        0x00020C20    g_hook_insert_sorted
+429        0x000201A0    g_hook_list_clear
+430        0x0001FCD0    g_hook_list_init
+431        0x000207C0    g_hook_list_invoke
+432        0x000206F0    g_hook_list_invoke_check
+433        0x00020500    g_hook_list_marshal
+434        0x000205F0    g_hook_list_marshal_check
+435        0x000203B0    g_hook_next_valid
+436        0x00020360    g_hook_prepend
+437        0x00020110    g_hook_ref
+438        0x0001FF30    g_hook_unref
+439        0x00021C40    g_hostname_is_ascii_encoded
+440        0x00021CA0    g_hostname_is_ip_address
+441        0x00021800    g_hostname_is_non_ascii
+442        0x00021250    g_hostname_to_ascii
+443        0x00021840    g_hostname_to_unicode
+444        0x00011530    g_iconv
+445        0x00011560    g_iconv_close
+446        0x000110A0    g_iconv_open
+447        0x00030F30    g_idle_add
+448        0x00030E80    g_idle_add_full
+449        0x000A11EC    g_idle_funcs
+450        0x00030F60    g_idle_remove_by_data
+451        0x00030E40    g_idle_source_new
+452        0x000602D0    g_int64_equal
+453        0x000602F0    g_int64_hash
+454        0x000602A0    g_int_equal
+455        0x000602C0    g_int_hash
+456        0x00014610    g_intern_static_string
+457        0x00014320    g_intern_string
+458        0x00021FF0    g_io_add_watch
+459        0x00021F50    g_io_add_watch_full
+460        0x00023660    g_io_channel_close
+461        0x00022090    g_io_channel_error_from_errno
+462        0x00025510    g_io_channel_error_quark
+463        0x00022490    g_io_channel_flush
+464        0x00022030    g_io_channel_get_buffer_condition
+465        0x000221C0    g_io_channel_get_buffer_size
+466        0x000238C0    g_io_channel_get_buffered
+467        0x00022450    g_io_channel_get_close_on_unref
+468        0x00023D30    g_io_channel_get_encoding
+469        0x00022390    g_io_channel_get_flags
+470        0x000222D0    g_io_channel_get_line_term
+471        0x00021E60    g_io_channel_init
+472        0x00071590    g_io_channel_new_file
+473        0x000711F0    g_io_channel_new_file_utf8
+474        0x000257B0    g_io_channel_read
+475        0x00024360    g_io_channel_read_chars
+476        0x00023D70    g_io_channel_read_line
+477        0x00023F50    g_io_channel_read_line_string
+478        0x00024110    g_io_channel_read_to_end
+479        0x000247C0    g_io_channel_read_unichar
+480        0x00021ED0    g_io_channel_ref
+481        0x000255E0    g_io_channel_seek
+482        0x00023080    g_io_channel_seek_position
+483        0x00022170    g_io_channel_set_buffer_size
+484        0x00023800    g_io_channel_set_buffered
+485        0x00022400    g_io_channel_set_close_on_unref
+486        0x00023900    g_io_channel_set_encoding
+487        0x00022310    g_io_channel_set_flags
+488        0x00022200    g_io_channel_set_line_term
+489        0x000233A0    g_io_channel_shutdown
+490        0x00071780    g_io_channel_unix_get_fd
+491        0x00071680    g_io_channel_unix_new
+492        0x00023700    g_io_channel_unref
+493        0x00071600    g_io_channel_win32_get_fd
+494        0x000717F0    g_io_channel_win32_make_pollfd
+495        0x00071190    g_io_channel_win32_new_fd
+496        0x000710F0    g_io_channel_win32_new_messages
+497        0x00071610    g_io_channel_win32_new_socket
+498        0x000718E0    g_io_channel_win32_new_stream_socket
+499        0x000717A0    g_io_channel_win32_poll
+500        0x00071790    g_io_channel_win32_set_debug
+501        0x000256F0    g_io_channel_write
+502        0x000249E0    g_io_channel_write_chars
+503        0x00025370    g_io_channel_write_unichar
+504        0x00021F10    g_io_create_watch
+505        0x000A17A0    g_io_watch_funcs
+506        0x00026570    g_key_file_error_quark
+507        0x00027D90    g_key_file_free
+508        0x00029270    g_key_file_get_boolean
+509        0x000294B0    g_key_file_get_boolean_list
+510        0x0002A600    g_key_file_get_comment
+511        0x0002A050    g_key_file_get_double
+512        0x0002A250    g_key_file_get_double_list
+513        0x00028130    g_key_file_get_groups
+514        0x000299F0    g_key_file_get_int64
+515        0x000297A0    g_key_file_get_integer
+516        0x00029D70    g_key_file_get_integer_list
+517        0x00027F70    g_key_file_get_keys
+518        0x00028D70    g_key_file_get_locale_string
+519        0x00028F20    g_key_file_get_locale_string_list
+520        0x000280E0    g_key_file_get_start_group
+521        0x00028560    g_key_file_get_string
+522        0x00028810    g_key_file_get_string_list
+523        0x00029BB0    g_key_file_get_uint64
+524        0x00028280    g_key_file_get_value
+525        0x0002A980    g_key_file_has_group
+526        0x0002A9F0    g_key_file_has_key
+527        0x00027800    g_key_file_load_from_data
+528        0x00027C60    g_key_file_load_from_data_dirs
+529        0x00027960    g_key_file_load_from_dirs
+530        0x000276C0    g_key_file_load_from_file
+531        0x00027650    g_key_file_new
+532        0x0002A8D0    g_key_file_remove_comment
+533        0x0002AB00    g_key_file_remove_group
+534        0x0002ABD0    g_key_file_remove_key
+535        0x00029420    g_key_file_set_boolean
+536        0x00029640    g_key_file_set_boolean_list
+537        0x0002A520    g_key_file_set_comment
+538        0x0002A1D0    g_key_file_set_double
+539        0x0002A3E0    g_key_file_set_double_list
+540        0x00029B20    g_key_file_set_int64
+541        0x00029970    g_key_file_set_integer
+542        0x00029F00    g_key_file_set_integer_list
+543        0x00027680    g_key_file_set_list_separator
+544        0x00028C20    g_key_file_set_locale_string
+545        0x00029090    g_key_file_set_locale_string_list
+546        0x00028770    g_key_file_set_string
+547        0x00028AB0    g_key_file_set_string_list
+548        0x00029CE0    g_key_file_set_uint64
+549        0x00028400    g_key_file_set_value
+550        0x00027DF0    g_key_file_to_data
+551        0x0002AFC0    g_list_alloc
+552        0x0002B070    g_list_append
+553        0x0002B2C0    g_list_concat
+554        0x0002B480    g_list_copy
+555        0x0002B420    g_list_delete_link
+556        0x0002B5C0    g_list_find
+557        0x0002B5E0    g_list_find_custom
+558        0x0002B6E0    g_list_first
+559        0x0002B720    g_list_foreach
+560        0x0002AFE0    g_list_free
+561        0x0002B010    g_list_free_1
+562        0x0002B030    g_list_free_full
+563        0x0002B680    g_list_index
+564        0x0002B120    g_list_insert
+565        0x0002B1C0    g_list_insert_before
+566        0x0002B760    g_list_insert_sorted
+567        0x0002B780    g_list_insert_sorted_with_data
+568        0x0002B6C0    g_list_last
+569        0x0002B700    g_list_length
+570        0x0002B520    g_list_nth
+571        0x0002B580    g_list_nth_data
+572        0x0002B550    g_list_nth_prev
+573        0x0002AFB0    g_list_pop_allocator
+574        0x0002B640    g_list_position
+575        0x0002B0D0    g_list_prepend
+576        0x0002AFA0    g_list_push_allocator
+577        0x0002B2F0    g_list_remove
+578        0x0002B360    g_list_remove_all
+579        0x0002B3D0    g_list_remove_link
+580        0x0002B4F0    g_list_reverse
+581        0x0002B7A0    g_list_sort
+582        0x0002B7C0    g_list_sort_with_data
+583        0x0005EDD0    g_listenv
+584        0x00011ED0    g_locale_from_utf8
+585        0x00011E40    g_locale_to_utf8
+586        0x00036BC0    g_log
+587        0x00035ED0    g_log_default_handler
+588        0x00037100    g_log_remove_handler
+589        0x000362A0    g_log_set_always_fatal
+590        0x000363A0    g_log_set_default_handler
+591        0x00036320    g_log_set_fatal_mask
+592        0x00036FC0    g_log_set_handler
+593        0x000366A0    g_logv
+594        0x0004AE10    g_lstat
+595        0x0002DFC0    g_main_context_acquire
+596        0x00030120    g_main_context_add_poll
+597        0x0002EB20    g_main_context_check
+598        0x0002C800    g_main_context_default
+599        0x0002EE70    g_main_context_dispatch
+600        0x0002DB10    g_main_context_find_source_by_funcs_user_data
+601        0x0002D9E0    g_main_context_find_source_by_id
+602        0x0002DC20    g_main_context_find_source_by_user_data
+603        0x000307B0    g_main_context_get_poll_func
+604        0x0002C8C0    g_main_context_get_thread_default
+605        0x000310B0    g_main_context_invoke
+606        0x00030F80    g_main_context_invoke_full
+607        0x00030970    g_main_context_is_owner
+608        0x0002FA40    g_main_context_iteration
+609        0x0002C670    g_main_context_new
+610        0x0002F980    g_main_context_pending
+611        0x0002E2E0    g_main_context_pop_thread_default
+612        0x0002E640    g_main_context_prepare
+613        0x0002E0D0    g_main_context_push_thread_default
+614        0x0002EA10    g_main_context_query
+615        0x0002C3E0    g_main_context_ref
+616        0x0002E170    g_main_context_release
+617        0x00030230    g_main_context_remove_poll
+618        0x000306C0    g_main_context_set_poll_func
+619        0x0002C450    g_main_context_unref
+620        0x0002E3F0    g_main_context_wait
+621        0x000308A0    g_main_context_wakeup
+622        0x0002DF80    g_main_current_source
+623        0x0002DF70    g_main_depth
+624        0x000300C0    g_main_loop_get_context
+625        0x00030060    g_main_loop_is_running
+626        0x0002FB00    g_main_loop_new
+627        0x0002FF40    g_main_loop_quit
+628        0x0002FB50    g_main_loop_ref
+629        0x0002FC60    g_main_loop_run
+630        0x0002FBC0    g_main_loop_unref
+631        0x00034EB0    g_malloc
+632        0x00034F10    g_malloc0
+633        0x000351A0    g_malloc0_n
+634        0x00035120    g_malloc_n
+635        0x00031570    g_mapped_file_free
+636        0x000314A0    g_mapped_file_get_contents
+637        0x00031460    g_mapped_file_get_length
+638        0x00031140    g_mapped_file_new
+639        0x000314E0    g_mapped_file_ref
+640        0x00031520    g_mapped_file_unref
+641        0x00034350    g_markup_collect_attributes
+642        0x00031CB0    g_markup_error_quark
+643        0x00033F00    g_markup_escape_text
+644        0x00033AB0    g_markup_parse_context_end_parse
+645        0x00032800    g_markup_parse_context_free
+646        0x00033D40    g_markup_parse_context_get_element
+647        0x00033D80    g_markup_parse_context_get_element_stack
+648        0x00033DC0    g_markup_parse_context_get_position
+649        0x00033E20    g_markup_parse_context_get_user_data
+650        0x00032700    g_markup_parse_context_new
+651        0x00032940    g_markup_parse_context_parse
+652        0x00033E90    g_markup_parse_context_pop
+653        0x00033E30    g_markup_parse_context_push
+654        0x00034330    g_markup_printf_escaped
+655        0x000340B0    g_markup_vprintf_escaped
+656        0x00040640    g_match_info_expand_references
+657        0x0003FC90    g_match_info_fetch
+658        0x0003FF80    g_match_info_fetch_all
+659        0x0003FD50    g_match_info_fetch_named
+660        0x0003FEF0    g_match_info_fetch_named_pos
+661        0x0003FBF0    g_match_info_fetch_pos
+662        0x00040BF0    g_match_info_free
+663        0x0003FB60    g_match_info_get_match_count
+664        0x0003FA60    g_match_info_get_regex
+665        0x0003FAA0    g_match_info_get_string
+666        0x0003FBB0    g_match_info_is_partial_match
+667        0x0003FB20    g_match_info_matches
+668        0x000407B0    g_match_info_next
+669        0x0003FAE0    g_match_info_ref
+670        0x00040BA0    g_match_info_unref
+671        0x00035740    g_mem_chunk_alloc
+672        0x00035780    g_mem_chunk_alloc0
+673        0x00035800    g_mem_chunk_clean
+674        0x00035700    g_mem_chunk_destroy
+675        0x000357C0    g_mem_chunk_free
+676        0x00035830    g_mem_chunk_info
+677        0x000356B0    g_mem_chunk_new
+678        0x00035820    g_mem_chunk_print
+679        0x00035810    g_mem_chunk_reset
+680        0x000F9188    g_mem_gc_friendly
+681        0x00035360    g_mem_is_system_malloc
+682        0x00035450    g_mem_profile
+683        0x00035380    g_mem_set_vtable
+684        0x0004B7E0    g_memdup
+685        0x0004ABF0    g_mkdir
+686        0x0001C650    g_mkdir_with_parents
+687        0x0001D030    g_mkdtemp
+688        0x0001CFF0    g_mkdtemp_full
+689        0x0001DFC0    g_mkstemp
+690        0x0001D050    g_mkstemp_full
+691        0x0001D560    g_mkstemp_utf8
+692        0x00038450    g_node_child_index
+693        0x00038390    g_node_child_position
+694        0x00038560    g_node_children_foreach
+695        0x00038050    g_node_copy
+696        0x000380B0    g_node_copy_deep
+697        0x00037BE0    g_node_depth
+698        0x00037830    g_node_destroy
+699        0x00037EC0    g_node_find
+700        0x000382F0    g_node_find_child
+701        0x000384C0    g_node_first_sibling
+702        0x00037B30    g_node_get_root
+703        0x00038190    g_node_insert
+704        0x000379D0    g_node_insert_after
+705        0x000378A0    g_node_insert_before
+706        0x00037B70    g_node_is_ancestor
+707        0x00038000    g_node_last_child
+708        0x00038520    g_node_last_sibling
+709        0x00037C70    g_node_max_height
+710        0x000382A0    g_node_n_children
+711        0x00037F90    g_node_n_nodes
+712        0x00037790    g_node_new
+713        0x00038130    g_node_nth_child
+714        0x00037780    g_node_pop_allocator
+715        0x00037AE0    g_node_prepend
+716        0x00037770    g_node_push_allocator
+717        0x00037C00    g_node_reverse_children
+718        0x00037CB0    g_node_traverse
+719        0x000377B0    g_node_unlink
+720        0x00060350    g_nullify_pointer
+721        0x00003790    g_on_error_query
+722        0x000037F0    g_on_error_stack_trace
+723        0x00052280    g_once_impl
+724        0x00052470    g_once_init_enter
+725        0x00052390    g_once_init_enter_impl
+726        0x000524A0    g_once_init_leave
+727        0x0004A970    g_open
+728        0x00039A00    g_option_context_add_group
+729        0x0003B420    g_option_context_add_main_entries
+730        0x00039830    g_option_context_free
+731        0x0003B6A0    g_option_context_get_description
+732        0x00039C50    g_option_context_get_help
+733        0x00039930    g_option_context_get_help_enabled
+734        0x000399C0    g_option_context_get_ignore_unknown_options
+735        0x00039C10    g_option_context_get_main_group
+736        0x0003B600    g_option_context_get_summary
+737        0x000397F0    g_option_context_new
+738        0x0003AF30    g_option_context_parse
+739        0x0003B000    g_option_context_parse_command_line
+740        0x0003AF60    g_option_context_parse_utf8
+741        0x0003B640    g_option_context_set_description
+742        0x000398F0    g_option_context_set_help_enabled
+743        0x00039970    g_option_context_set_ignore_unknown_options
+744        0x00039B80    g_option_context_set_main_group
+745        0x0003B5A0    g_option_context_set_summary
+746        0x0003B4D0    g_option_context_set_translate_func
+747        0x0003B530    g_option_context_set_translation_domain
+748        0x00038D60    g_option_error_quark
+749        0x0003B100    g_option_group_add_entries
+750        0x00038790    g_option_group_free
+751        0x0003B0A0    g_option_group_new
+752        0x0003B310    g_option_group_set_error_hook
+753        0x0003B2D0    g_option_group_set_parse_hooks
+754        0x0003B350    g_option_group_set_translate_func
+755        0x0003B3B0    g_option_group_set_translation_domain
+756        0x0005D3E0    g_parse_debug_string
+757        0x0005D6B0    g_path_get_basename
+758        0x0005DAE0    g_path_get_dirname
+759        0x0005D850    g_path_is_absolute
+760        0x0005D8D0    g_path_skip_root
+761        0x0003BDD0    g_pattern_match
+762        0x0003C430    g_pattern_match_simple
+763        0x0003C390    g_pattern_match_string
+764        0x0003C2F0    g_pattern_spec_equal
+765        0x0003C2A0    g_pattern_spec_free
+766        0x0003BF70    g_pattern_spec_new
+767        0x00004320    g_pointer_bit_lock
+768        0x000043C0    g_pointer_bit_trylock
+769        0x00004400    g_pointer_bit_unlock
+770        0x0003C840    g_poll
+771        0x0001BCB0    g_prefix_error
+772        0x00036EB0    g_print
+773        0x00036DA0    g_printerr
+774        0x0006DC10    g_printf
+775        0x00036580    g_printf_string_upper_bound
+776        0x0001BC10    g_propagate_error
+777        0x0001BCE0    g_propagate_prefixed_error
+778        0x00002500    g_ptr_array_add
+779        0x00002610    g_ptr_array_foreach
+780        0x00002680    g_ptr_array_free
+781        0x00001F60    g_ptr_array_new
+782        0x00001FC0    g_ptr_array_new_full
+783        0x00001FF0    g_ptr_array_new_with_free_func
+784        0x00002020    g_ptr_array_ref
+785        0x00002400    g_ptr_array_remove
+786        0x00002480    g_ptr_array_remove_fast
+787        0x00002060    g_ptr_array_remove_index
+788        0x00002150    g_ptr_array_remove_index_fast
+789        0x00002220    g_ptr_array_remove_range
+790        0x00001F80    g_ptr_array_set_free_func
+791        0x00002360    g_ptr_array_set_size
+792        0x00001F00    g_ptr_array_sized_new
+793        0x00002560    g_ptr_array_sort
+794        0x000025B0    g_ptr_array_sort_with_data
+795        0x00002750    g_ptr_array_unref
+796        0x0003CB20    g_qsort_with_data
+797        0x00013FB0    g_quark_from_static_string
+798        0x00013CB0    g_quark_from_string
+799        0x00014230    g_quark_to_string
+800        0x00013C00    g_quark_try_string
+801        0x0003D160    g_queue_clear
+802        0x0003D600    g_queue_copy
+803        0x0003DC90    g_queue_delete_link
+804        0x0003D320    g_queue_find
+805        0x0003D360    g_queue_find_custom
+806        0x0003D290    g_queue_foreach
+807        0x0003D0B0    g_queue_free
+808        0x0003D200    g_queue_get_length
+809        0x0003DE50    g_queue_index
+810        0x0003D110    g_queue_init
+811        0x0003E0A0    g_queue_insert_after
+812        0x0003DF90    g_queue_insert_before
+813        0x0003E120    g_queue_insert_sorted
+814        0x0003D1B0    g_queue_is_empty
+815        0x0003DB50    g_queue_link_index
+816        0x0003D090    g_queue_new
+817        0x0003DD80    g_queue_peek_head
+818        0x0003D830    g_queue_peek_head_link
+819        0x0003DE00    g_queue_peek_nth
+820        0x0003D990    g_queue_peek_nth_link
+821        0x0003DDC0    g_queue_peek_tail
+822        0x0003D870    g_queue_peek_tail_link
+823        0x0003D740    g_queue_pop_head
+824        0x0003D7D0    g_queue_pop_head_link
+825        0x0003DD10    g_queue_pop_nth
+826        0x0003DC20    g_queue_pop_nth_link
+827        0x0003D8B0    g_queue_pop_tail
+828        0x0003D930    g_queue_pop_tail_link
+829        0x0003D460    g_queue_push_head
+830        0x0003D4C0    g_queue_push_head_link
+831        0x0003E010    g_queue_push_nth
+832        0x0003DA10    g_queue_push_nth_link
+833        0x0003D590    g_queue_push_tail
+834        0x0003D670    g_queue_push_tail_link
+835        0x0003DEA0    g_queue_remove
+836        0x0003DF10    g_queue_remove_all
+837        0x0003D240    g_queue_reverse
+838        0x0003D3D0    g_queue_sort
+839        0x0003DBA0    g_queue_unlink
+840        0x0003ECA0    g_rand_copy
+841        0x0003F170    g_rand_double
+842        0x0003F380    g_rand_double_range
+843        0x0003EC60    g_rand_free
+844        0x0003F040    g_rand_int
+845        0x0003F1E0    g_rand_int_range
+846        0x0003EFF0    g_rand_new
+847        0x0003EE50    g_rand_new_with_seed
+848        0x0003EFB0    g_rand_new_with_seed_array
+849        0x0003ED60    g_rand_set_seed
+850        0x0003EE80    g_rand_set_seed_array
+851        0x0003F520    g_random_double
+852        0x0003F5D0    g_random_double_range
+853        0x0003F3C0    g_random_int
+854        0x0003F470    g_random_int_range
+855        0x0003F6A0    g_random_set_seed
+856        0x00034F80    g_realloc
+857        0x00035220    g_realloc_n
+858        0x00042460    g_regex_check_replacement
+859        0x00040010    g_regex_error_quark
+860        0x00042510    g_regex_escape_nul
+861        0x00042720    g_regex_escape_string
+862        0x000414C0    g_regex_get_capture_count
+863        0x000414F0    g_regex_get_compile_flags
+864        0x00041530    g_regex_get_match_flags
+865        0x00041490    g_regex_get_max_backref
+866        0x00041450    g_regex_get_pattern
+867        0x00041A60    g_regex_get_string_number
+868        0x000416F0    g_regex_match
+869        0x00041A20    g_regex_match_all
+870        0x000417B0    g_regex_match_all_full
+871        0x00041570    g_regex_match_full
+872        0x00041730    g_regex_match_simple
+873        0x00040C10    g_regex_new
+874        0x000409F0    g_regex_ref
+875        0x00042260    g_regex_replace
+876        0x00041F90    g_regex_replace_eval
+877        0x000421C0    g_regex_replace_literal
+878        0x00041EC0    g_regex_split
+879        0x00041AE0    g_regex_split_full
+880        0x00041F10    g_regex_split_simple
+881        0x00040B10    g_regex_unref
+882        0x0003E800    g_relation_count
+883        0x0003E720    g_relation_delete
+884        0x0003E4F0    g_relation_destroy
+885        0x0003E9C0    g_relation_exists
+886        0x0003E580    g_relation_index
+887        0x0003E610    g_relation_insert
+888        0x0003E470    g_relation_new
+889        0x0003EAE0    g_relation_print
+890        0x0003E880    g_relation_select
+891        0x0005F9D0    g_reload_user_special_dirs_cache
+892        0x0004AEC0    g_remove
+893        0x0004AAA0    g_rename
+894        0x00036D60    g_return_if_fail_warning
+895        0x0004AF60    g_rmdir
+896        0x00043770    g_scanner_cur_line
+897        0x000437B0    g_scanner_cur_position
+898        0x000436F0    g_scanner_cur_token
+899        0x00043730    g_scanner_cur_value
+900        0x00042F30    g_scanner_destroy
+901        0x000437F0    g_scanner_eof
+902        0x00042AB0    g_scanner_error
+903        0x00044E70    g_scanner_get_next_token
+904        0x000439B0    g_scanner_input_file
+905        0x000438D0    g_scanner_input_text
+906        0x00043330    g_scanner_lookup_symbol
+907        0x00042CD0    g_scanner_new
+908        0x00044F50    g_scanner_peek_next_token
+909        0x00043020    g_scanner_scope_add_symbol
+910        0x00043690    g_scanner_scope_foreach_symbol
+911        0x00043540    g_scanner_scope_lookup_symbol
+912        0x000431E0    g_scanner_scope_remove_symbol
+913        0x00043650    g_scanner_set_scope
+914        0x00043840    g_scanner_sync_file_offset
+915        0x00044FD0    g_scanner_unexp_token
+916        0x00042A00    g_scanner_warn
+917        0x000465B0    g_sequence_append
+918        0x00047450    g_sequence_foreach
+919        0x00046270    g_sequence_foreach_range
+920        0x00046210    g_sequence_free
+921        0x00047110    g_sequence_get
+922        0x000472A0    g_sequence_get_begin_iter
+923        0x00047260    g_sequence_get_end_iter
+924        0x000474A0    g_sequence_get_iter_at_pos
+925        0x00047240    g_sequence_get_length
+926        0x000466A0    g_sequence_insert_before
+927        0x00046D80    g_sequence_insert_sorted
+928        0x00046C90    g_sequence_insert_sorted_iter
+929        0x000464A0    g_sequence_iter_compare
+930        0x00047660    g_sequence_iter_get_position
+931        0x000470B0    g_sequence_iter_get_sequence
+932        0x00047610    g_sequence_iter_is_begin
+933        0x000475D0    g_sequence_iter_is_end
+934        0x00047720    g_sequence_iter_move
+935        0x000476A0    g_sequence_iter_next
+936        0x000476E0    g_sequence_iter_prev
+937        0x00047030    g_sequence_lookup
+938        0x00046F50    g_sequence_lookup_iter
+939        0x00047510    g_sequence_move
+940        0x000467C0    g_sequence_move_range
+941        0x000461D0    g_sequence_new
+942        0x00046620    g_sequence_prepend
+943        0x00046370    g_sequence_range_get_midpoint
+944        0x00046710    g_sequence_remove
+945        0x000469E0    g_sequence_remove_range
+946        0x00046ED0    g_sequence_search
+947        0x00046E20    g_sequence_search_iter
+948        0x00047190    g_sequence_set
+949        0x00047410    g_sequence_sort
+950        0x00046BF0    g_sequence_sort_changed
+951        0x00046A80    g_sequence_sort_changed_iter
+952        0x000472F0    g_sequence_sort_iter
+953        0x000477B0    g_sequence_swap
+954        0x0005F560    g_set_application_name
+955        0x0001BB40    g_set_error
+956        0x0001BBB0    g_set_error_literal
+957        0x0005F410    g_set_prgname
+958        0x000364A0    g_set_print_handler
+959        0x00036510    g_set_printerr_handler
+960        0x00060690    g_setenv
+961        0x0005EA30    g_setenv_utf8
+962        0x000478E0    g_shell_error_quark
+963        0x00047D60    g_shell_parse_argv
+964        0x00047900    g_shell_quote
+965        0x00047A10    g_shell_unquote
+966        0x00049100    g_slice_alloc
+967        0x00049760    g_slice_alloc0
+968        0x000497A0    g_slice_copy
+969        0x000497E0    g_slice_free1
+970        0x00049B40    g_slice_free_chain_with_offset
+971        0x00048F10    g_slice_get_config
+972        0x00048F70    g_slice_get_config_state
+973        0x00048E80    g_slice_set_config
+974        0x0004A160    g_slist_alloc
+975        0x0004A210    g_slist_append
+976        0x0004A3B0    g_slist_concat
+977        0x0004A540    g_slist_copy
+978        0x0004A4E0    g_slist_delete_link
+979        0x0004A640    g_slist_find
+980        0x0004A660    g_slist_find_custom
+981        0x0004A780    g_slist_foreach
+982        0x0004A180    g_slist_free
+983        0x0004A1B0    g_slist_free_1
+984        0x0004A1D0    g_slist_free_full
+985        0x0004A700    g_slist_index
+986        0x0004A280    g_slist_insert
+987        0x0004A300    g_slist_insert_before
+988        0x0004A7C0    g_slist_insert_sorted
+989        0x0004A7E0    g_slist_insert_sorted_with_data
+990        0x0004A740    g_slist_last
+991        0x0004A760    g_slist_length
+992        0x0004A5D0    g_slist_nth
+993        0x0004A600    g_slist_nth_data
+994        0x0004A150    g_slist_pop_allocator
+995        0x0004A6C0    g_slist_position
+996        0x0004A260    g_slist_prepend
+997        0x0004A140    g_slist_push_allocator
+998        0x0004A3E0    g_slist_remove
+999        0x0004A440    g_slist_remove_all
+1000       0x0004A4A0    g_slist_remove_link
+1001       0x0004A5A0    g_slist_reverse
+1002       0x0004A800    g_slist_sort
+1003       0x0004A820    g_slist_sort_with_data
+1004       0x0006DDF0    g_snprintf
+1005       0x0002D780    g_source_add_child_source
+1006       0x0002CC50    g_source_add_poll
+1007       0x0002C980    g_source_attach
+1008       0x0002CAB0    g_source_destroy
+1009       0x0002D5D0    g_source_get_can_recurse
+1010       0x0002CC10    g_source_get_context
+1011       0x00030340    g_source_get_current_time
+1012       0x0002CB00    g_source_get_id
+1013       0x0002D670    g_source_get_name
+1014       0x0002D4B0    g_source_get_priority
+1015       0x00030480    g_source_get_time
+1016       0x0002DFA0    g_source_is_destroyed
+1017       0x0002C8F0    g_source_new
+1018       0x0002D6B0    g_source_ref
+1019       0x0002DD10    g_source_remove
+1020       0x0002DDB0    g_source_remove_by_funcs_user_data
+1021       0x0002DD80    g_source_remove_by_user_data
+1022       0x0002CF70    g_source_remove_child_source
+1023       0x0002CDE0    g_source_remove_poll
+1024       0x0002D280    g_source_set_callback
+1025       0x0002D150    g_source_set_callback_indirect
+1026       0x0002D4F0    g_source_set_can_recurse
+1027       0x0002D300    g_source_set_funcs
+1028       0x0002D610    g_source_set_name
+1029       0x0002DAC0    g_source_set_name_by_id
+1030       0x0002D3B0    g_source_set_priority
+1031       0x0002D9A0    g_source_unref
+1032       0x0003CAE0    g_spaced_primes_closest
+1033       0x00073B60    g_spawn_async
+1034       0x00073870    g_spawn_async_utf8
+1035       0x00073AA0    g_spawn_async_with_pipes
+1036       0x00073710    g_spawn_async_with_pipes_utf8
+1037       0x00073A80    g_spawn_close_pid
+1038       0x00073D50    g_spawn_command_line_async
+1039       0x000739C0    g_spawn_command_line_async_utf8
+1040       0x00073C80    g_spawn_command_line_sync
+1041       0x000738F0    g_spawn_command_line_sync_utf8
+1042       0x00071C50    g_spawn_error_quark
+1043       0x00073BC0    g_spawn_sync
+1044       0x000730A0    g_spawn_sync_utf8
+1045       0x0006DD30    g_sprintf
+1046       0x0004AD10    g_stat
+1047       0x000528C0    g_static_mutex_free
+1048       0x000525F0    g_static_mutex_get_mutex_impl
+1049       0x000525B0    g_static_mutex_init
+1050       0x00052DC0    g_static_private_free
+1051       0x000536C0    g_static_private_get
+1052       0x00052DB0    g_static_private_init
+1053       0x00053540    g_static_private_set
+1054       0x00052D70    g_static_rec_mutex_free
+1055       0x00052930    g_static_rec_mutex_init
+1056       0x00052980    g_static_rec_mutex_lock
+1057       0x00052BF0    g_static_rec_mutex_lock_full
+1058       0x00052A70    g_static_rec_mutex_trylock
+1059       0x00052B70    g_static_rec_mutex_unlock
+1060       0x00052CE0    g_static_rec_mutex_unlock_full
+1061       0x00053DE0    g_static_rw_lock_free
+1062       0x000537D0    g_static_rw_lock_init
+1063       0x00053810    g_static_rw_lock_reader_lock
+1064       0x00053920    g_static_rw_lock_reader_trylock
+1065       0x000539F0    g_static_rw_lock_reader_unlock
+1066       0x00053B00    g_static_rw_lock_writer_lock
+1067       0x00053C10    g_static_rw_lock_writer_trylock
+1068       0x00053CE0    g_static_rw_lock_writer_unlock
+1069       0x0004B8D0    g_stpcpy
+1070       0x0004E020    g_str_equal
+1071       0x0004DC10    g_str_has_prefix
+1072       0x0004DB50    g_str_has_suffix
+1073       0x0004DFF0    g_str_hash
+1074       0x0004CCD0    g_strcanon
+1075       0x0004CBA0    g_strcasecmp
+1076       0x0004D180    g_strchomp
+1077       0x0004D0F0    g_strchug
+1078       0x000501E0    g_strcmp0
+1079       0x0004CD90    g_strcompress
+1080       0x0004B9A0    g_strconcat
+1081       0x0004CC40    g_strdelimit
+1082       0x0004C780    g_strdown
+1083       0x0004B790    g_strdup
+1084       0x0004B980    g_strdup_printf
+1085       0x0004B950    g_strdup_vprintf
+1086       0x0004D600    g_strdupv
+1087       0x0004C2B0    g_strerror
+1088       0x0004CF50    g_strescape
+1089       0x0004D5C0    g_strfreev
+1090       0x0004E810    g_string_append
+1091       0x0004ECE0    g_string_append_c
+1092       0x0004E910    g_string_append_len
+1093       0x0004F7A0    g_string_append_printf
+1094       0x0004F160    g_string_append_unichar
+1095       0x0004ED30    g_string_append_uri_escaped
+1096       0x0004F660    g_string_append_vprintf
+1097       0x0004F480    g_string_ascii_down
+1098       0x0004F4F0    g_string_ascii_up
+1099       0x0004E870    g_string_assign
+1100       0x0004E180    g_string_chunk_clear
+1101       0x0004E100    g_string_chunk_free
+1102       0x0004E2E0    g_string_chunk_insert
+1103       0x0004E330    g_string_chunk_insert_const
+1104       0x0004E200    g_string_chunk_insert_len
+1105       0x0004E0A0    g_string_chunk_new
+1106       0x0004F560    g_string_down
+1107       0x0004E4A0    g_string_equal
+1108       0x0004F350    g_string_erase
+1109       0x0004E430    g_string_free
+1110       0x0004E500    g_string_hash
+1111       0x0004EB30    g_string_insert
+1112       0x0004EBB0    g_string_insert_c
+1113       0x0004E5F0    g_string_insert_len
+1114       0x0004EF70    g_string_insert_unichar
+1115       0x0004E9A0    g_string_new
+1116       0x0004EA10    g_string_new_len
+1117       0x0004F2E0    g_string_overwrite
+1118       0x0004F1B0    g_string_overwrite_len
+1119       0x0004EA70    g_string_prepend
+1120       0x0004EC90    g_string_prepend_c
+1121       0x0004EAD0    g_string_prepend_len
+1122       0x0004F110    g_string_prepend_unichar
+1123       0x0004F760    g_string_printf
+1124       0x0004E580    g_string_set_size
+1125       0x0004E3D0    g_string_sized_new
+1126       0x0004E530    g_string_truncate
+1127       0x0004F5E0    g_string_up
+1128       0x0004F720    g_string_vprintf
+1129       0x0004DCD0    g_strip_context
+1130       0x0004D7A0    g_strjoin
+1131       0x0004D690    g_strjoinv
+1132       0x0004C570    g_strlcat
+1133       0x0004C4B0    g_strlcpy
+1134       0x0004CC10    g_strncasecmp
+1135       0x0004B830    g_strndup
+1136       0x0004B880    g_strnfill
+1137       0x0004C880    g_strreverse
+1138       0x0004D960    g_strrstr
+1139       0x0004DA40    g_strrstr_len
+1140       0x0004C3C0    g_strsignal
+1141       0x0004D200    g_strsplit
+1142       0x0004D3E0    g_strsplit_set
+1143       0x0004D880    g_strstr_len
+1144       0x0004BE40    g_strtod
+1145       0x0004C800    g_strup
+1146       0x0004DD10    g_strv_length
+1147       0x00050010    g_test_add_data_func
+1148       0x000500B0    g_test_add_func
+1149       0x0004FE90    g_test_add_vtable
+1150       0x00051770    g_test_bug
+1151       0x0004FAF0    g_test_bug_base
+1152       0x000B0CB0    g_test_config_vars
+1153       0x0004FB20    g_test_create_case
+1154       0x0004FC70    g_test_create_suite
+1155       0x0004FC60    g_test_fail
+1156       0x0004FD40    g_test_get_root
+1157       0x00051930    g_test_init
+1158       0x000505B0    g_test_log_buffer_free
+1159       0x000502A0    g_test_log_buffer_new
+1160       0x000504E0    g_test_log_buffer_pop
+1161       0x000502D0    g_test_log_buffer_push
+1162       0x00050550    g_test_log_msg_free
+1163       0x00036430    g_test_log_set_fatal_handler
+1164       0x0004F9A0    g_test_log_type_name
+1165       0x00051890    g_test_maximized_result
+1166       0x00051720    g_test_message
+1167       0x000518E0    g_test_minimized_result
+1168       0x00050160    g_test_queue_destroy
+1169       0x000501C0    g_test_queue_free
+1170       0x0004FA10    g_test_rand_double
+1171       0x0004FA30    g_test_rand_double_range
+1172       0x0004F9C0    g_test_rand_int
+1173       0x0004F9E0    g_test_rand_int_range
+1174       0x00051700    g_test_run
+1175       0x00051570    g_test_run_suite
+1176       0x0004FD90    g_test_suite_add
+1177       0x0004FE10    g_test_suite_add_suite
+1178       0x0004FAA0    g_test_timer_elapsed
+1179       0x0004FAE0    g_test_timer_last
+1180       0x0004FA60    g_test_timer_start
+1181       0x00050290    g_test_trap_assertions
+1182       0x00050220    g_test_trap_fork
+1183       0x00050250    g_test_trap_has_passed
+1184       0x00050270    g_test_trap_reached_timeout
+1185       0x00052F90    g_thread_create_full
+1186       0x00052260    g_thread_error_quark
+1187       0x00053510    g_thread_exit
+1188       0x00053E80    g_thread_foreach
+1189       0x000A1720    g_thread_functions_for_glib_use
+1190       0x00054030    g_thread_get_initialized
+1191       0x000A1700    g_thread_gettime
+1192       0x00053720    g_thread_init_glib
+1193       0x00053130    g_thread_join
+1194       0x00054BC0    g_thread_pool_free
+1195       0x00054F80    g_thread_pool_get_max_idle_time
+1196       0x00054A10    g_thread_pool_get_max_threads
+1197       0x00054E00    g_thread_pool_get_max_unused_threads
+1198       0x00054AB0    g_thread_pool_get_num_threads
+1199       0x00054E10    g_thread_pool_get_num_unused_threads
+1200       0x000545E0    g_thread_pool_new
+1201       0x00054800    g_thread_pool_push
+1202       0x00054F00    g_thread_pool_set_max_idle_time
+1203       0x000548D0    g_thread_pool_set_max_threads
+1204       0x00054D50    g_thread_pool_set_max_unused_threads
+1205       0x00054E50    g_thread_pool_set_sort_function
+1206       0x00054E20    g_thread_pool_stop_unused_threads
+1207       0x00054B50    g_thread_pool_unprocessed
+1208       0x000533E0    g_thread_self
+1209       0x000532F0    g_thread_set_priority
+1210       0x000A1704    g_thread_use_default_impl
+1211       0x000F9340    g_threads_got_initialized
+1212       0x000552E0    g_time_val_add
+1213       0x000553C0    g_time_val_from_iso8601
+1214       0x00055800    g_time_val_to_iso8601
+1215       0x00055FC0    g_time_zone_adjust_time
+1216       0x000563E0    g_time_zone_find_interval
+1217       0x00056720    g_time_zone_get_abbreviation
+1218       0x000567A0    g_time_zone_get_offset
+1219       0x00056800    g_time_zone_is_dst
+1220       0x00055B80    g_time_zone_new
+1221       0x00055FA0    g_time_zone_new_local
+1222       0x00055F80    g_time_zone_new_utc
+1223       0x00055B30    g_time_zone_ref
+1224       0x000559D0    g_time_zone_unref
+1225       0x00030BB0    g_timeout_add
+1226       0x00030B00    g_timeout_add_full
+1227       0x00030CA0    g_timeout_add_seconds
+1228       0x00030BF0    g_timeout_add_seconds_full
+1229       0x000A121C    g_timeout_funcs
+1230       0x00030A30    g_timeout_source_new
+1231       0x00030A90    g_timeout_source_new_seconds
+1232       0x00055170    g_timer_continue
+1233       0x00055040    g_timer_destroy
+1234       0x00055210    g_timer_elapsed
+1235       0x00055010    g_timer_new
+1236       0x00055120    g_timer_reset
+1237       0x00055080    g_timer_start
+1238       0x000550D0    g_timer_stop
+1239       0x0005D270    g_trash_stack_height
+1240       0x0005D260    g_trash_stack_peek
+1241       0x0005D240    g_trash_stack_pop
+1242       0x0005D220    g_trash_stack_push
+1243       0x00057620    g_tree_destroy
+1244       0x000578C0    g_tree_foreach
+1245       0x00057AA0    g_tree_height
+1246       0x00057670    g_tree_insert
+1247       0x00057770    g_tree_lookup
+1248       0x00057800    g_tree_lookup_extended
+1249       0x00057520    g_tree_new
+1250       0x00057450    g_tree_new_full
+1251       0x000574D0    g_tree_new_with_data
+1252       0x00057B20    g_tree_nnodes
+1253       0x00057570    g_tree_ref
+1254       0x000576F0    g_tree_remove
+1255       0x000576B0    g_tree_replace
+1256       0x00057A00    g_tree_search
+1257       0x00057730    g_tree_steal
+1258       0x00057950    g_tree_traverse
+1259       0x000575B0    g_tree_unref
+1260       0x00035030    g_try_malloc
+1261       0x00035060    g_try_malloc0
+1262       0x000352E0    g_try_malloc0_n
+1263       0x000352A0    g_try_malloc_n
+1264       0x000350C0    g_try_realloc
+1265       0x00035320    g_try_realloc_n
+1266       0x0003EA40    g_tuples_destroy
+1267       0x0003EA70    g_tuples_index
+1268       0x0005AE50    g_ucs4_to_utf16
+1269       0x0005A640    g_ucs4_to_utf8
+1270       0x0005B540    g_unichar_break_type
+1271       0x0005BF10    g_unichar_combining_class
+1272       0x0005C7E0    g_unichar_compose
+1273       0x0005C6C0    g_unichar_decompose
+1274       0x000591C0    g_unichar_digit_value
+1275       0x0005C810    g_unichar_fully_decompose
+1276       0x00059680    g_unichar_get_mirror_char
+1277       0x000596F0    g_unichar_get_script
+1278       0x00057D50    g_unichar_isalnum
+1279       0x00057DE0    g_unichar_isalpha
+1280       0x00057E70    g_unichar_iscntrl
+1281       0x000583B0    g_unichar_isdefined
+1282       0x00057EE0    g_unichar_isdigit
+1283       0x00057F50    g_unichar_isgraph
+1284       0x00057FD0    g_unichar_islower
+1285       0x000581E0    g_unichar_ismark
+1286       0x00058040    g_unichar_isprint
+1287       0x000580D0    g_unichar_ispunct
+1288       0x00058150    g_unichar_isspace
+1289       0x000582F0    g_unichar_istitle
+1290       0x00058280    g_unichar_isupper
+1291       0x000584F0    g_unichar_iswide
+1292       0x00058530    g_unichar_iswide_cjk
+1293       0x00058320    g_unichar_isxdigit
+1294       0x00058440    g_unichar_iszerowidth
+1295       0x00059FB0    g_unichar_to_utf8
+1296       0x00058A50    g_unichar_tolower
+1297       0x00059120    g_unichar_totitle
+1298       0x00058590    g_unichar_toupper
+1299       0x000593B0    g_unichar_type
+1300       0x0005B2F0    g_unichar_validate
+1301       0x000592A0    g_unichar_xdigit_value
+1302       0x0005C170    g_unicode_canonical_decomposition
+1303       0x0005BF80    g_unicode_canonical_ordering
+1304       0x000597B0    g_unicode_script_from_iso15924
+1305       0x00059780    g_unicode_script_to_iso15924
+1306       0x0004AE30    g_unlink
+1307       0x00060730    g_unsetenv
+1308       0x0005EC50    g_unsetenv_utf8
+1309       0x0005CB00    g_uri_escape_string
+1310       0x00012610    g_uri_list_extract_uris
+1311       0x0005CA60    g_uri_parse_scheme
+1312       0x0005C920    g_uri_unescape_segment
+1313       0x0005CA30    g_uri_unescape_string
+1314       0x000552B0    g_usleep
+1315       0x0005A990    g_utf16_to_ucs4
+1316       0x0005A790    g_utf16_to_utf8
+1317       0x00059540    g_utf8_casefold
+1318       0x0005B5B0    g_utf8_collate
+1319       0x0005B780    g_utf8_collate_key
+1320       0x0005B930    g_utf8_collate_key_for_filename
+1321       0x00059850    g_utf8_find_next_char
+1322       0x00059810    g_utf8_find_prev_char
+1323       0x000599D0    g_utf8_get_char
+1324       0x0005A0F0    g_utf8_get_char_validated
+1325       0x0005C650    g_utf8_normalize
+1326       0x00059B60    g_utf8_offset_to_pointer
+1327       0x00059B10    g_utf8_pointer_to_offset
+1328       0x000598E0    g_utf8_prev_char
+1329       0x000C7A48    g_utf8_skip
+1330       0x0005A070    g_utf8_strchr
+1331       0x000594B0    g_utf8_strdown
+1332       0x00059900    g_utf8_strlen
+1333       0x00059C50    g_utf8_strncpy
+1334       0x0005A0B0    g_utf8_strrchr
+1335       0x0005B340    g_utf8_strreverse
+1336       0x00059420    g_utf8_strup
+1337       0x00059BE0    g_utf8_substring
+1338       0x0005A3B0    g_utf8_to_ucs4
+1339       0x0005A260    g_utf8_to_ucs4_fast
+1340       0x0005AB30    g_utf8_to_utf16
+1341       0x0005AFC0    g_utf8_validate
+1342       0x0004B1B0    g_utime
+1343       0x000660B0    g_variant_builder_add
+1344       0x0006A110    g_variant_builder_add_parsed
+1345       0x00064250    g_variant_builder_add_value
+1346       0x00063E30    g_variant_builder_clear
+1347       0x00064DB0    g_variant_builder_close
+1348       0x00064590    g_variant_builder_end
+1349       0x00063F90    g_variant_builder_init
+1350       0x00064210    g_variant_builder_new
+1351       0x00064400    g_variant_builder_open
+1352       0x00063DF0    g_variant_builder_ref
+1353       0x00063F20    g_variant_builder_unref
+1354       0x000663B0    g_variant_byteswap
+1355       0x00062090    g_variant_classify
+1356       0x00063740    g_variant_compare
+1357       0x00061400    g_variant_dup_bytestring
+1358       0x00061530    g_variant_dup_bytestring_array
+1359       0x000624A0    g_variant_dup_objv
+1360       0x00062470    g_variant_dup_string
+1361       0x00062570    g_variant_dup_strv
+1362       0x00063620    g_variant_equal
+1363       0x00064EC0    g_variant_format_string_scan
+1364       0x00065870    g_variant_format_string_scan_type
+1365       0x00065F80    g_variant_get
+1366       0x00061F00    g_variant_get_boolean
+1367       0x00061EA0    g_variant_get_byte
+1368       0x00061360    g_variant_get_bytestring
+1369       0x00061450    g_variant_get_bytestring_array
+1370       0x000660F0    g_variant_get_child
+1371       0x00066C10    g_variant_get_child_value
+1372       0x00066B00    g_variant_get_data
+1373       0x00061B80    g_variant_get_double
+1374       0x00061620    g_variant_get_fixed_array
+1375       0x00061BE0    g_variant_get_handle
+1376       0x00061E40    g_variant_get_int16
+1377       0x00061D80    g_variant_get_int32
+1378       0x00061CB0    g_variant_get_int64
+1379       0x000619B0    g_variant_get_maybe
+1380       0x00066330    g_variant_get_normal_form
+1381       0x00062290    g_variant_get_objv
+1382       0x00066AD0    g_variant_get_size
+1383       0x000620D0    g_variant_get_string
+1384       0x00062380    g_variant_get_strv
+1385       0x00061170    g_variant_get_type
+1386       0x000612F0    g_variant_get_type_string
+1387       0x00061DE0    g_variant_get_uint16
+1388       0x00061D20    g_variant_get_uint32
+1389       0x00061C40    g_variant_get_uint64
+1390       0x00065E70    g_variant_get_va
+1391       0x00061950    g_variant_get_variant
+1392       0x00063500    g_variant_hash
+1393       0x00061F60    g_variant_is_container
+1394       0x00066A90    g_variant_is_floating
+1395       0x00066E60    g_variant_is_normal_form
+1396       0x00060D50    g_variant_is_object_path
+1397       0x00061330    g_variant_is_of_type
+1398       0x00060E10    g_variant_is_signature
+1399       0x00063AA0    g_variant_iter_copy
+1400       0x00063B40    g_variant_iter_free
+1401       0x00063A10    g_variant_iter_init
+1402       0x00066200    g_variant_iter_loop
+1403       0x00063B00    g_variant_iter_n_children
+1404       0x00063A50    g_variant_iter_new
+1405       0x00066180    g_variant_iter_next
+1406       0x00063BB0    g_variant_iter_next_value
+1407       0x00066010    g_variant_lookup
+1408       0x00063C40    g_variant_lookup_value
+1409       0x00066BB0    g_variant_n_children
+1410       0x00065DF0    g_variant_new
+1411       0x000617A0    g_variant_new_array
+1412       0x00060AA0    g_variant_new_boolean
+1413       0x00060AC0    g_variant_new_byte
+1414       0x00061050    g_variant_new_bytestring
+1415       0x000610B0    g_variant_new_bytestring_array
+1416       0x00061F80    g_variant_new_dict_entry
+1417       0x00060C00    g_variant_new_double
+1418       0x000664A0    g_variant_new_from_data
+1419       0x00060BE0    g_variant_new_handle
+1420       0x00060AE0    g_variant_new_int16
+1421       0x00060B40    g_variant_new_int32
+1422       0x00060B80    g_variant_new_int64
+1423       0x00061A20    g_variant_new_maybe
+1424       0x00060DB0    g_variant_new_object_path
+1425       0x00060F90    g_variant_new_objv
+1426       0x0006A0F0    g_variant_new_parsed
+1427       0x00069FE0    g_variant_new_parsed_va
+1428       0x00060E70    g_variant_new_signature
+1429       0x00060CB0    g_variant_new_string
+1430       0x00060ED0    g_variant_new_strv
+1431       0x00061220    g_variant_new_tuple
+1432       0x00060B10    g_variant_new_uint16
+1433       0x00060B60    g_variant_new_uint32
+1434       0x00060BB0    g_variant_new_uint64
+1435       0x00065D60    g_variant_new_va
+1436       0x00060C30    g_variant_new_variant
+1437       0x00069E80    g_variant_parse
+1438       0x000679F0    g_variant_parser_get_error_quark
+1439       0x00062640    g_variant_print
+1440       0x00062680    g_variant_print_string
+1441       0x000669F0    g_variant_ref
+1442       0x00066A00    g_variant_ref_sink
+1443       0x0006B2D0    g_variant_serialised_byteswap
+1444       0x0006A4B0    g_variant_serialised_get_child
+1445       0x0006B6C0    g_variant_serialised_is_normal
+1446       0x0006A310    g_variant_serialised_n_children
+1447       0x0006B5A0    g_variant_serialiser_is_object_path
+1448       0x0006B640    g_variant_serialiser_is_signature
+1449       0x0006B550    g_variant_serialiser_is_string
+1450       0x0006AFE0    g_variant_serialiser_needed_size
+1451       0x0006ABB0    g_variant_serialiser_serialise
+1452       0x00066D20    g_variant_store
+1453       0x00066A50    g_variant_take_ref
+1454       0x0006DA50    g_variant_type_checked_
+1455       0x0006CB50    g_variant_type_copy
+1456       0x0006CC20    g_variant_type_dup_string
+1457       0x0006D290    g_variant_type_element
+1458       0x0006D0A0    g_variant_type_equal
+1459       0x0006D320    g_variant_type_first
+1460       0x0006CA80    g_variant_type_free
+1461       0x0006CAD0    g_variant_type_get_string_length
+1462       0x0006D020    g_variant_type_hash
+1463       0x0006C820    g_variant_type_info_assert_no_infos
+1464       0x0006C110    g_variant_type_info_element
+1465       0x0006C280    g_variant_type_info_get
+1466       0x0006C090    g_variant_type_info_get_type_string
+1467       0x0006C190    g_variant_type_info_member_info
+1468       0x0006C170    g_variant_type_info_n_members
+1469       0x0006C0D0    g_variant_type_info_query
+1470       0x0006C130    g_variant_type_info_query_element
+1471       0x0006C1D0    g_variant_type_info_ref
+1472       0x0006C6C0    g_variant_type_info_unref
+1473       0x0006CE90    g_variant_type_is_array
+1474       0x0006CDC0    g_variant_type_is_basic
+1475       0x0006CD40    g_variant_type_is_container
+1476       0x0006CC90    g_variant_type_is_definite
+1477       0x0006CF60    g_variant_type_is_dict_entry
+1478       0x0006CE30    g_variant_type_is_maybe
+1479       0x0006D180    g_variant_type_is_subtype_of
+1480       0x0006CEF0    g_variant_type_is_tuple
+1481       0x0006CFC0    g_variant_type_is_variant
+1482       0x0006D490    g_variant_type_key
+1483       0x0006D420    g_variant_type_n_items
+1484       0x0006DA90    g_variant_type_new
+1485       0x0006D830    g_variant_type_new_array
+1486       0x0006D950    g_variant_type_new_dict_entry
+1487       0x0006D8C0    g_variant_type_new_maybe
+1488       0x0006D5A0    g_variant_type_new_tuple
+1489       0x0006D3B0    g_variant_type_next
+1490       0x0006CBE0    g_variant_type_peek_string
+1491       0x0006CA10    g_variant_type_string_is_valid
+1492       0x0006C870    g_variant_type_string_scan
+1493       0x0006D510    g_variant_type_value
+1494       0x00066860    g_variant_unref
+1495       0x0006DE20    g_vasprintf
+1496       0x0006DC30    g_vfprintf
+1497       0x0006DBC0    g_vprintf
+1498       0x0006DD60    g_vsnprintf
+1499       0x0006DCB0    g_vsprintf
+1500       0x00036C40    g_warn_message
+1501       0x00074000    g_win32_error_message
+1502       0x00073E60    g_win32_ftruncate
+1503       0x000743D0    g_win32_get_package_installation_directory
+1504       0x000740E0    g_win32_get_package_installation_directory_of_module
+1505       0x00074380    g_win32_get_package_installation_directory_utf8
+1506       0x00074500    g_win32_get_package_installation_subdirectory
+1507       0x000744B0    g_win32_get_package_installation_subdirectory_utf8
+1508       0x0005FC00    g_win32_get_system_data_dirs_for_module
+1509       0x00074690    g_win32_get_utf8_argv
+1510       0x00074560    g_win32_get_windows_version
+1511       0x00073E80    g_win32_getlocale
+1512       0x00074580    g_win32_locale_filename_from_utf8
+1513       0x000EEFA4    glib_binary_age
+1514       0x0005D340    glib_check_version
+1515       0x000604A0    glib_gettext
+1516       0x000EEFA8    glib_interface_age
+1517       0x000EEFB4    glib_major_version
+1518       0x000A1244    glib_mem_profiler_table
+1519       0x000EEFAC    glib_micro_version
+1520       0x000EEFB0    glib_minor_version
+1521       0x000A1000    glib_on_error_halt
+1522       0x000604D0    glib_pgettext
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x57FA8    0x0   OriginalFirstThunk:            0x0       
+0x57FA8    0x0   Characteristics:               0x0       
+0x57FAC    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x57FB0    0x8   ForwarderChain:                0x0       
+0x57FB4    0xC   Name:                          0x11A4AC  
+0x57FB8    0x10  FirstThunk:                    0x11A45C  
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x57FBC    0x0   OriginalFirstThunk:            0x0       
+0x57FBC    0x0   Characteristics:               0x0       
+0x57FC0    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x57FC4    0x8   ForwarderChain:                0x0       
+0x57FC8    0xC   Name:                          0x11A4B9  
+0x57FCC    0x10  FirstThunk:                    0x11A474  
+
+ADVAPI32.DLL.GetUserNameW Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x57FD0    0x0   OriginalFirstThunk:            0x0       
+0x57FD0    0x0   Characteristics:               0x0       
+0x57FD4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x57FD8    0x8   ForwarderChain:                0x0       
+0x57FDC    0xC   Name:                          0x11A4C6  
+0x57FE0    0x10  FirstThunk:                    0x11A47C  
+
+libintl-8.dll.libintl_fprintf Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x57FE4    0x0   OriginalFirstThunk:            0x0       
+0x57FE4    0x0   Characteristics:               0x0       
+0x57FE8    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x57FEC    0x8   ForwarderChain:                0x0       
+0x57FF0    0xC   Name:                          0x11A4D4  
+0x57FF4    0x10  FirstThunk:                    0x11A484  
+
+msvcrt.dll._iob Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x57FF8    0x0   OriginalFirstThunk:            0x0       
+0x57FF8    0x0   Characteristics:               0x0       
+0x57FFC    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x58000    0x8   ForwarderChain:                0x0       
+0x58004    0xC   Name:                          0x11A4DF  
+0x58008    0x10  FirstThunk:                    0x11A48C  
+
+OLE32.dll.CoTaskMemFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x5800C    0x0   OriginalFirstThunk:            0x0       
+0x5800C    0x0   Characteristics:               0x0       
+0x58010    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x58014    0x8   ForwarderChain:                0x0       
+0x58018    0xC   Name:                          0x11A4E9  
+0x5801C    0x10  FirstThunk:                    0x11A494  
+
+SHELL32.DLL.SHGetPathFromIDListW Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x58020    0x0   OriginalFirstThunk:            0x0       
+0x58020    0x0   Characteristics:               0x0       
+0x58024    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x58028    0x8   ForwarderChain:                0x0       
+0x5802C    0xC   Name:                          0x11A4F5  
+0x58030    0x10  FirstThunk:                    0x11A49C  
+
+USER32.dll.IsWindow Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x58034    0x0   OriginalFirstThunk:            0x0       
+0x58034    0x0   Characteristics:               0x0       
+0x58038    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x5803C    0x8   ForwarderChain:                0x0       
+0x58040    0xC   Name:                          0x11A500  
+0x58044    0x10  FirstThunk:                    0x11A4A4  
+
+WS2_32.DLL.recv Hint[0]
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x57C00    0x0   Characteristics:               0x0       
+0x57C04    0x4   TimeDateStamp:                 0x4E8F37E2 [Fri Oct  7 17:33:22 2011 UTC]
+0x57C08    0x8   MajorVersion:                  0x0       
+0x57C0A    0xA   MinorVersion:                  0x0       
+0x57C0C    0xC   NumberOfNamedEntries:          0x0       
+0x57C0E    0xE   NumberOfIdEntries:             0x1       
+  Id: [0x10] (RT_VERSION)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x57C10    0x0   Name:                          0x10      
+  0x57C14    0x4   OffsetToData:                  0x80000018
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x57C18    0x0   Characteristics:               0x0       
+    0x57C1C    0x4   TimeDateStamp:                 0x4E8F37E2 [Fri Oct  7 17:33:22 2011 UTC]
+    0x57C20    0x8   MajorVersion:                  0x0       
+    0x57C22    0xA   MinorVersion:                  0x0       
+    0x57C24    0xC   NumberOfNamedEntries:          0x0       
+    0x57C26    0xE   NumberOfIdEntries:             0x1       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x57C28    0x0   Name:                          0x1       
+      0x57C2C    0x4   OffsetToData:                  0x80000030
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x57C30    0x0   Characteristics:               0x0       
+        0x57C34    0x4   TimeDateStamp:                 0x4E8F37E2 [Fri Oct  7 17:33:22 2011 UTC]
+        0x57C38    0x8   MajorVersion:                  0x0       
+        0x57C3A    0xA   MinorVersion:                  0x0       
+        0x57C3C    0xC   NumberOfNamedEntries:          0x0       
+        0x57C3E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x57C40    0x0   Name:                          0x409     
+          0x57C44    0x4   OffsetToData:                  0x48      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x57C48    0x0   OffsetToData:                  0x11A05C  
+            0x57C4C    0x4   Size:                          0x34C     
+            0x57C50    0x8   CodePage:                      0x0       
+            0x57C54    0xC   Reserved:                      0x0       
+
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x57B48    0x0   StartAddressOfRawData:         0x686D9960
+0x57B4C    0x4   EndAddressOfRawData:           0x686D9963
+0x57B50    0x8   AddressOfIndex:                0x686B9460
+0x57B54    0xC   AddressOfCallBacks:            0x686D9963
+0x57B58    0x10  SizeOfZeroFill:                0x0       
+0x57B5C    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x63864    0x0   VirtualAddress:                0x119000  
+0x63868    0x4   SizeOfBlock:                   0x18      
+    0011972Dh HIGHLOW
+    0011992Dh HIGHLOW
+    00119948h HIGHLOW
+    0011994Ch HIGHLOW
+    00119950h HIGHLOW
+    00119954h HIGHLOW
+    00119963h HIGHLOW
+    00119000h ABSOLUTE
+

@@ -1,6 +1,0 @@
-#ifndef PYLIBROM_CONFIG_H_
-#define PYLIBROM_CONFIG_H_
-
-#cmakedefine PYLIBROM_HAS_MFEM
-
-#endif

@@ -1,0 +1,77 @@
+2008-11-13 13:56:42 #30052> cd Priithon_25_PySrc/
+2008-11-13 13:56:45 #30052> ls -l usefulP.py*
+2008-11-13 13:57:04 #30052> diff usefulP.py usefulP.py~
+2008-11-13 13:57:40 #30052> ls -l usefulP.py*
+2008-11-24 14:40:09 #21913> cd Priithon_25_PySrc
+2008-11-24 14:40:48 #21913> mv sifreader.py readerSIF.py
+2008-11-24 14:41:00 #21913> mv sifreader.py~ readerSIF.py~
+2008-11-24 14:41:05 #21913> rm sifreader.pyc
+2009-01-20 16:21:10 #27859> cd Priithon_25_lin64/Priithon
+2009-01-20 16:21:26 #27859> ls ../
+2009-01-20 16:21:37 #27859> pwd
+2009-01-20 16:21:41 #27859> ls ..
+2009-01-20 16:21:47 #27859> pwd
+2009-06-12 17:06:13 #15999> cd Priithon_25_PySrc/
+2009-06-12 17:07:45 #15999> rm pylab.py*
+2009-06-15 16:11:52 #17254> w
+2009-07-14 16:24:50 #10910> cd /home/shaase/Priithon_25_lin64/Priithon/
+2009-07-14 16:24:52 #10910> ls -lrt
+2009-07-14 16:24:56 #10910> ls -l *.so
+2009-07-14 16:25:01 #10910> rm *.so
+2009-07-14 16:25:08 #10910> less seb.py
+2009-07-14 16:25:10 #10910> rm seb.py
+2009-07-14 16:25:11 #10910> rm seb.pyc
+2009-07-14 16:25:16 #10910> less glSeb.py
+2009-07-14 16:25:18 #10910> rm glSeb.py
+2009-07-14 16:25:19 #10910> rm glSeb.pyc
+2009-07-14 16:25:21 #10910> ls -lrt
+2009-07-14 16:26:07 #10910> grep -ri swig * |less
+2009-07-14 16:26:16 #10910> less ccg.py
+2009-07-14 16:26:28 #10910> grep -ri gmail * |less
+2009-07-14 16:26:36 #10910> less ccg.py
+2009-07-14 16:26:50 #10910> grep -ri swig * |less
+2009-07-14 17:04:26 #10910> hh
+2009-12-08 10:49:00 #26557> CCP
+2010-07-13 09:33:48 #28965> cd Priithon_25_PySrc/
+2010-07-13 09:52:33 #28965> grep -ir magic *|less
+2010-07-13 09:52:58 #28965> l magic|less
+2010-07-13 09:52:59 #28965> less magic_square.py
+2010-07-13 09:53:00 #28965> less magic_square.py
+2010-07-13 09:53:11 #28965> l magic_square.py
+2010-07-13 09:53:13 #28965> l magic_square
+2010-07-13 09:53:25 #28965> l magic_square | xargs ls -l
+2010-07-21 11:04:03 #28965> l magic_square | xargs ls -l
+2010-07-21 11:04:07 #28965> l magic_square | ls
+2010-07-21 11:04:15 #28965> l magic_square | xargs ls
+2010-07-21 11:04:20 #28965> l magic_square | xargs rm -i
+2010-07-21 11:04:29 #28965> l magic_square | xargs rm -i
+2010-07-21 11:04:46 #28965> man xargs
+2010-07-21 11:05:01 #28965> l magic_square | xargs -p rm
+2010-07-21 11:05:03 #28965> l magic_square | xargs -1p rm
+2010-07-21 11:05:07 #28965> l magic_square | xargs -1 -p rm
+2010-07-21 11:05:28 #28965> man xargs
+2010-07-21 11:05:31 #28965> l magic_square | xargs -lp rm
+2010-07-21 11:05:52 #28965> l magic_square | xargs -l -p rm
+2010-07-21 11:05:53 #28965> l magic_square | xargs -l -p rm
+2010-07-21 11:05:53 #28965> l magic_square | xargs -l -p rm
+2010-07-21 11:16:46 #2743> sudo reboot
+2010-07-21 15:14:36 #2688> sudo reboot
+2010-07-22 10:02:01 #2582> ssh iris
+2010-07-26 09:53:35 #2675> kill 24041
+2010-08-11 10:56:12 #20362> cd ~/Priithon_25_PySrc/
+2010-08-11 10:56:16 #20362> grep _registerEventHandler *.py |grep -v _[0-9]|less
+2010-08-11 10:56:21 #20362> grep _registerEventHandler */*.py |grep -v _[0-9]|less
+2010-08-11 10:56:26 #20362> grep _registerEventHandler */*/*.py |grep -v _[0-9]|less
+2011-04-07 10:55:01 #3868> cd Priithon_PySrc/
+2011-04-07 10:55:17 #3868> grep 'sys.path.inser' *.py
+2011-04-07 11:02:11 #3868> emacs fileDropPopup.py
+2012-02-28 10:51:23 #14572> cd Priithon_PySrc/
+2012-02-28 10:51:30 #14572> mv py py_old
+2012-02-28 10:51:51 #14572> cat > py.py
+2012-02-28 11:48:08 #2648> cd ../Priithon_PySrc/
+2012-02-28 11:48:28 #2648> mv py.py py____revertToOrig.py
+2012-02-28 11:48:38 #2648> mv py_old py
+2013-06-28 19:45:44 #27471> cd Py/Priithon_PySrc/
+2013-06-28 19:45:49 #27471> ls -lrt
+2015-11-23 22:47:59 #3910>
+2015-11-23 22:48:27 #3910>

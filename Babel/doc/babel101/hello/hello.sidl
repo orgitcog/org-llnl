@@ -1,5 +1,0 @@
-package Hello version 1.0 {
-  class World {
-    string getMsg();
-  }
-}

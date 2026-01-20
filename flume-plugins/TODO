@@ -1,2 +1,0 @@
-make generic "fixed format" LDMS Hbase sink
-if columnfamily not yet created, have plugins create it ..?

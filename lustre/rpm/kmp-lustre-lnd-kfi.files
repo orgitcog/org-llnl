@@ -1,2 +1,0 @@
-%defattr(-,root,root)
-%{modules_fs_path}/%{lustre_name}-lnd-kfi/net/kkfilnd.ko

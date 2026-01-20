@@ -1,9 +1,0 @@
-code.csv
-code.json
-config.json
-build/
-dist/
-venv/
-*.pyc
-llnl_scraper.egg-info/
-.vscode/

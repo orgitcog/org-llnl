@@ -1,0 +1,30 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+// Copyright (c) Lawrence Livermore National Security, LLC and other
+// RAJA Project Developers. See top-level LICENSE and COPYRIGHT
+// files for dates and other details. No copyright assignment is required
+// to contribute to RAJA.
+//
+// SPDX-License-Identifier: (BSD-3-Clause)
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+///
+/// Source file containing tests for RAJA workgroup enqueue.
+///
+
+#include "test-workgroup-Enqueue-@SUBTESTNAME@.hpp"
+
+using @BACKEND@BasicWorkGroupEnqueue@SUBTESTNAME@Types =
+  Test< camp::cartesian_product< @BACKEND@ExecPolicyList,
+                                 @BACKEND@OrderPolicyList,
+                                 @BACKEND@StoragePolicyList,
+                                 @DISPATCHER@DispatchTyperList,
+                                 IndexTypeTypeList,
+                                 XargsTypeList,
+                                 @BACKEND@AllocatorList > >::Types;
+
+REGISTER_TYPED_TEST_SUITE_P(WorkGroupBasicEnqueue@SUBTESTNAME@UnitTest,
+                            BasicWorkGroupEnqueue@SUBTESTNAME@);
+
+INSTANTIATE_TYPED_TEST_SUITE_P(@BACKEND@BasicTest,
+                               WorkGroupBasicEnqueue@SUBTESTNAME@UnitTest,
+                               @BACKEND@BasicWorkGroupEnqueue@SUBTESTNAME@Types);

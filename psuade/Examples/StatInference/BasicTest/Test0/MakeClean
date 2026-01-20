@@ -1,3 +1,0 @@
-clean:
-	rm -f *.m *.sci simulator MCMCPostSample simdata .psuade_* *.png
-

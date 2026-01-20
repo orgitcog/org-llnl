@@ -1,3 +1,0 @@
-[codespell]
-skip = ./docs/_build,./docs/_static
-ignore-words-list = fom

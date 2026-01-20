@@ -1,0 +1,31 @@
+// Build file for GhidraMCP extension using Ghidra's official extension build system
+
+apply plugin: 'java'
+
+// Point to Ghidra installation
+def ghidraInstallDir = file(System.env.GHIDRA_INSTALL_DIR ?: "<PATH_TO_GHIDRA_INSTALLATION>")
+
+// Check if Ghidra installation is valid
+if (!ghidraInstallDir.exists()) {
+    throw new GradleException("Ghidra installation not found at: ${ghidraInstallDir}\nSet GHIDRA_INSTALL_DIR environment variable.")
+}
+
+// Apply Ghidra's extension build script
+apply from: new File(ghidraInstallDir, "support/buildExtension.gradle").absolutePath
+
+// Extension information
+version = "1.0"
+ext.ghidraVersion = "11.3.2"
+
+// Java version matching Ghidra 11.3.2
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+// sourceCompatibility = 21
+// targetCompatibility = 21
+
+repositories {
+    mavenCentral()
+}

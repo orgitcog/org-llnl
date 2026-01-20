@@ -1,5 +1,0 @@
-This line ends with a carriage return and new line CRLF
-This line ends with a carriage return and new line CRLF
-This line ends with a carriage return and new line CRLF
-This line ends with a carriage return and new line CRLF
-This line ends with a carriage return and new line CRLF

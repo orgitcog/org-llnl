@@ -1,0 +1,136 @@
+# This will create IMPORTED targets for WCS. The executables will be
+# WCS::<exe-name>-bin (e.g., WCS::wcs-bin) and the library will
+# be WCS::wcs.
+
+include("${CMAKE_CURRENT_LIST_DIR}/WCSConfigVersion.cmake")
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/modules")
+list(APPEND CMAKE_MODULE_PATH "@EXTRA_CMAKE_MODULE_DIR@")
+
+include(GNUInstallDirs)
+include(ExternalProject)
+include(WCSCMakeUtilities)
+include(CMakePackageConfigHelpers)
+
+
+set(WCS_VERSION ${PACKAGE_VERSION})
+
+# Record compiler information
+set(WCS_CXX_COMPILER "@CMAKE_CXX_COMPILER@")
+set(WCS_C_COMPILER "@CMAKE_C_COMPILER@")
+
+set(WCS_CXX_FLAGS "@CMAKE_CXX_FLAGS@")
+
+set(WCS_CXX_STANDARD "@CMAKE_CXX_STANDARD@")
+
+# Fix the CXX and CUDA standards
+if (CMAKE_CXX_STANDARD LESS WCS_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD "${WCS_CXX_STANDARD}")
+endif ()
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+# Record the various flags and switches accumlated in WCS
+set(WCS_VERTEX_LIST_TYPE @WCS_VERTEX_LIST_TYPE@)
+set(WCS_OUT_EDGE_LIST_TYPE @WCS_OUT_EDGE_LIST_TYPE@)
+set(WCS_GNU_LINUX @WCS_GNU_LINUX@)
+set(WCS_HAS_SUNDIALS @WCS_HAS_SUNDIALS@)
+set(WCS_HAS_SBML @WCS_HAS_SBML@)
+set(WCS_HAS_EXPRTK @WCS_HAS_EXPRTK@)
+set(WCS_HAS_CEREAL @WCS_HAS_CEREAL@)
+set(WCS_HAS_CATCH2 @WCS_HAS_CATCH2@)
+set(WCS_HAS_DOXYGEN @WCS_HAS_DOXYGEN@)
+set(WCS_HAS_VTUNE @WCS_HAS_VTUNE@)
+set(WCS_HAS_HPCTOOLKIT @WCS_HAS_HPCTOOLKIT@)
+set(WCS_PERF_PROF @WCS_PERF_PROF@)
+set(WCS_HAS_ROSS @WCS_HAS_ROSS@)
+set(WCS_HAS_OPENMP @WCS_HAS_OPENMP@)
+set(WCS_HAS_NUMA @WCS_HAS_NUMA@)
+set(WCS_HAS_METIS @WCS_HAS_METIS@)
+set(WCS_HAS_STD_FILESYSTEM @WCS_HAS_STD_FILESYSTEM@)
+set(WCS_HAS_PROTOBUF @WCS_HAS_PROTOBUF@)
+set(WCS_64BIT_CNT @WCS_64BIT_CNT@)
+
+# Setup dependencies
+
+if (NOT BOOST_ROOT)
+  set(BOOST_ROOT "@BOOST_ROOT@")
+  if (NOT BOOST_ROOT)
+    unset(BOOST_ROOT)
+  endif (NOT BOOST_ROOT)
+endif (NOT BOOST_ROOT)
+
+if (WCS_HAS_SUNDIALS)
+  if (NOT SUNDIALS_ROOT)
+    set(SUNDIALS_ROOT "@SUNDIALS_ROOT@")
+  endif ()
+
+  find_package(Sundials REQUIRED)
+endif (WCS_HAS_SUNDIALS)
+
+if (WCS_HAS_SBML)
+  if (NOT SBML_ROOT)
+    set(SBML_ROOT "@SBML_ROOT@")
+  endif ()
+
+  find_package(SBML REQUIRED)
+endif (WCS_HAS_SBML)
+
+if (WCS_HAS_ROSS)
+  if (NOT ROSS_ROOT)
+    set(ROSS_ROOT "@ROSS_ROOT@")
+  endif ()
+
+  find_package(ROSS REQUIRED)
+endif (WCS_HAS_ROSS)
+
+if (WCS_HAS_METIS)
+  if (NOT METIS_ROOT)
+    set(METIS_ROOT "@METIS_ROOT@")
+  endif ()
+
+  find_package(Metis REQUIRED)
+endif (WCS_HAS_METIS)
+
+if (WCS_HAS_PROTOBUF)
+  set(PROTOBUF_MIN_VERSION "@PROTOBUF_MIN_VERSION@")
+
+  if (NOT Protobuf_DIR)
+    set(Protobuf_DIR "@Protobuf_DIR@")
+  endif ()
+  if ("@Protobuf_PROTOC_EXECUTABLE@")
+    set(Protobuf_PROTOC_EXECUTABLE "@Protobuf_PROTOC_EXECUTABLE@")
+  endif ()
+
+  find_package(Protobuf "${PROTOBUF_MIN_VERSION}" CONFIG QUIET
+    NAMES protobuf PROTOBUF
+    HINTS
+    "${Protobuf_DIR}" "$ENV{Protobuf_DIR}"
+    PATH_SUFFIXES lib64/cmake/protobuf lib/cmake/protobuf
+    NO_DEFAULT_PATH)
+endif (WCS_HAS_PROTOBUF)
+
+
+@PACKAGE_INIT@
+
+# Now actually import the WCS target
+set(_TMP_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIRS@")
+foreach (_DIR ${_TMP_INCLUDE_DIRS})
+  set_and_check(_INCLUDE_DIR "${_DIR}")
+  list(APPEND WCS_INCLUDE_DIRS "${_INCLUDE_DIR}")
+endforeach (_DIR "${_TMP_INCLUDE_DIRS}")
+
+set(_TMP_LIBRARY_DIRS "@PACKAGE_LIB_INSTALL_DIR@")
+foreach (_DIR ${_TMP_LIBRARY_DIRS})
+  set_and_check(_LIBRARY_DIR "${_DIR}")
+  list(APPEND WCS_LIBRARY_DIRS "${_LIBRARY_DIR}")
+endforeach (_DIR ${_TMP_LIBRARY_DIRS})
+
+if (NOT TARGET WCS::wcs)
+  include(${CMAKE_CURRENT_LIST_DIR}/WCSTargets.cmake)
+endif (NOT TARGET WCS::wcs)
+
+check_required_components(WCS)
+check_required_components(protobuf)
+
+set(WCS_LIBRARIES WCS::wcs)

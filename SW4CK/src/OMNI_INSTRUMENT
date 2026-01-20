@@ -1,1 +1,0 @@
-omnitrace-instrument -o sw4ck.ins -- ./sw4ck

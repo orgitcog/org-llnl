@@ -1,6 +1,0 @@
-docker:
-    command: docker
-    # init_command: ?
-    run_command: \{command} run --name {name} -d {image}
-    stop_command: \{command} stop {name}
-    pull_command: \{command} pull {url}

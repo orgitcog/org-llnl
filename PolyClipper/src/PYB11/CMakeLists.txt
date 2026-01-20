@@ -1,1 +1,0 @@
-PYB11Generator_add_module(PolyClipper INSTALL ${POLYCLIPPER_PYTHON_INSTALL})

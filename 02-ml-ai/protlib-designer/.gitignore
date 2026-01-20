@@ -1,0 +1,11 @@
+.venv*
+.eggs*
+*.egg-info
+.bash_history
+lp_solution*
+dist
+.vscode
+.coverage
+plm_scores.csv
+ifold_scores.csv
+protlib_designer/_version.py

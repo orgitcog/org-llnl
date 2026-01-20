@@ -1,0 +1,279 @@
+#!/bin/bash
+#############################################################################
+#  Copyright (C) 2013-2015 Lawrence Livermore National Security, LLC.
+#  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
+#  Written by Albert Chu <chu11@llnl.gov>
+#  LLNL-CODE-644248
+#
+#  This file is part of Magpie, scripts for running Hadoop on
+#  traditional HPC systems.  For details, see https://github.com/llnl/magpie.
+#
+#  Magpie is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  Magpie is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with Magpie.  If not, see <http://www.gnu.org/licenses/>.
+#############################################################################
+
+# This script sets up core configuration files for jobs.  For the most
+# part, it shouldn't be editted.  See job submission files for
+# configuration details.
+
+source ${MAGPIE_SCRIPTS_HOME}/magpie/exports/magpie-exports-submission-type
+source ${MAGPIE_SCRIPTS_HOME}/magpie/exports/magpie-exports-dirs
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-hadoop-helper
+source ${MAGPIE_SCRIPTS_HOME}/magpie/lib/magpie-lib-helper
+
+#
+# Setup a whole bunch of environment variables and directories
+#
+
+# Create conf & log dirs node specific
+Magpie_make_all_local_dirs_node_specific
+
+mkdir -p $MAGPIE_LOCAL_CONF_DIR
+if [ $? -ne 0 ] ; then
+    echo "mkdir failed making ${MAGPIE_LOCAL_CONF_DIR}"
+    exit 1
+fi
+
+mkdir -p $MAGPIE_LOCAL_LOG_DIR
+if [ $? -ne 0 ] ; then
+    echo "mkdir failed making ${MAGPIE_LOCAL_LOG_DIR}"
+    exit 1
+fi
+
+mkdir -p $MAGPIE_LOCAL_PID_DIR
+if [ $? -ne 0 ] ; then
+    echo "mkdir failed making ${MAGPIE_LOCAL_PID_DIR}"
+    exit 1
+fi
+
+mkdir -p $MAGPIE_LOCAL_SCRATCHSPACE_DIR
+if [ $? -ne 0 ] ; then
+    echo "mkdir failed making ${MAGPIE_LOCAL_SCRATCHSPACE_DIR}"
+    exit 1
+fi
+
+#
+# Setup primary conf, log, and local scratchspace directories for projects
+#
+
+magpieprojects="HADOOP PIG HBASE HIVE PHOENIX SPARK KAFKA ZEPPELIN STORM ZOOKEEPER RAY ALLUXIO"
+
+for project in ${magpieprojects}
+do
+    setupvar="${project}_SETUP"
+    confdirvar="${project}_CONF_DIR"
+    logdirvar="${project}_LOG_DIR"
+    piddirvar="${project}_PID_DIR"
+    localscratchspacedirvar="${project}_LOCAL_SCRATCHSPACE_DIR"
+
+    if [ "${!setupvar}" == "yes" ]
+    then
+        if [ "${!confdirvar}X" != "X" ]
+        then
+            mkdir -p ${!confdirvar}
+            if [ $? -ne 0 ] ; then
+                echo "mkdir failed making ${!confdirvar}"
+                exit 1
+            fi
+        fi
+
+        if [ "${!logdirvar}X" != "X" ]
+        then
+            mkdir -p ${!logdirvar}
+            if [ $? -ne 0 ] ; then
+                echo "mkdir failed making ${!logdirvar}"
+                exit 1
+            fi
+        fi
+
+        if [ "${!piddirvar}X" != "X" ]
+        then
+            mkdir -p ${!piddirvar}
+            if [ $? -ne 0 ] ; then
+                echo "mkdir failed making ${!piddirvar}"
+                exit 1
+            fi
+        fi
+
+        if [ "${!localscratchspacedirvar}X" != "X" ]
+        then
+            mkdir -p ${!localscratchspacedirvar}
+            if [ $? -ne 0 ] ; then
+                echo "mkdir failed making ${!localscratchspacedirvar}"
+                exit 1
+            fi
+        fi
+    fi
+done
+
+#
+# Setup/Calculate Core Master/Worker files
+#
+
+# Sets magpie_hostrangescript and magpie_hostrangescriptoptions
+Magpie_get_hostlist_command
+
+Magpie_get_magpie_hostname
+myhostname=${magpie_hostname}
+
+${magpie_hostrangescript} ${magpie_hostrangescriptoptions} ${MAGPIE_NODELIST} | head -1 > ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters
+${magpie_hostrangescript} ${magpie_hostrangescriptoptions} ${MAGPIE_NODELIST} | tail -n+2 > ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers
+
+# Convert nodenames if necessary
+
+if [ "${MAGPIE_HOSTNAME_SCHEDULER_MAP}X" != "X" ]
+then
+    masterhosts=`cat ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters`
+    workerhosts=`cat ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers`
+    for host in ${masterhosts}
+    do
+        newhost=`${MAGPIE_HOSTNAME_SCHEDULER_MAP} $host`
+        if [ $? -ne 0 ]
+        then
+            echo "Error in MAGPIE_HOSTNAME_SCHEDULER_MAP = ${MAGPIE_HOSTNAME_SCHEDULER_MAP}"
+            exit 1
+        fi
+        echo $newhost >> ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters_convert
+    done
+
+    for host in ${workerhosts}
+    do
+        newhost=`${MAGPIE_HOSTNAME_SCHEDULER_MAP} $host`
+        if [ $? -ne 0 ]
+        then
+            echo "Error in MAGPIE_HOSTNAME_SCHEDULER_MAP = ${MAGPIE_HOSTNAME_SCHEDULER_MAP}"
+            exit 1
+        fi
+        echo $newhost >> ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers_convert
+    done
+
+    rm -f ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters
+    rm -f ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers
+    mv ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters_convert ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters
+    mv ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers_convert ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers
+fi
+
+if ! grep -q ${myhostname} ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters \
+    && ! grep -q ${myhostname} ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers
+then
+    if [ "${MAGPIE_HOSTNAME_CMD_MAP}X" != "X" ]
+    then
+        echo "WARNING: MAGPIE_HOSTNAME_CMD_MAP command returned a node not listed in nodelist."
+        echo "WARNING: ${MAGPIE_HOSTNAME_CMD_MAP} may need tweaking"
+    else
+        echo "WARNING: hostname command returned a node not listed in nodelist."
+        echo "WARNING: Consider configuring MAGPIE_HOSTNAME_CMD_MAP"
+    fi
+fi
+
+if [ "${ZOOKEEPER_SETUP}" == "yes" ]
+then
+    tmpworkercount=`cat ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers | wc -l`
+    jobworkercount=`expr ${tmpworkercount} - ${ZOOKEEPER_REPLICATION_COUNT}`
+    zookeeperworkerstart=`expr ${jobworkercount} + 1`
+
+    cp ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters ${MAGPIE_LOCAL_CONF_DIR}/job_masters
+
+    if [ "${ZOOKEEPER_SHARE_NODES}" != "yes" ]
+    then
+        head -${jobworkercount} ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers > ${MAGPIE_LOCAL_CONF_DIR}/job_workers
+    else
+        cp ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers ${MAGPIE_LOCAL_CONF_DIR}/job_workers
+    fi
+
+    tail -n+${zookeeperworkerstart} ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers > ${ZOOKEEPER_CONF_DIR}/workers
+
+    # The Zookeeper master is not an actual Zookeeper node, this is
+    # predominantly to indicate to magpie that Zookeeper should be
+    # launched via the "master" node
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${ZOOKEEPER_CONF_DIR}/masters
+else
+    cp ${MAGPIE_LOCAL_CONF_DIR}/tmp_masters ${MAGPIE_LOCAL_CONF_DIR}/job_masters
+    cp ${MAGPIE_LOCAL_CONF_DIR}/tmp_workers ${MAGPIE_LOCAL_CONF_DIR}/job_workers
+fi
+
+if [ "${HADOOP_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${HADOOP_CONF_DIR}/masters
+    if echo ${HADOOP_VERSION} | grep -q -E "3\.[0-9]\.[0-9]"
+    then
+        cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${HADOOP_CONF_DIR}/workers
+    else
+        cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${HADOOP_CONF_DIR}/slaves
+    fi
+fi
+
+if [ "${HBASE_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${HBASE_CONF_DIR}/masters
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${HBASE_CONF_DIR}/regionservers
+fi
+
+if [ "${HIVE_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${HIVE_CONF_DIR}/masters
+fi
+
+if [ "${PHOENIX_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${PHOENIX_CONF_DIR}/regionservers
+fi
+
+if [ "${SPARK_SETUP}" == "yes" ]
+then
+    # Create regardless of using yarn or not, needed for other code
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${SPARK_CONF_DIR}/masters
+    if echo ${SPARK_VERSION} | grep -q -E "3\.[1-9]\.[0-9]"
+    then
+        cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${SPARK_CONF_DIR}/workers
+    else
+        cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${SPARK_CONF_DIR}/slaves
+    fi
+fi
+
+if [ "${KAFKA_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${KAFKA_CONF_DIR}/masters
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${KAFKA_CONF_DIR}/workers
+fi
+
+if [ "${ZEPPELIN_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${ZEPPELIN_CONF_DIR}/masters
+fi
+
+if [ "${STORM_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${STORM_CONF_DIR}/masters
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${STORM_CONF_DIR}/workers
+fi
+
+if [ "${RAY_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${RAY_CONF_DIR}/masters
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${RAY_CONF_DIR}/workers
+fi
+
+if [ "${ALLUXIO_SETUP}" == "yes" ]
+then
+    cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${ALLUXIO_CONF_DIR}/masters
+    if [ "${ALLUXIO_WORKER_ON_MASTER}" == "yes" ]
+    then
+        cp ${MAGPIE_LOCAL_CONF_DIR}/job_masters ${ALLUXIO_CONF_DIR}/workers
+        cat ${MAGPIE_LOCAL_CONF_DIR}/job_workers >> ${ALLUXIO_CONF_DIR}/workers
+    else
+        cp ${MAGPIE_LOCAL_CONF_DIR}/job_workers ${ALLUXIO_CONF_DIR}/workers
+    fi
+fi
+
+exit 0

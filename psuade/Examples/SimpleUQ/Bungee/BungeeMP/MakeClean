@@ -1,3 +1,0 @@
-clean:
-	rm -f *.m *.sci simulator psuadeData .psuade_* psuade_print psuade_stop
-

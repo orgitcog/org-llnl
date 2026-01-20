@@ -1,1 +1,0 @@
-#define TOOL_VERSION "1.26.1.12"

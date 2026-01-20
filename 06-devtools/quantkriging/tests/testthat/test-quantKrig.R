@@ -1,0 +1,15 @@
+Sys.unsetenv("R_TESTS")
+
+test_that("Quantkrig Example", {
+  set.seed(1)
+  X <- seq(0,1,length.out = 20)
+  Y <- cos(5*X) + cos(X)
+  Xstar <- rep(X,each = 100)
+  Ystar <- rep(Y,each = 100)
+  Ystar <- rnorm(length(Ystar),Ystar,1)
+  lb <- c(0.0001,0.0001)
+  ub <- c(10,10)
+  tmp <- tempfile()
+  Qout <- quantKrig(Xstar,Ystar, quantv = seq(0.05,0.95, length.out = 7), lower = lb, upper = ub)
+  expect_known_value(Qout, "quantKrig.test.output")
+})

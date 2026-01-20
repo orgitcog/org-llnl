@@ -1,1 +1,0 @@
-{"rule":{"missing":["a", "b"]},"data":{"a":"apple", "c":"carrot"},"expected":["b"]}

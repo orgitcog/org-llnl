@@ -1,0 +1,35 @@
+#!/bin/sh
+
+_prefix=/nfs/tmp2/lee218/deleteme/core_stack_merge-2.3
+
+if test $# -lt 2
+then
+    echo 
+    echo 'This tool will merge the stack traces from the user specified lightweight core files and output 2 .dot files, one with just function names, the other with function names + line number information'
+    echo
+    echo 'USAGE:'
+    echo '    core_stack_merge [options] -x <exe_path> -c <corefile>*'
+    echo '    core_stack_merge [options] -x <exe_path> -c <core_files_dir>'
+    echo
+    echo 'NOTE: linux has a limit for the number of command line arguments.  For a large number of core files, specify <core_files_dir> instead of individual core files.'
+    echo
+    echo 'OPTIONS'
+    echo '    -x <value>, --exe=<value>          the executable path'
+    echo '    -f <value>, --fileprefix=<value>   the output filename prefix'
+    echo '    -j, --jobid                        delineate traces based on Job ID in the core file'
+    echo '    -H <value>, --high=<value>         the high rank of the input traces'
+    echo '    -l <value>, --limit=<value>        the max number of traces to parse per process'
+    echo '    -a <value>, --addr2line=<value>    the path to addr2line'
+    echo '    -s, --symtab                       use Symtab addr2line'
+
+    echo '    -t <value>, --type=<value>         the output file type (raw or dot)'
+    echo
+    echo 'EXAMPLE:'
+    echo '    core_stack_merge -x a.out -c core.0 core.1'
+    echo '    core_stack_merge -x a.out -c core.*'
+    echo '    core_stack_merge -x a.out -c ./'
+    echo '    core_stack_merge -x a.out -c core_dir'
+    echo
+    exit 1
+fi
+env PATH=${_prefix}/bin/internals:$PATH PYTHONPATH=${_prefix}/lib /usr/bin/python ${_prefix}/bin/internals/bg_core_backtrace.py `echo \$@ | sed -e "s:-s\|--symtab:-a ${_prefix}/bin/internals/symt_addr2line:g"`

@@ -1,0 +1,1047 @@
+#!/usr/bin/env python
+#
+#  Copyright (c) 2015, 2016, 2017, 2018, Intel Corporation
+#
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions
+#  are met:
+#
+#      * Redistributions of source code must retain the above copyright
+#        notice, this list of conditions and the following disclaimer.
+#
+#      * Redistributions in binary form must reproduce the above copyright
+#        notice, this list of conditions and the following disclaimer in
+#        the documentation and/or other materials provided with the
+#        distribution.
+#
+#      * Neither the name of Intel Corporation nor the names of its
+#        contributors may be used to endorse or promote products derived
+#        from this software without specific prior written permission.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+#  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+#  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+#  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+#  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+#  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+#  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+#  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+#  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY LOG OF THE USE
+#  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+import os
+import sys
+import unittest
+import subprocess
+import time
+import pandas
+import collections
+import socket
+import stat
+import datetime
+
+import geopm_test_launcher
+import geopmpy.io
+import geopmpy.analysis
+
+
+def skip_unless_run_long_tests():
+    if 'GEOPM_RUN_LONG_TESTS' not in os.environ:
+        return unittest.skip("Define GEOPM_RUN_LONG_TESTS in your environment to run this test.")
+    return lambda func: func
+
+
+def skip_unless_cpufreq():
+    try:
+        os.stat("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq")
+        os.stat("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq")
+    except OSError:
+        return unittest.skip("Could not determine min and max frequency, enable cpufreq driver to run this test.")
+    return lambda func: func
+
+
+def get_platform():
+    with open('/proc/cpuinfo') as fid:
+        for line in fid.readlines():
+            if line.startswith('cpu family\t:'):
+                fam = int(line.split(':')[1])
+            if line.startswith('model\t\t:'):
+                mod = int(line.split(':')[1])
+    return fam, mod
+
+
+def skip_unless_platform_bdx():
+    fam, mod = get_platform()
+    if fam != 6 or mod not in (45, 47, 79):
+        return unittest.skip("Performance test is tuned for BDX server, The family {}, model {} is not supported.".format(fam, mod))
+    return lambda func: func
+
+
+def skip_unless_config_enable(feature):
+    path = os.path.join(
+           os.path.dirname(
+            os.path.dirname(
+             os.path.realpath(__file__))),
+           'config.log')
+    with open(path) as fid:
+        for line in fid.readlines():
+            if line.startswith("enable_{}='0'".format(feature)):
+                return unittest.skip("Feature: {feature} is not enabled, configure with --enable-{feature} to run this test.".format(feature=feature))
+            elif line.startswith("enable_{}='1'".format(feature)):
+                break
+    return lambda func: func
+
+
+def skip_unless_slurm_batch():
+    if 'SLURM_NODELIST' not in os.environ:
+        return unittest.skip('Requires SLURM batch session.')
+    return lambda func: func
+
+
+class TestIntegration(unittest.TestCase):
+    def setUp(self):
+        self.longMessage = True
+        self._mode = 'dynamic'
+        self._options = {'tree_decider': 'static_policy',
+                         'leaf_decider': 'power_governing',
+                         'platform': 'rapl',
+                         'power_budget': 150}
+        self._tmp_files = []
+        self._output = None
+
+    def tearDown(self):
+        if sys.exc_info() == (None, None, None) and os.getenv('GEOPM_KEEP_FILES') is None:
+            if self._output is not None:
+                self._output.remove_files()
+            for ff in self._tmp_files:
+                try:
+                    os.remove(ff)
+                except OSError:
+                    pass
+
+    def assertNear(self, a, b, epsilon=0.05):
+        denom = a if a != 0 else 1
+        if abs((a - b) / denom) >= epsilon:
+            self.fail('The fractional difference between {a} and {b} is greater than {epsilon}'.format(a=a, b=b, epsilon=epsilon))
+
+    def create_progress_df(self, df):
+        # Build a df with only the first region entry and the exit.
+        last_index = 0
+        filtered_df = pandas.DataFrame()
+        row_list = []
+        progress_1s = df['progress-0'].loc[df['progress-0'] == 1]
+        for index, junk in progress_1s.iteritems():
+            row = df.loc[last_index:index].head(1)
+            row_list += [row[['seconds', 'progress-0', 'runtime-0']]]
+            row = df.loc[last_index:index].tail(1)
+            row_list += [row[['seconds', 'progress-0', 'runtime-0']]]
+            last_index = index + 1  # Set the next starting index to be one past where we are
+        filtered_df = pandas.concat(row_list)
+        return filtered_df
+
+    def test_report_and_trace_generation(self):
+        name = 'test_report_and_trace_generation'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 4
+        num_rank = 16
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', 1.0)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+        for nn in node_names:
+            report = self._output.get_report(nn)
+            self.assertNotEqual(0, len(report))
+            trace = self._output.get_trace(nn)
+            self.assertNotEqual(0, len(trace))
+
+    @unittest.skip("TODO: check if MPI was built with threading support")
+    def test_report_and_trace_generation_pthread(self):
+        name = 'test_report_and_trace_generation_pthread'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 4
+        num_rank = 16
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', 1.0)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.set_pmpi_ctl('pthread')
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+        for nn in node_names:
+            report = self._output.get_report(nn)
+            self.assertNotEqual(0, len(report))
+            trace = self._output.get_trace(nn)
+            self.assertNotEqual(0, len(trace))
+
+    @unittest.skipUnless(geopm_test_launcher.resource_manager() != "ALPS",
+                         'ALPS does not support multi-application launch on the same nodes.')
+    @skip_unless_slurm_batch()
+    def test_report_and_trace_generation_application(self):
+        name = 'test_report_and_trace_generation_application'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 4
+        num_rank = 16
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', 1.0)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.set_pmpi_ctl('application')
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+        for nn in node_names:
+            report = self._output.get_report(nn)
+            self.assertNotEqual(0, len(report))
+            trace = self._output.get_trace(nn)
+            self.assertNotEqual(0, len(trace))
+
+    @unittest.skipUnless(geopm_test_launcher.resource_manager() == "SLURM" and os.getenv('SLURM_NODELIST') is None,
+                         'Requires non-sbatch SLURM session for alloc\'d and idle nodes.')
+    def test_report_generation_all_nodes(self):
+        name = 'test_report_generation_all_nodes'
+        report_path = name + '.report'
+        num_node = 1
+        num_rank = 1
+        delay = 1.0
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', delay)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        time.sleep(5)  # Wait a moment to finish cleaning-up from a previous test
+        idle_nodes = launcher.get_idle_nodes()
+        idle_nodes_copy = list(idle_nodes)
+        alloc_nodes = launcher.get_alloc_nodes()
+        launcher.write_log(name, 'Idle nodes : {nodes}'.format(nodes=idle_nodes))
+        launcher.write_log(name, 'Alloc\'d  nodes : {nodes}'.format(nodes=alloc_nodes))
+        node_names = []
+        reports = {}
+        for nn in idle_nodes_copy:
+            launcher.set_node_list(nn.split())  # Hack to convert string to list
+            try:
+                launcher.run(name)
+                node_names += nn.split()
+                oo = geopmpy.io.AppOutput(report_path)
+                reports[nn] = oo.get_report(nn)
+            except subprocess.CalledProcessError as e:
+                if e.returncode == 1 and nn not in launcher.get_idle_nodes():
+                    launcher.write_log(name, '{node} has disappeared from the idle list!'.format(node=nn))
+                    idle_nodes.remove(nn)
+                else:
+                    launcher.write_log(name, 'Return code = {code}'.format(code=e.returncode))
+                    raise e
+
+        self.assertEqual(len(node_names), len(idle_nodes))
+        for nn in node_names:
+            report = reports[nn]
+            self.assertNotEqual(0, len(report))
+            self.assertNear(delay, report['sleep'].get_runtime())
+            self.assertGreater(report.get_runtime(), report['sleep'].get_runtime())
+            self.assertEqual(1, report['sleep'].get_count())
+
+    def test_runtime(self):
+        name = 'test_runtime'
+        report_path = name + '.report'
+        num_node = 1
+        num_rank = 5
+        delay = 3.0
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', delay)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+        self._output = geopmpy.io.AppOutput(report_path)
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            self.assertNear(delay, rr['sleep'].get_runtime())
+            self.assertGreater(rr.get_runtime(), rr['sleep'].get_runtime())
+
+    def test_runtime_epoch(self):
+        name = 'test_runtime_epoch'
+        report_path = name + '.report'
+        num_node = 1
+        num_rank = 5
+        delay = 3.0
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', delay)
+        app_conf.append_region('spin', delay)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+        self._output = geopmpy.io.AppOutput(report_path)
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            total_runtime = rr['sleep'].get_runtime() + rr['spin'].get_runtime()
+            self.assertNear(total_runtime, rr['epoch'].get_runtime())
+
+    def test_runtime_nested(self):
+        name = 'test_runtime_nested'
+        report_path = name + '.report'
+        num_node = 1
+        num_rank = 1
+        delay = 1.0
+        loop_count = 2
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.set_loop_count(loop_count)
+        app_conf.append_region('nested-progress', delay)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+        self._output = geopmpy.io.AppOutput(report_path)
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            # The spin sections of this region sleep for 'delay' seconds twice per loop.
+            self.assertNear(2 * loop_count * delay, rr['spin'].get_runtime())
+            self.assertNear(rr['spin'].get_runtime(), rr['epoch'].get_runtime(), epsilon=0.01)
+            self.assertGreater(rr.get_mpi_runtime(), 0)
+            self.assertGreater(0.1, rr.get_mpi_runtime())
+            self.assertEqual(loop_count, rr['spin'].get_count())
+
+    def test_trace_runtimes(self):
+        name = 'test_trace_runtimes'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 4
+        num_rank = 16
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', 1.0)
+        app_conf.append_region('dgemm', 1.0)
+        app_conf.append_region('all2all', 1.0)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path,
+                                                    trace_path, region_barrier=True)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(len(node_names), num_node)
+
+        for nn in node_names:
+            report = self._output.get_report(nn)
+            trace = self._output.get_trace(nn)
+            self.assertNear(trace.iloc[-1]['seconds'], report.get_runtime())
+
+            # Calculate runtime totals for each region in each trace, compare to report
+            tt = trace.set_index(['region_id'], append=True)
+            tt = tt.groupby(level=['region_id'])
+            for region_name, region_data in report.iteritems():
+                if region_name != 'unmarked-region' and region_data.get_runtime() != 0:
+                    trace_data = tt.get_group((region_data.get_id()))
+                    trace_elapsed_time = trace_data.iloc[-1]['seconds'] - trace_data.iloc[0]['seconds']
+                    self.assertNear(trace_elapsed_time, region_data.get_runtime())
+
+    def test_runtime_regulator(self):
+        name = 'test_runtime_regulator'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 1
+        num_rank = 4
+        loop_count = 20
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.set_loop_count(loop_count)
+        sleep_big_o = 1.0
+        spin_big_o = 0.5
+        expected_region_runtime = {'spin': spin_big_o, 'sleep': sleep_big_o}
+        app_conf.append_region('sleep', sleep_big_o)
+        app_conf.append_region('spin', spin_big_o)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path, region_barrier=True)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(len(node_names), num_node)
+
+        for nn in node_names:
+            report = self._output.get_report(nn)
+            trace = self._output.get_trace(nn)
+            self.assertNear(trace.iloc[-1]['seconds'], report.get_runtime())
+
+            tt = trace.set_index(['region_id'], append=True)
+            tt = tt.groupby(level=['region_id'])
+
+            for region_name, region_data in report.iteritems():
+                if region_name not in ['unmarked-region', 'model-init', 'epoch'] and region_data.get_runtime() != 0:
+                    trace_data = tt.get_group((region_data.get_id()))
+                    filtered_df = self.create_progress_df(trace_data.reset_index('region_id', drop=True))
+                    first_time = False
+                    for index, df in filtered_df.iterrows():
+                        if df['progress-0'] == 1:
+                            self.assertNear(df['runtime-0'], expected_region_runtime[region_name], epsilon=0.001)
+                            first_time = True
+                        if first_time is True and df['progress-0'] == 0:
+                            self.assertNear(df['runtime-0'], expected_region_runtime[region_name], epsilon=0.001)
+
+    @skip_unless_run_long_tests()
+    def test_region_runtimes(self):
+        name = 'test_region_runtime'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 4
+        num_rank = 16
+        loop_count = 500
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('dgemm', 8.0)
+        app_conf.set_loop_count(loop_count)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path, time_limit=900)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(len(node_names), num_node)
+
+        # Calculate region times from traces
+        region_times = collections.defaultdict(lambda: collections.defaultdict(dict))
+        for nn in node_names:
+            tt = self._output.get_trace(nn).set_index(['region_id'], append=True).groupby(level=['region_id'])
+
+            for region_id, data in tt:
+                # Build a df with only the first region entry and the exit.
+                last_index = 0
+                filtered_df = pandas.DataFrame()
+                row_list = []
+                progress_1s = data['progress-0'].loc[data['progress-0'] == 1]
+                for index, junk in progress_1s.iteritems():
+                    row = data.ix[last_index:index].head(1)
+                    row_list += [row[['seconds', 'progress-0']]]
+                    row = data.ix[last_index:index].tail(1)
+                    row_list += [row[['seconds', 'progress-0']]]
+                    last_index = index[0] + 1  # Set the next starting index to be one past where we are
+                filtered_df = pandas.concat(row_list)
+
+                filtered_df = filtered_df.diff()
+                # Since I'm not separating out the progress 0's from 1's, when I do the diff I only care about the
+                # case where 1 - 0 = 1 for the progress column.
+                filtered_df = filtered_df.loc[filtered_df['progress-0'] == 1]
+
+                if len(filtered_df) > 1:
+                    launcher.write_log(name, 'Region elapsed time stats from {} - {} :\n{}'\
+                                       .format(nn, region_id, filtered_df['seconds'].describe()))
+                    filtered_df['seconds'].describe()
+                    region_times[nn][region_id] = filtered_df
+
+            launcher.write_log(name, '{}'.format('-' * 80))
+
+        # Loop through the reports to see if the region runtimes line up with what was calculated from the trace files above.
+        write_regions = True
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            for region_name, region in rr.iteritems():
+                if region.get_id() != 0 and region.get_count() > 1:
+                    if write_regions:
+                        launcher.write_log(name, 'Region {} is {}.'.format(region.get_id(), region_name))
+                    self.assertNear(region.get_runtime(),
+                                    region_times[nn][region.get_id()]['seconds'].sum())
+            write_regions = False
+
+        # Test to ensure every region detected in the trace is captured in the report.
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            report_ids = [rr[ii].get_id() for ii in rr]
+            for region_id in region_times[nn].keys():
+                self.assertTrue(region_id in report_ids, msg='Report from {} missing region_id {}'.format(nn, region_id))
+
+    def test_progress(self):
+        name = 'test_progress'
+        report_path = name + '.report'
+        num_node = 1
+        num_rank = 4
+        delay = 3.0
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep-progress', delay)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+        self._output = geopmpy.io.AppOutput(report_path)
+        node_names = self._output.get_node_names()
+        self.assertEqual(len(node_names), num_node)
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            self.assertNear(delay, rr['sleep'].get_runtime())
+            self.assertGreater(rr.get_runtime(), rr['sleep'].get_runtime())
+            self.assertEqual(1, rr['sleep'].get_count())
+
+    def test_count(self):
+        name = 'test_count'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 1
+        num_rank = 4
+        delay = 0.01
+        loop_count = 100
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.set_loop_count(loop_count)
+        app_conf.append_region('spin', delay)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(len(node_names), num_node)
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            self.assertNear(delay * loop_count, rr['spin'].get_runtime())
+            self.assertEqual(loop_count, rr['spin'].get_count())
+            self.assertEqual(loop_count, rr['epoch'].get_count())
+
+        # TODO Trace file parsing + analysis
+
+    @skip_unless_run_long_tests()
+    def test_scaling(self):
+        """
+        This test will start at ${num_node} nodes and ranks.  It will then calls check_run() to
+        ensure that commands can be executed successfully on all of the allocated compute nodes.
+        Afterwards it will run the specified app config on each node and verify the reports.  When
+        complete it will double num_node and run the steps again.
+
+        WARNING: This test can take a long time to run depending on the number of starting nodes and
+        the size of the allocation.
+        """
+        name = 'test_scaling'
+        report_path = name + '.report'
+        num_node = 2
+        loop_count = 100
+
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('dgemm', 1.0)
+        app_conf.append_region('all2all', 1.0)
+        app_conf.set_loop_count(loop_count)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, time_limit=900)
+
+        check_successful = True
+        while check_successful:
+            launcher.set_num_node(num_node)
+            launcher.set_num_rank(num_node)
+            try:
+                launcher.check_run(name)
+            except subprocess.CalledProcessError as e:
+                # If we exceed the available nodes in the allocation ALPS/SLURM give a rc of 1
+                # All other rc's are real errors
+                if e.returncode != 1:
+                    raise e
+                check_successful = False
+            if check_successful:
+                launcher.write_log(name, 'About to run on {} nodes.'.format(num_node))
+                launcher.run(name)
+                self._output = geopmpy.io.AppOutput(report_path)
+                node_names = self._output.get_node_names()
+                self.assertEqual(len(node_names), num_node)
+                for nn in node_names:
+                    rr = self._output.get_report(nn)
+                    self.assertEqual(loop_count, rr['dgemm'].get_count())
+                    self.assertEqual(loop_count, rr['all2all'].get_count())
+                    self.assertGreater(rr['dgemm'].get_runtime(), 0.0)
+                    self.assertGreater(rr['all2all'].get_runtime(), 0.0)
+                num_node *= 2
+                self._output.remove_files()
+
+    @skip_unless_run_long_tests()
+    def test_power_consumption(self):
+        name = 'test_power_consumption'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 4
+        num_rank = 16
+        loop_count = 500
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('dgemm', 8.0)
+        app_conf.set_loop_count(loop_count)
+        fam, mod = get_platform()
+        if fam == 6 and mod in (45, 47, 79):
+            # set budget for BDX server or IVB
+            self._options['power_budget'] = 240
+        elif fam == 6 and mod == 87:
+            # budget for KNL
+            self._options['power_budget'] = 150
+        else:
+            self._options['power_budget'] = 200
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path, time_limit=900)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.write_log(name, 'Power cap = {}W'.format(self._options['power_budget']))
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+        all_power_data = {}
+        # Total power consumed will be Socket(s) + DRAM
+        for nn in node_names:
+            tt = self._output.get_trace(nn)
+
+            epoch = '9223372036854775808'
+            # todo: hack to run tests with new controller
+            if os.getenv("GEOPM_AGENT") is not None:
+                epoch = '0x8000000000000000'
+
+            first_epoch_index = tt.loc[tt['region_id'] == epoch][:1].index[0]
+            epoch_dropped_data = tt[first_epoch_index:]  # Drop all startup data
+
+            power_data = epoch_dropped_data.filter(regex='energy')
+            power_data['seconds'] = epoch_dropped_data['seconds']
+            power_data = power_data.diff().dropna()
+            power_data.rename(columns={'seconds': 'elapsed_time'}, inplace=True)
+            power_data = power_data.loc[(power_data != 0).all(axis=1)]  # Will drop any row that is all 0's
+
+            pkg_energy_cols = [s for s in power_data.keys() if 'pkg_energy' in s]
+            dram_energy_cols = [s for s in power_data.keys() if 'dram_energy' in s]
+            power_data['socket_power'] = power_data[pkg_energy_cols].sum(axis=1) / power_data['elapsed_time']
+            power_data['dram_power'] = power_data[dram_energy_cols].sum(axis=1) / power_data['elapsed_time']
+            power_data['combined_power'] = power_data['socket_power'] + power_data['dram_power']
+
+            pandas.set_option('display.width', 100)
+            launcher.write_log(name, 'Power stats from {} :\n{}'.format(nn, power_data.describe()))
+
+            all_power_data[nn] = power_data
+
+        for node_name, power_data in all_power_data.iteritems():
+            # Allow for overages of 2% at the 75th percentile.
+            self.assertGreater(self._options['power_budget'] * 1.02, power_data['combined_power'].quantile(.75))
+
+            # TODO Checks on the maximum power computed during the run?
+            # TODO Checks to see how much power was left on the table?
+
+    def test_progress_exit(self):
+        """
+        Check that when we always see progress exit before the next entry.
+        Make sure that progress only decreases when a new region is entered.
+        """
+        name = 'test_progress_exit'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 1
+        num_rank = 16
+        loop_count = 100
+        big_o = 0.1
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.set_loop_count(loop_count)
+        app_conf.append_region('dgemm-progress', big_o)
+        app_conf.append_region('spin-progress', big_o)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path, region_barrier=True)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+
+        for nn in node_names:
+            tt = self._output.get_trace(nn)
+
+            tt = tt.set_index(['region_id'], append=True)
+            tt = tt.groupby(level=['region_id'])
+
+            for region_id, data in tt:
+                tmp = data['progress-0'].diff()
+                # Look for changes in progress that are more negative
+                # than can be expected due to extrapolation error.
+                if region_id == 8300189175:
+                    negative_progress = tmp.loc[(tmp > -1) & (tmp < -0.1)]
+                    launcher.write_log(name, '{}'.format(negative_progress))
+                    self.assertEqual(0, len(negative_progress))
+
+    @skip_unless_run_long_tests()
+    def test_sample_rate(self):
+        """
+        Check that sample rate is regular and fast.
+        """
+        name = 'test_sample_rate'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 1
+        num_rank = 16
+        loop_count = 10
+        big_o = 10.0
+        region = 'dgemm-progress'
+        max_mean = 0.01  # 10 millisecond max sample period
+        max_nstd = 0.1  # 10% normalized standard deviation (std / mean)
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.set_loop_count(loop_count)
+        app_conf.append_region(region, big_o)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(num_node, len(node_names))
+
+        for nn in node_names:
+            tt = self._output.get_trace(nn)
+            delta_t = tt['seconds'].diff()
+            delta_t = delta_t.loc[delta_t != 0]
+            self.assertGreater(max_mean, delta_t.mean())
+            # WARNING : The following line may mask issues in the sampling rate. To do a fine grained analysis, comment
+            # out the next line and do NOT run on the BSP. This will require modifications to the launcher or manual testing.
+            size_orig = len(delta_t)
+            delta_t = delta_t[(delta_t - delta_t.mean()) < 3*delta_t.std()]  # Only keep samples within 3 stds of the mean
+            self.assertGreater(0.06, 1 - (float(len(delta_t)) / size_orig))
+            self.assertGreater(max_nstd, delta_t.std() / delta_t.mean())
+
+    def test_mpi_runtimes(self):
+        name = 'test_mpi_runtimes'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 4
+        num_rank = 16
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', 1.0)
+        app_conf.append_region('dgemm', 1.0)
+        app_conf.append_region('all2all', 1.0)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(len(node_names), num_node)
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            self.assertEqual(0, rr['unmarked-region'].get_count())
+            # Since MPI time is is counted if any rank on a node is in
+            # an MPI call, but region time is counted only when all
+            # ranks on a node are in a region, we must use the
+            # unmarked-region time as our error term when comparing
+            # MPI time and all2all time.
+            mpi_epsilon = max(rr['unmarked-region'].get_runtime() / rr['all2all'].get_mpi_runtime(), 0.05)
+            self.assertNear(rr['all2all'].get_mpi_runtime(), rr['all2all'].get_runtime(), mpi_epsilon)
+            self.assertEqual(rr['all2all'].get_mpi_runtime(), rr['epoch'].get_mpi_runtime())
+            self.assertEqual(rr['all2all'].get_mpi_runtime(), rr.get_mpi_runtime())
+            self.assertEqual(0, rr['unmarked-region'].get_mpi_runtime())
+            self.assertEqual(0, rr['sleep'].get_mpi_runtime())
+            self.assertEqual(0, rr['dgemm'].get_mpi_runtime())
+
+    def test_ignore_runtime(self):
+        name = 'test_ignore_runtimes'
+        report_path = name + '.report'
+        trace_path = name + '.trace'
+        num_node = 4
+        num_rank = 16
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('ignore', 1.0)
+        app_conf.append_region('dgemm', 1.0)
+        app_conf.append_region('all2all', 1.0)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path, trace_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path, trace_path + '*')
+        node_names = self._output.get_node_names()
+        self.assertEqual(len(node_names), num_node)
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            self.assertEqual(rr['ignore'].get_runtime(), rr.get_ignore_runtime())
+
+    @skip_unless_config_enable('ompt')
+    def test_unmarked_ompt(self):
+        name = 'test_unmarked_ompt'
+        report_path = name + '.report'
+        num_node = 4
+        num_rank = 16
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('stream-unmarked', 1.0)
+        app_conf.append_region('dgemm-unmarked', 1.0)
+        app_conf.append_region('all2all-unmarked', 1.0)
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path)
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+        launcher.run(name)
+
+        self._output = geopmpy.io.AppOutput(report_path)
+        node_names = self._output.get_node_names()
+        self.assertEqual(len(node_names), num_node)
+        stream_id = None
+        stream_name = '[OMPT]geopmbench:geopm::StreamModelRegion::run()'
+        for nn in node_names:
+            rr = self._output.get_report(nn)
+            region_names = rr.keys()
+            found = False
+            full_name = stream_name
+            for name in region_names:
+                if stream_name in name:  # account for numbers at end of OMPT region names
+                    found = True
+                    full_name = name
+            self.assertTrue(found)
+            stream_region = rr[full_name]
+            self.assertEqual(1, stream_region.get_count())
+            if stream_id:
+                self.assertEqual(stream_id, stream_region.get_id())
+            else:
+                stream_id = stream_region.get_id()
+            ompt_regions = [key for key in region_names if key.startswith('[OMPT]')]
+            self.assertLessEqual(2, len(ompt_regions))
+            self.assertTrue(('MPI_Alltoall' in rr))
+            gemm_region = [key for key in region_names if key.lower().find('gemm') != -1]
+            self.assertLessEqual(1, len(gemm_region))
+
+    @skip_unless_run_long_tests()
+    @skip_unless_platform_bdx()
+    @skip_unless_cpufreq()
+    def test_plugin_efficient_freq_offline(self):
+        """
+        Test of the EfficientFreqDecider offline auto mode.
+        """
+        name = 'test_plugin_efficient_freq_offline'
+        loop_count = 10
+        dgemm_bigo = 20.25
+        stream_bigo = 1.449
+        dgemm_bigo_jlse = 35.647
+        dgemm_bigo_quartz = 29.12
+        stream_bigo_jlse = 1.6225
+        stream_bigo_quartz = 1.7941
+        hostname = socket.gethostname()
+        if hostname.endswith('.alcf.anl.gov'):
+            dgemm_bigo = dgemm_bigo_jlse
+            stream_bigo = stream_bigo_jlse
+        else:
+            dgemm_bigo = dgemm_bigo_quartz
+            stream_bigo = stream_bigo_quartz
+
+        app_conf_name = name + '_app.config'
+        app_conf = geopmpy.io.BenchConf(app_conf_name)
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.set_loop_count(loop_count)
+        app_conf.append_region('dgemm', dgemm_bigo)
+        app_conf.append_region('stream', stream_bigo)
+        app_conf.append_region('all2all', 1.0)
+        app_conf.write()
+
+        source_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        app_path = os.path.join(source_dir, '.libs', 'geopmbench')
+        # if not found, use geopmbench from user's PATH
+        if not os.path.exists(app_path):
+            app_path = "geopmbench"
+        app_argv = [app_path, app_conf_name]
+
+        # Setup the static policy run
+        num_node = 1
+        num_rank = 4
+        # Runs frequency sweep, generates best-fit frequency mapping, and
+        # runs with the plugin in offline mode.
+        analysis = geopmpy.analysis.OfflineBaselineComparisonAnalysis(name,
+                                                                      '.',
+                                                                      num_rank,
+                                                                      num_node,
+                                                                      app_argv,
+                                                                      verbose=True)
+        analysis.launch()
+        parse_output = analysis.parse()
+        process_output = analysis.report_process(parse_output)
+        analysis.report(process_output)
+        sticker_freq_idx = process_output.loc['epoch'].index[-2]
+        energy_savings_epoch = process_output.loc['epoch']['energy_savings'][sticker_freq_idx]
+        runtime_savings_epoch = process_output.loc['epoch']['runtime_savings'][sticker_freq_idx]
+
+        self.assertLess(0.0, energy_savings_epoch)
+        self.assertLess(-10.0, runtime_savings_epoch)  # want -10% or better
+
+    @skip_unless_run_long_tests()
+    @skip_unless_platform_bdx()
+    @skip_unless_cpufreq()
+    def test_plugin_efficient_freq_online(self):
+        """
+        Test of the EfficientFreqDecider online auto mode.
+        """
+        name = 'test_plugin_efficient_freq_online'
+        loop_count = 10
+        dgemm_bigo = 20.25
+        stream_bigo = 1.449
+        dgemm_bigo_jlse = 35.647
+        dgemm_bigo_quartz = 29.12
+        stream_bigo_jlse = 1.6225
+        stream_bigo_quartz = 1.7941
+        hostname = socket.gethostname()
+        if hostname.endswith('.alcf.anl.gov'):
+            dgemm_bigo = dgemm_bigo_jlse
+            stream_bigo = stream_bigo_jlse
+        else:
+            dgemm_bigo = dgemm_bigo_quartz
+            stream_bigo = stream_bigo_quartz
+        app_conf_name = name + '_app.config'
+        app_conf = geopmpy.io.BenchConf(app_conf_name)
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.set_loop_count(loop_count)
+
+        app_conf.append_region('dgemm', dgemm_bigo)
+        app_conf.append_region('stream', stream_bigo)
+        app_conf.append_region('all2all', 1.0)
+        app_conf.write()
+
+        source_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        app_path = os.path.join(source_dir, '.libs', 'geopmbench')
+        # if not found, use geopmbench from user's PATH
+        if not os.path.exists(app_path):
+            app_path = "geopmbench"
+        app_argv = [app_path, app_conf_name]
+
+        # Setup the adaptive policy run
+        num_node = 1
+        num_rank = 4
+        # Runs frequency sweep and runs with the plugin in online mode.
+        analysis = geopmpy.analysis.OnlineBaselineComparisonAnalysis(name,
+                                                                     '.',
+                                                                     num_rank,
+                                                                     num_node,
+                                                                     app_argv,
+                                                                     verbose=True)
+        analysis.launch()
+        parse_output = analysis.parse()
+        process_output = analysis.report_process(parse_output)
+        analysis.report(process_output)
+        sticker_freq_idx = process_output.loc['epoch'].index[-2]
+        energy_savings_epoch = process_output.loc['epoch']['energy_savings'][sticker_freq_idx]
+        runtime_savings_epoch = process_output.loc['epoch']['runtime_savings'][sticker_freq_idx]
+
+        self.assertLess(0.0, energy_savings_epoch)
+        self.assertLess(-10.0, runtime_savings_epoch)  # want -10% or better
+
+    @skip_unless_slurm_batch()
+    def test_controller_signal_handling(self):
+        """
+        Check that Controller handles signals and cleans up.
+        """
+        name = 'test_controller_signal_handling'
+        report_path = name + '.report'
+        num_node = 4
+        num_rank = 8
+        app_conf = geopmpy.io.BenchConf(name + '_app.config')
+        self._tmp_files.append(app_conf.get_path())
+        app_conf.append_region('sleep', 30.0)
+        app_conf.write()
+
+        ctl_conf = geopmpy.io.CtlConf(name + '_ctl.config', self._mode, self._options)
+        self._tmp_files.append(ctl_conf.get_path())
+        ctl_conf.write()
+
+        launcher = geopm_test_launcher.TestLauncher(app_conf, ctl_conf, report_path)
+        launcher.set_pmpi_ctl("application")
+        launcher.set_num_node(num_node)
+        launcher.set_num_rank(num_rank)
+
+        alloc_nodes = launcher.get_alloc_nodes()
+
+        kill_proc_list = [subprocess.Popen("ssh -vvv -o StrictHostKeyChecking=no -o BatchMode=yes {} ".format(nn) +
+                                           "'sleep 15; pkill --signal 15 geopmctl; sleep 5; pkill -9 geopmbench'",
+                                           shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                          for nn in alloc_nodes]
+
+        try:
+            launcher.run(name)
+        except subprocess.CalledProcessError:
+            pass
+
+        for kp in kill_proc_list:
+            stdout, stderr = kp.communicate()
+            err = kp.returncode
+            if err != 0:
+                launcher.write_log(name, "Output from SSH:")
+                launcher.write_log(name, str(stdout))
+                launcher.write_log(name, str(stderr))
+                self.skipTest(name + ' requires passwordless SSH between allocated nodes.')
+
+        message = "Error: <geopm> Runtime error: Signal 15"
+
+        logfile_name = name + '.log'
+        with open(logfile_name) as infile_fid:
+            found = False
+            for line in infile_fid:
+                if message in line:
+                    found = True
+        self.assertTrue(found, "runtime error message not found in log")
+
+
+if __name__ == '__main__':
+    unittest.main()

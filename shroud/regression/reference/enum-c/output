@@ -1,9 +1,0 @@
-Will not generate C wrappers for a language=c library
-Wrote wrapenum.h
-Wrote wrapenum.c
-Wrote wrapfenum.f
-Wrote utilenum.c
-Wrote typesenum.h
-Wrote pyenummodule.c
-Wrote pyenummodule.h
-Wrote setup.py

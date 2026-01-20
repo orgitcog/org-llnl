@@ -1,0 +1,121 @@
+# DEPRECATED
+***Libmsr is no longer actively maintained -- libmsr has evolved into Variorum, which can be found on github: https://github.com/llnl/variorum.***
+
+LIBMSR
+======
+
+[![Read the Docs](http://readthedocs.org/projects/hatchet/badge/?version=latest)](http://hatchet.readthedocs.io)
+
+Welcome to Libmsr, a friendly (well, friendlier) interface to many of the
+model-specific registers in Intel processors. Now with PCI configuration
+register support for some Intel hardware.
+
+version 0.3.1
+
+**Important**
+
+Libmsr is no longer being actively developed. Variorum
+https://variorum.readthedocs.io/ is an evolution of and a successor to
+libmsr. Variorum can be found on github:
+
+https://github.com/llnl/variorum
+
+
+Last Update
+-----------
+24 March 2020
+
+
+Webpages
+--------
+http://software.llnl.gov/libmsr <br>
+https://github.com/llnl/libmsr
+
+
+Overview
+--------
+
+Libmsr provides an interface to accessing the model-specific registers (MSRs)
+on Intel platforms, which provide privileged functionality for monitoring and
+controlling various CPU features.
+
+
+Installation
+------------
+
+Installation is simple. You will need [CMAKE](http://www.cmake.org) version 2.8
+or higher and GCC. In most cases, the installation is as follows:
+
+    $ cmake . -DCMAKE_INSTALL_PREFIX=${HOME}/build/libmsr
+    $ make
+    $ make install
+
+The installation depends on a `master.h` file, which defines the offsets for
+several MSRs given a particular architecture (e.g., Sandy Bridge, Ivy Bridge,
+Haswell, etc.). The auto-configuration tool can be forced to use the header
+file of a specific architecture or can auto-detect the architecture. To specify
+a particular architecture, run `cmake` with the option
+`-DLIBMSR_TARGET_ARCH=<ARG>` where `ARG` is in hexadecimal. In the future, we
+plan to have a set of architecture-specific configuration files that can be
+pre-loaded to CMake to populate the cache.
+
+Currently supported architectures are Intel Xeon v1-3 (Sandy Bridge, Ivy
+Bridge, and Haswell server processors). The library technically supports all
+processors based on these architectures, but some features may be missing from
+client products. Using the wrong header file is likely to cause problems.
+
+Supported Architectures:
+
+	2D (Sandy Bridge)       57 (Knights Landing)
+	3E (Ivy Bridge)
+	3F (Haswell)
+	4F (Broadwell)
+	55 (Skylake)*
+
+If you are unsure of your architecture number, check the "model" field in `lscpu`
+or `/proc/cpuinfo` (note that it will not be in hexadecimal).
+
+*The Skylake support is currently experimental and requires more testing/validation.
+
+Notes
+-----
+
+This software depends on the files `/dev/cpu/*/msr` being present. Recent
+kernels require additional capabilities. We have found it easier to use our own
+[MSR-SAFE](https://github.com/LLNL/msr-safe) kernel
+module with R/W permissions, but running as root (or going through the bother
+of adding the capabilities to the binaries) is another option.
+
+If you need PCI configuration register (CSR) support in Libmsr, you MUST have
+CSR-SAFE installed. This code is not currently on Github -- you will need to
+request it.
+
+Call `msr_init()` before using any of the APIs.
+
+For sample code, see `libmsr_test.c` in the `test/` directory.
+
+Our most up-to-date documentation for Libmsr can be generated with `make doc`
+and `make latex_doc` for HTML and PDF versions, respectively. There are also
+some useful PDF files in the `documentation/` directory.
+
+
+Contact
+-------
+
+Barry Rountree, Project Lead, <rountree@llnl.gov> <br>
+Stephanie Brink, Developer, <brink2@llnl.gov>
+
+Please feel free to contact the developers with any questions or feedback.
+
+We are collecting names of those who have previously contributed to libmsr over
+the years. See the current list in the `AUTHORS` file. Please contact the
+developers to have your name added to the list.
+
+
+Release
+-------
+
+libmsr is released under the GPLv2.1 license. For more details, see the
+[LICENSE](https://github.com/LLNL/libmsr/blob/master/LICENSE) file.
+
+    LLNL-CODE-645430

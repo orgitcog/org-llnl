@@ -1,5 +1,0 @@
-_build
-.env
-node_modules
-vendor
-*.local.*

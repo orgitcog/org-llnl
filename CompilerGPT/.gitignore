@@ -1,6 +1,0 @@
-*.bin
-*.o
-*.a
-./*.json
-.vscode
-./build

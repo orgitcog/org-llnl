@@ -1,3 +1,0 @@
-#pragma once
-
-#define EXAEPI_VERSION "@EXAEPI_VERSION@"

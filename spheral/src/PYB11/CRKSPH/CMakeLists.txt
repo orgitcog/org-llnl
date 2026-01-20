@@ -1,1 +1,0 @@
-spheral_add_pybind11_library(CRKSPH SPHERAL_MODULE_LIST)

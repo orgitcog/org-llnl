@@ -1,0 +1,108 @@
+# Run workflow for both push and MR triggers, but avoid duplicate pipeline runs
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: '$CI_COMMIT_BRANCH'
+
+stages:
+  - test
+
+.oslic:
+  tags:
+    - shell
+    - oslic
+
+before_script:
+  - python3 --version  # For debugging
+  - python3 -m pip install virtualenv # Should already be installed, but just to be sure...
+  - python3 -m virtualenv venv # Create venv
+  - source venv/bin/activate
+
+pytest:
+  stage: test
+  extends:
+    - .oslic
+  image: python:3.10
+  script:
+    - pip install .
+    - pip install -r requirements-dev.txt
+    - pytest
+
+pre-commit:
+  stage: test
+  extends:
+    - .oslic
+  needs:
+    - job: scheduled-precommit-autoupdate
+      optional: true
+  variables:
+    GIT_STRATEGY: clone # or fetch (faster), none (no code needed)
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
+    - exists: [.pre-commit-config.yaml]
+  script: |
+    pip install -r requirements-dev.txt
+    status=0
+    pre-commit run --all-files || status=$?
+    if [[ $status -eq 0 ]]; then
+      exit 0
+    else
+      echo "Running pre-commit again to check for issues that can't be auto fixed."
+      pre-commit run --all-files # should exit on failure
+    fi
+
+    if [[ -z "$PRECOMMIT_SSH_KEY" ]]; then
+      echo "No pre-commit SSH key is set up for automatic fixes." > /dev/stderr
+      exit 1
+    fi
+
+    if [[ -n "$CI_MERGE_REQUEST_IID" ]]; then
+      echo "Attempting to auto fix issues for open MR."
+      if [[ "$CI_MERGE_REQUEST_EVENT_TYPE" != "detached" ]]; then
+        echo "Can not autofix when Merged results pipelines are enabled."
+      fi
+      git config user.email "$GITLAB_USER_EMAIL"
+      git config user.name "$GITLAB_USER_NAME"
+      git add .
+      git commit -m "auto fixes from pre-commit CI job (!$CI_MERGE_REQUEST_IID)" -m "job: $CI_JOB_URL"
+      # note: add -o ci.skip if repeated pipeline triggering loops are a concern... worst case here should be committing fails because no files changed
+      GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i $PRECOMMIT_SSH_KEY" git push ssh://git@czgitlab.llnl.gov:7999/cir-software-assurance/sbom-surfactant.git HEAD:"$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
+    fi
+    exit 1
+  artifacts:
+    reports:
+      codequality: "codeclimate.json"
+
+scheduled-precommit-autoupdate:
+  extends:
+    - .oslic
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: never
+    - exists: [.pre-commit-config.yaml]
+  script: |
+    pip install -r requirements-dev.txt
+    pre-commit autoupdate || status=$?
+    if [[ $status -ne 0 ]]; then
+      echo "Unexpected error occurred during pre-commit autoupdate." > /dev/stderr
+      exit 1
+    fi
+    if [[ -z "$PRECOMMIT_SSH_KEY" ]]; then
+      echo "No pre-commit SSH key is set up for automatic fixes." > /dev/stderr
+      exit 1
+    fi
+    git config user.email "$GITLAB_USER_EMAIL"
+    git config user.name "$GITLAB_USER_NAME"
+    git add .pre-commit-config.yaml
+    git commit -m "autoupdate pre-commit config" || status=$?
+    if [[ $status -ne 0 ]]; then
+      echo "pre-commit config is either up to date or an error occurred."
+      # Assume it is just up to date, and don't fail the pipeline run
+      exit 0
+    fi
+    GIT_SSH_COMMAND="ssh -i $PRECOMMIT_SSH_KEY" git push ssh://git@czgitlab.llnl.gov:7999/cir-software-assurance/sbom-surfactant.git HEAD:"$CI_COMMIT_BRANCH"

@@ -1,1 +1,0 @@
-add_metall_executable(verify_soft_dirty verify_soft_dirty.cpp)

@@ -1,3 +1,0 @@
-Host slurm-*
-    StrictHostKeyChecking no
-

@@ -1,0 +1,39 @@
+include: [component: $CI_SERVER_FQDN/lc-components/id_tokens/id_tokens-component@main]
+
+before_script:
+  - python3 --version  # For debugging
+  - pip install setuptools wheel
+  - pip install . 
+  - pip install flask==3.1.0
+  #- apt-get -y update
+  #- apt-get -y install build-essential sqlite3 flex bison libtool make automake autoconf graphviz libjq-dev
+
+#formatting:
+# tags:
+ # - oslic
+ # - shell
+ #stage: build
+ #image: python:3.11
+ #script: 
+  #- pip install black
+  #- black --check .
+
+static-checks:
+ tags:
+  - oslic
+  - shell
+ stage: test
+ image: python:3.11
+ script: 
+  - pip install mypy
+  - mypy . --ignore-missing-imports
+
+unit-test:
+  tags:
+    - oslic
+    - shell
+  stage: test
+  image: python:3.11
+  script:
+    - pip install pytest
+    - pytest ./test/

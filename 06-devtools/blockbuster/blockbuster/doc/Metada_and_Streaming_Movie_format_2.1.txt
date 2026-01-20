@@ -1,0 +1,83 @@
+We are now supporting the use of metadata in movies.  This required an extension to the current format.  We store the metadata at the end of SM 2.0 movies.  
+
+=================================================================================
+USE CASES: 
+    Becky or other manager asks for information about movies matching some criteria K. 
+    Rich, Liam or Scott need to browse movie information preparatory to a demo.  
+    Lorenz needs to list all movie data for Movie Browser utility. 
+     
+=================================================================================
+TOOLS: 
+smtag   -- intended to set tags in existing movies. 
+smquery -- for querying metadata in existing movies.  
+sminfo  -- is now an alias for "smquery --movie-info"
+img2sm  -- has support for inserting metadata at creation time
+sm2img  -- no longer deals with metadata (see sminfo)
+
+=================================================================================
+CURRENT STATUS:
+    Movie information is now available in the Lorenz Movie Browser utility, now in beta.  To that end, we will need a tool that sets and gets tags, and also can work with thumbnails.  
+    Scott Miller and other experts are now able to add metadata and query both files and lists of files for metadata.  
+    There is a canonical list of tags.  
+
+=================================================================================
+    CANONICAL SET OF DESCRIPTIVE TAGS 
+(  ASCII) Authors                          : value = ""
+(  ASCII) Code Name                        : value = ""
+(  ASCII) Description                      : value = ""
+(  ASCII) Keywords                         : value = ""
+(  ASCII) Movie Create Command             : value = ""
+(   DATE) Movie Create Date                : value = ""
+(  ASCII) Movie Create Host                : value = ""
+(  ASCII) Movie Creator                    : value = "<name from finger> (<username>): <phone from finger>"
+(  ASCII) Science Type                     : value = ""
+(  INT64) Sim CPUs                         : value = 1
+(  ASCII) Sim Cluster                      : value = ""
+(   DATE) Sim Date                         : value = ""
+(  ASCII) Sim Duration                     : value = ""
+(  ASCII) Title                            : value = ""
+(  ASCII) UCRL                             : value = ""
+   
+    CANONICAL SET OF DESCRIPTIVE TAGS SET AT MOVIE CREATION TIME (by img2sm)
+(  ASCII) Movie Create Command             : value = ""
+(   DATE) Movie Create Date                : value = ""
+(  ASCII) Movie Create Host                : value = ""
+(  ASCII) Movie Creator                    : value = "<name from finger> (<username>): <phone from finger>"
+
+
+=================================================================================
+       METADATA FORMAT IN STREAMING MOVIES
+       The metadata section shall begin at the first byte following the last frame of the 
+       movie and continues to the end of the movie.  Metadata is a general term and can 
+       include any arbitrary information, including binary payloads, that one might want
+       to include with a movie.  The metadata is written  as follows. 
+       All numerical fields are big-endian (network byte order).  
+       Note that Field 3 is the beginning of the header, always 24 bytes before the end of the metadata.
+
+         (1) n bytes: <tag name: null terminated ASCII sequence> 
+         (2) p bytes: <data payload: see below>
+         (3) 8 bytes: uint64 : a binary signature constant 0x0088BBeecc113399
+         (4) 8 bytes: uint64 : tag name length (n)
+         (5) 8 bytes: uint64 : payload length (p)  BEGINNING OF "HEADER" 
+
+ 
+       This allows the metadata to be found simply by reading the last 24 bytes of the file, 
+       then confirming the binary signature (3).         
+       You then can read the payload by seeking backwards to (1) and reading the data.  
+       The next  metadata item is found by reading the 24 bytes preceding this one.  This
+       backwards flow is convenient, flexible, and eliminates the need to store any more
+       than just the metadata itself.  
+       
+       The data payload may theoretically in the future be of any format, including binary, 
+       compressed,  "wrong" endian, etc.  However, currently supported payloads are all big 
+       endian and start with a magic number and have the following formats: 
+         METADATA_TYPE_ASCII:  8 bytes: magic number 0xA5C11A5C11A5C11A
+                               8 bytes: uint64_t giving  length of null-terminated string
+                               n bytes: null-terminated ASCII string,             
+         METADATA_TYPE_DATE:   8 bytes: magic number 0xDD00772255DD1177
+                               8 bytes: uint64_t giving  length of null-terminated string
+                               n bytes: null-terminated ASCII string,             
+         METADATA_TYPE_DOUBLE: 8 bytes: magic number 0xF10A7F10A7F10A7F
+                               8 bytes: double (FP64)
+         METADATA_TYPE_INT64:  8 bytes: magic number 0x4244224442244442
+                               8 bytes: long long (int64_t)

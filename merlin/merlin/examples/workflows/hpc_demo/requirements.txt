@@ -1,4 +1,0 @@
-pandas
-faker
-merlin
-maestrowf

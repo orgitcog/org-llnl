@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -x 
-libtoolize --verbose --copy || exit
-autoreconf --verbose --install || exit 
-
-set +x
-echo "Success! Now run './configure'"
-

@@ -1,3 +1,0 @@
-To build source code documentation, type "doxygen doxygen.config", 
-then point you web browser to doxygen/html/index.html.
- 

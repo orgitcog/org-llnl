@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+   To override this file, copy it to phpmd.xml and then modify.
+   @see https://phpmd.org/documentation/
+-->
+<ruleset name="PMD Ruleset for Drupal"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+  <description>
+    LLNL PHP Mess Detector Code Validation for Custom Modules and Themes.
+  </description>
+
+  <!-- Import Clean Code Ruleset -->
+  <rule ref="rulesets/cleancode.xml">
+    <exclude name="StaticAccess" /> <!-- Exclude StaticAccess -->
+    <exclude name="MissingImport" /> <!-- Exclude MissingImport -->
+    <exclude name="IfStatementAssignment" /> <!-- Exclude ElseExpression -->
+    <exclude name="ElseExpression" /> <!-- Exclude ElseExpression -->
+    <exclude name="BooleanArgumentFlag" /> <!-- Exclude BooleanArgumentFlag -->
+  </rule>
+
+  <!-- Import Code Size Ruleset -->
+  <rule ref="rulesets/codesize.xml">
+    <exclude name="ExcessiveMethodLength" /> <!-- Exclude ExcessiveMethodLength (overridden below) -->
+    <exclude name="TooManyPublicMethods" /> <!-- Exclude TooManyPublicMethods (overridden below) -->
+    <exclude name="CyclomaticComplexity" /> <!-- Exclude CyclomaticComplexity (overridden below) -->
+  </rule>
+
+  <!-- Import Controversial Ruleset -->
+  <rule ref="rulesets/controversial.xml">
+    <exclude name="CamelCaseParameterName" /> <!-- Exclude CamelCaseParameterName -->
+    <exclude name="CamelCaseVariableName" /> <!-- Exclude CamelCaseVariableName -->
+  </rule>
+
+  <!-- Import Design Ruleset -->
+  <rule ref="rulesets/design.xml">
+    <exclude name="CouplingBetweenObjects" /> <!-- Exclude CouplingBetweenObjects -->
+    <exclude name="NumberOfChildren" /> <!-- Exclude NumberOfChildren -->
+  </rule>
+
+  <!-- Import Naming Ruleset  -->
+  <rule ref="rulesets/naming.xml">
+    <exclude name="ShortVariable" /> <!-- Exclude ShortVariable -->
+    <exclude name="LongVariable" /> <!-- Exclude LongVariable -->
+    <exclude name="ShortMethodName" /> <!-- Exclude ShortMethodName -->
+    <exclude name="LongClassName" /> <!-- Exclude LongClassName -->
+  </rule>
+
+  <!-- Import Unused Code Ruleset -->
+  <rule ref="rulesets/unusedcode.xml">
+    <exclude name="UnusedFormalParameter" /> <!-- Exclude UnusedFormalParameter -->
+    <exclude name="UnusedLocalVariable" /> <!-- Exclude UnusedLocalVariable -->
+  </rule>
+
+  <!-- ################################## -->
+  <!-- #### Begin Rule Customization #### -->
+  <!-- ################################## -->
+  <!-- Import and Override Code Size ExcessiveMethodLength Rule -->
+  <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+    <properties>
+      <property name="reportLevel" description="The Cyclomatic Complexity reporting threshold" value="15"/>
+    </properties>
+  </rule>
+
+  <!-- Import and Override Code Size ExcessiveMethodLength Rule -->
+  <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+    <properties>
+      <property name="minimum" description="The method size reporting threshold" value="250"/>
+    </properties>
+  </rule>
+
+  <!-- Import and Override Code Size TooManyPublicMethods Rule -->
+  <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+    <properties>
+      <property name="maxmethods" description="The method count reporting threshold" value="15"/>
+    </properties>
+  </rule>
+
+</ruleset>

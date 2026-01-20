@@ -1,9 +1,0 @@
-/Makefile
-/src/*.o
-/src/*.pyc
-/src/__pycache__
-/test/testSimple00IFP
-/test/testSimple01IFP
-/test/testComplexIFP
-/example/appExampleIFP
-/build*

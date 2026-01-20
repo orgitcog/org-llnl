@@ -1,0 +1,10 @@
+.idea
+gotls
+*.pem
+*.key
+*.csr
+*.crt
+*.cer
+gotls.odp
+*.exe
+vendor

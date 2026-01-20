@@ -1,1 +1,0 @@
-../../bin/pgen_scisample.py

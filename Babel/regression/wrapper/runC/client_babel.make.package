@@ -1,2 +1,0 @@
-client_BABEL_MAKEFILE_NAME = client_babel.make
-client_STUB_SRC_DIRS = .

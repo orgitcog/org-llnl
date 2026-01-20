@@ -1,0 +1,558 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F409B [Fri Oct  7 18:10:35 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x2C000   
+0x90       0xC   NumberOfSymbols:               0x5C      
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x13000   
+0xA0       0x8   SizeOfInitializedData:         0x3000    
+0xA4       0xC   SizeOfUninitializedData:       0x23000   
+0xA8       0x10  AddressOfEntryPoint:           0x36480   
+0xAC       0x14  BaseOfCode:                    0x24000   
+0xB0       0x18  BaseOfData:                    0x37000   
+0xB4       0x1C  ImageBase:                     0x705C0000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x3A000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x23000   
+0x180      0x8   Misc_PhysicalAddress:          0x23000   
+0x180      0x8   Misc_VirtualSize:              0x23000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x13000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x13000   
+0x1A8      0x8   Misc_VirtualSize:              0x13000   
+0x1AC      0xC   VirtualAddress:                0x24000   
+0x1B0      0x10  SizeOfRawData:                 0x12800   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.926586 (Min=0.0, Max=8.0)
+MD5     hash: 0be3f911d7bb2a23a0c35d1eecc69768
+SHA-1   hash: b72a0e9621336af4e2f0ca93227aa85d9943eadb
+SHA-256 hash: acb5524e11561a5a1996464eb0d44fb4be943ab337f409608fc197b22289819b
+SHA-512 hash: 869f7041e41c523e558b70ff2bf6341306bfffc29b85f771cab5615a122462c80be58b9538e0f93a9de07c8c78afc871a90e3ef7326ab81a692e4df201d5f14f
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          UPX2
+0x1D0      0x8   Misc:                          0x3000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x3000    
+0x1D0      0x8   Misc_VirtualSize:              0x3000    
+0x1D4      0xC   VirtualAddress:                0x37000   
+0x1D8      0x10  SizeOfRawData:                 0x2200    
+0x1DC      0x14  PointerToRawData:              0x12A00   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.681755 (Min=0.0, Max=8.0)
+MD5     hash: 978274bb6afce71bba3adff48988386a
+SHA-1   hash: 82eb2024d6d8de5ea74e4182c5574e9915fbfb16
+SHA-256 hash: b2ac941eccee2e783270322380c372e25f05fdd081efb3b71b447d319f69d677
+SHA-512 hash: d48511104c706e08f55e001f79f40a9f29ac61558ba391a802191c6281f07d1abfff60238842ad84a8442fc4fd0c9f926e4d882685731f2f20087c9daf06a3fa
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x370F8   
+0xFC       0x4   Size:                          0x2020    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x37000   
+0x104      0x4   Size:                          0xF8      
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x39118   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x366A8   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x12AF8    0x0   Characteristics:               0x0       
+0x12AFC    0x4   TimeDateStamp:                 0x4E8F4077 [Fri Oct  7 18:09:59 2011 UTC]
+0x12B00    0x8   MajorVersion:                  0x0       
+0x12B02    0xA   MinorVersion:                  0x0       
+0x12B04    0xC   Name:                          0x37C42   
+0x12B08    0x10  Base:                          0x1       
+0x12B0C    0x14  NumberOfFunctions:             0x11D     
+0x12B10    0x18  NumberOfNames:                 0x11D     
+0x12B14    0x1C  AddressOfFunctions:            0x37120   
+0x12B18    0x20  AddressOfNames:                0x37594   
+0x12B1C    0x24  AddressOfNameOrdinals:         0x37A08   
+
+Ordinal      RVA         Name
+1          0x00003AE0    Clamp_L
+2          0x00003B00    Clamp_ab
+3          0x00010F90    FixedLERP
+4          0x00010F50    FixedMul
+5          0x00010FE0    FixedScale
+6          0x00010F70    FixedSquare
+7          0x000117D0    MAT3det
+8          0x00011830    MAT3eval
+9          0x000118F0    MAT3evalW
+10         0x00011B80    MAT3fromFix
+11         0x000114D0    MAT3identity
+12         0x00011600    MAT3inverse
+13         0x00011AE0    MAT3isIdentity
+14         0x00011500    MAT3per
+15         0x000119C0    MAT3perK
+16         0x00011C80    MAT3scaleAndCut
+17         0x00011890    MAT3solve
+18         0x00011A20    MAT3toFix
+19         0x000113A0    VEC3cross
+20         0x00011480    VEC3distance
+21         0x00011160    VEC3divK
+22         0x00011220    VEC3equal
+23         0x00011280    VEC3equalF
+24         0x00011100    VEC3fromFix
+25         0x00011020    VEC3init
+26         0x00011040    VEC3initF
+27         0x000113F0    VEC3length
+28         0x000111F0    VEC3minus
+29         0x000111C0    VEC3perComp
+30         0x00011190    VEC3perK
+31         0x00011430    VEC3saturate
+32         0x00011BE0    VEC3scaleAndCut
+33         0x000112D0    VEC3scaleFix
+34         0x00011130    VEC3swap
+35         0x000110A0    VEC3toFix
+36         0x00008080    _cmsAddChromaticAdaptationTag
+37         0x00007F60    _cmsAddChromaticityTag
+38         0x00008040    _cmsAddColorantTableTag
+39         0x00008010    _cmsAddDateTimeTag
+40         0x00007F20    _cmsAddGammaTag
+41         0x00007DF0    _cmsAddLUTTag
+42         0x00007FD0    _cmsAddNamedColorTag
+43         0x00007F90    _cmsAddSequenceDescriptionTag
+44         0x00007EE0    _cmsAddTextTag
+45         0x00007EB0    _cmsAddXYZTag
+46         0x00010210    _cmsBlessLUT8
+47         0x00005D20    _cmsBuildKToneCurve
+48         0x000052C0    _cmsChannelsOf
+49         0x00005720    _cmsComputeGamutLUT
+50         0x000058D0    _cmsComputePrelinearizationTablesFromXFORM
+51         0x00005760    _cmsComputeSoftProofLUT
+52         0x00002140    _cmsCrc32OfGammaTable
+53         0x00007960    _cmsCreateProfileFromFilePlaceholder
+54         0x00007A20    _cmsCreateProfileFromMemPlaceholder
+55         0x000076F0    _cmsCreateProfilePlaceholder
+56         0x000039A0    _cmsEndPointsBySpace
+57         0x00019B30    _cmsFixWhiteMisalignment
+58         0x000050A0    _cmsICCcolorSpace
+59         0x00013A00    _cmsIdentifyInputFormat
+60         0x00013D20    _cmsIdentifyOutputFormat
+61         0x00015800    _cmsIdentifyWhitePoint
+62         0x00007830    _cmsInitTag
+63         0x00018620    _cmsIsMatrixShaper
+64         0x000050C0    _cmsLCMScolorSpace
+65         0x00019860    _cmsPrecalculateBlackPreservingDeviceLink
+66         0x00019710    _cmsPrecalculateDeviceLink
+67         0x00005740    _cmsPrecalculateGamutCheck
+68         0x00019370    _cmsQuantizeVal
+69         0x00019690    _cmsReasonableGridpointsByColorspace
+70         0x0000EA00    _cmsSaveProfile
+71         0x0000EC80    _cmsSaveProfileToMem
+72         0x00007780    _cmsSearchTag
+73         0x0000E6F0    _cmsSetLUTdepth
+74         0x00007AC0    _cmsSetSaveToDisk
+75         0x00007B40    _cmsSetSaveToMemory
+76         0x00003440    _cmsSmoothEndpoints
+77         0x0000F140    _cmsValidateLUT
+78         0x00003A90    _cmsWhiteBySpace
+79         0x00015560    cmsAdaptMatrixFromD50
+80         0x000154E0    cmsAdaptMatrixToD50
+81         0x000155E0    cmsAdaptToIlluminant
+82         0x00015350    cmsAdaptationMatrix
+83         0x0000E740    cmsAddTag
+84         0x0000F1E0    cmsAlloc3DGrid
+85         0x00002190    cmsAllocGamma
+86         0x0000EF10    cmsAllocLUT
+87         0x0000F2D0    cmsAllocLinearTable
+88         0x00010870    cmsAllocMatShaper
+89         0x000109B0    cmsAllocMatShaper2
+90         0x0001B200    cmsAllocNamedColorList
+91         0x00002CB0    cmsAllocSampledCurve
+92         0x0001B2C0    cmsAppendNamedColor
+93         0x000040B0    cmsBFDdeltaE
+94         0x00002850    cmsBuildGamma
+95         0x000175E0    cmsBuildInputMatrixShaper
+96         0x000177C0    cmsBuildOutputMatrixShaper
+97         0x00002390    cmsBuildParametricGamma
+98         0x00015110    cmsBuildRGB2XYZtransferMatrix
+99         0x000047D0    cmsCIE2000DeltaE
+100        0x00003F60    cmsCIE94DeltaE
+101        0x0001D820    cmsCIECAM02Done
+102        0x0001D840    cmsCIECAM02Forward
+103        0x0001D480    cmsCIECAM02Init
+104        0x0001DEC0    cmsCIECAM02Reverse
+105        0x0001A330    cmsCIECAM97sDone
+106        0x0001A930    cmsCIECAM97sForward
+107        0x0001A350    cmsCIECAM97sInit
+108        0x0001ABE0    cmsCIECAM97sReverse
+109        0x00004560    cmsCMCdeltaE
+110        0x00006B40    cmsCalcCLUT16Params
+111        0x00006A40    cmsCalcCLUT16ParamsEx
+112        0x00006A10    cmsCalcL16Params
+113        0x00014210    cmsChangeBuffersFormat
+114        0x00001950    cmsChooseCnvrt
+115        0x00004E70    cmsClampLab
+116        0x00002E30    cmsClampSampledCurve
+117        0x0000EBF0    cmsCloseProfile
+118        0x000032E0    cmsConvertGammaToSampledCurve
+119        0x00003220    cmsConvertSampledCurveToGamma
+120        0x0001FA90    cmsCreateBCHSWabstractProfile
+121        0x0001ED40    cmsCreateGrayProfile
+122        0x0001F430    cmsCreateInkLimitingDeviceLink
+123        0x0001F750    cmsCreateLab4Profile
+124        0x0001F640    cmsCreateLabProfile
+125        0x0001F310    cmsCreateLinearizationDeviceLink
+126        0x000187C0    cmsCreateMultiprofileTransform
+127        0x0001FC40    cmsCreateNULLProfile
+128        0x00017B00    cmsCreateProofingTransform
+129        0x0001EAC0    cmsCreateRGBProfile
+130        0x00018500    cmsCreateTransform
+131        0x0001F880    cmsCreateXYZProfile
+132        0x0001F990    cmsCreate_sRGBProfile
+133        0x00001910    cmsD50_XYZ
+134        0x00001920    cmsD50_xyY
+135        0x00017A30    cmsDeleteTransform
+136        0x00003B30    cmsDeltaE
+137        0x00015BB0    cmsDetectBlackPoint
+138        0x00018550    cmsDoTransform
+139        0x00002280    cmsDupGamma
+140        0x0000F030    cmsDupLUT
+141        0x00002D70    cmsDupSampledCurve
+142        0x00002DC0    cmsEndpointsOfSampledCurve
+143        0x00001C90    cmsErrorAction
+144        0x00002C80    cmsEstimateGamma
+145        0x00002B20    cmsEstimateGammaEx
+146        0x0000FA10    cmsEvalLUT
+147        0x000103C0    cmsEvalLUTreverse
+148        0x00010A80    cmsEvalMatShaper
+149        0x000149C0    cmsFloat2LabEncoded
+150        0x00014AF0    cmsFloat2LabEncoded4
+151        0x00014E50    cmsFloat2XYZEncoded
+152        0x00002210    cmsFreeGamma
+153        0x00002230    cmsFreeGammaTriple
+154        0x0000EF40    cmsFreeLUT
+155        0x00010820    cmsFreeMatShaper
+156        0x0001B290    cmsFreeNamedColorList
+157        0x0000E5D0    cmsFreeProfileSequenceDescription
+158        0x00002D40    cmsFreeSampledCurve
+159        0x000185C0    cmsGetAlarmCodes
+160        0x00007D90    cmsGetColorSpace
+161        0x00007DB0    cmsGetDeviceClass
+162        0x00007D70    cmsGetPCS
+163        0x0001D1E0    cmsGetPostScriptCRD
+164        0x0001C8F0    cmsGetPostScriptCRDEx
+165        0x0001C170    cmsGetPostScriptCSA
+166        0x00007DC0    cmsGetProfileICCversion
+167        0x00007750    cmsGetTagCount
+168        0x00007760    cmsGetTagSignature
+169        0x000141B0    cmsGetUserFormatters
+170        0x000214B0    cmsIT8Alloc
+171        0x00022EA0    cmsIT8DefineDblFormat
+172        0x00022920    cmsIT8EnumDataFormat
+173        0x00022940    cmsIT8EnumProperties
+174        0x000229A0    cmsIT8EnumPropertyMulti
+175        0x000213D0    cmsIT8Free
+176        0x00022B20    cmsIT8GetData
+177        0x00022B70    cmsIT8GetDataDbl
+178        0x00022A40    cmsIT8GetDataFormat
+179        0x00022A60    cmsIT8GetDataRowCol
+180        0x00022A80    cmsIT8GetDataRowColDbl
+181        0x00022D50    cmsIT8GetPatchByName
+182        0x00022D00    cmsIT8GetPatchName
+183        0x000218F0    cmsIT8GetProperty
+184        0x00022110    cmsIT8GetPropertyDbl
+185        0x000224C0    cmsIT8GetPropertyMulti
+186        0x00021660    cmsIT8GetSheetType
+187        0x000227A0    cmsIT8LoadFromFile
+188        0x00022690    cmsIT8LoadFromMem
+189        0x00022520    cmsIT8SaveToFile
+190        0x000225E0    cmsIT8SaveToMem
+191        0x000216B0    cmsIT8SetComment
+192        0x00022BB0    cmsIT8SetData
+193        0x00022CA0    cmsIT8SetDataDbl
+194        0x00022500    cmsIT8SetDataFormat
+195        0x00022AB0    cmsIT8SetDataRowCol
+196        0x00022AD0    cmsIT8SetDataRowColDbl
+197        0x00022E60    cmsIT8SetIndexColumn
+198        0x00021770    cmsIT8SetPropertyDbl
+199        0x000217E0    cmsIT8SetPropertyHex
+200        0x000218A0    cmsIT8SetPropertyMulti
+201        0x00021710    cmsIT8SetPropertyStr
+202        0x00021850    cmsIT8SetPropertyUncooked
+203        0x00021670    cmsIT8SetSheetType
+204        0x00021440    cmsIT8SetTable
+205        0x00022D80    cmsIT8SetTableByLabel
+206        0x00022D70    cmsIT8TableCount
+207        0x00018700    cmsIsIntentSupported
+208        0x000193C0    cmsIsLinear
+209        0x00007800    cmsIsTag
+210        0x000022D0    cmsJoinGamma
+211        0x00003390    cmsJoinGammaEx
+212        0x00003080    cmsJoinSampledCurves
+213        0x00014D90    cmsLCh2Lab
+214        0x00014C20    cmsLab2LCh
+215        0x000146A0    cmsLab2XYZ
+216        0x00014760    cmsLab2XYZEncoded
+217        0x00014920    cmsLabEncoded2Float
+218        0x00014970    cmsLabEncoded2Float4
+219        0x00006C60    cmsLinearInterpFixed
+220        0x00006B70    cmsLinearInterpLUT16
+221        0x0001B450    cmsNamedColorCount
+222        0x0001B550    cmsNamedColorIndex
+223        0x0001B470    cmsNamedColorInfo
+224        0x0000E5F0    cmsOpenProfileFromFile
+225        0x0000E6A0    cmsOpenProfileFromMem
+226        0x0000D100    cmsReadChromaticAdaptationMatrix
+227        0x0000DA30    cmsReadColorantTable
+228        0x0000D190    cmsReadICCGamma
+229        0x0000D210    cmsReadICCGammaReversed
+230        0x0000C510    cmsReadICCLut
+231        0x0000D070    cmsReadICCMatrixRGB2XYZ
+232        0x0000CFC0    cmsReadICCText
+233        0x0000CF10    cmsReadICCTextEx
+234        0x0000D5B0    cmsReadICCnamedColorList
+235        0x0000E340    cmsReadProfileSequenceDescription
+236        0x00002FF0    cmsRescaleSampledCurve
+237        0x000027A0    cmsReverseGamma
+238        0x00006CE0    cmsReverseLinearInterpLUT16
+239        0x00019430    cmsSample3DGrid
+240        0x00018F20    cmsSetAdaptationState
+241        0x00018580    cmsSetAlarmCodes
+242        0x00019840    cmsSetCMYKPreservationStrategy
+243        0x00007DA0    cmsSetColorSpace
+244        0x00007DE0    cmsSetDeviceClass
+245        0x00001CB0    cmsSetErrorHandler
+246        0x00007CD0    cmsSetHeaderAttributes
+247        0x00007CB0    cmsSetHeaderFlags
+248        0x0000CEB0    cmsSetLanguage
+249        0x0000F7F0    cmsSetMatrixLUT
+250        0x0000F840    cmsSetMatrixLUT4
+251        0x00007D80    cmsSetPCS
+252        0x00007DD0    cmsSetProfileICCversion
+253        0x00007CF0    cmsSetProfileID
+254        0x00007C90    cmsSetRenderingIntent
+255        0x00014180    cmsSetUserFormatters
+256        0x00001CC0    cmsSignalError
+257        0x00002880    cmsSmoothGamma
+258        0x00002E80    cmsSmoothSampledCurve
+259        0x0000E260    cmsTakeCalibrationDateTime
+260        0x0000E190    cmsTakeCharTargetData
+261        0x0000CFF0    cmsTakeColorants
+262        0x0000DCC0    cmsTakeCopyright
+263        0x00007D20    cmsTakeCreationDateTime
+264        0x00007CC0    cmsTakeHeaderAttributes
+265        0x00007CA0    cmsTakeHeaderFlags
+266        0x00007C40    cmsTakeIluminant
+267        0x0000DC20    cmsTakeManufacturer
+268        0x00007BF0    cmsTakeMediaBlackPoint
+269        0x00007BA0    cmsTakeMediaWhitePoint
+270        0x0000DC70    cmsTakeModel
+271        0x0000DEC0    cmsTakeProductDesc
+272        0x0000DF40    cmsTakeProductInfo
+273        0x0000DD10    cmsTakeProductName
+274        0x00007CE0    cmsTakeProfileID
+275        0x00007C80    cmsTakeRenderingIntent
+276        0x00005DF0    cmsTetrahedralInterp16
+277        0x00006F80    cmsTetrahedralInterp8
+278        0x0001EE30    cmsTransform2DeviceLink
+279        0x00006230    cmsTrilinearInterp16
+280        0x00015000    cmsWhitePointFromTemp
+281        0x00014400    cmsXYZ2Lab
+282        0x00014510    cmsXYZ2LabEncoded
+283        0x00014FA0    cmsXYZ2xyY
+284        0x00014F50    cmsXYZEncoded2Float
+285        0x00014FD0    cmsxyY2XYZ
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x12A00    0x0   OriginalFirstThunk:            0x0       
+0x12A00    0x0   Characteristics:               0x0       
+0x12A04    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x12A08    0x8   ForwarderChain:                0x0       
+0x12A0C    0xC   Name:                          0x37078   
+0x12A10    0x10  FirstThunk:                    0x37050   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x12A14    0x0   OriginalFirstThunk:            0x0       
+0x12A14    0x0   Characteristics:               0x0       
+0x12A18    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x12A1C    0x8   ForwarderChain:                0x0       
+0x12A20    0xC   Name:                          0x37085   
+0x12A24    0x10  FirstThunk:                    0x37068   
+
+msvcrt.dll.cos Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x12A28    0x0   OriginalFirstThunk:            0x0       
+0x12A28    0x0   Characteristics:               0x0       
+0x12A2C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x12A30    0x8   ForwarderChain:                0x0       
+0x12A34    0xC   Name:                          0x37090   
+0x12A38    0x10  FirstThunk:                    0x37070   
+
+USER32.dll.MessageBoxA Hint[0]
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x128A8    0x0   StartAddressOfRawData:         0x705F66C0
+0x128AC    0x4   EndAddressOfRawData:           0x705F66C3
+0x128B0    0x8   AddressOfIndex:                0x705ECB2C
+0x128B4    0xC   AddressOfCallBacks:            0x705F66C3
+0x128B8    0x10  SizeOfZeroFill:                0x0       
+0x128BC    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x14B18    0x0   VirtualAddress:                0x36000   
+0x14B1C    0x4   SizeOfBlock:                   0x18      
+    0003648Dh HIGHLOW
+    0003668Dh HIGHLOW
+    000366A8h HIGHLOW
+    000366ACh HIGHLOW
+    000366B0h HIGHLOW
+    000366B4h HIGHLOW
+    000366C3h HIGHLOW
+    00036000h ABSOLUTE
+

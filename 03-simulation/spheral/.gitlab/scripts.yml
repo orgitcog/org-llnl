@@ -1,0 +1,267 @@
+# ------------------------------------------------------------------------------
+# CI Job Scripts
+# ------------------------------------------------------------------------------
+
+.init:
+  variables:
+    GIT_STRATEGY: clone
+    GIT_SUBMODULE_STRATEGY: recursive
+  stage: init
+  script:
+    - echo $USER
+    - CI_BUILD_DIR=$SPHERAL_BUILDS_DIR/$CI_JOB_ID/project
+    - echo $CI_BUILD_DIR &> ci-dir.txt && echo $CI_JOB_NAME &> job-name.txt
+    - echo $CI_BUILD_DIR && echo $CI_PROJECT_DIR
+    - mkdir -p $CI_BUILD_DIR && cp -a $CI_PROJECT_DIR/. $CI_BUILD_DIR
+  artifacts:
+    paths:
+      - ci-dir.txt
+      - job-name.txt
+  interruptible: true
+
+.tpls:
+  extends: [.retry_rule]
+  stage: tpls
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - CI_BUILD_DIR=$(cat ci-dir.txt)
+    - cd $CI_BUILD_DIR && cat job-name.txt
+    - echo $SPEC
+
+    - ./$SCRIPT_DIR/devtools/tpl-manager.py --spec="${SPACK_PKG_NAME}${SPEC}" --ci-run
+  artifacts:
+    paths:
+      - ci-dir.txt
+      - job-name.txt
+
+.build:
+  extends: [.retry_rule]
+  stage: build_and_install
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - CI_BUILD_DIR=$(cat ci-dir.txt)
+    - cd $CI_BUILD_DIR && cat job-name.txt
+    - ./$SCRIPT_DIR/devtools/host-config-build.py --no-clean --build --ctest --nprocs $NPROC --host-config gitlab.cmake -DSPHERAL_ENABLE_TIMERS=ON $EXTRA_CMAKE_ARGS
+  artifacts:
+    paths:
+      - ci-dir.txt
+      - job-name.txt
+
+.build_and_test:
+  extends: [.build]
+  after_script:
+    - CI_BUILD_DIR=$(cat ci-dir.txt)
+    - cd $CI_BUILD_DIR && cat job-name.txt
+
+    - ./build_gitlab/install/bin/spheral -c "import $SPHERAL_MODULE"
+  artifacts:
+    paths:
+      - ci-dir.txt
+      - job-name.txt
+
+.run_ats:
+  extends: [.retry_rule]
+  stage: run_ats
+  variables:
+    GIT_STRATEGY: none
+    FF_ENABLE_BASH_EXIT_CODE_CHECK: 1
+    FF_USE_NEW_BASH_EVAL_STRATEGY: 1
+  script:
+    - CI_BUILD_DIR=$(cat ci-dir.txt)
+    - cd $CI_BUILD_DIR && cat job-name.txt
+
+    - ./build_gitlab/install/bin/spheral-ats --ciRun ./build_gitlab/install/$ATS_FILE || exit_code=$?
+    - cp -r test-logs $CI_PROJECT_DIR
+    - exit $exit_code
+  artifacts:
+    when: always
+    paths:
+      - ci-dir.txt
+      - test-logs/
+  allow_failure:
+    exit_codes:
+      - 80
+
+# Run the performance suite and move the resulting Caliper files into the benchmark location
+.run_perf:
+  extends: [.retry_rule]
+  stage: run_perf
+  variables:
+    GIT_STRATEGY: none
+    FF_ENABLE_BASH_EXIT_CODE_CHECK: 1
+    FF_USE_NEW_BASH_EVAL_STRATEGY: 1
+  script:
+    - CI_BUILD_DIR=$(cat ci-dir.txt)
+    - cd $CI_BUILD_DIR && cat job-name.txt
+
+    - ./build_gitlab/install/bin/spheral-ats --ciRun --numNodes 2 --delay --batch --logs perf_logs ./build_gitlab/install/$PERF_ATS_FILE || exit_code=$?
+    - exit $exit_code
+  artifacts:
+    when: always
+    paths:
+      - ci-dir.txt
+
+.cleanup_dir:
+  stage: cleanup
+  variables:
+    GIT_STRATEGY: empty
+  script:
+    - CI_BUILD_DIR=$(cat ci-dir.txt)
+
+    - ml load mpifileutils
+    - cd $SPHERAL_BUILDS_DIR
+    - $RUN_CMD -n 20 drm $CI_BUILD_DIR/..
+  interruptible: true
+
+# ------------------------------------------------------------------------------
+# Shared TPL scripts.
+# ------------------------------------------------------------------------------
+
+.update_tpls:
+  variables:
+    GIT_STRATEGY: clone
+    GIT_SUBMODULE_STRATEGY: recursive
+  stage: update_tpls
+  script:
+    - ./$SCRIPT_DIR/devtools/tpl-manager.py --no-upstream --spack-dir=$UPSTREAM_DIR
+
+.toss_update_permissions:
+  stage: update_permissions
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - ml load mpifileutils
+    - dchmod --mode go+rx $UPSTREAM_DIR
+
+# ------------------------------------------------------------------------------
+# Production Installation scripts
+# ------------------------------------------------------------------------------
+
+### Create a tar file containing:
+#
+# dev-pkg/
+#   *cloned spheral repo.*
+#   resources/
+#     mirror/
+#     build_cache/
+#     bootstrap/
+#       metadata/
+#       bootstrap_cache/
+
+.build_dev_pkg:
+  variables:
+    GIT_STRATEGY: clone
+    GIT_SUBMODULE_STRATEGY: recursive
+  stage: generate_buildcache
+  extends: [.spheral_rev_str]
+  script:
+    - DEV_PKG_NAME=$SYS_TYPE-spheral-dev-pkg-$SPHERAL_REV_STR
+    - INSTALL_DIR=/usr/gapps/Spheral/$SYS_TYPE/spheral-$SPHERAL_REV_STR
+    - CI_BUILD_DIR=$SPHERAL_BUILDS_DIR/$CI_JOB_ID
+    - echo $DEV_PKG_NAME &> dev-pkg-name.txt
+    - echo $CI_BUILD_DIR &> ci-dir.txt
+    - echo $INSTALL_DIR &> install-dir.txt
+    - mkdir -p $CI_BUILD_DIR/$DEV_PKG_NAME && cp -a $CI_PROJECT_DIR/. $CI_BUILD_DIR/$DEV_PKG_NAME
+    - cd $CI_BUILD_DIR/$DEV_PKG_NAME
+
+    - env SCRIPT_DIR=$SCRIPT_DIR DEV_PKG_NAME=$DEV_PKG_NAME CI_BULD_DIR=$CI_BUILD_DIR
+      bash ./$SCRIPT_DIR/lc/generate-buildcache.sh
+
+  artifacts:
+    paths:
+      - dev-pkg-name.txt
+      - ci-dir.txt
+      - install-dir.txt
+
+.install_dev_pkg:
+  stage: install_production
+  variables:
+    GIT_STRATEGY: empty
+  script:
+    - INSTALL_DIR=$(cat install-dir.txt)
+    - rm -rf $INSTALL_DIR
+    - CI_BUILD_DIR=$(cat ci-dir.txt)
+    - DEV_PKG_NAME=$(cat dev-pkg-name.txt)
+
+    - cp $CI_BUILD_DIR/$DEV_PKG_NAME.tar.gz .
+    - tar -xzf $DEV_PKG_NAME.tar.gz
+    - cd $DEV_PKG_NAME
+
+    - env INSTALL_DIR=$INSTALL_DIR DEV_PKG_SPEC=$DEV_PKG_SPEC BUILD_ALLOC="" SCRIPT_DIR=$SCRIPT_DIR
+      bash ./$SCRIPT_DIR/lc/install-from-dev-pkg.sh
+    - ml load mpifileutils
+    - dchmod --mode go+rx $INSTALL_DIR
+
+  artifacts:
+    paths:
+      - ci-dir.txt
+      - install-dir.txt
+
+.prod_permissions:
+  stage: update_permissions
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - INSTALL_DIR=$(cat install-dir.txt)
+
+    - sed 's/YYYY\.MM\.p/'"$ALIAS"'/g' $SCRIPT_DIR/lc/modulefile-template.lua > /usr/gapps/Spheral/modulefiles/Spheral/"$ALIAS".lua
+    - chmod go+r /usr/gapps/Spheral/modulefiles/Spheral/"$ALIAS".lua
+
+    - ln -sfn $INSTALL_DIR /usr/gapps/Spheral/$SYS_TYPE/$ALIAS
+
+
+# ------------------------------------------------------------------------------
+# Script Utilities
+# ------------------------------------------------------------------------------
+
+# This job searches our SPHERAL_BUILDS_DIR and deletes all but the N most recent builds.
+# This should be enough of a buffer that we likely won't delete a build mid pipeline,
+# and never fill the sphapp workspace storage.
+.clean_old_dirs:
+  stage: cleanup
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - cd $SPHERAL_BUILDS_DIR
+
+    - MAX_DIR=30
+    - DIR_LIST=$(ls -ltd * | sed "1, $MAX_DIR d" | rev | cut -d ' ' -f1 | rev | paste -sd ' ' - )
+    - echo $DIR_LIST
+
+    - ml load mpifileutils
+    - if [[ $DIR_LIST ]]; then $RUN_CMD -n 20 drm $DIR_LIST; else echo "No directories to remove at this time."; fi
+
+.merge_pr_rule:
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "develop"'
+      when: always
+
+.tag_release_rule:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: manual
+    - if: '$CI_COMMIT_MESSAGE =~ /test-prod/'
+      when: manual
+
+.perf_pr_rule:
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "develop"'
+      when: always
+    - if: '$CI_COMMIT_MESSAGE =~ /test-perf/'
+      when: always
+
+# Must skip cleanup if running the performance stage
+.cleanup_rule:
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "develop"'
+      when: never
+    - if: '$CI_COMMIT_MESSAGE =~ /test-perf/'
+      when: never
+
+.retry_rule:
+  retry:
+    max: 2
+    when: job_execution_timeout
+  interruptible: true

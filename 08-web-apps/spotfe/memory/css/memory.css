@@ -1,0 +1,51 @@
+
+.plus.myButton {
+	position: absolute;
+    top: 5px;
+    right: 60px;
+    z-index: 10;
+    font-size: 30px;
+    width: 22px;
+    padding: 4px;
+    text-align: center;
+}
+
+.one_chart {
+	padding: 35px 0 0 0;
+}
+
+.top_bar {
+	height: 30px;
+}
+
+/* make body 100% to ensure when you click on white area it's in the body */
+html,
+body {
+	height:100%;
+}
+
+.ch_dropdown {
+	position: relative;
+	top: -30px;
+}
+
+.checkbox_open_close {
+	position: absolute;
+	right: 10px;
+	top: 0;
+	display: inline-block;
+	border: 1px solid #888888;
+	background-color: #dddddd;
+	padding: 2px 7px 2px 7px;
+	cursor: pointer;
+	z-index: 101;
+	color: #888888;
+}
+
+.error_statement {
+	color: red;
+	border-color: #FF00B2;
+	background-color: #ffdddd;
+	padding: 20px;
+}
+

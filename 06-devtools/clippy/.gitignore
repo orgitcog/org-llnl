@@ -1,0 +1,11 @@
+__pycache__
+**/build
+venv
+setup.cfg
+.vscode
+*.egg-info
+.coverage
+**/attic
+build
+*/.cache
+.cache/

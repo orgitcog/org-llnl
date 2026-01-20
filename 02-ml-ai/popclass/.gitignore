@@ -1,0 +1,6 @@
+.devcontainer/*
+*/__pycache__/*
+*/pytest_cache/*
+docs/build/*
+*/.DS_Store
+dist/*

@@ -1,3 +1,0 @@
-clean:
-	rm -f *.m *.sci simulator psuadeData psuadeMetis* .psuade_mars psu_*.png vsample sample_* psuadeApp*
-

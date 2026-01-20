@@ -1,0 +1,75 @@
+This test problem demonstrates running ODOE using the 
+Fisher method directly on simulator (not RS) and also
+using RS.
+* The simulation model has 3 parameters whereby parameter 
+  3 is the uncertain parameter with a uniform prior.
+  - The largest uncertainty should be at (0.75, 0.75)
+    so the largest uncertainty is around candidate 19.
+* The candidate design set is a 5x5=25 candidates on a 2D
+  lattice spanned by the first two inputs in the simulation
+  model.
+* The objective is to select 4 points in the candidate set
+* Follow the steps below to see things in action. When
+  done, do: make -f MakeClean to clean up things.
+
+**********************************************************
+STEPS for Fisher method with simulator+derivative):
+(odoeu_fdoptn)
+==========================================================
+
+Step 1: Preparation (psuade < psScriptStep1_fdoptn.in)
+
+ A. Create an initial candidate set
+
+    To create a candidate set, do:
+
+      cc -o candidate candidate.c -lm 
+      ./candidate
+      ====> CandidateSet0
+
+ B. Create a prior sample PriorSample
+ 
+    a. psuade psuadeGenPrior.in to create psuadeData
+
+    b. load psuadeData and use 'iwrite PriorSample'
+       ====> PriorSample
+
+Step 2: run optimal experimental design
+
+        RUN: psuade < psScriptStep2_fdoptn.in 
+
+**********************************************************
+STEPS for Fisher method with RS + finite difference):
+(odoeu_foptn)
+==========================================================
+
+Step 1: Preparation (psuade < psScriptStep2_foptn.in)
+
+ A. Create an initial candidate set
+
+    To create a candidate set, do:
+
+      cc -o candidate candidate.c -lm 
+      ./candidate
+      ====> CandidateSet0
+
+ B. Create a prior sample PriorSample
+ 
+    a. psuade psuadeGenPrior.in to create psuadeData
+
+    b. load psuadeData and use 'iwrite PriorSample'
+       ====> PriorSample
+
+ C. Create an evaluation set (for derivative-free method)
+
+Step 2: run optimal experimental design
+
+        RUN: psuade < psScriptStep2_foptn.in 
+
+**********************************************************
+ALSO:
+==========================================================
+To compute W-metric for each point in the candidate set
+
+        RUN: psuade < psScriptW.in
+

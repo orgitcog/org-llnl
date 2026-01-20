@@ -1,0 +1,7 @@
+scipy
+numpy
+pandas>=1.1
+llnl-hatchet
+matplotlib
+seaborn
+beautifulsoup4

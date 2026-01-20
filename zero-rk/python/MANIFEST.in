@@ -1,2 +1,0 @@
-include zerork/rate_opt/data/*.yml
-include zerork/surrogate_optimizer/data/*.npz

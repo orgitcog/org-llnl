@@ -1,0 +1,48 @@
+listen_port: 8095
+listen_address: hostname
+worker_count: 3
+log_level: warning
+
+kafka:
+  bootstrap.servers: hostname:9092
+  security.protocol: ssl
+  ssl.ca.location: /some/path/ca.crt
+  ssl.certificate.location: /some/path/client.pem
+  ssl.key.location: /some/path/client.key
+  ssl.key.password: XXXXX
+  # queue.buffering.max.kbytes default is 1048576
+  # By nature of dftfd's implementation, this is _per worker_.
+  queue.buffering.max.kbytes: 262144
+
+schema_registry:
+  url: "http://hostname:8081"
+
+# The order of the top-level array matters. The first matching pattern
+# will be used.
+# If "fields" is null, then the rule will match _all_.
+# Possible names for fields are:
+#   SensorName
+#   Location
+#   EventName
+#   ParentalContext
+#   PhysicalContext
+#   PhysicalSubContext
+#   DeviceSpecificContext
+# If "period" is null, then the matching sensors will be ignored.
+sample_periods:
+  - fields:
+    - name: "SensorName"
+      pattern: "Rectifier.*Power"
+    - name: "Location"
+      pattern: ".*"
+    period: 15
+  - fields:
+    - name: "Location"
+      pattern: "x9000c1"
+    period: 60
+  - fields:
+    - name: "Location"
+      pattern: "outerspace"
+    period: null
+  - fields: null
+    period: 600

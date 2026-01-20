@@ -1,9 +1,0 @@
-#! /bin/bash
-
-echo "**********************"
-echo "RADIUSS Shared CI Test"
-echo "**********************"
-echo ""
-echo "Variables of interest:"
-echo "CI_MACHINE: ${CI_MACHINE}"
-echo "SHARED_CI_REF: ${SHARED_CI_REF}"

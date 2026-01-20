@@ -1,3 +1,0 @@
-clean:
-	rm -f psuadeData simdata psuadeApp* *Metis* simulator sam*.psu *.m *png .psuade*
-

@@ -1,5 +1,0 @@
-*.internal
-*.swp
-.ipynb_checkpoints
-__pycache__
-work/partition/

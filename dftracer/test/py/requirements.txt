@@ -1,5 +1,0 @@
-numpy
-Pillow
-h5py
-opencv-python
-torch

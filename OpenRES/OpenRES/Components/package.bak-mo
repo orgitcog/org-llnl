@@ -1,4 +1,0 @@
-within OpenRES;
-package Electrical
-annotation (Documentation);
-end Electrical;

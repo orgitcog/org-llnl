@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SPOT 2</title>
+    <!-- dc.js - Dimensional Charting Javascript Library -->
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="web/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="web/css/dc.css"/>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico"/>
+
+    <style>
+        #monthly-volume-chart g.y {
+            display: none;
+        }
+        #logo {
+            margin-right: 2em;
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
+
+<script src="web/js/jquery-1.11.0.min.js"></script>
+<script src="web/js/vue.js"></script>
+<script src="web/js/run-table-component.js"></script>
+
+
+<div class="container" id="app">
+
+    <div class="left_side"></div>
+
+    <div id="file_upload">
+        <file-upload></file-upload>
+    </div>
+
+    <div class="inner_container">
+
+        <div id="help_icon">
+            <help-section></help-section>
+        </div>
+
+        <div id="user_preferences">
+            <user-preferences></user-preferences>
+        </div>
+
+
+        <div class="row chart_container">
+        </div>
+
+        <!--
+        <run-table-component></run-table-component>
+        -->
+
+        <div class="row bottom_table">
+
+            <div class="launch_container"></div>
+            <div class="compare_arguments"></div>
+            <!--<div class="compare_button myButton">COMPARE</div>-->
+
+            <div>
+                <div class="dc-data-count">
+                    <span class="filter-count"></span> selected out of <span class="total-count"></span> records | <a
+                        href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
+                </div>
+            </div>
+
+            <bottom-tabs id="bottom-tabs"></bottom-tabs>
+
+            <div class="table-outer">
+
+                <table class="table table-hover dc-data-table">
+                </table>
+
+                <div class="contain_show_more">
+                    <a>show more</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>
+
+    <a href="https://www.iconsdb.com/black-icons/planet-icon.html" class="none_here">planet icons</a>
+    <a href="https://image.flaticon.com/icons/png/512/59/59252.png" class="none_here">flaticons</a>
+    <a href="https://img.icons8.com" class="none_here">icons8</a>
+
+</div>
+
+<div id="compare_bottom_outer"></div>
+
+<div id="tooltip"></div>
+<div class="spinner_loader"></div>
+
+<div class="attributions">
+    <br><br><br>
+    <h4>Attributions</h4>
+    Icons made by <a target="_blank"  href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+    Icons made by <a target="_blank"  href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    For Jupyter Planet icon: <a target="_blank" href="https://wpzoom.com">wpzoom.com</a>
+    <br><br><br>
+    <br>
+</div>
+
+<script type="text/javascript" src="web/js/Environment.js"></script>
+<script type="text/javascript" src="web/js/d3.js"></script>
+<script type="text/javascript" src="web/js/crossfilter.js?a=22"></script>
+<script type="text/javascript" src="web/js/dc.js"></script>
+<!--<script type="text/javascript" src="node_modules/d3/dist/d3.min.js"></script>
+<script type="text/javascript" src="node_modules/crossfilter2/crossfilter.min.js"></script>
+<script type="text/javascript" src="node_modules/dc/dist/dc.min.js"></script>-->
+
+
+<script type="text/javascript" src="compare.js?a=33934"></script>
+<script type="text/javascript" src="web/js/MultiRowSelector.jquery.js"></script>
+
+<script src="web/js/Utility.js"></script>
+<script src="web/js/BarChart.js?a"></script>
+<script src="web/js/ScatterPlot.js"></script>
+<script src="web/js/CompareArguments.js"></script>
+<script src="web/js/BubbleChart.js"></script>
+<script src="web/js/PieChart.js"></script>
+<script src="web/js/BasicLineChart.js"></script>
+<script src="web/js/CustomTemplates.js"></script>
+<script src="web/js/LineChart.js"></script>
+<script src="web/js/LeftHorizontalBarChart.js"></script>
+<script src="web/js/CallSpot.js?afd3ff"></script>
+<script src="web/js/LayoutAugmenterModel.js"></script>
+<script src="web/js/ReturnedDataStub.js"></script>
+<script src="web/js/UrlStateManager.js"></script>
+<script src="web/js/MakeNiceData.js"></script>
+<script src="web/js/Help.js"></script>
+<script src="web/js/AllPallets.js"></script>
+<script src="web/js/FileUpload.js"></script>
+<script src="web/js/UserPreferences.js?asd"></script>
+<script src="web/js/HorizontalBarChart.js"></script>
+<script src="web/js/ReusableView.js"></script>
+<script src="web/js/AddChartTypeView.js?x"></script>
+<script src="web/js/EtcBucket.js"></script>
+<script src="web/js/localStorage.js"></script>
+<script src="web/js/CompositeLayoutModel.js"></script>
+<script src="web/js/ValidateCompositeModel.js"></script>
+<script src="web/js/RunDictionaryTranslator.js"></script>
+<script src="web/js/RunsMeter.js"></script>
+<script src="web/js/DBStorage.js"></script>
+<script src="web/js/LZstring.min.js"></script>
+
+<script type="text/javascript" src="web/ChartCollection.js"></script>
+
+<canvas id="myCanvas" width="500" height="500"></canvas>
+
+</body>
+</html>

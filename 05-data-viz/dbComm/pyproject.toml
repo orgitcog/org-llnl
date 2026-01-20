@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dbComm*"]
+namespaces = false
+
+[project]
+name = "dbComm"
+version = "0.4.1"
+authors = [
+  { name="Pigeon Caviness", email="pigeon@llnl.gov" },
+]
+description = "Module for communicating with a (MongoDB) database"
+keywords=["mongoDB", "pymongo", "database"]
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Python Software Foundation License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  'pymongo>=3.12.0',
+  'sshtunnel>=0.4.0'
+]
+
+[project.urls]
+"Homepage" = "https://github.com/LLNL/dbComm"

@@ -1,0 +1,6 @@
+
+The following have been reloaded with a version change:
+  1) cuda/11.6.1 => cuda/10.2.89
+
+python: can't open file '/usr/WS1/ranganath2/code/fast2/scripts/train.py': [Errno 2] No such file or directory
+Training Completed

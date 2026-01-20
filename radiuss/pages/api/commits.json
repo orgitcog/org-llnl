@@ -1,7 +1,0 @@
----
-layout: null
-permalink: /api/commits.json
----
-
-
-{{ site.data.data.latest.cci-activity_commits | jsonify }}

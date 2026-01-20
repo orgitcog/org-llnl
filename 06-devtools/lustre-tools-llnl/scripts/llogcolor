@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2011, Lawrence Livermore National Security, LLC.
+# Produced at the Lawrence Livermore National Laboratory.
+# Written by Christopher J. Morrone <morrone2@llnl.gov>
+# LLNL-CODE-468512
+#
+# This file is part of lustre-tools-llnl.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License (as published by the
+# Free Software Foundation) version 2, dated June 1991.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the IMPLIED WARRANTY OF
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# terms and conditions of the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software Foundation,
+# Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+import argparse
+import datetime
+import errno
+import fileinput
+import os
+import pathlib
+import re
+import signal
+import subprocess
+import sys
+
+colors = {
+    "default": "\033[0m",
+    "bold": "\033[1m",
+    "underline": "\033[4m",
+    "blink": "\033[5m",
+    "reverse": "\033[7m",
+    "concealed": "\033[8m",
+    "black": "\033[30m",
+    "red": "\033[31m",
+    "green": "\033[32m",
+    "yellow": "\033[33m",
+    "blue": "\033[34m",
+    "magenta": "\033[35m",
+    "cyan": "\033[36m",
+    "white": "\033[37m",
+    "bright_black": "\033[90m",
+    "bright_red": "\033[91m",
+    "bright_green": "\033[92m",
+    "bright_yellow": "\033[93m",
+    "bright_blue": "\033[94m",
+    "bright_magenta": "\033[95m",
+    "bright_cyan": "\033[96m",
+    "bright_white": "\033[97m",
+    "on_black": "\033[40m",
+    "on_red": "\033[41m",
+    "on_green": "\033[42m",
+    "on_yellow": "\033[43m",
+    "on_blue": "\033[44m",
+    "on_magenta": "\033[45m",
+    "on_cyan": "\033[46m",
+    "on_white": "\033[47m",
+}
+
+# Example line from a lustre log:
+# 00000020:00000080:2.0F:1192055998.876285:0:6848:0:(obd_config.c:714:class_process_config()) processing cmd: cf003
+pattern = re.compile(
+    r"(?P<begin>     \d+:\d+:\d+(\.\d+)?F?:)"
+    r"(?P<timestamp> \d+\.\d+)"
+    r"(?P<middle>    :\d+:)"
+    r"(?P<threadid>  \d+)"
+    r"(?P<end>       :.+)",
+    re.VERBOSE,
+)
+
+color_round_robin = [
+    "green",
+    "yellow",
+    "magenta",
+    "cyan",
+    "white",
+    "red",
+    "bright_green",
+    "bright_yellow",
+    "bright_magenta",
+    "bright_cyan",
+    "bright_white",
+    "bright_red",
+]
+
+
+def next_ansi_color():
+    next_color = colors[color_round_robin[0]]
+    color_round_robin.append(color_round_robin.pop(0))  # rotate the list
+    return next_color
+
+def make_parser():
+    """Create the argument parser."""
+    description = (
+        "Accepts a lustre log on stdin or as a filename on the command line, "
+        "and outputs a colorized version of the log. "
+        "Lines are colored by task id. By default, and if stdout is a tty, "
+        "the pager (less) is called to display the colorized log."
+    )
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument(
+        "-d",
+        "--date",
+        action="store_true",
+        help="convert date to human-readable form",
+    )
+    parser.add_argument(
+        "-s",
+        "--split",
+        action="store_true",
+        help="create a separate file for each thread",
+    )
+    parser.add_argument(
+        "-t",
+        "--thread",
+        type=str,
+        metavar="TID",
+        help="highlight one thread in a unique color (black on cyan)",
+    )
+    parser.add_argument(
+        "-P",
+        "--no-pager",
+        action="store_false",
+        dest="pager",
+        help="disable the pager, just write to stdout",
+    )
+    parser.add_argument(
+        "-C",
+        "--no-color",
+        action="store_false",
+        dest="color",
+        help="disable all colorization",
+    )
+    parser.add_argument(
+        "files",
+        nargs="*",
+        help="the log files to be processed",
+    )
+
+    return parser
+
+
+def main():
+    # Parse command-line options
+    parser = make_parser()
+    args = parser.parse_args()
+
+    if not sys.stdout.isatty():
+        args.pager = False
+
+    split_dir = pathlib.Path(f"/tmp/llogcolor.{os.getpid()}")
+    combined = split_dir / "combined"
+
+    if args.split:
+        split_dir.mkdir()
+        output = combined.open(mode="w")
+        pager = None
+    elif args.pager:
+        # specify an encoding so the subprocess can accept strings
+        # (not bytes). This allows the output to the pager, files,
+        # and stdout, to all be the of same type (string).
+        pager = subprocess.Popen(
+            ["less", "-KXRS"], stdin=subprocess.PIPE, encoding="utf-8"
+        )
+        output = pager.stdin
+    else:
+        pager = None
+        output = sys.stdout
+
+    # Loop over all of the lines in the log
+    thread_color = {}
+    thread_file = {}
+    try:
+        for line in fileinput.input(files=args.files):
+            result = pattern.match(line)
+            if not result:
+                output.write(line)
+                continue
+
+            tid = result.group("threadid")
+            ts = result.group("timestamp")
+
+            if tid not in thread_color:
+                if not args.color:
+                    thread_color[tid] = ""
+                elif tid == args.thread:
+                    thread_color[tid] = colors["black"] + colors["on_cyan"]
+                else:
+                    thread_color[tid] = next_ansi_color()
+                if args.split:
+                    thread_file[tid] = (split_dir / tid).open("w")
+            if args.date:
+                ts = str(datetime.datetime.fromtimestamp(float(ts)))
+                line = (
+                    thread_color[tid]
+                    + ts
+                    + " "
+                    + result.group("begin")
+                    + result.group("middle")
+                    + tid
+                    + result.group("end")
+                    + "\n"
+                )
+            else:
+                line = (
+                    thread_color[tid]
+                    + result.group("begin")
+                    + ts
+                    + result.group("middle")
+                    + tid
+                    + result.group("end")
+                    + "\n"
+                )
+
+            output.write(line)
+            if args.split:
+                thread_file[tid].write(line)
+    except KeyboardInterrupt:
+        if pager:
+            pager.send_signal(signal.SIGINT)
+        return 1
+    except IOError as ioerror:
+        num, strerror = ioerror
+        if pager:
+            pager.kill()
+        if num == errno.EPIPE:  # Ignore "Broken pipe", user quit less
+            return 0
+        raise
+
+    if args.color:
+        output.write(colors["default"])
+    output.close()
+
+    if args.split:
+        for f in thread_file.values():
+            if args.color:
+                f.write(colors["default"])
+            f.close()
+        filenames = [int(x) for x in thread_file.keys()]
+        filenames.sort()
+        filenames = [split_dir / str(x) for x in filenames]
+        filenames = [combined] + filenames
+        if args.pager:
+            try:
+                pager = subprocess.Popen(
+                    ["less", "-RK", "--force"] + filenames
+                )
+                pager.wait()
+            except KeyboardInterrupt:
+                pager.send_signal(signal.SIGINT)
+            for f in filenames:
+                f.unlink()
+            split_dir.rmdir()
+        else:
+            print(f"Split log files are located in {split_dir}")
+    elif pager:
+        pager.wait()
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,4 +1,0 @@
-
-set launch prun
-set args {-n 2 -ppdebug }
-

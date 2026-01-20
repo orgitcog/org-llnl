@@ -1,0 +1,117 @@
+#!/usr/bin/env bash 
+#
+#       Convert an sm file into an QuickTime file...
+#
+function usage() {
+    echo "sm2qt: Convert SM movie to QuickTime h264 mov file. Usage:"
+    echo "sm2qt [OPTIONS] smfile qtfile"
+    echo "If the input movie is stereo, then only the left hand frames (odd frames) are used." 
+    echo "OPTIONS:"
+    echo "-f/--fps: Set FPS (default is 30)" 
+    echo "-t/--tmpdir name: use the given directory for scratch instead of a random location in /tmp/$USER"    
+}
+
+function runecho(){
+    echo "$@"
+    "$@"
+}
+function errexit() {    
+    echo '*************************************************'
+    echo "ERROR: $1"
+    echo '*************************************************'
+    rm -rf $tmpdir
+    exit 1
+}
+
+fps=30
+while [ "$1" != "" ]; do 
+   if [ "${1:0:1}" != "-" ]; then 
+        if [ "$infile" == "" ]; then 
+            infile="$1"
+        elif [ "$outfile" == "" ]; then
+            outfile="$1"
+        else
+            echo "Error: too many arguments"
+            usage
+            exit 1
+        fi
+        shift 1;
+    else
+       case $1 in
+           "-f"|"--fps")    fps=${2:-30};  shift 2;;
+           "-t"|"--tmpdir") tmpdir="$2"; shift 2;;
+           *)               usage; errexit "Unknown option: $1";;
+       esac
+   fi
+done
+
+if [ "$outfile" == "" ]; then 
+    usage
+    errexit "Not enough args" 
+fi
+
+tmpdir=${tmpdir:-/tmp/$USER/sm2qt.tmp.$RANDOM/}
+mkdir -p $tmpdir || errexit "Cannot make tmp directory $tmpdir"
+
+if [ "${infile:0:1}" != '/' ]; then 
+    infile=$(pwd)/$infile
+fi
+
+if [ "${infile: -3}" != '.sm' ]; then 
+    errexit "Please specify an input movie name ending with '.sm'"
+fi
+
+if [ ${outfile:0:1} != '/' ]; then 
+    outfile=$(pwd)/$outfile
+fi
+if [ "${outfile: -4}" != '.mov' ]; then 
+    errexit "Please specify an output movie name ending with '.mov'"
+fi
+
+tmp=$(sminfo $infile)
+stereo=false
+if echo $tmp | grep Stereo >/dev/null 2>&1; then
+    stereo=true
+fi
+
+ninput=$(sminfo $infile | grep Frames | cut "-d " -f2)
+
+skip=1
+if $stereo; then 
+    skip=2
+    ninput=$(expr $ninput / 2)
+fi
+
+# set -xv
+outframebase=_$(basename $outfile | sed 's/.mov//')
+pushd $tmpdir 
+echo "Extracting frames from SM using sm2img..." 
+runecho sm2img -F png -s $skip $1 ${outframebase}_%05d.png || errexit "sm2img failed" 
+
+if [ $skip != 1 ]; then 
+    echo "renumbering output files..."
+    framenum=0
+    for frame in ${outframebase}_*png; do
+        outnum=$(printf "%05d" $framenum)   
+        outframe=${outframebase}_${outnum}.png
+        if [ $outframe != $frame ]; then
+            mv $frame ${outframebase}_${outnum}.png
+        fi
+        let framenum++
+    done
+fi
+
+echo "Creating new Quicktime movie using ffmpeg..." 
+runecho ffmpeg -v -1 -mbd rd -trellis 2  -cmp 2 -subcmp 2 -g 300 -r $fps -i "${outframebase}_%05d.png" $outfile || errexit  "ffmpeg failed" 
+
+rm -rf $tmpdir
+popd
+
+#
+#	Lots of files...
+#
+
+#echo "to clean up do this: "
+#echo 'find $tmpdir -name "$2_junk_?????.rgb" -exec rm -f {} \;'
+#find . -name "$2_junk_?????.rgb" -exec rm -f {} \;
+

@@ -1,5 +1,0 @@
-[hpssrepo]
-name=HPSS Repo
-baseurl=http://boroni/HPSS-RPMS
-enabled=1
-gpgcheck=0

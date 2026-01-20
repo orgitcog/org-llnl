@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hubcast"
+version = "0.0.1"
+dependencies = [
+    "aiohttp",
+    "aiojobs",
+    "cachetools",
+    "gidgethub",
+    "gidgetlab",
+    "repligit[aiohttp]",
+    "pyyaml",
+]
+authors = [
+    { name = "Alec Scott" },
+]
+description = "An event driven synchronization application for bridging GitHub and GitLab."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "Apache-2.0"
+keywords = ["github", "gitlab", "mirroring", "ci"]
+
+[project.urls]
+Homepage = "https://github.com/llnl/hubcast"
+Issues = "https://github.com/llnl/hubcast/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-mock"
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
+
+[tool.ruff]
+line-length = 88
+exclude = ["spack"]
+
+[tool.bandit]
+exclude_dirs = []

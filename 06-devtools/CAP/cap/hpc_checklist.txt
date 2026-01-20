@@ -1,0 +1,30 @@
+Checklist before running large jobs:
+
+1. You have copied the data (partitioned if using) all correct
+2. Clear out any unneeded logs/files
+3. Edit execution_info.py
+    a. Change EXECUTION_UID
+    b. Select which data to keep in KEEP_DATA, along with NORMALIZERS and ANALYZERS to use
+    c. Make sure _DEBUG_NUM_FILES is off (unless using)
+    d. Change CODEFORCES_COMPILE_METHODS/MISC_COMPILE_METHODS. See below for example
+4. Edit run_cap.sh
+    a. Figure out the n_threads and n_nodes being used
+    b. Select the cap_task
+    c. Set the execution time with cap_runtime and which partition to use ('pdebug' or 'pbatch')
+    d. Did any directories/environments change? If so, set those
+5. Run it!
+
+
+
+Example COMPILE_METHOD:
+    {
+        'family': 'GCC',
+        'compiler': 'g++',
+        'version': 12,
+        'arch': 'x86',
+        'flags': [],
+        'force_flags': {
+            'O': ['', '3'],
+            'm': 64,
+        },
+    },

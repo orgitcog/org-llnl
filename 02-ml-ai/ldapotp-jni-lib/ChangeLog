@@ -1,0 +1,9 @@
+- Wed Oct 26 2011 Tim Meier <meier3@llnl.gov>
+
+	* : added a symbolic link in /usr/lib64 so java apps that use more than one native
+	    library can use a single lib directory for finding & loading
+
+- Wed May 11 2011 Tim Meier <meier3@llnl.gov>
+
+	* : initial creation
+

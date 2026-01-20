@@ -1,5 +1,0 @@
-svm_learn train.dat model
-svm_classify test.dat model predictions
-
-
-

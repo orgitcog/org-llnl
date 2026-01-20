@@ -1,1 +1,0 @@
-spheral_add_pybind11_library(Mesh SPHERAL_MODULE_LIST)

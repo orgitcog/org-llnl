@@ -1,0 +1,918 @@
+#!/usr/bin/python3.9
+
+# Copyright 2023 Lawrence Livermore National Security, LLC and other
+# DFTF Project Developers. See the top-level LICENSE file for details.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+import argparse
+from collections import defaultdict
+import dataclasses
+from dataclasses import dataclass, InitVar
+import dateutil
+import dateutil.parser
+import functools
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import itertools
+import json
+import logging
+import multiprocessing
+import os
+import platform
+import random
+import re
+import subprocess
+import sys
+import time
+from typing import Optional, Pattern
+import queue
+from confluent_kafka import Producer
+from confluent_kafka.serialization import StringSerializer, SerializationContext, MessageField
+from confluent_kafka.schema_registry import SchemaRegistryClient
+from confluent_kafka.schema_registry.avro import AvroSerializer
+from confluent_kafka.schema_registry import record_subject_name_strategy
+import yaml
+
+CLOCK_SKEW_LIMIT_SEC=3600
+
+DEBUG2=logging.DEBUG-1
+DEBUG3=logging.DEBUG-2
+logging.addLevelName(DEBUG2, 'DEBUG2')
+logging.addLevelName(DEBUG3, 'DEBUG3')
+
+verbosity_levels = {
+    'critical': logging.CRITICAL,
+    'error': logging.ERROR,
+    'warning': logging.WARNING,
+    'info': logging.INFO,
+    'debug': logging.DEBUG,
+    'debug2': DEBUG2,
+    'debug3': DEBUG3
+}
+
+@dataclass
+class SampleField:
+    name: str
+    pattern: Pattern[str]
+
+@dataclass
+class SamplePeriod:
+    fields: Optional[list[SampleField]] = None
+    period_ms: Optional[int] = None
+
+@dataclass
+class Config:
+    config_file: str = '/etc/dftfd.yaml'
+    listen_port: int = 8095
+    listen_address: str = ''
+    worker_count: int = 16
+    log_level: str = 'warning'
+    kafka: Optional[dict] = None
+    schema_registry: Optional[dict] = None
+    sample_periods: list[SamplePeriod] = dataclasses.field(default_factory=list)
+config = Config()
+
+logger = None
+hostname = platform.node()
+cluster_name = hostname.rstrip('0123456789')
+
+metrics_schema = """{
+    "name": "RedfishCrayOemSensors",
+    "type": "record",
+    "fields": [
+        {
+            "name": "timestamp",
+            "type": {
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }
+        },
+        {
+            "name": "Location",
+            "type": "string"
+        },
+        {
+            "name": "Index",
+            "type": "int"
+        },
+        {
+            "name": "ParentalContext",
+            "type": "string"
+        },
+        {
+            "name": "ParentalIndex",
+            "type": "int"
+        },
+        {
+            "name": "PhysicalContext",
+            "type": "string"
+        },
+        {
+            "name": "PhysicalSubContext",
+            "type": "string"
+        },
+        {
+            "name": "DeviceSpecificContext",
+            "type": "string"
+        },
+        {
+            "name": "EventName",
+            "type": "string"
+        },
+        {
+            "name": "Value",
+            "type": "double"
+        },
+        {
+            "name": "SensorName",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "cluster",
+            "type": "string",
+            "default": ""
+        }
+    ]
+}
+"""
+
+events_schema = """{
+    "name": "RedfishCrayEvents",
+    "type": "record",
+    "fields": [
+        {
+            "name": "timestamp",
+            "type": {
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }
+        },
+        {
+            "name": "Location",
+            "type": "string"
+        },
+        {
+            "name": "MessageId",
+            "type": "string"
+        },
+        {
+            "name": "Severity",
+            "type": "string"
+        },
+        {
+            "name": "Message",
+            "type": "string"
+        },
+        {
+            "name": "OriginOfCondition",
+            "type": "string"
+        },
+        {
+            "name": "syslog_level",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "cluster",
+            "type": "string",
+            "default": ""
+        }
+    ]
+}
+"""
+
+slingshot_health_schema = """{
+    "name": "CrayFabricHealth",
+    "type": "record",
+    "fields": [
+        {
+            "name": "timestamp",
+            "type": {
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }
+        },
+        {
+            "name": "Location",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "MessageId",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "message",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "Group",
+            "type": "int",
+            "default": 0
+        },
+        {
+            "name": "Switch",
+            "type": "int",
+            "default": 0
+        },
+        {
+            "name": "Port",
+            "type": "int",
+            "default": 0
+        },
+        {
+            "name": "Severity",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "PhysicalContext",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "cluster",
+            "type": "string",
+            "default": ""
+        }
+    ]
+}
+"""
+
+@dataclass
+class SensorCache:
+    sensor: InitVar[dict]
+    last_kept_ms: int = 0
+    sample_period_ms: Optional[int] = None
+
+    def __post_init__(self, sensor):
+        for i, period in enumerate(config.sample_periods, start=1):
+            if period.fields is None:
+                self.sample_period_ms = period.period_ms
+                logger.log(DEBUG2, f'SensorCache() sensor "{sensor["SensorName"]}" matched sample_period group {i}, sample_period_ms = {self.sample_period_ms}')
+                return
+            # All of the patterns int the "fields" list must match for the
+            # period to be a match.
+            matched = True
+            for field in period.fields:
+                if field.name not in sensor:
+                    logger.warning(f'sensor "{sensor["SensorName"]}" is missing configuration field name "{field.name}"')
+                    return
+                if not field.pattern.fullmatch(sensor[field.name]):
+                    matched = False
+                    break
+            if matched is True:
+                self.sample_period_ms = period.period_ms
+                logger.log(DEBUG2, f'SensorCache() sensor "{sensor["SensorName"]}", matched sample_period group {i}, sample_period_ms = {self.sample_period_ms}')
+                return
+        logger.log(DEBUG2, f'SensorCache() sensor "{sensor["SensorName"]}" matched no sample_period: skipping collection')
+        return
+
+def get_name(hostname_or_ip):
+    if hostname_or_ip not in get_name.cache:
+        try:
+            hosts = subprocess.run(['getent', 'hosts', hostname_or_ip], stdout=subprocess.PIPE)
+            hosts = hosts.stdout.decode("utf-8").split()
+            # Index 0 is the IP address, 1+ are hostnames. We prefer a Cray "x" prefixed
+            # name, but use index 1 if an x name is not found.
+            name = None
+            if len(hosts) > 1:
+                for n in hosts[1:]:
+                    if n[0] == "x":
+                        name = n
+                        break
+                if name is None:
+                    name = hosts[1]
+            else:
+                name = hostname_or_ip
+            get_name.cache[hostname_or_ip] = name
+        except:
+            pass
+    name = None
+    if hostname_or_ip in get_name.cache:
+        logger.log(DEBUG2, f"get_name({hostname_or_ip}) returning {get_name.cache[hostname_or_ip]}")
+        name = get_name.cache[hostname_or_ip]
+    else:
+        logger.log(DEBUG2, f"get_name({hostname_or_ip}) returning {hostname_or_ip} (NOT in cache)")
+        name = hostname_or_ip
+
+    return name
+get_name.cache = {}
+
+def getent_hosts(hostname_or_ip):
+    hosts = None
+    try:
+        hosts = subprocess.run(['getent', 'hosts', hostname_or_ip], stdout=subprocess.PIPE)
+        hosts = hosts.stdout.decode("utf-8").split()
+    except:
+        raise
+
+    return hosts
+
+def find_and_purge_subscriptions(session,
+                                 subscriptions,
+                                 destination,
+                                 contexts):
+    """Returns a list of contexts for subscriptions that are found.
+
+       As it works, any subscriptions that have our destination, but the wrong context,
+       will be removed.
+    """
+    found_contexts = []
+
+    for sub in subscriptions:
+        if sub['Destination'] != destination:
+            continue
+        if 'Context' not in sub or sub['Context'] not in contexts:
+            logger.warning(f'purging subscription {sub}')
+            session.delete(sub['@odata.id'])
+            continue
+        found_contexts.append(sub['Context'])
+
+    logger.debug(f'found existing subscriptions {found_contexts}')
+    return found_contexts
+
+class Handle_HTTP_Connection(BaseHTTPRequestHandler):
+    def __init__(self, parent_queue, workers, worker_queues, worker_mapping,
+                 *args, **kwargs):
+        self.parent_queue = parent_queue
+        self.workers = workers
+        self.worker_queues = worker_queues
+        self.worker_mapping = worker_mapping
+        super().__init__(*args, **kwargs)
+
+    def log_request(self, code='-', size='-'):
+        # silence internal library messages for each request
+        return
+
+    def do_GET(self):
+        logger.warning(f'Invalid GET request, Path: {str(self.path)}, Headers:{str(self.headers)}')
+        try:
+            self.send_response_only(405)
+        except:
+            pass
+
+    def do_POST(self):
+        client_ip = self.client_address[0]
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+
+        idx = self.worker_mapping[client_ip]
+        logger.debug(f'Assigning Worker-{idx} content POSTed to path {self.path} from {client_ip}, content length = {content_length}')
+
+        try:
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            self.wfile.write('<html><body><p>OK</p></body></html>'.encode('utf-8'))
+        except Exception as inst:
+            logger.warning(f'Error while sending HTTP response to client {client_ip}: {inst}')
+
+        if self.workers[idx].is_alive():
+            self.worker_queues[idx].put((self.path, self.headers, client_ip, post_data))
+        else:
+            self.parent_queue.put(idx)
+
+def next_worker_index(worker_count):
+    idx = 0
+    while True:
+        yield idx
+        idx = (idx + 1) % worker_count
+
+def removeprefix(string_val, prefix):
+    '''The string class has a removeprefix() method in 3.9+'''
+    if string_val[:len(prefix)] == prefix:
+        return string_val[len(prefix):]
+    else:
+        return string_val
+
+def get_sensors_cray_telemetry(event):
+    eventname = removeprefix(event['MessageId'], 'CrayTelemetry.')
+    sensor_ignored_count = 0
+    for sensor in event['Oem']['Sensors']:
+        if 'Location' not in sensor:
+            logger.warning('sensor is missing Location')
+            sensor_ignored_count += 1
+            continue
+        if 'Timestamp' not in sensor:
+            logger.warning(f'sensor from {sensor["Location"]} is missing Timestamp')
+            sensor_ignored_count += 1
+            continue
+        try:
+            sensor['timestamp'] = parse_timestamp_simple(sensor['Timestamp'])
+        except:
+            logger.warning(f'''unable to parse timestamp '{sensor["Timestamp"]}' from {sensor["Location"]}''')
+            continue
+        if 'Value' not in sensor:
+            logger.warning(f'sensor from {sensor["Location"]} is missing Value')
+            sensor_ignored_count += 1
+            continue
+
+        # The order in which we check the individual fields and append them to
+        # "name" is important. We are trying to make it match the order found
+        # in the Sensors string of the Redfish endpoint. While we don't work
+        # with the endpoints here, keeping the names the same will help humans
+        # tie the CrayTelemetry events to their associated Redfish enpoints.
+        # The sensor URI looks like:
+        #   ${hostname}/redfish/v1/Chassis/${ChassisId}/Sensors/${SensorId}
+        # and the SensorId format is:
+        #   [ParentalContext][ParentalIndex][PhysicalContext][Index][DeviceSpecificContext][PhysicalSubContext][ReadingType]
+        # where "ReadingType" is the EventName derived from the MessageId.
+        name = []
+        try:
+            name.append(sensor['ParentalContext'])
+        except KeyError:
+            sensor['ParentalContext'] = ''
+        try:
+            name.append(str(sensor['ParentalIndex']))
+        except KeyError:
+            sensor['ParentalIndex'] = -1
+        try:
+            name.append(sensor['PhysicalContext'])
+        except KeyError:
+            sensor['PhysicalContext'] = ''
+        try:
+            name.append(str(sensor['Index']))
+        except KeyError:
+            sensor['Index'] = -1
+        try:
+            name.append(sensor['DeviceSpecificContext'])
+        except KeyError:
+            sensor['DeviceSpecificContext'] = ''
+        try:
+            name.append(sensor['PhysicalSubContext'])
+        except KeyError:
+            sensor['PhysicalSubContext'] = ''
+        sensor['EventName'] = eventname
+        name.append(sensor['EventName'])
+
+        sensor_name = ''.join(name)
+        sensor['SensorName'] = sensor_name
+        sensor['cluster'] = cluster_name
+
+        logger.log(DEBUG3, f"{sensor['timestamp']} {sensor['Location']:10} {sensor['SensorName']:45} {sensor['Value']:10}")
+
+        yield (sensor_name, sensor)
+
+# returns integers milliseconds-since-epoch
+def parse_timestamp_simple(timestamp_string):
+        ts_datetime = dateutil.parser.parse(timestamp_string)
+        ts = round(ts_datetime.timestamp() * 1000)
+        return ts
+
+# returns integers milliseconds-since-epoch
+WARNING_LIMIT_MS = 24*60*60*1000
+def parse_timestamp(timestamp_string, location):
+    now = round(time.time() * 1000)
+    try:
+        ts_datetime = dateutil.parser.parse(timestamp_string)
+    except:
+        logger.warning(f"Unable to parse EventTimestamp {timestamp_string} from {location}")
+        return now
+    ts = round(ts_datetime.timestamp() * 1000)
+    skew = abs(now - ts)
+    if skew > (CLOCK_SKEW_LIMIT_SEC*1000):
+        if location not in parse_timestamp.last_warning \
+           or ((now - parse_timestamp.last_warning[location]) > WARNING_LIMIT_MS):
+            logger.warning(f'Excessive clock skew from {location}: {skew//1000}s')
+        parse_timestamp.last_warning[location] = now
+        ts = now
+    return ts
+parse_timestamp.last_warning = {}
+
+redfish_to_syslog_severity = {
+    "OK": "information",
+    "Warning": "warning",
+    "Critical": "error"
+}
+
+def delivery_report(err, msg):
+    """
+    Reports the failure or success of a message delivery.
+
+    Args:
+        err (KafkaError): The error that occurred on None on success.
+
+        msg (Message): The message that was produced or failed.
+
+    Note:
+        In the delivery report callback the Message.key() and Message.value()
+        will be the binary format as encoded by any configured Serializers and
+        not the same object that was passed to produce().
+        If you wish to pass the original object(s) for key and value to delivery
+        report callback we recommend a bound callback or lambda where you pass
+        the objects along.
+    """
+
+    if err is not None:
+        logger.error(f'Delivery failed for record: {err}')
+        return
+    logger.log(DEBUG3, f'record successfully produced to {msg.topic()} [{msg.partition()}] at offset {msg.offset()}')
+
+def process_cray_telemetry(client_ip, event, producer, serializer):
+    logger.debug(f'processing CrayTelemetry client_ip {client_ip} event {event["MessageId"]}')
+    # Look through all sensors, only keep the ones for which the sampling period
+    # has elapsed.
+    for sensor_name, sensor in get_sensors_cray_telemetry(event):
+        if (sensor_name not in process_cray_telemetry.sensor_cache[client_ip]):
+            process_cray_telemetry.sensor_cache[client_ip][sensor_name] = SensorCache(sensor)
+        cache = process_cray_telemetry.sensor_cache[client_ip][sensor_name]
+        last_ms = cache.last_kept_ms
+        current_ms = sensor['timestamp']
+        delta = current_ms - last_ms
+        if not cache.sample_period_ms:
+            logger.log(DEBUG3, f'perma-skipping CrayTelemetry client_ip {client_ip}, sensor {sensor_name}')
+            continue
+        # The timestamps coming from the HPE Redfish servers exhibit some jitter.
+        # New timestamp values may not be spaced at a minmum of 1 second spacing.
+        # We allow 250ms of timeset offset to still match the data point rather
+        # then having to wait for the next data point which might cause a gap
+        # in the data collection.
+        jitter_allowance_ms = 250
+        if delta < (cache.sample_period_ms - jitter_allowance_ms):
+            logger.log(DEBUG3, f'skipping CrayTelemetry client_ip {client_ip}, sensor {sensor_name}, last_ms {last_ms}, current_ms {current_ms}, sample_period {cache.sample_period_ms}')
+            # The sample period for this sensor has not yet elapsed. Skip this data point.
+            continue
+        cache.last_kept_ms = current_ms
+
+        topic = "redfish-craytelemetry"
+        if not config.kafka:
+            continue
+        logger.log(DEBUG3, f'sending CrayTelemtry client_ip {client_ip}, sensor {sensor_name}, last_ms {last_ms}, current_ms {current_ms}, sample_period {cache.sample_period_ms}')
+        try:
+            producer.produce(topic=topic,
+                             value=serializer(sensor,
+                                              SerializationContext(topic, MessageField.VALUE)),
+                             on_delivery=delivery_report)
+        except KeyboardInterrupt:
+            pass
+        except Exception as inst:
+            logger.error("produce() failed on kafka topic \"{topic}\", discarding record: {inst}")
+# The first key is client_ip, the second key is the sensor_name.
+# The values are a SensorCache dataclass.
+process_cray_telemetry.sensor_cache = defaultdict(lambda: defaultdict())
+
+def process_generic_redfish_event(client_ip, event, producer, serializer):
+    logger.debug(f'processing generic redfish event {client_ip}')
+    # client_ip is the IP address as a string
+    client_hostname = get_name(client_ip)
+    if 'EventTimestamp' not in event:
+        logger.warning(f'event from {client_hostname} is missing EventTimestamp')
+        return
+    event['timestamp'] = parse_timestamp(event['EventTimestamp'], client_hostname)
+    event['Location'] = client_hostname
+    event['cluster'] = cluster_name
+    if 'Message' not in event:
+        event['Message'] = ''
+    if 'MessageId' not in event:
+        event['MessageId'] = ''
+    if 'Severity' not in event:
+        event['Severity'] = ''
+        event['syslog_level'] = 'unknown'
+    elif event['Severity'] in redfish_to_syslog_severity:
+        event['syslog_level'] = redfish_to_syslog_severity[event['Severity']]
+    else:
+        event['syslog_level'] = 'unknown'
+    if 'OriginOfCondition' not in event or '@odata.id' not in event['OriginOfCondition']:
+        event['OriginOfCondition'] = ''
+    else:
+        event['OriginOfCondition'] = event['OriginOfCondition']['@odata.id']
+    logger.log(DEBUG3, f"{event['timestamp']} {event['Location']} {event['MessageId']} {event['Severity']} {event['Message']} {event['OriginOfCondition']}")
+
+    if config.kafka:
+        topic = "redfish-crayevents"
+        try:
+            producer.produce(topic=topic,
+                             value=serializer(event,
+                                              SerializationContext(topic, MessageField.VALUE)),
+                             on_delivery=delivery_report)
+        except KeyboardInterrupt:
+            pass
+        except Exception as inst:
+            logger.error("produce() failed on kafka topic \"{topic}\", discarding record: {inst}")
+
+def process_slingshot_health(client_ip, event, producer, serializer):
+    message = {}
+    try:
+        message['timestamp'] = parse_timestamp(event['EventTimestamp'], client_ip)
+    except:
+        logger.warning(f'Message from {client_ip} is EventTimeStamp')
+        return
+    try:
+        message['MessageId'] = event['MessageId']
+    except:
+        logger.warning(f'Message from {client_ip} is missing MessageId')
+    try:
+        sensor = event['Oem']['Sensors'][0]
+    except:
+        logger.warning(f'Message {message["MessageId"]} from {client_ip} is missing .Oem.Sensors[0]: {event}')
+        return
+    if len(event['Oem']['Sensors']) > 1:
+        # if ever true, will need to change the code to loop over the Sensor array
+        logger.warning(f'Message {message["MessageId"]} from {client_ip}: more than one "sensor" in Oem.Sensors')
+    try:
+        message['Location'] = sensor['Location']
+    except:
+        logger.warning(f'Message {message["MessageId"]} from {client_ip} is missing .Oem.Sensors[0].Location')
+        return
+    try:
+        message['message'] = sensor['Value']
+    except:
+        logger.warning(f'Message {message["MessageId"]} from {client_ip}/{message["Location"]} is missing .Oem.Sensors[0].Value')
+        return
+    try:
+        message['Severity'] = sensor['PhysicalSubContext']
+    except:
+        logger.debug(f'Message {message["MessageId"]} from {client_ip}/{message["Location"]} is missing .Oem.Sensors[0].PhysicalSubContext')
+    try:
+        message['Group'] = int(sensor['ParentalIndex'])
+    except:
+        logger.debug(f'Message {message["MessageId"]} from {client_ip}/{message["Location"]} is missing .Oem.Sensors[0].ParentalIndex')
+    try:
+        message['Switch'] = int(sensor['Index'])
+    except:
+        logger.debug(f'Message {message["MessageId"]} from {client_ip}/{message["Location"]} is missing .Oem.Sensors[0].Index')
+    try:
+        message['Port'] = int(sensor['SubIndex'])
+    except:
+        logger.debug(f'Message {message["MessageId"]} from {client_ip}/{message["Location"]} is missing .Oem.Sensors[0].SubIndex')
+    message['cluster'] = cluster_name
+
+    if not config.kafka:
+        return
+    try:
+        topic = "crayfabrichealth"
+        producer.produce(topic=topic,
+                         value=serializer(message,
+                                          SerializationContext(topic, MessageField.VALUE)),
+                         on_delivery=delivery_report)
+    except KeyboardInterrupt:
+        pass
+    except Exception as inst:
+        logger.error("produce() failed on kafka topic \"{topic}\", discarding record: {inst}")
+
+def worker_process(worker_queue, kafka_conf, schema_registry_conf):
+    producer = None
+    metrics_serializer = None
+    events_serializer = None
+    if config.kafka:
+        schema_registry_client = SchemaRegistryClient(schema_registry_conf)
+        avro_serializer_conf = {}
+        avro_serializer_conf['subject.name.strategy'] = record_subject_name_strategy
+        metrics_serializer = AvroSerializer(schema_registry_client,
+                                            metrics_schema,
+                                            to_dict=None,
+                                            conf=avro_serializer_conf)
+        events_serializer = AvroSerializer(schema_registry_client,
+                                           events_schema,
+                                           to_dict=None,
+                                           conf=avro_serializer_conf)
+        slingshot_health_serializer = AvroSerializer(schema_registry_client,
+                                                     slingshot_health_schema,
+                                                     to_dict=None,
+                                                     conf=avro_serializer_conf)
+        producer = Producer(kafka_conf)
+
+    while True:
+        try:
+            work = worker_queue.get()
+        except:
+            if config.kafka:
+                producer.flush()
+            return
+        if config.kafka:
+            producer.poll(0.0)
+        if work is None:
+            # None signals time to exit, put it back on the queue
+            # so the next worker will exit as well.
+            logger.debug('end (received "None" exit message)')
+            if config.kafka:
+                producer.flush()
+            worker_queue.put(None)
+            break
+
+        # decode the message
+        try:
+            (path, headers, client_ip, data) = work
+        except:
+            logger.error(f'Unable to unpack "work" tuple')
+            continue
+        try:
+            data_decoded = data.decode('utf-8')
+        except:
+            logger.error(f'Unable to decode("utf-8") the data from {client_ip}')
+            continue
+        try:
+            json_data = json.loads(data_decoded)
+        except:
+            logger.error(f'Failed JSON decode of data from {client_ip}, data starts with: "{data_decoded[:40]}"')
+            continue
+        if 'Events' not in json_data:
+            logger.warning(f'No "Events" in the message from {client_ip}, data starts with: "{data_decoded[:40]}"')
+            continue
+        if path != '/redfish' and path != '/slingshot':
+            logger.warning(f'Unrecognized path "{path}" for message from {client_ip}')
+            continue
+
+        # process the the message
+        if path == '/redfish':
+            for event in json_data['Events']:
+                if event['MessageId'].startswith('CrayTelemetry'):
+                    process_cray_telemetry(client_ip, event,
+                                           producer, metrics_serializer)
+                else:
+                    process_generic_redfish_event(client_ip, event,
+                                                  producer, events_serializer)
+        elif path == '/slingshot':
+            for event in json_data['Events']:
+                if event['MessageId'].startswith('CrayFabricHealth'):
+                    process_slingshot_health(client_ip, event,
+                                             producer,
+                                             slingshot_health_serializer)
+                else:
+                    logger.debug(f'Unhandled slingshot message id {event["MessageId"]} from {client_ip}')
+
+        if config.kafka:
+            producer.poll(0.0)
+
+def process_config_yaml(from_yaml):
+    global config
+
+    known_top_level_keys = [
+        'listen_port',
+        'listen_address',
+        'worker_count',
+        'log_level',
+        'kafka',
+        'schema_registry',
+        'sample_periods'
+        ]
+    for key in from_yaml.keys():
+        if key not in known_top_level_keys:
+            logger.warning(f'Unrecognized key in configuration file: {key}')
+
+    try:
+        config.log_level = from_yaml['log_level']
+    except:
+        pass
+    try:
+        config.listen_port = from_yaml['listen_port']
+    except:
+        pass
+    try:
+        config.listen_address = from_yaml['listen_address']
+    except:
+        pass
+    try:
+        config.worker_count = from_yaml['worker_count']
+    except:
+        pass
+    try:
+        config.kafka = from_yaml['kafka']
+    except:
+        pass
+    try:
+        config.schema_registry = from_yaml['schema_registry']
+    except:
+        pass
+    if 'sample_periods' not in from_yaml:
+        logger.error('"sampler_periods" is a required configuration file section.')
+        sys.exit(1)
+    for period in from_yaml['sample_periods']:
+        for key in period.keys():
+            if key != 'fields' and key != 'period':
+                logger.warning('Invalid key in configuration file: {key}')
+                sys.exit(1)
+        if 'fields' not in period:
+            logger.error('Each mapping in the "sample_periods" list must have a "fields" key')
+            sys.exit(1)
+        if 'period' not in period:
+            logger.error('Each mapping in the "sample_periods" list must have a "period" key')
+            sys.exit(1)
+
+        new_period = SamplePeriod()
+        config.sample_periods.append(new_period)
+        if period['period'] is not None:
+            new_period.period_ms = period['period'] * 1000
+        if period['fields']:
+            new_fields = []
+            new_period.fields = new_fields
+            for field in period['fields']:
+                for key in field.keys():
+                    if key != 'name' and key != 'pattern':
+                        logger.warning('Invalid key in configuration file: {key}')
+                        sys.exit(1)
+                if 'name' not in field:
+                    logger.error('Each mapping in the "fields" list must have a "name" key')
+                    sys.exit(1)
+                if 'pattern' not in field:
+                    logger.error('Each mapping in the "fields" list must have a "pattern" key')
+                    sys.exit(1)
+                try:
+                    pattern = re.compile(field['pattern'])
+                except:
+                    logger.error(f'''Failed to compile regular expression: "{field['pattern']}"''')
+                    raise
+                new_field = SampleField(name=field['name'], pattern=pattern)
+                new_fields.append(new_field)
+
+def initialize_configuration():
+    global config
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--config",
+                        help="configuration file",
+                        metavar="FILE",
+                        default=argparse.SUPPRESS)
+    parser.add_argument("-v", "--verbosity",
+                        choices=verbosity_levels.keys(),
+                        default=argparse.SUPPRESS)
+    args = parser.parse_args()
+    if 'config' in args:
+        config.config_file = args.config
+    try:
+        with open(args.config, 'r') as cf:
+            from_yaml = yaml.safe_load(cf)
+            process_config_yaml(from_yaml)
+    except Exception as inst:
+        logger.error(f'Unable to read config file {args.config}: {inst}')
+        sys.exit(1)
+    if 'verbosity' in args:
+        config.log_level = args.verbosity
+
+    # Lookup listen_address was supplied, and it was not an ip address, look up the IP address
+    if config.listen_address and not re.fullmatch('\d+\.\d+\.\d+\.\d+', config.listen_address):
+        try:
+            config.listen_address = getent_hosts(config.listen_address)[0]
+        except:
+            logger.error(f'Failed to look up IP of listen_address "{config.listen_address}" using "getent hosts"')
+            sys.exit(1)
+
+def main():
+    global logger
+    global config
+
+    logger = logging.getLogger(__name__)
+    initialize_configuration()
+    logger = multiprocessing.log_to_stderr(level=verbosity_levels[config.log_level])
+
+    parent_queue = multiprocessing.Queue()
+    worker_queues = []
+    workers = []
+    for i in range(config.worker_count):
+        worker_queue = multiprocessing.Queue()
+        worker_queues.append(worker_queue)
+        worker = multiprocessing.Process(target=worker_process,
+                                         name=f'Worker-{i}',
+                                         args=(worker_queue,
+                                               config.kafka,
+                                               config.schema_registry))
+        workers.append(worker)
+        worker.start()
+
+    server_address = (config.listen_address, config.listen_port)
+    worker_mapping = defaultdict(next_worker_index(config.worker_count).__next__)
+    handler = functools.partial(Handle_HTTP_Connection,
+                                parent_queue,
+                                workers,
+                                worker_queues,
+                                worker_mapping)
+    httpd = ThreadingHTTPServer(server_address, handler)
+    logger.debug(f'Starting http server on {config.listen_address}:{config.listen_port}')
+    running = True
+    while running:
+        try:
+            httpd.handle_request()
+        except KeyboardInterrupt:
+            break
+        if not parent_queue.empty():
+            dead_worker_idx = parent_queue.get()
+            logger.error(f'Worker index {dead_worker_idx} is reported dead. Restarting.')
+            dead_queue = worker_queues[dead_worker_idx]
+            worker_queues[dead_worker_idx] = multiprocessing.Queue()
+            dead_worker = workers[dead_worker_idx]
+            new_worker = multiprocessing.Process(target=worker_process,
+                                                 name=f'Worker-{dead_worker_idx}',
+                                                 args=(worker_queues[dead_worker_idx],
+                                                       config.kafka,
+                                                       config.schema_registry))
+            new_worker.start()
+            workers[dead_worker_idx] = new_worker
+            dead_worker.join()
+            del dead_worker
+            del dead_queue
+    logger.warning('Stopping http server')
+    httpd.server_close()
+
+    # Signal exit by putting "None" in the various queues
+    for worker_queue in worker_queues:
+        worker_queue.put(None)
+        worker_queue.close()
+    for worker in workers:
+        worker.join()
+
+if __name__ == '__main__':
+    main()

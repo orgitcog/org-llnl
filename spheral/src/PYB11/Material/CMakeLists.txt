@@ -1,1 +1,0 @@
-spheral_add_pybind11_library(Material SPHERAL_MODULE_LIST)

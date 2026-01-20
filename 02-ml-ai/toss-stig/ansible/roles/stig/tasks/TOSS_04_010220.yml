@@ -1,0 +1,52 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252930
+
+# Verify TOSS prevents the installation of patches, service packs, device drivers,
+# or operating system components without verification they have been digitally
+# signed using a certificate that is recognized and approved by the organization.
+#
+# Check that YUM verifies the signature of packages from a repository prior to
+# install with the following command:
+#
+#     $ sudo egrep '^\[.*\]|gpgcheck' /etc/yum.repos.d/*.repo
+#     /etc/yum.repos.d/appstream.repo:[appstream]
+#     /etc/yum.repos.d/appstream.repo:gpgcheck=1
+#     /etc/yum.repos.d/baseos.repo:[baseos]
+#     /etc/yum.repos.d/baseos.repo:gpgcheck=1
+#
+# If "gpgcheck" is not set to "1", or if options are missing or commented out,
+# ask the System Administrator how the certificates for patches and other
+# operating system components are verified.
+#
+# If there is no process to validate certificates that is approved by the
+# organization, this is a finding.
+
+
+- name: TOSS-04-010220 - TOSS must prevent the installation of patches, service packs, device drivers, or operating system components without verification they have been digitally signed using a certificate that is recognized and approved by the organization.
+  block:
+    - name: TOSS-04-010220 - Register /etc/yum.repos.d/*.yml files
+      ansible.builtin.find:
+        paths: /etc/yum.repos.d
+        patterns: '*.repo'
+        file_type: file
+        recurse: false
+      register: yum_repo_files
+    - name: TOSS-04-010220 - Ensure gpgcheck Enabled For All Package Repositories
+      ansible.builtin.replace:
+        path: '{{ yum_repo_file.path }}'
+        regexp: '^#?\s*gpgcheck=[0-9]+'
+        replace: 'gpgcheck=1'
+        backup: true
+      loop: '{{ yum_repo_files.files }}'
+      loop_control:
+        loop_var: yum_repo_file
+  when:
+    - toss_04_010220 | bool
+  tags:
+    - V-252930
+    - SRG-OS-000366-GPOS-00153
+    - TOSS-04-010220
+    - DISA-STIG-TOSS-04-010220
+    - high_severity
+    - CCI-001749
+    - DISA-STIG-RHEL-08-010370
+    - NASA-ASCS-20283

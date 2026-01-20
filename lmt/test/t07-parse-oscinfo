@@ -1,5 +1,0 @@
-#!/bin/bash
-
-. test_header
-
-test_versions ./tosc

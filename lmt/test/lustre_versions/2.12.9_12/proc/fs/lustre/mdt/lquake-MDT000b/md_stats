@@ -1,4 +1,0 @@
-snapshot_time             1705616006.986214496 secs.nsecs
-getattr                   63 samples [reqs]
-getxattr                  63 samples [reqs]
-statfs                    1525013 samples [reqs]

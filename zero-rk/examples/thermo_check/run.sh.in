@@ -1,6 +1,0 @@
-
-app=thermo_check.x
-inp=thermo_check.yml
-
-"@CMAKE_INSTALL_PREFIX@/bin/$app" $inp
-

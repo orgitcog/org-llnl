@@ -1,7 +1,0 @@
-{
-   config_process_leaks
-   Memcheck:Leak
-   match-leak-kinds: definite
-   ...
-   src:ldmsd_config.c
-}

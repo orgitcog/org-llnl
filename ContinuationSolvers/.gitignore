@@ -1,6 +1,0 @@
-*.a
-*.o
-*.core
-CMakeFiles
-*.cmake
-Makefile

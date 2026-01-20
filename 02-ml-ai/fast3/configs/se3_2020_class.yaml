@@ -1,0 +1,64 @@
+data:
+  split:
+    train:
+      - [pdbbind2020, train]
+      - [pdbbind2020, val]
+    val:
+      - [pdbbind2020, test]
+    test:
+      - [pdbbind2020, test]
+  input_type: graph
+
+
+model:
+  name: efficientse3
+  params:
+    edge_dim: 16
+    fiber_mid:
+      0: 16
+      1: 16
+      2: 16
+    fiber_edge:
+      0: 16
+    out_multiplicity: 16
+    num_convs: 5
+    heads: 1
+    dropout: 0.
+    reduce_type: "edge"
+    reduce_from: "all"
+    pool_method: "add"
+    x_ij: "add"
+    pair_bias: true
+    uniform_attention: true
+    distance_cutoff: 5 # increase ? [3, 5, 7]
+    estlabel: true
+  loss:
+    - name: mse
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 32
+  num_workers: 8
+  epochs: 300
+  checkpoint_step: 100
+  optimizer:
+    name: adam # [sgd, rmsprop, adam]
+    params:
+      lr: 0.001
+  scheduler:
+    name: multi_step
+    params:
+      milestones: [100, 200]
+      gamma: 0.1
+
+test:
+  batch_size: 2
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r

@@ -1,0 +1,35 @@
+#generate conductivity file
+python ../AnisotropicDiffusion/generateAnisotropicConductivityField.py 16 16 16 > anatomy16#000000
+
+#run on LC Peloton cluster
+srun -ppdebug -n16 ../../bin/cardioid-peloton
+
+#gather outputs into single file
+cat snapshot.000000000002/coarsened_anatomy#0000* > gradVm.dat
+
+#inspect gradVm.dat:
+
+gradV FILEHEADER {
+  datatype = FIXRECORDASCII;
+  lrec = 59;
+  nfields = 7;
+  nrecords = 9;
+  field_names = gid nvals gx gy gz;
+  field_types = u d f;
+  nfiles = 16;
+  time = 0.002000; loop = 2;
+  h =   16  0    0
+        0      16  0
+        0    0      16;
+}
+
+        1092     512         1.22    1.3299998         1.46
+        1099     432         1.22    1.3299999    1.4599999
+        1551     100    1.2200006    1.3300006         1.46
+        1204     512    1.2200001         1.33    1.4600002
+        1211     478    1.2199999    1.3299999         1.46
+        2884     512    1.2199999    1.3299999         1.46
+        2891     511    1.2200001         1.33    1.4600002
+        2996     615         1.22    1.3299999    1.4599999
+        2222     424    1.2199999    1.3299998         1.46
+

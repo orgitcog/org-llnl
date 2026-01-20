@@ -1,0 +1,19 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(MPI REQUIRED)
+
+IF(@MYSQL_FOUND@)
+    find_dependency(MySQL REQUIRED)
+ENDIF()
+
+IF(@PDSH_FOUND@)
+    find_dependency(PDSH REQUIRED)
+ENDIF()
+
+IF(@YOGRT_FOUND@)
+    find_dependency(YOGRT REQUIRED)
+ENDIF()
+
+include("${CMAKE_CURRENT_LIST_DIR}/scrTargets.cmake")

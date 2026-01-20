@@ -1,0 +1,17 @@
+dockerbuild:
+  container_basename: radiuss
+
+  matrix:
+    intel_version:
+      - "2024.2"
+    ubuntu_version:
+      - "24.04"
+
+  build_args:
+    intel_version:
+      key: intel
+      name: intel
+
+    ubuntu_version:
+      key: ubuntu
+      name: ubuntu

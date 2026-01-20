@@ -1,0 +1,28 @@
+###############################################################################
+# Copyright (c) Lawrence Livermore National Security, LLC and other
+# RAJA Project Developers. See top-level LICENSE and COPYRIGHT
+# files for dates and other details. No copyright assignment is required
+# to contribute to RAJA.
+#
+# SPDX-License-Identifier: (BSD-3-Clause)
+###############################################################################
+
+raja_add_test(
+  NAME test-indexset
+  SOURCES test-indexset.cpp)
+
+raja_add_test(
+  NAME test-indexvalue
+  SOURCES test-indexvalue.cpp)
+
+raja_add_test(
+  NAME test-listsegment
+  SOURCES test-listsegment.cpp)
+
+raja_add_test(
+  NAME test-rangesegment
+  SOURCES test-rangesegment.cpp)
+
+raja_add_test(
+  NAME test-rangestridesegment
+  SOURCES test-rangestridesegment.cpp)

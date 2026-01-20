@@ -1,0 +1,35 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - master
+    tags: '*'
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        version: ['1.10']  # Test against LTS and current release
+        os: [macOS-latest, ubuntu-latest] #[macOS-latest, windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: julia-actions/setup-julia@latest
+        with:
+          version: ${{ matrix.version }}
+      - name: Install dependencies, part 1
+        env:
+           PYTHON:
+        run: julia --project=docs/ -e 'using Pkg; Pkg.add("PyCall"); Pkg.build("PyCall") '
+      - name: Checking environment
+        run: |
+           echo "PYTHON='"${PYTHON}"'"
+           echo "CI='"${CI}"'"
+      - name: Install dependencies, part 2
+        run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate(); Pkg.add("Documenter"); Pkg.add("DocumenterTools"); Pkg.add("PyPlot") '
+      - name: Build and deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # For authentication with GitHub Actions token
+        run: julia --color=yes --project=docs/ docs/make.jl

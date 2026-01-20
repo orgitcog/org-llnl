@@ -1,3 +1,0 @@
-add_metall_executable(run_vector_bench run_vector_bench.cpp)
-add_metall_executable(run_map_bench run_map_bench.cpp)
-add_metall_executable(run_unordered_map_bench run_unordered_map_bench.cpp)

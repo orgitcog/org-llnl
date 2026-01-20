@@ -1,1 +1,0 @@
-{"rule":{"missing_some":[1, ["a", "b", "c"]]},"data":{"a":"apple"},"expected":[]}

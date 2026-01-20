@@ -1,0 +1,46 @@
+#!/bin/sh
+
+if [ -z "$PRI" ]; then
+  d0=`dirname $0`
+  ll=`ls -l $0`
+  case $ll in
+	  l*)  
+		  f1=`echo $ll|awk '{print $NF}'`
+		  d1=`dirname $f1`
+		  PRI=`(cd $d0; cd $d1; echo $PWD)`
+		  ;;
+	  *)
+		  PRI=`(cd $d0;echo $PWD)`
+		  ;;
+  esac
+  PRI=$PRI/.. # remove _swig
+
+fi
+if [ -z "$PY" ]; then
+  export PATH=${PATH}:/usr/local/bin
+  PY="python2.7  -Qnew"
+  PYW="pythonw2.7  -Qnew"
+fi
+
+
+export PYTHONPATH=${PYTHONPATH}:\
+${PRI}/PIL:\
+${PRI}
+
+if [ ! ${LD_LIBRARY_PATH} ]; then
+   export LD_LIBRARY_PATH=${PRI}/wxPyLibs
+else
+   export LD_LIBRARY_PATH=${PRI}/wxPyLibs:${LD_LIBRARY_PATH}
+fi
+
+SWIGDIR=${PRI}/_swig/share/swig/2.0.4
+PRCOMMON=${PRI}/_swig/PriithonCommon
+# ARGS=-I${SWIGDIR} -I${SWIGDIR}/python \
+#      -I${PRCOMMON} -I${PRCOMMON}/Include #$(INCL) 
+#  #   -I$(SWIG_INCL_PRIITHON) -I$(SWIG_INCL_PRIITHON)/common
+
+# ${PRI}/_swig/bin/swig ${ARGS} $*
+
+## oder is important: first `swig/python/` then `swig/`
+${PRI}/_swig/bin/swig -I${SWIGDIR}/python -I${SWIGDIR} \
+     -I${PRCOMMON} -I${PRCOMMON}/Include $*

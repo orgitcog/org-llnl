@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OSS Prevalence Ingest Tool</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="workflow-container">
+            <h1 class="text-center mb-4">OSS Prevalence Ingest Tool</h1>
+            <!-- File Upload Section -->
+            <div class="section">
+                <h3 class="section-title">Step 1: Upload Assets</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-header">Select Asset List</div>
+                            <div class="card-body">
+                                <div class="button-row">
+                                    <label class="btn btn-primary file-upload-btn w-100">
+                                        <i class="bi bi-cloud-upload me-2"></i>Select Excel File
+                                        <input type="file" name="assets" id="assets-file" accept=".xlsx,.xls">
+                                    </label>
+                                    <button id="submit-assets-btn" type="submit"
+                                        class="btn btn-primary submit-btn w-30">Submit</button>
+                                </div>
+                                <div class="file-info mt-2 text-muted small"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-header">Download SBOM Zip</div>
+                            <div class="card-body">
+                                <button id="download-sbom-zip-btn" class="btn btn-primary download-button w-100">
+                                    <i class="bi bi-cloud-download me-2"></i>Download Formatted Zip
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section">
+                <h3 class="section-title">Step 2: Upload SBOMs</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-header">Upload Zipped SBOMs</div>
+                            <div class="card-body">
+                                <div class="button-row">
+                                    <label class="btn btn-primary file-upload-btn w-100">
+                                        <i class="bi bi-cloud-upload me-2"></i>Select Zip File
+                                        <input type="file" name="sboms" id="sboms-file" accept=".zip">
+                                    </label>
+                                    <button id="submit-sboms-btn" type="submit"
+                                        class="btn btn-primary submit-btn w-30">Submit</button>
+                                </div>
+                                <div class="file-info mt-2 text-muted small"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-header">Go to Scoring Page</div>
+                            <div class="card-body">
+                                <button id="go-to-scoring-btn" class="btn w-100 scores-btn">
+                                    <span>Score SBOMs <i class="bi bi-box-arrow-up-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Organization Info Input Section -->
+            <div class="section">
+                <h3 class="section-title">Step 3: Input Organization Info</h3>
+                <form id="org-form" action="/submit/org" method="POST">
+                    <!-- row 1 -->
+                    <div class="row align-items-end">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label"> Name</label>
+                            <input type="text" class="form-control" name="org_name"
+                                placeholder="Enter organization name" required>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Country</label>
+                            <input type="text" class="form-control" name="org_country"
+                                placeholder="Enter organization country" required>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Org Type</label>
+                            <select class="form-select" name="org_type" required>
+                                <option value="" disabled selected>Select Org Type</option>
+                                <option value="National Lab">National Lab</option>
+                                <option value="Private Sector">Private Sector</option>
+                                <option value="Government Agency">Government Agency</option>
+                                <option value="Nonprofit">Nonprofit</option>
+                                <option value="Academic">Academic</option>
+                                <option value="Research Institute">Research Institute</option>
+                                <option value="International">International</option>
+                                <option value="Startup">Startup</option>
+                                <option value="Trade Association">Trade Association</option>
+                                <option value="Public Utility">Public Utility</option>
+                                <option value="Other ">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- row 2 -->
+                    <div class="row align-items-end">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Continent</label>
+                            <input type="text" class="form-control" name="org_continent" placeholder="Enter continent">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Size</label>
+                            <input type="number" class="form-control" name="org_size" placeholder="Enter size" step="1">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">CI Sector</label>
+                            <select class="form-select" name="ci_sector">
+                                <option value="" disabled selected>Select CI Sector</option>
+                                <option value="Energy">Energy</option>
+                                <option value="Critical Manufacturing">Critical Manufacturing</option>
+                                <option value="Chemical">Chemical</option>
+                                <option value="Commercial Facilities">Commercial Facilities</option>
+                                <option value="Communications">Communications</option>
+                                <option value="Dams">Dams</option>
+                                <option value="Defense Industrial Base">Defense Industrial Base</option>
+                                <option value="Emergency Services">Emergency Services</option>
+                                <option value="Financial Services">Financial Services</option>
+                                <option value="Food and Agriculture">Food and Agriculture</option>
+                                <option value="Government Facilities">Government Facilities</option>
+                                <option value="Healthcare and Public Health">Healthcare and Public Health</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Nuclear Reactors, Materials, and Waste">Nuclear Reactors, Materials, and Waste</option>
+                                <option value="Transportation Systems">Transportation Systems</option>
+                                <option value="Water and Wastewater Systems">Water and Wastewater Systems</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-md-2">
+                            <button id="submit-org-btn" type="submit" class="btn btn-primary w-100">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Step 4: Ingest and Redact Data</h3>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <button id="run-all-btn" class="btn btn-primary w-100">
+                            <span id="run-all-spinner"><i class="bi bi-play-circle me-2"></i>Run All Processes</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <form action="/results" method="GET">
+                            <button id="results-btn" type="submit" class="btn btn-primary w-100">Results</button>
+                        </form>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <button id="run-redaction-btn" class="btn btn-primary w-100">
+                            <span>Redact Data <i class="bi bi-box-arrow-up-right"></i></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Individual Function Buttons -->
+            <div class="section">
+                <h3 class="section-title">Optional: Individual Functions</h3>
+                <div class="row justify-content-center align-items-end">
+                    <div class="col-md-3 col-sm-6 mb-2">
+                        <button id="populate-database-btn" type="submit"
+                            class="btn btn-outline-primary function-btn w-100">Populate
+                            Database</button>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-2">
+                        <button id="run-analysis-btn" type="submit"
+                            class="btn btn-outline-secondary function-btn w-100">Run Analysis</button>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-2">
+                        <button id="refresh-license-btn" type="submit"
+                            class="btn btn-outline-success function-btn w-100">Refresh License
+                            Information</button>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-2">
+                        <button id="infer-license-btn" type="submit"
+                            class="btn btn-outline-warning function-btn w-100">Infer Licenses</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="errors-box" class="section"></div>
+        </div>
+    </div>
+
+
+    <footer>
+        <p>OSS Prevalence - LLNL</p>
+    </footer>
+</body>
+<script src="{{ url_for('static', filename='js/index.js')}}" type="text/javascript"></script>
+
+<!-- Add this where you want messages to appear -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+</html>

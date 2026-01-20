@@ -1,6 +1,0 @@
-
-app=idt_diagnostic.x
-inp=hydrogen_stats.yml
-
-"@CMAKE_INSTALL_PREFIX@/bin/$app" $inp
-

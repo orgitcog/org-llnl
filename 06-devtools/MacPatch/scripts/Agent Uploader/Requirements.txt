@@ -1,0 +1,5 @@
+# Python 3 = MacPatch API Modules
+requests>=2.27.0
+mysql-connector-python
+simplejson==3.17.6
+psutil==5.9.0

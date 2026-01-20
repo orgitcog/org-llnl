@@ -1,0 +1,1749 @@
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x100     
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x100      0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x104      0x0   Machine:                       0x8664    
+0x106      0x2   NumberOfSections:              0x6       
+0x108      0x4   TimeDateStamp:                 0x5370993B [Mon May 12 09:49:47 2014 UTC]
+0x10C      0x8   PointerToSymbolTable:          0x0       
+0x110      0xC   NumberOfSymbols:               0x0       
+0x114      0x10  SizeOfOptionalHeader:          0xF0      
+0x116      0x12  Characteristics:               0x2022    
+Flags: IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LARGE_ADDRESS_AWARE
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER64]
+0x118      0x0   Magic:                         0x20B     
+0x11A      0x2   MajorLinkerVersion:            0x9       
+0x11B      0x3   MinorLinkerVersion:            0x0       
+0x11C      0x4   SizeOfCode:                    0x4E00    
+0x120      0x8   SizeOfInitializedData:         0x31400   
+0x124      0xC   SizeOfUninitializedData:       0x0       
+0x128      0x10  AddressOfEntryPoint:           0x177C    
+0x12C      0x14  BaseOfCode:                    0x1000    
+0x130      0x18  ImageBase:                     0x180000000
+0x138      0x20  SectionAlignment:              0x1000    
+0x13C      0x24  FileAlignment:                 0x200     
+0x140      0x28  MajorOperatingSystemVersion:   0x5       
+0x142      0x2A  MinorOperatingSystemVersion:   0x2       
+0x144      0x2C  MajorImageVersion:             0x0       
+0x146      0x2E  MinorImageVersion:             0x0       
+0x148      0x30  MajorSubsystemVersion:         0x5       
+0x14A      0x32  MinorSubsystemVersion:         0x2       
+0x14C      0x34  Reserved1:                     0x0       
+0x150      0x38  SizeOfImage:                   0x3B000   
+0x154      0x3C  SizeOfHeaders:                 0x400     
+0x158      0x40  CheckSum:                      0x44E6F   
+0x15C      0x44  Subsystem:                     0x2       
+0x15E      0x46  DllCharacteristics:            0x0       
+0x160      0x48  SizeOfStackReserve:            0x100000  
+0x168      0x50  SizeOfStackCommit:             0x1000    
+0x170      0x58  SizeOfHeapReserve:             0x100000  
+0x178      0x60  SizeOfHeapCommit:              0x1000    
+0x180      0x68  LoaderFlags:                   0x0       
+0x184      0x6C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x208      0x0   Name:                          .text
+0x210      0x8   Misc:                          0x4CD1    
+0x210      0x8   Misc_PhysicalAddress:          0x4CD1    
+0x210      0x8   Misc_VirtualSize:              0x4CD1    
+0x214      0xC   VirtualAddress:                0x1000    
+0x218      0x10  SizeOfRawData:                 0x4E00    
+0x21C      0x14  PointerToRawData:              0x400     
+0x220      0x18  PointerToRelocations:          0x0       
+0x224      0x1C  PointerToLinenumbers:          0x0       
+0x228      0x20  NumberOfRelocations:           0x0       
+0x22A      0x22  NumberOfLinenumbers:           0x0       
+0x22C      0x24  Characteristics:               0x60000020
+Flags: IMAGE_SCN_CNT_CODE, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ
+Entropy: 5.450830 (Min=0.0, Max=8.0)
+MD5     hash: 38358894412e6dc531a702839d6260e6
+SHA-1   hash: e98039f16298bd9f0ab4264f5fd59268f8eaf323
+SHA-256 hash: de758e2598436c6ae7d095ef03d644148c39ce0bac743789c3ac07276045fad0
+SHA-512 hash: 43ef3231b5e92339cc3cc343dbe643aa3a80e0a72f156d93f23e0737fe83e00e640d514b519ce01ab9569c47c48600094146692a4e90484ddf59ea4760248d0f
+
+[IMAGE_SECTION_HEADER]
+0x230      0x0   Name:                          .rdata
+0x238      0x8   Misc:                          0x207C    
+0x238      0x8   Misc_PhysicalAddress:          0x207C    
+0x238      0x8   Misc_VirtualSize:              0x207C    
+0x23C      0xC   VirtualAddress:                0x6000    
+0x240      0x10  SizeOfRawData:                 0x2200    
+0x244      0x14  PointerToRawData:              0x5200    
+0x248      0x18  PointerToRelocations:          0x0       
+0x24C      0x1C  PointerToLinenumbers:          0x0       
+0x250      0x20  NumberOfRelocations:           0x0       
+0x252      0x22  NumberOfLinenumbers:           0x0       
+0x254      0x24  Characteristics:               0x40000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ
+Entropy: 3.823317 (Min=0.0, Max=8.0)
+MD5     hash: a19cfc4e9ddbb6667600333d730b40f1
+SHA-1   hash: a353e72c1e01a06a96533b1327d830d0323212a7
+SHA-256 hash: d93d6bd4b99fb7e9de718094ebf5ebe097add77160b5b5d66accd37bb3976d10
+SHA-512 hash: 9cec2d39bc8d94b427dee8891729385ad88095cfcb273e39fa70ee92fef91d903e16dd78d86b81c71bca639534c8a2d7021fe3b437f0523f4eba8884af1e434f
+
+[IMAGE_SECTION_HEADER]
+0x258      0x0   Name:                          .data
+0x260      0x8   Misc:                          0xAB0     
+0x260      0x8   Misc_PhysicalAddress:          0xAB0     
+0x260      0x8   Misc_VirtualSize:              0xAB0     
+0x264      0xC   VirtualAddress:                0x9000    
+0x268      0x10  SizeOfRawData:                 0x600     
+0x26C      0x14  PointerToRawData:              0x7400    
+0x270      0x18  PointerToRelocations:          0x0       
+0x274      0x1C  PointerToLinenumbers:          0x0       
+0x278      0x20  NumberOfRelocations:           0x0       
+0x27A      0x22  NumberOfLinenumbers:           0x0       
+0x27C      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 2.447435 (Min=0.0, Max=8.0)
+MD5     hash: 52c65a99de297166d7978a1373880eed
+SHA-1   hash: 5818bc94d5a335087fbf1510383563cc4d52a161
+SHA-256 hash: 65f9eca743f8369e9abd7cdceb3538896d2cee231496e5a33ea9fcabb4443a30
+SHA-512 hash: b49f843a8c4a5c92879cd6d392dffec9c2086812cfc52a59676d1c75297e3f721fe856f14015ce51cb48831afd3a816b1a99bc412d72cabbf501fa47b6528820
+
+[IMAGE_SECTION_HEADER]
+0x280      0x0   Name:                          .pdata
+0x288      0x8   Misc:                          0x30C     
+0x288      0x8   Misc_PhysicalAddress:          0x30C     
+0x288      0x8   Misc_VirtualSize:              0x30C     
+0x28C      0xC   VirtualAddress:                0xA000    
+0x290      0x10  SizeOfRawData:                 0x400     
+0x294      0x14  PointerToRawData:              0x7A00    
+0x298      0x18  PointerToRelocations:          0x0       
+0x29C      0x1C  PointerToLinenumbers:          0x0       
+0x2A0      0x20  NumberOfRelocations:           0x0       
+0x2A2      0x22  NumberOfLinenumbers:           0x0       
+0x2A4      0x24  Characteristics:               0x40000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ
+Entropy: 3.319959 (Min=0.0, Max=8.0)
+MD5     hash: c248ad672c5e34ada422a89bea39afa6
+SHA-1   hash: 4b0db73ec11eb369c6e3d74fd3db7d26cfb95a5a
+SHA-256 hash: 7b75f0bb29a93701b53e593ab0cfa0935e545f8935f2fef97b55553250561483
+SHA-512 hash: 3125e21c8e3233063dbbd51eb40f701a4b6f7fc59d926e5a92351a3fde2a745dae024d13c1558f4b29b852f983755f72cc52823aa4349e1024441c3b53c44e80
+
+[IMAGE_SECTION_HEADER]
+0x2A8      0x0   Name:                          .rsrc
+0x2B0      0x8   Misc:                          0x2E37C   
+0x2B0      0x8   Misc_PhysicalAddress:          0x2E37C   
+0x2B0      0x8   Misc_VirtualSize:              0x2E37C   
+0x2B4      0xC   VirtualAddress:                0xB000    
+0x2B8      0x10  SizeOfRawData:                 0x2E400   
+0x2BC      0x14  PointerToRawData:              0x7E00    
+0x2C0      0x18  PointerToRelocations:          0x0       
+0x2C4      0x1C  PointerToLinenumbers:          0x0       
+0x2C8      0x20  NumberOfRelocations:           0x0       
+0x2CA      0x22  NumberOfLinenumbers:           0x0       
+0x2CC      0x24  Characteristics:               0x40000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ
+Entropy: 6.588309 (Min=0.0, Max=8.0)
+MD5     hash: 8f0074210a574db6d1ecc64be47ac87d
+SHA-1   hash: 4512ec5b95aa974d3bb0ff97716404e123e50795
+SHA-256 hash: 500234f25aeac6f4296f7cfe0a544b1478c46f7ad23e5edaeabc2e21ec116596
+SHA-512 hash: 471d071fdb2f4d05c57cd327ca32d82f9e9502d5b3715298d5d394d89d214ceff0eb915ea62166c3c69047f484aa23f11fabfbfc3f1026a7e3e957fed93833a4
+
+[IMAGE_SECTION_HEADER]
+0x2D0      0x0   Name:                          .reloc
+0x2D8      0x8   Misc:                          0x2AC     
+0x2D8      0x8   Misc_PhysicalAddress:          0x2AC     
+0x2D8      0x8   Misc_VirtualSize:              0x2AC     
+0x2DC      0xC   VirtualAddress:                0x3A000   
+0x2E0      0x10  SizeOfRawData:                 0x400     
+0x2E4      0x14  PointerToRawData:              0x36200   
+0x2E8      0x18  PointerToRelocations:          0x0       
+0x2EC      0x1C  PointerToLinenumbers:          0x0       
+0x2F0      0x20  NumberOfRelocations:           0x0       
+0x2F2      0x22  NumberOfLinenumbers:           0x0       
+0x2F4      0x24  Characteristics:               0x42000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_DISCARDABLE, IMAGE_SCN_MEM_READ
+Entropy: 1.014722 (Min=0.0, Max=8.0)
+MD5     hash: 1c52644248038336bef6c0957e988771
+SHA-1   hash: 8993d67480ccf50db5b32f9df6b53a0bd5b8c390
+SHA-256 hash: 3757190e4a46e72328d9fbb582fb2f56fddd006a7a90beeba069c34b6ba2c750
+SHA-512 hash: 8f132562ff46dc14c86ae7a83b9746708e5730d975941acae54f49c898b57f7cd8bdfd0a10f932012ceece52a8503225af81348a2a8cb9e7a8975b48335577e6
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0x188      0x0   VirtualAddress:                0x7FC0    
+0x18C      0x4   Size:                          0xBC      
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x190      0x0   VirtualAddress:                0x7508    
+0x194      0x4   Size:                          0xC8      
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x198      0x0   VirtualAddress:                0xB000    
+0x19C      0x4   Size:                          0x2E37C   
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x1A0      0x0   VirtualAddress:                0xA000    
+0x1A4      0x4   Size:                          0x30C     
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x1A8      0x0   VirtualAddress:                0x0       
+0x1AC      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x1B0      0x0   VirtualAddress:                0x3A000   
+0x1B4      0x4   Size:                          0x84      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x1B8      0x0   VirtualAddress:                0x0       
+0x1BC      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x1C0      0x0   VirtualAddress:                0x0       
+0x1C4      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x1C8      0x0   VirtualAddress:                0x0       
+0x1CC      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x1D0      0x0   VirtualAddress:                0x0       
+0x1D4      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x1D8      0x0   VirtualAddress:                0x0       
+0x1DC      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x1E0      0x0   VirtualAddress:                0x0       
+0x1E4      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x1E8      0x0   VirtualAddress:                0x6000    
+0x1EC      0x4   Size:                          0x350     
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x1F0      0x0   VirtualAddress:                0x0       
+0x1F4      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x1F8      0x0   VirtualAddress:                0x0       
+0x1FC      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x200      0x0   VirtualAddress:                0x0       
+0x204      0x4   Size:                          0x0       
+
+----------Version Information----------
+
+[VS_VERSIONINFO]
+0x35CF4    0x0   Length:                        0x230     
+0x35CF6    0x2   ValueLength:                   0x34      
+0x35CF8    0x4   Type:                          0x0       
+
+[VS_FIXEDFILEINFO]
+0x35D1C    0x0   Signature:                     0xFEEF04BD
+0x35D20    0x4   StrucVersion:                  0x10000   
+0x35D24    0x8   FileVersionMS:                 0x1       
+0x35D28    0xC   FileVersionLS:                 0x0       
+0x35D2C    0x10  ProductVersionMS:              0x1       
+0x35D30    0x14  ProductVersionLS:              0x0       
+0x35D34    0x18  FileFlagsMask:                 0x3F      
+0x35D38    0x1C  FileFlags:                     0x2       
+0x35D3C    0x20  FileOS:                        0x4       
+0x35D40    0x24  FileType:                      0x2       
+0x35D44    0x28  FileSubtype:                   0x0       
+0x35D48    0x2C  FileDateMS:                    0x0       
+0x35D4C    0x30  FileDateLS:                    0x0       
+
+[StringFileInfo]
+0x35D50    0x0   Length:                        0x190     
+0x35D52    0x2   ValueLength:                   0x0       
+0x35D54    0x4   Type:                          0x1       
+
+  [StringTable]
+  0x35D74    0x0   Length:                        0x16C     
+  0x35D76    0x2   ValueLength:                   0x0       
+  0x35D78    0x4   Type:                          0x1       
+  LangID: 040904b0
+
+    FileDescription: ShellHandler for Notepad++ (64 bit)
+    FileVersion: 0.1
+    LegalCopyright: Copyright \xc2\xa9 2010
+    OriginalFilename: NppShell64.dll
+    ProductVersion: 0.1
+
+[VarFileInfo]
+0x35EE0    0x0   Length:                        0x44      
+0x35EE2    0x2   ValueLength:                   0x0       
+0x35EE4    0x4   Type:                          0x1       
+
+  [Var]
+  0x35F00    0x0   Length:                        0x24      
+  0x35F02    0x2   ValueLength:                   0x4       
+  0x35F04    0x4   Type:                          0x0       
+    Translation: 0x0409 0x04b0
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x71C0     0x0   Characteristics:               0x0       
+0x71C4     0x4   TimeDateStamp:                 0x5370993B [Mon May 12 09:49:47 2014 UTC]
+0x71C8     0x8   MajorVersion:                  0x0       
+0x71CA     0xA   MinorVersion:                  0x0       
+0x71CC     0xC   Name:                          0x801A    
+0x71D0     0x10  Base:                          0x1       
+0x71D4     0x14  NumberOfFunctions:             0x5       
+0x71D8     0x18  NumberOfNames:                 0x5       
+0x71DC     0x1C  AddressOfFunctions:            0x7FE8    
+0x71E0     0x20  AddressOfNames:                0x7FFC    
+0x71E4     0x24  AddressOfNameOrdinals:         0x8010    
+
+Ordinal      RVA         Name
+1          0x00003E80    DllCanUnloadNow
+2          0x00004FA0    DllGetClassObject
+3          0x00003DC0    DllInstall
+4          0x00003E50    DllRegisterServer
+5          0x00003E20    DllUnregisterServer
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6708     0x0   OriginalFirstThunk:            0x7808    
+0x6708     0x0   Characteristics:               0x7808    
+0x670C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6710     0x8   ForwarderChain:                0x0       
+0x6714     0xC   Name:                          0x7942    
+0x6718     0x10  FirstThunk:                    0x6238    
+
+SHELL32.dll.ShellExecuteW Hint[280]
+SHELL32.dll.DragQueryFileW Hint[32]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x671C     0x0   OriginalFirstThunk:            0x7820    
+0x671C     0x0   Characteristics:               0x7820    
+0x6720     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6724     0x8   ForwarderChain:                0x0       
+0x6728     0xC   Name:                          0x7970    
+0x672C     0x10  FirstThunk:                    0x6250    
+
+SHLWAPI.dll.StrRChrW Hint[310]
+SHLWAPI.dll.PathFindExtensionW Hint[71]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6730     0x0   OriginalFirstThunk:            0x7738    
+0x6730     0x0   Characteristics:               0x7738    
+0x6734     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6738     0x8   ForwarderChain:                0x0       
+0x673C     0xC   Name:                          0x798A    
+0x6740     0x10  FirstThunk:                    0x6168    
+
+MSIMG32.dll.AlphaBlend Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6744     0x0   OriginalFirstThunk:            0x7680    
+0x6744     0x0   Characteristics:               0x7680    
+0x6748     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x674C     0x8   ForwarderChain:                0x0       
+0x6750     0xC   Name:                          0x7A86    
+0x6754     0x10  FirstThunk:                    0x60B0    
+
+KERNEL32.dll.GetLastError Hint[486]
+KERNEL32.dll.lstrcatW Hint[1199]
+KERNEL32.dll.lstrlenW Hint[1214]
+KERNEL32.dll.GetModuleFileNameW Hint[501]
+KERNEL32.dll.lstrcpynW Hint[1211]
+KERNEL32.dll.GetVersionExW Hint[630]
+KERNEL32.dll.CreateProcessW Hint[152]
+KERNEL32.dll.lstrcpynA Hint[1210]
+KERNEL32.dll.FindFirstFileW Hint[293]
+KERNEL32.dll.GetProcAddress Hint[544]
+KERNEL32.dll.LoadLibraryW Hint[750]
+KERNEL32.dll.GetProcessHeap Hint[547]
+KERNEL32.dll.HeapFree Hint[673]
+KERNEL32.dll.HeapAlloc Hint[669]
+KERNEL32.dll.FreeLibrary Hint[333]
+KERNEL32.dll.Sleep Hint[1061]
+KERNEL32.dll.QueryPerformanceCounter Hint[846]
+KERNEL32.dll.GetSystemTimeAsFileTime Hint[591]
+KERNEL32.dll.GetTickCount Hint[614]
+KERNEL32.dll.GetCurrentThreadId Hint[430]
+KERNEL32.dll.GetCurrentProcessId Hint[427]
+KERNEL32.dll.FindClose Hint[282]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6758     0x0   OriginalFirstThunk:            0x7838    
+0x6758     0x0   Characteristics:               0x7838    
+0x675C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6760     0x8   ForwarderChain:                0x0       
+0x6764     0xC   Name:                          0x7BEC    
+0x6768     0x10  FirstThunk:                    0x6268    
+
+USER32.dll.DestroyIcon Hint[157]
+USER32.dll.ReleaseDC Hint[592]
+USER32.dll.SetRect Hint[663]
+USER32.dll.GetDC Hint[284]
+USER32.dll.GetIconInfo Hint[298]
+USER32.dll.DrawIconEx Hint[192]
+USER32.dll.SetMenuItemInfoW Hint[651]
+USER32.dll.SendMessageW Hint[615]
+USER32.dll.SetDlgItemTextW Hint[637]
+USER32.dll.GetDlgItemTextW Hint[292]
+USER32.dll.GetSystemMetrics Hint[369]
+USER32.dll.MessageBoxW Hint[515]
+USER32.dll.InsertMenuW Hint[426]
+USER32.dll.SetMenuInfo Hint[648]
+USER32.dll.EndDialog Hint[211]
+USER32.dll.GetDlgItem Hint[289]
+USER32.dll.CreateIconIndirect Hint[97]
+USER32.dll.wsprintfW Hint[784]
+USER32.dll.DialogBoxParamW Hint[166]
+USER32.dll.DrawTextW Hint[200]
+USER32.dll.CharUpperBuffW Hint[57]
+USER32.dll.LoadImageW Hint[477]
+USER32.dll.PostMessageW Hint[547]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x676C     0x0   OriginalFirstThunk:            0x7608    
+0x676C     0x0   Characteristics:               0x7608    
+0x6770     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6774     0x8   ForwarderChain:                0x0       
+0x6778     0xC   Name:                          0x7CDE    
+0x677C     0x10  FirstThunk:                    0x6038    
+
+GDI32.dll.CreateSolidBrush Hint[82]
+GDI32.dll.RoundRect Hint[593]
+GDI32.dll.CreatePen Hint[73]
+GDI32.dll.DeleteDC Hint[205]
+GDI32.dll.SetBkColor Hint[613]
+GDI32.dll.CreateFontIndirectW Hint[62]
+GDI32.dll.SetTextColor Hint[653]
+GDI32.dll.GetTextExtentPoint32W Hint[517]
+GDI32.dll.GetDIBits Hint[436]
+GDI32.dll.DeleteObject Hint[208]
+GDI32.dll.SelectObject Hint[606]
+GDI32.dll.SetBkMode Hint[614]
+GDI32.dll.CreateDIBSection Hint[51]
+GDI32.dll.CreateCompatibleDC Hint[46]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6780     0x0   OriginalFirstThunk:            0x75D0    
+0x6780     0x0   Characteristics:               0x75D0    
+0x6784     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6788     0x8   ForwarderChain:                0x0       
+0x678C     0xC   Name:                          0x7D4E    
+0x6790     0x10  FirstThunk:                    0x6000    
+
+ADVAPI32.dll.RegCloseKey Hint[554]
+ADVAPI32.dll.RegDeleteKeyW Hint[574]
+ADVAPI32.dll.RegQueryValueExW Hint[616]
+ADVAPI32.dll.RegCreateKeyExW Hint[563]
+ADVAPI32.dll.RegOpenKeyExW Hint[603]
+ADVAPI32.dll.RegSetValueExW Hint[632]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6794     0x0   OriginalFirstThunk:            0x78F8    
+0x6794     0x0   Characteristics:               0x78F8    
+0x6798     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x679C     0x8   ForwarderChain:                0x0       
+0x67A0     0xC   Name:                          0x7DA2    
+0x67A4     0x10  FirstThunk:                    0x6328    
+
+ole32.dll.CoTaskMemAlloc Hint[106]
+ole32.dll.CoTaskMemFree Hint[107]
+ole32.dll.CoUninitialize Hint[111]
+ole32.dll.CoInitializeEx Hint[66]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x67A8     0x0   OriginalFirstThunk:            0x7748    
+0x67A8     0x0   Characteristics:               0x7748    
+0x67AC     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x67B0     0x8   ForwarderChain:                0x0       
+0x67B4     0xC   Name:                          0x7E06    
+0x67B8     0x10  FirstThunk:                    0x6178    
+
+MSVCR90.dll._lock Hint[573]
+MSVCR90.dll.__dllonexit Hint[133]
+MSVCR90.dll._unlock Hint[932]
+MSVCR90.dll.__clean_type_info_names_internal Hint[123]
+MSVCR90.dll.?_type_info_dtor_internal_method@type_info@@QEAAXXZ Hint[56]
+MSVCR90.dll.?terminate@@YAXXZ Hint[67]
+MSVCR90.dll.__CppXcptFilter Hint[90]
+MSVCR90.dll.__C_specific_handler Hint[89]
+MSVCR90.dll._amsg_exit Hint[226]
+MSVCR90.dll._onexit Hint[740]
+MSVCR90.dll._encoded_null Hint[312]
+MSVCR90.dll.free Hint[1196]
+MSVCR90.dll.memset Hint[1268]
+MSVCR90.dll._initterm Hint[462]
+MSVCR90.dll._malloc_crt Hint[590]
+MSVCR90.dll._encode_pointer Hint[311]
+MSVCR90.dll.??2@YAPEAX_K@Z Hint[17]
+MSVCR90.dll.??3@YAXPEAX@Z Hint[19]
+MSVCR90.dll.??_V@YAXPEAX@Z Hint[35]
+MSVCR90.dll.memcmp Hint[1263]
+MSVCR90.dll.??_U@YAPEAX_K@Z Hint[33]
+MSVCR90.dll._decode_pointer Hint[301]
+MSVCR90.dll._initterm_e Hint[463]
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x7E00     0x0   Characteristics:               0x0       
+0x7E04     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x7E08     0x8   MajorVersion:                  0x4       
+0x7E0A     0xA   MinorVersion:                  0x0       
+0x7E0C     0xC   NumberOfNamedEntries:          0x0       
+0x7E0E     0xE   NumberOfIdEntries:             0x5       
+  Id: [0x3] (RT_ICON)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x7E10     0x0   Name:                          0x3       
+  0x7E14     0x4   OffsetToData:                  0x80000038
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x7E38     0x0   Characteristics:               0x0       
+    0x7E3C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x7E40     0x8   MajorVersion:                  0x4       
+    0x7E42     0xA   MinorVersion:                  0x0       
+    0x7E44     0xC   NumberOfNamedEntries:          0x0       
+    0x7E46     0xE   NumberOfIdEntries:             0x9       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E48     0x0   Name:                          0x1       
+      0x7E4C     0x4   OffsetToData:                  0x800000F0
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7EF0     0x0   Characteristics:               0x0       
+        0x7EF4     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7EF8     0x8   MajorVersion:                  0x4       
+        0x7EFA     0xA   MinorVersion:                  0x0       
+        0x7EFC     0xC   NumberOfNamedEntries:          0x0       
+        0x7EFE     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F00     0x0   Name:                          0x409     
+          0x7F04     0x4   OffsetToData:                  0x228     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x8028     0x0   OffsetToData:                  0xB2F8    
+            0x802C     0x4   Size:                          0xEA8     
+            0x8030     0x8   CodePage:                      0x4E4     
+            0x8034     0xC   Reserved:                      0x0       
+      Id: [0x2]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E50     0x0   Name:                          0x2       
+      0x7E54     0x4   OffsetToData:                  0x80000108
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7F08     0x0   Characteristics:               0x0       
+        0x7F0C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7F10     0x8   MajorVersion:                  0x4       
+        0x7F12     0xA   MinorVersion:                  0x0       
+        0x7F14     0xC   NumberOfNamedEntries:          0x0       
+        0x7F16     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F18     0x0   Name:                          0x409     
+          0x7F1C     0x4   OffsetToData:                  0x238     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x8038     0x0   OffsetToData:                  0xC1A0    
+            0x803C     0x4   Size:                          0x8A8     
+            0x8040     0x8   CodePage:                      0x4E4     
+            0x8044     0xC   Reserved:                      0x0       
+      Id: [0x3]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E58     0x0   Name:                          0x3       
+      0x7E5C     0x4   OffsetToData:                  0x80000120
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7F20     0x0   Characteristics:               0x0       
+        0x7F24     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7F28     0x8   MajorVersion:                  0x4       
+        0x7F2A     0xA   MinorVersion:                  0x0       
+        0x7F2C     0xC   NumberOfNamedEntries:          0x0       
+        0x7F2E     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F30     0x0   Name:                          0x409     
+          0x7F34     0x4   OffsetToData:                  0x248     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x8048     0x0   OffsetToData:                  0xCA48    
+            0x804C     0x4   Size:                          0x568     
+            0x8050     0x8   CodePage:                      0x4E4     
+            0x8054     0xC   Reserved:                      0x0       
+      Id: [0x4]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E60     0x0   Name:                          0x4       
+      0x7E64     0x4   OffsetToData:                  0x80000138
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7F38     0x0   Characteristics:               0x0       
+        0x7F3C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7F40     0x8   MajorVersion:                  0x4       
+        0x7F42     0xA   MinorVersion:                  0x0       
+        0x7F44     0xC   NumberOfNamedEntries:          0x0       
+        0x7F46     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F48     0x0   Name:                          0x409     
+          0x7F4C     0x4   OffsetToData:                  0x258     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x8058     0x0   OffsetToData:                  0xCFB0    
+            0x805C     0x4   Size:                          0x13702   
+            0x8060     0x8   CodePage:                      0x4E4     
+            0x8064     0xC   Reserved:                      0x0       
+      Id: [0x5]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E68     0x0   Name:                          0x5       
+      0x7E6C     0x4   OffsetToData:                  0x80000150
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7F50     0x0   Characteristics:               0x0       
+        0x7F54     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7F58     0x8   MajorVersion:                  0x4       
+        0x7F5A     0xA   MinorVersion:                  0x0       
+        0x7F5C     0xC   NumberOfNamedEntries:          0x0       
+        0x7F5E     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F60     0x0   Name:                          0x409     
+          0x7F64     0x4   OffsetToData:                  0x268     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x8068     0x0   OffsetToData:                  0x206B4   
+            0x806C     0x4   Size:                          0x10828   
+            0x8070     0x8   CodePage:                      0x4E4     
+            0x8074     0xC   Reserved:                      0x0       
+      Id: [0x6]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E70     0x0   Name:                          0x6       
+      0x7E74     0x4   OffsetToData:                  0x80000168
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7F68     0x0   Characteristics:               0x0       
+        0x7F6C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7F70     0x8   MajorVersion:                  0x4       
+        0x7F72     0xA   MinorVersion:                  0x0       
+        0x7F74     0xC   NumberOfNamedEntries:          0x0       
+        0x7F76     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F78     0x0   Name:                          0x409     
+          0x7F7C     0x4   OffsetToData:                  0x278     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x8078     0x0   OffsetToData:                  0x30EDC   
+            0x807C     0x4   Size:                          0x4228    
+            0x8080     0x8   CodePage:                      0x4E4     
+            0x8084     0xC   Reserved:                      0x0       
+      Id: [0x7]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E78     0x0   Name:                          0x7       
+      0x7E7C     0x4   OffsetToData:                  0x80000180
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7F80     0x0   Characteristics:               0x0       
+        0x7F84     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7F88     0x8   MajorVersion:                  0x4       
+        0x7F8A     0xA   MinorVersion:                  0x0       
+        0x7F8C     0xC   NumberOfNamedEntries:          0x0       
+        0x7F8E     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F90     0x0   Name:                          0x409     
+          0x7F94     0x4   OffsetToData:                  0x288     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x8088     0x0   OffsetToData:                  0x35104   
+            0x808C     0x4   Size:                          0x25A8    
+            0x8090     0x8   CodePage:                      0x4E4     
+            0x8094     0xC   Reserved:                      0x0       
+      Id: [0x8]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E80     0x0   Name:                          0x8       
+      0x7E84     0x4   OffsetToData:                  0x80000198
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7F98     0x0   Characteristics:               0x0       
+        0x7F9C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7FA0     0x8   MajorVersion:                  0x4       
+        0x7FA2     0xA   MinorVersion:                  0x0       
+        0x7FA4     0xC   NumberOfNamedEntries:          0x0       
+        0x7FA6     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7FA8     0x0   Name:                          0x409     
+          0x7FAC     0x4   OffsetToData:                  0x298     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x8098     0x0   OffsetToData:                  0x376AC   
+            0x809C     0x4   Size:                          0x10A8    
+            0x80A0     0x8   CodePage:                      0x4E4     
+            0x80A4     0xC   Reserved:                      0x0       
+      Id: [0x9]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7E88     0x0   Name:                          0x9       
+      0x7E8C     0x4   OffsetToData:                  0x800001B0
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7FB0     0x0   Characteristics:               0x0       
+        0x7FB4     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7FB8     0x8   MajorVersion:                  0x4       
+        0x7FBA     0xA   MinorVersion:                  0x0       
+        0x7FBC     0xC   NumberOfNamedEntries:          0x0       
+        0x7FBE     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7FC0     0x0   Name:                          0x409     
+          0x7FC4     0x4   OffsetToData:                  0x2A8     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x80A8     0x0   OffsetToData:                  0x38754   
+            0x80AC     0x4   Size:                          0x468     
+            0x80B0     0x8   CodePage:                      0x4E4     
+            0x80B4     0xC   Reserved:                      0x0       
+
+  Id: [0x5] (RT_DIALOG)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x7E18     0x0   Name:                          0x5       
+  0x7E1C     0x4   OffsetToData:                  0x80000090
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x7E90     0x0   Characteristics:               0x0       
+    0x7E94     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x7E98     0x8   MajorVersion:                  0x4       
+    0x7E9A     0xA   MinorVersion:                  0x0       
+    0x7E9C     0xC   NumberOfNamedEntries:          0x0       
+    0x7E9E     0xE   NumberOfIdEntries:             0x1       
+      Id: [0x65]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7EA0     0x0   Name:                          0x65      
+      0x7EA4     0x4   OffsetToData:                  0x800001C8
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7FC8     0x0   Characteristics:               0x0       
+        0x7FCC     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7FD0     0x8   MajorVersion:                  0x4       
+        0x7FD2     0xA   MinorVersion:                  0x0       
+        0x7FD4     0xC   NumberOfNamedEntries:          0x0       
+        0x7FD6     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7FD8     0x0   Name:                          0x409     
+          0x7FDC     0x4   OffsetToData:                  0x2B8     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x80B8     0x0   OffsetToData:                  0x38BBC   
+            0x80BC     0x4   Size:                          0x2B4     
+            0x80C0     0x8   CodePage:                      0x4E4     
+            0x80C4     0xC   Reserved:                      0x0       
+
+  Id: [0xE] (RT_GROUP_ICON)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x7E20     0x0   Name:                          0xE       
+  0x7E24     0x4   OffsetToData:                  0x800000A8
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x7EA8     0x0   Characteristics:               0x0       
+    0x7EAC     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x7EB0     0x8   MajorVersion:                  0x4       
+    0x7EB2     0xA   MinorVersion:                  0x0       
+    0x7EB4     0xC   NumberOfNamedEntries:          0x0       
+    0x7EB6     0xE   NumberOfIdEntries:             0x1       
+      Id: [0x66]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7EB8     0x0   Name:                          0x66      
+      0x7EBC     0x4   OffsetToData:                  0x800001E0
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7FE0     0x0   Characteristics:               0x0       
+        0x7FE4     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7FE8     0x8   MajorVersion:                  0x4       
+        0x7FEA     0xA   MinorVersion:                  0x0       
+        0x7FEC     0xC   NumberOfNamedEntries:          0x0       
+        0x7FEE     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7FF0     0x0   Name:                          0x409     
+          0x7FF4     0x4   OffsetToData:                  0x2C8     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x80C8     0x0   OffsetToData:                  0x38E70   
+            0x80CC     0x4   Size:                          0x84      
+            0x80D0     0x8   CodePage:                      0x4E4     
+            0x80D4     0xC   Reserved:                      0x0       
+
+  Id: [0x10] (RT_VERSION)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x7E28     0x0   Name:                          0x10      
+  0x7E2C     0x4   OffsetToData:                  0x800000C0
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x7EC0     0x0   Characteristics:               0x0       
+    0x7EC4     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x7EC8     0x8   MajorVersion:                  0x4       
+    0x7ECA     0xA   MinorVersion:                  0x0       
+    0x7ECC     0xC   NumberOfNamedEntries:          0x0       
+    0x7ECE     0xE   NumberOfIdEntries:             0x1       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7ED0     0x0   Name:                          0x1       
+      0x7ED4     0x4   OffsetToData:                  0x800001F8
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7FF8     0x0   Characteristics:               0x0       
+        0x7FFC     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x8000     0x8   MajorVersion:                  0x4       
+        0x8002     0xA   MinorVersion:                  0x0       
+        0x8004     0xC   NumberOfNamedEntries:          0x0       
+        0x8006     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8008     0x0   Name:                          0x409     
+          0x800C     0x4   OffsetToData:                  0x2D8     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x80D8     0x0   OffsetToData:                  0x38EF4   
+            0x80DC     0x4   Size:                          0x230     
+            0x80E0     0x8   CodePage:                      0x4E4     
+            0x80E4     0xC   Reserved:                      0x0       
+
+  Id: [0x18] (RT_MANIFEST)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x7E30     0x0   Name:                          0x18      
+  0x7E34     0x4   OffsetToData:                  0x800000D8
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x7ED8     0x0   Characteristics:               0x0       
+    0x7EDC     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x7EE0     0x8   MajorVersion:                  0x4       
+    0x7EE2     0xA   MinorVersion:                  0x0       
+    0x7EE4     0xC   NumberOfNamedEntries:          0x0       
+    0x7EE6     0xE   NumberOfIdEntries:             0x1       
+      Id: [0x2]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7EE8     0x0   Name:                          0x2       
+      0x7EEC     0x4   OffsetToData:                  0x80000210
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x8010     0x0   Characteristics:               0x0       
+        0x8014     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x8018     0x8   MajorVersion:                  0x4       
+        0x801A     0xA   MinorVersion:                  0x0       
+        0x801C     0xC   NumberOfNamedEntries:          0x0       
+        0x801E     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8020     0x0   Name:                          0x409     
+          0x8024     0x4   OffsetToData:                  0x2E8     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x80E8     0x0   OffsetToData:                  0x39124   
+            0x80EC     0x4   Size:                          0x258     
+            0x80F0     0x8   CodePage:                      0x4E4     
+            0x80F4     0xC   Reserved:                      0x0       
+
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x36200    0x0   VirtualAddress:                0x6000    
+0x36204    0x4   SizeOfBlock:                   0x5C      
+    00006368h DIR64
+    00006400h DIR64
+    00006408h DIR64
+    00006A78h DIR64
+    00006A80h DIR64
+    00006A88h DIR64
+    00006A90h DIR64
+    00006A98h DIR64
+    00006AA0h DIR64
+    00006AA8h DIR64
+    00006AB0h DIR64
+    00006AB8h DIR64
+    00006AC0h DIR64
+    00006AC8h DIR64
+    00006AD0h DIR64
+    00006AD8h DIR64
+    00006AE0h DIR64
+    00006AE8h DIR64
+    00006AF0h DIR64
+    00006AF8h DIR64
+    00006B00h DIR64
+    00006B08h DIR64
+    00006B10h DIR64
+    00006B18h DIR64
+    00006B20h DIR64
+    00006B30h DIR64
+    00006B38h DIR64
+    00006B40h DIR64
+    00006B48h DIR64
+    00006B50h DIR64
+    00006B58h DIR64
+    00006B60h DIR64
+    00006B68h DIR64
+    00006B70h DIR64
+    00006B78h DIR64
+    00006B80h DIR64
+    00006B88h DIR64
+    00006B90h DIR64
+    00006B98h DIR64
+    00006BA0h DIR64
+    00006BA8h DIR64
+    00006000h ABSOLUTE
+
+[IMAGE_BASE_RELOCATION]
+0x3625C    0x0   VirtualAddress:                0x9000    
+0x36260    0x4   SizeOfBlock:                   0x28      
+    00009000h DIR64
+    00009038h DIR64
+    00009060h DIR64
+    00009080h DIR64
+    000090A8h DIR64
+    000090D0h DIR64
+    000090F8h DIR64
+    00009120h DIR64
+    00009148h DIR64
+    00009168h DIR64
+    00009188h DIR64
+    000091B0h DIR64
+    00009230h DIR64
+    00009318h DIR64
+    00009330h DIR64
+    00009340h DIR64
+
+----------Unwind data for exception handling----------
+
+[RUNTIME_FUNCTION]
+0x7A00     0x0   BeginAddress:                  0x1000    
+0x7A04     0x4   EndAddress:                    0x1042    
+0x7A08     0x8   UnwindData:                    0x74B8    
+    [UNWIND_INFO]
+    0x66B8     0x0   Version:                       0x1       
+    0x66B8     0x0   Flags:                         0x0       
+    0x66B9     0x1   SizeOfProlog:                  0xE       
+    0x66BA     0x2   CountOfCodes:                  0x1       
+    0x66BB     0x3   FrameRegister:                 0x0       
+    0x66BB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x38
+[RUNTIME_FUNCTION]
+0x7A0C     0x0   BeginAddress:                  0x1050    
+0x7A10     0x4   EndAddress:                    0x1093    
+0x7A14     0x8   UnwindData:                    0x74B0    
+    [UNWIND_INFO]
+    0x66B0     0x0   Version:                       0x1       
+    0x66B0     0x0   Flags:                         0x0       
+    0x66B1     0x1   SizeOfProlog:                  0x17      
+    0x66B2     0x2   CountOfCodes:                  0x1       
+    0x66B3     0x3   FrameRegister:                 0x0       
+    0x66B3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x38
+[RUNTIME_FUNCTION]
+0x7A18     0x0   BeginAddress:                  0x10E0    
+0x7A1C     0x4   EndAddress:                    0x1116    
+0x7A20     0x8   UnwindData:                    0x74A8    
+    [UNWIND_INFO]
+    0x66A8     0x0   Version:                       0x1       
+    0x66A8     0x0   Flags:                         0x0       
+    0x66A9     0x1   SizeOfProlog:                  0xD       
+    0x66AA     0x2   CountOfCodes:                  0x1       
+    0x66AB     0x3   FrameRegister:                 0x0       
+    0x66AB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7A24     0x0   BeginAddress:                  0x1130    
+0x7A28     0x4   EndAddress:                    0x1166    
+0x7A2C     0x8   UnwindData:                    0x74A8    
+    [UNWIND_INFO]
+    0x66A8     0x0   Version:                       0x1       
+    0x66A8     0x0   Flags:                         0x0       
+    0x66A9     0x1   SizeOfProlog:                  0xD       
+    0x66AA     0x2   CountOfCodes:                  0x1       
+    0x66AB     0x3   FrameRegister:                 0x0       
+    0x66AB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7A30     0x0   BeginAddress:                  0x1170    
+0x7A34     0x4   EndAddress:                    0x118D    
+0x7A38     0x8   UnwindData:                    0x7500    
+    [UNWIND_INFO]
+    0x6700     0x0   Version:                       0x1       
+    0x6700     0x0   Flags:                         0x0       
+    0x6701     0x1   SizeOfProlog:                  0x9       
+    0x6702     0x2   CountOfCodes:                  0x1       
+    0x6703     0x3   FrameRegister:                 0x0       
+    0x6703     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7A3C     0x0   BeginAddress:                  0x1190    
+0x7A40     0x4   EndAddress:                    0x11AD    
+0x7A44     0x8   UnwindData:                    0x7500    
+    [UNWIND_INFO]
+    0x6700     0x0   Version:                       0x1       
+    0x6700     0x0   Flags:                         0x0       
+    0x6701     0x1   SizeOfProlog:                  0x9       
+    0x6702     0x2   CountOfCodes:                  0x1       
+    0x6703     0x3   FrameRegister:                 0x0       
+    0x6703     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7A48     0x0   BeginAddress:                  0x11B0    
+0x7A4C     0x4   EndAddress:                    0x11CD    
+0x7A50     0x8   UnwindData:                    0x7500    
+    [UNWIND_INFO]
+    0x6700     0x0   Version:                       0x1       
+    0x6700     0x0   Flags:                         0x0       
+    0x6701     0x1   SizeOfProlog:                  0x9       
+    0x6702     0x2   CountOfCodes:                  0x1       
+    0x6703     0x3   FrameRegister:                 0x0       
+    0x6703     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7A54     0x0   BeginAddress:                  0x11D0    
+0x7A58     0x4   EndAddress:                    0x1216    
+0x7A5C     0x8   UnwindData:                    0x73B0    
+    [UNWIND_INFO]
+    0x65B0     0x0   Version:                       0x1       
+    0x65B0     0x0   Flags:                         0x0       
+    0x65B1     0x1   SizeOfProlog:                  0xE       
+    0x65B2     0x2   CountOfCodes:                  0x1       
+    0x65B3     0x3   FrameRegister:                 0x0       
+    0x65B3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x18
+[RUNTIME_FUNCTION]
+0x7A60     0x0   BeginAddress:                  0x1220    
+0x7A64     0x4   EndAddress:                    0x1266    
+0x7A68     0x8   UnwindData:                    0x73B0    
+    [UNWIND_INFO]
+    0x65B0     0x0   Version:                       0x1       
+    0x65B0     0x0   Flags:                         0x0       
+    0x65B1     0x1   SizeOfProlog:                  0xE       
+    0x65B2     0x2   CountOfCodes:                  0x1       
+    0x65B3     0x3   FrameRegister:                 0x0       
+    0x65B3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x18
+[RUNTIME_FUNCTION]
+0x7A6C     0x0   BeginAddress:                  0x1318    
+0x7A70     0x4   EndAddress:                    0x1381    
+0x7A74     0x8   UnwindData:                    0x72E8    
+    [UNWIND_INFO]
+    0x64E8     0x0   Version:                       0x1       
+    0x64E8     0x0   Flags:                         0x0       
+    0x64E9     0x1   SizeOfProlog:                  0xF       
+    0x64EA     0x2   CountOfCodes:                  0x6       
+    0x64EB     0x3   FrameRegister:                 0x0       
+    0x64EB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .SAVEREG RSI, 0x38; .SAVEREG RBX, 0x30; .ALLOCSTACK 0x20; .PUSHREG RDI
+[RUNTIME_FUNCTION]
+0x7A78     0x0   BeginAddress:                  0x1388    
+0x7A7C     0x4   EndAddress:                    0x13E6    
+0x7A80     0x8   UnwindData:                    0x7288    
+    [UNWIND_INFO]
+    0x6488     0x0   Version:                       0x1       
+    0x6488     0x0   Flags:                         0x0       
+    0x6489     0x1   SizeOfProlog:                  0x6       
+    0x648A     0x2   CountOfCodes:                  0x2       
+    0x648B     0x3   FrameRegister:                 0x0       
+    0x648B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x20; .PUSHREG RBX
+[RUNTIME_FUNCTION]
+0x7A84     0x0   BeginAddress:                  0x13E8    
+0x7A88     0x4   EndAddress:                    0x1641    
+0x7A8C     0x8   UnwindData:                    0x7290    
+    [UNWIND_INFO]
+    0x6490     0x0   Version:                       0x1       
+    0x6490     0x0   Flags:                         0x0       
+    0x6491     0x1   SizeOfProlog:                  0x1D      
+    0x6492     0x2   CountOfCodes:                  0xC       
+    0x6493     0x3   FrameRegister:                 0x0       
+    0x6493     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .SAVEREG R12, 0x58; .SAVEREG RDI, 0x50; .SAVEREG RBP, 0x48; .SAVEREG RBX, 0x40; .ALLOCSTACK 0x20; .PUSHREG R15; .PUSHREG R14; .PUSHREG R13
+[RUNTIME_FUNCTION]
+0x7A90     0x0   BeginAddress:                  0x1644    
+0x7A94     0x4   EndAddress:                    0x1779    
+0x7A98     0x8   UnwindData:                    0x72AC    
+    [UNWIND_INFO]
+    0x64AC     0x0   Version:                       0x1       
+    0x64AC     0x0   Flags:                         0x3       
+    0x64AD     0x1   SizeOfProlog:                  0x15      
+    0x64AE     0x2   CountOfCodes:                  0x8       
+    0x64AF     0x3   FrameRegister:                 0x0       
+    0x64AF     0x3   FrameOffset:                   0x0       
+    0x64C0     0x14  ExceptionHandler:              0x1A84    
+    Flags: UNW_FLAG_EHANDLER, UNW_FLAG_UHANDLER
+    Unwind codes: .SAVEREG RDI, 0x50; .SAVEREG RSI, 0x48; .SAVEREG RBX, 0x40; .ALLOCSTACK 0x30; .PUSHREG R12
+[RUNTIME_FUNCTION]
+0x7A9C     0x0   BeginAddress:                  0x177C    
+0x7AA0     0x4   EndAddress:                    0x17B9    
+0x7AA4     0x8   UnwindData:                    0x72E8    
+    [UNWIND_INFO]
+    0x64E8     0x0   Version:                       0x1       
+    0x64E8     0x0   Flags:                         0x0       
+    0x64E9     0x1   SizeOfProlog:                  0xF       
+    0x64EA     0x2   CountOfCodes:                  0x6       
+    0x64EB     0x3   FrameRegister:                 0x0       
+    0x64EB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .SAVEREG RSI, 0x38; .SAVEREG RBX, 0x30; .ALLOCSTACK 0x20; .PUSHREG RDI
+[RUNTIME_FUNCTION]
+0x7AA8     0x0   BeginAddress:                  0x17BC    
+0x7AAC     0x4   EndAddress:                    0x1807    
+0x7AB0     0x8   UnwindData:                    0x72F8    
+    [UNWIND_INFO]
+    0x64F8     0x0   Version:                       0x1       
+    0x64F8     0x0   Flags:                         0x1       
+    0x64F9     0x1   SizeOfProlog:                  0x17      
+    0x64FA     0x2   CountOfCodes:                  0x6       
+    0x64FB     0x3   FrameRegister:                 0x0       
+    0x64FB     0x3   FrameOffset:                   0x0       
+    0x6508     0x10  ExceptionHandler:              0x1A84    
+    Flags: UNW_FLAG_EHANDLER
+    Unwind codes: .SAVEREG RBX, 0x68; .ALLOCSTACK 0x40; .PUSHREG R12; .PUSHREG RDI; .PUSHREG RSI
+[RUNTIME_FUNCTION]
+0x7AB4     0x0   BeginAddress:                  0x1808    
+0x7AB8     0x4   EndAddress:                    0x1866    
+0x7ABC     0x8   UnwindData:                    0x7328    
+    [UNWIND_INFO]
+    0x6528     0x0   Version:                       0x1       
+    0x6528     0x0   Flags:                         0x2       
+    0x6529     0x1   SizeOfProlog:                  0x18      
+    0x652A     0x2   CountOfCodes:                  0x5       
+    0x652B     0x3   FrameRegister:                 0x0       
+    0x652B     0x3   FrameOffset:                   0x0       
+    0x6538     0x10  ExceptionHandler:              0x1A84    
+    Flags: UNW_FLAG_UHANDLER
+    Unwind codes: .ALLOCSTACK 0x38; .PUSHREG R12; .PUSHREG RDI; .PUSHREG RSI; .PUSHREG RBX
+[RUNTIME_FUNCTION]
+0x7AC0     0x0   BeginAddress:                  0x1874    
+0x7AC4     0x4   EndAddress:                    0x1924    
+0x7AC8     0x8   UnwindData:                    0x7350    
+    [UNWIND_INFO]
+    0x6550     0x0   Version:                       0x1       
+    0x6550     0x0   Flags:                         0x2       
+    0x6551     0x1   SizeOfProlog:                  0x6       
+    0x6552     0x2   CountOfCodes:                  0x2       
+    0x6553     0x3   FrameRegister:                 0x0       
+    0x6553     0x3   FrameOffset:                   0x0       
+    0x6558     0x8   ExceptionHandler:              0x1A84    
+    Flags: UNW_FLAG_UHANDLER
+    Unwind codes: .ALLOCSTACK 0x20; .PUSHREG RBX
+[RUNTIME_FUNCTION]
+0x7ACC     0x0   BeginAddress:                  0x1924    
+0x7AD0     0x4   EndAddress:                    0x193B    
+0x7AD4     0x8   UnwindData:                    0x7370    
+    [UNWIND_INFO]
+    0x6570     0x0   Version:                       0x1       
+    0x6570     0x0   Flags:                         0x0       
+    0x6571     0x1   SizeOfProlog:                  0x4       
+    0x6572     0x2   CountOfCodes:                  0x1       
+    0x6573     0x3   FrameRegister:                 0x0       
+    0x6573     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7AD8     0x0   BeginAddress:                  0x193C    
+0x7ADC     0x4   EndAddress:                    0x1974    
+0x7AE0     0x8   UnwindData:                    0x7378    
+    [UNWIND_INFO]
+    0x6578     0x0   Version:                       0x1       
+    0x6578     0x0   Flags:                         0x0       
+    0x6579     0x1   SizeOfProlog:                  0xA       
+    0x657A     0x2   CountOfCodes:                  0x4       
+    0x657B     0x3   FrameRegister:                 0x0       
+    0x657B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .SAVEREG RBX, 0x30; .ALLOCSTACK 0x20; .PUSHREG RDI
+[RUNTIME_FUNCTION]
+0x7AE4     0x0   BeginAddress:                  0x1974    
+0x7AE8     0x4   EndAddress:                    0x19AC    
+0x7AEC     0x8   UnwindData:                    0x7378    
+    [UNWIND_INFO]
+    0x6578     0x0   Version:                       0x1       
+    0x6578     0x0   Flags:                         0x0       
+    0x6579     0x1   SizeOfProlog:                  0xA       
+    0x657A     0x2   CountOfCodes:                  0x4       
+    0x657B     0x3   FrameRegister:                 0x0       
+    0x657B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .SAVEREG RBX, 0x30; .ALLOCSTACK 0x20; .PUSHREG RDI
+[RUNTIME_FUNCTION]
+0x7AF0     0x0   BeginAddress:                  0x1A30    
+0x7AF4     0x4   EndAddress:                    0x1A71    
+0x7AF8     0x8   UnwindData:                    0x7384    
+    [UNWIND_INFO]
+    0x6584     0x0   Version:                       0x1       
+    0x6584     0x0   Flags:                         0x1       
+    0x6585     0x1   SizeOfProlog:                  0x4       
+    0x6586     0x2   CountOfCodes:                  0x1       
+    0x6587     0x3   FrameRegister:                 0x0       
+    0x6587     0x3   FrameOffset:                   0x0       
+    0x658C     0x8   ExceptionHandler:              0x1A84    
+    Flags: UNW_FLAG_EHANDLER
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7AFC     0x0   BeginAddress:                  0x1A90    
+0x7B00     0x4   EndAddress:                    0x1B43    
+0x7B04     0x8   UnwindData:                    0x73A4    
+    [UNWIND_INFO]
+    0x65A4     0x0   Version:                       0x1       
+    0x65A4     0x0   Flags:                         0x0       
+    0x65A5     0x1   SizeOfProlog:                  0xA       
+    0x65A6     0x2   CountOfCodes:                  0x4       
+    0x65A7     0x3   FrameRegister:                 0x0       
+    0x65A7     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .SAVEREG RBX, 0x40; .ALLOCSTACK 0x20; .PUSHREG RDI
+[RUNTIME_FUNCTION]
+0x7B08     0x0   BeginAddress:                  0x1B70    
+0x7B0C     0x4   EndAddress:                    0x1C52    
+0x7B10     0x8   UnwindData:                    0x73B8    
+    [UNWIND_INFO]
+    0x65B8     0x0   Version:                       0x1       
+    0x65B8     0x0   Flags:                         0x0       
+    0x65B9     0x1   SizeOfProlog:                  0x17      
+    0x65BA     0x2   CountOfCodes:                  0x1       
+    0x65BB     0x3   FrameRegister:                 0x0       
+    0x65BB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x48
+[RUNTIME_FUNCTION]
+0x7B14     0x0   BeginAddress:                  0x1C60    
+0x7B18     0x4   EndAddress:                    0x1CCD    
+0x7B1C     0x8   UnwindData:                    0x73C0    
+    [UNWIND_INFO]
+    0x65C0     0x0   Version:                       0x1       
+    0x65C0     0x0   Flags:                         0x0       
+    0x65C1     0x1   SizeOfProlog:                  0xE       
+    0x65C2     0x2   CountOfCodes:                  0x1       
+    0x65C3     0x3   FrameRegister:                 0x0       
+    0x65C3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7B20     0x0   BeginAddress:                  0x1CE0    
+0x7B24     0x4   EndAddress:                    0x2777    
+0x7B28     0x8   UnwindData:                    0x73C8    
+    [UNWIND_INFO]
+    0x65C8     0x0   Version:                       0x1       
+    0x65C8     0x0   Flags:                         0x0       
+    0x65C9     0x1   SizeOfProlog:                  0x1C      
+    0x65CA     0x2   CountOfCodes:                  0x3       
+    0x65CB     0x3   FrameRegister:                 0x0       
+    0x65CB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x1e0; .PUSHREG RDI
+[RUNTIME_FUNCTION]
+0x7B2C     0x0   BeginAddress:                  0x2780    
+0x7B30     0x4   EndAddress:                    0x28A6    
+0x7B34     0x8   UnwindData:                    0x73D4    
+    [UNWIND_INFO]
+    0x65D4     0x0   Version:                       0x1       
+    0x65D4     0x0   Flags:                         0x0       
+    0x65D5     0x1   SizeOfProlog:                  0x17      
+    0x65D6     0x2   CountOfCodes:                  0x1       
+    0x65D7     0x3   FrameRegister:                 0x0       
+    0x65D7     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x38
+[RUNTIME_FUNCTION]
+0x7B38     0x0   BeginAddress:                  0x28B0    
+0x7B3C     0x4   EndAddress:                    0x29E3    
+0x7B40     0x8   UnwindData:                    0x73DC    
+    [UNWIND_INFO]
+    0x65DC     0x0   Version:                       0x1       
+    0x65DC     0x0   Flags:                         0x0       
+    0x65DD     0x1   SizeOfProlog:                  0x16      
+    0x65DE     0x2   CountOfCodes:                  0x2       
+    0x65DF     0x3   FrameRegister:                 0x0       
+    0x65DF     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x868
+[RUNTIME_FUNCTION]
+0x7B44     0x0   BeginAddress:                  0x29F0    
+0x7B48     0x4   EndAddress:                    0x2BAC    
+0x7B4C     0x8   UnwindData:                    0x73E4    
+    [UNWIND_INFO]
+    0x65E4     0x0   Version:                       0x1       
+    0x65E4     0x0   Flags:                         0x0       
+    0x65E5     0x1   SizeOfProlog:                  0x1A      
+    0x65E6     0x2   CountOfCodes:                  0x2       
+    0x65E7     0x3   FrameRegister:                 0x0       
+    0x65E7     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x98
+[RUNTIME_FUNCTION]
+0x7B50     0x0   BeginAddress:                  0x2BC0    
+0x7B54     0x4   EndAddress:                    0x2C32    
+0x7B58     0x8   UnwindData:                    0x73EC    
+    [UNWIND_INFO]
+    0x65EC     0x0   Version:                       0x1       
+    0x65EC     0x0   Flags:                         0x0       
+    0x65ED     0x1   SizeOfProlog:                  0x18      
+    0x65EE     0x2   CountOfCodes:                  0x1       
+    0x65EF     0x3   FrameRegister:                 0x0       
+    0x65EF     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x38
+[RUNTIME_FUNCTION]
+0x7B5C     0x0   BeginAddress:                  0x2C40    
+0x7B60     0x4   EndAddress:                    0x2CB6    
+0x7B64     0x8   UnwindData:                    0x73F4    
+    [UNWIND_INFO]
+    0x65F4     0x0   Version:                       0x1       
+    0x65F4     0x0   Flags:                         0x0       
+    0x65F5     0x1   SizeOfProlog:                  0x18      
+    0x65F6     0x2   CountOfCodes:                  0x1       
+    0x65F7     0x3   FrameRegister:                 0x0       
+    0x65F7     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7B68     0x0   BeginAddress:                  0x2CC0    
+0x7B6C     0x4   EndAddress:                    0x2D39    
+0x7B70     0x8   UnwindData:                    0x73FC    
+    [UNWIND_INFO]
+    0x65FC     0x0   Version:                       0x1       
+    0x65FC     0x0   Flags:                         0x0       
+    0x65FD     0x1   SizeOfProlog:                  0x9       
+    0x65FE     0x2   CountOfCodes:                  0x1       
+    0x65FF     0x3   FrameRegister:                 0x0       
+    0x65FF     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x48
+[RUNTIME_FUNCTION]
+0x7B74     0x0   BeginAddress:                  0x2D90    
+0x7B78     0x4   EndAddress:                    0x2E09    
+0x7B7C     0x8   UnwindData:                    0x7404    
+    [UNWIND_INFO]
+    0x6604     0x0   Version:                       0x1       
+    0x6604     0x0   Flags:                         0x0       
+    0x6605     0x1   SizeOfProlog:                  0x9       
+    0x6606     0x2   CountOfCodes:                  0x1       
+    0x6607     0x3   FrameRegister:                 0x0       
+    0x6607     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x48
+[RUNTIME_FUNCTION]
+0x7B80     0x0   BeginAddress:                  0x2E70    
+0x7B84     0x4   EndAddress:                    0x2EB7    
+0x7B88     0x8   UnwindData:                    0x740C    
+    [UNWIND_INFO]
+    0x660C     0x0   Version:                       0x1       
+    0x660C     0x0   Flags:                         0x0       
+    0x660D     0x1   SizeOfProlog:                  0x9       
+    0x660E     0x2   CountOfCodes:                  0x1       
+    0x660F     0x3   FrameRegister:                 0x0       
+    0x660F     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7B8C     0x0   BeginAddress:                  0x2EC0    
+0x7B90     0x4   EndAddress:                    0x3721    
+0x7B94     0x8   UnwindData:                    0x7414    
+    [UNWIND_INFO]
+    0x6614     0x0   Version:                       0x1       
+    0x6614     0x0   Flags:                         0x0       
+    0x6615     0x1   SizeOfProlog:                  0x1B      
+    0x6616     0x2   CountOfCodes:                  0x3       
+    0x6617     0x3   FrameRegister:                 0x0       
+    0x6617     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x90; .PUSHREG RBX
+[RUNTIME_FUNCTION]
+0x7B98     0x0   BeginAddress:                  0x3730    
+0x7B9C     0x4   EndAddress:                    0x377A    
+0x7BA0     0x8   UnwindData:                    0x7420    
+    [UNWIND_INFO]
+    0x6620     0x0   Version:                       0x1       
+    0x6620     0x0   Flags:                         0x0       
+    0x6621     0x1   SizeOfProlog:                  0xC       
+    0x6622     0x2   CountOfCodes:                  0x2       
+    0x6623     0x3   FrameRegister:                 0x0       
+    0x6623     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x288
+[RUNTIME_FUNCTION]
+0x7BA4     0x0   BeginAddress:                  0x3780    
+0x7BA8     0x4   EndAddress:                    0x37A8    
+0x7BAC     0x8   UnwindData:                    0x7428    
+    [UNWIND_INFO]
+    0x6628     0x0   Version:                       0x1       
+    0x6628     0x0   Flags:                         0x0       
+    0x6629     0x1   SizeOfProlog:                  0x9       
+    0x662A     0x2   CountOfCodes:                  0x1       
+    0x662B     0x3   FrameRegister:                 0x0       
+    0x662B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7BB0     0x0   BeginAddress:                  0x37B0    
+0x7BB4     0x4   EndAddress:                    0x38A1    
+0x7BB8     0x8   UnwindData:                    0x7430    
+    [UNWIND_INFO]
+    0x6630     0x0   Version:                       0x1       
+    0x6630     0x0   Flags:                         0x0       
+    0x6631     0x1   SizeOfProlog:                  0x7       
+    0x6632     0x2   CountOfCodes:                  0x2       
+    0x6633     0x3   FrameRegister:                 0x0       
+    0x6633     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x288
+[RUNTIME_FUNCTION]
+0x7BBC     0x0   BeginAddress:                  0x38B0    
+0x7BC0     0x4   EndAddress:                    0x3DAE    
+0x7BC4     0x8   UnwindData:                    0x7438    
+    [UNWIND_INFO]
+    0x6638     0x0   Version:                       0x1       
+    0x6638     0x0   Flags:                         0x0       
+    0x6639     0x1   SizeOfProlog:                  0x7       
+    0x663A     0x2   CountOfCodes:                  0x2       
+    0x663B     0x3   FrameRegister:                 0x0       
+    0x663B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x8d8
+[RUNTIME_FUNCTION]
+0x7BC8     0x0   BeginAddress:                  0x3DC0    
+0x7BCC     0x4   EndAddress:                    0x3E15    
+0x7BD0     0x8   UnwindData:                    0x7440    
+    [UNWIND_INFO]
+    0x6640     0x0   Version:                       0x1       
+    0x6640     0x0   Flags:                         0x0       
+    0x6641     0x1   SizeOfProlog:                  0xD       
+    0x6642     0x2   CountOfCodes:                  0x1       
+    0x6643     0x3   FrameRegister:                 0x0       
+    0x6643     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x38
+[RUNTIME_FUNCTION]
+0x7BD4     0x0   BeginAddress:                  0x3E20    
+0x7BD8     0x4   EndAddress:                    0x3E48    
+0x7BDC     0x8   UnwindData:                    0x7448    
+    [UNWIND_INFO]
+    0x6648     0x0   Version:                       0x1       
+    0x6648     0x0   Flags:                         0x0       
+    0x6649     0x1   SizeOfProlog:                  0x4       
+    0x664A     0x2   CountOfCodes:                  0x1       
+    0x664B     0x3   FrameRegister:                 0x0       
+    0x664B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x38
+[RUNTIME_FUNCTION]
+0x7BE0     0x0   BeginAddress:                  0x3E50    
+0x7BE4     0x4   EndAddress:                    0x3E78    
+0x7BE8     0x8   UnwindData:                    0x7450    
+    [UNWIND_INFO]
+    0x6650     0x0   Version:                       0x1       
+    0x6650     0x0   Flags:                         0x0       
+    0x6651     0x1   SizeOfProlog:                  0x4       
+    0x6652     0x2   CountOfCodes:                  0x1       
+    0x6653     0x3   FrameRegister:                 0x0       
+    0x6653     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x38
+[RUNTIME_FUNCTION]
+0x7BEC     0x0   BeginAddress:                  0x3E80    
+0x7BF0     0x4   EndAddress:                    0x3EA5    
+0x7BF4     0x8   UnwindData:                    0x7458    
+    [UNWIND_INFO]
+    0x6658     0x0   Version:                       0x1       
+    0x6658     0x0   Flags:                         0x0       
+    0x6659     0x1   SizeOfProlog:                  0x4       
+    0x665A     0x2   CountOfCodes:                  0x1       
+    0x665B     0x3   FrameRegister:                 0x0       
+    0x665B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x18
+[RUNTIME_FUNCTION]
+0x7BF8     0x0   BeginAddress:                  0x3EE0    
+0x7BFC     0x4   EndAddress:                    0x460A    
+0x7C00     0x8   UnwindData:                    0x7460    
+    [UNWIND_INFO]
+    0x6660     0x0   Version:                       0x1       
+    0x6660     0x0   Flags:                         0x0       
+    0x6661     0x1   SizeOfProlog:                  0x1B      
+    0x6662     0x2   CountOfCodes:                  0x2       
+    0x6663     0x3   FrameRegister:                 0x0       
+    0x6663     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0xe18
+[RUNTIME_FUNCTION]
+0x7C04     0x0   BeginAddress:                  0x4610    
+0x7C08     0x4   EndAddress:                    0x46B3    
+0x7C0C     0x8   UnwindData:                    0x7468    
+    [UNWIND_INFO]
+    0x6668     0x0   Version:                       0x1       
+    0x6668     0x0   Flags:                         0x0       
+    0x6669     0x1   SizeOfProlog:                  0xE       
+    0x666A     0x2   CountOfCodes:                  0x1       
+    0x666B     0x3   FrameRegister:                 0x0       
+    0x666B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x48
+[RUNTIME_FUNCTION]
+0x7C10     0x0   BeginAddress:                  0x46C0    
+0x7C14     0x4   EndAddress:                    0x4895    
+0x7C18     0x8   UnwindData:                    0x7470    
+    [UNWIND_INFO]
+    0x6670     0x0   Version:                       0x1       
+    0x6670     0x0   Flags:                         0x0       
+    0x6671     0x1   SizeOfProlog:                  0x13      
+    0x6672     0x2   CountOfCodes:                  0x1       
+    0x6673     0x3   FrameRegister:                 0x0       
+    0x6673     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x48
+[RUNTIME_FUNCTION]
+0x7C1C     0x0   BeginAddress:                  0x48A0    
+0x7C20     0x4   EndAddress:                    0x4936    
+0x7C24     0x8   UnwindData:                    0x7478    
+    [UNWIND_INFO]
+    0x6678     0x0   Version:                       0x1       
+    0x6678     0x0   Flags:                         0x0       
+    0x6679     0x1   SizeOfProlog:                  0x9       
+    0x667A     0x2   CountOfCodes:                  0x1       
+    0x667B     0x3   FrameRegister:                 0x0       
+    0x667B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7C28     0x0   BeginAddress:                  0x4940    
+0x7C2C     0x4   EndAddress:                    0x4E68    
+0x7C30     0x8   UnwindData:                    0x7480    
+    [UNWIND_INFO]
+    0x6680     0x0   Version:                       0x1       
+    0x6680     0x0   Flags:                         0x0       
+    0x6681     0x1   SizeOfProlog:                  0xC       
+    0x6682     0x2   CountOfCodes:                  0x2       
+    0x6683     0x3   FrameRegister:                 0x0       
+    0x6683     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x3e8
+[RUNTIME_FUNCTION]
+0x7C34     0x0   BeginAddress:                  0x4E70    
+0x7C38     0x4   EndAddress:                    0x4F0B    
+0x7C3C     0x8   UnwindData:                    0x7488    
+    [UNWIND_INFO]
+    0x6688     0x0   Version:                       0x1       
+    0x6688     0x0   Flags:                         0x0       
+    0x6689     0x1   SizeOfProlog:                  0x18      
+    0x668A     0x2   CountOfCodes:                  0x1       
+    0x668B     0x3   FrameRegister:                 0x0       
+    0x668B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x48
+[RUNTIME_FUNCTION]
+0x7C40     0x0   BeginAddress:                  0x4F20    
+0x7C44     0x4   EndAddress:                    0x4F94    
+0x7C48     0x8   UnwindData:                    0x7490    
+    [UNWIND_INFO]
+    0x6690     0x0   Version:                       0x1       
+    0x6690     0x0   Flags:                         0x0       
+    0x6691     0x1   SizeOfProlog:                  0x13      
+    0x6692     0x2   CountOfCodes:                  0x1       
+    0x6693     0x3   FrameRegister:                 0x0       
+    0x6693     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7C4C     0x0   BeginAddress:                  0x4FA0    
+0x7C50     0x4   EndAddress:                    0x5034    
+0x7C54     0x8   UnwindData:                    0x7498    
+    [UNWIND_INFO]
+    0x6698     0x0   Version:                       0x1       
+    0x6698     0x0   Flags:                         0x0       
+    0x6699     0x1   SizeOfProlog:                  0x13      
+    0x669A     0x2   CountOfCodes:                  0x1       
+    0x669B     0x3   FrameRegister:                 0x0       
+    0x669B     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x48
+[RUNTIME_FUNCTION]
+0x7C58     0x0   BeginAddress:                  0x5040    
+0x7C5C     0x4   EndAddress:                    0x530B    
+0x7C60     0x8   UnwindData:                    0x74A0    
+    [UNWIND_INFO]
+    0x66A0     0x0   Version:                       0x1       
+    0x66A0     0x0   Flags:                         0x0       
+    0x66A1     0x1   SizeOfProlog:                  0x1B      
+    0x66A2     0x2   CountOfCodes:                  0x2       
+    0x66A3     0x3   FrameRegister:                 0x0       
+    0x66A3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x108
+[RUNTIME_FUNCTION]
+0x7C64     0x0   BeginAddress:                  0x5310    
+0x7C68     0x4   EndAddress:                    0x53B1    
+0x7C6C     0x8   UnwindData:                    0x74C0    
+    [UNWIND_INFO]
+    0x66C0     0x0   Version:                       0x1       
+    0x66C0     0x0   Flags:                         0x0       
+    0x66C1     0x1   SizeOfProlog:                  0x13      
+    0x66C2     0x2   CountOfCodes:                  0x1       
+    0x66C3     0x3   FrameRegister:                 0x0       
+    0x66C3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x18
+[RUNTIME_FUNCTION]
+0x7C70     0x0   BeginAddress:                  0x53C0    
+0x7C74     0x4   EndAddress:                    0x5439    
+0x7C78     0x8   UnwindData:                    0x74C8    
+    [UNWIND_INFO]
+    0x66C8     0x0   Version:                       0x1       
+    0x66C8     0x0   Flags:                         0x0       
+    0x66C9     0x1   SizeOfProlog:                  0x17      
+    0x66CA     0x2   CountOfCodes:                  0x1       
+    0x66CB     0x3   FrameRegister:                 0x0       
+    0x66CB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7C7C     0x0   BeginAddress:                  0x5440    
+0x7C80     0x4   EndAddress:                    0x5484    
+0x7C84     0x8   UnwindData:                    0x74D0    
+    [UNWIND_INFO]
+    0x66D0     0x0   Version:                       0x1       
+    0x66D0     0x0   Flags:                         0x0       
+    0x66D1     0x1   SizeOfProlog:                  0x4       
+    0x66D2     0x2   CountOfCodes:                  0x1       
+    0x66D3     0x3   FrameRegister:                 0x0       
+    0x66D3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7C88     0x0   BeginAddress:                  0x5490    
+0x7C8C     0x4   EndAddress:                    0x5554    
+0x7C90     0x8   UnwindData:                    0x74D8    
+    [UNWIND_INFO]
+    0x66D8     0x0   Version:                       0x1       
+    0x66D8     0x0   Flags:                         0x0       
+    0x66D9     0x1   SizeOfProlog:                  0x4       
+    0x66DA     0x2   CountOfCodes:                  0x1       
+    0x66DB     0x3   FrameRegister:                 0x0       
+    0x66DB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x28
+[RUNTIME_FUNCTION]
+0x7C94     0x0   BeginAddress:                  0x5560    
+0x7C98     0x4   EndAddress:                    0x5774    
+0x7C9C     0x8   UnwindData:                    0x74E0    
+    [UNWIND_INFO]
+    0x66E0     0x0   Version:                       0x1       
+    0x66E0     0x0   Flags:                         0x0       
+    0x66E1     0x1   SizeOfProlog:                  0x1B      
+    0x66E2     0x2   CountOfCodes:                  0x2       
+    0x66E3     0x3   FrameRegister:                 0x0       
+    0x66E3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0xa8
+[RUNTIME_FUNCTION]
+0x7CA0     0x0   BeginAddress:                  0x5780    
+0x7CA4     0x4   EndAddress:                    0x5892    
+0x7CA8     0x8   UnwindData:                    0x74E8    
+    [UNWIND_INFO]
+    0x66E8     0x0   Version:                       0x1       
+    0x66E8     0x0   Flags:                         0x0       
+    0x66E9     0x1   SizeOfProlog:                  0x1B      
+    0x66EA     0x2   CountOfCodes:                  0x2       
+    0x66EB     0x3   FrameRegister:                 0x0       
+    0x66EB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x88
+[RUNTIME_FUNCTION]
+0x7CAC     0x0   BeginAddress:                  0x58A0    
+0x7CB0     0x4   EndAddress:                    0x5970    
+0x7CB4     0x8   UnwindData:                    0x74F0    
+    [UNWIND_INFO]
+    0x66F0     0x0   Version:                       0x1       
+    0x66F0     0x0   Flags:                         0x0       
+    0x66F1     0x1   SizeOfProlog:                  0x18      
+    0x66F2     0x2   CountOfCodes:                  0x1       
+    0x66F3     0x3   FrameRegister:                 0x0       
+    0x66F3     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x78
+[RUNTIME_FUNCTION]
+0x7CB8     0x0   BeginAddress:                  0x5980    
+0x7CBC     0x4   EndAddress:                    0x5BD8    
+0x7CC0     0x8   UnwindData:                    0x74F8    
+    [UNWIND_INFO]
+    0x66F8     0x0   Version:                       0x1       
+    0x66F8     0x0   Flags:                         0x0       
+    0x66F9     0x1   SizeOfProlog:                  0x15      
+    0x66FA     0x2   CountOfCodes:                  0x2       
+    0x66FB     0x3   FrameRegister:                 0x0       
+    0x66FB     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0xc8
+[RUNTIME_FUNCTION]
+0x7CC4     0x0   BeginAddress:                  0x5BE0    
+0x7CC8     0x4   EndAddress:                    0x5C03    
+0x7CCC     0x8   UnwindData:                    0x7320    
+    [UNWIND_INFO]
+    0x6520     0x0   Version:                       0x1       
+    0x6520     0x0   Flags:                         0x0       
+    0x6521     0x1   SizeOfProlog:                  0x6       
+    0x6522     0x2   CountOfCodes:                  0x2       
+    0x6523     0x3   FrameRegister:                 0x0       
+    0x6523     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x20; .PUSHREG RBP
+[RUNTIME_FUNCTION]
+0x7CD0     0x0   BeginAddress:                  0x5C10    
+0x7CD4     0x4   EndAddress:                    0x5C29    
+0x7CD8     0x8   UnwindData:                    0x7320    
+    [UNWIND_INFO]
+    0x6520     0x0   Version:                       0x1       
+    0x6520     0x0   Flags:                         0x0       
+    0x6521     0x1   SizeOfProlog:                  0x6       
+    0x6522     0x2   CountOfCodes:                  0x2       
+    0x6523     0x3   FrameRegister:                 0x0       
+    0x6523     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x20; .PUSHREG RBP
+[RUNTIME_FUNCTION]
+0x7CDC     0x0   BeginAddress:                  0x5C29    
+0x7CE0     0x4   EndAddress:                    0x5C68    
+0x7CE4     0x8   UnwindData:                    0x7320    
+    [UNWIND_INFO]
+    0x6520     0x0   Version:                       0x1       
+    0x6520     0x0   Flags:                         0x0       
+    0x6521     0x1   SizeOfProlog:                  0x6       
+    0x6522     0x2   CountOfCodes:                  0x2       
+    0x6523     0x3   FrameRegister:                 0x0       
+    0x6523     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x20; .PUSHREG RBP
+[RUNTIME_FUNCTION]
+0x7CE8     0x0   BeginAddress:                  0x5C68    
+0x7CEC     0x4   EndAddress:                    0x5C92    
+0x7CF0     0x8   UnwindData:                    0x7320    
+    [UNWIND_INFO]
+    0x6520     0x0   Version:                       0x1       
+    0x6520     0x0   Flags:                         0x0       
+    0x6521     0x1   SizeOfProlog:                  0x6       
+    0x6522     0x2   CountOfCodes:                  0x2       
+    0x6523     0x3   FrameRegister:                 0x0       
+    0x6523     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x20; .PUSHREG RBP
+[RUNTIME_FUNCTION]
+0x7CF4     0x0   BeginAddress:                  0x5C92    
+0x7CF8     0x4   EndAddress:                    0x5CAB    
+0x7CFC     0x8   UnwindData:                    0x7320    
+    [UNWIND_INFO]
+    0x6520     0x0   Version:                       0x1       
+    0x6520     0x0   Flags:                         0x0       
+    0x6521     0x1   SizeOfProlog:                  0x6       
+    0x6522     0x2   CountOfCodes:                  0x2       
+    0x6523     0x3   FrameRegister:                 0x0       
+    0x6523     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x20; .PUSHREG RBP
+[RUNTIME_FUNCTION]
+0x7D00     0x0   BeginAddress:                  0x5CB0    
+0x7D04     0x4   EndAddress:                    0x5CD1    
+0x7D08     0x8   UnwindData:                    0x7320    
+    [UNWIND_INFO]
+    0x6520     0x0   Version:                       0x1       
+    0x6520     0x0   Flags:                         0x0       
+    0x6521     0x1   SizeOfProlog:                  0x6       
+    0x6522     0x2   CountOfCodes:                  0x2       
+    0x6523     0x3   FrameRegister:                 0x0       
+    0x6523     0x3   FrameOffset:                   0x0       
+    Flags: 
+    Unwind codes: .ALLOCSTACK 0x20; .PUSHREG RBP

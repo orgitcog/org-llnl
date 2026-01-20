@@ -1,0 +1,1441 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F441E [Fri Oct  7 18:25:34 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x96E00   
+0x90       0xC   NumberOfSymbols:               0x23F     
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x34000   
+0xA0       0x8   SizeOfInitializedData:         0xD000    
+0xA4       0xC   SizeOfUninitializedData:       0x6F000   
+0xA8       0x10  AddressOfEntryPoint:           0xA3AC0   
+0xAC       0x14  BaseOfCode:                    0x70000   
+0xB0       0x18  BaseOfData:                    0xA4000   
+0xB4       0x1C  ImageBase:                     0x6C340000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0xB1000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x6F000   
+0x180      0x8   Misc_PhysicalAddress:          0x6F000   
+0x180      0x8   Misc_VirtualSize:              0x6F000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x34000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x34000   
+0x1A8      0x8   Misc_VirtualSize:              0x34000   
+0x1AC      0xC   VirtualAddress:                0x70000   
+0x1B0      0x10  SizeOfRawData:                 0x33E00   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.920767 (Min=0.0, Max=8.0)
+MD5     hash: f4262b3b5afb12687b80280ccfaeb4e6
+SHA-1   hash: 3cd57bf517e7cec92e35f4dc2485073efcf0fc43
+SHA-256 hash: 90b680d3e4c55c2900203c04adfbc82187aaa91071119d76b6e5606c94c4b719
+SHA-512 hash: a386b60063936288c9682d35e72075435d51e90871a266ea481ff11752f36e6378c5d3368cc9d1f564d8c82b5d46573e5691a487345971cb64e812ec2011efa0
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          .rsrc
+0x1D0      0x8   Misc:                          0xD000    
+0x1D0      0x8   Misc_PhysicalAddress:          0xD000    
+0x1D0      0x8   Misc_VirtualSize:              0xD000    
+0x1D4      0xC   VirtualAddress:                0xA4000   
+0x1D8      0x10  SizeOfRawData:                 0xD000    
+0x1DC      0x14  PointerToRawData:              0x34000   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.816012 (Min=0.0, Max=8.0)
+MD5     hash: 0120d60af856a9ed2f0608457810f3d0
+SHA-1   hash: c03d267f7ece358fe2b8bdd18b915de26ae1bf54
+SHA-256 hash: 33ff21ca44a9946f10f8e56811fc9ad5495021bd27ecf43c9a6f78d13d6746f1
+SHA-512 hash: 897e3dfb96cd10e19ca6ae3a923b51d27e92add33df3e878e7c4391bc45d19711ca5bcb44a648257399934f77cdefdee0486f69954377e0a289cb984883cc956
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0xAAC94   
+0xFC       0x4   Size:                          0x6238    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0xAA8DC   
+0x104      0x4   Size:                          0x3B8     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0xA4000   
+0x10C      0x4   Size:                          0x68DC    
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0xB0ECC   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0xA3CE8   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Version Information----------
+
+[VS_VERSIONINFO]
+0x3A514    0x0   Length:                        0x3C8     
+0x3A516    0x2   ValueLength:                   0x34      
+0x3A518    0x4   Type:                          0x0       
+
+[VS_FIXEDFILEINFO]
+0x3A53C    0x0   Signature:                     0xFEEF04BD
+0x3A540    0x4   StrucVersion:                  0x10000   
+0x3A544    0x8   FileVersionMS:                 0x20018   
+0x3A548    0xC   FileVersionLS:                 0x60000   
+0x3A54C    0x10  ProductVersionMS:              0x20018   
+0x3A550    0x14  ProductVersionLS:              0x60000   
+0x3A554    0x18  FileFlagsMask:                 0x0       
+0x3A558    0x1C  FileFlags:                     0x0       
+0x3A55C    0x20  FileOS:                        0x4       
+0x3A560    0x24  FileType:                      0x2       
+0x3A564    0x28  FileSubtype:                   0x0       
+0x3A568    0x2C  FileDateMS:                    0x0       
+0x3A56C    0x30  FileDateLS:                    0x0       
+
+[StringFileInfo]
+0x3A570    0x0   Length:                        0x326     
+0x3A572    0x2   ValueLength:                   0x0       
+0x3A574    0x4   Type:                          0x0       
+
+  [StringTable]
+  0x3A594    0x0   Length:                        0x302     
+  0x3A596    0x2   ValueLength:                   0x0       
+  0x3A598    0x4   Type:                          0x0       
+  LangID: 040904B0
+
+    CompanyName: The GTK developer community
+    FileDescription: GIMP Drawing Kit
+    FileVersion: 2.24.6.0
+    InternalName: libgdk-win32-2.0-0
+    LegalCopyright: Copyright \xc2\xa9 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald. Modified by the GTK+ Team and others 1997-2005.
+    OriginalFilename: libgdk-win32-2.0-0.dll
+    ProductName: GTK+
+    ProductVersion: 2.24.6
+
+[VarFileInfo]
+0x3A898    0x0   Length:                        0x44      
+0x3A89A    0x2   ValueLength:                   0x0       
+0x3A89C    0x4   Type:                          0x0       
+
+  [Var]
+  0x3A8B8    0x0   Length:                        0x24      
+  0x3A8BA    0x2   ValueLength:                   0x4       
+  0x3A8BC    0x4   Type:                          0x0       
+    Translation: 0x0409 0x04b0
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x3AC94    0x0   Characteristics:               0x0       
+0x3AC98    0x4   TimeDateStamp:                 0x4E8F441D [Fri Oct  7 18:25:33 2011 UTC]
+0x3AC9C    0x8   MajorVersion:                  0x0       
+0x3AC9E    0xA   MinorVersion:                  0x0       
+0x3ACA0    0xC   Name:                          0xAC936   
+0x3ACA4    0x10  Base:                          0x1       
+0x3ACA8    0x14  NumberOfFunctions:             0x2D9     
+0x3ACAC    0x18  NumberOfNames:                 0x2D9     
+0x3ACB0    0x1C  AddressOfFunctions:            0xAACBC   
+0x3ACB4    0x20  AddressOfNames:                0xAB820   
+0x3ACB8    0x24  AddressOfNameOrdinals:         0xAC384   
+
+Ordinal      RVA         Name
+1          0x00037E10    gdk_add_client_message_filter
+2          0x000015B0    gdk_add_option_entries_libgtk_only
+3          0x00001DE0    gdk_app_launch_context_get_type
+4          0x000022C0    gdk_app_launch_context_new
+5          0x00002090    gdk_app_launch_context_set_desktop
+6          0x00001EB0    gdk_app_launch_context_set_display
+7          0x00002150    gdk_app_launch_context_set_icon
+8          0x00002240    gdk_app_launch_context_set_icon_name
+9          0x00001FA0    gdk_app_launch_context_set_screen
+10         0x000020F0    gdk_app_launch_context_set_timestamp
+11         0x00044A80    gdk_atom_intern
+12         0x00044C60    gdk_atom_intern_static_string
+13         0x00044C80    gdk_atom_name
+14         0x0002A9F0    gdk_axis_use_get_type
+15         0x00003BF0    gdk_beep
+16         0x00013400    gdk_bitmap_create_from_data
+17         0x0002AB30    gdk_byte_order_get_type
+18         0x00002300    gdk_cairo_create
+19         0x000024A0    gdk_cairo_rectangle
+20         0x00002520    gdk_cairo_region
+21         0x000023C0    gdk_cairo_reset_clip
+22         0x00002400    gdk_cairo_set_source_color
+23         0x000025F0    gdk_cairo_set_source_pixbuf
+24         0x000027E0    gdk_cairo_set_source_pixmap
+25         0x00002830    gdk_cairo_set_source_window
+26         0x0002A730    gdk_cap_style_get_type
+27         0x00009320    gdk_char_height
+28         0x00009180    gdk_char_measure
+29         0x00008EE0    gdk_char_width
+30         0x00008F40    gdk_char_width_wc
+31         0x00002BB0    gdk_color_alloc
+32         0x00002AD0    gdk_color_black
+33         0x0002D0F0    gdk_color_change
+34         0x00002930    gdk_color_copy
+35         0x00002C20    gdk_color_equal
+36         0x000028F0    gdk_color_free
+37         0x00002CB0    gdk_color_get_type
+38         0x00002BF0    gdk_color_hash
+39         0x00002CF0    gdk_color_parse
+40         0x00002D40    gdk_color_to_string
+41         0x00002B40    gdk_color_white
+42         0x00002A90    gdk_colormap_alloc_color
+43         0x0002C6B0    gdk_colormap_alloc_colors
+44         0x0002C100    gdk_colormap_change
+45         0x0002C5B0    gdk_colormap_free_colors
+46         0x0002D1F0    gdk_colormap_get_screen
+47         0x00002DA0    gdk_colormap_get_system
+48         0x0002C0F0    gdk_colormap_get_system_size
+49         0x0002BE00    gdk_colormap_get_type
+50         0x000029D0    gdk_colormap_get_visual
+51         0x0002BE70    gdk_colormap_new
+52         0x0002CEC0    gdk_colormap_query_color
+53         0x00002990    gdk_colormap_ref
+54         0x000029B0    gdk_colormap_unref
+55         0x0002C210    gdk_colors_alloc
+56         0x0002C2C0    gdk_colors_free
+57         0x00002A30    gdk_colors_store
+58         0x0002A5B0    gdk_crossing_mode_get_type
+59         0x00002F00    gdk_cursor_get_cursor_type
+60         0x0002DD90    gdk_cursor_get_display
+61         0x0002E530    gdk_cursor_get_image
+62         0x00002EA0    gdk_cursor_get_type
+63         0x00002EE0    gdk_cursor_new
+64         0x0002D350    gdk_cursor_new_for_display
+65         0x0002DC20    gdk_cursor_new_from_name
+66         0x0002EE30    gdk_cursor_new_from_pixbuf
+67         0x0002D770    gdk_cursor_new_from_pixmap
+68         0x00002DC0    gdk_cursor_ref
+69         0x0002A370    gdk_cursor_type_get_type
+70         0x00002E30    gdk_cursor_unref
+71         0x00040090    gdk_device_free_history
+72         0x00040350    gdk_device_get_axis
+73         0x0003FCD0    gdk_device_get_axis_use
+74         0x00003CC0    gdk_device_get_core_pointer
+75         0x0003FAF0    gdk_device_get_has_cursor
+76         0x0003FED0    gdk_device_get_history
+77         0x0003FB90    gdk_device_get_key
+78         0x0003FA90    gdk_device_get_mode
+79         0x0003FDD0    gdk_device_get_n_axes
+80         0x0003FD70    gdk_device_get_n_keys
+81         0x0003F9D0    gdk_device_get_name
+82         0x0003FA30    gdk_device_get_source
+83         0x00041BA0    gdk_device_get_state
+84         0x0003F8B0    gdk_device_get_type
+85         0x0003FE30    gdk_device_set_axis_use
+86         0x0003FC60    gdk_device_set_key
+87         0x000403F0    gdk_device_set_mode
+88         0x0003FB50    gdk_device_set_source
+89         0x0003F9B0    gdk_devices_list
+90         0x00037E50    gdk_display_add_client_message_filter
+91         0x00043B10    gdk_display_beep
+92         0x00003910    gdk_display_close
+93         0x0003AE90    gdk_display_flush
+94         0x00003CD0    gdk_display_get_core_pointer
+95         0x000047A0    gdk_display_get_default
+96         0x0002E5B0    gdk_display_get_default_cursor_size
+97         0x0002FA00    gdk_display_get_default_group
+98         0x0002F9A0    gdk_display_get_default_screen
+99         0x00003A10    gdk_display_get_event
+100        0x0002E650    gdk_display_get_maximal_cursor_size
+101        0x0002F8A0    gdk_display_get_n_screens
+102        0x0002F520    gdk_display_get_name
+103        0x00003DB0    gdk_display_get_pointer
+104        0x0002F910    gdk_display_get_screen
+105        0x00003880    gdk_display_get_type
+106        0x00003E80    gdk_display_get_window_at_pointer
+107        0x000039B0    gdk_display_is_closed
+108        0x00037DF0    gdk_display_keyboard_ungrab
+109        0x0003F970    gdk_display_list_devices
+110        0x00004760    gdk_display_manager_get
+111        0x00004790    gdk_display_manager_get_default_display
+112        0x000046D0    gdk_display_manager_get_type
+113        0x000048B0    gdk_display_manager_list_displays
+114        0x000047D0    gdk_display_manager_set_default_display
+115        0x0002F7A0    gdk_display_open
+116        0x000017E0    gdk_display_open_default_libgtk_only
+117        0x00003A80    gdk_display_peek_event
+118        0x00004480    gdk_display_pointer_is_grabbed
+119        0x00037CF0    gdk_display_pointer_ungrab
+120        0x00003B00    gdk_display_put_event
+121        0x0002FAF0    gdk_display_request_selection_notification
+122        0x00008CD0    gdk_display_set_double_click_distance
+123        0x00008CA0    gdk_display_set_double_click_time
+124        0x00003F20    gdk_display_set_pointer_hooks
+125        0x0002FC70    gdk_display_store_clipboard
+126        0x0002FC60    gdk_display_supports_clipboard_persistence
+127        0x0002FD50    gdk_display_supports_composite
+128        0x0002EF90    gdk_display_supports_cursor_alpha
+129        0x0002E570    gdk_display_supports_cursor_color
+130        0x0002FCF0    gdk_display_supports_input_shapes
+131        0x0002FA80    gdk_display_supports_selection_notification
+132        0x0002FC80    gdk_display_supports_shapes
+133        0x0003AE00    gdk_display_sync
+134        0x0004B910    gdk_display_warp_pointer
+135        0x00031D50    gdk_drag_abort
+136        0x0002A3B0    gdk_drag_action_get_type
+137        0x00031540    gdk_drag_begin
+138        0x000049B0    gdk_drag_context_get_actions
+139        0x00004B30    gdk_drag_context_get_dest_window
+140        0x00004B90    gdk_drag_context_get_protocol
+141        0x00004A70    gdk_drag_context_get_selected_action
+142        0x00004AD0    gdk_drag_context_get_source_window
+143        0x00004A10    gdk_drag_context_get_suggested_action
+144        0x00030C50    gdk_drag_context_get_type
+145        0x00004950    gdk_drag_context_list_targets
+146        0x00030D40    gdk_drag_context_new
+147        0x00031220    gdk_drag_context_ref
+148        0x00031280    gdk_drag_context_unref
+149        0x00031C80    gdk_drag_drop
+150        0x000321B0    gdk_drag_drop_succeeded
+151        0x000048D0    gdk_drag_find_window
+152        0x000318E0    gdk_drag_find_window_for_screen
+153        0x00004920    gdk_drag_get_protocol
+154        0x00031870    gdk_drag_get_protocol_for_display
+155        0x00032180    gdk_drag_get_selection
+156        0x000319A0    gdk_drag_motion
+157        0x0002A3F0    gdk_drag_protocol_get_type
+158        0x00031D90    gdk_drag_status
+159        0x00005A10    gdk_draw_arc
+160        0x00005F10    gdk_draw_drawable
+161        0x00006800    gdk_draw_glyphs
+162        0x000068D0    gdk_draw_glyphs_transformed
+163        0x0001B8A0    gdk_draw_gray_image
+164        0x00006170    gdk_draw_image
+165        0x0001B7F0    gdk_draw_indexed_image
+166        0x0000FCE0    gdk_draw_layout
+167        0x0000FBC0    gdk_draw_layout_line
+168        0x0000F760    gdk_draw_layout_line_with_colors
+169        0x0000F960    gdk_draw_layout_with_colors
+170        0x000057E0    gdk_draw_line
+171        0x000066B0    gdk_draw_lines
+172        0x000062C0    gdk_draw_pixbuf
+173        0x000056F0    gdk_draw_point
+174        0x00006450    gdk_draw_points
+175        0x00005B50    gdk_draw_polygon
+176        0x000058D0    gdk_draw_rectangle
+177        0x0001BA40    gdk_draw_rgb_32_image
+178        0x0001B990    gdk_draw_rgb_32_image_dithalign
+179        0x0001BBB0    gdk_draw_rgb_image
+180        0x0001BB00    gdk_draw_rgb_image_dithalign
+181        0x00006560    gdk_draw_segments
+182        0x00005D70    gdk_draw_string
+183        0x00005C30    gdk_draw_text
+184        0x00005DD0    gdk_draw_text_wc
+185        0x000069E0    gdk_draw_trapezoids
+186        0x00006BA0    gdk_drawable_copy_to_image
+187        0x00006F90    gdk_drawable_get_clip_region
+188        0x000055F0    gdk_drawable_get_colormap
+189        0x00005220    gdk_drawable_get_data
+190        0x000053D0    gdk_drawable_get_depth
+191        0x000054C0    gdk_drawable_get_display
+192        0x00006DD0    gdk_drawable_get_image
+193        0x00005440    gdk_drawable_get_screen
+194        0x00005290    gdk_drawable_get_size
+195        0x00005090    gdk_drawable_get_type
+196        0x00007010    gdk_drawable_get_visible_region
+197        0x00005350    gdk_drawable_get_visual
+198        0x00005670    gdk_drawable_ref
+199        0x00005530    gdk_drawable_set_colormap
+200        0x000051A0    gdk_drawable_set_data
+201        0x00005690    gdk_drawable_unref
+202        0x00031ED0    gdk_drop_finish
+203        0x00031E70    gdk_drop_reply
+204        0x00043BD0    gdk_error_trap_pop
+205        0x00043BC0    gdk_error_trap_push
+206        0x00008260    gdk_event_copy
+207        0x00007D70    gdk_event_free
+208        0x000080F0    gdk_event_get
+209        0x00008670    gdk_event_get_axis
+210        0x00008530    gdk_event_get_coords
+211        0x00038490    gdk_event_get_graphics_expose
+212        0x000085D0    gdk_event_get_root_coords
+213        0x00008850    gdk_event_get_screen
+214        0x00008490    gdk_event_get_state
+215        0x00008450    gdk_event_get_time
+216        0x00008CE0    gdk_event_get_type
+217        0x000080B0    gdk_event_handler_set
+218        0x0002A4B0    gdk_event_mask_get_type
+219        0x000081B0    gdk_event_new
+220        0x00008120    gdk_event_peek
+221        0x00008150    gdk_event_put
+222        0x00008770    gdk_event_request_motions
+223        0x00003C10    gdk_event_send_client_message
+224        0x0003AD70    gdk_event_send_client_message_for_display
+225        0x00003C70    gdk_event_send_clientmessage_toall
+226        0x00008800    gdk_event_set_screen
+227        0x0002A470    gdk_event_type_get_type
+228        0x00037A90    gdk_events_pending
+229        0x00001930    gdk_exit
+230        0x0002A930    gdk_extension_mode_get_type
+231        0x0002A770    gdk_fill_get_type
+232        0x0002AA70    gdk_fill_rule_get_type
+233        0x0002A430    gdk_filter_return_get_type
+234        0x0003ADF0    gdk_flush
+235        0x0003C8A0    gdk_font_equal
+236        0x00009380    gdk_font_from_description
+237        0x0003C390    gdk_font_from_description_for_display
+238        0x0003D000    gdk_font_get_display
+239        0x00008E00    gdk_font_get_type
+240        0x0003C860    gdk_font_id
+241        0x000093A0    gdk_font_load
+242        0x0003C240    gdk_font_load_for_display
+243        0x00008D50    gdk_font_ref
+244        0x0002A6F0    gdk_font_type_get_type
+245        0x00008D90    gdk_font_unref
+246        0x0003C4A0    gdk_fontset_load
+247        0x0003C6B0    gdk_fontset_load_for_display
+248        0x00047510    gdk_free_compound_text
+249        0x00047070    gdk_free_text_list
+250        0x0002A7B0    gdk_function_get_type
+251        0x0000AD30    gdk_gc_copy
+252        0x0000B050    gdk_gc_get_colormap
+253        0x0003D670    gdk_gc_get_screen
+254        0x00009520    gdk_gc_get_type
+255        0x00009980    gdk_gc_get_values
+256        0x00009750    gdk_gc_new
+257        0x00009700    gdk_gc_new_with_values
+258        0x0000ACD0    gdk_gc_offset
+259        0x00009940    gdk_gc_ref
+260        0x0000A130    gdk_gc_set_background
+261        0x00009D00    gdk_gc_set_clip_mask
+262        0x00009D80    gdk_gc_set_clip_origin
+263        0x0000A290    gdk_gc_set_clip_rectangle
+264        0x0000A310    gdk_gc_set_clip_region
+265        0x0000AF80    gdk_gc_set_colormap
+266        0x0000AC10    gdk_gc_set_dashes
+267        0x0000AB50    gdk_gc_set_exposures
+268        0x00009F80    gdk_gc_set_fill
+269        0x0000A080    gdk_gc_set_font
+270        0x0000A1E0    gdk_gc_set_foreground
+271        0x0000A000    gdk_gc_set_function
+272        0x0000ABD0    gdk_gc_set_line_attributes
+273        0x0000B1A0    gdk_gc_set_rgb_bg_color
+274        0x0000B0B0    gdk_gc_set_rgb_fg_color
+275        0x00009E80    gdk_gc_set_stipple
+276        0x0000AA60    gdk_gc_set_subwindow
+277        0x00009F00    gdk_gc_set_tile
+278        0x00009E00    gdk_gc_set_ts_origin
+279        0x00009AF0    gdk_gc_set_values
+280        0x00009960    gdk_gc_unref
+281        0x0002A8B0    gdk_gc_values_mask_get_type
+282        0x00022960    gdk_get_default_root_window
+283        0x00043BA0    gdk_get_display
+284        0x00001790    gdk_get_display_arg_name
+285        0x00001C80    gdk_get_program_class
+286        0x000088B0    gdk_get_show_events
+287        0x000439E0    gdk_get_use_xshm
+288        0x0002AC30    gdk_grab_status_get_type
+289        0x0002AE70    gdk_gravity_get_type
+290        0x0000B9D0    gdk_image_get
+291        0x0000BF60    gdk_image_get_bits_per_pixel
+292        0x0000BD20    gdk_image_get_byte_order
+293        0x0000BF00    gdk_image_get_bytes_per_line
+294        0x0000BEA0    gdk_image_get_bytes_per_pixel
+295        0x0000BC00    gdk_image_get_colormap
+296        0x0000BE40    gdk_image_get_depth
+297        0x0000BDE0    gdk_image_get_height
+298        0x0000BC60    gdk_image_get_image_type
+299        0x0003EFC0    gdk_image_get_pixel
+300        0x0000BFC0    gdk_image_get_pixels
+301        0x0003EE90    gdk_image_get_type
+302        0x0000BCC0    gdk_image_get_visual
+303        0x0000BD80    gdk_image_get_width
+304        0x0000C310    gdk_image_new
+305        0x0003F160    gdk_image_put_pixel
+306        0x0000B910    gdk_image_ref
+307        0x0000BB30    gdk_image_set_colormap
+308        0x0002A8F0    gdk_image_type_get_type
+309        0x0000B970    gdk_image_unref
+310        0x000018D0    gdk_init
+311        0x000018A0    gdk_init_check
+312        0x00008980    gdk_input_add
+313        0x000088D0    gdk_input_add_full
+314        0x0002ABB0    gdk_input_condition_get_type
+315        0x0002A9B0    gdk_input_mode_get_type
+316        0x000089B0    gdk_input_remove
+317        0x00040100    gdk_input_set_extension_events
+318        0x0002A970    gdk_input_source_get_type
+319        0x0002A7F0    gdk_join_style_get_type
+320        0x00037D30    gdk_keyboard_grab
+321        0x00004350    gdk_keyboard_grab_info_libgtk_only
+322        0x00003BD0    gdk_keyboard_ungrab
+323        0x00043640    gdk_keymap_add_virtual_modifiers
+324        0x00042CD0    gdk_keymap_get_caps_lock_state
+325        0x0000C960    gdk_keymap_get_default
+326        0x00042C90    gdk_keymap_get_direction
+327        0x00042EE0    gdk_keymap_get_entries_for_keycode
+328        0x00042CF0    gdk_keymap_get_entries_for_keyval
+329        0x00042C30    gdk_keymap_get_for_display
+330        0x0000C480    gdk_keymap_get_type
+331        0x00042CC0    gdk_keymap_have_bidi_layouts
+332        0x00043150    gdk_keymap_lookup_key
+333        0x00043650    gdk_keymap_map_virtual_modifiers
+334        0x00043270    gdk_keymap_translate_keyboard_state
+335        0x0000C510    gdk_keyval_convert_case
+336        0x0002B330    gdk_keyval_from_name
+337        0x0000C920    gdk_keyval_is_lower
+338        0x0000C8E0    gdk_keyval_is_upper
+339        0x0002B260    gdk_keyval_name
+340        0x0000C8B0    gdk_keyval_to_lower
+341        0x0000C980    gdk_keyval_to_unicode
+342        0x0000C880    gdk_keyval_to_upper
+343        0x0002A830    gdk_line_style_get_type
+344        0x0001CA90    gdk_list_visuals
+345        0x0003EDB0    gdk_mbstowcs
+346        0x0002AB70    gdk_modifier_type_get_type
+347        0x0003AEC0    gdk_net_wm_supports
+348        0x00043BE0    gdk_notify_startup_complete
+349        0x00043BF0    gdk_notify_startup_complete_with_id
+350        0x0002A570    gdk_notify_type_get_type
+351        0x0000E0A0    gdk_offscreen_window_get_embedder
+352        0x0000DEF0    gdk_offscreen_window_get_pixmap
+353        0x0000DCF0    gdk_offscreen_window_get_type
+354        0x0000DF80    gdk_offscreen_window_set_embedder
+355        0x0002AAB0    gdk_overlap_type_get_type
+356        0x0002A6B0    gdk_owner_change_get_type
+357        0x0000FEF0    gdk_pango_attr_emboss_color_new
+358        0x0000FE90    gdk_pango_attr_embossed_new
+359        0x0000FE10    gdk_pango_attr_stipple_new
+360        0x000101E0    gdk_pango_context_get
+361        0x00010140    gdk_pango_context_get_for_screen
+362        0x0000F6C0    gdk_pango_context_set_colormap
+363        0x00010010    gdk_pango_layout_get_clip_region
+364        0x0000FF50    gdk_pango_layout_line_get_clip_region
+365        0x0000EF60    gdk_pango_renderer_get_default
+366        0x0000EE20    gdk_pango_renderer_get_type
+367        0x0000EF00    gdk_pango_renderer_new
+368        0x0000F040    gdk_pango_renderer_set_drawable
+369        0x0000F110    gdk_pango_renderer_set_gc
+370        0x0000F4A0    gdk_pango_renderer_set_override_color
+371        0x0000F1F0    gdk_pango_renderer_set_stipple
+372        0x00001660    gdk_parse_args
+373        0x00011950    gdk_pixbuf_get_from_drawable
+374        0x00010EF0    gdk_pixbuf_get_from_image
+375        0x000126E0    gdk_pixbuf_render_pixmap_and_mask
+376        0x00012410    gdk_pixbuf_render_pixmap_and_mask_for_colormap
+377        0x00011EF0    gdk_pixbuf_render_threshold_alpha
+378        0x00012340    gdk_pixbuf_render_to_drawable
+379        0x000123A0    gdk_pixbuf_render_to_drawable_alpha
+380        0x00013490    gdk_pixmap_colormap_create_from_xpm
+381        0x00013600    gdk_pixmap_colormap_create_from_xpm_d
+382        0x00013440    gdk_pixmap_create_from_data
+383        0x000135D0    gdk_pixmap_create_from_xpm
+384        0x00013730    gdk_pixmap_create_from_xpm_d
+385        0x00044800    gdk_pixmap_foreign_new
+386        0x00044920    gdk_pixmap_foreign_new_for_display
+387        0x000448B0    gdk_pixmap_foreign_new_for_screen
+388        0x00013760    gdk_pixmap_get_size
+389        0x00012D90    gdk_pixmap_get_type
+390        0x000449C0    gdk_pixmap_lookup
+391        0x000449E0    gdk_pixmap_lookup_for_display
+392        0x000130B0    gdk_pixmap_new
+393        0x000285B0    gdk_pointer_grab
+394        0x000043E0    gdk_pointer_grab_info_libgtk_only
+395        0x00004500    gdk_pointer_is_grabbed
+396        0x00003BB0    gdk_pointer_ungrab
+397        0x000015E0    gdk_pre_parse_libgtk_only
+398        0x0002AA30    gdk_prop_mode_get_type
+399        0x00044ED0    gdk_property_change
+400        0x000452D0    gdk_property_delete
+401        0x00044E20    gdk_property_get
+402        0x0002A5F0    gdk_property_state_get_type
+403        0x000482E0    gdk_query_depths
+404        0x00048300    gdk_query_visual_types
+405        0x00014840    gdk_rectangle_get_type
+406        0x00014730    gdk_rectangle_intersect
+407        0x00014620    gdk_rectangle_union
+408        0x00016240    gdk_region_copy
+409        0x00016420    gdk_region_destroy
+410        0x00016C30    gdk_region_empty
+411        0x00016C70    gdk_region_equal
+412        0x000162A0    gdk_region_get_clipbox
+413        0x00016330    gdk_region_get_rectangles
+414        0x00016500    gdk_region_intersect
+415        0x000160B0    gdk_region_new
+416        0x00016480    gdk_region_offset
+417        0x00016E70    gdk_region_point_in
+418        0x00013890    gdk_region_polygon
+419        0x00016DC0    gdk_region_rect_equal
+420        0x00016F00    gdk_region_rect_in
+421        0x000161B0    gdk_region_rectangle
+422        0x00016890    gdk_region_shrink
+423        0x000170A0    gdk_region_spans_intersect_foreach
+424        0x00016A80    gdk_region_subtract
+425        0x00016600    gdk_region_union
+426        0x000169B0    gdk_region_union_with_rect
+427        0x00016B70    gdk_region_xor
+428        0x0001B540    gdk_rgb_cmap_free
+429        0x0001B440    gdk_rgb_cmap_new
+430        0x0001B650    gdk_rgb_colormap_ditherable
+431        0x0002AAF0    gdk_rgb_dither_get_type
+432        0x0001B6A0    gdk_rgb_ditherable
+433        0x0001B410    gdk_rgb_find_color
+434        0x0001BCE0    gdk_rgb_gc_set_background
+435        0x0001BD10    gdk_rgb_gc_set_foreground
+436        0x0001B670    gdk_rgb_get_colormap
+437        0x0001BDB0    gdk_rgb_get_visual
+438        0x0001B3D0    gdk_rgb_init
+439        0x0001B3B0    gdk_rgb_set_install
+440        0x0001B3C0    gdk_rgb_set_min_colors
+441        0x0001B3A0    gdk_rgb_set_verbose
+442        0x0001BC70    gdk_rgb_xpixel_from_rgb
+443        0x0003ADB0    gdk_screen_broadcast_client_message
+444        0x00045A50    gdk_screen_get_active_window
+445        0x000047B0    gdk_screen_get_default
+446        0x000455F0    gdk_screen_get_default_colormap
+447        0x000455D0    gdk_screen_get_display
+448        0x0001C5D0    gdk_screen_get_font_options
+449        0x00043A00    gdk_screen_get_height
+450        0x00043A70    gdk_screen_get_height_mm
+451        0x0001C290    gdk_screen_get_monitor_at_point
+452        0x0001C360    gdk_screen_get_monitor_at_window
+453        0x000458E0    gdk_screen_get_monitor_geometry
+454        0x000457B0    gdk_screen_get_monitor_height_mm
+455        0x00045840    gdk_screen_get_monitor_plug_name
+456        0x00045720    gdk_screen_get_monitor_width_mm
+457        0x000456B0    gdk_screen_get_n_monitors
+458        0x000459E0    gdk_screen_get_number
+459        0x000456F0    gdk_screen_get_primary_monitor
+460        0x0001C7B0    gdk_screen_get_resolution
+461        0x0001B6C0    gdk_screen_get_rgb_colormap
+462        0x0001BD40    gdk_screen_get_rgb_visual
+463        0x00045980    gdk_screen_get_rgba_colormap
+464        0x000459B0    gdk_screen_get_rgba_visual
+465        0x000455E0    gdk_screen_get_root_window
+466        0x000453C0    gdk_screen_get_setting
+467        0x0002BFC0    gdk_screen_get_system_colormap
+468        0x00048250    gdk_screen_get_system_visual
+469        0x0001FCD0    gdk_screen_get_toplevel_windows
+470        0x0001C090    gdk_screen_get_type
+471        0x000439F0    gdk_screen_get_width
+472        0x00043A10    gdk_screen_get_width_mm
+473        0x00045AB0    gdk_screen_get_window_stack
+474        0x0001C4D0    gdk_screen_height
+475        0x0001C510    gdk_screen_height_mm
+476        0x00045B10    gdk_screen_is_composited
+477        0x00048320    gdk_screen_list_visuals
+478        0x00045A30    gdk_screen_make_display_name
+479        0x00045600    gdk_screen_set_default_colormap
+480        0x0001C530    gdk_screen_set_font_options
+481        0x0001C630    gdk_screen_set_resolution
+482        0x0001C4B0    gdk_screen_width
+483        0x0001C4F0    gdk_screen_width_mm
+484        0x0002A530    gdk_scroll_direction_get_type
+485        0x00046320    gdk_selection_convert
+486        0x0001C930    gdk_selection_owner_get
+487        0x00046290    gdk_selection_owner_get_for_display
+488        0x0001C8F0    gdk_selection_owner_set
+489        0x00046090    gdk_selection_owner_set_for_display
+490        0x00046DF0    gdk_selection_property_get
+491        0x0001C950    gdk_selection_send_notify
+492        0x00046F40    gdk_selection_send_notify_for_display
+493        0x00008CB0    gdk_set_double_click_time
+494        0x0003ED10    gdk_set_locale
+495        0x00003F90    gdk_set_pointer_hooks
+496        0x00001C90    gdk_set_program_class
+497        0x00008890    gdk_set_show_events
+498        0x00003CE0    gdk_set_sm_client_id
+499        0x000439D0    gdk_set_use_xshm
+500        0x0002A670    gdk_setting_action_get_type
+501        0x00008D20    gdk_setting_get
+502        0x000479A0    gdk_spawn_command_line_on_screen
+503        0x00047850    gdk_spawn_on_screen
+504        0x000478F0    gdk_spawn_on_screen_with_pipes
+505        0x0002ABF0    gdk_status_get_type
+506        0x00008F90    gdk_string_extents
+507        0x00009280    gdk_string_height
+508        0x000090E0    gdk_string_measure
+509        0x0001CA10    gdk_string_to_compound_text
+510        0x000471E0    gdk_string_to_compound_text_for_display
+511        0x00008E40    gdk_string_width
+512        0x0002A870    gdk_subwindow_mode_get_type
+513        0x00008BF0    gdk_synthesize_window_state
+514        0x00047A60    gdk_test_render_sync
+515        0x00047AD0    gdk_test_simulate_button
+516        0x00047A70    gdk_test_simulate_key
+517        0x0003CB80    gdk_text_extents
+518        0x0003CDE0    gdk_text_extents_wc
+519        0x000091E0    gdk_text_height
+520        0x00009040    gdk_text_measure
+521        0x0001C990    gdk_text_property_to_text_list
+522        0x00046F70    gdk_text_property_to_text_list_for_display
+523        0x0001C9D0    gdk_text_property_to_utf8_list
+524        0x000470C0    gdk_text_property_to_utf8_list_for_display
+525        0x0003CD80    gdk_text_width
+526        0x0003CFA0    gdk_text_width_wc
+527        0x00001AD0    gdk_threads_add_idle
+528        0x00001A50    gdk_threads_add_idle_full
+529        0x00001B80    gdk_threads_add_timeout
+530        0x00001B00    gdk_threads_add_timeout_full
+531        0x00001C40    gdk_threads_add_timeout_seconds
+532        0x00001BC0    gdk_threads_add_timeout_seconds_full
+533        0x00001950    gdk_threads_enter
+534        0x00001990    gdk_threads_init
+535        0x00001970    gdk_threads_leave
+536        0x00083090    gdk_threads_lock
+537        0x00083094    gdk_threads_mutex
+538        0x00001A00    gdk_threads_set_lock_functions
+539        0x0008308C    gdk_threads_unlock
+540        0x0000CA00    gdk_unicode_to_keyval
+541        0x0001CA50    gdk_utf8_to_compound_text
+542        0x00047460    gdk_utf8_to_compound_text_for_display
+543        0x00047290    gdk_utf8_to_string_target
+544        0x0002A4F0    gdk_visibility_state_get_type
+545        0x00048260    gdk_visual_get_best
+546        0x00048230    gdk_visual_get_best_depth
+547        0x00048240    gdk_visual_get_best_type
+548        0x000482B0    gdk_visual_get_best_with_both
+549        0x00048270    gdk_visual_get_best_with_depth
+550        0x00048290    gdk_visual_get_best_with_type
+551        0x0001CC50    gdk_visual_get_bits_per_rgb
+552        0x0001CDF0    gdk_visual_get_blue_pixel_details
+553        0x0001CB90    gdk_visual_get_byte_order
+554        0x0001CBF0    gdk_visual_get_colormap_size
+555        0x0001CB30    gdk_visual_get_depth
+556        0x0001CD50    gdk_visual_get_green_pixel_details
+557        0x0001CCB0    gdk_visual_get_red_pixel_details
+558        0x00048340    gdk_visual_get_screen
+559        0x0001CAB0    gdk_visual_get_system
+560        0x00047B70    gdk_visual_get_type
+561        0x0001CAD0    gdk_visual_get_visual_type
+562        0x0002AC70    gdk_visual_type_get_type
+563        0x0003ED60    gdk_wcstombs
+564        0x0004E4E0    gdk_win32_begin_direct_draw_libgtk_only
+565        0x00036DC0    gdk_win32_drawable_get_handle
+566        0x0004E510    gdk_win32_end_direct_draw_libgtk_only
+567        0x00048480    gdk_win32_handle_table_lookup
+568        0x0003D910    gdk_win32_hdc_get
+569        0x0003DD70    gdk_win32_hdc_release
+570        0x0002DDA0    gdk_win32_icon_to_pixbuf_libgtk_only
+571        0x0002EFD0    gdk_win32_pixbuf_to_hicon_libgtk_only
+572        0x00047540    gdk_win32_selection_add_targets
+573        0x0003AD60    gdk_win32_set_modal_dialog_libgtk_only
+574        0x0004ADC0    gdk_win32_window_foreign_new_for_display
+575        0x0004E4A0    gdk_win32_window_is_win32
+576        0x0004E080    gdk_win32_window_lookup_for_display
+577        0x000288F0    gdk_window_add_filter
+578        0x00022930    gdk_window_at_pointer
+579        0x0002AD30    gdk_window_attributes_type_get_type
+580        0x00025190    gdk_window_beep
+581        0x0004C3A0    gdk_window_begin_move_drag
+582        0x000205F0    gdk_window_begin_paint_rect
+583        0x00020330    gdk_window_begin_paint_region
+584        0x0004C2D0    gdk_window_begin_resize_drag
+585        0x0002ACB0    gdk_window_class_get_type
+586        0x000244A0    gdk_window_clear
+587        0x00024470    gdk_window_clear_area
+588        0x00024440    gdk_window_clear_area_e
+589        0x0004E130    gdk_window_configure_finished
+590        0x000225B0    gdk_window_constrain_size
+591        0x00023560    gdk_window_coords_from_parent
+592        0x00023460    gdk_window_coords_to_parent
+593        0x0002A070    gdk_window_create_similar_surface
+594        0x0004CBF0    gdk_window_deiconify
+595        0x00027E80    gdk_window_destroy
+596        0x0004B040    gdk_window_destroy_notify
+597        0x0002AEB0    gdk_window_edge_get_type
+598        0x0004E0E0    gdk_window_enable_synchronized_configure
+599        0x00024540    gdk_window_end_paint
+600        0x00028380    gdk_window_ensure_native
+601        0x00020680    gdk_window_flush
+602        0x0004CFC0    gdk_window_focus
+603        0x00022980    gdk_window_foreign_new
+604        0x0004AF90    gdk_window_foreign_new_for_display
+605        0x00022460    gdk_window_freeze_toplevel_updates_libgtk_only
+606        0x00022360    gdk_window_freeze_updates
+607        0x0004C700    gdk_window_fullscreen
+608        0x00026BC0    gdk_window_geometry_changed
+609        0x000239E0    gdk_window_get_accept_focus
+610        0x00022F10    gdk_window_get_background_pattern
+611        0x0001FB00    gdk_window_get_children
+612        0x00023870    gdk_window_get_composited
+613        0x00023040    gdk_window_get_cursor
+614        0x0004C120    gdk_window_get_decorations
+615        0x00023710    gdk_window_get_deskrelative_origin
+616        0x0002A160    gdk_window_get_display
+617        0x0001EF90    gdk_window_get_effective_parent
+618        0x0001FA80    gdk_window_get_effective_toplevel
+619        0x00022A50    gdk_window_get_events
+620        0x00023A50    gdk_window_get_focus_on_map
+621        0x0004B6D0    gdk_window_get_frame_extents
+622        0x00023150    gdk_window_get_geometry
+623        0x0004BF50    gdk_window_get_group
+624        0x0002A290    gdk_window_get_height
+625        0x00021B00    gdk_window_get_internal_paint_info
+626        0x00023970    gdk_window_get_modal_hint
+627        0x000232A0    gdk_window_get_origin
+628        0x0001EF30    gdk_window_get_parent
+629        0x00022840    gdk_window_get_pointer
+630        0x0001EEA0    gdk_window_get_position
+631        0x00023380    gdk_window_get_root_coords
+632        0x0004B7F0    gdk_window_get_root_origin
+633        0x0002A100    gdk_window_get_screen
+634        0x000202D0    gdk_window_get_state
+635        0x0001F000    gdk_window_get_toplevel
+636        0x0001FD60    gdk_window_get_toplevels
+637        0x0004E010    gdk_window_get_type_hint
+638        0x000221C0    gdk_window_get_update_area
+639        0x0001ED50    gdk_window_get_user_data
+640        0x0002A1C0    gdk_window_get_visual
+641        0x0002A220    gdk_window_get_width
+642        0x0001EDB0    gdk_window_get_window_type
+643        0x0001EE30    gdk_window_has_native
+644        0x000278A0    gdk_window_hide
+645        0x0002AD70    gdk_window_hints_get_type
+646        0x0004C460    gdk_window_iconify
+647        0x0002A300    gdk_window_impl_get_type
+648        0x00026E50    gdk_window_input_shape_combine_mask
+649        0x00026BE0    gdk_window_input_shape_combine_region
+650        0x00022070    gdk_window_invalidate_maybe_recurse
+651        0x00022050    gdk_window_invalidate_rect
+652        0x000220A0    gdk_window_invalidate_region
+653        0x0001EE10    gdk_window_is_destroyed
+654        0x00023AC0    gdk_window_is_input_only
+655        0x00023B20    gdk_window_is_shaped
+656        0x0001FDE0    gdk_window_is_viewable
+657        0x0001FD80    gdk_window_is_visible
+658        0x0004AFB0    gdk_window_lookup
+659        0x0004E0C0    gdk_window_lookup_for_display
+660        0x00028A80    gdk_window_lower
+661        0x0004C5C0    gdk_window_maximize
+662        0x00026D80    gdk_window_merge_child_input_shapes
+663        0x00025AE0    gdk_window_merge_child_shapes
+664        0x00027770    gdk_window_move
+665        0x00022AC0    gdk_window_move_region
+666        0x00027710    gdk_window_move_resize
+667        0x00025FC0    gdk_window_new
+668        0x0001E2D0    gdk_window_object_get_type
+669        0x0001FB70    gdk_window_peek_children
+670        0x00021D60    gdk_window_process_all_updates
+671        0x00021F00    gdk_window_process_updates
+672        0x00025C70    gdk_window_raise
+673        0x00023B80    gdk_window_redirect_to_drawable
+674        0x00031F60    gdk_window_register_dnd
+675        0x0001FBE0    gdk_window_remove_filter
+676        0x000238E0    gdk_window_remove_redirection
+677        0x00028EF0    gdk_window_reparent
+678        0x00027740    gdk_window_resize
+679        0x00028C20    gdk_window_restack
+680        0x00026F10    gdk_window_scroll
+681        0x0004BB50    gdk_window_set_accept_focus
+682        0x00022D40    gdk_window_set_back_pixmap
+683        0x00022C40    gdk_window_set_background
+684        0x00026DF0    gdk_window_set_child_input_shapes
+685        0x00025B50    gdk_window_set_child_shapes
+686        0x000287D0    gdk_window_set_composited
+687        0x00024CE0    gdk_window_set_cursor
+688        0x000225A0    gdk_window_set_debug_updates
+689        0x0004D7E0    gdk_window_set_decorations
+690        0x000229A0    gdk_window_set_events
+691        0x0004BBF0    gdk_window_set_focus_on_map
+692        0x0004C1A0    gdk_window_set_functions
+693        0x0004D880    gdk_window_set_geometry_hints
+694        0x0004C000    gdk_window_set_group
+695        0x0004D950    gdk_window_set_hints
+696        0x0004BEB0    gdk_window_set_icon
+697        0x0004BC70    gdk_window_set_icon_list
+698        0x0004BF00    gdk_window_set_icon_name
+699        0x0004CDE0    gdk_window_set_keep_above
+700        0x0004CED0    gdk_window_set_keep_below
+701        0x0004D060    gdk_window_set_modal_hint
+702        0x0004E1A0    gdk_window_set_opacity
+703        0x0004BAD0    gdk_window_set_override_redirect
+704        0x0004B2F0    gdk_window_set_role
+705        0x0004D160    gdk_window_set_skip_pager_hint
+706        0x0004D110    gdk_window_set_skip_taskbar_hint
+707        0x00043C00    gdk_window_set_startup_id
+708        0x000237E0    gdk_window_set_static_gravities
+709        0x0004B1F0    gdk_window_set_title
+710        0x0004B340    gdk_window_set_transient_for
+711        0x0004D9F0    gdk_window_set_type_hint
+712        0x0004B0F0    gdk_window_set_urgency_hint
+713        0x0001ECF0    gdk_window_set_user_data
+714        0x00025BB0    gdk_window_shape_combine_mask
+715        0x00025840    gdk_window_shape_combine_region
+716        0x000282B0    gdk_window_show
+717        0x000282D0    gdk_window_show_unraised
+718        0x0002A630    gdk_window_state_get_type
+719        0x0004C520    gdk_window_stick
+720        0x000224F0    gdk_window_thaw_toplevel_updates_libgtk_only
+721        0x000223C0    gdk_window_thaw_updates
+722        0x0002ACF0    gdk_window_type_get_type
+723        0x0002ADB0    gdk_window_type_hint_get_type
+724        0x0004CCB0    gdk_window_unfullscreen
+725        0x0004C660    gdk_window_unmaximize
+726        0x0004C570    gdk_window_unstick
+727        0x000277A0    gdk_window_withdraw
+728        0x0002ADF0    gdk_wm_decoration_get_type
+729        0x0002AE30    gdk_wm_function_get_type
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A8DC    0x0   OriginalFirstThunk:            0x0       
+0x3A8DC    0x0   Characteristics:               0x0       
+0x3A8E0    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A8E4    0x8   ForwarderChain:                0x0       
+0x3A8E8    0xC   Name:                          0xAAAA4   
+0x3A8EC    0x10  FirstThunk:                    0xAAA1C   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A8F0    0x0   OriginalFirstThunk:            0x0       
+0x3A8F0    0x0   Characteristics:               0x0       
+0x3A8F4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A8F8    0x8   ForwarderChain:                0x0       
+0x3A8FC    0xC   Name:                          0xAAAB1   
+0x3A900    0x10  FirstThunk:                    0xAAA34   
+
+GDI32.dll.Arc Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A904    0x0   OriginalFirstThunk:            0x0       
+0x3A904    0x0   Characteristics:               0x0       
+0x3A908    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A90C    0x8   ForwarderChain:                0x0       
+0x3A910    0xC   Name:                          0xAAABB   
+0x3A914    0x10  FirstThunk:                    0xAAA3C   
+
+IMM32.DLL.ImmIsIME Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A918    0x0   OriginalFirstThunk:            0x0       
+0x3A918    0x0   Characteristics:               0x0       
+0x3A91C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A920    0x8   ForwarderChain:                0x0       
+0x3A924    0xC   Name:                          0xAAAC5   
+0x3A928    0x10  FirstThunk:                    0xAAA44   
+
+libcairo-2.dll.cairo_clip Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A92C    0x0   OriginalFirstThunk:            0x0       
+0x3A92C    0x0   Characteristics:               0x0       
+0x3A930    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A934    0x8   ForwarderChain:                0x0       
+0x3A938    0xC   Name:                          0xAAAD4   
+0x3A93C    0x10  FirstThunk:                    0xAAA4C   
+
+libgdk_pixbuf-2.0-0.dll.gdk_pixbuf_new Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A940    0x0   OriginalFirstThunk:            0x0       
+0x3A940    0x0   Characteristics:               0x0       
+0x3A944    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A948    0x8   ForwarderChain:                0x0       
+0x3A94C    0xC   Name:                          0xAAAEC   
+0x3A950    0x10  FirstThunk:                    0xAAA54   
+
+libgio-2.0-0.dll.g_icon_get_type Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A954    0x0   OriginalFirstThunk:            0x0       
+0x3A954    0x0   Characteristics:               0x0       
+0x3A958    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A95C    0x8   ForwarderChain:                0x0       
+0x3A960    0xC   Name:                          0xAAAFD   
+0x3A964    0x10  FirstThunk:                    0xAAA5C   
+
+libglib-2.0-0.dll.g_log Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A968    0x0   OriginalFirstThunk:            0x0       
+0x3A968    0x0   Characteristics:               0x0       
+0x3A96C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A970    0x8   ForwarderChain:                0x0       
+0x3A974    0xC   Name:                          0xAAB0F   
+0x3A978    0x10  FirstThunk:                    0xAAA64   
+
+libgobject-2.0-0.dll.g_type_init Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A97C    0x0   OriginalFirstThunk:            0x0       
+0x3A97C    0x0   Characteristics:               0x0       
+0x3A980    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A984    0x8   ForwarderChain:                0x0       
+0x3A988    0xC   Name:                          0xAAB24   
+0x3A98C    0x10  FirstThunk:                    0xAAA6C   
+
+libintl-8.dll.libintl_dgettext Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A990    0x0   OriginalFirstThunk:            0x0       
+0x3A990    0x0   Characteristics:               0x0       
+0x3A994    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A998    0x8   ForwarderChain:                0x0       
+0x3A99C    0xC   Name:                          0xAAB32   
+0x3A9A0    0x10  FirstThunk:                    0xAAA74   
+
+libpango-1.0-0.dll.pango_color_parse Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A9A4    0x0   OriginalFirstThunk:            0x0       
+0x3A9A4    0x0   Characteristics:               0x0       
+0x3A9A8    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A9AC    0x8   ForwarderChain:                0x0       
+0x3A9B0    0xC   Name:                          0xAAB45   
+0x3A9B4    0x10  FirstThunk:                    0xAAA7C   
+
+libpangocairo-1.0-0.dll.pango_cairo_show_glyph_string Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A9B8    0x0   OriginalFirstThunk:            0x0       
+0x3A9B8    0x0   Characteristics:               0x0       
+0x3A9BC    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A9C0    0x8   ForwarderChain:                0x0       
+0x3A9C4    0xC   Name:                          0xAAB5D   
+0x3A9C8    0x10  FirstThunk:                    0xAAA84   
+
+msvcrt.dll.cos Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A9CC    0x0   OriginalFirstThunk:            0x0       
+0x3A9CC    0x0   Characteristics:               0x0       
+0x3A9D0    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A9D4    0x8   ForwarderChain:                0x0       
+0x3A9D8    0xC   Name:                          0xAAB68   
+0x3A9DC    0x10  FirstThunk:                    0xAAA8C   
+
+OLE32.dll.DoDragDrop Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A9E0    0x0   OriginalFirstThunk:            0x0       
+0x3A9E0    0x0   Characteristics:               0x0       
+0x3A9E4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A9E8    0x8   ForwarderChain:                0x0       
+0x3A9EC    0xC   Name:                          0xAAB72   
+0x3A9F0    0x10  FirstThunk:                    0xAAA94   
+
+SHELL32.DLL.DragFinish Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3A9F4    0x0   OriginalFirstThunk:            0x0       
+0x3A9F4    0x0   Characteristics:               0x0       
+0x3A9F8    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3A9FC    0x8   ForwarderChain:                0x0       
+0x3AA00    0xC   Name:                          0xAAB7E   
+0x3AA04    0x10  FirstThunk:                    0xAAA9C   
+
+USER32.dll.GetDC Hint[0]
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x34000    0x0   Characteristics:               0x0       
+0x34004    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+0x34008    0x8   MajorVersion:                  0x0       
+0x3400A    0xA   MinorVersion:                  0x0       
+0x3400C    0xC   NumberOfNamedEntries:          0x0       
+0x3400E    0xE   NumberOfIdEntries:             0x3       
+  Id: [0x3] (RT_ICON)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x34010    0x0   Name:                          0x3       
+  0x34014    0x4   OffsetToData:                  0x80000028
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x34028    0x0   Characteristics:               0x0       
+    0x3402C    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+    0x34030    0x8   MajorVersion:                  0x0       
+    0x34032    0xA   MinorVersion:                  0x0       
+    0x34034    0xC   NumberOfNamedEntries:          0x0       
+    0x34036    0xE   NumberOfIdEntries:             0x9       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34038    0x0   Name:                          0x1       
+      0x3403C    0x4   OffsetToData:                  0x80000080
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x34080    0x0   Characteristics:               0x0       
+        0x34084    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x34088    0x8   MajorVersion:                  0x0       
+        0x3408A    0xA   MinorVersion:                  0x0       
+        0x3408C    0xC   NumberOfNamedEntries:          0x0       
+        0x3408E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x34090    0x0   Name:                          0x409     
+          0x34094    0x4   OffsetToData:                  0x98      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x34098    0x0   OffsetToData:                  0xA4280   
+            0x3409C    0x4   Size:                          0x128     
+            0x340A0    0x8   CodePage:                      0x0       
+            0x340A4    0xC   Reserved:                      0x0       
+      Id: [0x2]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34040    0x0   Name:                          0x2       
+      0x34044    0x4   OffsetToData:                  0x800000A8
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x340A8    0x0   Characteristics:               0x0       
+        0x340AC    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x340B0    0x8   MajorVersion:                  0x0       
+        0x340B2    0xA   MinorVersion:                  0x0       
+        0x340B4    0xC   NumberOfNamedEntries:          0x0       
+        0x340B6    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x340B8    0x0   Name:                          0x409     
+          0x340BC    0x4   OffsetToData:                  0xC0      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x340C0    0x0   OffsetToData:                  0xA43AC   
+            0x340C4    0x4   Size:                          0x568     
+            0x340C8    0x8   CodePage:                      0x0       
+            0x340CC    0xC   Reserved:                      0x0       
+      Id: [0x3]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34048    0x0   Name:                          0x3       
+      0x3404C    0x4   OffsetToData:                  0x800000D0
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x340D0    0x0   Characteristics:               0x0       
+        0x340D4    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x340D8    0x8   MajorVersion:                  0x0       
+        0x340DA    0xA   MinorVersion:                  0x0       
+        0x340DC    0xC   NumberOfNamedEntries:          0x0       
+        0x340DE    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x340E0    0x0   Name:                          0x409     
+          0x340E4    0x4   OffsetToData:                  0xE8      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x340E8    0x0   OffsetToData:                  0xA4918   
+            0x340EC    0x4   Size:                          0x2E8     
+            0x340F0    0x8   CodePage:                      0x0       
+            0x340F4    0xC   Reserved:                      0x0       
+      Id: [0x4]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34050    0x0   Name:                          0x4       
+      0x34054    0x4   OffsetToData:                  0x800000F8
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x340F8    0x0   Characteristics:               0x0       
+        0x340FC    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x34100    0x8   MajorVersion:                  0x0       
+        0x34102    0xA   MinorVersion:                  0x0       
+        0x34104    0xC   NumberOfNamedEntries:          0x0       
+        0x34106    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x34108    0x0   Name:                          0x409     
+          0x3410C    0x4   OffsetToData:                  0x110     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x34110    0x0   OffsetToData:                  0xA4C04   
+            0x34114    0x4   Size:                          0x8A8     
+            0x34118    0x8   CodePage:                      0x0       
+            0x3411C    0xC   Reserved:                      0x0       
+      Id: [0x5]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34058    0x0   Name:                          0x5       
+      0x3405C    0x4   OffsetToData:                  0x80000120
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x34120    0x0   Characteristics:               0x0       
+        0x34124    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x34128    0x8   MajorVersion:                  0x0       
+        0x3412A    0xA   MinorVersion:                  0x0       
+        0x3412C    0xC   NumberOfNamedEntries:          0x0       
+        0x3412E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x34130    0x0   Name:                          0x409     
+          0x34134    0x4   OffsetToData:                  0x138     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x34138    0x0   OffsetToData:                  0xA54B0   
+            0x3413C    0x4   Size:                          0x668     
+            0x34140    0x8   CodePage:                      0x0       
+            0x34144    0xC   Reserved:                      0x0       
+      Id: [0x6]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34060    0x0   Name:                          0x6       
+      0x34064    0x4   OffsetToData:                  0x80000148
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x34148    0x0   Characteristics:               0x0       
+        0x3414C    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x34150    0x8   MajorVersion:                  0x0       
+        0x34152    0xA   MinorVersion:                  0x0       
+        0x34154    0xC   NumberOfNamedEntries:          0x0       
+        0x34156    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x34158    0x0   Name:                          0x409     
+          0x3415C    0x4   OffsetToData:                  0x160     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x34160    0x0   OffsetToData:                  0xA5B1C   
+            0x34164    0x4   Size:                          0xEA8     
+            0x34168    0x8   CodePage:                      0x0       
+            0x3416C    0xC   Reserved:                      0x0       
+      Id: [0x7]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34068    0x0   Name:                          0x7       
+      0x3406C    0x4   OffsetToData:                  0x80000170
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x34170    0x0   Characteristics:               0x0       
+        0x34174    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x34178    0x8   MajorVersion:                  0x0       
+        0x3417A    0xA   MinorVersion:                  0x0       
+        0x3417C    0xC   NumberOfNamedEntries:          0x0       
+        0x3417E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x34180    0x0   Name:                          0x409     
+          0x34184    0x4   OffsetToData:                  0x188     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x34188    0x0   OffsetToData:                  0xA69C8   
+            0x3418C    0x4   Size:                          0x468     
+            0x34190    0x8   CodePage:                      0x0       
+            0x34194    0xC   Reserved:                      0x0       
+      Id: [0x8]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34070    0x0   Name:                          0x8       
+      0x34074    0x4   OffsetToData:                  0x80000198
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x34198    0x0   Characteristics:               0x0       
+        0x3419C    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x341A0    0x8   MajorVersion:                  0x0       
+        0x341A2    0xA   MinorVersion:                  0x0       
+        0x341A4    0xC   NumberOfNamedEntries:          0x0       
+        0x341A6    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x341A8    0x0   Name:                          0x409     
+          0x341AC    0x4   OffsetToData:                  0x1B0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x341B0    0x0   OffsetToData:                  0xA6E34   
+            0x341B4    0x4   Size:                          0x10A8    
+            0x341B8    0x8   CodePage:                      0x0       
+            0x341BC    0xC   Reserved:                      0x0       
+      Id: [0x9]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34078    0x0   Name:                          0x9       
+      0x3407C    0x4   OffsetToData:                  0x800001C0
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x341C0    0x0   Characteristics:               0x0       
+        0x341C4    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x341C8    0x8   MajorVersion:                  0x0       
+        0x341CA    0xA   MinorVersion:                  0x0       
+        0x341CC    0xC   NumberOfNamedEntries:          0x0       
+        0x341CE    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x341D0    0x0   Name:                          0x409     
+          0x341D4    0x4   OffsetToData:                  0x1D8     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x341D8    0x0   OffsetToData:                  0xA7EE0   
+            0x341DC    0x4   Size:                          0x25A8    
+            0x341E0    0x8   CodePage:                      0x0       
+            0x341E4    0xC   Reserved:                      0x0       
+
+  Id: [0xE] (RT_GROUP_ICON)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x34018    0x0   Name:                          0xE       
+  0x3401C    0x4   OffsetToData:                  0x800001E8
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x341E8    0x0   Characteristics:               0x0       
+    0x341EC    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+    0x341F0    0x8   MajorVersion:                  0x0       
+    0x341F2    0xA   MinorVersion:                  0x0       
+    0x341F4    0xC   NumberOfNamedEntries:          0x1       
+    0x341F6    0xE   NumberOfIdEntries:             0x0       
+      Name: [GTK_ICON]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x341F8    0x0   Name:                          0x80000268
+      0x341FC    0x4   OffsetToData:                  0x80000200
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x34200    0x0   Characteristics:               0x0       
+        0x34204    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x34208    0x8   MajorVersion:                  0x0       
+        0x3420A    0xA   MinorVersion:                  0x0       
+        0x3420C    0xC   NumberOfNamedEntries:          0x0       
+        0x3420E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x34210    0x0   Name:                          0x409     
+          0x34214    0x4   OffsetToData:                  0x218     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x34218    0x0   OffsetToData:                  0xAA48C   
+            0x3421C    0x4   Size:                          0x84      
+            0x34220    0x8   CodePage:                      0x0       
+            0x34224    0xC   Reserved:                      0x0       
+
+  Id: [0x10] (RT_VERSION)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x34020    0x0   Name:                          0x10      
+  0x34024    0x4   OffsetToData:                  0x80000228
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x34228    0x0   Characteristics:               0x0       
+    0x3422C    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+    0x34230    0x8   MajorVersion:                  0x0       
+    0x34232    0xA   MinorVersion:                  0x0       
+    0x34234    0xC   NumberOfNamedEntries:          0x0       
+    0x34236    0xE   NumberOfIdEntries:             0x1       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x34238    0x0   Name:                          0x1       
+      0x3423C    0x4   OffsetToData:                  0x80000240
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x34240    0x0   Characteristics:               0x0       
+        0x34244    0x4   TimeDateStamp:                 0x4E8F43E5 [Fri Oct  7 18:24:37 2011 UTC]
+        0x34248    0x8   MajorVersion:                  0x0       
+        0x3424A    0xA   MinorVersion:                  0x0       
+        0x3424C    0xC   NumberOfNamedEntries:          0x0       
+        0x3424E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x34250    0x0   Name:                          0x409     
+          0x34254    0x4   OffsetToData:                  0x258     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x34258    0x0   OffsetToData:                  0xAA514   
+            0x3425C    0x4   Size:                          0x3C8     
+            0x34260    0x8   CodePage:                      0x0       
+            0x34264    0xC   Reserved:                      0x0       
+
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x33EE8    0x0   StartAddressOfRawData:         0x6C3E3D00
+0x33EEC    0x4   EndAddressOfRawData:           0x6C3E3D03
+0x33EF0    0x8   AddressOfIndex:                0x6C3C34AC
+0x33EF4    0xC   AddressOfCallBacks:            0x6C3E3D03
+0x33EF8    0x10  SizeOfZeroFill:                0x0       
+0x33EFC    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x40ECC    0x0   VirtualAddress:                0xA3000   
+0x40ED0    0x4   SizeOfBlock:                   0x18      
+    000A3ACDh HIGHLOW
+    000A3CCDh HIGHLOW
+    000A3CE8h HIGHLOW
+    000A3CECh HIGHLOW
+    000A3CF0h HIGHLOW
+    000A3CF4h HIGHLOW
+    000A3D03h HIGHLOW
+    000A3000h ABSOLUTE
+

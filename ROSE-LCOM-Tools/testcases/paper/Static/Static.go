@@ -1,1 +1,0 @@
-// Go Doesn't support static methods. Not applicable.

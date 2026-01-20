@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ "x$SPINDLE_TEST_ARGS" == "x" ] ; then
-    PROC_ARG="-T 4"
-else
-    PROC_ARGS="-n $SPINDLE_TEST_ARGS"
-fi
-
-$SPINDLE $SPINDLE_OPTS lrun $PROC_ARG $*

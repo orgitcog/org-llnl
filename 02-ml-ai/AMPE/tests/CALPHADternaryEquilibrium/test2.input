@@ -1,0 +1,34 @@
+// Input for grain growth
+// Units are:
+//   length: um = 10^-6 m
+//   energy: pJ = 10^-12 J
+//
+
+ModelParameters {
+   
+   Temperature {
+      temperature        = 3073. // [K]
+   }
+
+   concentration = 0.16, 0.225
+
+   initial_guess = 0.13, 0.21, 0.12, 0.15, 0.8
+
+   ConcentrationModel {
+      model    = "calphad"
+      Calphad {
+         filename ="../../thermodynamic_data/calphadMoNbTa.dat"
+      }
+      NewtonSolver {
+        max_its = 40
+      }
+   }
+}
+
+ExpectedResults {
+   cl = 0.164344,0.2321
+   cs = 0.13675,0.186999
+   fs = 0.157429
+}
+
+

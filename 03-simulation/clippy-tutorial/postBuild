@@ -1,0 +1,29 @@
+# Needs >= GCC 8.1
+export CC=gcc-8
+export CXX=g++-8
+
+# Get Boost
+cd /tmp
+wget -q --no-check-certificate https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz
+tar xf boost_1_77_0.tar.gz
+
+# Get CMake
+cd /tmp
+wget -q --no-check-certificate https://github.com/Kitware/CMake/releases/download/v3.20.3/cmake-3.20.3-linux-x86_64.tar.gz
+tar xf cmake-3.20.3-linux-x86_64.tar.gz
+export CMAKE_DIR=$PWD/cmake-3.20.3-linux-x86_64
+
+# Get and setup Clippy
+cd /tmp
+git clone https://github.com/LLNL/clippy.git
+cd clippy
+python3.8 setup.py install
+git clone https://github.com/LLNL/clippy-cpp.git
+cd clippy-cpp
+mkdir build
+cd build
+${CMAKE_DIR}/bin/cmake ../ -DBOOST_ROOT=/tmp/boost_1_77_0
+make -j2
+cd ../..
+
+/bin/rm -rf /tmp/cmake-3.20.3-linux-x86_64* && /bin/rm -rf /tmp/boost_1_77_0*

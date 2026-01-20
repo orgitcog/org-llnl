@@ -1,8 +1,0 @@
-.DS_Store
-.nfs*
-build*/
-.vscode
-.cache/
-*/.backup/
-.backup/
-*~

@@ -1,5 +1,0 @@
-#FIRE algorithm
-srun -ppdebug -n8 $exe fire.cfg -i coords.in -l lrs.in
-
-#LBFGS
-srun -ppdebug -n8 $exe -c lbfgs.cfg -i coords.in -l lrs.in

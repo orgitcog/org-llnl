@@ -1,0 +1,32 @@
+{
+  "name": "llnl/blt-phpmd",
+  "description": "Tests php mess detector rules against custom modules, themes, and profile files.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Shelane French",
+      "role": "Maintainer"
+    },
+    {
+      "name": "John Doyle",
+      "homepage": "https://www.digitalpolygon.com/",
+      "role": "Originator"
+    },
+    {
+      "name": "LLNL LivIT",
+      "homepage": "https://www.llnl.gov",
+      "role": "Supporting Organization"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "LLNL\\Phpmd\\": "./src/"
+    }
+  },
+  "require": {
+    "phpmd/phpmd": "^2.12"
+  }
+}

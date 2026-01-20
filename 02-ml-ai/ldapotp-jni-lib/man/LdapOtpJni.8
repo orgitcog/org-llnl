@@ -1,0 +1,50 @@
+.TH LdapOtpJni 8 "June 23, 2015" "libLdapOtpJni" "LdapOtp Java Client Authentication"
+
+.SH NAME
+libLdapOtpJni \- native library for Java client LDAPOTP authentications
+
+.SH SYNOPSIS
+.B /usr/share/java/JLdapOtpInterface/bin/otp_is_otp.sh
+.PP
+.B /usr/share/java/JLdapOtpInterface/bin/otp_auth.sh
+.PP
+.B /usr/share/java/JLdapOtpInterface/bin/otp_auth_pod.sh
+
+.SH DESCRIPTION
+.PP
+
+The \fBlibLdapOtpJni.so\fR file is a static library which is dynamically
+loaded at run time (as needed) by the \fBJLdapOtpInterface.jar\fR java library.
+This library provides a java wrapper for the traditional LdapOtp C libraries.
+Refer to the javadocs of the 
+JLdapOtpInterface package for further information.  Point your browser to;
+
+file:///usr/share/javadoc/JLdapOtpInterface/index.html
+
+
+.SH OPTIONS
+
+.PP
+.TP
+\fB\-h\fR
+Display help
+
+.SH FILES
+.I /usr/lib64/libLdapOtpJni.so
+.RS
+The static library that can be dynamically loaded.  It provides the java native
+interface between the traditional LdapOtp C libraries and the Java Client
+Authentication library.
+.RE
+.I /usr/share/java/JLdapOtpInterface/JLdapOtpInterface.jar
+.RS
+The Java Client Authentication library for ldapotp.  It is used by java applications
+that need to authenticate the user via ldapotp.  The actual authentication
+process is performed via the normal C libraries, this Java Library simply
+wraps them with a native interface.
+.RE
+.SH AUTHOR
+.TP
+Timothy A. Meier < meier3@llnl.gov >
+.SH "SEE ALSO"
+.BR OMS (7)

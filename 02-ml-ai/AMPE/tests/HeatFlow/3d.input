@@ -1,0 +1,75 @@
+// Units are:
+//   length: um = 10^-6 m
+//   energy: pJ = 10^-12 J
+//
+end_time = 800.  // required
+max_timesteps = 50  // optional, default is INT_MAX (alias: max_cycles)
+
+Verbosity {  // optional, block
+   level = 1  // optional, default=1
+}
+
+Visit {
+   interval = 200.
+   interval_type = "time"
+}
+
+TimerManager {
+    timer_list = "solv::*::*","xfer::*::*","PFModel::*"
+    print_threshold = 0.0
+}
+
+ModelParameters {  // required block
+
+   Temperature{
+      type = "heat"
+      equation_type = "unsteady"
+      cp{  
+         SpeciesA{
+            a = 10. // rho*Cp in [J/mol*K]
+         }
+      }
+      thermal_diffusivity = 1.e-3 // [cm^2/s]
+      latent_heat = 1. // unused
+   }
+
+   molar_volume = 1.e-5 // [m^3/mol]
+
+   FreeEnergyModel{
+      type = "linear"
+   }
+
+  BoundaryConditions {
+    Temperature{
+      boundary_0 = "slope", "0."
+      boundary_1 = "slope", "0."
+      boundary_2 = "slope", "-1.e-4"
+      boundary_3 = "slope", "0."
+      boundary_4 = "slope", "1.e-4"
+      boundary_5 = "slope", "1.e-4"
+    }
+
+   }
+}
+
+ScalarDiagnostics {
+   interval = 10.
+   interval_type = "time"
+}   
+
+Integrator {
+   atol = 1.e-6
+   Preconditioner {  // optional block
+   }
+}
+
+InitialConditions {  // required block
+   init_t = 0.
+}
+
+Geometry{
+   periodic_dimension = 0, 0, 0
+   coarsest_level_resolution = 60, 60, 60  // required
+   x_lo         =  0., 0., 0.    // lower end of computational domain.
+   x_up         =  1., 1., 1. // upper end of computational domain.
+}

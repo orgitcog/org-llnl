@@ -1,9 +1,0 @@
-bin/
-build/
-lib/
-
-**/*.pyc
-**/*.nfs*
-**/*.swp
-
-.project

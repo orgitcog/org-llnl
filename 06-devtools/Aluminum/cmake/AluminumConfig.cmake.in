@@ -1,0 +1,108 @@
+# Aluminum currently has 4 known components: MPI, NCCL, HOST_TRANSFER,
+# and MPI_CUDA. "MPI" is always available. The others are found if
+# AL_HAS_<COMP>.
+include(CMakeFindDependencyMacro)
+
+list(APPEND CMAKE_MODULE_PATH "@CMAKE_MODULE_LOCATION@")
+
+include(${CMAKE_CURRENT_LIST_DIR}/AluminumConfigVersion.cmake)
+set(ALUMINUM_VERSION ${PACKAGE_VERSION})
+
+set(_AL_KNOWN_COMPONENTS
+  MPI
+  NCCL
+  HOST_TRANSFER
+  MPI_CUDA)
+
+set(AL_HAS_CALIPER @AL_HAS_CALIPER@)
+set(AL_HAS_CUDA @AL_HAS_CUDA@)
+set(AL_HAS_ROCM @AL_HAS_ROCM@)
+set(AL_HAS_MPI_CUDA @AL_HAS_MPI_CUDA@)
+set(AL_HAS_HOST_TRANSFER @AL_HAS_HOST_TRANSFER@)
+set(AL_HAS_NCCL @AL_HAS_NCCL@)
+set(AL_HAS_ROCTRACER @AL_HAS_ROCTRACER@)
+
+set(MPI_CXX_COMPILER "@MPI_CXX_COMPILER@" CACHE FILEPATH
+  "The MPI CXX compiler wrapper.")
+find_package(MPI 3.0 REQUIRED COMPONENTS CXX)
+
+set(AL_USE_HWLOC @AL_USE_HWLOC@)
+if (AL_USE_HWLOC)
+  find_dependency(HWLOC)
+endif ()
+find_dependency(Threads)
+
+if (AL_HAS_CALIPER)
+  find_dependency(caliper)
+endif ()
+
+if (AL_HAS_ROCM)
+  # The API for Aluminum does not require that HIP language support
+  # be enabled; it only requires the host/device libraries be found.
+  find_dependency(hip)
+  find_dependency(hipcub)
+  find_dependency(rocm_smi)
+
+  set(AL_ROCM_PATH "@AL_ROCM_PATH@")
+
+  if (AL_HAS_NCCL)
+    find_dependency(rccl)
+  endif (AL_HAS_NCCL)
+
+  if (AL_HAS_ROCTRACER)
+    find_dependency(Roctracer COMPONENTS roctx)
+  endif ()
+elseif (AL_HAS_CUDA)
+
+  # The API for Aluminum does not require that CUDA language support
+  # be enabled; it only requires the CUDAToolkit.
+  find_dependency(CUDAToolkit)
+
+  if (AL_HAS_NCCL)
+    find_dependency(NCCL)
+  endif (AL_HAS_NCCL)
+
+  set(AL_HAS_NVPROF @AL_HAS_NVPROF@)
+  if (AL_HAS_NVPROF)
+    set(AL_HAS_EXTERNAL_NVTX @AL_HAS_EXTERNAL_NVTX@)
+    if (AL_HAS_EXTERNAL_NVTX)
+      find_dependency(NVTX)
+    endif ()
+  endif ()
+
+  # Because of their templated nature, the CUB-based memory allocator
+  # is public. Therefore, this dependency is public and must be met
+  # downstream.
+  set(AL_HAS_EXTERNAL_CUB @AL_HAS_EXTERNAL_CUB@)
+  if (AL_HAS_EXTERNAL_CUB)
+    find_dependency(CUB)
+  endif ()
+endif (AL_HAS_ROCM)
+
+@PACKAGE_INIT@
+
+set(_TMP_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIRS@")
+foreach (_DIR ${_TMP_INCLUDE_DIRS})
+  set_and_check(_INCLUDE_DIR "${_DIR}")
+  list(APPEND ALUMINUM_INCLUDE_DIRS "${_INCLUDE_DIR}")
+endforeach (_DIR "${_TMP_INCLUDE_DIRS}")
+
+set(_TMP_LIBRARY_DIRS "@PACKAGE_LIB_INSTALL_DIR@")
+foreach (_DIR ${_TMP_LIBRARY_DIRS})
+  set_and_check(_LIBRARY_DIR "${_DIR}")
+  list(APPEND ALUMINUM_LIBRARY_DIRS "${_LIBRARY_DIR}")
+endforeach (_DIR ${_TMP_LIBRARY_DIRS})
+
+if (NOT TARGET AL::Al)
+  include(${CMAKE_CURRENT_LIST_DIR}/AluminumTargets.cmake)
+endif ()
+
+foreach (comp ${_AL_KNOWN_COMPONENTS})
+  if (AL_HAS_${comp})
+    set(Aluminum_${comp}_FOUND 1)
+  endif ()
+endforeach ()
+
+check_required_components(Aluminum)
+
+set(Aluminum_LIBRARIES AL::Al)

@@ -1,0 +1,173 @@
+name: Dockerfile Updates
+
+# This job updates Dockerfiles for base images (e.g., ubuntu)
+# Two hours later, the jobs that update matrix builds (that use these base images)
+# are run.
+
+on: 
+
+  # On a schedule we push updated recipes
+  schedule:
+    - cron: 0 1 * * *
+
+  # On pull request we test updates to images
+  pull_request:
+    types:
+      [opened]
+ 
+  # On push to main we build and deploy images
+  push: 
+    branches:
+      - main
+
+jobs:
+  update:
+    name: Test Updated Dockerfiles
+    runs-on: ubuntu-latest
+    outputs:
+      dockerfile_matrix: ${{ steps.dockerfile_list.outputs.dockerfilelist_matrix }}
+      empty_matrix: ${{ steps.dockerfile_list.outputs.dockerfilelist_matrix_empty }}
+
+    steps:
+
+      # START PULL REQUEST / PUSH checkout and file derivation =======================
+      # Using git in the container to diff means we explicitly need to checkout a branch
+      # if we use the default of this action we get a detached HEAD state.
+      - uses: actions/checkout@v3
+        if: github.event_name != 'schedule'
+        with:
+           fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        if: github.event_name != 'schedule'
+        uses: tj-actions/changed-files@aa52cfcd81f1a00a6bf1241a8cad6adec4d80638 # v33
+        with:
+          separator: " "
+          files_ignore: .github*
+
+      - name: View Changed Files
+        if: github.event_name != 'schedule'
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done            
+
+      - name: List all Dockerfile and save to matrix
+        uses: vsoch/uptodate@main
+        if: github.event_name != 'schedule'
+        id: dockerfile_list_pr
+        with: 
+          root: ${{ steps.changed-files.outputs.all_changed_files }}
+          parser: dockerfilelist
+          flags: "--no-empty-build-args"
+      # END PULL REQUEST / PUSH checkout and file derivation =======================
+
+      # START SCHEDULED checkout and file derivation =======================
+      - uses: actions/checkout@v3
+        if: github.event_name == 'schedule'
+        with:
+           fetch-depth: 0
+
+      - name: Add new Dockerfiles for build
+        if: github.event_name == 'schedule'
+        uses: vsoch/uptodate@main
+        with: 
+          root: .
+          parser: dockerhierarchy
+
+      - name: Update existing Dockerfile hashes
+        uses: vsoch/uptodate@main
+        if: github.event_name == 'schedule'
+        id: dockerfile_check
+        with: 
+          root: .
+          parser: dockerfile
+
+      # This should not trigger a second time, since the token is not a PAT
+      - name: Update Recipes
+        if: github.event_name == 'schedule'
+        env:
+          result: ${{ steps.dockerfile_check.outputs.dockerfile_matrix }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          result_name: ${{ matrix.result.name }}
+        run: /bin/bash .github/scripts/commit.sh
+
+      - name: List all Dockerfile and save to matrix
+        uses: vsoch/uptodate@main
+        if: github.event_name == 'schedule'
+        id: dockerfile_list_scheduled
+        with: 
+          root: .
+          parser: dockerfilelist
+          flags: "--no-empty-build-args"
+          changes: true # only include changed files
+
+      # END SCHEDULED checkout and file derivation =======================
+
+      - name: View Build Matrix Result
+        id: dockerfile_list
+        env:
+          result: ${{ steps.dockerfile_list_pr.outputs.dockerfilelist_matrix }}
+          result_scheduled: ${{ steps.dockerfile_list_scheduled.outputs.dockerfilelist_matrix }}
+        run: /bin/bash .github/scripts/combine_results.sh
+
+  build:
+    needs:
+      - update
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        result: ${{ fromJson(needs.update.outputs.dockerfile_matrix) }}
+    if: ${{ needs.update.outputs.dockerfile_matrix != '[]' }}
+
+    name: "Build ${{ matrix.result.name }}"
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: GHCR Login
+      if: (github.event_name != 'pull_request')
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ secrets.GHCR_USERNAME }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Make Space For Build
+      run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+
+    # This currently has a lot of extra prints for debugging
+    - name: Build ${{ matrix.result.name }}
+      env:
+        result_name: ${{ matrix.result.name }}
+      id: builder   
+      run: /bin/bash .github/scripts/build.sh
+
+    - name: Deploy Container
+      if: (github.event_name != 'pull_request')
+      env:
+        uri: ${{ steps.builder.outputs.container_uri }}
+      run: |
+        docker images
+        printf "docker push ${{ env.uri }}\n"
+        docker push ${{ env.uri }}
+
+    - name: Run Librarian
+      id: runner
+      if: (github.event_name != 'pull_request')
+      uses: rse-ops/librarian/docker-images@main
+      with:
+          container: ${{ steps.builder.outputs.uri }} 
+          dockerfile: ${{ steps.builder.outputs.dockerfile_dir }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          outdir: _library
+          # defaults to branch: gh-pages, deploy: true, outdir: pwd
+          # outdir is in context of the gh-pages branch, not here.

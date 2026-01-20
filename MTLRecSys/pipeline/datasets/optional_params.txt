@@ -1,4 +1,0 @@
-drug_features_cosine=10
-cell_features_cosine=10
-drug_features_gauss=10
-cell_features_gauss=10

@@ -1,5 +1,0 @@
-{
-    "name": "simple",
-    "clean_cmd": "make clean",
-    "build_cmd": "make"
-}

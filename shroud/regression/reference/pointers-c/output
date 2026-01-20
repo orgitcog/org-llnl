@@ -1,6 +1,0 @@
-Will not generate C wrappers for a language=c library
-Wrote wrappointers.h
-Wrote wrappointers.c
-Wrote wrapfpointers.f
-Wrote utilpointers.c
-Wrote typespointers.h

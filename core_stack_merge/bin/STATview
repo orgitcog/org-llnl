@@ -1,5 +1,0 @@
-#!/bin/sh
-
-_prefix=/nfs/tmp2/lee218/deleteme/core_stack_merge-2.3
-
-/usr/bin/python ${_prefix}/bin/internals/STATview.py $@

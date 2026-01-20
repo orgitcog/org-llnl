@@ -1,7 +1,0 @@
-# Read in system-specific link constraints.
--r links.txt
-
-# Remaining dependencies for running example Jupyter notebooks
-# .. Tox appears to have trouble with environment markers in requirements
-#    files so grab them from setup.py.
--e .[jupyter]

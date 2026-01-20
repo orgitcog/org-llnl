@@ -1,0 +1,26 @@
+// Copyright (c) Lawrence Livermore National Security, LLC and other Conduit
+// Project developers. See top-level LICENSE AND COPYRIGHT files for dates and
+// other details. No copyright assignment is required to contribute to Conduit.
+
+//-----------------------------------------------------------------------------
+///
+/// file: t_config.hpp
+///
+//-----------------------------------------------------------------------------
+
+#ifndef CONDUIT_T_CONFIG_HPP
+#define CONDUIT_T_CONFIG_HPP
+
+//-----------------------------------------------------------------------------
+//
+// #define test source and bin dir
+//
+//-----------------------------------------------------------------------------
+
+#define CONDUIT_T_SRC_DIR  "@CONDUIT_T_SRC_DIR@"
+#define CONDUIT_T_BIN_DIR  "@CONDUIT_T_BIN_DIR@"
+
+#endif
+
+
+

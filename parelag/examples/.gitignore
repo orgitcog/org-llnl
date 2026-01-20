@@ -1,5 +1,0 @@
-mesh.*
-sol.*
-*.exe
-slurm-*.out
-*.getpot~

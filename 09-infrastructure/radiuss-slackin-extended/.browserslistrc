@@ -1,0 +1,10 @@
+# https://github.com/browserslist/browserslist#readme
+
+>= 0.5%
+last 2 major versions
+not dead
+Firefox ESR
+Edge >= 16
+Explorer >= 10
+iOS >= 10
+Safari >= 10
