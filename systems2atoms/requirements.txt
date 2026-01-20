@@ -1,0 +1,11 @@
+numpy < 2.0.0
+scikit-learn
+flake8
+pytest
+pandas
+matplotlib
+tqdm
+torch
+pyomo
+omlt >= 1.2.0
+linear-tree @ git+https://github.com/emsunshine/linear-tree
