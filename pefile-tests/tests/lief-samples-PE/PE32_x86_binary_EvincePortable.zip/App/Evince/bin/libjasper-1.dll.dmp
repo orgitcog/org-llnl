@@ -1,0 +1,650 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F3B73 [Fri Oct  7 17:48:35 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x3DE00   
+0x90       0xC   NumberOfSymbols:               0x6B      
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x1C000   
+0xA0       0x8   SizeOfInitializedData:         0x3000    
+0xA4       0xC   SizeOfUninitializedData:       0x32000   
+0xA8       0x10  AddressOfEntryPoint:           0x4DDE0   
+0xAC       0x14  BaseOfCode:                    0x33000   
+0xB0       0x18  BaseOfData:                    0x4F000   
+0xB4       0x1C  ImageBase:                     0x617C0000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x52000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x32000   
+0x180      0x8   Misc_PhysicalAddress:          0x32000   
+0x180      0x8   Misc_VirtualSize:              0x32000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x1C000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x1C000   
+0x1A8      0x8   Misc_VirtualSize:              0x1C000   
+0x1AC      0xC   VirtualAddress:                0x33000   
+0x1B0      0x10  SizeOfRawData:                 0x1B200   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.917888 (Min=0.0, Max=8.0)
+MD5     hash: 0c05b75f081f3632ba7911ff4bdcdbbe
+SHA-1   hash: baf887751ba6b03f5c56739f729dfe5deed3aa22
+SHA-256 hash: d43b97ad2b7b4016ace5ca018eb2a48c475164077d01c8f785677155e0dcf47d
+SHA-512 hash: 5ceffb3a7f3e78821225793bf30e99a1d1c87d3fb1bd1c57cf2a15cb2662fd3253c5dacf123d63605b22a44e2ff8c569d7310d838a8d9f5b8c05a76b4a8adb44
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          UPX2
+0x1D0      0x8   Misc:                          0x3000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x3000    
+0x1D0      0x8   Misc_VirtualSize:              0x3000    
+0x1D4      0xC   VirtualAddress:                0x4F000   
+0x1D8      0x10  SizeOfRawData:                 0x2A00    
+0x1DC      0x14  PointerToRawData:              0x1B400   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.407323 (Min=0.0, Max=8.0)
+MD5     hash: f4699f6f2c35ca40b1f971d8a3d3ad37
+SHA-1   hash: a1ac527727982c33f18c2be24cf3150c061a4d8f
+SHA-256 hash: 4127cff25ed67a49128242a4e62819c732de0bc0b544d865d6a076552fadf006
+SHA-512 hash: 86871ceb66295cf20155ab7deb89085aa7006cb5b2aee9ba17f0ff1a01f7e8728be031ab5f8491b3782bcfc1edd0bb363973a921242e55b3ba30c3fe803c2b52
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x4F100   
+0xFC       0x4   Size:                          0x2790    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x4F000   
+0x104      0x4   Size:                          0x100     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x51890   
+0x124      0x4   Size:                          0x20      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x4E008   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x1B500    0x0   Characteristics:               0x0       
+0x1B504    0x4   TimeDateStamp:                 0x4E8F3B69 [Fri Oct  7 17:48:25 2011 UTC]
+0x1B508    0x8   MajorVersion:                  0x0       
+0x1B50A    0xA   MinorVersion:                  0x0       
+0x1B50C    0xC   Name:                          0x4FFBA   
+0x1B510    0x10  Base:                          0x1       
+0x1B514    0x14  NumberOfFunctions:             0x175     
+0x1B518    0x18  NumberOfNames:                 0x175     
+0x1B51C    0x1C  AddressOfFunctions:            0x4F128   
+0x1B520    0x20  AddressOfNames:                0x4F6FC   
+0x1B524    0x24  AddressOfNameOrdinals:         0x4FCD0   
+
+Ordinal      RVA         Name
+1          0x00021BC0    JPC_ISTERMINATED
+2          0x00021A40    JPC_NOMINALGAIN
+3          0x000219E0    JPC_PASSTYPE
+4          0x00021B30    JPC_SEGPASSCNT
+5          0x00021AE0    JPC_SEGTYPE
+6          0x0000C300    bmp_decode
+7          0x0000D200    bmp_encode
+8          0x0000C000    bmp_info_create
+9          0x0000C020    bmp_info_destroy
+10         0x0000C050    bmp_isgrayscalepal
+11         0x0000C0B0    bmp_numcmpts
+12         0x0000CFD0    bmp_validate
+13         0x00018E00    calcrdslopes
+14         0x000363E0    decopts
+15         0x00018F40    dump_layeringinfo
+16         0x00018C90    dump_passes
+17         0x00036560    encopts
+18         0x00026E80    getthebyte
+19         0x00009A70    jas_calloc
+20         0x000097A0    jas_cleanup
+21         0x00002E60    jas_clrspc_numchans
+22         0x00002800    jas_cmprof_copy
+23         0x000033B0    jas_cmprof_createfromclrspc
+24         0x00003270    jas_cmprof_createfromiccprof
+25         0x000027B0    jas_cmprof_destroy
+26         0x000028B0    jas_cmxform_apply
+27         0x00002EA0    jas_cmxform_create
+28         0x00002E30    jas_cmxform_destroy
+29         0x0003C744    jas_dummy
+30         0x00003610    jas_eprintf
+31         0x00009A30    jas_free
+32         0x00003600    jas_getdbglevel
+33         0x00003730    jas_getopt
+34         0x0000BFF0    jas_getversion
+35         0x000094D0    jas_iccattrtab_dump
+36         0x00009620    jas_iccattrval_allowmodify
+37         0x000083C0    jas_iccattrval_clone
+38         0x00008310    jas_iccattrval_create
+39         0x000083D0    jas_iccattrval_destroy
+40         0x00009470    jas_iccattrval_dump
+41         0x00035020    jas_iccattrvalinfos
+42         0x000086F0    jas_iccprof_copy
+43         0x00009700    jas_iccprof_createfrombuf
+44         0x00009750    jas_iccprof_createfromclrspc
+45         0x000035C0    jas_iccprof_createfromcmprof
+46         0x00008520    jas_iccprof_destroy
+47         0x00009600    jas_iccprof_dump
+48         0x00008260    jas_iccprof_getattr
+49         0x000082B0    jas_iccprof_gethdr
+50         0x00008FA0    jas_iccprof_load
+51         0x00008860    jas_iccprof_save
+52         0x000087D0    jas_iccprof_setattr
+53         0x000082E0    jas_iccprof_sethdr
+54         0x00035120    jas_iccprofdata_sgray
+55         0x00035100    jas_iccprofdata_sgraylen
+56         0x000352C0    jas_iccprofdata_srgb
+57         0x000352AC    jas_iccprofdata_srgblen
+58         0x00004B10    jas_image_addcmpt
+59         0x00004750    jas_image_addfmt
+60         0x00005BD0    jas_image_chclrspc
+61         0x000046D0    jas_image_clearfmts
+62         0x00003FD0    jas_image_copy
+63         0x00004D00    jas_image_copycmpt
+64         0x00004070    jas_image_create
+65         0x00003F00    jas_image_create0
+66         0x00004900    jas_image_decode
+67         0x00004A80    jas_image_delcmpt
+68         0x00004FF0    jas_image_depalettize
+69         0x00003F60    jas_image_destroy
+70         0x000052B0    jas_image_dump
+71         0x000041D0    jas_image_encode
+72         0x000049C0    jas_image_fmtfromname
+73         0x00004850    jas_image_fmttostr
+74         0x00005130    jas_image_getcmptbytype
+75         0x000048A0    jas_image_getfmt
+76         0x00005B80    jas_image_ishomosamp
+77         0x00004C30    jas_image_lookupfmtbyid
+78         0x00004C70    jas_image_lookupfmtbyname
+79         0x00004A40    jas_image_rawsize
+80         0x00004260    jas_image_readcmpt
+81         0x00005170    jas_image_readcmpt2
+82         0x00004DC0    jas_image_readcmptsample
+83         0x000055F0    jas_image_sampcmpt
+84         0x00004CD0    jas_image_strtofmt
+85         0x00004490    jas_image_writecmpt
+86         0x000054C0    jas_image_writecmpt2
+87         0x00004ED0    jas_image_writecmptsample
+88         0x000097B0    jas_init
+89         0x00009A10    jas_malloc
+90         0x0000A170    jas_matrix_asl
+91         0x0000A0E0    jas_matrix_asr
+92         0x00009DE0    jas_matrix_bindsub
+93         0x0000A050    jas_matrix_clip
+94         0x00009F20    jas_matrix_cmp
+95         0x00009D70    jas_matrix_copy
+96         0x00009B40    jas_matrix_create
+97         0x00009AC0    jas_matrix_destroy
+98         0x00009FC0    jas_matrix_divpow2
+99         0x0000A1E0    jas_matrix_resize
+100        0x0000A240    jas_matrix_setall
+101        0x00003640    jas_memdump
+102        0x0003C008    jas_optarg
+103        0x0003500C    jas_opterr
+104        0x0003C00C    jas_optind
+105        0x00009A50    jas_realloc
+106        0x00009EC0    jas_seq2d_bindsub
+107        0x00009CD0    jas_seq2d_copy
+108        0x00009C50    jas_seq2d_create
+109        0x0000A2B0    jas_seq2d_input
+110        0x0000A3F0    jas_seq2d_output
+111        0x000035E0    jas_setdbglevel
+112        0x0000BC80    jas_strdup
+113        0x0000B440    jas_stream_close
+114        0x0000B820    jas_stream_copy
+115        0x0000B990    jas_stream_display
+116        0x0000AD00    jas_stream_fdopen
+117        0x0000AE70    jas_stream_fillbuf
+118        0x0000B320    jas_stream_flush
+119        0x0000B210    jas_stream_flushbuf
+120        0x0000AB30    jas_stream_fopen
+121        0x0000AC10    jas_stream_freopen
+122        0x0000B170    jas_stream_getc_func
+123        0x0000AFF0    jas_stream_gets
+124        0x0000AF60    jas_stream_gobble
+125        0x0000ADC0    jas_stream_isseekable
+126        0x0000BBF0    jas_stream_length
+127        0x0000B470    jas_stream_memopen
+128        0x0000B550    jas_stream_pad
+129        0x0000B680    jas_stream_printf
+130        0x0000B770    jas_stream_putc_func
+131        0x0000B5F0    jas_stream_puts
+132        0x0000B0D0    jas_stream_read
+133        0x0000B410    jas_stream_rewind
+134        0x0000B350    jas_stream_seek
+135        0x0000B970    jas_stream_setrwcount
+136        0x0000AE10    jas_stream_tell
+137        0x0000AC50    jas_stream_tmpfile
+138        0x0000AD80    jas_stream_ungetc
+139        0x0000B6D0    jas_stream_write
+140        0x0000BFD0    jas_taginfo_nonull
+141        0x0000BF80    jas_taginfos_lookup
+142        0x0000BD20    jas_tmr_get
+143        0x0000BCC0    jas_tmr_start
+144        0x0000BCF0    jas_tmr_stop
+145        0x0000BD80    jas_tvparser_create
+146        0x0000BD50    jas_tvparser_destroy
+147        0x0000BF60    jas_tvparser_gettag
+148        0x0000BF70    jas_tvparser_getval
+149        0x0000BDD0    jas_tvparser_next
+150        0x0000EEF0    jp2_box_create
+151        0x0000EFE0    jp2_box_destroy
+152        0x0000F010    jp2_box_dump
+153        0x0000F0D0    jp2_box_get
+154        0x0000F350    jp2_box_put
+155        0x00035F60    jp2_boxinfo_unk
+156        0x0000F440    jp2_boxinfolookup
+157        0x00035F80    jp2_boxinfos
+158        0x0000F490    jp2_cdef_lookup
+159        0x0000F5D0    jp2_decode
+160        0x00010010    jp2_encode
+161        0x0000FF70    jp2_validate
+162        0x0002D6B0    jpc_atoaf
+163        0x00011050    jpc_bitstream_align
+164        0x000110A0    jpc_bitstream_close
+165        0x00010AA0    jpc_bitstream_fillbuf
+166        0x00010CE0    jpc_bitstream_getbit_func
+167        0x00010C20    jpc_bitstream_getbits
+168        0x00010DE0    jpc_bitstream_inalign
+169        0x00010D50    jpc_bitstream_needalign
+170        0x00010EB0    jpc_bitstream_outalign
+171        0x00010DC0    jpc_bitstream_pending
+172        0x000107F0    jpc_bitstream_putbit_func
+173        0x000108F0    jpc_bitstream_putbits
+174        0x00010710    jpc_bitstream_sopen
+175        0x00029850    jpc_cod_gettsfb
+176        0x00011A90    jpc_cstate_create
+177        0x00011AB0    jpc_cstate_destroy
+178        0x00022770    jpc_dec_decodecblks
+179        0x0002B540    jpc_dec_decodepkts
+180        0x0002B4C0    jpc_dec_lookahead
+181        0x00036400    jpc_dec_mstab
+182        0x0002B210    jpc_dec_pi_create
+183        0x00015D40    jpc_decode
+184        0x00018B50    jpc_enc_cp_destroy
+185        0x00019DF0    jpc_enc_create
+186        0x00019D90    jpc_enc_destroy
+187        0x00019E70    jpc_enc_dump
+188        0x00026F20    jpc_enc_enccblk
+189        0x00029600    jpc_enc_enccblks
+190        0x00018C30    jpc_enc_encodetiledata
+191        0x0002C140    jpc_enc_encpkt
+192        0x0002D280    jpc_enc_encpkts
+193        0x0002D3E0    jpc_enc_pi_create
+194        0x00019B50    jpc_enc_tile_create
+195        0x00019AD0    jpc_enc_tile_destroy
+196        0x0001A070    jpc_encode
+197        0x0001B810    jpc_firstone
+198        0x0001B7D0    jpc_floorlog2
+199        0x0001E580    jpc_ft_analyze
+200        0x0001DFD0    jpc_ft_fwdlift_col
+201        0x0001E140    jpc_ft_fwdlift_colgrp
+202        0x0001E350    jpc_ft_fwdlift_colres
+203        0x0001DEB0    jpc_ft_fwdlift_row
+204        0x00036E40    jpc_ft_hpenergywts
+205        0x0001E7F0    jpc_ft_invlift_col
+206        0x0001E970    jpc_ft_invlift_colgrp
+207        0x0001EB80    jpc_ft_invlift_colres
+208        0x0001E6B0    jpc_ft_invlift_row
+209        0x00036F40    jpc_ft_lpenergywts
+210        0x00036C30    jpc_ft_qmfb2d
+211        0x0001EDB0    jpc_ft_synthesize
+212        0x00013C50    jpc_getdata
+213        0x00021FE0    jpc_getmagctxno
+214        0x000129C0    jpc_getms
+215        0x00021ED0    jpc_getscctxno
+216        0x00021C20    jpc_getsignmsedec_func
+217        0x00021DF0    jpc_getspb
+218        0x00012180    jpc_getuint16
+219        0x00013350    jpc_getuint32
+220        0x00011C80    jpc_getuint8
+221        0x00021CB0    jpc_getzcctxno
+222        0x0001BA70    jpc_ict
+223        0x0001BC20    jpc_iict
+224        0x0002D080    jpc_init_t2state
+225        0x00022000    jpc_initctxs
+226        0x00022080    jpc_initluts
+227        0x00022060    jpc_initmqctxs
+228        0x0001B970    jpc_irct
+229        0x0003DE00    jpc_magctxnolut
+230        0x0001BDA0    jpc_mct_getsynweight
+231        0x0003DD60    jpc_mqctxs
+232        0x0001C030    jpc_mqdec_create
+233        0x0001BDF0    jpc_mqdec_destroy
+234        0x0001C3F0    jpc_mqdec_dump
+235        0x0001C370    jpc_mqdec_getbit_func
+236        0x0001BE20    jpc_mqdec_init
+237        0x0001C240    jpc_mqdec_lpsexchrenormd
+238        0x0001C110    jpc_mqdec_mpsexchrenormd
+239        0x0001C0E0    jpc_mqdec_setctx
+240        0x0001BFC0    jpc_mqdec_setctxs
+241        0x0001BFB0    jpc_mqdec_setinput
+242        0x0001CA80    jpc_mqenc_codelps
+243        0x0001C620    jpc_mqenc_codemps2
+244        0x0001C550    jpc_mqenc_create
+245        0x0001C480    jpc_mqenc_destroy
+246        0x0001D560    jpc_mqenc_dump
+247        0x0001CC90    jpc_mqenc_flush
+248        0x0001C5F0    jpc_mqenc_getstate
+249        0x0001C4B0    jpc_mqenc_init
+250        0x0001C820    jpc_mqenc_putbit_func
+251        0x0001C4E0    jpc_mqenc_setctxs
+252        0x00036640    jpc_mqstates
+253        0x00011AD0    jpc_ms_create
+254        0x00011B90    jpc_ms_destroy
+255        0x00011BC0    jpc_ms_dump
+256        0x0001FB30    jpc_ns_analyze
+257        0x0001FC60    jpc_ns_fwdlift_col
+258        0x0001F1A0    jpc_ns_fwdlift_colgrp
+259        0x0001F630    jpc_ns_fwdlift_colres
+260        0x0001EEE0    jpc_ns_fwdlift_row
+261        0x00036C40    jpc_ns_hpenergywts
+262        0x00020CE0    jpc_ns_invlift_col
+263        0x00020250    jpc_ns_invlift_colgrp
+264        0x000206D0    jpc_ns_invlift_colres
+265        0x0001FFB0    jpc_ns_invlift_row
+266        0x00036D40    jpc_ns_lpenergywts
+267        0x00036C20    jpc_ns_qmfb2d
+268        0x00020BB0    jpc_ns_synthesize
+269        0x0002AFA0    jpc_pchg_copy
+270        0x0002B140    jpc_pchg_destroy
+271        0x0002B030    jpc_pchglist_copy
+272        0x0002ADD0    jpc_pchglist_create
+273        0x0002AFE0    jpc_pchglist_destroy
+274        0x0002B160    jpc_pchglist_get
+275        0x0002AE50    jpc_pchglist_insert
+276        0x0002B180    jpc_pchglist_numpchgs
+277        0x0002AF20    jpc_pchglist_remove
+278        0x0002AEF0    jpc_pi_addpchg
+279        0x0002AE00    jpc_pi_create0
+280        0x0002B0A0    jpc_pi_destroy
+281        0x0002B190    jpc_pi_init
+282        0x00029EB0    jpc_pi_next
+283        0x00022300    jpc_pow2i
+284        0x000161E0    jpc_ppmstabtostreams
+285        0x00016330    jpc_pptstabwrite
+286        0x000160A0    jpc_ppxstab_create
+287        0x000164D0    jpc_ppxstab_destroy
+288        0x000160D0    jpc_ppxstab_grow
+289        0x00016140    jpc_ppxstab_insert
+290        0x00016390    jpc_ppxstabent_create
+291        0x000164A0    jpc_ppxstabent_destroy
+292        0x00013C80    jpc_putdata
+293        0x00013210    jpc_putms
+294        0x00012BB0    jpc_putuint16
+295        0x000137A0    jpc_putuint32
+296        0x00011F50    jpc_putuint8
+297        0x0001DB50    jpc_qmfb_join_col
+298        0x0001DC40    jpc_qmfb_join_colgrp
+299        0x0001DD60    jpc_qmfb_join_colres
+300        0x0001DAA0    jpc_qmfb_join_row
+301        0x0001D6A0    jpc_qmfb_split_col
+302        0x0001D7C0    jpc_qmfb_split_colgrp
+303        0x0001D920    jpc_qmfb_split_colres
+304        0x0001D5D0    jpc_qmfb_split_row
+305        0x00018D10    jpc_quantize
+306        0x0001B860    jpc_rct
+307        0x00042600    jpc_refnmsedec
+308        0x0003DB60    jpc_refnmsedec0
+309        0x0002CF60    jpc_restore_t2state
+310        0x0002CE40    jpc_save_t2state
+311        0x0003C760    jpc_scctxnolut
+312        0x00015A80    jpc_seg_alloc
+313        0x00015AE0    jpc_seg_destroy
+314        0x000159F0    jpc_seglist_insert
+315        0x00015A30    jpc_seglist_remove
+316        0x0002D920    jpc_seq_conv
+317        0x0002D8A0    jpc_seq_norm
+318        0x0002D7C0    jpc_seq_upsample
+319        0x00041E00    jpc_signmsedec
+320        0x00042000    jpc_signmsedec0
+321        0x00042200    jpc_spblut
+322        0x00015B10    jpc_streamlist_create
+323        0x00015C80    jpc_streamlist_destroy
+324        0x00016040    jpc_streamlist_get
+325        0x00015B80    jpc_streamlist_insert
+326        0x00016090    jpc_streamlist_numstreams
+327        0x00015C20    jpc_streamlist_remove
+328        0x000212E0    jpc_tagtree_copy
+329        0x00021020    jpc_tagtree_create
+330        0x00021810    jpc_tagtree_decode
+331        0x000212B0    jpc_tagtree_destroy
+332        0x00021970    jpc_tagtree_dump
+333        0x00021420    jpc_tagtree_encode
+334        0x00021400    jpc_tagtree_getleaf
+335        0x00021360    jpc_tagtree_reset
+336        0x000213A0    jpc_tagtree_setvalue
+337        0x000299A0    jpc_tsfb_analyze
+338        0x000298C0    jpc_tsfb_analyze2
+339        0x000298A0    jpc_tsfb_destroy
+340        0x00029E00    jpc_tsfb_getbands
+341        0x00029B80    jpc_tsfb_getbands2
+342        0x00029B00    jpc_tsfb_synthesize
+343        0x00029A20    jpc_tsfb_synthesize2
+344        0x00013BD0    jpc_validate
+345        0x0003CB60    jpc_zcctxnolut
+346        0x0002DBB0    jpg_decode
+347        0x0002DF10    jpg_encode
+348        0x00037048    jpg_opttab
+349        0x0002E510    jpg_validate
+350        0x0002EC90    mif_decode
+351        0x0002F040    mif_encode
+352        0x00037060    mif_tags
+353        0x000370B0    mif_tags2
+354        0x0002F620    mif_validate
+355        0x00036500    modetab
+356        0x0002F8C0    pgx_decode
+357        0x0002F6C0    pgx_dumphdr
+358        0x0002FE50    pgx_encode
+359        0x0002FDC0    pgx_validate
+360        0x00030440    pnm_decode
+361        0x00030D20    pnm_encode
+362        0x00030150    pnm_fmt
+363        0x00030180    pnm_maxvaltodepth
+364        0x000370E0    pnm_opttab
+365        0x00030110    pnm_type
+366        0x00030BA0    pnm_validate
+367        0x00036520    prgordtab
+368        0x00031570    ras_decode
+369        0x00042800    ras_dummy
+370        0x00031EA0    ras_encode
+371        0x00031D60    ras_validate
+372        0x00019110    rateallocate
+373        0x00018B90    ratestrtosize
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x1B400    0x0   OriginalFirstThunk:            0x0       
+0x1B400    0x0   Characteristics:               0x0       
+0x1B404    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x1B408    0x8   ForwarderChain:                0x0       
+0x1B40C    0xC   Name:                          0x4F078   
+0x1B410    0x10  FirstThunk:                    0x4F050   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x1B414    0x0   OriginalFirstThunk:            0x0       
+0x1B414    0x0   Characteristics:               0x0       
+0x1B418    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x1B41C    0x8   ForwarderChain:                0x0       
+0x1B420    0xC   Name:                          0x4F085   
+0x1B424    0x10  FirstThunk:                    0x4F068   
+
+libjpeg-8.dll.jpeg_std_error Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x1B428    0x0   OriginalFirstThunk:            0x0       
+0x1B428    0x0   Characteristics:               0x0       
+0x1B42C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x1B430    0x8   ForwarderChain:                0x0       
+0x1B434    0xC   Name:                          0x4F093   
+0x1B438    0x10  FirstThunk:                    0x4F070   
+
+msvcrt.dll._iob Hint[0]
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x1B208    0x0   StartAddressOfRawData:         0x6180E020
+0x1B20C    0x4   EndAddressOfRawData:           0x6180E023
+0x1B210    0x8   AddressOfIndex:                0x617FC3CC
+0x1B214    0xC   AddressOfCallBacks:            0x6180E023
+0x1B218    0x10  SizeOfZeroFill:                0x0       
+0x1B21C    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x1DC90    0x0   VirtualAddress:                0x4D000   
+0x1DC94    0x4   SizeOfBlock:                   0xC       
+    0004DDEDh HIGHLOW
+    0004DFEDh HIGHLOW
+
+[IMAGE_BASE_RELOCATION]
+0x1DC9C    0x0   VirtualAddress:                0x4E000   
+0x1DCA0    0x4   SizeOfBlock:                   0x14      
+    0004E008h HIGHLOW
+    0004E00Ch HIGHLOW
+    0004E010h HIGHLOW
+    0004E014h HIGHLOW
+    0004E023h HIGHLOW
+    0004E000h ABSOLUTE
+

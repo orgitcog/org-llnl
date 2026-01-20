@@ -1,0 +1,782 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F42D3 [Fri Oct  7 18:20:03 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x3B400   
+0x90       0xC   NumberOfSymbols:               0xE0      
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x16000   
+0xA0       0x8   SizeOfInitializedData:         0x4000    
+0xA4       0xC   SizeOfUninitializedData:       0x2E000   
+0xA8       0x10  AddressOfEntryPoint:           0x440C0   
+0xAC       0x14  BaseOfCode:                    0x2F000   
+0xB0       0x18  BaseOfData:                    0x45000   
+0xB4       0x1C  ImageBase:                     0x65580000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x49000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x2E000   
+0x180      0x8   Misc_PhysicalAddress:          0x2E000   
+0x180      0x8   Misc_VirtualSize:              0x2E000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x16000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x16000   
+0x1A8      0x8   Misc_VirtualSize:              0x16000   
+0x1AC      0xC   VirtualAddress:                0x2F000   
+0x1B0      0x10  SizeOfRawData:                 0x15400   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.921842 (Min=0.0, Max=8.0)
+MD5     hash: e8b1c11b53bc0a00ee8bec91aaeac7ed
+SHA-1   hash: 96ab0a3fff5df66729f2c666310c74e17b0f0062
+SHA-256 hash: 7e7f663b7a9940d3a9ed118cc8dd4f2f0fd82be165a639206b456a9402e52f54
+SHA-512 hash: 7072a7dbebdf18cc19a321abb49d781a4d110429602338e02cb853a2997b0c02eef33967db7c96158c191b7b8c9030383f6699c553995934a5eb5faf793f7003
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          .rsrc
+0x1D0      0x8   Misc:                          0x4000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x4000    
+0x1D0      0x8   Misc_VirtualSize:              0x4000    
+0x1D4      0xC   VirtualAddress:                0x45000   
+0x1D8      0x10  SizeOfRawData:                 0x3E00    
+0x1DC      0x14  PointerToRawData:              0x15600   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.068085 (Min=0.0, Max=8.0)
+MD5     hash: 8e78601f872ad8a5a10b639ea8179b99
+SHA-1   hash: 01479523ae41eab9a3ca25b56dce997c7e5b512f
+SHA-256 hash: 3b9f185b04ed2c6c49af67abb3ac85822090344ebf646aed3f9d80a5f699f09a
+SHA-512 hash: 5036711d1d768b61951a4b888dcf61bf0fa12609948d88d0615c27194d8a42a4de0c4f4c9dc529723878b958f7c13606655bcec91bb5a26d4e2ac429bd8ff01c
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x454AC   
+0xFC       0x4   Size:                          0x38B4    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x45330   
+0x104      0x4   Size:                          0x17C     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x45000   
+0x10C      0x4   Size:                          0x330     
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x48D60   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x442E8   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Version Information----------
+
+[VS_VERSIONINFO]
+0x1565C    0x0   Length:                        0x2D4     
+0x1565E    0x2   ValueLength:                   0x34      
+0x15660    0x4   Type:                          0x0       
+
+[VS_FIXEDFILEINFO]
+0x15684    0x0   Signature:                     0xFEEF04BD
+0x15688    0x4   StrucVersion:                  0x10000   
+0x1568C    0x8   FileVersionMS:                 0x1001C   
+0x15690    0xC   FileVersionLS:                 0x40000   
+0x15694    0x10  ProductVersionMS:              0x1001C   
+0x15698    0x14  ProductVersionLS:              0x40000   
+0x1569C    0x18  FileFlagsMask:                 0x0       
+0x156A0    0x1C  FileFlags:                     0x0       
+0x156A4    0x20  FileOS:                        0x4       
+0x156A8    0x24  FileType:                      0x2       
+0x156AC    0x28  FileSubtype:                   0x0       
+0x156B0    0x2C  FileDateMS:                    0x0       
+0x156B4    0x30  FileDateLS:                    0x0       
+
+[StringFileInfo]
+0x156B8    0x0   Length:                        0x232     
+0x156BA    0x2   ValueLength:                   0x0       
+0x156BC    0x4   Type:                          0x0       
+
+  [StringTable]
+  0x156DC    0x0   Length:                        0x20E     
+  0x156DE    0x2   ValueLength:                   0x0       
+  0x156E0    0x4   Type:                          0x0       
+  LangID: 040904B0
+
+    CompanyName: Red Hat Software
+    FileDescription: Pango
+    FileVersion: 1.28.4.0
+    InternalName: pango-1.0-0
+    LegalCopyright: Copyright \xc2\xa9 1999 Red Hat Software.
+    OriginalFilename: pango-1.0-0.dll
+    ProductName: Pango
+    ProductVersion: 1.28.4
+
+[VarFileInfo]
+0x158EC    0x0   Length:                        0x44      
+0x158EE    0x2   ValueLength:                   0x0       
+0x158F0    0x4   Type:                          0x0       
+
+  [Var]
+  0x1590C    0x0   Length:                        0x24      
+  0x1590E    0x2   ValueLength:                   0x4       
+  0x15910    0x4   Type:                          0x0       
+    Translation: 0x0409 0x04b0
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x15AAC    0x0   Characteristics:               0x0       
+0x15AB0    0x4   TimeDateStamp:                 0x4E8F42CF [Fri Oct  7 18:19:59 2011 UTC]
+0x15AB4    0x8   MajorVersion:                  0x0       
+0x15AB6    0xA   MinorVersion:                  0x0       
+0x15AB8    0xC   Name:                          0x46438   
+0x15ABC    0x10  Base:                          0x1       
+0x15AC0    0x14  NumberOfFunctions:             0x18A     
+0x15AC4    0x18  NumberOfNames:                 0x18A     
+0x15AC8    0x1C  AddressOfFunctions:            0x454D4   
+0x15ACC    0x20  AddressOfNames:                0x45AFC   
+0x15AD0    0x24  AddressOfNameOrdinals:         0x46124   
+
+Ordinal      RVA         Name
+1          0x0001CB50    pango_alignment_get_type
+2          0x000089E0    pango_attr_background_new
+3          0x00008CA0    pango_attr_fallback_new
+4          0x000088D0    pango_attr_family_new
+5          0x00008B40    pango_attr_font_desc_new
+6          0x000089B0    pango_attr_foreground_new
+7          0x00008EE0    pango_attr_gravity_hint_new
+8          0x00008EA0    pango_attr_gravity_new
+9          0x00009760    pango_attr_iterator_copy
+10         0x000097E0    pango_attr_iterator_destroy
+11         0x00009840    pango_attr_iterator_get
+12         0x00009CE0    pango_attr_iterator_get_attrs
+13         0x000098B0    pango_attr_iterator_get_font
+14         0x00009590    pango_attr_iterator_next
+15         0x00009520    pango_attr_iterator_range
+16         0x00008950    pango_attr_language_new
+17         0x00008CC0    pango_attr_letter_spacing_new
+18         0x000090C0    pango_attr_list_change
+19         0x00008F70    pango_attr_list_copy
+20         0x00009C00    pango_attr_list_filter
+21         0x000096D0    pango_attr_list_get_iterator
+22         0x00008F00    pango_attr_list_get_type
+23         0x00008FE0    pango_attr_list_insert
+24         0x00009050    pango_attr_list_insert_before
+25         0x00008F40    pango_attr_list_new
+26         0x00008FD0    pango_attr_list_ref
+27         0x000093B0    pango_attr_list_splice
+28         0x00008450    pango_attr_list_unref
+29         0x00008C40    pango_attr_rise_new
+30         0x00008C60    pango_attr_scale_new
+31         0x00008E20    pango_attr_shape_new
+32         0x00008CE0    pango_attr_shape_new_with_data
+33         0x00008A10    pango_attr_size_new
+34         0x00008A50    pango_attr_size_new_absolute
+35         0x00008B20    pango_attr_stretch_new
+36         0x00008C10    pango_attr_strikethrough_color_new
+37         0x00008BF0    pango_attr_strikethrough_new
+38         0x00008AC0    pango_attr_style_new
+39         0x00008560    pango_attr_type_get_name
+40         0x0001C850    pango_attr_type_get_type
+41         0x000084F0    pango_attr_type_register
+42         0x00008BC0    pango_attr_underline_color_new
+43         0x00008BA0    pango_attr_underline_new
+44         0x00008B00    pango_attr_variant_new
+45         0x00008AE0    pango_attr_weight_new
+46         0x00008790    pango_attribute_copy
+47         0x000087E0    pango_attribute_destroy
+48         0x00008820    pango_attribute_equal
+49         0x00008590    pango_attribute_init
+50         0x00009D50    pango_bidi_type_for_unichar
+51         0x0001C8D0    pango_bidi_type_get_type
+52         0x00002BC0    pango_break
+53         0x0000A0D0    pango_color_copy
+54         0x0000A0B0    pango_color_free
+55         0x0000A100    pango_color_get_type
+56         0x0000A1A0    pango_color_parse
+57         0x0000A140    pango_color_to_string
+58         0x0001B9D0    pango_config_key_get
+59         0x0000BE50    pango_context_get_base_dir
+60         0x0000BEF0    pango_context_get_base_gravity
+61         0x0000BD40    pango_context_get_font_description
+62         0x0000BB20    pango_context_get_font_map
+63         0x0000BF30    pango_context_get_gravity
+64         0x0000BFB0    pango_context_get_gravity_hint
+65         0x0000BDD0    pango_context_get_language
+66         0x0000B9F0    pango_context_get_matrix
+67         0x0000C260    pango_context_get_metrics
+68         0x0000B890    pango_context_get_type
+69         0x0000BB80    pango_context_list_families
+70         0x0000BC10    pango_context_load_font
+71         0x0000BC60    pango_context_load_fontset
+72         0x0000B920    pango_context_new
+73         0x0000BE10    pango_context_set_base_dir
+74         0x0000BE90    pango_context_set_base_gravity
+75         0x0000BCB0    pango_context_set_font_description
+76         0x0000BA50    pango_context_set_font_map
+77         0x0000BF70    pango_context_set_gravity_hint
+78         0x0000BD80    pango_context_set_language
+79         0x0000B940    pango_context_set_matrix
+80         0x0000C580    pango_coverage_copy
+81         0x0000CEE0    pango_coverage_from_bytes
+82         0x0000C7F0    pango_coverage_get
+83         0x0001C950    pango_coverage_level_get_type
+84         0x0000CA30    pango_coverage_max
+85         0x0000C540    pango_coverage_new
+86         0x0000C6E0    pango_coverage_ref
+87         0x0000C880    pango_coverage_set
+88         0x0000CD60    pango_coverage_to_bytes
+89         0x0000C720    pango_coverage_unref
+90         0x00001680    pango_default_break
+91         0x0001C910    pango_direction_get_type
+92         0x0001CBD0    pango_ellipsize_mode_get_type
+93         0x0000D360    pango_engine_get_type
+94         0x0000D3B0    pango_engine_lang_get_type
+95         0x0000D400    pango_engine_shape_get_type
+96         0x0001C0C0    pango_extents_to_pixels
+97         0x0001BED0    pango_find_base_dir
+98         0x00007990    pango_find_map
+99         0x00002C90    pango_find_paragraph_boundary
+100        0x00005D10    pango_font_describe
+101        0x00005D50    pango_font_describe_with_absolute_size
+102        0x00005240    pango_font_description_better_match
+103        0x000044A0    pango_font_description_copy
+104        0x00005390    pango_font_description_copy_static
+105        0x000053F0    pango_font_description_equal
+106        0x00004460    pango_font_description_free
+107        0x000055F0    pango_font_description_from_string
+108        0x00004B60    pango_font_description_get_family
+109        0x00004F00    pango_font_description_get_gravity
+110        0x00004F40    pango_font_description_get_set_fields
+111        0x00004E00    pango_font_description_get_size
+112        0x00004EC0    pango_font_description_get_size_is_absolute
+113        0x00004D60    pango_font_description_get_stretch
+114        0x00004BE0    pango_font_description_get_style
+115        0x000049B0    pango_font_description_get_type
+116        0x00004C60    pango_font_description_get_variant
+117        0x00004CE0    pango_font_description_get_weight
+118        0x000054D0    pango_font_description_hash
+119        0x000050A0    pango_font_description_merge
+120        0x00004F80    pango_font_description_merge_static
+121        0x000049F0    pango_font_description_new
+122        0x00004E40    pango_font_description_set_absolute_size
+123        0x00004AE0    pango_font_description_set_family
+124        0x00004A40    pango_font_description_set_family_static
+125        0x000051E0    pango_font_description_set_gravity
+126        0x00004DA0    pango_font_description_set_size
+127        0x00004D20    pango_font_description_set_stretch
+128        0x00004BA0    pango_font_description_set_style
+129        0x00004C20    pango_font_description_set_variant
+130        0x00004CA0    pango_font_description_set_weight
+131        0x00005B00    pango_font_description_to_filename
+132        0x00005830    pango_font_description_to_string
+133        0x00005130    pango_font_description_unset_fields
+134        0x000055A0    pango_font_descriptions_free
+135        0x00006430    pango_font_face_describe
+136        0x00006510    pango_font_face_get_face_name
+137        0x000063A0    pango_font_face_get_type
+138        0x000064A0    pango_font_face_is_synthesized
+139        0x00006580    pango_font_face_list_sizes
+140        0x00006240    pango_font_family_get_name
+141        0x000061B0    pango_font_family_get_type
+142        0x00006330    pango_font_family_is_monospace
+143        0x000062B0    pango_font_family_list_faces
+144        0x00005E00    pango_font_find_shaper
+145        0x00005DC0    pango_font_get_coverage
+146        0x00005ED0    pango_font_get_font_map
+147        0x00005E50    pango_font_get_glyph_extents
+148        0x00005F50    pango_font_get_metrics
+149        0x00005C80    pango_font_get_type
+150        0x0000D6C0    pango_font_map_create_context
+151        0x0000DBB0    pango_font_map_get_shape_engine_type
+152        0x0000D630    pango_font_map_get_type
+153        0x0000DB10    pango_font_map_list_families
+154        0x0000D720    pango_font_map_load_font
+155        0x0000DB60    pango_font_map_load_fontset
+156        0x0001CA90    pango_font_mask_get_type
+157        0x00006030    pango_font_metrics_get_approximate_char_width
+158        0x00006070    pango_font_metrics_get_approximate_digit_width
+159        0x00005FB0    pango_font_metrics_get_ascent
+160        0x00005FF0    pango_font_metrics_get_descent
+161        0x00006130    pango_font_metrics_get_strikethrough_position
+162        0x00006170    pango_font_metrics_get_strikethrough_thickness
+163        0x00005EF0    pango_font_metrics_get_type
+164        0x000060B0    pango_font_metrics_get_underline_position
+165        0x000060F0    pango_font_metrics_get_underline_thickness
+166        0x00005F30    pango_font_metrics_new
+167        0x00004240    pango_font_metrics_ref
+168        0x00004510    pango_font_metrics_unref
+169        0x0000E040    pango_fontset_foreach
+170        0x0000DF50    pango_fontset_get_font
+171        0x0000DFD0    pango_fontset_get_metrics
+172        0x0000DF00    pango_fontset_get_type
+173        0x0000E320    pango_fontset_simple_append
+174        0x0000E2A0    pango_fontset_simple_get_type
+175        0x0000E2F0    pango_fontset_simple_new
+176        0x0000E360    pango_fontset_simple_size
+177        0x0001BAF0    pango_get_lib_subdirectory
+178        0x00002DF0    pango_get_log_attrs
+179        0x00009FD0    pango_get_mirror_char
+180        0x0001B970    pango_get_sysconf_subdirectory
+181        0x0000EC10    pango_glyph_item_apply_attrs
+182        0x0000E430    pango_glyph_item_copy
+183        0x0000E3E0    pango_glyph_item_free
+184        0x0000EF50    pango_glyph_item_get_logical_widths
+185        0x0000E920    pango_glyph_item_get_type
+186        0x0000E390    pango_glyph_item_iter_copy
+187        0x0000E370    pango_glyph_item_iter_free
+188        0x0000E960    pango_glyph_item_iter_get_type
+189        0x0000EBB0    pango_glyph_item_iter_init_end
+190        0x0000EB50    pango_glyph_item_iter_init_start
+191        0x0000E9A0    pango_glyph_item_iter_next_cluster
+192        0x0000EA60    pango_glyph_item_iter_prev_cluster
+193        0x0000EE50    pango_glyph_item_letter_space
+194        0x0000E520    pango_glyph_item_split
+195        0x000066B0    pango_glyph_string_copy
+196        0x00006B00    pango_glyph_string_extents
+197        0x00006870    pango_glyph_string_extents_range
+198        0x00006670    pango_glyph_string_free
+199        0x00006B70    pango_glyph_string_get_logical_widths
+200        0x00006830    pango_glyph_string_get_type
+201        0x00006B40    pango_glyph_string_get_width
+202        0x00006C60    pango_glyph_string_index_to_x
+203        0x00006730    pango_glyph_string_new
+204        0x00006760    pango_glyph_string_set_size
+205        0x00006EE0    pango_glyph_string_x_to_index
+206        0x0000F0C0    pango_gravity_get_for_matrix
+207        0x0000F1C0    pango_gravity_get_for_script
+208        0x0000F110    pango_gravity_get_for_script_and_width
+209        0x0001CAD0    pango_gravity_get_type
+210        0x0001CB10    pango_gravity_hint_get_type
+211        0x0000F070    pango_gravity_to_rotation
+212        0x0001BF60    pango_is_zero_width
+213        0x0000F270    pango_item_copy
+214        0x0000F210    pango_item_free
+215        0x0000F340    pango_item_get_type
+216        0x0000F320    pango_item_new
+217        0x0000F380    pango_item_split
+218        0x0000C150    pango_itemize
+219        0x0000BFF0    pango_itemize_with_base_dir
+220        0x0000F690    pango_language_from_string
+221        0x0000F780    pango_language_get_default
+222        0x0000F8C0    pango_language_get_sample_string
+223        0x0000F960    pango_language_get_scripts
+224        0x0000F650    pango_language_get_type
+225        0x0000FA50    pango_language_includes_script
+226        0x0000F810    pango_language_matches
+227        0x0000F800    pango_language_to_string
+228        0x00011EE0    pango_layout_context_changed
+229        0x00010FA0    pango_layout_copy
+230        0x00011870    pango_layout_get_alignment
+231        0x000114E0    pango_layout_get_attributes
+232        0x000117A0    pango_layout_get_auto_dir
+233        0x00016210    pango_layout_get_baseline
+234        0x000110F0    pango_layout_get_context
+235        0x00015AE0    pango_layout_get_cursor_pos
+236        0x00011B50    pango_layout_get_ellipsize
+237        0x00014160    pango_layout_get_extents
+238        0x000115F0    pango_layout_get_font_description
+239        0x00011220    pango_layout_get_height
+240        0x000113A0    pango_layout_get_indent
+241        0x000151F0    pango_layout_get_iter
+242        0x000116C0    pango_layout_get_justify
+243        0x000149E0    pango_layout_get_line
+244        0x00014AF0    pango_layout_get_line_count
+245        0x00014940    pango_layout_get_line_readonly
+246        0x00014AB0    pango_layout_get_lines
+247        0x00014A90    pango_layout_get_lines_readonly
+248        0x00014B40    pango_layout_get_log_attrs
+249        0x000141F0    pango_layout_get_pixel_extents
+250        0x000142A0    pango_layout_get_pixel_size
+251        0x00011A50    pango_layout_get_single_paragraph_mode
+252        0x000141A0    pango_layout_get_size
+253        0x00011420    pango_layout_get_spacing
+254        0x00011940    pango_layout_get_tabs
+255        0x00011CF0    pango_layout_get_text
+256        0x00010EA0    pango_layout_get_type
+257        0x00014BE0    pango_layout_get_unknown_glyphs_count
+258        0x00011170    pango_layout_get_width
+259        0x000112F0    pango_layout_get_wrap
+260        0x00014800    pango_layout_index_to_line_x
+261        0x00015DF0    pango_layout_index_to_pos
+262        0x00014CC0    pango_layout_is_ellipsized
+263        0x00014D10    pango_layout_is_wrapped
+264        0x00015410    pango_layout_iter_at_last_line
+265        0x000102F0    pango_layout_iter_copy
+266        0x00010D60    pango_layout_iter_free
+267        0x000161E0    pango_layout_iter_get_baseline
+268        0x00015A30    pango_layout_iter_get_char_extents
+269        0x00015940    pango_layout_iter_get_cluster_extents
+270        0x000152F0    pango_layout_iter_get_index
+271        0x00015450    pango_layout_iter_get_layout
+272        0x00016250    pango_layout_iter_get_layout_extents
+273        0x000153A0    pango_layout_iter_get_line
+274        0x000157E0    pango_layout_iter_get_line_extents
+275        0x000153E0    pango_layout_iter_get_line_readonly
+276        0x00015FA0    pango_layout_iter_get_line_yrange
+277        0x00015320    pango_layout_iter_get_run
+278        0x00015870    pango_layout_iter_get_run_extents
+279        0x00015360    pango_layout_iter_get_run_readonly
+280        0x000151B0    pango_layout_iter_get_type
+281        0x000156C0    pango_layout_iter_next_char
+282        0x000156A0    pango_layout_iter_next_cluster
+283        0x00015480    pango_layout_iter_next_line
+284        0x00015540    pango_layout_iter_next_run
+285        0x000124E0    pango_layout_line_get_extents
+286        0x00015120    pango_layout_line_get_pixel_extents
+287        0x00012100    pango_layout_line_get_type
+288        0x00014D60    pango_layout_line_get_x_ranges
+289        0x00011F00    pango_layout_line_index_to_x
+290        0x000102D0    pango_layout_line_ref
+291        0x00010CD0    pango_layout_line_unref
+292        0x00012140    pango_layout_line_x_to_index
+293        0x000142F0    pango_layout_move_cursor_visually
+294        0x00010F30    pango_layout_new
+295        0x00011810    pango_layout_set_alignment
+296        0x00011460    pango_layout_set_attributes
+297        0x00011700    pango_layout_set_auto_dir
+298        0x00011AC0    pango_layout_set_ellipsize
+299        0x00011540    pango_layout_set_font_description
+300        0x000111B0    pango_layout_set_height
+301        0x00011360    pango_layout_set_indent
+302        0x00011650    pango_layout_set_justify
+303        0x00011EA0    pango_layout_set_markup
+304        0x00011D50    pango_layout_set_markup_with_accel
+305        0x000119B0    pango_layout_set_single_paragraph_mode
+306        0x000113E0    pango_layout_set_spacing
+307        0x000118B0    pango_layout_set_tabs
+308        0x00011BB0    pango_layout_set_text
+309        0x00011130    pango_layout_set_width
+310        0x00011260    pango_layout_set_wrap
+311        0x00016030    pango_layout_xy_to_index
+312        0x00009F10    pango_log2vis_get_embedding_levels
+313        0x0001BD30    pango_lookup_aliases
+314        0x00007790    pango_map_get_engine
+315        0x00007810    pango_map_get_engines
+316        0x000180F0    pango_matrix_concat
+317        0x00017F80    pango_matrix_copy
+318        0x00017F60    pango_matrix_free
+319        0x00018220    pango_matrix_get_font_scale_factor
+320        0x00017FF0    pango_matrix_get_type
+321        0x00018190    pango_matrix_rotate
+322        0x00018090    pango_matrix_scale
+323        0x000182C0    pango_matrix_transform_distance
+324        0x00018500    pango_matrix_transform_pixel_rectangle
+325        0x00018300    pango_matrix_transform_point
+326        0x00018350    pango_matrix_transform_rectangle
+327        0x00018030    pango_matrix_translate
+328        0x000078B0    pango_module_register
+329        0x0001BB70    pango_parse_enum
+330        0x00017BC0    pango_parse_markup
+331        0x00005C50    pango_parse_stretch
+332        0x00005BC0    pango_parse_style
+333        0x00005BF0    pango_parse_variant
+334        0x00005C20    pango_parse_weight
+335        0x0001BFC0    pango_quantize_line_geometry
+336        0x0001AFD0    pango_read_line
+337        0x0001CC10    pango_render_part_get_type
+338        0x000192B0    pango_renderer_activate
+339        0x00019300    pango_renderer_deactivate
+340        0x00018A30    pango_renderer_draw_error_underline
+341        0x00019170    pango_renderer_draw_glyph
+342        0x00019440    pango_renderer_draw_glyph_item
+343        0x00019390    pango_renderer_draw_glyphs
+344        0x0001A070    pango_renderer_draw_layout
+345        0x000199C0    pango_renderer_draw_layout_line
+346        0x00018920    pango_renderer_draw_rectangle
+347        0x00018B80    pango_renderer_draw_trapezoid
+348        0x00019500    pango_renderer_get_color
+349        0x0001A210    pango_renderer_get_layout
+350        0x0001A230    pango_renderer_get_layout_line
+351        0x0001A1B0    pango_renderer_get_matrix
+352        0x00018860    pango_renderer_get_type
+353        0x00019570    pango_renderer_part_changed
+354        0x000196C0    pango_renderer_set_color
+355        0x00019960    pango_renderer_set_matrix
+356        0x0001C490    pango_reorder_items
+357        0x0001B8E0    pango_scan_int
+358        0x0001B420    pango_scan_string
+359        0x0001B2F0    pango_scan_word
+360        0x0001A240    pango_script_for_unichar
+361        0x0000FAC0    pango_script_get_sample_language
+362        0x0001CC50    pango_script_get_type
+363        0x0001A270    pango_script_iter_free
+364        0x0001A290    pango_script_iter_get_range
+365        0x0001A520    pango_script_iter_new
+366        0x0001A2D0    pango_script_iter_next
+367        0x0001C4C0    pango_shape
+368        0x0001B2B0    pango_skip_space
+369        0x0001AF20    pango_split_file_list
+370        0x0001CA50    pango_stretch_get_type
+371        0x0001C990    pango_style_get_type
+372        0x0001CC90    pango_tab_align_get_type
+373        0x0001A650    pango_tab_array_copy
+374        0x0001A550    pango_tab_array_free
+375        0x0001AAF0    pango_tab_array_get_positions_in_pixels
+376        0x0001A7A0    pango_tab_array_get_size
+377        0x0001A970    pango_tab_array_get_tab
+378        0x0001AA20    pango_tab_array_get_tabs
+379        0x0001A760    pango_tab_array_get_type
+380        0x0001A5B0    pango_tab_array_new
+381        0x0001A6D0    pango_tab_array_new_with_positions
+382        0x0001A7E0    pango_tab_array_resize
+383        0x0001A870    pango_tab_array_set_tab
+384        0x0001AE70    pango_trim_string
+385        0x0001C890    pango_underline_get_type
+386        0x00009FA0    pango_unichar_direction
+387        0x0001C070    pango_units_from_double
+388        0x0001C0B0    pango_units_to_double
+389        0x0001C9D0    pango_variant_get_type
+390        0x0001AE10    pango_version
+391        0x0001AE30    pango_version_check
+392        0x0001AE20    pango_version_string
+393        0x0001CA10    pango_weight_get_type
+394        0x0001CB90    pango_wrap_mode_get_type
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x15930    0x0   OriginalFirstThunk:            0x0       
+0x15930    0x0   Characteristics:               0x0       
+0x15934    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x15938    0x8   ForwarderChain:                0x0       
+0x1593C    0xC   Name:                          0x453E0   
+0x15940    0x10  FirstThunk:                    0x453A8   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x15944    0x0   OriginalFirstThunk:            0x0       
+0x15944    0x0   Characteristics:               0x0       
+0x15948    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x1594C    0x8   ForwarderChain:                0x0       
+0x15950    0xC   Name:                          0x453ED   
+0x15954    0x10  FirstThunk:                    0x453C0   
+
+libglib-2.0-0.dll.g_log Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x15958    0x0   OriginalFirstThunk:            0x0       
+0x15958    0x0   Characteristics:               0x0       
+0x1595C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x15960    0x8   ForwarderChain:                0x0       
+0x15964    0xC   Name:                          0x453FF   
+0x15968    0x10  FirstThunk:                    0x453C8   
+
+libgmodule-2.0-0.dll.g_module_close Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x1596C    0x0   OriginalFirstThunk:            0x0       
+0x1596C    0x0   Characteristics:               0x0       
+0x15970    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x15974    0x8   ForwarderChain:                0x0       
+0x15978    0xC   Name:                          0x45414   
+0x1597C    0x10  FirstThunk:                    0x453D0   
+
+libgobject-2.0-0.dll.g_type_init Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x15980    0x0   OriginalFirstThunk:            0x0       
+0x15980    0x0   Characteristics:               0x0       
+0x15984    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x15988    0x8   ForwarderChain:                0x0       
+0x1598C    0xC   Name:                          0x45429   
+0x15990    0x10  FirstThunk:                    0x453D8   
+
+msvcrt.dll.cos Hint[0]
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x15600    0x0   Characteristics:               0x0       
+0x15604    0x4   TimeDateStamp:                 0x4E8F42C3 [Fri Oct  7 18:19:47 2011 UTC]
+0x15608    0x8   MajorVersion:                  0x0       
+0x1560A    0xA   MinorVersion:                  0x0       
+0x1560C    0xC   NumberOfNamedEntries:          0x0       
+0x1560E    0xE   NumberOfIdEntries:             0x1       
+  Id: [0x10] (RT_VERSION)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x15610    0x0   Name:                          0x10      
+  0x15614    0x4   OffsetToData:                  0x80000018
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x15618    0x0   Characteristics:               0x0       
+    0x1561C    0x4   TimeDateStamp:                 0x4E8F42C3 [Fri Oct  7 18:19:47 2011 UTC]
+    0x15620    0x8   MajorVersion:                  0x0       
+    0x15622    0xA   MinorVersion:                  0x0       
+    0x15624    0xC   NumberOfNamedEntries:          0x0       
+    0x15626    0xE   NumberOfIdEntries:             0x1       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x15628    0x0   Name:                          0x1       
+      0x1562C    0x4   OffsetToData:                  0x80000030
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x15630    0x0   Characteristics:               0x0       
+        0x15634    0x4   TimeDateStamp:                 0x4E8F42C3 [Fri Oct  7 18:19:47 2011 UTC]
+        0x15638    0x8   MajorVersion:                  0x0       
+        0x1563A    0xA   MinorVersion:                  0x0       
+        0x1563C    0xC   NumberOfNamedEntries:          0x0       
+        0x1563E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x15640    0x0   Name:                          0x409     
+          0x15644    0x4   OffsetToData:                  0x48      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x15648    0x0   OffsetToData:                  0x4505C   
+            0x1564C    0x4   Size:                          0x2D4     
+            0x15650    0x8   CodePage:                      0x0       
+            0x15654    0xC   Reserved:                      0x0       
+
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x154E8    0x0   StartAddressOfRawData:         0x655C4300
+0x154EC    0x4   EndAddressOfRawData:           0x655C4303
+0x154F0    0x8   AddressOfIndex:                0x655B6164
+0x154F4    0xC   AddressOfCallBacks:            0x655C4303
+0x154F8    0x10  SizeOfZeroFill:                0x0       
+0x154FC    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x19360    0x0   VirtualAddress:                0x44000   
+0x19364    0x4   SizeOfBlock:                   0x18      
+    000440CDh HIGHLOW
+    000442CDh HIGHLOW
+    000442E8h HIGHLOW
+    000442ECh HIGHLOW
+    000442F0h HIGHLOW
+    000442F4h HIGHLOW
+    00044303h HIGHLOW
+    00044000h ABSOLUTE
+

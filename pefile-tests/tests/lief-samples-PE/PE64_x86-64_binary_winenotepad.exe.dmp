@@ -1,0 +1,3010 @@
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x40      
+0x4        0x4   e_cp:                          0x1       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x6       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x60      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x60      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x60       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x64       0x0   Machine:                       0x8664    
+0x66       0x2   NumberOfSections:              0x3       
+0x68       0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6C       0x8   PointerToSymbolTable:          0x0       
+0x70       0xC   NumberOfSymbols:               0x0       
+0x74       0x10  SizeOfOptionalHeader:          0xF0      
+0x76       0x12  Characteristics:               0x22      
+Flags: IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LARGE_ADDRESS_AWARE
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER64]
+0x78       0x0   Magic:                         0x20B     
+0x7A       0x2   MajorLinkerVersion:            0x7       
+0x7B       0x3   MinorLinkerVersion:            0xA       
+0x7C       0x4   SizeOfCode:                    0x8       
+0x80       0x8   SizeOfInitializedData:         0x0       
+0x84       0xC   SizeOfUninitializedData:       0x0       
+0x88       0x10  AddressOfEntryPoint:           0x1000    
+0x8C       0x14  BaseOfCode:                    0x1000    
+0x90       0x18  ImageBase:                     0x10000000
+0x98       0x20  SectionAlignment:              0x1000    
+0x9C       0x24  FileAlignment:                 0x200     
+0xA0       0x28  MajorOperatingSystemVersion:   0x1       
+0xA2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xA4       0x2C  MajorImageVersion:             0x0       
+0xA6       0x2E  MinorImageVersion:             0x0       
+0xA8       0x30  MajorSubsystemVersion:         0x4       
+0xAA       0x32  MinorSubsystemVersion:         0x0       
+0xAC       0x34  Reserved1:                     0x0       
+0xB0       0x38  SizeOfImage:                   0x2F000   
+0xB4       0x3C  SizeOfHeaders:                 0x200     
+0xB8       0x40  CheckSum:                      0x0       
+0xBC       0x44  Subsystem:                     0x2       
+0xBE       0x46  DllCharacteristics:            0x100     
+0xC0       0x48  SizeOfStackReserve:            0x100000  
+0xC8       0x50  SizeOfStackCommit:             0x1000    
+0xD0       0x58  SizeOfHeapReserve:             0x100000  
+0xD8       0x60  SizeOfHeapCommit:              0x1000    
+0xE0       0x68  LoaderFlags:                   0x0       
+0xE4       0x6C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: IMAGE_DLLCHARACTERISTICS_NX_COMPAT
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x168      0x0   Name:                          .text
+0x170      0x8   Misc:                          0x1000    
+0x170      0x8   Misc_PhysicalAddress:          0x1000    
+0x170      0x8   Misc_VirtualSize:              0x1000    
+0x174      0xC   VirtualAddress:                0x1000    
+0x178      0x10  SizeOfRawData:                 0x8       
+0x17C      0x14  PointerToRawData:              0x200     
+0x180      0x18  PointerToRelocations:          0x0       
+0x184      0x1C  PointerToLinenumbers:          0x0       
+0x188      0x20  NumberOfRelocations:           0x0       
+0x18A      0x22  NumberOfLinenumbers:           0x0       
+0x18C      0x24  Characteristics:               0x60000020
+Flags: IMAGE_SCN_CNT_CODE, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ
+Entropy: 2.000000 (Min=0.0, Max=8.0)
+MD5     hash: d1cdb50dfc28930120acdc4c14c7845d
+SHA-1   hash: 2eaf40a016da167892075ac9af2a0c4d31890b3e
+SHA-256 hash: 0313bfd0cef5226e9622da4eb89d7f2953dbe8898785549f15943417f539bac8
+SHA-512 hash: 525056dde7278ae81bf16f130a3d9620ed9bf35c71796e9715ffab4a92ea6639f9eb86d5f0c851c8dc47d67a21c413213f941006d86c35b33e4d18eef435681e
+
+[IMAGE_SECTION_HEADER]
+0x190      0x0   Name:                          .reloc
+0x198      0x8   Misc:                          0x1000    
+0x198      0x8   Misc_PhysicalAddress:          0x1000    
+0x198      0x8   Misc_VirtualSize:              0x1000    
+0x19C      0xC   VirtualAddress:                0x2000    
+0x1A0      0x10  SizeOfRawData:                 0x8       
+0x1A4      0x14  PointerToRawData:              0x400     
+0x1A8      0x18  PointerToRelocations:          0x0       
+0x1AC      0x1C  PointerToLinenumbers:          0x0       
+0x1B0      0x20  NumberOfRelocations:           0x0       
+0x1B2      0x22  NumberOfLinenumbers:           0x0       
+0x1B4      0x24  Characteristics:               0x42000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_DISCARDABLE, IMAGE_SCN_MEM_READ
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: 7dea362b3fac8e00956a4952a3d4f474
+SHA-1   hash: 05fe405753166f125559e7c9ac558654f107c7e9
+SHA-256 hash: af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc
+SHA-512 hash: 1b7409ccf0d5a34d3a77eaabfa9fe27427655be9297127ee9522aa1bf4046d4f945983678169cb1a7348edcac47ef0d9e2c924130e5bcc5f0d94937852c42f1b
+
+[IMAGE_SECTION_HEADER]
+0x1B8      0x0   Name:                          .rsrc
+0x1C0      0x8   Misc:                          0x2C000   
+0x1C0      0x8   Misc_PhysicalAddress:          0x2C000   
+0x1C0      0x8   Misc_VirtualSize:              0x2C000   
+0x1C4      0xC   VirtualAddress:                0x3000    
+0x1C8      0x10  SizeOfRawData:                 0x2B234   
+0x1CC      0x14  PointerToRawData:              0x600     
+0x1D0      0x18  PointerToRelocations:          0x0       
+0x1D4      0x1C  PointerToLinenumbers:          0x0       
+0x1D8      0x20  NumberOfRelocations:           0x0       
+0x1DA      0x22  NumberOfLinenumbers:           0x0       
+0x1DC      0x24  Characteristics:               0x40000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ
+Entropy: 5.386086 (Min=0.0, Max=8.0)
+MD5     hash: 5ee6956a0e8dccb46da5b2ed6a641572
+SHA-1   hash: ab053eb3c72f63c0ff82b116f30c55565d3abd45
+SHA-256 hash: 7d56138a40d3766403b1129db6590a92fbc5e5e527c5f7dba5a9c31a3c7bf5df
+SHA-512 hash: 374a75e9615288c6c02bf7554deadc548717de66c6965ff929a6cfc9f0eea21dce29b0a03f82b9fdf09a5f434e76fb1a0b4b8816e6f072fb81785980b5b7efd5
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xE8       0x0   VirtualAddress:                0x0       
+0xEC       0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0xF0       0x0   VirtualAddress:                0x0       
+0xF4       0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0xF8       0x0   VirtualAddress:                0x3000    
+0xFC       0x4   Size:                          0x2B234   
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x100      0x0   VirtualAddress:                0x0       
+0x104      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x110      0x0   VirtualAddress:                0x2000    
+0x114      0x4   Size:                          0x8       
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x120      0x0   VirtualAddress:                0x0       
+0x124      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x140      0x0   VirtualAddress:                0x0       
+0x144      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x600      0x0   Characteristics:               0x0       
+0x604      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x608      0x8   MajorVersion:                  0x0       
+0x60A      0xA   MinorVersion:                  0x0       
+0x60C      0xC   NumberOfNamedEntries:          0x0       
+0x60E      0xE   NumberOfIdEntries:             0x6       
+  Id: [0x3] (RT_ICON)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x610      0x0   Name:                          0x3       
+  0x614      0x4   OffsetToData:                  0x80000040
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x640      0x0   Characteristics:               0x0       
+    0x644      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x648      0x8   MajorVersion:                  0x0       
+    0x64A      0xA   MinorVersion:                  0x0       
+    0x64C      0xC   NumberOfNamedEntries:          0x0       
+    0x64E      0xE   NumberOfIdEntries:             0xA       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x650      0x0   Name:                          0x1       
+      0x654      0x4   OffsetToData:                  0x800000A0
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x6A0      0x0   Characteristics:               0x0       
+        0x6A4      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x6A8      0x8   MajorVersion:                  0x0       
+        0x6AA      0xA   MinorVersion:                  0x0       
+        0x6AC      0xC   NumberOfNamedEntries:          0x0       
+        0x6AE      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x6B0      0x0   Name:                          0x0       
+          0x6B4      0x4   OffsetToData:                  0xB10     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1110     0x0   OffsetToData:                  0x4C90    
+            0x1114     0x4   Size:                          0x128     
+            0x1118     0x8   CodePage:                      0x0       
+            0x111C     0xC   Reserved:                      0x0       
+      Id: [0x2]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x658      0x0   Name:                          0x2       
+      0x65C      0x4   OffsetToData:                  0x800000B8
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x6B8      0x0   Characteristics:               0x0       
+        0x6BC      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x6C0      0x8   MajorVersion:                  0x0       
+        0x6C2      0xA   MinorVersion:                  0x0       
+        0x6C4      0xC   NumberOfNamedEntries:          0x0       
+        0x6C6      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x6C8      0x0   Name:                          0x0       
+          0x6CC      0x4   OffsetToData:                  0xB20     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1120     0x0   OffsetToData:                  0x4DB8    
+            0x1124     0x4   Size:                          0x568     
+            0x1128     0x8   CodePage:                      0x0       
+            0x112C     0xC   Reserved:                      0x0       
+      Id: [0x3]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x660      0x0   Name:                          0x3       
+      0x664      0x4   OffsetToData:                  0x800000D0
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x6D0      0x0   Characteristics:               0x0       
+        0x6D4      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x6D8      0x8   MajorVersion:                  0x0       
+        0x6DA      0xA   MinorVersion:                  0x0       
+        0x6DC      0xC   NumberOfNamedEntries:          0x0       
+        0x6DE      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x6E0      0x0   Name:                          0x0       
+          0x6E4      0x4   OffsetToData:                  0xB30     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1130     0x0   OffsetToData:                  0x5320    
+            0x1134     0x4   Size:                          0x468     
+            0x1138     0x8   CodePage:                      0x0       
+            0x113C     0xC   Reserved:                      0x0       
+      Id: [0x4]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x668      0x0   Name:                          0x4       
+      0x66C      0x4   OffsetToData:                  0x800000E8
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x6E8      0x0   Characteristics:               0x0       
+        0x6EC      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x6F0      0x8   MajorVersion:                  0x0       
+        0x6F2      0xA   MinorVersion:                  0x0       
+        0x6F4      0xC   NumberOfNamedEntries:          0x0       
+        0x6F6      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x6F8      0x0   Name:                          0x0       
+          0x6FC      0x4   OffsetToData:                  0xB40     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1140     0x0   OffsetToData:                  0x5788    
+            0x1144     0x4   Size:                          0x2E8     
+            0x1148     0x8   CodePage:                      0x0       
+            0x114C     0xC   Reserved:                      0x0       
+      Id: [0x5]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x670      0x0   Name:                          0x5       
+      0x674      0x4   OffsetToData:                  0x80000100
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x700      0x0   Characteristics:               0x0       
+        0x704      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x708      0x8   MajorVersion:                  0x0       
+        0x70A      0xA   MinorVersion:                  0x0       
+        0x70C      0xC   NumberOfNamedEntries:          0x0       
+        0x70E      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x710      0x0   Name:                          0x0       
+          0x714      0x4   OffsetToData:                  0xB50     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1150     0x0   OffsetToData:                  0x5A70    
+            0x1154     0x4   Size:                          0x8A8     
+            0x1158     0x8   CodePage:                      0x0       
+            0x115C     0xC   Reserved:                      0x0       
+      Id: [0x6]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x678      0x0   Name:                          0x6       
+      0x67C      0x4   OffsetToData:                  0x80000118
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x718      0x0   Characteristics:               0x0       
+        0x71C      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x720      0x8   MajorVersion:                  0x0       
+        0x722      0xA   MinorVersion:                  0x0       
+        0x724      0xC   NumberOfNamedEntries:          0x0       
+        0x726      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x728      0x0   Name:                          0x0       
+          0x72C      0x4   OffsetToData:                  0xB60     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1160     0x0   OffsetToData:                  0x6318    
+            0x1164     0x4   Size:                          0x668     
+            0x1168     0x8   CodePage:                      0x0       
+            0x116C     0xC   Reserved:                      0x0       
+      Id: [0x7]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x680      0x0   Name:                          0x7       
+      0x684      0x4   OffsetToData:                  0x80000130
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x730      0x0   Characteristics:               0x0       
+        0x734      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x738      0x8   MajorVersion:                  0x0       
+        0x73A      0xA   MinorVersion:                  0x0       
+        0x73C      0xC   NumberOfNamedEntries:          0x0       
+        0x73E      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x740      0x0   Name:                          0x0       
+          0x744      0x4   OffsetToData:                  0xB70     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1170     0x0   OffsetToData:                  0x6980    
+            0x1174     0x4   Size:                          0xEA8     
+            0x1178     0x8   CodePage:                      0x0       
+            0x117C     0xC   Reserved:                      0x0       
+      Id: [0x8]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x688      0x0   Name:                          0x8       
+      0x68C      0x4   OffsetToData:                  0x80000148
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x748      0x0   Characteristics:               0x0       
+        0x74C      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x750      0x8   MajorVersion:                  0x0       
+        0x752      0xA   MinorVersion:                  0x0       
+        0x754      0xC   NumberOfNamedEntries:          0x0       
+        0x756      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x758      0x0   Name:                          0x0       
+          0x75C      0x4   OffsetToData:                  0xB80     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1180     0x0   OffsetToData:                  0x7828    
+            0x1184     0x4   Size:                          0x10A8    
+            0x1188     0x8   CodePage:                      0x0       
+            0x118C     0xC   Reserved:                      0x0       
+      Id: [0x9]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x690      0x0   Name:                          0x9       
+      0x694      0x4   OffsetToData:                  0x80000160
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x760      0x0   Characteristics:               0x0       
+        0x764      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x768      0x8   MajorVersion:                  0x0       
+        0x76A      0xA   MinorVersion:                  0x0       
+        0x76C      0xC   NumberOfNamedEntries:          0x0       
+        0x76E      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x770      0x0   Name:                          0x0       
+          0x774      0x4   OffsetToData:                  0xB90     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1190     0x0   OffsetToData:                  0x88D0    
+            0x1194     0x4   Size:                          0x25A8    
+            0x1198     0x8   CodePage:                      0x0       
+            0x119C     0xC   Reserved:                      0x0       
+      Id: [0xA]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x698      0x0   Name:                          0xA       
+      0x69C      0x4   OffsetToData:                  0x80000178
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x778      0x0   Characteristics:               0x0       
+        0x77C      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x780      0x8   MajorVersion:                  0x0       
+        0x782      0xA   MinorVersion:                  0x0       
+        0x784      0xC   NumberOfNamedEntries:          0x0       
+        0x786      0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x788      0x0   Name:                          0x0       
+          0x78C      0x4   OffsetToData:                  0xBA0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x11A0     0x0   OffsetToData:                  0xAE78    
+            0x11A4     0x4   Size:                          0x7024    
+            0x11A8     0x8   CodePage:                      0x0       
+            0x11AC     0xC   Reserved:                      0x0       
+
+  Id: [0x4] (RT_MENU)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x618      0x0   Name:                          0x4       
+  0x61C      0x4   OffsetToData:                  0x80000190
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x790      0x0   Characteristics:               0x0       
+    0x794      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x798      0x8   MajorVersion:                  0x0       
+    0x79A      0xA   MinorVersion:                  0x0       
+    0x79C      0xC   NumberOfNamedEntries:          0x0       
+    0x79E      0xE   NumberOfIdEntries:             0x1       
+      Id: [0x201]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x7A0      0x0   Name:                          0x201     
+      0x7A4      0x4   OffsetToData:                  0x800001A8
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x7A8      0x0   Characteristics:               0x0       
+        0x7AC      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x7B0      0x8   MajorVersion:                  0x0       
+        0x7B2      0xA   MinorVersion:                  0x0       
+        0x7B4      0xC   NumberOfNamedEntries:          0x0       
+        0x7B6      0xE   NumberOfIdEntries:             0x2D      
+        \--- LANG [1,0][LANG_ARABIC,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7B8      0x0   Name:                          0x1       
+          0x7BC      0x4   OffsetToData:                  0xBB0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x11B0     0x0   OffsetToData:                  0x11E9C   
+            0x11B4     0x4   Size:                          0x344     
+            0x11B8     0x8   CodePage:                      0x0       
+            0x11BC     0xC   Reserved:                      0x0       
+        \--- LANG [2,0][LANG_BULGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7C0      0x0   Name:                          0x2       
+          0x7C4      0x4   OffsetToData:                  0xBC0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x11C0     0x0   OffsetToData:                  0x121E0   
+            0x11C4     0x4   Size:                          0x3AA     
+            0x11C8     0x8   CodePage:                      0x0       
+            0x11CC     0xC   Reserved:                      0x0       
+        \--- LANG [3,0][LANG_CATALAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7C8      0x0   Name:                          0x3       
+          0x7CC      0x4   OffsetToData:                  0xBD0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x11D0     0x0   OffsetToData:                  0x1258C   
+            0x11D4     0x4   Size:                          0x3E6     
+            0x11D8     0x8   CodePage:                      0x0       
+            0x11DC     0xC   Reserved:                      0x0       
+        \--- LANG [5,0][LANG_CZECH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7D0      0x0   Name:                          0x5       
+          0x7D4      0x4   OffsetToData:                  0xBE0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x11E0     0x0   OffsetToData:                  0x12974   
+            0x11E4     0x4   Size:                          0x394     
+            0x11E8     0x8   CodePage:                      0x0       
+            0x11EC     0xC   Reserved:                      0x0       
+        \--- LANG [6,0][LANG_DANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7D8      0x0   Name:                          0x6       
+          0x7DC      0x4   OffsetToData:                  0xBF0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x11F0     0x0   OffsetToData:                  0x12D08   
+            0x11F4     0x4   Size:                          0x340     
+            0x11F8     0x8   CodePage:                      0x0       
+            0x11FC     0xC   Reserved:                      0x0       
+        \--- LANG [7,0][LANG_GERMAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7E0      0x0   Name:                          0x7       
+          0x7E4      0x4   OffsetToData:                  0xC00     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1200     0x0   OffsetToData:                  0x13048   
+            0x1204     0x4   Size:                          0x3BA     
+            0x1208     0x8   CodePage:                      0x0       
+            0x120C     0xC   Reserved:                      0x0       
+        \--- LANG [8,0][LANG_GREEK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7E8      0x0   Name:                          0x8       
+          0x7EC      0x4   OffsetToData:                  0xC10     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1210     0x0   OffsetToData:                  0x13404   
+            0x1214     0x4   Size:                          0x334     
+            0x1218     0x8   CodePage:                      0x0       
+            0x121C     0xC   Reserved:                      0x0       
+        \--- LANG [9,0][LANG_ENGLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F0      0x0   Name:                          0x9       
+          0x7F4      0x4   OffsetToData:                  0xC20     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1220     0x0   OffsetToData:                  0x13738   
+            0x1224     0x4   Size:                          0x328     
+            0x1228     0x8   CodePage:                      0x0       
+            0x122C     0xC   Reserved:                      0x0       
+        \--- LANG [10,0][LANG_SPANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x7F8      0x0   Name:                          0xA       
+          0x7FC      0x4   OffsetToData:                  0xC30     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1230     0x0   OffsetToData:                  0x13A60   
+            0x1234     0x4   Size:                          0x3C8     
+            0x1238     0x8   CodePage:                      0x0       
+            0x123C     0xC   Reserved:                      0x0       
+        \--- LANG [11,0][LANG_FINNISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x800      0x0   Name:                          0xB       
+          0x804      0x4   OffsetToData:                  0xC40     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1240     0x0   OffsetToData:                  0x13E28   
+            0x1244     0x4   Size:                          0x3A4     
+            0x1248     0x8   CodePage:                      0x0       
+            0x124C     0xC   Reserved:                      0x0       
+        \--- LANG [12,0][LANG_FRENCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x808      0x0   Name:                          0xC       
+          0x80C      0x4   OffsetToData:                  0xC50     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1250     0x0   OffsetToData:                  0x141CC   
+            0x1254     0x4   Size:                          0x3F6     
+            0x1258     0x8   CodePage:                      0x0       
+            0x125C     0xC   Reserved:                      0x0       
+        \--- LANG [13,0][LANG_HEBREW,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x810      0x0   Name:                          0xD       
+          0x814      0x4   OffsetToData:                  0xC60     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1260     0x0   OffsetToData:                  0x145C4   
+            0x1264     0x4   Size:                          0x342     
+            0x1268     0x8   CodePage:                      0x0       
+            0x126C     0xC   Reserved:                      0x0       
+        \--- LANG [14,0][LANG_HUNGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x818      0x0   Name:                          0xE       
+          0x81C      0x4   OffsetToData:                  0xC70     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1270     0x0   OffsetToData:                  0x14908   
+            0x1274     0x4   Size:                          0x3C8     
+            0x1278     0x8   CodePage:                      0x0       
+            0x127C     0xC   Reserved:                      0x0       
+        \--- LANG [16,0][LANG_ITALIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x820      0x0   Name:                          0x10      
+          0x824      0x4   OffsetToData:                  0xC80     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1280     0x0   OffsetToData:                  0x14CD0   
+            0x1284     0x4   Size:                          0x3B6     
+            0x1288     0x8   CodePage:                      0x0       
+            0x128C     0xC   Reserved:                      0x0       
+        \--- LANG [17,0][LANG_JAPANESE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x828      0x0   Name:                          0x11      
+          0x82C      0x4   OffsetToData:                  0xC90     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1290     0x0   OffsetToData:                  0x15088   
+            0x1294     0x4   Size:                          0x330     
+            0x1298     0x8   CodePage:                      0x0       
+            0x129C     0xC   Reserved:                      0x0       
+        \--- LANG [18,0][LANG_KOREAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x830      0x0   Name:                          0x12      
+          0x834      0x4   OffsetToData:                  0xCA0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x12A0     0x0   OffsetToData:                  0x153B8   
+            0x12A4     0x4   Size:                          0x330     
+            0x12A8     0x8   CodePage:                      0x0       
+            0x12AC     0xC   Reserved:                      0x0       
+        \--- LANG [19,0][LANG_DUTCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x838      0x0   Name:                          0x13      
+          0x83C      0x4   OffsetToData:                  0xCB0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x12B0     0x0   OffsetToData:                  0x156E8   
+            0x12B4     0x4   Size:                          0x3F0     
+            0x12B8     0x8   CodePage:                      0x0       
+            0x12BC     0xC   Reserved:                      0x0       
+        \--- LANG [21,0][LANG_POLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x840      0x0   Name:                          0x15      
+          0x844      0x4   OffsetToData:                  0xCC0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x12C0     0x0   OffsetToData:                  0x15AD8   
+            0x12C4     0x4   Size:                          0x3AA     
+            0x12C8     0x8   CodePage:                      0x0       
+            0x12CC     0xC   Reserved:                      0x0       
+        \--- LANG [23,0][LANG_RHAETO_ROMANCE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x848      0x0   Name:                          0x17      
+          0x84C      0x4   OffsetToData:                  0xCD0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x12D0     0x0   OffsetToData:                  0x15E84   
+            0x12D4     0x4   Size:                          0x338     
+            0x12D8     0x8   CodePage:                      0x0       
+            0x12DC     0xC   Reserved:                      0x0       
+        \--- LANG [24,0][LANG_ROMANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x850      0x0   Name:                          0x18      
+          0x854      0x4   OffsetToData:                  0xCE0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x12E0     0x0   OffsetToData:                  0x161BC   
+            0x12E4     0x4   Size:                          0x396     
+            0x12E8     0x8   CodePage:                      0x0       
+            0x12EC     0xC   Reserved:                      0x0       
+        \--- LANG [25,0][LANG_RUSSIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x858      0x0   Name:                          0x19      
+          0x85C      0x4   OffsetToData:                  0xCF0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x12F0     0x0   OffsetToData:                  0x16554   
+            0x12F4     0x4   Size:                          0x3A4     
+            0x12F8     0x8   CodePage:                      0x0       
+            0x12FC     0xC   Reserved:                      0x0       
+        \--- LANG [26,0][LANG_SERBIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x860      0x0   Name:                          0x1A      
+          0x864      0x4   OffsetToData:                  0xD00     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1300     0x0   OffsetToData:                  0x168F8   
+            0x1304     0x4   Size:                          0x396     
+            0x1308     0x8   CodePage:                      0x0       
+            0x130C     0xC   Reserved:                      0x0       
+        \--- LANG [27,0][LANG_SLOVAK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x868      0x0   Name:                          0x1B      
+          0x86C      0x4   OffsetToData:                  0xD10     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1310     0x0   OffsetToData:                  0x16C90   
+            0x1314     0x4   Size:                          0x3AE     
+            0x1318     0x8   CodePage:                      0x0       
+            0x131C     0xC   Reserved:                      0x0       
+        \--- LANG [29,0][LANG_SWEDISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x870      0x0   Name:                          0x1D      
+          0x874      0x4   OffsetToData:                  0xD20     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1320     0x0   OffsetToData:                  0x17040   
+            0x1324     0x4   Size:                          0x374     
+            0x1328     0x8   CodePage:                      0x0       
+            0x132C     0xC   Reserved:                      0x0       
+        \--- LANG [30,0][LANG_THAI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x878      0x0   Name:                          0x1E      
+          0x87C      0x4   OffsetToData:                  0xD30     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1330     0x0   OffsetToData:                  0x173B4   
+            0x1334     0x4   Size:                          0x328     
+            0x1338     0x8   CodePage:                      0x0       
+            0x133C     0xC   Reserved:                      0x0       
+        \--- LANG [31,0][LANG_TURKISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x880      0x0   Name:                          0x1F      
+          0x884      0x4   OffsetToData:                  0xD40     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1340     0x0   OffsetToData:                  0x176DC   
+            0x1344     0x4   Size:                          0x36C     
+            0x1348     0x8   CodePage:                      0x0       
+            0x134C     0xC   Reserved:                      0x0       
+        \--- LANG [34,0][LANG_UKRAINIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x888      0x0   Name:                          0x22      
+          0x88C      0x4   OffsetToData:                  0xD50     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1350     0x0   OffsetToData:                  0x17A48   
+            0x1354     0x4   Size:                          0x38E     
+            0x1358     0x8   CodePage:                      0x0       
+            0x135C     0xC   Reserved:                      0x0       
+        \--- LANG [36,0][LANG_SLOVENIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x890      0x0   Name:                          0x24      
+          0x894      0x4   OffsetToData:                  0xD60     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1360     0x0   OffsetToData:                  0x17DD8   
+            0x1364     0x4   Size:                          0x3AA     
+            0x1368     0x8   CodePage:                      0x0       
+            0x136C     0xC   Reserved:                      0x0       
+        \--- LANG [39,0][LANG_LITHUANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x898      0x0   Name:                          0x27      
+          0x89C      0x4   OffsetToData:                  0xD70     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1370     0x0   OffsetToData:                  0x18184   
+            0x1374     0x4   Size:                          0x3CC     
+            0x1378     0x8   CodePage:                      0x0       
+            0x137C     0xC   Reserved:                      0x0       
+        \--- LANG [41,0][LANG_FARSI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8A0      0x0   Name:                          0x29      
+          0x8A4      0x4   OffsetToData:                  0xD80     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1380     0x0   OffsetToData:                  0x18550   
+            0x1384     0x4   Size:                          0x392     
+            0x1388     0x8   CodePage:                      0x0       
+            0x138C     0xC   Reserved:                      0x0       
+        \--- LANG [57,0][LANG_HINDI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8A8      0x0   Name:                          0x39      
+          0x8AC      0x4   OffsetToData:                  0xD90     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1390     0x0   OffsetToData:                  0x188E4   
+            0x1394     0x4   Size:                          0x334     
+            0x1398     0x8   CodePage:                      0x0       
+            0x139C     0xC   Reserved:                      0x0       
+        \--- LANG [70,0][LANG_PUNJABI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8B0      0x0   Name:                          0x46      
+          0x8B4      0x4   OffsetToData:                  0xDA0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x13A0     0x0   OffsetToData:                  0x18C18   
+            0x13A4     0x4   Size:                          0x32E     
+            0x13A8     0x8   CodePage:                      0x0       
+            0x13AC     0xC   Reserved:                      0x0       
+        \--- LANG [72,0][LANG_ORIYA,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8B8      0x0   Name:                          0x48      
+          0x8BC      0x4   OffsetToData:                  0xDB0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x13B0     0x0   OffsetToData:                  0x18F48   
+            0x13B4     0x4   Size:                          0x338     
+            0x13B8     0x8   CodePage:                      0x0       
+            0x13BC     0xC   Reserved:                      0x0       
+        \--- LANG [74,0][LANG_TELUGU,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8C0      0x0   Name:                          0x4A      
+          0x8C4      0x4   OffsetToData:                  0xDC0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x13C0     0x0   OffsetToData:                  0x19280   
+            0x13C4     0x4   Size:                          0x332     
+            0x13C8     0x8   CodePage:                      0x0       
+            0x13CC     0xC   Reserved:                      0x0       
+        \--- LANG [76,0][LANG_MALAYALAM,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8C8      0x0   Name:                          0x4C      
+          0x8CC      0x4   OffsetToData:                  0xDD0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x13D0     0x0   OffsetToData:                  0x195B4   
+            0x13D4     0x4   Size:                          0x336     
+            0x13D8     0x8   CodePage:                      0x0       
+            0x13DC     0xC   Reserved:                      0x0       
+        \--- LANG [144,0][LANG_WALON,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8D0      0x0   Name:                          0x90      
+          0x8D4      0x4   OffsetToData:                  0xDE0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x13E0     0x0   OffsetToData:                  0x198EC   
+            0x13E4     0x4   Size:                          0x39A     
+            0x13E8     0x8   CodePage:                      0x0       
+            0x13EC     0xC   Reserved:                      0x0       
+        \--- LANG [4,1][LANG_CHINESE,SUBLANG_CHINESE_TRADITIONAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8D8      0x0   Name:                          0x404     
+          0x8DC      0x4   OffsetToData:                  0xDF0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x13F0     0x0   OffsetToData:                  0x19C88   
+            0x13F4     0x4   Size:                          0x2F2     
+            0x13F8     0x8   CodePage:                      0x0       
+            0x13FC     0xC   Reserved:                      0x0       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8E0      0x0   Name:                          0x409     
+          0x8E4      0x4   OffsetToData:                  0xE00     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1400     0x0   OffsetToData:                  0x19F7C   
+            0x1404     0x4   Size:                          0x328     
+            0x1408     0x8   CodePage:                      0x0       
+            0x140C     0xC   Reserved:                      0x0       
+        \--- LANG [20,1][LANG_NORWEGIAN,SUBLANG_NORWEGIAN_BOKMAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8E8      0x0   Name:                          0x414     
+          0x8EC      0x4   OffsetToData:                  0xE10     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1410     0x0   OffsetToData:                  0x1A2A4   
+            0x1414     0x4   Size:                          0x340     
+            0x1418     0x8   CodePage:                      0x0       
+            0x141C     0xC   Reserved:                      0x0       
+        \--- LANG [22,1][LANG_PORTUGUESE,SUBLANG_PORTUGUESE_BRAZILIAN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8F0      0x0   Name:                          0x416     
+          0x8F4      0x4   OffsetToData:                  0xE20     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1420     0x0   OffsetToData:                  0x1A5E4   
+            0x1424     0x4   Size:                          0x3D2     
+            0x1428     0x8   CodePage:                      0x0       
+            0x142C     0xC   Reserved:                      0x0       
+        \--- LANG [143,1][LANG_ESPERANTO,SUBLANG_DEFAULT]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x8F8      0x0   Name:                          0x48F     
+          0x8FC      0x4   OffsetToData:                  0xE30     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1430     0x0   OffsetToData:                  0x1A9B8   
+            0x1434     0x4   Size:                          0x37C     
+            0x1438     0x8   CodePage:                      0x0       
+            0x143C     0xC   Reserved:                      0x0       
+        \--- LANG [4,2][LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x900      0x0   Name:                          0x804     
+          0x904      0x4   OffsetToData:                  0xE40     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1440     0x0   OffsetToData:                  0x1AD34   
+            0x1444     0x4   Size:                          0x2DA     
+            0x1448     0x8   CodePage:                      0x0       
+            0x144C     0xC   Reserved:                      0x0       
+        \--- LANG [22,2][LANG_PORTUGUESE,SUBLANG_PORTUGUESE]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x908      0x0   Name:                          0x816     
+          0x90C      0x4   OffsetToData:                  0xE50     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1450     0x0   OffsetToData:                  0x1B010   
+            0x1454     0x4   Size:                          0x3DC     
+            0x1458     0x8   CodePage:                      0x0       
+            0x145C     0xC   Reserved:                      0x0       
+        \--- LANG [26,2][LANG_SERBIAN,SUBLANG_SERBIAN_LATIN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x910      0x0   Name:                          0x81A     
+          0x914      0x4   OffsetToData:                  0xE60     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1460     0x0   OffsetToData:                  0x1B3EC   
+            0x1464     0x4   Size:                          0x380     
+            0x1468     0x8   CodePage:                      0x0       
+            0x146C     0xC   Reserved:                      0x0       
+        \--- LANG [26,3][LANG_SERBIAN,SUBLANG_SERBIAN_CYRILLIC]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x918      0x0   Name:                          0xC1A     
+          0x91C      0x4   OffsetToData:                  0xE70     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1470     0x0   OffsetToData:                  0x1B76C   
+            0x1474     0x4   Size:                          0x38C     
+            0x1478     0x8   CodePage:                      0x0       
+            0x147C     0xC   Reserved:                      0x0       
+
+  Id: [0x5] (RT_DIALOG)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x620      0x0   Name:                          0x5       
+  0x624      0x4   OffsetToData:                  0x80000320
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x920      0x0   Characteristics:               0x0       
+    0x924      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x928      0x8   MajorVersion:                  0x0       
+    0x92A      0xA   MinorVersion:                  0x0       
+    0x92C      0xC   NumberOfNamedEntries:          0x0       
+    0x92E      0xE   NumberOfIdEntries:             0x2       
+      Id: [0x190]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x930      0x0   Name:                          0x190     
+      0x934      0x4   OffsetToData:                  0x80000340
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x940      0x0   Characteristics:               0x0       
+        0x944      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x948      0x8   MajorVersion:                  0x0       
+        0x94A      0xA   MinorVersion:                  0x0       
+        0x94C      0xC   NumberOfNamedEntries:          0x0       
+        0x94E      0xE   NumberOfIdEntries:             0x23      
+        \--- LANG [1,0][LANG_ARABIC,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x950      0x0   Name:                          0x1       
+          0x954      0x4   OffsetToData:                  0xE80     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1480     0x0   OffsetToData:                  0x1BAF8   
+            0x1484     0x4   Size:                          0x7A      
+            0x1488     0x8   CodePage:                      0x0       
+            0x148C     0xC   Reserved:                      0x0       
+        \--- LANG [3,0][LANG_CATALAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x958      0x0   Name:                          0x3       
+          0x95C      0x4   OffsetToData:                  0xE90     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1490     0x0   OffsetToData:                  0x1BB74   
+            0x1494     0x4   Size:                          0x82      
+            0x1498     0x8   CodePage:                      0x0       
+            0x149C     0xC   Reserved:                      0x0       
+        \--- LANG [5,0][LANG_CZECH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x960      0x0   Name:                          0x5       
+          0x964      0x4   OffsetToData:                  0xEA0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x14A0     0x0   OffsetToData:                  0x1BBF8   
+            0x14A4     0x4   Size:                          0x7A      
+            0x14A8     0x8   CodePage:                      0x0       
+            0x14AC     0xC   Reserved:                      0x0       
+        \--- LANG [6,0][LANG_DANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x968      0x0   Name:                          0x6       
+          0x96C      0x4   OffsetToData:                  0xEB0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x14B0     0x0   OffsetToData:                  0x1BC74   
+            0x14B4     0x4   Size:                          0x7A      
+            0x14B8     0x8   CodePage:                      0x0       
+            0x14BC     0xC   Reserved:                      0x0       
+        \--- LANG [7,0][LANG_GERMAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x970      0x0   Name:                          0x7       
+          0x974      0x4   OffsetToData:                  0xEC0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x14C0     0x0   OffsetToData:                  0x1BCF0   
+            0x14C4     0x4   Size:                          0x7E      
+            0x14C8     0x8   CodePage:                      0x0       
+            0x14CC     0xC   Reserved:                      0x0       
+        \--- LANG [9,0][LANG_ENGLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x978      0x0   Name:                          0x9       
+          0x97C      0x4   OffsetToData:                  0xED0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x14D0     0x0   OffsetToData:                  0x1BD70   
+            0x14D4     0x4   Size:                          0x7A      
+            0x14D8     0x8   CodePage:                      0x0       
+            0x14DC     0xC   Reserved:                      0x0       
+        \--- LANG [10,0][LANG_SPANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x980      0x0   Name:                          0xA       
+          0x984      0x4   OffsetToData:                  0xEE0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x14E0     0x0   OffsetToData:                  0x1BDEC   
+            0x14E4     0x4   Size:                          0x82      
+            0x14E8     0x8   CodePage:                      0x0       
+            0x14EC     0xC   Reserved:                      0x0       
+        \--- LANG [11,0][LANG_FINNISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x988      0x0   Name:                          0xB       
+          0x98C      0x4   OffsetToData:                  0xEF0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x14F0     0x0   OffsetToData:                  0x1BE70   
+            0x14F4     0x4   Size:                          0x7E      
+            0x14F8     0x8   CodePage:                      0x0       
+            0x14FC     0xC   Reserved:                      0x0       
+        \--- LANG [12,0][LANG_FRENCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x990      0x0   Name:                          0xC       
+          0x994      0x4   OffsetToData:                  0xF00     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1500     0x0   OffsetToData:                  0x1BEF0   
+            0x1504     0x4   Size:                          0x7A      
+            0x1508     0x8   CodePage:                      0x0       
+            0x150C     0xC   Reserved:                      0x0       
+        \--- LANG [13,0][LANG_HEBREW,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x998      0x0   Name:                          0xD       
+          0x99C      0x4   OffsetToData:                  0xF10     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1510     0x0   OffsetToData:                  0x1BF6C   
+            0x1514     0x4   Size:                          0x76      
+            0x1518     0x8   CodePage:                      0x0       
+            0x151C     0xC   Reserved:                      0x0       
+        \--- LANG [14,0][LANG_HUNGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9A0      0x0   Name:                          0xE       
+          0x9A4      0x4   OffsetToData:                  0xF20     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1520     0x0   OffsetToData:                  0x1BFE4   
+            0x1524     0x4   Size:                          0x7A      
+            0x1528     0x8   CodePage:                      0x0       
+            0x152C     0xC   Reserved:                      0x0       
+        \--- LANG [16,0][LANG_ITALIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9A8      0x0   Name:                          0x10      
+          0x9AC      0x4   OffsetToData:                  0xF30     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1530     0x0   OffsetToData:                  0x1C060   
+            0x1534     0x4   Size:                          0x7A      
+            0x1538     0x8   CodePage:                      0x0       
+            0x153C     0xC   Reserved:                      0x0       
+        \--- LANG [17,0][LANG_JAPANESE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9B0      0x0   Name:                          0x11      
+          0x9B4      0x4   OffsetToData:                  0xF40     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1540     0x0   OffsetToData:                  0x1C0DC   
+            0x1544     0x4   Size:                          0x76      
+            0x1548     0x8   CodePage:                      0x0       
+            0x154C     0xC   Reserved:                      0x0       
+        \--- LANG [18,0][LANG_KOREAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9B8      0x0   Name:                          0x12      
+          0x9BC      0x4   OffsetToData:                  0xF50     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1550     0x0   OffsetToData:                  0x1C154   
+            0x1554     0x4   Size:                          0x72      
+            0x1558     0x8   CodePage:                      0x0       
+            0x155C     0xC   Reserved:                      0x0       
+        \--- LANG [19,0][LANG_DUTCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9C0      0x0   Name:                          0x13      
+          0x9C4      0x4   OffsetToData:                  0xF60     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1560     0x0   OffsetToData:                  0x1C1C8   
+            0x1564     0x4   Size:                          0x7A      
+            0x1568     0x8   CodePage:                      0x0       
+            0x156C     0xC   Reserved:                      0x0       
+        \--- LANG [21,0][LANG_POLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9C8      0x0   Name:                          0x15      
+          0x9CC      0x4   OffsetToData:                  0xF70     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1570     0x0   OffsetToData:                  0x1C244   
+            0x1574     0x4   Size:                          0x7E      
+            0x1578     0x8   CodePage:                      0x0       
+            0x157C     0xC   Reserved:                      0x0       
+        \--- LANG [24,0][LANG_ROMANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9D0      0x0   Name:                          0x18      
+          0x9D4      0x4   OffsetToData:                  0xF80     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1580     0x0   OffsetToData:                  0x1C2C4   
+            0x1584     0x4   Size:                          0x7E      
+            0x1588     0x8   CodePage:                      0x0       
+            0x158C     0xC   Reserved:                      0x0       
+        \--- LANG [25,0][LANG_RUSSIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9D8      0x0   Name:                          0x19      
+          0x9DC      0x4   OffsetToData:                  0xF90     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1590     0x0   OffsetToData:                  0x1C344   
+            0x1594     0x4   Size:                          0x7E      
+            0x1598     0x8   CodePage:                      0x0       
+            0x159C     0xC   Reserved:                      0x0       
+        \--- LANG [26,0][LANG_SERBIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9E0      0x0   Name:                          0x1A      
+          0x9E4      0x4   OffsetToData:                  0xFA0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x15A0     0x0   OffsetToData:                  0x1C3C4   
+            0x15A4     0x4   Size:                          0x7E      
+            0x15A8     0x8   CodePage:                      0x0       
+            0x15AC     0xC   Reserved:                      0x0       
+        \--- LANG [27,0][LANG_SLOVAK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9E8      0x0   Name:                          0x1B      
+          0x9EC      0x4   OffsetToData:                  0xFB0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x15B0     0x0   OffsetToData:                  0x1C444   
+            0x15B4     0x4   Size:                          0x7E      
+            0x15B8     0x8   CodePage:                      0x0       
+            0x15BC     0xC   Reserved:                      0x0       
+        \--- LANG [29,0][LANG_SWEDISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9F0      0x0   Name:                          0x1D      
+          0x9F4      0x4   OffsetToData:                  0xFC0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x15C0     0x0   OffsetToData:                  0x1C4C4   
+            0x15C4     0x4   Size:                          0x7A      
+            0x15C8     0x8   CodePage:                      0x0       
+            0x15CC     0xC   Reserved:                      0x0       
+        \--- LANG [31,0][LANG_TURKISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x9F8      0x0   Name:                          0x1F      
+          0x9FC      0x4   OffsetToData:                  0xFD0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x15D0     0x0   OffsetToData:                  0x1C540   
+            0x15D4     0x4   Size:                          0x7A      
+            0x15D8     0x8   CodePage:                      0x0       
+            0x15DC     0xC   Reserved:                      0x0       
+        \--- LANG [34,0][LANG_UKRAINIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA00      0x0   Name:                          0x22      
+          0xA04      0x4   OffsetToData:                  0xFE0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x15E0     0x0   OffsetToData:                  0x1C5BC   
+            0x15E4     0x4   Size:                          0x7E      
+            0x15E8     0x8   CodePage:                      0x0       
+            0x15EC     0xC   Reserved:                      0x0       
+        \--- LANG [36,0][LANG_SLOVENIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA08      0x0   Name:                          0x24      
+          0xA0C      0x4   OffsetToData:                  0xFF0     
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x15F0     0x0   OffsetToData:                  0x1C63C   
+            0x15F4     0x4   Size:                          0x7E      
+            0x15F8     0x8   CodePage:                      0x0       
+            0x15FC     0xC   Reserved:                      0x0       
+        \--- LANG [39,0][LANG_LITHUANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA10      0x0   Name:                          0x27      
+          0xA14      0x4   OffsetToData:                  0x1000    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1600     0x0   OffsetToData:                  0x1C6BC   
+            0x1604     0x4   Size:                          0x7A      
+            0x1608     0x8   CodePage:                      0x0       
+            0x160C     0xC   Reserved:                      0x0       
+        \--- LANG [41,0][LANG_FARSI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA18      0x0   Name:                          0x29      
+          0xA1C      0x4   OffsetToData:                  0x1010    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1610     0x0   OffsetToData:                  0x1C738   
+            0x1614     0x4   Size:                          0x7A      
+            0x1618     0x8   CodePage:                      0x0       
+            0x161C     0xC   Reserved:                      0x0       
+        \--- LANG [4,1][LANG_CHINESE,SUBLANG_CHINESE_TRADITIONAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA20      0x0   Name:                          0x404     
+          0xA24      0x4   OffsetToData:                  0x1020    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1620     0x0   OffsetToData:                  0x1C7B4   
+            0x1624     0x4   Size:                          0x6E      
+            0x1628     0x8   CodePage:                      0x0       
+            0x162C     0xC   Reserved:                      0x0       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA28      0x0   Name:                          0x409     
+          0xA2C      0x4   OffsetToData:                  0x1030    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1630     0x0   OffsetToData:                  0x1C824   
+            0x1634     0x4   Size:                          0x7A      
+            0x1638     0x8   CodePage:                      0x0       
+            0x163C     0xC   Reserved:                      0x0       
+        \--- LANG [20,1][LANG_NORWEGIAN,SUBLANG_NORWEGIAN_BOKMAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA30      0x0   Name:                          0x414     
+          0xA34      0x4   OffsetToData:                  0x1040    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1640     0x0   OffsetToData:                  0x1C8A0   
+            0x1644     0x4   Size:                          0x7E      
+            0x1648     0x8   CodePage:                      0x0       
+            0x164C     0xC   Reserved:                      0x0       
+        \--- LANG [22,1][LANG_PORTUGUESE,SUBLANG_PORTUGUESE_BRAZILIAN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA38      0x0   Name:                          0x416     
+          0xA3C      0x4   OffsetToData:                  0x1050    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1650     0x0   OffsetToData:                  0x1C920   
+            0x1654     0x4   Size:                          0x82      
+            0x1658     0x8   CodePage:                      0x0       
+            0x165C     0xC   Reserved:                      0x0       
+        \--- LANG [143,1][LANG_ESPERANTO,SUBLANG_DEFAULT]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA40      0x0   Name:                          0x48F     
+          0xA44      0x4   OffsetToData:                  0x1060    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1660     0x0   OffsetToData:                  0x1C9A4   
+            0x1664     0x4   Size:                          0x86      
+            0x1668     0x8   CodePage:                      0x0       
+            0x166C     0xC   Reserved:                      0x0       
+        \--- LANG [4,2][LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA48      0x0   Name:                          0x804     
+          0xA4C      0x4   OffsetToData:                  0x1070    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1670     0x0   OffsetToData:                  0x1CA2C   
+            0x1674     0x4   Size:                          0x6E      
+            0x1678     0x8   CodePage:                      0x0       
+            0x167C     0xC   Reserved:                      0x0       
+        \--- LANG [22,2][LANG_PORTUGUESE,SUBLANG_PORTUGUESE]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA50      0x0   Name:                          0x816     
+          0xA54      0x4   OffsetToData:                  0x1080    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1680     0x0   OffsetToData:                  0x1CA9C   
+            0x1684     0x4   Size:                          0x82      
+            0x1688     0x8   CodePage:                      0x0       
+            0x168C     0xC   Reserved:                      0x0       
+        \--- LANG [26,2][LANG_SERBIAN,SUBLANG_SERBIAN_LATIN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA58      0x0   Name:                          0x81A     
+          0xA5C      0x4   OffsetToData:                  0x1090    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1690     0x0   OffsetToData:                  0x1CB20   
+            0x1694     0x4   Size:                          0x86      
+            0x1698     0x8   CodePage:                      0x0       
+            0x169C     0xC   Reserved:                      0x0       
+        \--- LANG [26,3][LANG_SERBIAN,SUBLANG_SERBIAN_CYRILLIC]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA60      0x0   Name:                          0xC1A     
+          0xA64      0x4   OffsetToData:                  0x10A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x16A0     0x0   OffsetToData:                  0x1CBA8   
+            0x16A4     0x4   Size:                          0x86      
+            0x16A8     0x8   CodePage:                      0x0       
+            0x16AC     0xC   Reserved:                      0x0       
+      Id: [0x202]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x938      0x0   Name:                          0x202     
+      0x93C      0x4   OffsetToData:                  0x80000468
+        [IMAGE_RESOURCE_DIRECTORY]
+        0xA68      0x0   Characteristics:               0x0       
+        0xA6C      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0xA70      0x8   MajorVersion:                  0x0       
+        0xA72      0xA   MinorVersion:                  0x0       
+        0xA74      0xC   NumberOfNamedEntries:          0x0       
+        0xA76      0xE   NumberOfIdEntries:             0x28      
+        \--- LANG [1,0][LANG_ARABIC,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA78      0x0   Name:                          0x1       
+          0xA7C      0x4   OffsetToData:                  0x10B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x16B0     0x0   OffsetToData:                  0x1CC30   
+            0x16B4     0x4   Size:                          0x2B0     
+            0x16B8     0x8   CodePage:                      0x0       
+            0x16BC     0xC   Reserved:                      0x0       
+        \--- LANG [2,0][LANG_BULGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA80      0x0   Name:                          0x2       
+          0xA84      0x4   OffsetToData:                  0x10C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x16C0     0x0   OffsetToData:                  0x1CEE0   
+            0x16C4     0x4   Size:                          0x2DE     
+            0x16C8     0x8   CodePage:                      0x0       
+            0x16CC     0xC   Reserved:                      0x0       
+        \--- LANG [3,0][LANG_CATALAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA88      0x0   Name:                          0x3       
+          0xA8C      0x4   OffsetToData:                  0x10D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x16D0     0x0   OffsetToData:                  0x1D1C0   
+            0x16D4     0x4   Size:                          0x2E6     
+            0x16D8     0x8   CodePage:                      0x0       
+            0x16DC     0xC   Reserved:                      0x0       
+        \--- LANG [5,0][LANG_CZECH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA90      0x0   Name:                          0x5       
+          0xA94      0x4   OffsetToData:                  0x10E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x16E0     0x0   OffsetToData:                  0x1D4A8   
+            0x16E4     0x4   Size:                          0x2B4     
+            0x16E8     0x8   CodePage:                      0x0       
+            0x16EC     0xC   Reserved:                      0x0       
+        \--- LANG [6,0][LANG_DANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xA98      0x0   Name:                          0x6       
+          0xA9C      0x4   OffsetToData:                  0x10F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x16F0     0x0   OffsetToData:                  0x1D75C   
+            0x16F4     0x4   Size:                          0x2AA     
+            0x16F8     0x8   CodePage:                      0x0       
+            0x16FC     0xC   Reserved:                      0x0       
+        \--- LANG [7,0][LANG_GERMAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAA0      0x0   Name:                          0x7       
+          0xAA4      0x4   OffsetToData:                  0x1100    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1700     0x0   OffsetToData:                  0x1DA08   
+            0x1704     0x4   Size:                          0x2B2     
+            0x1708     0x8   CodePage:                      0x0       
+            0x170C     0xC   Reserved:                      0x0       
+        \--- LANG [8,0][LANG_GREEK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAA8      0x0   Name:                          0x8       
+          0xAAC      0x4   OffsetToData:                  0x1110    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1710     0x0   OffsetToData:                  0x1DCBC   
+            0x1714     0x4   Size:                          0x296     
+            0x1718     0x8   CodePage:                      0x0       
+            0x171C     0xC   Reserved:                      0x0       
+        \--- LANG [9,0][LANG_ENGLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAB0      0x0   Name:                          0x9       
+          0xAB4      0x4   OffsetToData:                  0x1120    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1720     0x0   OffsetToData:                  0x1DF54   
+            0x1724     0x4   Size:                          0x298     
+            0x1728     0x8   CodePage:                      0x0       
+            0x172C     0xC   Reserved:                      0x0       
+        \--- LANG [10,0][LANG_SPANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAB8      0x0   Name:                          0xA       
+          0xABC      0x4   OffsetToData:                  0x1130    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1730     0x0   OffsetToData:                  0x1E1EC   
+            0x1734     0x4   Size:                          0x2C6     
+            0x1738     0x8   CodePage:                      0x0       
+            0x173C     0xC   Reserved:                      0x0       
+        \--- LANG [11,0][LANG_FINNISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAC0      0x0   Name:                          0xB       
+          0xAC4      0x4   OffsetToData:                  0x1140    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1740     0x0   OffsetToData:                  0x1E4B4   
+            0x1744     0x4   Size:                          0x2B4     
+            0x1748     0x8   CodePage:                      0x0       
+            0x174C     0xC   Reserved:                      0x0       
+        \--- LANG [12,0][LANG_FRENCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAC8      0x0   Name:                          0xC       
+          0xACC      0x4   OffsetToData:                  0x1150    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1750     0x0   OffsetToData:                  0x1E768   
+            0x1754     0x4   Size:                          0x2B4     
+            0x1758     0x8   CodePage:                      0x0       
+            0x175C     0xC   Reserved:                      0x0       
+        \--- LANG [13,0][LANG_HEBREW,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAD0      0x0   Name:                          0xD       
+          0xAD4      0x4   OffsetToData:                  0x1160    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1760     0x0   OffsetToData:                  0x1EA1C   
+            0x1764     0x4   Size:                          0x2C4     
+            0x1768     0x8   CodePage:                      0x0       
+            0x176C     0xC   Reserved:                      0x0       
+        \--- LANG [14,0][LANG_HUNGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAD8      0x0   Name:                          0xE       
+          0xADC      0x4   OffsetToData:                  0x1170    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1770     0x0   OffsetToData:                  0x1ECE0   
+            0x1774     0x4   Size:                          0x298     
+            0x1778     0x8   CodePage:                      0x0       
+            0x177C     0xC   Reserved:                      0x0       
+        \--- LANG [16,0][LANG_ITALIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAE0      0x0   Name:                          0x10      
+          0xAE4      0x4   OffsetToData:                  0x1180    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1780     0x0   OffsetToData:                  0x1EF78   
+            0x1784     0x4   Size:                          0x2F6     
+            0x1788     0x8   CodePage:                      0x0       
+            0x178C     0xC   Reserved:                      0x0       
+        \--- LANG [17,0][LANG_JAPANESE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAE8      0x0   Name:                          0x11      
+          0xAEC      0x4   OffsetToData:                  0x1190    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1790     0x0   OffsetToData:                  0x1F270   
+            0x1794     0x4   Size:                          0x278     
+            0x1798     0x8   CodePage:                      0x0       
+            0x179C     0xC   Reserved:                      0x0       
+        \--- LANG [18,0][LANG_KOREAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAF0      0x0   Name:                          0x12      
+          0xAF4      0x4   OffsetToData:                  0x11A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x17A0     0x0   OffsetToData:                  0x1F4E8   
+            0x17A4     0x4   Size:                          0x278     
+            0x17A8     0x8   CodePage:                      0x0       
+            0x17AC     0xC   Reserved:                      0x0       
+        \--- LANG [19,0][LANG_DUTCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xAF8      0x0   Name:                          0x13      
+          0xAFC      0x4   OffsetToData:                  0x11B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x17B0     0x0   OffsetToData:                  0x1F760   
+            0x17B4     0x4   Size:                          0x2B8     
+            0x17B8     0x8   CodePage:                      0x0       
+            0x17BC     0xC   Reserved:                      0x0       
+        \--- LANG [21,0][LANG_POLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB00      0x0   Name:                          0x15      
+          0xB04      0x4   OffsetToData:                  0x11C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x17C0     0x0   OffsetToData:                  0x1FA18   
+            0x17C4     0x4   Size:                          0x2AE     
+            0x17C8     0x8   CodePage:                      0x0       
+            0x17CC     0xC   Reserved:                      0x0       
+        \--- LANG [23,0][LANG_RHAETO_ROMANCE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB08      0x0   Name:                          0x17      
+          0xB0C      0x4   OffsetToData:                  0x11D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x17D0     0x0   OffsetToData:                  0x1FCC8   
+            0x17D4     0x4   Size:                          0x298     
+            0x17D8     0x8   CodePage:                      0x0       
+            0x17DC     0xC   Reserved:                      0x0       
+        \--- LANG [24,0][LANG_ROMANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB10      0x0   Name:                          0x18      
+          0xB14      0x4   OffsetToData:                  0x11E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x17E0     0x0   OffsetToData:                  0x1FF60   
+            0x17E4     0x4   Size:                          0x2B0     
+            0x17E8     0x8   CodePage:                      0x0       
+            0x17EC     0xC   Reserved:                      0x0       
+        \--- LANG [25,0][LANG_RUSSIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB18      0x0   Name:                          0x19      
+          0xB1C      0x4   OffsetToData:                  0x11F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x17F0     0x0   OffsetToData:                  0x20210   
+            0x17F4     0x4   Size:                          0x2CE     
+            0x17F8     0x8   CodePage:                      0x0       
+            0x17FC     0xC   Reserved:                      0x0       
+        \--- LANG [26,0][LANG_SERBIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB20      0x0   Name:                          0x1A      
+          0xB24      0x4   OffsetToData:                  0x1200    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1800     0x0   OffsetToData:                  0x204E0   
+            0x1804     0x4   Size:                          0x2BA     
+            0x1808     0x8   CodePage:                      0x0       
+            0x180C     0xC   Reserved:                      0x0       
+        \--- LANG [27,0][LANG_SLOVAK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB28      0x0   Name:                          0x1B      
+          0xB2C      0x4   OffsetToData:                  0x1210    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1810     0x0   OffsetToData:                  0x2079C   
+            0x1814     0x4   Size:                          0x2A6     
+            0x1818     0x8   CodePage:                      0x0       
+            0x181C     0xC   Reserved:                      0x0       
+        \--- LANG [29,0][LANG_SWEDISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB30      0x0   Name:                          0x1D      
+          0xB34      0x4   OffsetToData:                  0x1220    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1820     0x0   OffsetToData:                  0x20A44   
+            0x1824     0x4   Size:                          0x2A6     
+            0x1828     0x8   CodePage:                      0x0       
+            0x182C     0xC   Reserved:                      0x0       
+        \--- LANG [30,0][LANG_THAI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB38      0x0   Name:                          0x1E      
+          0xB3C      0x4   OffsetToData:                  0x1230    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1830     0x0   OffsetToData:                  0x20CEC   
+            0x1834     0x4   Size:                          0x28C     
+            0x1838     0x8   CodePage:                      0x0       
+            0x183C     0xC   Reserved:                      0x0       
+        \--- LANG [31,0][LANG_TURKISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB40      0x0   Name:                          0x1F      
+          0xB44      0x4   OffsetToData:                  0x1240    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1840     0x0   OffsetToData:                  0x20F78   
+            0x1844     0x4   Size:                          0x2A4     
+            0x1848     0x8   CodePage:                      0x0       
+            0x184C     0xC   Reserved:                      0x0       
+        \--- LANG [34,0][LANG_UKRAINIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB48      0x0   Name:                          0x22      
+          0xB4C      0x4   OffsetToData:                  0x1250    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1850     0x0   OffsetToData:                  0x2121C   
+            0x1854     0x4   Size:                          0x2DA     
+            0x1858     0x8   CodePage:                      0x0       
+            0x185C     0xC   Reserved:                      0x0       
+        \--- LANG [36,0][LANG_SLOVENIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB50      0x0   Name:                          0x24      
+          0xB54      0x4   OffsetToData:                  0x1260    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1860     0x0   OffsetToData:                  0x214F8   
+            0x1864     0x4   Size:                          0x2B2     
+            0x1868     0x8   CodePage:                      0x0       
+            0x186C     0xC   Reserved:                      0x0       
+        \--- LANG [39,0][LANG_LITHUANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB58      0x0   Name:                          0x27      
+          0xB5C      0x4   OffsetToData:                  0x1270    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1870     0x0   OffsetToData:                  0x217AC   
+            0x1874     0x4   Size:                          0x2DA     
+            0x1878     0x8   CodePage:                      0x0       
+            0x187C     0xC   Reserved:                      0x0       
+        \--- LANG [41,0][LANG_FARSI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB60      0x0   Name:                          0x29      
+          0xB64      0x4   OffsetToData:                  0x1280    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1880     0x0   OffsetToData:                  0x21A88   
+            0x1884     0x4   Size:                          0x29A     
+            0x1888     0x8   CodePage:                      0x0       
+            0x188C     0xC   Reserved:                      0x0       
+        \--- LANG [144,0][LANG_WALON,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB68      0x0   Name:                          0x90      
+          0xB6C      0x4   OffsetToData:                  0x1290    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1890     0x0   OffsetToData:                  0x21D24   
+            0x1894     0x4   Size:                          0x2B4     
+            0x1898     0x8   CodePage:                      0x0       
+            0x189C     0xC   Reserved:                      0x0       
+        \--- LANG [4,1][LANG_CHINESE,SUBLANG_CHINESE_TRADITIONAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB70      0x0   Name:                          0x404     
+          0xB74      0x4   OffsetToData:                  0x12A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x18A0     0x0   OffsetToData:                  0x21FD8   
+            0x18A4     0x4   Size:                          0x262     
+            0x18A8     0x8   CodePage:                      0x0       
+            0x18AC     0xC   Reserved:                      0x0       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB78      0x0   Name:                          0x409     
+          0xB7C      0x4   OffsetToData:                  0x12B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x18B0     0x0   OffsetToData:                  0x2223C   
+            0x18B4     0x4   Size:                          0x298     
+            0x18B8     0x8   CodePage:                      0x0       
+            0x18BC     0xC   Reserved:                      0x0       
+        \--- LANG [20,1][LANG_NORWEGIAN,SUBLANG_NORWEGIAN_BOKMAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB80      0x0   Name:                          0x414     
+          0xB84      0x4   OffsetToData:                  0x12C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x18C0     0x0   OffsetToData:                  0x224D4   
+            0x18C4     0x4   Size:                          0x296     
+            0x18C8     0x8   CodePage:                      0x0       
+            0x18CC     0xC   Reserved:                      0x0       
+        \--- LANG [22,1][LANG_PORTUGUESE,SUBLANG_PORTUGUESE_BRAZILIAN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB88      0x0   Name:                          0x416     
+          0xB8C      0x4   OffsetToData:                  0x12D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x18D0     0x0   OffsetToData:                  0x2276C   
+            0x18D4     0x4   Size:                          0x2CE     
+            0x18D8     0x8   CodePage:                      0x0       
+            0x18DC     0xC   Reserved:                      0x0       
+        \--- LANG [143,1][LANG_ESPERANTO,SUBLANG_DEFAULT]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB90      0x0   Name:                          0x48F     
+          0xB94      0x4   OffsetToData:                  0x12E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x18E0     0x0   OffsetToData:                  0x22A3C   
+            0x18E4     0x4   Size:                          0x2AA     
+            0x18E8     0x8   CodePage:                      0x0       
+            0x18EC     0xC   Reserved:                      0x0       
+        \--- LANG [4,2][LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xB98      0x0   Name:                          0x804     
+          0xB9C      0x4   OffsetToData:                  0x12F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x18F0     0x0   OffsetToData:                  0x22CE8   
+            0x18F4     0x4   Size:                          0x262     
+            0x18F8     0x8   CodePage:                      0x0       
+            0x18FC     0xC   Reserved:                      0x0       
+        \--- LANG [22,2][LANG_PORTUGUESE,SUBLANG_PORTUGUESE]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xBA0      0x0   Name:                          0x816     
+          0xBA4      0x4   OffsetToData:                  0x1300    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1900     0x0   OffsetToData:                  0x22F4C   
+            0x1904     0x4   Size:                          0x2CE     
+            0x1908     0x8   CodePage:                      0x0       
+            0x190C     0xC   Reserved:                      0x0       
+        \--- LANG [26,2][LANG_SERBIAN,SUBLANG_SERBIAN_LATIN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xBA8      0x0   Name:                          0x81A     
+          0xBAC      0x4   OffsetToData:                  0x1310    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1910     0x0   OffsetToData:                  0x2321C   
+            0x1914     0x4   Size:                          0x2AE     
+            0x1918     0x8   CodePage:                      0x0       
+            0x191C     0xC   Reserved:                      0x0       
+        \--- LANG [26,3][LANG_SERBIAN,SUBLANG_SERBIAN_CYRILLIC]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xBB0      0x0   Name:                          0xC1A     
+          0xBB4      0x4   OffsetToData:                  0x1320    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1920     0x0   OffsetToData:                  0x234CC   
+            0x1924     0x4   Size:                          0x2AE     
+            0x1928     0x8   CodePage:                      0x0       
+            0x192C     0xC   Reserved:                      0x0       
+
+  Id: [0x6] (RT_STRING)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x628      0x0   Name:                          0x6       
+  0x62C      0x4   OffsetToData:                  0x800005B8
+    [IMAGE_RESOURCE_DIRECTORY]
+    0xBB8      0x0   Characteristics:               0x0       
+    0xBBC      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0xBC0      0x8   MajorVersion:                  0x0       
+    0xBC2      0xA   MinorVersion:                  0x0       
+    0xBC4      0xC   NumberOfNamedEntries:          0x0       
+    0xBC6      0xE   NumberOfIdEntries:             0x3       
+      Id: [0x17]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0xBC8      0x0   Name:                          0x17      
+      0xBCC      0x4   OffsetToData:                  0x800005E0
+        [IMAGE_RESOURCE_DIRECTORY]
+        0xBE0      0x0   Characteristics:               0x0       
+        0xBE4      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0xBE8      0x8   MajorVersion:                  0x0       
+        0xBEA      0xA   MinorVersion:                  0x0       
+        0xBEC      0xC   NumberOfNamedEntries:          0x0       
+        0xBEE      0xE   NumberOfIdEntries:             0x25      
+        \--- LANG [1,0][LANG_ARABIC,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xBF0      0x0   Name:                          0x1       
+          0xBF4      0x4   OffsetToData:                  0x1330    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1930     0x0   OffsetToData:                  0x2377C   
+            0x1934     0x4   Size:                          0x32      
+            0x1938     0x8   CodePage:                      0x0       
+            0x193C     0xC   Reserved:                      0x0       
+        \--- LANG [3,0][LANG_CATALAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xBF8      0x0   Name:                          0x3       
+          0xBFC      0x4   OffsetToData:                  0x1340    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1940     0x0   OffsetToData:                  0x237B0   
+            0x1944     0x4   Size:                          0x36      
+            0x1948     0x8   CodePage:                      0x0       
+            0x194C     0xC   Reserved:                      0x0       
+        \--- LANG [5,0][LANG_CZECH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC00      0x0   Name:                          0x5       
+          0xC04      0x4   OffsetToData:                  0x1350    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1950     0x0   OffsetToData:                  0x237E8   
+            0x1954     0x4   Size:                          0x36      
+            0x1958     0x8   CodePage:                      0x0       
+            0x195C     0xC   Reserved:                      0x0       
+        \--- LANG [6,0][LANG_DANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC08      0x0   Name:                          0x6       
+          0xC0C      0x4   OffsetToData:                  0x1360    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1960     0x0   OffsetToData:                  0x23820   
+            0x1964     0x4   Size:                          0x32      
+            0x1968     0x8   CodePage:                      0x0       
+            0x196C     0xC   Reserved:                      0x0       
+        \--- LANG [7,0][LANG_GERMAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC10      0x0   Name:                          0x7       
+          0xC14      0x4   OffsetToData:                  0x1370    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1970     0x0   OffsetToData:                  0x23854   
+            0x1974     0x4   Size:                          0x34      
+            0x1978     0x8   CodePage:                      0x0       
+            0x197C     0xC   Reserved:                      0x0       
+        \--- LANG [9,0][LANG_ENGLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC18      0x0   Name:                          0x9       
+          0xC1C      0x4   OffsetToData:                  0x1380    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1980     0x0   OffsetToData:                  0x23888   
+            0x1984     0x4   Size:                          0x32      
+            0x1988     0x8   CodePage:                      0x0       
+            0x198C     0xC   Reserved:                      0x0       
+        \--- LANG [10,0][LANG_SPANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC20      0x0   Name:                          0xA       
+          0xC24      0x4   OffsetToData:                  0x1390    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1990     0x0   OffsetToData:                  0x238BC   
+            0x1994     0x4   Size:                          0x36      
+            0x1998     0x8   CodePage:                      0x0       
+            0x199C     0xC   Reserved:                      0x0       
+        \--- LANG [11,0][LANG_FINNISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC28      0x0   Name:                          0xB       
+          0xC2C      0x4   OffsetToData:                  0x13A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x19A0     0x0   OffsetToData:                  0x238F4   
+            0x19A4     0x4   Size:                          0x32      
+            0x19A8     0x8   CodePage:                      0x0       
+            0x19AC     0xC   Reserved:                      0x0       
+        \--- LANG [12,0][LANG_FRENCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC30      0x0   Name:                          0xC       
+          0xC34      0x4   OffsetToData:                  0x13B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x19B0     0x0   OffsetToData:                  0x23928   
+            0x19B4     0x4   Size:                          0x32      
+            0x19B8     0x8   CodePage:                      0x0       
+            0x19BC     0xC   Reserved:                      0x0       
+        \--- LANG [13,0][LANG_HEBREW,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC38      0x0   Name:                          0xD       
+          0xC3C      0x4   OffsetToData:                  0x13C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x19C0     0x0   OffsetToData:                  0x2395C   
+            0x19C4     0x4   Size:                          0x32      
+            0x19C8     0x8   CodePage:                      0x0       
+            0x19CC     0xC   Reserved:                      0x0       
+        \--- LANG [14,0][LANG_HUNGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC40      0x0   Name:                          0xE       
+          0xC44      0x4   OffsetToData:                  0x13D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x19D0     0x0   OffsetToData:                  0x23990   
+            0x19D4     0x4   Size:                          0x34      
+            0x19D8     0x8   CodePage:                      0x0       
+            0x19DC     0xC   Reserved:                      0x0       
+        \--- LANG [16,0][LANG_ITALIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC48      0x0   Name:                          0x10      
+          0xC4C      0x4   OffsetToData:                  0x13E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x19E0     0x0   OffsetToData:                  0x239C4   
+            0x19E4     0x4   Size:                          0x36      
+            0x19E8     0x8   CodePage:                      0x0       
+            0x19EC     0xC   Reserved:                      0x0       
+        \--- LANG [17,0][LANG_JAPANESE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC50      0x0   Name:                          0x11      
+          0xC54      0x4   OffsetToData:                  0x13F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x19F0     0x0   OffsetToData:                  0x239FC   
+            0x19F4     0x4   Size:                          0x30      
+            0x19F8     0x8   CodePage:                      0x0       
+            0x19FC     0xC   Reserved:                      0x0       
+        \--- LANG [18,0][LANG_KOREAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC58      0x0   Name:                          0x12      
+          0xC5C      0x4   OffsetToData:                  0x1400    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A00     0x0   OffsetToData:                  0x23A2C   
+            0x1A04     0x4   Size:                          0x30      
+            0x1A08     0x8   CodePage:                      0x0       
+            0x1A0C     0xC   Reserved:                      0x0       
+        \--- LANG [19,0][LANG_DUTCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC60      0x0   Name:                          0x13      
+          0xC64      0x4   OffsetToData:                  0x1410    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A10     0x0   OffsetToData:                  0x23A5C   
+            0x1A14     0x4   Size:                          0x36      
+            0x1A18     0x8   CodePage:                      0x0       
+            0x1A1C     0xC   Reserved:                      0x0       
+        \--- LANG [21,0][LANG_POLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC68      0x0   Name:                          0x15      
+          0xC6C      0x4   OffsetToData:                  0x1420    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A20     0x0   OffsetToData:                  0x23A94   
+            0x1A24     0x4   Size:                          0x36      
+            0x1A28     0x8   CodePage:                      0x0       
+            0x1A2C     0xC   Reserved:                      0x0       
+        \--- LANG [24,0][LANG_ROMANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC70      0x0   Name:                          0x18      
+          0xC74      0x4   OffsetToData:                  0x1430    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A30     0x0   OffsetToData:                  0x23ACC   
+            0x1A34     0x4   Size:                          0x36      
+            0x1A38     0x8   CodePage:                      0x0       
+            0x1A3C     0xC   Reserved:                      0x0       
+        \--- LANG [25,0][LANG_RUSSIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC78      0x0   Name:                          0x19      
+          0xC7C      0x4   OffsetToData:                  0x1440    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A40     0x0   OffsetToData:                  0x23B04   
+            0x1A44     0x4   Size:                          0x3A      
+            0x1A48     0x8   CodePage:                      0x0       
+            0x1A4C     0xC   Reserved:                      0x0       
+        \--- LANG [26,0][LANG_SERBIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC80      0x0   Name:                          0x1A      
+          0xC84      0x4   OffsetToData:                  0x1450    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A50     0x0   OffsetToData:                  0x23B40   
+            0x1A54     0x4   Size:                          0x36      
+            0x1A58     0x8   CodePage:                      0x0       
+            0x1A5C     0xC   Reserved:                      0x0       
+        \--- LANG [27,0][LANG_SLOVAK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC88      0x0   Name:                          0x1B      
+          0xC8C      0x4   OffsetToData:                  0x1460    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A60     0x0   OffsetToData:                  0x23B78   
+            0x1A64     0x4   Size:                          0x36      
+            0x1A68     0x8   CodePage:                      0x0       
+            0x1A6C     0xC   Reserved:                      0x0       
+        \--- LANG [29,0][LANG_SWEDISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC90      0x0   Name:                          0x1D      
+          0xC94      0x4   OffsetToData:                  0x1470    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A70     0x0   OffsetToData:                  0x23BB0   
+            0x1A74     0x4   Size:                          0x32      
+            0x1A78     0x8   CodePage:                      0x0       
+            0x1A7C     0xC   Reserved:                      0x0       
+        \--- LANG [30,0][LANG_THAI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xC98      0x0   Name:                          0x1E      
+          0xC9C      0x4   OffsetToData:                  0x1480    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A80     0x0   OffsetToData:                  0x23BE4   
+            0x1A84     0x4   Size:                          0x32      
+            0x1A88     0x8   CodePage:                      0x0       
+            0x1A8C     0xC   Reserved:                      0x0       
+        \--- LANG [31,0][LANG_TURKISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCA0      0x0   Name:                          0x1F      
+          0xCA4      0x4   OffsetToData:                  0x1490    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1A90     0x0   OffsetToData:                  0x23C18   
+            0x1A94     0x4   Size:                          0x36      
+            0x1A98     0x8   CodePage:                      0x0       
+            0x1A9C     0xC   Reserved:                      0x0       
+        \--- LANG [34,0][LANG_UKRAINIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCA8      0x0   Name:                          0x22      
+          0xCAC      0x4   OffsetToData:                  0x14A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1AA0     0x0   OffsetToData:                  0x23C50   
+            0x1AA4     0x4   Size:                          0x3A      
+            0x1AA8     0x8   CodePage:                      0x0       
+            0x1AAC     0xC   Reserved:                      0x0       
+        \--- LANG [36,0][LANG_SLOVENIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCB0      0x0   Name:                          0x24      
+          0xCB4      0x4   OffsetToData:                  0x14B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1AB0     0x0   OffsetToData:                  0x23C8C   
+            0x1AB4     0x4   Size:                          0x34      
+            0x1AB8     0x8   CodePage:                      0x0       
+            0x1ABC     0xC   Reserved:                      0x0       
+        \--- LANG [39,0][LANG_LITHUANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCB8      0x0   Name:                          0x27      
+          0xCBC      0x4   OffsetToData:                  0x14C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1AC0     0x0   OffsetToData:                  0x23CC0   
+            0x1AC4     0x4   Size:                          0x3A      
+            0x1AC8     0x8   CodePage:                      0x0       
+            0x1ACC     0xC   Reserved:                      0x0       
+        \--- LANG [41,0][LANG_FARSI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCC0      0x0   Name:                          0x29      
+          0xCC4      0x4   OffsetToData:                  0x14D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1AD0     0x0   OffsetToData:                  0x23CFC   
+            0x1AD4     0x4   Size:                          0x32      
+            0x1AD8     0x8   CodePage:                      0x0       
+            0x1ADC     0xC   Reserved:                      0x0       
+        \--- LANG [144,0][LANG_WALON,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCC8      0x0   Name:                          0x90      
+          0xCCC      0x4   OffsetToData:                  0x14E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1AE0     0x0   OffsetToData:                  0x23D30   
+            0x1AE4     0x4   Size:                          0x34      
+            0x1AE8     0x8   CodePage:                      0x0       
+            0x1AEC     0xC   Reserved:                      0x0       
+        \--- LANG [4,1][LANG_CHINESE,SUBLANG_CHINESE_TRADITIONAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCD0      0x0   Name:                          0x404     
+          0xCD4      0x4   OffsetToData:                  0x14F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1AF0     0x0   OffsetToData:                  0x23D64   
+            0x1AF4     0x4   Size:                          0x30      
+            0x1AF8     0x8   CodePage:                      0x0       
+            0x1AFC     0xC   Reserved:                      0x0       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCD8      0x0   Name:                          0x409     
+          0xCDC      0x4   OffsetToData:                  0x1500    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B00     0x0   OffsetToData:                  0x23D94   
+            0x1B04     0x4   Size:                          0x32      
+            0x1B08     0x8   CodePage:                      0x0       
+            0x1B0C     0xC   Reserved:                      0x0       
+        \--- LANG [20,1][LANG_NORWEGIAN,SUBLANG_NORWEGIAN_BOKMAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCE0      0x0   Name:                          0x414     
+          0xCE4      0x4   OffsetToData:                  0x1510    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B10     0x0   OffsetToData:                  0x23DC8   
+            0x1B14     0x4   Size:                          0x32      
+            0x1B18     0x8   CodePage:                      0x0       
+            0x1B1C     0xC   Reserved:                      0x0       
+        \--- LANG [22,1][LANG_PORTUGUESE,SUBLANG_PORTUGUESE_BRAZILIAN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCE8      0x0   Name:                          0x416     
+          0xCEC      0x4   OffsetToData:                  0x1520    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B20     0x0   OffsetToData:                  0x23DFC   
+            0x1B24     0x4   Size:                          0x36      
+            0x1B28     0x8   CodePage:                      0x0       
+            0x1B2C     0xC   Reserved:                      0x0       
+        \--- LANG [143,1][LANG_ESPERANTO,SUBLANG_DEFAULT]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCF0      0x0   Name:                          0x48F     
+          0xCF4      0x4   OffsetToData:                  0x1530    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B30     0x0   OffsetToData:                  0x23E34   
+            0x1B34     0x4   Size:                          0x32      
+            0x1B38     0x8   CodePage:                      0x0       
+            0x1B3C     0xC   Reserved:                      0x0       
+        \--- LANG [4,2][LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xCF8      0x0   Name:                          0x804     
+          0xCFC      0x4   OffsetToData:                  0x1540    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B40     0x0   OffsetToData:                  0x23E68   
+            0x1B44     0x4   Size:                          0x30      
+            0x1B48     0x8   CodePage:                      0x0       
+            0x1B4C     0xC   Reserved:                      0x0       
+        \--- LANG [22,2][LANG_PORTUGUESE,SUBLANG_PORTUGUESE]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD00      0x0   Name:                          0x816     
+          0xD04      0x4   OffsetToData:                  0x1550    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B50     0x0   OffsetToData:                  0x23E98   
+            0x1B54     0x4   Size:                          0x36      
+            0x1B58     0x8   CodePage:                      0x0       
+            0x1B5C     0xC   Reserved:                      0x0       
+        \--- LANG [26,2][LANG_SERBIAN,SUBLANG_SERBIAN_LATIN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD08      0x0   Name:                          0x81A     
+          0xD0C      0x4   OffsetToData:                  0x1560    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B60     0x0   OffsetToData:                  0x23ED0   
+            0x1B64     0x4   Size:                          0x36      
+            0x1B68     0x8   CodePage:                      0x0       
+            0x1B6C     0xC   Reserved:                      0x0       
+        \--- LANG [26,3][LANG_SERBIAN,SUBLANG_SERBIAN_CYRILLIC]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD10      0x0   Name:                          0xC1A     
+          0xD14      0x4   OffsetToData:                  0x1570    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B70     0x0   OffsetToData:                  0x23F08   
+            0x1B74     0x4   Size:                          0x36      
+            0x1B78     0x8   CodePage:                      0x0       
+            0x1B7C     0xC   Reserved:                      0x0       
+          [STRINGS]
+               352: &f
+               353: \u0421\u0442\u0440\u0430\u043d\u0430 &p
+      Id: [0x18]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0xBD0      0x0   Name:                          0x18      
+      0xBD4      0x4   OffsetToData:                  0x80000718
+        [IMAGE_RESOURCE_DIRECTORY]
+        0xD18      0x0   Characteristics:               0x0       
+        0xD1C      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0xD20      0x8   MajorVersion:                  0x0       
+        0xD22      0xA   MinorVersion:                  0x0       
+        0xD24      0xC   NumberOfNamedEntries:          0x0       
+        0xD26      0xE   NumberOfIdEntries:             0x27      
+        \--- LANG [1,0][LANG_ARABIC,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD28      0x0   Name:                          0x1       
+          0xD2C      0x4   OffsetToData:                  0x1580    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B80     0x0   OffsetToData:                  0x23F40   
+            0x1B84     0x4   Size:                          0x16C     
+            0x1B88     0x8   CodePage:                      0x0       
+            0x1B8C     0xC   Reserved:                      0x0       
+        \--- LANG [2,0][LANG_BULGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD30      0x0   Name:                          0x2       
+          0xD34      0x4   OffsetToData:                  0x1590    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1B90     0x0   OffsetToData:                  0x240AC   
+            0x1B94     0x4   Size:                          0x1DC     
+            0x1B98     0x8   CodePage:                      0x0       
+            0x1B9C     0xC   Reserved:                      0x0       
+        \--- LANG [3,0][LANG_CATALAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD38      0x0   Name:                          0x3       
+          0xD3C      0x4   OffsetToData:                  0x15A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1BA0     0x0   OffsetToData:                  0x24288   
+            0x1BA4     0x4   Size:                          0x1C8     
+            0x1BA8     0x8   CodePage:                      0x0       
+            0x1BAC     0xC   Reserved:                      0x0       
+        \--- LANG [5,0][LANG_CZECH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD40      0x0   Name:                          0x5       
+          0xD44      0x4   OffsetToData:                  0x15B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1BB0     0x0   OffsetToData:                  0x24450   
+            0x1BB4     0x4   Size:                          0x18A     
+            0x1BB8     0x8   CodePage:                      0x0       
+            0x1BBC     0xC   Reserved:                      0x0       
+        \--- LANG [6,0][LANG_DANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD48      0x0   Name:                          0x6       
+          0xD4C      0x4   OffsetToData:                  0x15C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1BC0     0x0   OffsetToData:                  0x245DC   
+            0x1BC4     0x4   Size:                          0x1A6     
+            0x1BC8     0x8   CodePage:                      0x0       
+            0x1BCC     0xC   Reserved:                      0x0       
+        \--- LANG [7,0][LANG_GERMAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD50      0x0   Name:                          0x7       
+          0xD54      0x4   OffsetToData:                  0x15D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1BD0     0x0   OffsetToData:                  0x24784   
+            0x1BD4     0x4   Size:                          0x1E4     
+            0x1BD8     0x8   CodePage:                      0x0       
+            0x1BDC     0xC   Reserved:                      0x0       
+        \--- LANG [9,0][LANG_ENGLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD58      0x0   Name:                          0x9       
+          0xD5C      0x4   OffsetToData:                  0x15E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1BE0     0x0   OffsetToData:                  0x24968   
+            0x1BE4     0x4   Size:                          0x1B4     
+            0x1BE8     0x8   CodePage:                      0x0       
+            0x1BEC     0xC   Reserved:                      0x0       
+        \--- LANG [10,0][LANG_SPANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD60      0x0   Name:                          0xA       
+          0xD64      0x4   OffsetToData:                  0x15F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1BF0     0x0   OffsetToData:                  0x24B1C   
+            0x1BF4     0x4   Size:                          0x1E8     
+            0x1BF8     0x8   CodePage:                      0x0       
+            0x1BFC     0xC   Reserved:                      0x0       
+        \--- LANG [11,0][LANG_FINNISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD68      0x0   Name:                          0xB       
+          0xD6C      0x4   OffsetToData:                  0x1600    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C00     0x0   OffsetToData:                  0x24D04   
+            0x1C04     0x4   Size:                          0x1A2     
+            0x1C08     0x8   CodePage:                      0x0       
+            0x1C0C     0xC   Reserved:                      0x0       
+        \--- LANG [12,0][LANG_FRENCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD70      0x0   Name:                          0xC       
+          0xD74      0x4   OffsetToData:                  0x1610    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C10     0x0   OffsetToData:                  0x24EA8   
+            0x1C14     0x4   Size:                          0x1FC     
+            0x1C18     0x8   CodePage:                      0x0       
+            0x1C1C     0xC   Reserved:                      0x0       
+        \--- LANG [13,0][LANG_HEBREW,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD78      0x0   Name:                          0xD       
+          0xD7C      0x4   OffsetToData:                  0x1620    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C20     0x0   OffsetToData:                  0x250A4   
+            0x1C24     0x4   Size:                          0x16C     
+            0x1C28     0x8   CodePage:                      0x0       
+            0x1C2C     0xC   Reserved:                      0x0       
+        \--- LANG [14,0][LANG_HUNGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD80      0x0   Name:                          0xE       
+          0xD84      0x4   OffsetToData:                  0x1630    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C30     0x0   OffsetToData:                  0x25210   
+            0x1C34     0x4   Size:                          0x1B0     
+            0x1C38     0x8   CodePage:                      0x0       
+            0x1C3C     0xC   Reserved:                      0x0       
+        \--- LANG [16,0][LANG_ITALIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD88      0x0   Name:                          0x10      
+          0xD8C      0x4   OffsetToData:                  0x1640    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C40     0x0   OffsetToData:                  0x253C0   
+            0x1C44     0x4   Size:                          0x1A6     
+            0x1C48     0x8   CodePage:                      0x0       
+            0x1C4C     0xC   Reserved:                      0x0       
+        \--- LANG [17,0][LANG_JAPANESE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD90      0x0   Name:                          0x11      
+          0xD94      0x4   OffsetToData:                  0x1650    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C50     0x0   OffsetToData:                  0x25568   
+            0x1C54     0x4   Size:                          0x116     
+            0x1C58     0x8   CodePage:                      0x0       
+            0x1C5C     0xC   Reserved:                      0x0       
+        \--- LANG [18,0][LANG_KOREAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xD98      0x0   Name:                          0x12      
+          0xD9C      0x4   OffsetToData:                  0x1660    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C60     0x0   OffsetToData:                  0x25680   
+            0x1C64     0x4   Size:                          0x110     
+            0x1C68     0x8   CodePage:                      0x0       
+            0x1C6C     0xC   Reserved:                      0x0       
+        \--- LANG [19,0][LANG_DUTCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDA0      0x0   Name:                          0x13      
+          0xDA4      0x4   OffsetToData:                  0x1670    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C70     0x0   OffsetToData:                  0x25790   
+            0x1C74     0x4   Size:                          0x1D2     
+            0x1C78     0x8   CodePage:                      0x0       
+            0x1C7C     0xC   Reserved:                      0x0       
+        \--- LANG [21,0][LANG_POLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDA8      0x0   Name:                          0x15      
+          0xDAC      0x4   OffsetToData:                  0x1680    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C80     0x0   OffsetToData:                  0x25964   
+            0x1C84     0x4   Size:                          0x1C6     
+            0x1C88     0x8   CodePage:                      0x0       
+            0x1C8C     0xC   Reserved:                      0x0       
+        \--- LANG [23,0][LANG_RHAETO_ROMANCE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDB0      0x0   Name:                          0x17      
+          0xDB4      0x4   OffsetToData:                  0x1690    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1C90     0x0   OffsetToData:                  0x25B2C   
+            0x1C94     0x4   Size:                          0x1C6     
+            0x1C98     0x8   CodePage:                      0x0       
+            0x1C9C     0xC   Reserved:                      0x0       
+        \--- LANG [24,0][LANG_ROMANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDB8      0x0   Name:                          0x18      
+          0xDBC      0x4   OffsetToData:                  0x16A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1CA0     0x0   OffsetToData:                  0x25CF4   
+            0x1CA4     0x4   Size:                          0x1CC     
+            0x1CA8     0x8   CodePage:                      0x0       
+            0x1CAC     0xC   Reserved:                      0x0       
+        \--- LANG [25,0][LANG_RUSSIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDC0      0x0   Name:                          0x19      
+          0xDC4      0x4   OffsetToData:                  0x16B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1CB0     0x0   OffsetToData:                  0x25EC0   
+            0x1CB4     0x4   Size:                          0x190     
+            0x1CB8     0x8   CodePage:                      0x0       
+            0x1CBC     0xC   Reserved:                      0x0       
+        \--- LANG [26,0][LANG_SERBIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDC8      0x0   Name:                          0x1A      
+          0xDCC      0x4   OffsetToData:                  0x16C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1CC0     0x0   OffsetToData:                  0x26050   
+            0x1CC4     0x4   Size:                          0x1BE     
+            0x1CC8     0x8   CodePage:                      0x0       
+            0x1CCC     0xC   Reserved:                      0x0       
+        \--- LANG [27,0][LANG_SLOVAK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDD0      0x0   Name:                          0x1B      
+          0xDD4      0x4   OffsetToData:                  0x16D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1CD0     0x0   OffsetToData:                  0x26210   
+            0x1CD4     0x4   Size:                          0x1DC     
+            0x1CD8     0x8   CodePage:                      0x0       
+            0x1CDC     0xC   Reserved:                      0x0       
+        \--- LANG [29,0][LANG_SWEDISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDD8      0x0   Name:                          0x1D      
+          0xDDC      0x4   OffsetToData:                  0x16E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1CE0     0x0   OffsetToData:                  0x263EC   
+            0x1CE4     0x4   Size:                          0x17E     
+            0x1CE8     0x8   CodePage:                      0x0       
+            0x1CEC     0xC   Reserved:                      0x0       
+        \--- LANG [30,0][LANG_THAI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDE0      0x0   Name:                          0x1E      
+          0xDE4      0x4   OffsetToData:                  0x16F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1CF0     0x0   OffsetToData:                  0x2656C   
+            0x1CF4     0x4   Size:                          0x1B6     
+            0x1CF8     0x8   CodePage:                      0x0       
+            0x1CFC     0xC   Reserved:                      0x0       
+        \--- LANG [31,0][LANG_TURKISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDE8      0x0   Name:                          0x1F      
+          0xDEC      0x4   OffsetToData:                  0x1700    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D00     0x0   OffsetToData:                  0x26724   
+            0x1D04     0x4   Size:                          0x1CA     
+            0x1D08     0x8   CodePage:                      0x0       
+            0x1D0C     0xC   Reserved:                      0x0       
+        \--- LANG [34,0][LANG_UKRAINIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDF0      0x0   Name:                          0x22      
+          0xDF4      0x4   OffsetToData:                  0x1710    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D10     0x0   OffsetToData:                  0x268F0   
+            0x1D14     0x4   Size:                          0x16C     
+            0x1D18     0x8   CodePage:                      0x0       
+            0x1D1C     0xC   Reserved:                      0x0       
+        \--- LANG [36,0][LANG_SLOVENIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xDF8      0x0   Name:                          0x24      
+          0xDFC      0x4   OffsetToData:                  0x1720    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D20     0x0   OffsetToData:                  0x26A5C   
+            0x1D24     0x4   Size:                          0x1CA     
+            0x1D28     0x8   CodePage:                      0x0       
+            0x1D2C     0xC   Reserved:                      0x0       
+        \--- LANG [39,0][LANG_LITHUANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE00      0x0   Name:                          0x27      
+          0xE04      0x4   OffsetToData:                  0x1730    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D30     0x0   OffsetToData:                  0x26C28   
+            0x1D34     0x4   Size:                          0x1B0     
+            0x1D38     0x8   CodePage:                      0x0       
+            0x1D3C     0xC   Reserved:                      0x0       
+        \--- LANG [41,0][LANG_FARSI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE08      0x0   Name:                          0x29      
+          0xE0C      0x4   OffsetToData:                  0x1740    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D40     0x0   OffsetToData:                  0x26DD8   
+            0x1D44     0x4   Size:                          0x1E6     
+            0x1D48     0x8   CodePage:                      0x0       
+            0x1D4C     0xC   Reserved:                      0x0       
+        \--- LANG [144,0][LANG_WALON,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE10      0x0   Name:                          0x90      
+          0xE14      0x4   OffsetToData:                  0x1750    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D50     0x0   OffsetToData:                  0x26FC0   
+            0x1D54     0x4   Size:                          0x1A0     
+            0x1D58     0x8   CodePage:                      0x0       
+            0x1D5C     0xC   Reserved:                      0x0       
+        \--- LANG [4,1][LANG_CHINESE,SUBLANG_CHINESE_TRADITIONAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE18      0x0   Name:                          0x404     
+          0xE1C      0x4   OffsetToData:                  0x1760    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D60     0x0   OffsetToData:                  0x27160   
+            0x1D64     0x4   Size:                          0xC2      
+            0x1D68     0x8   CodePage:                      0x0       
+            0x1D6C     0xC   Reserved:                      0x0       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE20      0x0   Name:                          0x409     
+          0xE24      0x4   OffsetToData:                  0x1770    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D70     0x0   OffsetToData:                  0x27224   
+            0x1D74     0x4   Size:                          0x1B4     
+            0x1D78     0x8   CodePage:                      0x0       
+            0x1D7C     0xC   Reserved:                      0x0       
+        \--- LANG [20,1][LANG_NORWEGIAN,SUBLANG_NORWEGIAN_BOKMAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE28      0x0   Name:                          0x414     
+          0xE2C      0x4   OffsetToData:                  0x1780    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D80     0x0   OffsetToData:                  0x273D8   
+            0x1D84     0x4   Size:                          0x15C     
+            0x1D88     0x8   CodePage:                      0x0       
+            0x1D8C     0xC   Reserved:                      0x0       
+        \--- LANG [22,1][LANG_PORTUGUESE,SUBLANG_PORTUGUESE_BRAZILIAN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE30      0x0   Name:                          0x416     
+          0xE34      0x4   OffsetToData:                  0x1790    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1D90     0x0   OffsetToData:                  0x27534   
+            0x1D94     0x4   Size:                          0x1EC     
+            0x1D98     0x8   CodePage:                      0x0       
+            0x1D9C     0xC   Reserved:                      0x0       
+        \--- LANG [143,1][LANG_ESPERANTO,SUBLANG_DEFAULT]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE38      0x0   Name:                          0x48F     
+          0xE3C      0x4   OffsetToData:                  0x17A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1DA0     0x0   OffsetToData:                  0x27720   
+            0x1DA4     0x4   Size:                          0x1B8     
+            0x1DA8     0x8   CodePage:                      0x0       
+            0x1DAC     0xC   Reserved:                      0x0       
+        \--- LANG [4,2][LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE40      0x0   Name:                          0x804     
+          0xE44      0x4   OffsetToData:                  0x17B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1DB0     0x0   OffsetToData:                  0x278D8   
+            0x1DB4     0x4   Size:                          0xC2      
+            0x1DB8     0x8   CodePage:                      0x0       
+            0x1DBC     0xC   Reserved:                      0x0       
+        \--- LANG [22,2][LANG_PORTUGUESE,SUBLANG_PORTUGUESE]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE48      0x0   Name:                          0x816     
+          0xE4C      0x4   OffsetToData:                  0x17C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1DC0     0x0   OffsetToData:                  0x2799C   
+            0x1DC4     0x4   Size:                          0x1DE     
+            0x1DC8     0x8   CodePage:                      0x0       
+            0x1DCC     0xC   Reserved:                      0x0       
+        \--- LANG [26,2][LANG_SERBIAN,SUBLANG_SERBIAN_LATIN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE50      0x0   Name:                          0x81A     
+          0xE54      0x4   OffsetToData:                  0x17D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1DD0     0x0   OffsetToData:                  0x27B7C   
+            0x1DD4     0x4   Size:                          0x1D4     
+            0x1DD8     0x8   CodePage:                      0x0       
+            0x1DDC     0xC   Reserved:                      0x0       
+        \--- LANG [26,3][LANG_SERBIAN,SUBLANG_SERBIAN_CYRILLIC]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE58      0x0   Name:                          0xC1A     
+          0xE5C      0x4   OffsetToData:                  0x17E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1DE0     0x0   OffsetToData:                  0x27D50   
+            0x1DE4     0x4   Size:                          0x1DA     
+            0x1DE8     0x8   CodePage:                      0x0       
+            0x1DEC     0xC   Reserved:                      0x0       
+          [STRINGS]
+               368: \u0411\u0435\u043b\u0435\u0436\u043d\u0438\u0446\u0430
+               369: \u0413\u0440\u0435\u0448\u043a\u0430
+               372: \u041d\u0435\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u043d\u043e
+               373: \u0421\u0432\u0435 \u0434\u0430\u0442\u043e\u0442\u0435\u043a\u0435 (*.*)
+               374: \u0422\u0435\u043a\u0441\u0442\u0443\u0430\u043b\u043d\u0435 \u0434\u0430\u0442\u043e\u0442\u0435\u043a\u0435 (*.txt)
+               377: \u0414\u0430\u0442\u043e\u0442\u0435\u043a\u0430 \u201e%s\u201c \u043d\u0435 \u043f\u043e\u0441\u0442\u043e\u0458\u0438.\n\n\u0416\u0435\u043b\u0438\u0442\u0435 \u043b\u0438 \u0434\u0430 \u043d\u0430\u043f\u0440\u0430\u0432\u0438\u0442\u0435 \u043d\u043e\u0432\u0443 \u0434\u0430\u0442\u043e\u0442\u0435\u043a\u0443?
+               378: \u0414\u0430\u0442\u043e\u0442\u0435\u043a\u0430 \u201e%s\u201c \u0458\u0435 \u0438\u0437\u043c\u0435\u045a\u0435\u043d\u0430.\n\n\u0416\u0435\u043b\u0438\u0442\u0435 \u043b\u0438 \u0434\u0430 \u0441\u0430\u0447\u0443\u0432\u0430\u0442\u0435 \u0438\u0437\u043c\u0435\u043d\u0435?
+               379: \u0414\u0430\u0442\u043e\u0442\u0435\u043a\u0430 \u201e%s\u201c \u043d\u0438\u0458\u0435 \u043f\u0440\u043e\u043d\u0430\u0452\u0435\u043d\u0430.
+      Id: [0x19]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0xBD8      0x0   Name:                          0x19      
+      0xBDC      0x4   OffsetToData:                  0x80000860
+        [IMAGE_RESOURCE_DIRECTORY]
+        0xE60      0x0   Characteristics:               0x0       
+        0xE64      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0xE68      0x8   MajorVersion:                  0x0       
+        0xE6A      0xA   MinorVersion:                  0x0       
+        0xE6C      0xC   NumberOfNamedEntries:          0x0       
+        0xE6E      0xE   NumberOfIdEntries:             0x22      
+        \--- LANG [1,0][LANG_ARABIC,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE70      0x0   Name:                          0x1       
+          0xE74      0x4   OffsetToData:                  0x17F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1DF0     0x0   OffsetToData:                  0x27F2C   
+            0x1DF4     0x4   Size:                          0x248     
+            0x1DF8     0x8   CodePage:                      0x0       
+            0x1DFC     0xC   Reserved:                      0x0       
+        \--- LANG [3,0][LANG_CATALAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE78      0x0   Name:                          0x3       
+          0xE7C      0x4   OffsetToData:                  0x1800    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E00     0x0   OffsetToData:                  0x28174   
+            0x1E04     0x4   Size:                          0x29A     
+            0x1E08     0x8   CodePage:                      0x0       
+            0x1E0C     0xC   Reserved:                      0x0       
+        \--- LANG [5,0][LANG_CZECH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE80      0x0   Name:                          0x5       
+          0xE84      0x4   OffsetToData:                  0x1810    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E10     0x0   OffsetToData:                  0x28410   
+            0x1E14     0x4   Size:                          0x2A0     
+            0x1E18     0x8   CodePage:                      0x0       
+            0x1E1C     0xC   Reserved:                      0x0       
+        \--- LANG [6,0][LANG_DANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE88      0x0   Name:                          0x6       
+          0xE8C      0x4   OffsetToData:                  0x1820    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E20     0x0   OffsetToData:                  0x286B0   
+            0x1E24     0x4   Size:                          0x262     
+            0x1E28     0x8   CodePage:                      0x0       
+            0x1E2C     0xC   Reserved:                      0x0       
+        \--- LANG [7,0][LANG_GERMAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE90      0x0   Name:                          0x7       
+          0xE94      0x4   OffsetToData:                  0x1830    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E30     0x0   OffsetToData:                  0x28914   
+            0x1E34     0x4   Size:                          0x27C     
+            0x1E38     0x8   CodePage:                      0x0       
+            0x1E3C     0xC   Reserved:                      0x0       
+        \--- LANG [9,0][LANG_ENGLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xE98      0x0   Name:                          0x9       
+          0xE9C      0x4   OffsetToData:                  0x1840    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E40     0x0   OffsetToData:                  0x28B90   
+            0x1E44     0x4   Size:                          0x258     
+            0x1E48     0x8   CodePage:                      0x0       
+            0x1E4C     0xC   Reserved:                      0x0       
+        \--- LANG [10,0][LANG_SPANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEA0      0x0   Name:                          0xA       
+          0xEA4      0x4   OffsetToData:                  0x1850    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E50     0x0   OffsetToData:                  0x28DE8   
+            0x1E54     0x4   Size:                          0x2CA     
+            0x1E58     0x8   CodePage:                      0x0       
+            0x1E5C     0xC   Reserved:                      0x0       
+        \--- LANG [11,0][LANG_FINNISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEA8      0x0   Name:                          0xB       
+          0xEAC      0x4   OffsetToData:                  0x1860    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E60     0x0   OffsetToData:                  0x290B4   
+            0x1E64     0x4   Size:                          0x254     
+            0x1E68     0x8   CodePage:                      0x0       
+            0x1E6C     0xC   Reserved:                      0x0       
+        \--- LANG [12,0][LANG_FRENCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEB0      0x0   Name:                          0xC       
+          0xEB4      0x4   OffsetToData:                  0x1870    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E70     0x0   OffsetToData:                  0x29308   
+            0x1E74     0x4   Size:                          0x276     
+            0x1E78     0x8   CodePage:                      0x0       
+            0x1E7C     0xC   Reserved:                      0x0       
+        \--- LANG [13,0][LANG_HEBREW,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEB8      0x0   Name:                          0xD       
+          0xEBC      0x4   OffsetToData:                  0x1880    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E80     0x0   OffsetToData:                  0x29580   
+            0x1E84     0x4   Size:                          0x258     
+            0x1E88     0x8   CodePage:                      0x0       
+            0x1E8C     0xC   Reserved:                      0x0       
+        \--- LANG [14,0][LANG_HUNGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEC0      0x0   Name:                          0xE       
+          0xEC4      0x4   OffsetToData:                  0x1890    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1E90     0x0   OffsetToData:                  0x297D8   
+            0x1E94     0x4   Size:                          0x2B0     
+            0x1E98     0x8   CodePage:                      0x0       
+            0x1E9C     0xC   Reserved:                      0x0       
+        \--- LANG [16,0][LANG_ITALIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEC8      0x0   Name:                          0x10      
+          0xECC      0x4   OffsetToData:                  0x18A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1EA0     0x0   OffsetToData:                  0x29A88   
+            0x1EA4     0x4   Size:                          0x252     
+            0x1EA8     0x8   CodePage:                      0x0       
+            0x1EAC     0xC   Reserved:                      0x0       
+        \--- LANG [17,0][LANG_JAPANESE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xED0      0x0   Name:                          0x11      
+          0xED4      0x4   OffsetToData:                  0x18B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1EB0     0x0   OffsetToData:                  0x29CDC   
+            0x1EB4     0x4   Size:                          0x196     
+            0x1EB8     0x8   CodePage:                      0x0       
+            0x1EBC     0xC   Reserved:                      0x0       
+        \--- LANG [18,0][LANG_KOREAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xED8      0x0   Name:                          0x12      
+          0xEDC      0x4   OffsetToData:                  0x18C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1EC0     0x0   OffsetToData:                  0x29E74   
+            0x1EC4     0x4   Size:                          0x18C     
+            0x1EC8     0x8   CodePage:                      0x0       
+            0x1ECC     0xC   Reserved:                      0x0       
+        \--- LANG [19,0][LANG_DUTCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEE0      0x0   Name:                          0x13      
+          0xEE4      0x4   OffsetToData:                  0x18D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1ED0     0x0   OffsetToData:                  0x2A000   
+            0x1ED4     0x4   Size:                          0x284     
+            0x1ED8     0x8   CodePage:                      0x0       
+            0x1EDC     0xC   Reserved:                      0x0       
+        \--- LANG [21,0][LANG_POLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEE8      0x0   Name:                          0x15      
+          0xEEC      0x4   OffsetToData:                  0x18E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1EE0     0x0   OffsetToData:                  0x2A284   
+            0x1EE4     0x4   Size:                          0x28C     
+            0x1EE8     0x8   CodePage:                      0x0       
+            0x1EEC     0xC   Reserved:                      0x0       
+        \--- LANG [24,0][LANG_ROMANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEF0      0x0   Name:                          0x18      
+          0xEF4      0x4   OffsetToData:                  0x18F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1EF0     0x0   OffsetToData:                  0x2A510   
+            0x1EF4     0x4   Size:                          0x28C     
+            0x1EF8     0x8   CodePage:                      0x0       
+            0x1EFC     0xC   Reserved:                      0x0       
+        \--- LANG [25,0][LANG_RUSSIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xEF8      0x0   Name:                          0x19      
+          0xEFC      0x4   OffsetToData:                  0x1900    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F00     0x0   OffsetToData:                  0x2A79C   
+            0x1F04     0x4   Size:                          0x28E     
+            0x1F08     0x8   CodePage:                      0x0       
+            0x1F0C     0xC   Reserved:                      0x0       
+        \--- LANG [26,0][LANG_SERBIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF00      0x0   Name:                          0x1A      
+          0xF04      0x4   OffsetToData:                  0x1910    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F10     0x0   OffsetToData:                  0x2AA2C   
+            0x1F14     0x4   Size:                          0x258     
+            0x1F18     0x8   CodePage:                      0x0       
+            0x1F1C     0xC   Reserved:                      0x0       
+        \--- LANG [29,0][LANG_SWEDISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF08      0x0   Name:                          0x1D      
+          0xF0C      0x4   OffsetToData:                  0x1920    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F20     0x0   OffsetToData:                  0x2AC84   
+            0x1F24     0x4   Size:                          0x26C     
+            0x1F28     0x8   CodePage:                      0x0       
+            0x1F2C     0xC   Reserved:                      0x0       
+        \--- LANG [31,0][LANG_TURKISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF10      0x0   Name:                          0x1F      
+          0xF14      0x4   OffsetToData:                  0x1930    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F30     0x0   OffsetToData:                  0x2AEF0   
+            0x1F34     0x4   Size:                          0x25A     
+            0x1F38     0x8   CodePage:                      0x0       
+            0x1F3C     0xC   Reserved:                      0x0       
+        \--- LANG [34,0][LANG_UKRAINIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF18      0x0   Name:                          0x22      
+          0xF1C      0x4   OffsetToData:                  0x1940    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F40     0x0   OffsetToData:                  0x2B14C   
+            0x1F44     0x4   Size:                          0x20E     
+            0x1F48     0x8   CodePage:                      0x0       
+            0x1F4C     0xC   Reserved:                      0x0       
+        \--- LANG [36,0][LANG_SLOVENIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF20      0x0   Name:                          0x24      
+          0xF24      0x4   OffsetToData:                  0x1950    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F50     0x0   OffsetToData:                  0x2B35C   
+            0x1F54     0x4   Size:                          0x264     
+            0x1F58     0x8   CodePage:                      0x0       
+            0x1F5C     0xC   Reserved:                      0x0       
+        \--- LANG [39,0][LANG_LITHUANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF28      0x0   Name:                          0x27      
+          0xF2C      0x4   OffsetToData:                  0x1960    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F60     0x0   OffsetToData:                  0x2B5C0   
+            0x1F64     0x4   Size:                          0x274     
+            0x1F68     0x8   CodePage:                      0x0       
+            0x1F6C     0xC   Reserved:                      0x0       
+        \--- LANG [41,0][LANG_FARSI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF30      0x0   Name:                          0x29      
+          0xF34      0x4   OffsetToData:                  0x1970    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F70     0x0   OffsetToData:                  0x2B834   
+            0x1F74     0x4   Size:                          0x258     
+            0x1F78     0x8   CodePage:                      0x0       
+            0x1F7C     0xC   Reserved:                      0x0       
+        \--- LANG [4,1][LANG_CHINESE,SUBLANG_CHINESE_TRADITIONAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF38      0x0   Name:                          0x404     
+          0xF3C      0x4   OffsetToData:                  0x1980    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F80     0x0   OffsetToData:                  0x2BA8C   
+            0x1F84     0x4   Size:                          0x116     
+            0x1F88     0x8   CodePage:                      0x0       
+            0x1F8C     0xC   Reserved:                      0x0       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF40      0x0   Name:                          0x409     
+          0xF44      0x4   OffsetToData:                  0x1990    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1F90     0x0   OffsetToData:                  0x2BBA4   
+            0x1F94     0x4   Size:                          0x258     
+            0x1F98     0x8   CodePage:                      0x0       
+            0x1F9C     0xC   Reserved:                      0x0       
+        \--- LANG [20,1][LANG_NORWEGIAN,SUBLANG_NORWEGIAN_BOKMAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF48      0x0   Name:                          0x414     
+          0xF4C      0x4   OffsetToData:                  0x19A0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1FA0     0x0   OffsetToData:                  0x2BDFC   
+            0x1FA4     0x4   Size:                          0x206     
+            0x1FA8     0x8   CodePage:                      0x0       
+            0x1FAC     0xC   Reserved:                      0x0       
+        \--- LANG [22,1][LANG_PORTUGUESE,SUBLANG_PORTUGUESE_BRAZILIAN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF50      0x0   Name:                          0x416     
+          0xF54      0x4   OffsetToData:                  0x19B0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1FB0     0x0   OffsetToData:                  0x2C004   
+            0x1FB4     0x4   Size:                          0x24C     
+            0x1FB8     0x8   CodePage:                      0x0       
+            0x1FBC     0xC   Reserved:                      0x0       
+        \--- LANG [143,1][LANG_ESPERANTO,SUBLANG_DEFAULT]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF58      0x0   Name:                          0x48F     
+          0xF5C      0x4   OffsetToData:                  0x19C0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1FC0     0x0   OffsetToData:                  0x2C250   
+            0x1FC4     0x4   Size:                          0x258     
+            0x1FC8     0x8   CodePage:                      0x0       
+            0x1FCC     0xC   Reserved:                      0x0       
+        \--- LANG [4,2][LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF60      0x0   Name:                          0x804     
+          0xF64      0x4   OffsetToData:                  0x19D0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1FD0     0x0   OffsetToData:                  0x2C4A8   
+            0x1FD4     0x4   Size:                          0x126     
+            0x1FD8     0x8   CodePage:                      0x0       
+            0x1FDC     0xC   Reserved:                      0x0       
+        \--- LANG [22,2][LANG_PORTUGUESE,SUBLANG_PORTUGUESE]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF68      0x0   Name:                          0x816     
+          0xF6C      0x4   OffsetToData:                  0x19E0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1FE0     0x0   OffsetToData:                  0x2C5D0   
+            0x1FE4     0x4   Size:                          0x26E     
+            0x1FE8     0x8   CodePage:                      0x0       
+            0x1FEC     0xC   Reserved:                      0x0       
+        \--- LANG [26,2][LANG_SERBIAN,SUBLANG_SERBIAN_LATIN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF70      0x0   Name:                          0x81A     
+          0xF74      0x4   OffsetToData:                  0x19F0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x1FF0     0x0   OffsetToData:                  0x2C840   
+            0x1FF4     0x4   Size:                          0x254     
+            0x1FF8     0x8   CodePage:                      0x0       
+            0x1FFC     0xC   Reserved:                      0x0       
+        \--- LANG [26,3][LANG_SERBIAN,SUBLANG_SERBIAN_CYRILLIC]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xF78      0x0   Name:                          0xC1A     
+          0xF7C      0x4   OffsetToData:                  0x1A00    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2000     0x0   OffsetToData:                  0x2CA94   
+            0x2004     0x4   Size:                          0x254     
+            0x2008     0x8   CodePage:                      0x0       
+            0x200C     0xC   Reserved:                      0x0       
+          [STRINGS]
+               384: \u0423\u043d\u0438\u043a\u043e\u0434 (UTF-16)
+               385: \u0423\u043d\u0438\u043a\u043e\u0434 (UTF-16 big-endian)
+               386: Unicode (UTF-8)
+               387: %1\nThis file contains Unicode characters which will be lost if\nyou save this file in the %2 encoding.\nTo keep these characters, click Cancel, and then select\none of the Unicode options in the Encoding drop down list.\nContinue?
+
+  Id: [0x9] (RT_ACCELERATOR)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x630      0x0   Name:                          0x9       
+  0x634      0x4   OffsetToData:                  0x80000980
+    [IMAGE_RESOURCE_DIRECTORY]
+    0xF80      0x0   Characteristics:               0x0       
+    0xF84      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0xF88      0x8   MajorVersion:                  0x0       
+    0xF8A      0xA   MinorVersion:                  0x0       
+    0xF8C      0xC   NumberOfNamedEntries:          0x0       
+    0xF8E      0xE   NumberOfIdEntries:             0x1       
+      Id: [0x203]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0xF90      0x0   Name:                          0x203     
+      0xF94      0x4   OffsetToData:                  0x80000998
+        [IMAGE_RESOURCE_DIRECTORY]
+        0xF98      0x0   Characteristics:               0x0       
+        0xF9C      0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0xFA0      0x8   MajorVersion:                  0x0       
+        0xFA2      0xA   MinorVersion:                  0x0       
+        0xFA4      0xC   NumberOfNamedEntries:          0x0       
+        0xFA6      0xE   NumberOfIdEntries:             0x27      
+        \--- LANG [1,0][LANG_ARABIC,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFA8      0x0   Name:                          0x1       
+          0xFAC      0x4   OffsetToData:                  0x1A10    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2010     0x0   OffsetToData:                  0x2CCE8   
+            0x2014     0x4   Size:                          0x88      
+            0x2018     0x8   CodePage:                      0x0       
+            0x201C     0xC   Reserved:                      0x0       
+        \--- LANG [2,0][LANG_BULGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFB0      0x0   Name:                          0x2       
+          0xFB4      0x4   OffsetToData:                  0x1A20    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2020     0x0   OffsetToData:                  0x2CD70   
+            0x2024     0x4   Size:                          0x88      
+            0x2028     0x8   CodePage:                      0x0       
+            0x202C     0xC   Reserved:                      0x0       
+        \--- LANG [3,0][LANG_CATALAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFB8      0x0   Name:                          0x3       
+          0xFBC      0x4   OffsetToData:                  0x1A30    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2030     0x0   OffsetToData:                  0x2CDF8   
+            0x2034     0x4   Size:                          0x88      
+            0x2038     0x8   CodePage:                      0x0       
+            0x203C     0xC   Reserved:                      0x0       
+        \--- LANG [5,0][LANG_CZECH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFC0      0x0   Name:                          0x5       
+          0xFC4      0x4   OffsetToData:                  0x1A40    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2040     0x0   OffsetToData:                  0x2CE80   
+            0x2044     0x4   Size:                          0x88      
+            0x2048     0x8   CodePage:                      0x0       
+            0x204C     0xC   Reserved:                      0x0       
+        \--- LANG [6,0][LANG_DANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFC8      0x0   Name:                          0x6       
+          0xFCC      0x4   OffsetToData:                  0x1A50    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2050     0x0   OffsetToData:                  0x2CF08   
+            0x2054     0x4   Size:                          0x88      
+            0x2058     0x8   CodePage:                      0x0       
+            0x205C     0xC   Reserved:                      0x0       
+        \--- LANG [7,0][LANG_GERMAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFD0      0x0   Name:                          0x7       
+          0xFD4      0x4   OffsetToData:                  0x1A60    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2060     0x0   OffsetToData:                  0x2CF90   
+            0x2064     0x4   Size:                          0x88      
+            0x2068     0x8   CodePage:                      0x0       
+            0x206C     0xC   Reserved:                      0x0       
+        \--- LANG [8,0][LANG_GREEK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFD8      0x0   Name:                          0x8       
+          0xFDC      0x4   OffsetToData:                  0x1A70    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2070     0x0   OffsetToData:                  0x2D018   
+            0x2074     0x4   Size:                          0x88      
+            0x2078     0x8   CodePage:                      0x0       
+            0x207C     0xC   Reserved:                      0x0       
+        \--- LANG [9,0][LANG_ENGLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFE0      0x0   Name:                          0x9       
+          0xFE4      0x4   OffsetToData:                  0x1A80    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2080     0x0   OffsetToData:                  0x2D0A0   
+            0x2084     0x4   Size:                          0x88      
+            0x2088     0x8   CodePage:                      0x0       
+            0x208C     0xC   Reserved:                      0x0       
+        \--- LANG [10,0][LANG_SPANISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFE8      0x0   Name:                          0xA       
+          0xFEC      0x4   OffsetToData:                  0x1A90    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2090     0x0   OffsetToData:                  0x2D128   
+            0x2094     0x4   Size:                          0x88      
+            0x2098     0x8   CodePage:                      0x0       
+            0x209C     0xC   Reserved:                      0x0       
+        \--- LANG [11,0][LANG_FINNISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFF0      0x0   Name:                          0xB       
+          0xFF4      0x4   OffsetToData:                  0x1AA0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x20A0     0x0   OffsetToData:                  0x2D1B0   
+            0x20A4     0x4   Size:                          0x88      
+            0x20A8     0x8   CodePage:                      0x0       
+            0x20AC     0xC   Reserved:                      0x0       
+        \--- LANG [12,0][LANG_FRENCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0xFF8      0x0   Name:                          0xC       
+          0xFFC      0x4   OffsetToData:                  0x1AB0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x20B0     0x0   OffsetToData:                  0x2D238   
+            0x20B4     0x4   Size:                          0x88      
+            0x20B8     0x8   CodePage:                      0x0       
+            0x20BC     0xC   Reserved:                      0x0       
+        \--- LANG [13,0][LANG_HEBREW,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1000     0x0   Name:                          0xD       
+          0x1004     0x4   OffsetToData:                  0x1AC0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x20C0     0x0   OffsetToData:                  0x2D2C0   
+            0x20C4     0x4   Size:                          0x88      
+            0x20C8     0x8   CodePage:                      0x0       
+            0x20CC     0xC   Reserved:                      0x0       
+        \--- LANG [14,0][LANG_HUNGARIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1008     0x0   Name:                          0xE       
+          0x100C     0x4   OffsetToData:                  0x1AD0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x20D0     0x0   OffsetToData:                  0x2D348   
+            0x20D4     0x4   Size:                          0x88      
+            0x20D8     0x8   CodePage:                      0x0       
+            0x20DC     0xC   Reserved:                      0x0       
+        \--- LANG [16,0][LANG_ITALIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1010     0x0   Name:                          0x10      
+          0x1014     0x4   OffsetToData:                  0x1AE0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x20E0     0x0   OffsetToData:                  0x2D3D0   
+            0x20E4     0x4   Size:                          0x88      
+            0x20E8     0x8   CodePage:                      0x0       
+            0x20EC     0xC   Reserved:                      0x0       
+        \--- LANG [17,0][LANG_JAPANESE,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1018     0x0   Name:                          0x11      
+          0x101C     0x4   OffsetToData:                  0x1AF0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x20F0     0x0   OffsetToData:                  0x2D458   
+            0x20F4     0x4   Size:                          0x88      
+            0x20F8     0x8   CodePage:                      0x0       
+            0x20FC     0xC   Reserved:                      0x0       
+        \--- LANG [18,0][LANG_KOREAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1020     0x0   Name:                          0x12      
+          0x1024     0x4   OffsetToData:                  0x1B00    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2100     0x0   OffsetToData:                  0x2D4E0   
+            0x2104     0x4   Size:                          0x88      
+            0x2108     0x8   CodePage:                      0x0       
+            0x210C     0xC   Reserved:                      0x0       
+        \--- LANG [19,0][LANG_DUTCH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1028     0x0   Name:                          0x13      
+          0x102C     0x4   OffsetToData:                  0x1B10    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2110     0x0   OffsetToData:                  0x2D568   
+            0x2114     0x4   Size:                          0x88      
+            0x2118     0x8   CodePage:                      0x0       
+            0x211C     0xC   Reserved:                      0x0       
+        \--- LANG [21,0][LANG_POLISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1030     0x0   Name:                          0x15      
+          0x1034     0x4   OffsetToData:                  0x1B20    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2120     0x0   OffsetToData:                  0x2D5F0   
+            0x2124     0x4   Size:                          0x88      
+            0x2128     0x8   CodePage:                      0x0       
+            0x212C     0xC   Reserved:                      0x0       
+        \--- LANG [24,0][LANG_ROMANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1038     0x0   Name:                          0x18      
+          0x103C     0x4   OffsetToData:                  0x1B30    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2130     0x0   OffsetToData:                  0x2D678   
+            0x2134     0x4   Size:                          0x88      
+            0x2138     0x8   CodePage:                      0x0       
+            0x213C     0xC   Reserved:                      0x0       
+        \--- LANG [25,0][LANG_RUSSIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1040     0x0   Name:                          0x19      
+          0x1044     0x4   OffsetToData:                  0x1B40    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2140     0x0   OffsetToData:                  0x2D700   
+            0x2144     0x4   Size:                          0x88      
+            0x2148     0x8   CodePage:                      0x0       
+            0x214C     0xC   Reserved:                      0x0       
+        \--- LANG [26,0][LANG_SERBIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1048     0x0   Name:                          0x1A      
+          0x104C     0x4   OffsetToData:                  0x1B50    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2150     0x0   OffsetToData:                  0x2D788   
+            0x2154     0x4   Size:                          0x88      
+            0x2158     0x8   CodePage:                      0x0       
+            0x215C     0xC   Reserved:                      0x0       
+        \--- LANG [27,0][LANG_SLOVAK,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1050     0x0   Name:                          0x1B      
+          0x1054     0x4   OffsetToData:                  0x1B60    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2160     0x0   OffsetToData:                  0x2D810   
+            0x2164     0x4   Size:                          0x88      
+            0x2168     0x8   CodePage:                      0x0       
+            0x216C     0xC   Reserved:                      0x0       
+        \--- LANG [29,0][LANG_SWEDISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1058     0x0   Name:                          0x1D      
+          0x105C     0x4   OffsetToData:                  0x1B70    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2170     0x0   OffsetToData:                  0x2D898   
+            0x2174     0x4   Size:                          0x88      
+            0x2178     0x8   CodePage:                      0x0       
+            0x217C     0xC   Reserved:                      0x0       
+        \--- LANG [30,0][LANG_THAI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1060     0x0   Name:                          0x1E      
+          0x1064     0x4   OffsetToData:                  0x1B80    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2180     0x0   OffsetToData:                  0x2D920   
+            0x2184     0x4   Size:                          0x88      
+            0x2188     0x8   CodePage:                      0x0       
+            0x218C     0xC   Reserved:                      0x0       
+        \--- LANG [31,0][LANG_TURKISH,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1068     0x0   Name:                          0x1F      
+          0x106C     0x4   OffsetToData:                  0x1B90    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2190     0x0   OffsetToData:                  0x2D9A8   
+            0x2194     0x4   Size:                          0x88      
+            0x2198     0x8   CodePage:                      0x0       
+            0x219C     0xC   Reserved:                      0x0       
+        \--- LANG [36,0][LANG_SLOVENIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1070     0x0   Name:                          0x24      
+          0x1074     0x4   OffsetToData:                  0x1BA0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x21A0     0x0   OffsetToData:                  0x2DA30   
+            0x21A4     0x4   Size:                          0x88      
+            0x21A8     0x8   CodePage:                      0x0       
+            0x21AC     0xC   Reserved:                      0x0       
+        \--- LANG [39,0][LANG_LITHUANIAN,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1078     0x0   Name:                          0x27      
+          0x107C     0x4   OffsetToData:                  0x1BB0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x21B0     0x0   OffsetToData:                  0x2DAB8   
+            0x21B4     0x4   Size:                          0x88      
+            0x21B8     0x8   CodePage:                      0x0       
+            0x21BC     0xC   Reserved:                      0x0       
+        \--- LANG [41,0][LANG_FARSI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1080     0x0   Name:                          0x29      
+          0x1084     0x4   OffsetToData:                  0x1BC0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x21C0     0x0   OffsetToData:                  0x2DB40   
+            0x21C4     0x4   Size:                          0x88      
+            0x21C8     0x8   CodePage:                      0x0       
+            0x21CC     0xC   Reserved:                      0x0       
+        \--- LANG [57,0][LANG_HINDI,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1088     0x0   Name:                          0x39      
+          0x108C     0x4   OffsetToData:                  0x1BD0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x21D0     0x0   OffsetToData:                  0x2DBC8   
+            0x21D4     0x4   Size:                          0x88      
+            0x21D8     0x8   CodePage:                      0x0       
+            0x21DC     0xC   Reserved:                      0x0       
+        \--- LANG [144,0][LANG_WALON,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1090     0x0   Name:                          0x90      
+          0x1094     0x4   OffsetToData:                  0x1BE0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x21E0     0x0   OffsetToData:                  0x2DC50   
+            0x21E4     0x4   Size:                          0x88      
+            0x21E8     0x8   CodePage:                      0x0       
+            0x21EC     0xC   Reserved:                      0x0       
+        \--- LANG [4,1][LANG_CHINESE,SUBLANG_CHINESE_TRADITIONAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1098     0x0   Name:                          0x404     
+          0x109C     0x4   OffsetToData:                  0x1BF0    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x21F0     0x0   OffsetToData:                  0x2DCD8   
+            0x21F4     0x4   Size:                          0x88      
+            0x21F8     0x8   CodePage:                      0x0       
+            0x21FC     0xC   Reserved:                      0x0       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x10A0     0x0   Name:                          0x409     
+          0x10A4     0x4   OffsetToData:                  0x1C00    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2200     0x0   OffsetToData:                  0x2DD60   
+            0x2204     0x4   Size:                          0x88      
+            0x2208     0x8   CodePage:                      0x0       
+            0x220C     0xC   Reserved:                      0x0       
+        \--- LANG [20,1][LANG_NORWEGIAN,SUBLANG_NORWEGIAN_BOKMAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x10A8     0x0   Name:                          0x414     
+          0x10AC     0x4   OffsetToData:                  0x1C10    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2210     0x0   OffsetToData:                  0x2DDE8   
+            0x2214     0x4   Size:                          0x88      
+            0x2218     0x8   CodePage:                      0x0       
+            0x221C     0xC   Reserved:                      0x0       
+        \--- LANG [22,1][LANG_PORTUGUESE,SUBLANG_PORTUGUESE_BRAZILIAN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x10B0     0x0   Name:                          0x416     
+          0x10B4     0x4   OffsetToData:                  0x1C20    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2220     0x0   OffsetToData:                  0x2DE70   
+            0x2224     0x4   Size:                          0x88      
+            0x2228     0x8   CodePage:                      0x0       
+            0x222C     0xC   Reserved:                      0x0       
+        \--- LANG [143,1][LANG_ESPERANTO,SUBLANG_DEFAULT]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x10B8     0x0   Name:                          0x48F     
+          0x10BC     0x4   OffsetToData:                  0x1C30    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2230     0x0   OffsetToData:                  0x2DEF8   
+            0x2234     0x4   Size:                          0x88      
+            0x2238     0x8   CodePage:                      0x0       
+            0x223C     0xC   Reserved:                      0x0       
+        \--- LANG [4,2][LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x10C0     0x0   Name:                          0x804     
+          0x10C4     0x4   OffsetToData:                  0x1C40    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2240     0x0   OffsetToData:                  0x2DF80   
+            0x2244     0x4   Size:                          0x88      
+            0x2248     0x8   CodePage:                      0x0       
+            0x224C     0xC   Reserved:                      0x0       
+        \--- LANG [22,2][LANG_PORTUGUESE,SUBLANG_PORTUGUESE]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x10C8     0x0   Name:                          0x816     
+          0x10CC     0x4   OffsetToData:                  0x1C50    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2250     0x0   OffsetToData:                  0x2E008   
+            0x2254     0x4   Size:                          0x88      
+            0x2258     0x8   CodePage:                      0x0       
+            0x225C     0xC   Reserved:                      0x0       
+        \--- LANG [26,2][LANG_SERBIAN,SUBLANG_SERBIAN_LATIN]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x10D0     0x0   Name:                          0x81A     
+          0x10D4     0x4   OffsetToData:                  0x1C60    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2260     0x0   OffsetToData:                  0x2E090   
+            0x2264     0x4   Size:                          0x88      
+            0x2268     0x8   CodePage:                      0x0       
+            0x226C     0xC   Reserved:                      0x0       
+        \--- LANG [26,3][LANG_SERBIAN,SUBLANG_SERBIAN_CYRILLIC]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x10D8     0x0   Name:                          0xC1A     
+          0x10DC     0x4   OffsetToData:                  0x1C70    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2270     0x0   OffsetToData:                  0x2E118   
+            0x2274     0x4   Size:                          0x88      
+            0x2278     0x8   CodePage:                      0x0       
+            0x227C     0xC   Reserved:                      0x0       
+
+  Id: [0xE] (RT_GROUP_ICON)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x638      0x0   Name:                          0xE       
+  0x63C      0x4   OffsetToData:                  0x80000AE0
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x10E0     0x0   Characteristics:               0x0       
+    0x10E4     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+    0x10E8     0x8   MajorVersion:                  0x0       
+    0x10EA     0xA   MinorVersion:                  0x0       
+    0x10EC     0xC   NumberOfNamedEntries:          0x0       
+    0x10EE     0xE   NumberOfIdEntries:             0x1       
+      Id: [0x300]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x10F0     0x0   Name:                          0x300     
+      0x10F4     0x4   OffsetToData:                  0x80000AF8
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x10F8     0x0   Characteristics:               0x0       
+        0x10FC     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+        0x1100     0x8   MajorVersion:                  0x0       
+        0x1102     0xA   MinorVersion:                  0x0       
+        0x1104     0xC   NumberOfNamedEntries:          0x0       
+        0x1106     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [0,0][LANG_NEUTRAL,SUBLANG_NEUTRAL]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x1108     0x0   Name:                          0x0       
+          0x110C     0x4   OffsetToData:                  0x1C80    
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x2280     0x0   OffsetToData:                  0x2E1A0   
+            0x2284     0x4   Size:                          0x92      
+            0x2288     0x8   CodePage:                      0x0       
+            0x228C     0xC   Reserved:                      0x0       
+
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x400      0x0   VirtualAddress:                0x0       
+0x404      0x4   SizeOfBlock:                   0x0       
+

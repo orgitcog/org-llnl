@@ -1,0 +1,438 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F2E9C [Fri Oct  7 16:53:48 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x6A600   
+0x90       0xC   NumberOfSymbols:               0x38      
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x28000   
+0xA0       0x8   SizeOfInitializedData:         0x2000    
+0xA4       0xC   SizeOfUninitializedData:       0x4B000   
+0xA8       0x10  AddressOfEntryPoint:           0x73450   
+0xAC       0x14  BaseOfCode:                    0x4C000   
+0xB0       0x18  BaseOfData:                    0x74000   
+0xB4       0x1C  ImageBase:                     0x65300000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x76000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x4B000   
+0x180      0x8   Misc_PhysicalAddress:          0x4B000   
+0x180      0x8   Misc_VirtualSize:              0x4B000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x28000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x28000   
+0x1A8      0x8   Misc_VirtualSize:              0x28000   
+0x1AC      0xC   VirtualAddress:                0x4C000   
+0x1B0      0x10  SizeOfRawData:                 0x27800   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.927250 (Min=0.0, Max=8.0)
+MD5     hash: a9446c36c31c02f512c6ef371f85c801
+SHA-1   hash: 3f7e1c09e8559d789d3968fdab8be98ed967d6ef
+SHA-256 hash: e7e3b70e9600c8cbbafabcc31d02f8960cca1c41c21661315a09703a9d1cb963
+SHA-512 hash: 084c88474fd3e2baaa1589acb33ecc6c63e78fd6e6b0a1d905fc7b247d7db92aec530f41749f7dee0335323c43ec60f7e26484e89628b5298ece391aa13c1bd0
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          UPX2
+0x1D0      0x8   Misc:                          0x2000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x2000    
+0x1D0      0x8   Misc_VirtualSize:              0x2000    
+0x1D4      0xC   VirtualAddress:                0x74000   
+0x1D8      0x10  SizeOfRawData:                 0x1C00    
+0x1DC      0x14  PointerToRawData:              0x27A00   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.053785 (Min=0.0, Max=8.0)
+MD5     hash: c621a3f9df32e2aaa5f898fdf6a393ad
+SHA-1   hash: 010849c47beb7c97944e45601d5c0a0f66981c5a
+SHA-256 hash: f3629b9a3ffa95e184bd880c5d14ca5fa1c0f9584be5d9a4d88843ce07fe7e94
+SHA-512 hash: 5562f4c2af26ccc1095a16e905162832d422747705ccd41202bad6c5d498d3640195aacd33398fa721c4729356bd1165a2d34885aa1bca40e27b736cc2e80c85
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x740C8   
+0xFC       0x4   Size:                          0x19B4    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x74000   
+0x104      0x4   Size:                          0xC8      
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x75A7C   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x73678   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x27AC8    0x0   Characteristics:               0x0       
+0x27ACC    0x4   TimeDateStamp:                 0x4E8F2E9B [Fri Oct  7 16:53:47 2011 UTC]
+0x27AD0    0x8   MajorVersion:                  0x0       
+0x27AD2    0xA   MinorVersion:                  0x0       
+0x27AD4    0xC   Name:                          0x747C6   
+0x27AD8    0x10  Base:                          0x1       
+0x27ADC    0x14  NumberOfFunctions:             0xAF      
+0x27AE0    0x18  NumberOfNames:                 0xAF      
+0x27AE4    0x1C  AddressOfFunctions:            0x740F0   
+0x27AE8    0x20  AddressOfNames:                0x743AC   
+0x27AEC    0x24  AddressOfNameOrdinals:         0x74668   
+
+Ordinal      RVA         Name
+1          0x00062FB0    __emutls_get_address
+2          0x00063260    __emutls_register_common
+3          0x00049C10    _pixman_bits_image_dest_iter_init
+4          0x000055D0    _pixman_bits_image_setup_accessors
+5          0x0000A760    _pixman_bits_image_setup_accessors_accessors
+6          0x00049BF0    _pixman_bits_image_src_iter_init
+7          0x0000A8E0    _pixman_choose_implementation
+8          0x00041220    _pixman_conical_gradient_iter_init
+9          0x0000A980    _pixman_gradient_walker_init
+10         0x0000AE20    _pixman_gradient_walker_pixel
+11         0x0000A9E0    _pixman_gradient_walker_reset
+12         0x000123D0    _pixman_image_allocate
+13         0x00012DD0    _pixman_image_get_solid
+14         0x00012570    _pixman_image_reset_clip_region
+15         0x00012590    _pixman_image_validate
+16         0x00013230    _pixman_implementation_blt
+17         0x00013130    _pixman_implementation_combine_32
+18         0x000131B0    _pixman_implementation_combine_32_ca
+19         0x00013170    _pixman_implementation_combine_64
+20         0x000131F0    _pixman_implementation_combine_64_ca
+21         0x00013070    _pixman_implementation_create
+22         0x00040CC0    _pixman_implementation_create_fast_path
+23         0x00034EB0    _pixman_implementation_create_general
+24         0x00053C30    _pixman_implementation_create_mmx
+25         0x000623F0    _pixman_implementation_create_sse2
+26         0x00013360    _pixman_implementation_dest_iter_init
+27         0x000132A0    _pixman_implementation_fill
+28         0x000132F0    _pixman_implementation_src_iter_init
+29         0x00012360    _pixman_init_gradient
+30         0x0004A1C0    _pixman_iter_get_scanline_noop
+31         0x00041770    _pixman_linear_gradient_iter_init
+32         0x00042100    _pixman_radial_gradient_iter_init
+33         0x0001DDA0    _pixman_setup_combiner_functions_32
+34         0x000346D0    _pixman_setup_combiner_functions_64
+35         0x00040CF0    _pixman_solid_fill_iter_init
+36         0x0004C7C0    pixman_add_trapezoids
+37         0x0004C500    pixman_add_traps
+38         0x0004CB80    pixman_add_triangles
+39         0x00049E50    pixman_addition_overflows_int
+40         0x000361D0    pixman_blt
+41         0x0004C830    pixman_composite_trapezoids
+42         0x0004CB10    pixman_composite_triangles
+43         0x000369B0    pixman_compute_composite_region
+44         0x0004A160    pixman_contract
+45         0x00012580    pixman_disable_out_of_bounds_workaround
+46         0x0004C230    pixman_edge_init
+47         0x0004C120    pixman_edge_step
+48         0x00049F10    pixman_expand
+49         0x0004DD80    pixman_f_transform_bounds
+50         0x0004D680    pixman_f_transform_from_pixman_transform
+51         0x0004DF40    pixman_f_transform_init_identity
+52         0x0004DB70    pixman_f_transform_init_rotate
+53         0x0004DA30    pixman_f_transform_init_scale
+54         0x0004DC80    pixman_f_transform_init_translate
+55         0x0004D750    pixman_f_transform_invert
+56         0x0004D9C0    pixman_f_transform_multiply
+57         0x0004D8F0    pixman_f_transform_point
+58         0x0004D960    pixman_f_transform_point_3d
+59         0x0004DBB0    pixman_f_transform_rotate
+60         0x0004DA60    pixman_f_transform_scale
+61         0x0004DCB0    pixman_f_transform_translate
+62         0x00036240    pixman_fill
+63         0x000535E0    pixman_fill_mmx
+64         0x00036980    pixman_format_supported_destination
+65         0x00036710    pixman_format_supported_source
+66         0x00036140    pixman_image_composite
+67         0x00035BA0    pixman_image_composite32
+68         0x00049CA0    pixman_image_create_bits
+69         0x00041240    pixman_image_create_conical_gradient
+70         0x000418C0    pixman_image_create_linear_gradient
+71         0x00042120    pixman_image_create_radial_gradient
+72         0x00040D50    pixman_image_create_solid_fill
+73         0x00036290    pixman_image_fill_boxes
+74         0x000365F0    pixman_image_fill_rectangles
+75         0x00012CB0    pixman_image_get_component_alpha
+76         0x00012CF0    pixman_image_get_data
+77         0x00012D70    pixman_image_get_depth
+78         0x00012560    pixman_image_get_destroy_data
+79         0x00012DB0    pixman_image_get_format
+80         0x00012D30    pixman_image_get_height
+81         0x00012D50    pixman_image_get_stride
+82         0x00012D10    pixman_image_get_width
+83         0x00012470    pixman_image_ref
+84         0x00012CC0    pixman_image_set_accessors
+85         0x00012BF0    pixman_image_set_alpha_map
+86         0x000129B0    pixman_image_set_clip_region
+87         0x00012950    pixman_image_set_clip_region32
+88         0x00012C90    pixman_image_set_component_alpha
+89         0x00012540    pixman_image_set_destroy_function
+90         0x00012B00    pixman_image_set_filter
+91         0x00012A10    pixman_image_set_has_client_clip
+92         0x00012BD0    pixman_image_set_indexed
+93         0x00012AE0    pixman_image_set_repeat
+94         0x00012BB0    pixman_image_set_source_clipping
+95         0x00012A20    pixman_image_set_transform
+96         0x00012480    pixman_image_unref
+97         0x0004C480    pixman_line_fixed_edge_init
+98         0x00049E70    pixman_malloc_ab
+99         0x00049EB0    pixman_malloc_abc
+100        0x00049E30    pixman_multiply_overflows_int
+101        0x0004A340    pixman_rasterize_edges
+102        0x0004AD30    pixman_rasterize_edges_accessors
+103        0x0004C680    pixman_rasterize_trapezoid
+104        0x0004A1D0    pixman_region16_copy_from_region32
+105        0x00011870    pixman_region32_contains_point
+106        0x00011630    pixman_region32_contains_rectangle
+107        0x00010EB0    pixman_region32_copy
+108        0x0004A270    pixman_region32_copy_from_region16
+109        0x00010AE0    pixman_region32_equal
+110        0x00011980    pixman_region32_extents
+111        0x00010E30    pixman_region32_fini
+112        0x00010D00    pixman_region32_init
+113        0x00011D40    pixman_region32_init_from_image
+114        0x00010D40    pixman_region32_init_rect
+115        0x00011B50    pixman_region32_init_rects
+116        0x00010DC0    pixman_region32_init_with_extents
+117        0x00010FA0    pixman_region32_intersect
+118        0x000111E0    pixman_region32_intersect_rect
+119        0x00011520    pixman_region32_inverse
+120        0x00010E60    pixman_region32_n_rects
+121        0x00011960    pixman_region32_not_empty
+122        0x00010BC0    pixman_region32_print
+123        0x00010E80    pixman_region32_rectangles
+124        0x00011820    pixman_region32_reset
+125        0x00011990    pixman_region32_selfcheck
+126        0x00011430    pixman_region32_subtract
+127        0x000117D0    pixman_region32_translate
+128        0x00011220    pixman_region32_union
+129        0x000113B0    pixman_region32_union_rect
+130        0x0000DFE0    pixman_region_contains_point
+131        0x0000DB50    pixman_region_contains_rectangle
+132        0x0000D370    pixman_region_copy
+133        0x0000D000    pixman_region_equal
+134        0x0000E0E0    pixman_region_extents
+135        0x0000D2F0    pixman_region_fini
+136        0x0000D1F0    pixman_region_init
+137        0x0000E480    pixman_region_init_from_image
+138        0x0000D220    pixman_region_init_rect
+139        0x0000E2D0    pixman_region_init_rects
+140        0x0000D2A0    pixman_region_init_with_extents
+141        0x0000D450    pixman_region_intersect
+142        0x0000D6C0    pixman_region_intersect_rect
+143        0x0000DA60    pixman_region_inverse
+144        0x0000D320    pixman_region_n_rects
+145        0x0000E0C0    pixman_region_not_empty
+146        0x0000D0F0    pixman_region_print
+147        0x0000D340    pixman_region_rectangles
+148        0x0000DFA0    pixman_region_reset
+149        0x0000E0F0    pixman_region_selfcheck
+150        0x0000EAD0    pixman_region_set_static_pointers
+151        0x0000D960    pixman_region_subtract
+152        0x0000DD00    pixman_region_translate
+153        0x0000D710    pixman_region_union
+154        0x0000D8D0    pixman_region_union_rect
+155        0x0004BD00    pixman_sample_ceil_y
+156        0x0004BF20    pixman_sample_floor_y
+157        0x0004D2D0    pixman_transform_bounds
+158        0x0004D6C0    pixman_transform_from_pixman_f_transform
+159        0x0004CBE0    pixman_transform_init_identity
+160        0x0004D080    pixman_transform_init_rotate
+161        0x0004CEF0    pixman_transform_init_scale
+162        0x0004D1B0    pixman_transform_init_translate
+163        0x0004D870    pixman_transform_invert
+164        0x0004D400    pixman_transform_is_identity
+165        0x0004D580    pixman_transform_is_int_translate
+166        0x0004D640    pixman_transform_is_inverse
+167        0x0004D4C0    pixman_transform_is_scale
+168        0x0004CE00    pixman_transform_multiply
+169        0x0004CD00    pixman_transform_point
+170        0x0004CC60    pixman_transform_point_3d
+171        0x0004D110    pixman_transform_rotate
+172        0x0004CF60    pixman_transform_scale
+173        0x0004D230    pixman_transform_translate
+174        0x000366F0    pixman_version
+175        0x00036700    pixman_version_string
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x27A00    0x0   OriginalFirstThunk:            0x0       
+0x27A00    0x0   Characteristics:               0x0       
+0x27A04    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x27A08    0x8   ForwarderChain:                0x0       
+0x27A0C    0xC   Name:                          0x7405C   
+0x27A10    0x10  FirstThunk:                    0x7403C   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x27A14    0x0   OriginalFirstThunk:            0x0       
+0x27A14    0x0   Characteristics:               0x0       
+0x27A18    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x27A1C    0x8   ForwarderChain:                0x0       
+0x27A20    0xC   Name:                          0x74069   
+0x27A24    0x10  FirstThunk:                    0x74054   
+
+msvcrt.dll._iob Hint[0]
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x27878    0x0   StartAddressOfRawData:         0x65373690
+0x2787C    0x4   EndAddressOfRawData:           0x65373693
+0x27880    0x8   AddressOfIndex:                0x6536911C
+0x27884    0xC   AddressOfCallBacks:            0x65373693
+0x27888    0x10  SizeOfZeroFill:                0x0       
+0x2788C    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x2947C    0x0   VirtualAddress:                0x73000   
+0x29480    0x4   SizeOfBlock:                   0x18      
+    0007345Dh HIGHLOW
+    0007365Dh HIGHLOW
+    00073678h HIGHLOW
+    0007367Ch HIGHLOW
+    00073680h HIGHLOW
+    00073684h HIGHLOW
+    00073693h HIGHLOW
+    00073000h ABSOLUTE
+

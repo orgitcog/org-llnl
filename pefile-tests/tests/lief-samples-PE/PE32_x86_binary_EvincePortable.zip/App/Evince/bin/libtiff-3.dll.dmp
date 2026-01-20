@@ -1,0 +1,508 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F3C4C [Fri Oct  7 17:52:12 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x55E00   
+0x90       0xC   NumberOfSymbols:               0x6F      
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x1A000   
+0xA0       0x8   SizeOfInitializedData:         0x2000    
+0xA4       0xC   SizeOfUninitializedData:       0x44000   
+0xA8       0x10  AddressOfEntryPoint:           0x5E2D0   
+0xAC       0x14  BaseOfCode:                    0x45000   
+0xB0       0x18  BaseOfData:                    0x5F000   
+0xB4       0x1C  ImageBase:                     0x66600000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x61000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x44000   
+0x180      0x8   Misc_PhysicalAddress:          0x44000   
+0x180      0x8   Misc_VirtualSize:              0x44000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x1A000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x1A000   
+0x1A8      0x8   Misc_VirtualSize:              0x1A000   
+0x1AC      0xC   VirtualAddress:                0x45000   
+0x1B0      0x10  SizeOfRawData:                 0x19600   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.918436 (Min=0.0, Max=8.0)
+MD5     hash: b1e7f577176a384392bb554db1b193e6
+SHA-1   hash: d57860afde31e5158c519e60f14a9d1418fe9706
+SHA-256 hash: f752617f4892e451d61c9669ada21815548be07e3bb6ebd347c8ae5f0807e550
+SHA-512 hash: 2d9b13b345be66d2ab1a4e0fe565eed4d172e681ebdf47fc01c862437e9d070de24ae3aa1fc615bb301a5a80bf17e16f92d815f4afba278bee7026b59822f24b
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          UPX2
+0x1D0      0x8   Misc:                          0x2000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x2000    
+0x1D0      0x8   Misc_VirtualSize:              0x2000    
+0x1D4      0xC   VirtualAddress:                0x5F000   
+0x1D8      0x10  SizeOfRawData:                 0x1A00    
+0x1DC      0x14  PointerToRawData:              0x19800   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.604636 (Min=0.0, Max=8.0)
+MD5     hash: 4c1b6418e21ea7abceb221fb52e50d3e
+SHA-1   hash: bf9fc4fd2f58309cbc3a0d445ca7eeb86a8f0186
+SHA-256 hash: 36621f279354933de423dc7da845c10d730c8c4ccf7cb2ee614fe490224c0c01
+SHA-512 hash: a9efc1a5d12bd8ede1a03c8b25e44ddf45912bbca388b1f184d235c88d04e396ab884687b06bb95f7fd0ffb5ab7b32e66577cd1391c9ef7d7a3506ec1a3de58b
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x5F12C   
+0xFC       0x4   Size:                          0x1838    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x5F000   
+0x104      0x4   Size:                          0x12C     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x60964   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x5E4F8   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x1992C    0x0   Characteristics:               0x0       
+0x19930    0x4   TimeDateStamp:                 0x4E8F3C24 [Fri Oct  7 17:51:32 2011 UTC]
+0x19934    0x8   MajorVersion:                  0x0       
+0x19936    0xA   MinorVersion:                  0x0       
+0x19938    0xC   Name:                          0x5FA1E   
+0x1993C    0x10  Base:                          0x1       
+0x19940    0x14  NumberOfFunctions:             0xE1      
+0x19944    0x18  NumberOfNames:                 0xE1      
+0x19948    0x1C  AddressOfFunctions:            0x5F154   
+0x1994C    0x20  AddressOfNames:                0x5F4D8   
+0x19950    0x24  AddressOfNameOrdinals:         0x5F85C   
+
+Ordinal      RVA         Name
+1          0x0001D190    LogL10fromY
+2          0x0001D150    LogL10toY
+3          0x0001CDE0    LogL16fromY
+4          0x0001CCA0    LogL16toY
+5          0x0001D800    LogLuv24fromXYZ
+6          0x0001D670    LogLuv24toXYZ
+7          0x0001DAC0    LogLuv32fromXYZ
+8          0x0001D930    LogLuv32toXYZ
+9          0x0000B710    TIFFAccessTagMethods
+10         0x00002150    TIFFCIELabToRGBInit
+11         0x00001E80    TIFFCIELabToXYZ
+12         0x0002CA20    TIFFCheckTile
+13         0x0000AE40    TIFFCheckpointDirectory
+14         0x00001BF0    TIFFCleanup
+15         0x00023160    TIFFClientOpen
+16         0x000237C0    TIFFClientdata
+17         0x00001D60    TIFFClose
+18         0x0002BB20    TIFFComputeStrip
+19         0x0002C8E0    TIFFComputeTile
+20         0x00004D80    TIFFCreateDirectory
+21         0x00004EC0    TIFFCurrentDirOffset
+22         0x00023850    TIFFCurrentDirectory
+23         0x00023840    TIFFCurrentRow
+24         0x00023860    TIFFCurrentStrip
+25         0x00023870    TIFFCurrentTile
+26         0x000052F0    TIFFDataWidth
+27         0x00004C40    TIFFDefaultDirectory
+28         0x0002BC60    TIFFDefaultStripSize
+29         0x0002CEB0    TIFFDefaultTileSize
+30         0x0000B600    TIFFError
+31         0x0000B660    TIFFErrorExt
+32         0x000358C0    TIFFFaxBlackCodes
+33         0x00036260    TIFFFaxBlackTable
+34         0x0004E260    TIFFFaxMainTable
+35         0x00035B60    TIFFFaxWhiteCodes
+36         0x00046260    TIFFFaxWhiteTable
+37         0x0002D160    TIFFFdOpen
+38         0x00005850    TIFFFieldWithName
+39         0x000057E0    TIFFFieldWithTag
+40         0x00023770    TIFFFileName
+41         0x00023790    TIFFFileno
+42         0x0002B470    TIFFFillStrip
+43         0x0002AFF0    TIFFFillTile
+44         0x000027A0    TIFFFindCODEC
+45         0x000053B0    TIFFFindFieldInfo
+46         0x00005710    TIFFFindFieldInfoByName
+47         0x00010250    TIFFFlush
+48         0x00010200    TIFFFlushData
+49         0x0002E740    TIFFFlushData1
+50         0x00004A40    TIFFFreeDirectory
+51         0x0002C3D0    TIFFGetBitRevTable
+52         0x0000B720    TIFFGetClientInfo
+53         0x00023920    TIFFGetCloseProc
+54         0x00002BA0    TIFFGetConfiguredCODECs
+55         0x00004A10    TIFFGetField
+56         0x00001BC0    TIFFGetFieldDefaulted
+57         0x00023940    TIFFGetMapFileProc
+58         0x000237F0    TIFFGetMode
+59         0x000238F0    TIFFGetReadProc
+60         0x00023910    TIFFGetSeekProc
+61         0x00023930    TIFFGetSizeProc
+62         0x0000B6C0    TIFFGetTagListCount
+63         0x0000B6D0    TIFFGetTagListEntry
+64         0x00023950    TIFFGetUnmapFileProc
+65         0x0002D500    TIFFGetVersion
+66         0x00023900    TIFFGetWriteProc
+67         0x0000FFD0    TIFFInitCCITTFax3
+68         0x00010060    TIFFInitCCITTFax4
+69         0x00010140    TIFFInitCCITTRLE
+70         0x000101A0    TIFFInitCCITTRLEW
+71         0x0000B560    TIFFInitDumpMode
+72         0x0001A840    TIFFInitJPEG
+73         0x0001F480    TIFFInitLZW
+74         0x0001F7E0    TIFFInitNeXT
+75         0x00022F30    TIFFInitOJPEG
+76         0x00023F40    TIFFInitPackBits
+77         0x00027450    TIFFInitPixarLog
+78         0x0001DCC0    TIFFInitSGILog
+79         0x0002C850    TIFFInitThunderScan
+80         0x0002EFD0    TIFFInitZIP
+81         0x000238D0    TIFFIsBigEndian
+82         0x00023880    TIFFIsByteSwapped
+83         0x00001E50    TIFFIsCODECConfigured
+84         0x000238C0    TIFFIsMSB2LSB
+85         0x00023820    TIFFIsTiled
+86         0x000238A0    TIFFIsUpSampled
+87         0x00004ED0    TIFFLastDirectory
+88         0x000055B0    TIFFMergeFieldInfo
+89         0x0002C050    TIFFNewScanlineSize
+90         0x00004DD0    TIFFNumberOfDirectories
+91         0x0002BB90    TIFFNumberOfStrips
+92         0x0002CB10    TIFFNumberOfTiles
+93         0x0002BFE0    TIFFOldScanlineSize
+94         0x0002D1D0    TIFFOpen
+95         0x0002D280    TIFFOpenW
+96         0x00028FA0    TIFFPredictorCleanup
+97         0x00028E90    TIFFPredictorInit
+98         0x000290D0    TIFFPrintDirectory
+99         0x00016A20    TIFFRGBAImageBegin
+100        0x00016970    TIFFRGBAImageEnd
+101        0x00017650    TIFFRGBAImageGet
+102        0x000165D0    TIFFRGBAImageOK
+103        0x0002C190    TIFFRasterScanlineSize
+104        0x0002BC10    TIFFRawStripSize
+105        0x0002AEB0    TIFFReadBufferSetup
+106        0x00008A30    TIFFReadCustomDirectory
+107        0x000071D0    TIFFReadDirectory
+108        0x00008E20    TIFFReadEXIFDirectory
+109        0x0002B690    TIFFReadEncodedStrip
+110        0x0002B2D0    TIFFReadEncodedTile
+111        0x000177D0    TIFFReadRGBAImage
+112        0x000176D0    TIFFReadRGBAImageOriented
+113        0x00017810    TIFFReadRGBAStrip
+114        0x00017990    TIFFReadRGBATile
+115        0x0002ACF0    TIFFReadRawStrip
+116        0x0002ADE0    TIFFReadRawTile
+117        0x0002B7B0    TIFFReadScanline
+118        0x0002B3C0    TIFFReadTile
+119        0x000050C0    TIFFReassignTagToIgnore
+120        0x00002A90    TIFFRegisterCODEC
+121        0x0002C3F0    TIFFReverseBits
+122        0x0000B160    TIFFRewriteDirectory
+123        0x0002BC80    TIFFScanlineSize
+124        0x0000B770    TIFFSetClientInfo
+125        0x000237D0    TIFFSetClientdata
+126        0x00002800    TIFFSetCompressionScheme
+127        0x00004E20    TIFFSetDirectory
+128        0x0000B5C0    TIFFSetErrorHandler
+129        0x0000B5E0    TIFFSetErrorHandlerExt
+130        0x00004970    TIFFSetField
+131        0x00023780    TIFFSetFileName
+132        0x000237A0    TIFFSetFileno
+133        0x00023800    TIFFSetMode
+134        0x00004EA0    TIFFSetSubDirectory
+135        0x00004C20    TIFFSetTagExtender
+136        0x0002D510    TIFFSetWarningHandler
+137        0x0002D530    TIFFSetWarningHandlerExt
+138        0x0002E7E0    TIFFSetWriteOffset
+139        0x0002D8F0    TIFFSetupStrips
+140        0x0002BFB0    TIFFStripSize
+141        0x0002C370    TIFFSwabArrayOfDouble
+142        0x0002C2E0    TIFFSwabArrayOfLong
+143        0x0002C280    TIFFSwabArrayOfShort
+144        0x0002C2B0    TIFFSwabArrayOfTriples
+145        0x0002C320    TIFFSwabDouble
+146        0x0002C250    TIFFSwabLong
+147        0x0002C230    TIFFSwabShort
+148        0x0002CC50    TIFFTileRowSize
+149        0x0002CE90    TIFFTileSize
+150        0x00002B30    TIFFUnRegisterCODEC
+151        0x00004EF0    TIFFUnlinkDirectory
+152        0x000049A0    TIFFVGetField
+153        0x00001550    TIFFVGetFieldDefaulted
+154        0x000048A0    TIFFVSetField
+155        0x0002BE10    TIFFVStripSize
+156        0x0002CCE0    TIFFVTileSize
+157        0x0002D550    TIFFWarning
+158        0x0002D5B0    TIFFWarningExt
+159        0x0002DD70    TIFFWriteBufferSetup
+160        0x0002DA10    TIFFWriteCheck
+161        0x0000AEC0    TIFFWriteCustomDirectory
+162        0x0000AE10    TIFFWriteDirectory
+163        0x0002E190    TIFFWriteEncodedStrip
+164        0x0002DE70    TIFFWriteEncodedTile
+165        0x0002DC60    TIFFWriteRawStrip
+166        0x0002DBB0    TIFFWriteRawTile
+167        0x0002E3F0    TIFFWriteScanline
+168        0x0002E100    TIFFWriteTile
+169        0x00001F80    TIFFXYZToRGB
+170        0x000023D0    TIFFYCbCrToRGBInit
+171        0x00002300    TIFFYCbCrtoRGB
+172        0x0001CF90    XYZtoRGB24
+173        0x00031020    _TIFFBuiltinCODECS
+174        0x00001520    _TIFFCheckMalloc
+175        0x00001490    _TIFFCheckRealloc
+176        0x000058C0    _TIFFCreateAnonFieldInfo
+177        0x00005310    _TIFFDataSize
+178        0x0002BDD0    _TIFFDefaultStripSize
+179        0x0002CEE0    _TIFFDefaultTileSize
+180        0x0000BCC0    _TIFFFax3fillruns
+181        0x00005960    _TIFFFindOrRegisterFieldInfo
+182        0x00005210    _TIFFGetExifFieldInfo
+183        0x000051F0    _TIFFGetFieldInfo
+184        0x00005460    _TIFFMergeFieldInfo
+185        0x0002B960    _TIFFNoPostDecode
+186        0x00002670    _TIFFNoPreCode
+187        0x000029A0    _TIFFNoRowDecode
+188        0x00002A70    _TIFFNoRowEncode
+189        0x000026A0    _TIFFNoSeek
+190        0x00002980    _TIFFNoStripDecode
+191        0x00002A50    _TIFFNoStripEncode
+192        0x00002960    _TIFFNoTileDecode
+193        0x00002A30    _TIFFNoTileEncode
+194        0x00005230    _TIFFPrintFieldInfo
+195        0x00005330    _TIFFSampleToTagType
+196        0x000026D0    _TIFFSetDefaultCompressionState
+197        0x00005610    _TIFFSetupFieldInfo
+198        0x0002B970    _TIFFSwab16BitData
+199        0x0002B9C0    _TIFFSwab24BitData
+200        0x0002BA20    _TIFFSwab32BitData
+201        0x0002BA70    _TIFFSwab64BitData
+202        0x00031180    _TIFFerrorHandler
+203        0x00054240    _TIFFerrorHandlerExt
+204        0x0002D430    _TIFFfree
+205        0x00023100    _TIFFgetMode
+206        0x0002D410    _TIFFmalloc
+207        0x0002D4D0    _TIFFmemcmp
+208        0x0002D4A0    _TIFFmemcpy
+209        0x0002D470    _TIFFmemset
+210        0x00029020    _TIFFprintAscii
+211        0x0002A7D0    _TIFFprintAsciiTag
+212        0x0002D450    _TIFFrealloc
+213        0x00003810    _TIFFsetByteArray
+214        0x00004880    _TIFFsetDoubleArray
+215        0x000038C0    _TIFFsetFloatArray
+216        0x000038A0    _TIFFsetLongArray
+217        0x00003860    _TIFFsetNString
+218        0x00003880    _TIFFsetShortArray
+219        0x00003830    _TIFFsetString
+220        0x00031184    _TIFFwarningHandler
+221        0x0005442C    _TIFFwarningHandlerExt
+222        0x00031100    display_sRGB
+223        0x0002F160    libport_dummy_function
+224        0x0001D4F0    uv_decode
+225        0x0001D240    uv_encode
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x19800    0x0   OriginalFirstThunk:            0x0       
+0x19800    0x0   Characteristics:               0x0       
+0x19804    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x19808    0x8   ForwarderChain:                0x0       
+0x1980C    0xC   Name:                          0x5F094   
+0x19810    0x10  FirstThunk:                    0x5F064   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x19814    0x0   OriginalFirstThunk:            0x0       
+0x19814    0x0   Characteristics:               0x0       
+0x19818    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x1981C    0x8   ForwarderChain:                0x0       
+0x19820    0xC   Name:                          0x5F0A1   
+0x19824    0x10  FirstThunk:                    0x5F07C   
+
+libjpeg-8.dll.jpeg_abort Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x19828    0x0   OriginalFirstThunk:            0x0       
+0x19828    0x0   Characteristics:               0x0       
+0x1982C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x19830    0x8   ForwarderChain:                0x0       
+0x19834    0xC   Name:                          0x5F0AF   
+0x19838    0x10  FirstThunk:                    0x5F084   
+
+msvcrt.dll.exp Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x1983C    0x0   OriginalFirstThunk:            0x0       
+0x1983C    0x0   Characteristics:               0x0       
+0x19840    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x19844    0x8   ForwarderChain:                0x0       
+0x19848    0xC   Name:                          0x5F0BA   
+0x1984C    0x10  FirstThunk:                    0x5F08C   
+
+zlib1.dll.deflate Hint[0]
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x196F8    0x0   StartAddressOfRawData:         0x6665E510
+0x196FC    0x4   EndAddressOfRawData:           0x6665E513
+0x19700    0x8   AddressOfIndex:                0x6665443C
+0x19704    0xC   AddressOfCallBacks:            0x6665E513
+0x19708    0x10  SizeOfZeroFill:                0x0       
+0x1970C    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x1B164    0x0   VirtualAddress:                0x5E000   
+0x1B168    0x4   SizeOfBlock:                   0x18      
+    0005E2DDh HIGHLOW
+    0005E4DDh HIGHLOW
+    0005E4F8h HIGHLOW
+    0005E4FCh HIGHLOW
+    0005E500h HIGHLOW
+    0005E504h HIGHLOW
+    0005E513h HIGHLOW
+    0005E000h ABSOLUTE
+

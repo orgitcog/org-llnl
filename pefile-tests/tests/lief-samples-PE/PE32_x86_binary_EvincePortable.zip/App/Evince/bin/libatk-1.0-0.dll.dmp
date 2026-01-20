@@ -1,0 +1,629 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F3D33 [Fri Oct  7 17:56:03 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x18800   
+0x90       0xC   NumberOfSymbols:               0x96      
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x7000    
+0xA0       0x8   SizeOfInitializedData:         0x3000    
+0xA4       0xC   SizeOfUninitializedData:       0x1B000   
+0xA8       0x10  AddressOfEntryPoint:           0x22090   
+0xAC       0x14  BaseOfCode:                    0x1C000   
+0xB0       0x18  BaseOfData:                    0x23000   
+0xB4       0x1C  ImageBase:                     0x62940000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x26000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x1B000   
+0x180      0x8   Misc_PhysicalAddress:          0x1B000   
+0x180      0x8   Misc_VirtualSize:              0x1B000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x7000    
+0x1A8      0x8   Misc_PhysicalAddress:          0x7000    
+0x1A8      0x8   Misc_VirtualSize:              0x7000    
+0x1AC      0xC   VirtualAddress:                0x1C000   
+0x1B0      0x10  SizeOfRawData:                 0x6400    
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.866008 (Min=0.0, Max=8.0)
+MD5     hash: fc4b725c54419068d622b2af5d0b37ce
+SHA-1   hash: 6b8f0a95f959850f86277e36f4c888ae460b6953
+SHA-256 hash: 0d73bfaeae88e2e48eefa2efc8642b945008d40d76cf207f46ff036ec43f550d
+SHA-512 hash: 43b5637247c5b1325d020031a8858faf9580c97018a35bd256a77178b61e7b38da11ad684b402b36a91ffb21aa33598f358db8ab29a9a18893d37a9f3346326b
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          .rsrc
+0x1D0      0x8   Misc:                          0x3000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x3000    
+0x1D0      0x8   Misc_VirtualSize:              0x3000    
+0x1D4      0xC   VirtualAddress:                0x23000   
+0x1D8      0x10  SizeOfRawData:                 0x2800    
+0x1DC      0x14  PointerToRawData:              0x6600    
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 4.964334 (Min=0.0, Max=8.0)
+MD5     hash: d21c5f7b748798533b6f8f47ed902ca1
+SHA-1   hash: 0bcfee78dab01b6d0d4fecf2f9997d14d731e7d0
+SHA-256 hash: 8f6e913a48d66f185477a6dd1fd0e286c0ffb9914d48a7c99963b6a80337d01a
+SHA-512 hash: 7589344435a1f9d633b69e8bd7df4449eda7e32b00c9d9433a43530cbad6fd39115a5b5f29d5fbe1923698a5f7d95a4541635b80f5ad5a92288bdef9e1e799c1
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x234A4   
+0xFC       0x4   Size:                          0x22D4    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x2332C   
+0x104      0x4   Size:                          0x178     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x23000   
+0x10C      0x4   Size:                          0x32C     
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x25778   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x222B0   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Version Information----------
+
+[VS_VERSIONINFO]
+0x665C     0x0   Length:                        0x2D0     
+0x665E     0x2   ValueLength:                   0x34      
+0x6660     0x4   Type:                          0x0       
+
+[VS_FIXEDFILEINFO]
+0x6684     0x0   Signature:                     0xFEEF04BD
+0x6688     0x4   StrucVersion:                  0x10000   
+0x668C     0x8   FileVersionMS:                 0x20002   
+0x6690     0xC   FileVersionLS:                 0x0       
+0x6694     0x10  ProductVersionMS:              0x20002   
+0x6698     0x14  ProductVersionLS:              0x0       
+0x669C     0x18  FileFlagsMask:                 0x0       
+0x66A0     0x1C  FileFlags:                     0x0       
+0x66A4     0x20  FileOS:                        0x4       
+0x66A8     0x24  FileType:                      0x2       
+0x66AC     0x28  FileSubtype:                   0x0       
+0x66B0     0x2C  FileDateMS:                    0x0       
+0x66B4     0x30  FileDateLS:                    0x0       
+
+[StringFileInfo]
+0x66B8     0x0   Length:                        0x230     
+0x66BA     0x2   ValueLength:                   0x0       
+0x66BC     0x4   Type:                          0x0       
+
+  [StringTable]
+  0x66DC     0x0   Length:                        0x20C     
+  0x66DE     0x2   ValueLength:                   0x0       
+  0x66E0     0x4   Type:                          0x0       
+  LangID: 040904B0
+
+    CompanyName: Sun Microsystems Inc.
+    FileDescription: atk
+    FileVersion: 2.2.0.0
+    InternalName: libatk-1.0-0
+    LegalCopyright: Copyright \xc2\xa9 Sun Microsystems Inc.
+    OriginalFilename: libatk-1.0-0.dll
+    ProductName: atk
+    ProductVersion: 2.2.0
+
+[VarFileInfo]
+0x68E8     0x0   Length:                        0x44      
+0x68EA     0x2   ValueLength:                   0x0       
+0x68EC     0x4   Type:                          0x0       
+
+  [Var]
+  0x6908     0x0   Length:                        0x24      
+  0x690A     0x2   ValueLength:                   0x4       
+  0x690C     0x4   Type:                          0x0       
+    Translation: 0x0409 0x04b0
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x6AA4     0x0   Characteristics:               0x0       
+0x6AA8     0x4   TimeDateStamp:                 0x4E8F3D33 [Fri Oct  7 17:56:03 2011 UTC]
+0x6AAC     0x8   MajorVersion:                  0x0       
+0x6AAE     0xA   MinorVersion:                  0x0       
+0x6AB0     0xC   Name:                          0x23E36   
+0x6AB4     0x10  Base:                          0x1       
+0x6AB8     0x14  NumberOfFunctions:             0xF1      
+0x6ABC     0x18  NumberOfNames:                 0xF1      
+0x6AC0     0x1C  AddressOfFunctions:            0x234CC   
+0x6AC4     0x20  AddressOfNames:                0x23890   
+0x6AC8     0x24  AddressOfNameOrdinals:         0x23C54   
+
+Ordinal      RVA         Name
+1          0x000014E0    atk_action_do_action
+2          0x000015E0    atk_action_get_description
+3          0x00001760    atk_action_get_keybinding
+4          0x000016E0    atk_action_get_localized_name
+5          0x00001560    atk_action_get_n_actions
+6          0x00001660    atk_action_get_name
+7          0x00001490    atk_action_get_type
+8          0x000017E0    atk_action_set_description
+9          0x0000C2A0    atk_add_focus_tracker
+10         0x0000C470    atk_add_global_event_listener
+11         0x0000C4F0    atk_add_key_event_listener
+12         0x0000B960    atk_attribute_set_free
+13         0x000018F0    atk_component_add_focus_handler
+14         0x000019F0    atk_component_contains
+15         0x00002030    atk_component_get_alpha
+16         0x00001BC0    atk_component_get_extents
+17         0x00001F30    atk_component_get_layer
+18         0x00001FB0    atk_component_get_mdi_zorder
+19         0x00001DB0    atk_component_get_position
+20         0x00001E60    atk_component_get_size
+21         0x000018B0    atk_component_get_type
+22         0x000020C0    atk_component_grab_focus
+23         0x00001B30    atk_component_ref_accessible_at_point
+24         0x00001970    atk_component_remove_focus_handler
+25         0x00002140    atk_component_set_extents
+26         0x000021E0    atk_component_set_position
+27         0x00002270    atk_component_set_size
+28         0x0000D0C0    atk_coord_type_get_type
+29         0x00002750    atk_document_get_attribute_value
+30         0x000026D0    atk_document_get_attributes
+31         0x000025D0    atk_document_get_document
+32         0x00002550    atk_document_get_document_type
+33         0x00002650    atk_document_get_locale
+34         0x000023F0    atk_document_get_type
+35         0x000027D0    atk_document_set_attribute_value
+36         0x00002A40    atk_editable_text_copy_text
+37         0x00002AD0    atk_editable_text_cut_text
+38         0x00002B60    atk_editable_text_delete_text
+39         0x00002860    atk_editable_text_get_type
+40         0x000029B0    atk_editable_text_insert_text
+41         0x00002BF0    atk_editable_text_paste_text
+42         0x000028A0    atk_editable_text_set_run_attributes
+43         0x00002930    atk_editable_text_set_text_contents
+44         0x0000C280    atk_focus_tracker_init
+45         0x0000C3D0    atk_focus_tracker_notify
+46         0x00006B90    atk_get_default_registry
+47         0x0000C5A0    atk_get_focus_object
+48         0x0000C560    atk_get_root
+49         0x0000C5B0    atk_get_toolkit_name
+50         0x0000C5F0    atk_get_toolkit_version
+51         0x00002E60    atk_gobject_accessible_for_object
+52         0x00002F60    atk_gobject_accessible_get_object
+53         0x00002CE0    atk_gobject_accessible_get_type
+54         0x00003390    atk_hyperlink_get_end_index
+55         0x00003550    atk_hyperlink_get_n_anchors
+56         0x00003320    atk_hyperlink_get_object
+57         0x00003400    atk_hyperlink_get_start_index
+58         0x00003250    atk_hyperlink_get_type
+59         0x000032B0    atk_hyperlink_get_uri
+60         0x00003740    atk_hyperlink_impl_get_hyperlink
+61         0x000036F0    atk_hyperlink_impl_get_type
+62         0x000034E0    atk_hyperlink_is_inline
+63         0x000035C0    atk_hyperlink_is_selected_link
+64         0x00003470    atk_hyperlink_is_valid
+65         0x0000CF10    atk_hyperlink_state_flags_get_type
+66         0x000038A0    atk_hypertext_get_link
+67         0x000039C0    atk_hypertext_get_link_index
+68         0x00003940    atk_hypertext_get_n_links
+69         0x000037E0    atk_hypertext_get_type
+70         0x00003AB0    atk_image_get_image_description
+71         0x00003D50    atk_image_get_image_locale
+72         0x00003C80    atk_image_get_image_position
+73         0x00003B30    atk_image_get_image_size
+74         0x00003A70    atk_image_get_type
+75         0x00003C00    atk_image_set_image_description
+76         0x00004F30    atk_implementor_get_type
+77         0x00005F40    atk_implementor_ref_accessible
+78         0x0000D090    atk_key_event_type_get_type
+79         0x0000CF70    atk_layer_get_type
+80         0x0000C6E0    atk_misc_get_instance
+81         0x0000C660    atk_misc_get_type
+82         0x00016270    atk_misc_instance
+83         0x0000C6A0    atk_misc_threads_enter
+84         0x0000C6C0    atk_misc_threads_leave
+85         0x00004080    atk_no_op_object_factory_get_type
+86         0x000040C0    atk_no_op_object_factory_new
+87         0x00003DF0    atk_no_op_object_get_type
+88         0x00003F80    atk_no_op_object_new
+89         0x00006260    atk_object_add_relationship
+90         0x00005D60    atk_object_connect_property_change_handler
+91         0x00006520    atk_object_factory_create_accessible
+92         0x00006650    atk_object_factory_get_accessible_type
+93         0x000064A0    atk_object_factory_get_type
+94         0x000065F0    atk_object_factory_invalidate
+95         0x00005FE0    atk_object_get_attributes
+96         0x00004FE0    atk_object_get_description
+97         0x00005760    atk_object_get_index_in_parent
+98         0x00005610    atk_object_get_layer
+99         0x00005680    atk_object_get_mdi_zorder
+100        0x000050C0    atk_object_get_n_accessible_children
+101        0x00004F70    atk_object_get_name
+102        0x00005050    atk_object_get_parent
+103        0x00005260    atk_object_get_role
+104        0x000044D0    atk_object_get_type
+105        0x00006050    atk_object_initialize
+106        0x00005EA0    atk_object_notify_state_change
+107        0x00005130    atk_object_ref_accessible_child
+108        0x000051A0    atk_object_ref_relation_set
+109        0x000056F0    atk_object_ref_state_set
+110        0x00005E20    atk_object_remove_property_change_handler
+111        0x00006370    atk_object_remove_relationship
+112        0x00005980    atk_object_set_description
+113        0x000058B0    atk_object_set_name
+114        0x00005A50    atk_object_set_parent
+115        0x00005AE0    atk_object_set_role
+116        0x00002300    atk_rectangle_get_type
+117        0x00006AF0    atk_registry_get_factory
+118        0x00006AB0    atk_registry_get_factory_type
+119        0x00006920    atk_registry_get_type
+120        0x000069C0    atk_registry_set_factory_type
+121        0x00007560    atk_relation_add_target
+122        0x000074A0    atk_relation_get_relation_type
+123        0x00007500    atk_relation_get_target
+124        0x00006D50    atk_relation_get_type
+125        0x000073A0    atk_relation_new
+126        0x00007A90    atk_relation_set_add
+127        0x00007C90    atk_relation_set_add_relation_by_type
+128        0x00007850    atk_relation_set_contains
+129        0x000078F0    atk_relation_set_get_n_relations
+130        0x00007960    atk_relation_set_get_relation
+131        0x00007A00    atk_relation_set_get_relation_by_type
+132        0x00007720    atk_relation_set_get_type
+133        0x00007830    atk_relation_set_new
+134        0x00007BB0    atk_relation_set_remove
+135        0x00007250    atk_relation_type_for_name
+136        0x00007180    atk_relation_type_get_name
+137        0x0000CFA0    atk_relation_type_get_type
+138        0x00007100    atk_relation_type_register
+139        0x0000C370    atk_remove_focus_tracker
+140        0x0000C4C0    atk_remove_global_event_listener
+141        0x0000C530    atk_remove_key_event_listener
+142        0x00006170    atk_role_for_name
+143        0x00006110    atk_role_get_localized_name
+144        0x000060D0    atk_role_get_name
+145        0x0000CF40    atk_role_get_type
+146        0x00005210    atk_role_register
+147        0x00007E80    atk_selection_add_selection
+148        0x00007F00    atk_selection_clear_selection
+149        0x00008000    atk_selection_get_selection_count
+150        0x00007DB0    atk_selection_get_type
+151        0x00008080    atk_selection_is_child_selected
+152        0x00007F80    atk_selection_ref_selection
+153        0x00008100    atk_selection_remove_selection
+154        0x00008180    atk_selection_select_all_selection
+155        0x000087F0    atk_state_set_add_state
+156        0x000088B0    atk_state_set_add_states
+157        0x00008BF0    atk_state_set_and_sets
+158        0x00008960    atk_state_set_clear_states
+159        0x000089D0    atk_state_set_contains_state
+160        0x00008A50    atk_state_set_contains_states
+161        0x00008720    atk_state_set_get_type
+162        0x00008780    atk_state_set_is_empty
+163        0x00008760    atk_state_set_new
+164        0x00008CD0    atk_state_set_or_sets
+165        0x00008B30    atk_state_set_remove_state
+166        0x00008DB0    atk_state_set_xor_sets
+167        0x00008600    atk_state_type_for_name
+168        0x00008550    atk_state_type_get_name
+169        0x0000CFD0    atk_state_type_get_type
+170        0x000084E0    atk_state_type_register
+171        0x00008F80    atk_streamable_content_get_mime_type
+172        0x00008F00    atk_streamable_content_get_n_mime_types
+173        0x00009040    atk_streamable_content_get_stream
+174        0x00008EB0    atk_streamable_content_get_type
+175        0x00009100    atk_streamable_content_get_uri
+176        0x0000A0A0    atk_table_add_column_selection
+177        0x00009FA0    atk_table_add_row_selection
+178        0x000097F0    atk_table_get_caption
+179        0x00009760    atk_table_get_column_at_index
+180        0x000098F0    atk_table_get_column_description
+181        0x00009970    atk_table_get_column_extent_at
+182        0x00009A00    atk_table_get_column_header
+183        0x000095C0    atk_table_get_index_at
+184        0x00009870    atk_table_get_n_columns
+185        0x00009A80    atk_table_get_n_rows
+186        0x000096D0    atk_table_get_row_at_index
+187        0x00009B00    atk_table_get_row_description
+188        0x00009B80    atk_table_get_row_extent_at
+189        0x00009C10    atk_table_get_row_header
+190        0x00009D90    atk_table_get_selected_columns
+191        0x00009D10    atk_table_get_selected_rows
+192        0x00009C90    atk_table_get_summary
+193        0x000091C0    atk_table_get_type
+194        0x00009E10    atk_table_is_column_selected
+195        0x00009E90    atk_table_is_row_selected
+196        0x00009F10    atk_table_is_selected
+197        0x000094C0    atk_table_ref_at
+198        0x0000A120    atk_table_remove_column_selection
+199        0x0000A020    atk_table_remove_row_selection
+200        0x0000A1A0    atk_table_set_caption
+201        0x0000A220    atk_table_set_column_description
+202        0x0000A2B0    atk_table_set_column_header
+203        0x0000A340    atk_table_set_row_description
+204        0x0000A3D0    atk_table_set_row_header
+205        0x0000A460    atk_table_set_summary
+206        0x0000B270    atk_text_add_selection
+207        0x0000BB00    atk_text_attribute_for_name
+208        0x0000BA30    atk_text_attribute_get_name
+209        0x0000D000    atk_text_attribute_get_type
+210        0x0000BC50    atk_text_attribute_get_value
+211        0x0000B9B0    atk_text_attribute_register
+212        0x0000D030    atk_text_boundary_get_type
+213        0x0000D060    atk_text_clip_type_get_type
+214        0x0000BEB0    atk_text_free_ranges
+215        0x0000B890    atk_text_get_bounded_ranges
+216        0x0000AC30    atk_text_get_caret_offset
+217        0x0000A950    atk_text_get_character_at_offset
+218        0x0000B010    atk_text_get_character_count
+219        0x0000ACB0    atk_text_get_character_extents
+220        0x0000AF90    atk_text_get_default_attributes
+221        0x0000B130    atk_text_get_n_selections
+222        0x0000B090    atk_text_get_offset_at_point
+223        0x0000B490    atk_text_get_range_extents
+224        0x0000AEC0    atk_text_get_run_attributes
+225        0x0000B1B0    atk_text_get_selection
+226        0x0000A890    atk_text_get_text
+227        0x0000A9D0    atk_text_get_text_after_offset
+228        0x0000AAA0    atk_text_get_text_at_offset
+229        0x0000AB60    atk_text_get_text_before_offset
+230        0x0000A570    atk_text_get_type
+231        0x0000B300    atk_text_remove_selection
+232        0x0000B410    atk_text_set_caret_offset
+233        0x0000B380    atk_text_set_selection
+234        0x0000C240    atk_util_get_type
+235        0x0000C740    atk_value_get_current_value
+236        0x0000C890    atk_value_get_maximum_value
+237        0x0000CB30    atk_value_get_minimum_increment
+238        0x0000C9E0    atk_value_get_minimum_value
+239        0x0000C6F0    atk_value_get_type
+240        0x0000CC80    atk_value_set_current_value
+241        0x0000CD40    atk_window_get_type
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x692C     0x0   OriginalFirstThunk:            0x0       
+0x692C     0x0   Characteristics:               0x0       
+0x6930     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6934     0x8   ForwarderChain:                0x0       
+0x6938     0xC   Name:                          0x233DC   
+0x693C     0x10  FirstThunk:                    0x233A4   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6940     0x0   OriginalFirstThunk:            0x0       
+0x6940     0x0   Characteristics:               0x0       
+0x6944     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6948     0x8   ForwarderChain:                0x0       
+0x694C     0xC   Name:                          0x233E9   
+0x6950     0x10  FirstThunk:                    0x233BC   
+
+libglib-2.0-0.dll.g_log Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6954     0x0   OriginalFirstThunk:            0x0       
+0x6954     0x0   Characteristics:               0x0       
+0x6958     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x695C     0x8   ForwarderChain:                0x0       
+0x6960     0xC   Name:                          0x233FB   
+0x6964     0x10  FirstThunk:                    0x233C4   
+
+libgobject-2.0-0.dll.g_type_name Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x6968     0x0   OriginalFirstThunk:            0x0       
+0x6968     0x0   Characteristics:               0x0       
+0x696C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6970     0x8   ForwarderChain:                0x0       
+0x6974     0xC   Name:                          0x23410   
+0x6978     0x10  FirstThunk:                    0x233CC   
+
+libintl-8.dll.libintl_dgettext Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x697C     0x0   OriginalFirstThunk:            0x0       
+0x697C     0x0   Characteristics:               0x0       
+0x6980     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x6984     0x8   ForwarderChain:                0x0       
+0x6988     0xC   Name:                          0x2341E   
+0x698C     0x10  FirstThunk:                    0x233D4   
+
+msvcrt.dll._iob Hint[0]
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x6600     0x0   Characteristics:               0x0       
+0x6604     0x4   TimeDateStamp:                 0x4E8F3D32 [Fri Oct  7 17:56:02 2011 UTC]
+0x6608     0x8   MajorVersion:                  0x0       
+0x660A     0xA   MinorVersion:                  0x0       
+0x660C     0xC   NumberOfNamedEntries:          0x0       
+0x660E     0xE   NumberOfIdEntries:             0x1       
+  Id: [0x10] (RT_VERSION)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x6610     0x0   Name:                          0x10      
+  0x6614     0x4   OffsetToData:                  0x80000018
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x6618     0x0   Characteristics:               0x0       
+    0x661C     0x4   TimeDateStamp:                 0x4E8F3D32 [Fri Oct  7 17:56:02 2011 UTC]
+    0x6620     0x8   MajorVersion:                  0x0       
+    0x6622     0xA   MinorVersion:                  0x0       
+    0x6624     0xC   NumberOfNamedEntries:          0x0       
+    0x6626     0xE   NumberOfIdEntries:             0x1       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x6628     0x0   Name:                          0x1       
+      0x662C     0x4   OffsetToData:                  0x80000030
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x6630     0x0   Characteristics:               0x0       
+        0x6634     0x4   TimeDateStamp:                 0x4E8F3D32 [Fri Oct  7 17:56:02 2011 UTC]
+        0x6638     0x8   MajorVersion:                  0x0       
+        0x663A     0xA   MinorVersion:                  0x0       
+        0x663C     0xC   NumberOfNamedEntries:          0x0       
+        0x663E     0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x6640     0x0   Name:                          0x409     
+          0x6644     0x4   OffsetToData:                  0x48      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x6648     0x0   OffsetToData:                  0x2305C   
+            0x664C     0x4   Size:                          0x2D0     
+            0x6650     0x8   CodePage:                      0x0       
+            0x6654     0xC   Reserved:                      0x0       
+
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x64B0     0x0   StartAddressOfRawData:         0x629622C8
+0x64B4     0x4   EndAddressOfRawData:           0x629622CB
+0x64B8     0x8   AddressOfIndex:                0x62956314
+0x64BC     0xC   AddressOfCallBacks:            0x629622CB
+0x64C0     0x10  SizeOfZeroFill:                0x0       
+0x64C4     0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x8D78     0x0   VirtualAddress:                0x22000   
+0x8D7C     0x4   SizeOfBlock:                   0x18      
+    0002209Dh HIGHLOW
+    00022295h HIGHLOW
+    000222B0h HIGHLOW
+    000222B4h HIGHLOW
+    000222B8h HIGHLOW
+    000222BCh HIGHLOW
+    000222CBh HIGHLOW
+    00022000h ABSOLUTE
+

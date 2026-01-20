@@ -1,0 +1,766 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F3810 [Fri Oct  7 17:34:08 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x40A00   
+0x90       0xC   NumberOfSymbols:               0xD4      
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x14000   
+0xA0       0x8   SizeOfInitializedData:         0x4000    
+0xA4       0xC   SizeOfUninitializedData:       0x37000   
+0xA8       0x10  AddressOfEntryPoint:           0x4B770   
+0xAC       0x14  BaseOfCode:                    0x38000   
+0xB0       0x18  BaseOfData:                    0x4C000   
+0xB4       0x1C  ImageBase:                     0x63A40000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x50000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x37000   
+0x180      0x8   Misc_PhysicalAddress:          0x37000   
+0x180      0x8   Misc_VirtualSize:              0x37000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x14000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x14000   
+0x1A8      0x8   Misc_VirtualSize:              0x14000   
+0x1AC      0xC   VirtualAddress:                0x38000   
+0x1B0      0x10  SizeOfRawData:                 0x13A00   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.913400 (Min=0.0, Max=8.0)
+MD5     hash: 6f73db633d7bed75da7f86a0d012005d
+SHA-1   hash: a15a20a8f6962f7ee2739667d2151845ee686b13
+SHA-256 hash: 724a416f972ef690edf7bf1d55ed279d32a11fcbb1fe17964683c59b4ad043cf
+SHA-512 hash: fb37554bc178190969e6df90f4d2cfa7cb292f1750262e3354d5aa3cc8de17fe5d60fc364cbe928d8d2682755b77e9436ae3383530ea6a814fc2b61c1ef3767a
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          .rsrc
+0x1D0      0x8   Misc:                          0x4000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x4000    
+0x1D0      0x8   Misc_VirtualSize:              0x4000    
+0x1D4      0xC   VirtualAddress:                0x4C000   
+0x1D8      0x10  SizeOfRawData:                 0x3600    
+0x1DC      0x14  PointerToRawData:              0x13C00   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.348328 (Min=0.0, Max=8.0)
+MD5     hash: cc9fa829e1199dc68860d4de5175e438
+SHA-1   hash: 996bb72e9e1d0b33d0df1544654e74fdd6444166
+SHA-256 hash: 61d17d7142d1a329a7229fb5965802f5fa958a124f151594fbd2085a83a4043a
+SHA-512 hash: 1bdad0606190d79ff9389bd61e4c362a31678c039887064c1b7d81d931702e7f228cc365ea197c9a6aca7df2f920c8910109b4051635673cdba33add4adaaf8a
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x4C500   
+0xFC       0x4   Size:                          0x30D8    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x4C390   
+0x104      0x4   Size:                          0x170     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x4C000   
+0x10C      0x4   Size:                          0x390     
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x4F5D8   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x4B998   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Version Information----------
+
+[VS_VERSIONINFO]
+0x13C5C    0x0   Length:                        0x334     
+0x13C5E    0x2   ValueLength:                   0x34      
+0x13C60    0x4   Type:                          0x0       
+
+[VS_FIXEDFILEINFO]
+0x13C84    0x0   Signature:                     0xFEEF04BD
+0x13C88    0x4   StrucVersion:                  0x10000   
+0x13C8C    0x8   FileVersionMS:                 0x2001E   
+0x13C90    0xC   FileVersionLS:                 0x0       
+0x13C94    0x10  ProductVersionMS:              0x2001E   
+0x13C98    0x14  ProductVersionLS:              0x0       
+0x13C9C    0x18  FileFlagsMask:                 0x0       
+0x13CA0    0x1C  FileFlags:                     0x0       
+0x13CA4    0x20  FileOS:                        0x4       
+0x13CA8    0x24  FileType:                      0x2       
+0x13CAC    0x28  FileSubtype:                   0x0       
+0x13CB0    0x2C  FileDateMS:                    0x0       
+0x13CB4    0x30  FileDateLS:                    0x0       
+
+[StringFileInfo]
+0x13CB8    0x0   Length:                        0x292     
+0x13CBA    0x2   ValueLength:                   0x0       
+0x13CBC    0x4   Type:                          0x0       
+
+  [StringTable]
+  0x13CDC    0x0   Length:                        0x26E     
+  0x13CDE    0x2   ValueLength:                   0x0       
+  0x13CE0    0x4   Type:                          0x0       
+  LangID: 040904B0
+
+    CompanyName: The GLib developer community
+    FileDescription: GObject
+    FileVersion: 2.30.0.0
+    InternalName: libgobject-2.0-0
+    LegalCopyright: Copyright \xc2\xa9 1998-2011 Tim Janik, Red Hat, Inc. and others
+    OriginalFilename: libgobject-2.0-0.dll
+    ProductName: GLib
+    ProductVersion: 2.30.0
+
+[VarFileInfo]
+0x13F4C    0x0   Length:                        0x44      
+0x13F4E    0x2   ValueLength:                   0x0       
+0x13F50    0x4   Type:                          0x0       
+
+  [Var]
+  0x13F6C    0x0   Length:                        0x24      
+  0x13F6E    0x2   ValueLength:                   0x4       
+  0x13F70    0x4   Type:                          0x0       
+    Translation: 0x0409 0x04b0
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x14100    0x0   Characteristics:               0x0       
+0x14104    0x4   TimeDateStamp:                 0x4E8F380E [Fri Oct  7 17:34:06 2011 UTC]
+0x14108    0x8   MajorVersion:                  0x0       
+0x1410A    0xA   MinorVersion:                  0x0       
+0x1410C    0xC   Name:                          0x4D3EC   
+0x14110    0x10  Base:                          0x1       
+0x14114    0x14  NumberOfFunctions:             0x17A     
+0x14118    0x18  NumberOfNames:                 0x17A     
+0x1411C    0x1C  AddressOfFunctions:            0x4C528   
+0x14120    0x20  AddressOfNames:                0x4CB10   
+0x14124    0x24  AddressOfNameOrdinals:         0x4D0F8   
+
+Ordinal      RVA         Name
+1          0x00003870    g_array_get_type
+2          0x000023E0    g_binding_flags_get_type
+3          0x000029C0    g_binding_get_flags
+4          0x00002A20    g_binding_get_source
+5          0x00002AE0    g_binding_get_source_property
+6          0x00002A80    g_binding_get_target
+7          0x00002B40    g_binding_get_target_property
+8          0x00002650    g_binding_get_type
+9          0x00003E30    g_boxed_copy
+10         0x00003FD0    g_boxed_free
+11         0x000031D0    g_boxed_type_register_static
+12         0x00003950    g_byte_array_get_type
+13         0x00007C80    g_cclosure_marshal_BOOLEAN__BOXED_BOXED
+14         0x00007AA0    g_cclosure_marshal_BOOLEAN__FLAGS
+15         0x00007B90    g_cclosure_marshal_STRING__OBJECT_POINTER
+16         0x00006F60    g_cclosure_marshal_VOID__BOOLEAN
+17         0x00007780    g_cclosure_marshal_VOID__BOXED
+18         0x00007000    g_cclosure_marshal_VOID__CHAR
+19         0x000075A0    g_cclosure_marshal_VOID__DOUBLE
+20         0x000073C0    g_cclosure_marshal_VOID__ENUM
+21         0x00007460    g_cclosure_marshal_VOID__FLAGS
+22         0x00007500    g_cclosure_marshal_VOID__FLOAT
+23         0x00007140    g_cclosure_marshal_VOID__INT
+24         0x00007280    g_cclosure_marshal_VOID__LONG
+25         0x000078C0    g_cclosure_marshal_VOID__OBJECT
+26         0x000076E0    g_cclosure_marshal_VOID__PARAM
+27         0x00007820    g_cclosure_marshal_VOID__POINTER
+28         0x00007640    g_cclosure_marshal_VOID__STRING
+29         0x000070A0    g_cclosure_marshal_VOID__UCHAR
+30         0x000071E0    g_cclosure_marshal_VOID__UINT
+31         0x00007A00    g_cclosure_marshal_VOID__UINT_POINTER
+32         0x00007320    g_cclosure_marshal_VOID__ULONG
+33         0x00007960    g_cclosure_marshal_VOID__VARIANT
+34         0x00006ED0    g_cclosure_marshal_VOID__VOID
+35         0x00005F20    g_cclosure_marshal_generic
+36         0x00005CF0    g_cclosure_new
+37         0x0000FD10    g_cclosure_new_object
+38         0x0000FC30    g_cclosure_new_object_swap
+39         0x00005D80    g_cclosure_new_swap
+40         0x0000EB00    g_clear_object
+41         0x00004EE0    g_closure_add_finalize_notifier
+42         0x000050B0    g_closure_add_invalidate_notifier
+43         0x00004B10    g_closure_add_marshal_guards
+44         0x000035D0    g_closure_get_type
+45         0x000054B0    g_closure_invalidate
+46         0x00005A60    g_closure_invoke
+47         0x0000FDF0    g_closure_new_object
+48         0x00004730    g_closure_new_simple
+49         0x00005240    g_closure_ref
+50         0x00005860    g_closure_remove_finalize_notifier
+51         0x000056D0    g_closure_remove_invalidate_notifier
+52         0x00005C60    g_closure_set_marshal
+53         0x00004930    g_closure_set_meta_marshal
+54         0x00005620    g_closure_sink
+55         0x00005350    g_closure_unref
+56         0x00003720    g_date_get_type
+57         0x00003BF0    g_date_time_get_type
+58         0x00006770    g_enum_complete_type_info
+59         0x00006C00    g_enum_get_value
+60         0x000068F0    g_enum_get_value_by_name
+61         0x00006A70    g_enum_get_value_by_nick
+62         0x000065F0    g_enum_register_static
+63         0x00003B80    g_error_get_type
+64         0x00006830    g_flags_complete_type_info
+65         0x00006C90    g_flags_get_first_value
+66         0x000069B0    g_flags_get_value_by_name
+67         0x00006B40    g_flags_get_value_by_nick
+68         0x000066B0    g_flags_register_static
+69         0x00003790    g_gstring_get_type
+70         0x0002ECF0    g_gtype_get_type
+71         0x00003800    g_hash_table_get_type
+72         0x0000FEA0    g_initially_unowned_get_type
+73         0x0001F010    g_io_channel_get_type
+74         0x0001F080    g_io_condition_get_type
+75         0x00003CD0    g_main_context_get_type
+76         0x00003C60    g_main_loop_get_type
+77         0x00003A30    g_match_info_get_type
+78         0x0000E760    g_object_add_toggle_ref
+79         0x0000E420    g_object_add_weak_pointer
+80         0x00003080    g_object_bind_property
+81         0x00002BA0    g_object_bind_property_full
+82         0x000030D0    g_object_bind_property_with_closures
+83         0x00009BF0    g_object_class_find_property
+84         0x00009700    g_object_class_install_properties
+85         0x00009410    g_object_class_install_property
+86         0x00009F30    g_object_class_list_properties
+87         0x00009D50    g_object_class_override_property
+88         0x0000FF30    g_object_compat_control
+89         0x0000F6A0    g_object_connect
+90         0x0000DE80    g_object_disconnect
+91         0x0000E6A0    g_object_force_floating
+92         0x0000A0E0    g_object_freeze_notify
+93         0x0000D220    g_object_get
+94         0x0000EEE0    g_object_get_data
+95         0x0000DB90    g_object_get_property
+96         0x0000EB40    g_object_get_qdata
+97         0x0000B120    g_object_get_type
+98         0x0000CE50    g_object_get_valist
+99         0x00009CB0    g_object_interface_find_property
+100        0x00009A40    g_object_interface_install_property
+101        0x00009FC0    g_object_interface_list_properties
+102        0x0000E580    g_object_is_floating
+103        0x0000C390    g_object_new
+104        0x0000C030    g_object_new_valist
+105        0x0000B130    g_object_newv
+106        0x0000A270    g_object_notify
+107        0x0000A730    g_object_notify_by_pspec
+108        0x000081A0    g_object_ref
+109        0x0000E5F0    g_object_ref_sink
+110        0x0000E930    g_object_remove_toggle_ref
+111        0x0000E4D0    g_object_remove_weak_pointer
+112        0x0000A040    g_object_run_dispose
+113        0x0000D1B0    g_object_set
+114        0x0000EF80    g_object_set_data
+115        0x0000F030    g_object_set_data_full
+116        0x0000D290    g_object_set_property
+117        0x0000ECC0    g_object_set_qdata
+118        0x0000ED70    g_object_set_qdata_full
+119        0x0000C420    g_object_set_valist
+120        0x0000F100    g_object_steal_data
+121        0x0000EE40    g_object_steal_qdata
+122        0x0000AB90    g_object_thaw_notify
+123        0x00007FE0    g_object_unref
+124        0x0000FA00    g_object_watch_closure
+125        0x0000E0C0    g_object_weak_ref
+126        0x0000E270    g_object_weak_unref
+127        0x000142F0    g_param_spec_boolean
+128        0x00014B90    g_param_spec_boxed
+129        0x000141B0    g_param_spec_char
+130        0x00014A10    g_param_spec_double
+131        0x000147C0    g_param_spec_enum
+132        0x000148A0    g_param_spec_flags
+133        0x00014980    g_param_spec_float
+134        0x00010D50    g_param_spec_get_blurb
+135        0x000107D0    g_param_spec_get_name
+136        0x00010DD0    g_param_spec_get_nick
+137        0x00010A10    g_param_spec_get_qdata
+138        0x00010CB0    g_param_spec_get_redirect_target
+139        0x00014C80    g_param_spec_gtype
+140        0x00014360    g_param_spec_int
+141        0x000145E0    g_param_spec_int64
+142        0x00010830    g_param_spec_internal
+143        0x000144A0    g_param_spec_long
+144        0x00014DB0    g_param_spec_object
+145        0x00014E30    g_param_spec_override
+146        0x00014B10    g_param_spec_param
+147        0x00014C40    g_param_spec_pointer
+148        0x00011510    g_param_spec_pool_insert
+149        0x00011D50    g_param_spec_pool_list
+150        0x00011C50    g_param_spec_pool_list_owned
+151        0x00011820    g_param_spec_pool_lookup
+152        0x000114C0    g_param_spec_pool_new
+153        0x000116F0    g_param_spec_pool_remove
+154        0x00010400    g_param_spec_ref
+155        0x00010750    g_param_spec_ref_sink
+156        0x00010A90    g_param_spec_set_qdata
+157        0x00010B40    g_param_spec_set_qdata_full
+158        0x000106D0    g_param_spec_sink
+159        0x00010C10    g_param_spec_steal_qdata
+160        0x00014AB0    g_param_spec_string
+161        0x0003B0B4    g_param_spec_types
+162        0x00014250    g_param_spec_uchar
+163        0x00014400    g_param_spec_uint
+164        0x000146B0    g_param_spec_uint64
+165        0x00014540    g_param_spec_ulong
+166        0x00014780    g_param_spec_unichar
+167        0x00010640    g_param_spec_unref
+168        0x00014CC0    g_param_spec_value_array
+169        0x00014F10    g_param_spec_variant
+170        0x000120B0    g_param_type_register_static
+171        0x000111A0    g_param_value_convert
+172        0x00010F20    g_param_value_defaults
+173        0x00010E40    g_param_value_set_default
+174        0x00011060    g_param_value_validate
+175        0x00011340    g_param_values_cmp
+176        0x0002EC60    g_pointer_type_register_static
+177        0x000038E0    g_ptr_array_get_type
+178        0x000039C0    g_regex_get_type
+179        0x0001EE30    g_signal_accumulator_first_wins
+180        0x0001EE00    g_signal_accumulator_true_handled
+181        0x000182A0    g_signal_add_emission_hook
+182        0x0001AC30    g_signal_chain_from_overridden
+183        0x0001B110    g_signal_chain_from_overridden_handler
+184        0x0001BFC0    g_signal_connect_closure
+185        0x0001BD00    g_signal_connect_closure_by_id
+186        0x0001C740    g_signal_connect_data
+187        0x0000F510    g_signal_connect_object
+188        0x0001E7D0    g_signal_emit
+189        0x0001E800    g_signal_emit_by_name
+190        0x0001DFB0    g_signal_emit_valist
+191        0x0001DCD0    g_signal_emitv
+192        0x0001BC10    g_signal_get_invocation_hint
+193        0x00015320    g_signal_handler_block
+194        0x00015D30    g_signal_handler_disconnect
+195        0x0001D1E0    g_signal_handler_find
+196        0x0001CEE0    g_signal_handler_is_connected
+197        0x000151C0    g_signal_handler_unblock
+198        0x0001D540    g_signal_handlers_block_matched
+199        0x0001CFA0    g_signal_handlers_destroy
+200        0x0001D7E0    g_signal_handlers_disconnect_matched
+201        0x0001D690    g_signal_handlers_unblock_matched
+202        0x0001D930    g_signal_has_handler_pending
+203        0x000196F0    g_signal_list_ids
+204        0x000193D0    g_signal_lookup
+205        0x000199A0    g_signal_name
+206        0x0001A6E0    g_signal_new
+207        0x0001A630    g_signal_new_class_handler
+208        0x0001A5A0    g_signal_new_valist
+209        0x00019B50    g_signal_newv
+210        0x0001A850    g_signal_override_class_closure
+211        0x0001AAE0    g_signal_override_class_handler
+212        0x000186A0    g_signal_parse_name
+213        0x00019A30    g_signal_query
+214        0x00018510    g_signal_remove_emission_hook
+215        0x00018070    g_signal_stop_emission
+216        0x00018CA0    g_signal_stop_emission_by_name
+217        0x00005E20    g_signal_type_cclosure_new
+218        0x0002EE10    g_slist_remove_all
+219        0x00003D40    g_source_get_type
+220        0x0001F1A0    g_source_set_closure
+221        0x0001F2E0    g_source_set_dummy_callback
+222        0x0002E8E0    g_strdup_value_contents
+223        0x00003DB0    g_strv_get_type
+224        0x00023300    g_type_add_class_cache_func
+225        0x00028850    g_type_add_class_private
+226        0x000234A0    g_type_add_interface_check
+227        0x000271F0    g_type_add_interface_dynamic
+228        0x000263B0    g_type_add_interface_static
+229        0x000277C0    g_type_check_class_cast
+230        0x000274D0    g_type_check_class_is_a
+231        0x00027950    g_type_check_instance
+232        0x00027580    g_type_check_instance_cast
+233        0x00026F60    g_type_check_instance_is_a
+234        0x00027A00    g_type_check_is_value_type
+235        0x00027B70    g_type_check_value
+236        0x00027CF0    g_type_check_value_holds
+237        0x00025D60    g_type_children
+238        0x000283D0    g_type_class_add_private
+239        0x00028980    g_type_class_get_private
+240        0x00023E30    g_type_class_peek
+241        0x00023EE0    g_type_class_peek_parent
+242        0x00023E80    g_type_class_peek_static
+243        0x000237A0    g_type_class_ref
+244        0x00023640    g_type_class_unref
+245        0x00023CD0    g_type_class_unref_uncached
+246        0x00026690    g_type_create_instance
+247        0x00024780    g_type_default_interface_peek
+248        0x000242B0    g_type_default_interface_ref
+249        0x000247D0    g_type_default_interface_unref
+250        0x00025680    g_type_depth
+251        0x00026540    g_type_free_instance
+252        0x000249C0    g_type_from_name
+253        0x00026F30    g_type_fundamental
+254        0x00026EF0    g_type_fundamental_next
+255        0x00026D00    g_type_get_plugin
+256        0x00025F30    g_type_get_qdata
+257        0x000283B0    g_type_init
+258        0x00028150    g_type_init_with_debug_flags
+259        0x00028560    g_type_instance_get_private
+260        0x00025950    g_type_interface_add_prerequisite
+261        0x00026D40    g_type_interface_get_plugin
+262        0x00023FA0    g_type_interface_peek
+263        0x00024110    g_type_interface_peek_parent
+264        0x00023070    g_type_interface_prerequisites
+265        0x00025E20    g_type_interfaces
+266        0x00025750    g_type_is_a
+267        0x00029270    g_type_module_add_interface
+268        0x00028D40    g_type_module_get_type
+269        0x00029450    g_type_module_register_enum
+270        0x00029570    g_type_module_register_flags
+271        0x00029030    g_type_module_register_type
+272        0x00028E60    g_type_module_set_name
+273        0x00028DB0    g_type_module_unuse
+274        0x00028ED0    g_type_module_use
+275        0x00024920    g_type_name
+276        0x00028050    g_type_name_from_class
+277        0x00028070    g_type_name_from_instance
+278        0x000256B0    g_type_next_base
+279        0x00025650    g_type_parent
+280        0x000298E0    g_type_plugin_complete_interface_info
+281        0x000297E0    g_type_plugin_complete_type_info
+282        0x00029690    g_type_plugin_get_type
+283        0x00029760    g_type_plugin_unuse
+284        0x000296E0    g_type_plugin_use
+285        0x00024990    g_type_qname
+286        0x000261A0    g_type_query
+287        0x00027340    g_type_register_dynamic
+288        0x000253E0    g_type_register_fundamental
+289        0x00024BA0    g_type_register_static
+290        0x00025370    g_type_register_static_simple
+291        0x000233A0    g_type_remove_class_cache_func
+292        0x00023540    g_type_remove_interface_check
+293        0x00025FF0    g_type_set_qdata
+294        0x00026280    g_type_test_flags
+295        0x00027E90    g_type_value_table_peek
+296        0x0002EE18    g_unichar_validate
+297        0x0002AA60    g_value_array_append
+298        0x0002A760    g_value_array_copy
+299        0x0002A6D0    g_value_array_free
+300        0x0002A5F0    g_value_array_get_nth
+301        0x000036B0    g_value_array_get_type
+302        0x0002A880    g_value_array_insert
+303        0x0002A650    g_value_array_new
+304        0x0002AAB0    g_value_array_prepend
+305        0x0002AB00    g_value_array_remove
+306        0x0002AC50    g_value_array_sort
+307        0x0002ACC0    g_value_array_sort_with_data
+308        0x0002A3B0    g_value_copy
+309        0x000041C0    g_value_dup_boxed
+310        0x0000F4A0    g_value_dup_object
+311        0x00012450    g_value_dup_param
+312        0x0002E5A0    g_value_dup_string
+313        0x0002E870    g_value_dup_variant
+314        0x00029DD0    g_value_fits_pointer
+315        0x0002DCE0    g_value_get_boolean
+316        0x00004120    g_value_get_boxed
+317        0x0002DB40    g_value_get_char
+318        0x0002E320    g_value_get_double
+319        0x00006DB0    g_value_get_enum
+320        0x00006E70    g_value_get_flags
+321        0x0002E260    g_value_get_float
+322        0x0002ED50    g_value_get_gtype
+323        0x0002DDA0    g_value_get_int
+324        0x0002E0C0    g_value_get_int64
+325        0x0002DF20    g_value_get_long
+326        0x0000F440    g_value_get_object
+327        0x000123F0    g_value_get_param
+328        0x0002E670    g_value_get_pointer
+329        0x0002E540    g_value_get_string
+330        0x00003640    g_value_get_type
+331        0x0002DC10    g_value_get_uchar
+332        0x0002DE60    g_value_get_uint
+333        0x0002E1A0    g_value_get_uint64
+334        0x0002DFE0    g_value_get_ulong
+335        0x0002E810    g_value_get_variant
+336        0x00029B30    g_value_init
+337        0x00029E30    g_value_peek_pointer
+338        0x00029EC0    g_value_register_transform_func
+339        0x00029C80    g_value_reset
+340        0x0002DC70    g_value_set_boolean
+341        0x00004260    g_value_set_boxed
+342        0x00004510    g_value_set_boxed_take_ownership
+343        0x0002DAD0    g_value_set_char
+344        0x0002E2C0    g_value_set_double
+345        0x00006D50    g_value_set_enum
+346        0x00006E10    g_value_set_flags
+347        0x0002E200    g_value_set_float
+348        0x0002EDB0    g_value_set_gtype
+349        0x0002A1F0    g_value_set_instance
+350        0x0002DD40    g_value_set_int
+351        0x0002E040    g_value_set_int64
+352        0x0002DEC0    g_value_set_long
+353        0x0000F1B0    g_value_set_object
+354        0x0000F420    g_value_set_object_take_ownership
+355        0x00012260    g_value_set_param
+356        0x000123D0    g_value_set_param_take_ownership
+357        0x0002E610    g_value_set_pointer
+358        0x00004350    g_value_set_static_boxed
+359        0x0002E410    g_value_set_static_string
+360        0x0002E380    g_value_set_string
+361        0x0002E520    g_value_set_string_take_ownership
+362        0x0002DBA0    g_value_set_uchar
+363        0x0002DE00    g_value_set_uint
+364        0x0002E120    g_value_set_uint64
+365        0x0002DF80    g_value_set_ulong
+366        0x0002E6D0    g_value_set_variant
+367        0x00004430    g_value_take_boxed
+368        0x0000F2F0    g_value_take_object
+369        0x00012320    g_value_take_param
+370        0x0002E4A0    g_value_take_string
+371        0x0002E770    g_value_take_variant
+372        0x0002A4D0    g_value_transform
+373        0x0002A090    g_value_type_compatible
+374        0x0002A140    g_value_type_transformable
+375        0x00029D20    g_value_unset
+376        0x00003B10    g_variant_builder_get_type
+377        0x00003E20    g_variant_get_gtype
+378        0x00003AA0    g_variant_type_get_gtype
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x13F90    0x0   OriginalFirstThunk:            0x0       
+0x13F90    0x0   Characteristics:               0x0       
+0x13F94    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x13F98    0x8   ForwarderChain:                0x0       
+0x13F9C    0xC   Name:                          0x4C440   
+0x13FA0    0x10  FirstThunk:                    0x4C408   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x13FA4    0x0   OriginalFirstThunk:            0x0       
+0x13FA4    0x0   Characteristics:               0x0       
+0x13FA8    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x13FAC    0x8   ForwarderChain:                0x0       
+0x13FB0    0xC   Name:                          0x4C44D   
+0x13FB4    0x10  FirstThunk:                    0x4C420   
+
+libffi-5.dll.ffi_call Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x13FB8    0x0   OriginalFirstThunk:            0x0       
+0x13FB8    0x0   Characteristics:               0x0       
+0x13FBC    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x13FC0    0x8   ForwarderChain:                0x0       
+0x13FC4    0xC   Name:                          0x4C45A   
+0x13FC8    0x10  FirstThunk:                    0x4C428   
+
+libglib-2.0-0.dll.g_log Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x13FCC    0x0   OriginalFirstThunk:            0x0       
+0x13FCC    0x0   Characteristics:               0x0       
+0x13FD0    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x13FD4    0x8   ForwarderChain:                0x0       
+0x13FD8    0xC   Name:                          0x4C46C   
+0x13FDC    0x10  FirstThunk:                    0x4C430   
+
+libgthread-2.0-0.dll.g_thread_init Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x13FE0    0x0   OriginalFirstThunk:            0x0       
+0x13FE0    0x0   Characteristics:               0x0       
+0x13FE4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x13FE8    0x8   ForwarderChain:                0x0       
+0x13FEC    0xC   Name:                          0x4C481   
+0x13FF0    0x10  FirstThunk:                    0x4C438   
+
+msvcrt.dll._iob Hint[0]
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x13C00    0x0   Characteristics:               0x0       
+0x13C04    0x4   TimeDateStamp:                 0x4E8F380D [Fri Oct  7 17:34:05 2011 UTC]
+0x13C08    0x8   MajorVersion:                  0x0       
+0x13C0A    0xA   MinorVersion:                  0x0       
+0x13C0C    0xC   NumberOfNamedEntries:          0x0       
+0x13C0E    0xE   NumberOfIdEntries:             0x1       
+  Id: [0x10] (RT_VERSION)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x13C10    0x0   Name:                          0x10      
+  0x13C14    0x4   OffsetToData:                  0x80000018
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x13C18    0x0   Characteristics:               0x0       
+    0x13C1C    0x4   TimeDateStamp:                 0x4E8F380D [Fri Oct  7 17:34:05 2011 UTC]
+    0x13C20    0x8   MajorVersion:                  0x0       
+    0x13C22    0xA   MinorVersion:                  0x0       
+    0x13C24    0xC   NumberOfNamedEntries:          0x0       
+    0x13C26    0xE   NumberOfIdEntries:             0x1       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x13C28    0x0   Name:                          0x1       
+      0x13C2C    0x4   OffsetToData:                  0x80000030
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x13C30    0x0   Characteristics:               0x0       
+        0x13C34    0x4   TimeDateStamp:                 0x4E8F380D [Fri Oct  7 17:34:05 2011 UTC]
+        0x13C38    0x8   MajorVersion:                  0x0       
+        0x13C3A    0xA   MinorVersion:                  0x0       
+        0x13C3C    0xC   NumberOfNamedEntries:          0x0       
+        0x13C3E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x13C40    0x0   Name:                          0x409     
+          0x13C44    0x4   OffsetToData:                  0x48      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x13C48    0x0   OffsetToData:                  0x4C05C   
+            0x13C4C    0x4   Size:                          0x334     
+            0x13C50    0x8   CodePage:                      0x0       
+            0x13C54    0xC   Reserved:                      0x0       
+
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x13B98    0x0   StartAddressOfRawData:         0x63A8B9B0
+0x13B9C    0x4   EndAddressOfRawData:           0x63A8B9B3
+0x13BA0    0x8   AddressOfIndex:                0x63A7B580
+0x13BA4    0xC   AddressOfCallBacks:            0x63A8B9B3
+0x13BA8    0x10  SizeOfZeroFill:                0x0       
+0x13BAC    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x171D8    0x0   VirtualAddress:                0x4B000   
+0x171DC    0x4   SizeOfBlock:                   0x18      
+    0004B77Dh HIGHLOW
+    0004B97Dh HIGHLOW
+    0004B998h HIGHLOW
+    0004B99Ch HIGHLOW
+    0004B9A0h HIGHLOW
+    0004B9A4h HIGHLOW
+    0004B9B3h HIGHLOW
+    0004B000h ABSOLUTE
+

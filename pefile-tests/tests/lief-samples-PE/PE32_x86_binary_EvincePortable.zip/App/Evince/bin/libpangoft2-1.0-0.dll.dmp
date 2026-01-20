@@ -1,0 +1,492 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F42D3 [Fri Oct  7 18:20:03 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x2E200   
+0x90       0xC   NumberOfSymbols:               0x118     
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x12000   
+0xA0       0x8   SizeOfInitializedData:         0x2000    
+0xA4       0xC   SizeOfUninitializedData:       0x25000   
+0xA8       0x10  AddressOfEntryPoint:           0x37560   
+0xAC       0x14  BaseOfCode:                    0x26000   
+0xB0       0x18  BaseOfData:                    0x38000   
+0xB4       0x1C  ImageBase:                     0x6D700000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x3A000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x25000   
+0x180      0x8   Misc_PhysicalAddress:          0x25000   
+0x180      0x8   Misc_VirtualSize:              0x25000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x12000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x12000   
+0x1A8      0x8   Misc_VirtualSize:              0x12000   
+0x1AC      0xC   VirtualAddress:                0x26000   
+0x1B0      0x10  SizeOfRawData:                 0x11800   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.922999 (Min=0.0, Max=8.0)
+MD5     hash: 156fd67237395c262cce43b40016cb32
+SHA-1   hash: d5a55abdf3574e4bf6e7298e3729d72f80e2f2d6
+SHA-256 hash: 9e6331fab5baf526b3bc3132a848604ae599ecf7dad8fda81b06db98b89bba35
+SHA-512 hash: f42208dc792879058123df32c6f306430e8264bb612a8733c36d10b23c4387a1c10e86899a09447a2e035182a8c3198c9bc98d1bfcb079230c8046a6d4a32630
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          .rsrc
+0x1D0      0x8   Misc:                          0x2000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x2000    
+0x1D0      0x8   Misc_VirtualSize:              0x2000    
+0x1D4      0xC   VirtualAddress:                0x38000   
+0x1D8      0x10  SizeOfRawData:                 0x1400    
+0x1DC      0x14  PointerToRawData:              0x11A00   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 4.705591 (Min=0.0, Max=8.0)
+MD5     hash: 48a3e68e1c3860864a0f41dd0283954b
+SHA-1   hash: d98a1cbdc7ea52bb25752dd14dd778604d2f70db
+SHA-256 hash: d6ccef9ce0f256b6b880707d08656bd1f60c276ee6f9d2f300cc31a9840e618c
+SHA-512 hash: 69650c3e70b4d4394acfb008bf8bfdd187c52c145eab3b11b61697ba41150ae61da5a13846b566c08a8621bc2e7321466abcd2a1a711dd8d1a8807b1b930e042
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x38580   
+0xFC       0x4   Size:                          0xD24     
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x3838C   
+0x104      0x4   Size:                          0x1F4     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x38000   
+0x10C      0x4   Size:                          0x38C     
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x392A4   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x37788   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Version Information----------
+
+[VS_VERSIONINFO]
+0x11A5C    0x0   Length:                        0x330     
+0x11A5E    0x2   ValueLength:                   0x34      
+0x11A60    0x4   Type:                          0x0       
+
+[VS_FIXEDFILEINFO]
+0x11A84    0x0   Signature:                     0xFEEF04BD
+0x11A88    0x4   StrucVersion:                  0x10000   
+0x11A8C    0x8   FileVersionMS:                 0x1001C   
+0x11A90    0xC   FileVersionLS:                 0x40000   
+0x11A94    0x10  ProductVersionMS:              0x1001C   
+0x11A98    0x14  ProductVersionLS:              0x40000   
+0x11A9C    0x18  FileFlagsMask:                 0x0       
+0x11AA0    0x1C  FileFlags:                     0x0       
+0x11AA4    0x20  FileOS:                        0x4       
+0x11AA8    0x24  FileType:                      0x2       
+0x11AAC    0x28  FileSubtype:                   0x0       
+0x11AB0    0x2C  FileDateMS:                    0x0       
+0x11AB4    0x30  FileDateLS:                    0x0       
+
+[StringFileInfo]
+0x11AB8    0x0   Length:                        0x28E     
+0x11ABA    0x2   ValueLength:                   0x0       
+0x11ABC    0x4   Type:                          0x0       
+
+  [StringTable]
+  0x11ADC    0x0   Length:                        0x26A     
+  0x11ADE    0x2   ValueLength:                   0x0       
+  0x11AE0    0x4   Type:                          0x0       
+  LangID: 040904B0
+
+    CompanyName: Red Hat Software
+    FileDescription: PangoFT2
+    FileVersion: 1.28.4.0
+    InternalName: pangoft2-1.0-0
+    LegalCopyright: Copyright \xc2\xa9 1999 Red Hat Software. Copyright \xc2\xa9 2000 Tor Lillqvist
+    OriginalFilename: pangoft2-1.0-0.dll
+    ProductName: PangoFT2
+    ProductVersion: 1.28.4
+
+[VarFileInfo]
+0x11D48    0x0   Length:                        0x44      
+0x11D4A    0x2   ValueLength:                   0x0       
+0x11D4C    0x4   Type:                          0x0       
+
+  [Var]
+  0x11D68    0x0   Length:                        0x24      
+  0x11D6A    0x2   ValueLength:                   0x4       
+  0x11D6C    0x4   Type:                          0x0       
+    Translation: 0x0409 0x04b0
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x11F80    0x0   Characteristics:               0x0       
+0x11F84    0x4   TimeDateStamp:                 0x4E8F42D0 [Fri Oct  7 18:20:00 2011 UTC]
+0x11F88    0x8   MajorVersion:                  0x0       
+0x11F8A    0xA   MinorVersion:                  0x0       
+0x11F8C    0xC   Name:                          0x388F0   
+0x11F90    0x10  Base:                          0x1       
+0x11F94    0x14  NumberOfFunctions:             0x54      
+0x11F98    0x18  NumberOfNames:                 0x54      
+0x11F9C    0x1C  AddressOfFunctions:            0x385A8   
+0x11FA0    0x20  AddressOfNames:                0x386F8   
+0x11FA4    0x24  AddressOfNameOrdinals:         0x38848   
+
+Ordinal      RVA         Name
+1          0x00005C90    pango_fc_decoder_get_charset
+2          0x00005D10    pango_fc_decoder_get_glyph
+3          0x00005C00    pango_fc_decoder_get_type
+4          0x000019D0    pango_fc_font_create_base_metrics_for_context
+5          0x00005720    pango_fc_font_description_from_pattern
+6          0x00002170    pango_fc_font_get_glyph
+7          0x000028B0    pango_fc_font_get_raw_extents
+8          0x00001900    pango_fc_font_get_type
+9          0x000021D0    pango_fc_font_get_unknown_glyph
+10         0x000020C0    pango_fc_font_has_char
+11         0x00002270    pango_fc_font_kern_glyphs
+12         0x00004F40    pango_fc_font_key_get_context_key
+13         0x00004F30    pango_fc_font_key_get_matrix
+14         0x00004F20    pango_fc_font_key_get_pattern
+15         0x00001FE0    pango_fc_font_lock_face
+16         0x00005120    pango_fc_font_map_add_decoder_find_func
+17         0x000052F0    pango_fc_font_map_cache_clear
+18         0x000055D0    pango_fc_font_map_create_context
+19         0x000051B0    pango_fc_font_map_find_decoder
+20         0x00004F50    pango_fc_font_map_get_type
+21         0x00005630    pango_fc_font_map_shutdown
+22         0x00002050    pango_fc_font_unlock_face
+23         0x00004EF0    pango_fc_fontset_key_get_absolute_size
+24         0x00004F10    pango_fc_fontset_key_get_context_key
+25         0x00004ED0    pango_fc_fontset_key_get_description
+26         0x00004EC0    pango_fc_fontset_key_get_language
+27         0x00004EE0    pango_fc_fontset_key_get_matrix
+28         0x00004F00    pango_fc_fontset_key_get_resolution
+29         0x000067D0    pango_ft2_font_get_coverage
+30         0x00006100    pango_ft2_font_get_face
+31         0x00006740    pango_ft2_font_get_kerning
+32         0x000065B0    pango_ft2_font_get_type
+33         0x00006CF0    pango_ft2_font_map_create_context
+34         0x00006D50    pango_ft2_font_map_for_display
+35         0x00006B10    pango_ft2_font_map_get_type
+36         0x00006BB0    pango_ft2_font_map_new
+37         0x00006C10    pango_ft2_font_map_set_default_substitute
+38         0x00006C70    pango_ft2_font_map_set_resolution
+39         0x00006C50    pango_ft2_font_map_substitute_changed
+40         0x00006D70    pango_ft2_get_context
+41         0x000067F0    pango_ft2_get_unknown_glyph
+42         0x00007F00    pango_ft2_render
+43         0x00007CE0    pango_ft2_render_layout
+44         0x00007DB0    pango_ft2_render_layout_line
+45         0x00007D10    pango_ft2_render_layout_line_subpixel
+46         0x00007C10    pango_ft2_render_layout_subpixel
+47         0x00007DE0    pango_ft2_render_transformed
+48         0x00007B70    pango_ft2_renderer_get_type
+49         0x00006DB0    pango_ft2_shutdown_display
+50         0x000080A0    pango_ot_buffer_add_glyph
+51         0x00008080    pango_ot_buffer_clear
+52         0x00007FF0    pango_ot_buffer_destroy
+53         0x00008120    pango_ot_buffer_get_glyphs
+54         0x00007F40    pango_ot_buffer_new
+55         0x00008170    pango_ot_buffer_output
+56         0x000080D0    pango_ot_buffer_set_rtl
+57         0x00008100    pango_ot_buffer_set_zero_width_marks
+58         0x00009010    pango_ot_info_find_feature
+59         0x00008F80    pango_ot_info_find_language
+60         0x00008F40    pango_ot_info_find_script
+61         0x00008C40    pango_ot_info_get
+62         0x00008BB0    pango_ot_info_get_type
+63         0x00009220    pango_ot_info_list_features
+64         0x00009130    pango_ot_info_list_languages
+65         0x00009060    pango_ot_info_list_scripts
+66         0x00009960    pango_ot_ruleset_add_feature
+67         0x0000A030    pango_ot_ruleset_description_copy
+68         0x00009730    pango_ot_ruleset_description_equal
+69         0x000097E0    pango_ot_ruleset_description_free
+70         0x00009610    pango_ot_ruleset_description_hash
+71         0x00009E60    pango_ot_ruleset_get_feature_count
+72         0x0000A110    pango_ot_ruleset_get_for_description
+73         0x00009840    pango_ot_ruleset_get_type
+74         0x00009B60    pango_ot_ruleset_maybe_add_feature
+75         0x00009C40    pango_ot_ruleset_maybe_add_features
+76         0x000098D0    pango_ot_ruleset_new
+77         0x00009A50    pango_ot_ruleset_new_for
+78         0x00009D40    pango_ot_ruleset_new_from_description
+79         0x00009F90    pango_ot_ruleset_position
+80         0x00009EF0    pango_ot_ruleset_substitute
+81         0x0000A380    pango_ot_tag_from_language
+82         0x0000A2F0    pango_ot_tag_from_script
+83         0x0000A450    pango_ot_tag_to_language
+84         0x0000A350    pango_ot_tag_to_script
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x11D8C    0x0   OriginalFirstThunk:            0x0       
+0x11D8C    0x0   Characteristics:               0x0       
+0x11D90    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x11D94    0x8   ForwarderChain:                0x0       
+0x11D98    0xC   Name:                          0x38474   
+0x11D9C    0x10  FirstThunk:                    0x3842C   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x11DA0    0x0   OriginalFirstThunk:            0x0       
+0x11DA0    0x0   Characteristics:               0x0       
+0x11DA4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x11DA8    0x8   ForwarderChain:                0x0       
+0x11DAC    0xC   Name:                          0x38481   
+0x11DB0    0x10  FirstThunk:                    0x38444   
+
+libfontconfig-1.dll.FcFontList Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x11DB4    0x0   OriginalFirstThunk:            0x0       
+0x11DB4    0x0   Characteristics:               0x0       
+0x11DB8    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x11DBC    0x8   ForwarderChain:                0x0       
+0x11DC0    0xC   Name:                          0x38495   
+0x11DC4    0x10  FirstThunk:                    0x3844C   
+
+libfreetype-6.dll.FT_New_Face Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x11DC8    0x0   OriginalFirstThunk:            0x0       
+0x11DC8    0x0   Characteristics:               0x0       
+0x11DCC    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x11DD0    0x8   ForwarderChain:                0x0       
+0x11DD4    0xC   Name:                          0x384A7   
+0x11DD8    0x10  FirstThunk:                    0x38454   
+
+libglib-2.0-0.dll.g_log Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x11DDC    0x0   OriginalFirstThunk:            0x0       
+0x11DDC    0x0   Characteristics:               0x0       
+0x11DE0    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x11DE4    0x8   ForwarderChain:                0x0       
+0x11DE8    0xC   Name:                          0x384B9   
+0x11DEC    0x10  FirstThunk:                    0x3845C   
+
+libgobject-2.0-0.dll.g_type_init Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x11DF0    0x0   OriginalFirstThunk:            0x0       
+0x11DF0    0x0   Characteristics:               0x0       
+0x11DF4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x11DF8    0x8   ForwarderChain:                0x0       
+0x11DFC    0xC   Name:                          0x384CE   
+0x11E00    0x10  FirstThunk:                    0x38464   
+
+libpango-1.0-0.dll.pango_version Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x11E04    0x0   OriginalFirstThunk:            0x0       
+0x11E04    0x0   Characteristics:               0x0       
+0x11E08    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x11E0C    0x8   ForwarderChain:                0x0       
+0x11E10    0xC   Name:                          0x384E1   
+0x11E14    0x10  FirstThunk:                    0x3846C   
+
+msvcrt.dll._iob Hint[0]
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x11A00    0x0   Characteristics:               0x0       
+0x11A04    0x4   TimeDateStamp:                 0x4E8F42C6 [Fri Oct  7 18:19:50 2011 UTC]
+0x11A08    0x8   MajorVersion:                  0x0       
+0x11A0A    0xA   MinorVersion:                  0x0       
+0x11A0C    0xC   NumberOfNamedEntries:          0x0       
+0x11A0E    0xE   NumberOfIdEntries:             0x1       
+  Id: [0x10] (RT_VERSION)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x11A10    0x0   Name:                          0x10      
+  0x11A14    0x4   OffsetToData:                  0x80000018
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x11A18    0x0   Characteristics:               0x0       
+    0x11A1C    0x4   TimeDateStamp:                 0x4E8F42C6 [Fri Oct  7 18:19:50 2011 UTC]
+    0x11A20    0x8   MajorVersion:                  0x0       
+    0x11A22    0xA   MinorVersion:                  0x0       
+    0x11A24    0xC   NumberOfNamedEntries:          0x0       
+    0x11A26    0xE   NumberOfIdEntries:             0x1       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x11A28    0x0   Name:                          0x1       
+      0x11A2C    0x4   OffsetToData:                  0x80000030
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x11A30    0x0   Characteristics:               0x0       
+        0x11A34    0x4   TimeDateStamp:                 0x4E8F42C6 [Fri Oct  7 18:19:50 2011 UTC]
+        0x11A38    0x8   MajorVersion:                  0x0       
+        0x11A3A    0xA   MinorVersion:                  0x0       
+        0x11A3C    0xC   NumberOfNamedEntries:          0x0       
+        0x11A3E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x11A40    0x0   Name:                          0x409     
+          0x11A44    0x4   OffsetToData:                  0x48      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x11A48    0x0   OffsetToData:                  0x3805C   
+            0x11A4C    0x4   Size:                          0x330     
+            0x11A50    0x8   CodePage:                      0x0       
+            0x11A54    0xC   Reserved:                      0x0       
+
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x11988    0x0   StartAddressOfRawData:         0x6D7377A0
+0x1198C    0x4   EndAddressOfRawData:           0x6D7377A3
+0x11990    0x8   AddressOfIndex:                0x6D72B0F4
+0x11994    0xC   AddressOfCallBacks:            0x6D7377A3
+0x11998    0x10  SizeOfZeroFill:                0x0       
+0x1199C    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x12CA4    0x0   VirtualAddress:                0x37000   
+0x12CA8    0x4   SizeOfBlock:                   0x18      
+    0003756Dh HIGHLOW
+    0003776Dh HIGHLOW
+    00037788h HIGHLOW
+    0003778Ch HIGHLOW
+    00037790h HIGHLOW
+    00037794h HIGHLOW
+    000377A3h HIGHLOW
+    00037000h ABSOLUTE
+

@@ -1,0 +1,622 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F3446 [Fri Oct  7 17:17:58 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x226800  
+0x90       0xC   NumberOfSymbols:               0xDAD     
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2106    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0xCA000   
+0xA0       0x8   SizeOfInitializedData:         0x3000    
+0xA4       0xC   SizeOfUninitializedData:       0x169000  
+0xA8       0x10  AddressOfEntryPoint:           0x2335F0  
+0xAC       0x14  BaseOfCode:                    0x16A000  
+0xB0       0x18  BaseOfData:                    0x234000  
+0xB4       0x1C  ImageBase:                     0x67A80000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x237000  
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x169000  
+0x180      0x8   Misc_PhysicalAddress:          0x169000  
+0x180      0x8   Misc_VirtualSize:              0x169000  
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0xCA000   
+0x1A8      0x8   Misc_PhysicalAddress:          0xCA000   
+0x1A8      0x8   Misc_VirtualSize:              0xCA000   
+0x1AC      0xC   VirtualAddress:                0x16A000  
+0x1B0      0x10  SizeOfRawData:                 0xC9A00   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.936959 (Min=0.0, Max=8.0)
+MD5     hash: d24115c50bc2676bafb80039cc94c43a
+SHA-1   hash: c726e70a11e5ebed89797a70ad763f4b59c27c42
+SHA-256 hash: 0887929b585ed56d8bdb2109675a3e83fcc86a0df9c235864e3198b33febbc4e
+SHA-512 hash: 169f1b7e39fa72a4b353e22f75227955e1b6636dc8ba8c0c022cfd711ebe008dedb9c1ca1c54aa33afd65584c8b1a4801f89b8a7c734701e537f62efd8feab60
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          UPX2
+0x1D0      0x8   Misc:                          0x3000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x3000    
+0x1D0      0x8   Misc_VirtualSize:              0x3000    
+0x1D4      0xC   VirtualAddress:                0x234000  
+0x1D8      0x10  SizeOfRawData:                 0x2A00    
+0x1DC      0x14  PointerToRawData:              0xC9C00   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.530686 (Min=0.0, Max=8.0)
+MD5     hash: c58ee094a5399cbaed674f6507e7b4bf
+SHA-1   hash: 006193ff00be1e18cf504363d3346e180f6fddb4
+SHA-256 hash: 81f1e168e073975e2b19d6edfd8134d16fe74df07f891ec4e18305b0dbd2fbb8
+SHA-512 hash: 66289e0760f56de74eeb33b17b4264d85fbd1ba11f14b8a7d097ba6c58716b414be762506f945bfd6accb2c2fca7473bbb7ce4743a97f78d6b658d3857c67e3e
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x2340F4  
+0xFC       0x4   Size:                          0x2864    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x234000  
+0x104      0x4   Size:                          0xF4      
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x236958  
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x233810  
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0xC9CF4    0x0   Characteristics:               0x0       
+0xC9CF8    0x4   TimeDateStamp:                 0x4E8F3446 [Fri Oct  7 17:17:58 2011 UTC]
+0xC9CFC    0x8   MajorVersion:                  0x0       
+0xC9CFE    0xA   MinorVersion:                  0x0       
+0xC9D00    0xC   Name:                          0x234EBE  
+0xC9D04    0x10  Base:                          0x1       
+0xC9D08    0x14  NumberOfFunctions:             0x15D     
+0xC9D0C    0x18  NumberOfNames:                 0x15D     
+0xC9D10    0x1C  AddressOfFunctions:            0x23411C  
+0xC9D14    0x20  AddressOfNames:                0x234690  
+0xC9D18    0x24  AddressOfNameOrdinals:         0x234C04  
+
+Ordinal      RVA         Name
+1          0x0004ADA0    FTC_CMapCache_Lookup
+2          0x0004AD80    FTC_CMapCache_New
+3          0x0004B0E0    FTC_ImageCache_Lookup
+4          0x0004B360    FTC_ImageCache_LookupScaler
+5          0x0004B0C0    FTC_ImageCache_New
+6          0x0004B600    FTC_Image_Cache_Lookup
+7          0x0004B5E0    FTC_Image_Cache_New
+8          0x0004A6C0    FTC_Manager_Done
+9          0x0004A320    FTC_Manager_LookupFace
+10         0x0004A160    FTC_Manager_LookupSize
+11         0x0004A900    FTC_Manager_Lookup_Face
+12         0x0004A930    FTC_Manager_Lookup_Size
+13         0x0004A560    FTC_Manager_New
+14         0x0004A780    FTC_Manager_RemoveFaceID
+15         0x0004A750    FTC_Manager_Reset
+16         0x0004A8E0    FTC_Node_Unref
+17         0x0004B670    FTC_SBitCache_Lookup
+18         0x0004B9A0    FTC_SBitCache_LookupScaler
+19         0x0004B650    FTC_SBitCache_New
+20         0x0004BCF0    FTC_SBit_Cache_Lookup
+21         0x0004BCD0    FTC_SBit_Cache_New
+22         0x00003F70    FT_Activate_Size
+23         0x000016F0    FT_Add_Default_Modules
+24         0x00008E10    FT_Add_Module
+25         0x0000A580    FT_Alloc
+26         0x00006F90    FT_Angle_Diff
+27         0x00006B00    FT_Atan2
+28         0x000079B0    FT_Attach_File
+29         0x00007920    FT_Attach_Stream
+30         0x0000B060    FT_Bitmap_Convert
+31         0x0000AF20    FT_Bitmap_Copy
+32         0x0000B4F0    FT_Bitmap_Done
+33         0x0000B540    FT_Bitmap_Embolden
+34         0x0000AF00    FT_Bitmap_New
+35         0x00008850    FT_CMap_Done
+36         0x00008730    FT_CMap_New
+37         0x00001E80    FT_CeilFix
+38         0x0000C690    FT_ClassicKern_Free
+39         0x0000C630    FT_ClassicKern_Validate
+40         0x00006A60    FT_Cos
+41         0x00002150    FT_DivFix
+42         0x00009220    FT_Done_Face
+43         0x000017A0    FT_Done_FreeType
+44         0x0000C210    FT_Done_Glyph
+45         0x00002BC0    FT_Done_GlyphSlot
+46         0x000092D0    FT_Done_Library
+47         0x000016A0    FT_Done_Memory
+48         0x00002D00    FT_Done_Size
+49         0x0000CB60    FT_Face_CheckTrueTypePatents
+50         0x00003E80    FT_Face_GetCharVariantIndex
+51         0x00003E40    FT_Face_GetCharVariantIsDefault
+52         0x00003D50    FT_Face_GetCharsOfVariant
+53         0x00003DF0    FT_Face_GetVariantSelectors
+54         0x00003DA0    FT_Face_GetVariantsOfChar
+55         0x0000CD90    FT_Face_SetUnpatentedHinting
+56         0x00001EB0    FT_FloorFix
+57         0x0000A6A0    FT_Free
+58         0x00005780    FT_Get_Advance
+59         0x00005630    FT_Get_Advances
+60         0x0000AE00    FT_Get_BDF_Charset_ID
+61         0x0000AE90    FT_Get_BDF_Property
+62         0x0000BC60    FT_Get_CID_From_Glyph_Index
+63         0x0000BBF0    FT_Get_CID_Is_Internally_CID_Keyed
+64         0x0000BB40    FT_Get_CID_Registry_Ordering_Supplement
+65         0x00003C90    FT_Get_CMap_Format
+66         0x00003C40    FT_Get_CMap_Language_ID
+67         0x00003800    FT_Get_Char_Index
+68         0x000037B0    FT_Get_Charmap_Index
+69         0x0000BCE0    FT_Get_FSType_Flags
+70         0x000038A0    FT_Get_First_Char
+71         0x0000BD60    FT_Get_Gasp
+72         0x0000C440    FT_Get_Glyph
+73         0x000039A0    FT_Get_Glyph_Name
+74         0x00003550    FT_Get_Kerning
+75         0x0000C7B0    FT_Get_MM_Var
+76         0x00004240    FT_Get_Module
+77         0x000042B0    FT_Get_Module_Interface
+78         0x0000C770    FT_Get_Multi_Master
+79         0x00003920    FT_Get_Name_Index
+80         0x00003830    FT_Get_Next_Char
+81         0x0000CF30    FT_Get_PFR_Advance
+82         0x0000CEC0    FT_Get_PFR_Kerning
+83         0x0000CE10    FT_Get_PFR_Metrics
+84         0x0000FE30    FT_Get_PS_Font_Info
+85         0x0000FEE0    FT_Get_PS_Font_Private
+86         0x00003A70    FT_Get_Postscript_Name
+87         0x00004000    FT_Get_Renderer
+88         0x00008200    FT_Get_Sfnt_Name
+89         0x00005B40    FT_Get_Sfnt_Name_Count
+90         0x00003AE0    FT_Get_Sfnt_Table
+91         0x00004510    FT_Get_SubGlyph_Info
+92         0x000036A0    FT_Get_Track_Kerning
+93         0x00004400    FT_Get_TrueType_Engine_Type
+94         0x0000FF40    FT_Get_WinFNT_Header
+95         0x0000FFB0    FT_Get_X11_Font_Format
+96         0x00002970    FT_GlyphLoader_Add
+97         0x00007EA0    FT_GlyphLoader_CheckPoints
+98         0x00007E10    FT_GlyphLoader_CheckSubGlyphs
+99         0x00008070    FT_GlyphLoader_CopyPoints
+100        0x00008190    FT_GlyphLoader_CreateExtra
+101        0x00002900    FT_GlyphLoader_Done
+102        0x00007300    FT_GlyphLoader_New
+103        0x00002940    FT_GlyphLoader_Prepare
+104        0x00002800    FT_GlyphLoader_Reset
+105        0x000027A0    FT_GlyphLoader_Rewind
+106        0x0000FD00    FT_GlyphSlot_Embolden
+107        0x0000FCB0    FT_GlyphSlot_Oblique
+108        0x0000B460    FT_GlyphSlot_Own_Bitmap
+109        0x0000C500    FT_Glyph_Copy
+110        0x0000C170    FT_Glyph_Get_CBox
+111        0x0000FA00    FT_Glyph_Stroke
+112        0x0000FB40    FT_Glyph_StrokeBorder
+113        0x0000C250    FT_Glyph_To_Bitmap
+114        0x0000C110    FT_Glyph_Transform
+115        0x0000FE90    FT_Has_PS_Glyph_Names
+116        0x00001730    FT_Init_FreeType
+117        0x0000C6D0    FT_Library_SetLcdFilter
+118        0x0000C6C0    FT_Library_SetLcdFilterWeights
+119        0x00004380    FT_Library_Version
+120        0x00008AC0    FT_List_Add
+121        0x00008BD0    FT_List_Finalize
+122        0x00008A90    FT_List_Find
+123        0x00008AF0    FT_List_Insert
+124        0x00008B90    FT_List_Iterate
+125        0x00008B20    FT_List_Remove
+126        0x00008B50    FT_List_Up
+127        0x000055E0    FT_Load_Char
+128        0x00004FE0    FT_Load_Glyph
+129        0x00003B30    FT_Load_Sfnt_Table
+130        0x00003FA0    FT_Lookup_Renderer
+131        0x00002DC0    FT_Match_Size
+132        0x00002360    FT_Matrix_Invert
+133        0x000021F0    FT_Matrix_Multiply
+134        0x00002450    FT_Matrix_Multiply_Scaled
+135        0x00001F00    FT_MulDiv
+136        0x00002050    FT_MulDiv_No_Round
+137        0x00002120    FT_MulFix
+138        0x0000A510    FT_New_Face
+139        0x000079F0    FT_New_GlyphSlot
+140        0x00007340    FT_New_Library
+141        0x00001660    FT_New_Memory
+142        0x0000A4C0    FT_New_Memory_Face
+143        0x00007B30    FT_New_Size
+144        0x0000C9A0    FT_OpenType_Free
+145        0x0000C8F0    FT_OpenType_Validate
+146        0x00009410    FT_Open_Face
+147        0x00004A10    FT_Outline_Check
+148        0x00004A90    FT_Outline_Copy
+149        0x00004590    FT_Outline_Decompose
+150        0x00004BF0    FT_Outline_Done
+151        0x00004B40    FT_Outline_Done_Internal
+152        0x00006C20    FT_Outline_Embolden
+153        0x0000DC40    FT_Outline_GetInsideBorder
+154        0x0000DC60    FT_Outline_GetOutsideBorder
+155        0x0000AC00    FT_Outline_Get_BBox
+156        0x00004E70    FT_Outline_Get_Bitmap
+157        0x00004C20    FT_Outline_Get_CBox
+158        0x00005870    FT_Outline_Get_Orientation
+159        0x000086F0    FT_Outline_New
+160        0x000085B0    FT_Outline_New_Internal
+161        0x00004DB0    FT_Outline_Render
+162        0x00004CF0    FT_Outline_Reverse
+163        0x00004FA0    FT_Outline_Transform
+164        0x00004CB0    FT_Outline_Translate
+165        0x0000A5B0    FT_QAlloc
+166        0x0000A650    FT_QRealloc
+167        0x00008360    FT_Raccess_Get_DataOffsets
+168        0x00006250    FT_Raccess_Get_HeaderInfo
+169        0x00005C20    FT_Raccess_Guess
+170        0x0000A600    FT_Realloc
+171        0x00002CE0    FT_Reference_Face
+172        0x00004360    FT_Reference_Library
+173        0x00008C30    FT_Remove_Module
+174        0x00004200    FT_Render_Glyph
+175        0x00004110    FT_Render_Glyph_Internal
+176        0x00003010    FT_Request_Metrics
+177        0x000033B0    FT_Request_Size
+178        0x00001E50    FT_RoundFix
+179        0x00003710    FT_Select_Charmap
+180        0x00002F60    FT_Select_Metrics
+181        0x00003350    FT_Select_Size
+182        0x00003450    FT_Set_Char_Size
+183        0x00003EF0    FT_Set_Charmap
+184        0x000043D0    FT_Set_Debug_Hook
+185        0x0000C870    FT_Set_MM_Blend_Coordinates
+186        0x0000C7F0    FT_Set_MM_Design_Coordinates
+187        0x000034D0    FT_Set_Pixel_Sizes
+188        0x00004030    FT_Set_Renderer
+189        0x00002C30    FT_Set_Transform
+190        0x0000C8B0    FT_Set_Var_Blend_Coordinates
+191        0x0000C830    FT_Set_Var_Design_Coordinates
+192        0x00003BB0    FT_Sfnt_Table_Info
+193        0x00006AA0    FT_Sin
+194        0x00001ED0    FT_Sqrt32
+195        0x00002620    FT_SqrtFixed
+196        0x00005B90    FT_Stream_Close
+197        0x00005E70    FT_Stream_EnterFrame
+198        0x00005FC0    FT_Stream_ExitFrame
+199        0x00005F80    FT_Stream_ExtractFrame
+200        0x00002A80    FT_Stream_Free
+201        0x00006000    FT_Stream_GetChar
+202        0x000060C0    FT_Stream_GetULong
+203        0x00006100    FT_Stream_GetULongLE
+204        0x00006080    FT_Stream_GetUOffset
+205        0x00006020    FT_Stream_GetUShort
+206        0x00006050    FT_Stream_GetUShortLE
+207        0x00007610    FT_Stream_New
+208        0x00001590    FT_Stream_Open
+209        0x0004D1A0    FT_Stream_OpenBzip2
+210        0x0004C1F0    FT_Stream_OpenGzip
+211        0x0004C8E0    FT_Stream_OpenLZW
+212        0x00005B60    FT_Stream_OpenMemory
+213        0x00005CF0    FT_Stream_Pos
+214        0x00005D90    FT_Stream_Read
+215        0x00005D00    FT_Stream_ReadAt
+216        0x00006140    FT_Stream_ReadChar
+217        0x00006840    FT_Stream_ReadFields
+218        0x00006530    FT_Stream_ReadULong
+219        0x00006790    FT_Stream_ReadULongLE
+220        0x00006490    FT_Stream_ReadUOffset
+221        0x000061C0    FT_Stream_ReadUShort
+222        0x00006400    FT_Stream_ReadUShortLE
+223        0x00005E30    FT_Stream_ReleaseFrame
+224        0x00005BB0    FT_Stream_Seek
+225        0x00005CC0    FT_Stream_Skip
+226        0x00005DC0    FT_Stream_TryRead
+227        0x0000F1B0    FT_Stroker_BeginSubPath
+228        0x0000DFA0    FT_Stroker_ConicTo
+229        0x0000E680    FT_Stroker_CubicTo
+230        0x0000DDC0    FT_Stroker_Done
+231        0x0000F220    FT_Stroker_EndSubPath
+232        0x0000F5C0    FT_Stroker_Export
+233        0x0000F4B0    FT_Stroker_ExportBorder
+234        0x0000F3F0    FT_Stroker_GetBorderCounts
+235        0x0000F450    FT_Stroker_GetCounts
+236        0x0000DEA0    FT_Stroker_LineTo
+237        0x0000DC80    FT_Stroker_New
+238        0x0000F610    FT_Stroker_ParseOutline
+239        0x0000DD90    FT_Stroker_Rewind
+240        0x0000DD30    FT_Stroker_Set
+241        0x00006AC0    FT_Tan
+242        0x000016D0    FT_Trace_Get_Count
+243        0x000016E0    FT_Trace_Get_Name
+244        0x0000C600    FT_TrueTypeGX_Free
+245        0x0000C5A0    FT_TrueTypeGX_Validate
+246        0x00006F60    FT_Vector_From_Polar
+247        0x00006E70    FT_Vector_Length
+248        0x00006F00    FT_Vector_Polarize
+249        0x00006B70    FT_Vector_Rotate
+250        0x00004ED0    FT_Vector_Transform
+251        0x00002570    FT_Vector_Transform_Scaled
+252        0x00006B40    FT_Vector_Unit
+253        0x0001A8A0    TT_New_Context
+254        0x00016F60    TT_RunIns
+255        0x0005B6A4    af_autofitter_service
+256        0x0005B6E0    af_cjk_script_class
+257        0x0005B720    af_dummy_script_class
+258        0x00042800    af_glyph_hints_dump_edges
+259        0x000427C0    af_glyph_hints_dump_points
+260        0x000427D0    af_glyph_hints_dump_segments
+261        0x000427E0    af_glyph_hints_get_num_segments
+262        0x000427F0    af_glyph_hints_get_segment_offset
+263        0x0005B6C0    af_indic_script_class
+264        0x0005B700    af_latin_script_class
+265        0x0005C894    afm_parser_funcs
+266        0x0005B680    autofit_module_class
+267        0x0005A460    bdf_cmap_class
+268        0x0005A3E0    bdf_driver_class
+269        0x00057A20    cff_cmap_encoding_class_rec
+270        0x000579E0    cff_cmap_unicode_class_rec
+271        0x00057A60    cff_driver_class
+272        0x00056340    ft_bitmap_glyph_class
+273        0x00002720    ft_corner_is_flat
+274        0x00002660    ft_corner_orientation
+275        0x000016C0    ft_debug_init
+276        0x000075A0    ft_glyphslot_alloc_bitmap
+277        0x00002AC0    ft_glyphslot_free_bitmap
+278        0x00002BA0    ft_glyphslot_set_bitmap
+279        0x0005C07C    ft_grays_raster
+280        0x0000A560    ft_highpow2
+281        0x0004CA80    ft_lzwstate_done
+282        0x0004C7F0    ft_lzwstate_init
+283        0x0004CBC0    ft_lzwstate_io
+284        0x0004C7B0    ft_lzwstate_reset
+285        0x00006FE0    ft_mem_alloc
+286        0x00008980    ft_mem_dup
+287        0x00008960    ft_mem_free
+288        0x00007C50    ft_mem_qalloc
+289        0x00007CA0    ft_mem_qrealloc
+290        0x00007D80    ft_mem_realloc
+291        0x00008A50    ft_mem_strcpyn
+292        0x00008A10    ft_mem_strdup
+293        0x000042E0    ft_module_get_service
+294        0x00056320    ft_outline_glyph_class
+295        0x0005BEE0    ft_raster1_renderer_class
+296        0x0005BE80    ft_raster5_renderer_class
+297        0x000029D0    ft_service_list_lookup
+298        0x0005BFE0    ft_smooth_lcd_renderer_class
+299        0x0005BF80    ft_smooth_lcdv_renderer_class
+300        0x0005C040    ft_smooth_renderer_class
+301        0x0005BF1C    ft_standard_raster
+302        0x00004450    ft_stub_set_char_sizes
+303        0x000044C0    ft_stub_set_pixel_sizes
+304        0x00002EF0    ft_synthesize_vertical_metrics
+305        0x00002A50    ft_validator_error
+306        0x00002A20    ft_validator_init
+307        0x00002A40    ft_validator_run
+308        0x0005C100    ftc_basic_image_cache_class
+309        0x0005C124    ftc_basic_image_family_class
+310        0x0005C0C0    ftc_basic_sbit_cache_class
+311        0x0005C0E4    ftc_basic_sbit_family_class
+312        0x0005C140    ftc_cmap_cache_class
+313        0x0005C160    ftc_face_list_class
+314        0x0004A9B0    ftc_node_destroy
+315        0x0005C174    ftc_size_list_class
+316        0x0005A080    pcf_cmap_class
+317        0x0005A000    pcf_driver_class
+318        0x000595C0    pfr_cmap_class_rec
+319        0x00059540    pfr_driver_class
+320        0x000595A8    pfr_metrics_service_rec
+321        0x00044D00    ps_hints_apply
+322        0x0005C8E0    ps_parser_funcs
+323        0x0005C914    ps_table_funcs
+324        0x0005C860    psaux_module_class
+325        0x0005BE20    pshinter_module_class
+326        0x0005CE80    psnames_module_class
+327        0x0005AF80    sfnt_module_class
+328        0x0005C8C0    t1_builder_funcs
+329        0x0005C884    t1_cmap_classes
+330        0x0005C7A0    t1_cmap_custom_class_rec
+331        0x0005C7E0    t1_cmap_expert_class_rec
+332        0x0005C820    t1_cmap_standard_class_rec
+333        0x0005C760    t1_cmap_unicode_class_rec
+334        0x0005C8A0    t1_decoder_funcs
+335        0x00056DC0    t1_driver_class
+336        0x00058AA0    t1cid_driver_class
+337        0x000597A0    t42_driver_class
+338        0x0005B1C0    tt_cmap0_class_rec
+339        0x0005B080    tt_cmap10_class_rec
+340        0x0005B040    tt_cmap12_class_rec
+341        0x0005B000    tt_cmap13_class_rec
+342        0x0005AFC0    tt_cmap14_class_rec
+343        0x0005B180    tt_cmap2_class_rec
+344        0x0005B140    tt_cmap4_class_rec
+345        0x0005B100    tt_cmap6_class_rec
+346        0x0005B0C0    tt_cmap8_class_rec
+347        0x000566A0    tt_default_graphics_state
+348        0x00056700    tt_driver_class
+349        0x00059CA0    winfnt_driver_class
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xC9C00    0x0   OriginalFirstThunk:            0x0       
+0xC9C00    0x0   Characteristics:               0x0       
+0xC9C04    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xC9C08    0x8   ForwarderChain:                0x0       
+0xC9C0C    0xC   Name:                          0x234078  
+0xC9C10    0x10  FirstThunk:                    0x234050  
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xC9C14    0x0   OriginalFirstThunk:            0x0       
+0xC9C14    0x0   Characteristics:               0x0       
+0xC9C18    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xC9C1C    0x8   ForwarderChain:                0x0       
+0xC9C20    0xC   Name:                          0x234085  
+0xC9C24    0x10  FirstThunk:                    0x234068  
+
+msvcrt.dll._iob Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xC9C28    0x0   OriginalFirstThunk:            0x0       
+0xC9C28    0x0   Characteristics:               0x0       
+0xC9C2C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xC9C30    0x8   ForwarderChain:                0x0       
+0xC9C34    0xC   Name:                          0x234090  
+0xC9C38    0x10  FirstThunk:                    0x234070  
+
+zlib1.dll.inflate Hint[0]
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0xC9A10    0x0   StartAddressOfRawData:         0x67CB3828
+0xC9A14    0x4   EndAddressOfRawData:           0x67CB382B
+0xC9A18    0x8   AddressOfIndex:                0x67AEC010
+0xC9A1C    0xC   AddressOfCallBacks:            0x67CB382B
+0xC9A20    0x10  SizeOfZeroFill:                0x0       
+0xC9A24    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0xCC558    0x0   VirtualAddress:                0x233000  
+0xCC55C    0x4   SizeOfBlock:                   0x18      
+    002335FDh HIGHLOW
+    002337F5h HIGHLOW
+    00233810h HIGHLOW
+    00233814h HIGHLOW
+    00233818h HIGHLOW
+    0023381Ch HIGHLOW
+    0023382Bh HIGHLOW
+    00233000h ABSOLUTE
+

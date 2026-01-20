@@ -1,0 +1,852 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F796D [Fri Oct  7 22:13:01 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x2D400   
+0x90       0xC   NumberOfSymbols:               0x1D8     
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0xD000    
+0xA0       0x8   SizeOfInitializedData:         0x7000    
+0xA4       0xC   SizeOfUninitializedData:       0x2B000   
+0xA8       0x10  AddressOfEntryPoint:           0x38460   
+0xAC       0x14  BaseOfCode:                    0x2C000   
+0xB0       0x18  BaseOfData:                    0x39000   
+0xB4       0x1C  ImageBase:                     0x6CA00000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x40000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x2B000   
+0x180      0x8   Misc_PhysicalAddress:          0x2B000   
+0x180      0x8   Misc_VirtualSize:              0x2B000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0xD000    
+0x1A8      0x8   Misc_PhysicalAddress:          0xD000    
+0x1A8      0x8   Misc_VirtualSize:              0xD000    
+0x1AC      0xC   VirtualAddress:                0x2C000   
+0x1B0      0x10  SizeOfRawData:                 0xC800    
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.899489 (Min=0.0, Max=8.0)
+MD5     hash: 77c9ef68bbf66ca3045adc57bfc3d41b
+SHA-1   hash: e847d33383b6f1871da26c67f6939e2ccd4747d4
+SHA-256 hash: 7ce9e7cf0941c562b8a19114a348f3d9551baba4375172fc29477cee76d7cc19
+SHA-512 hash: ff89940b833ed4647c84a15d6deb7f5f231f964f622dffcb528828f156aedda2a99df85bce8075a66333c5b7cfb7b26366f1e3b9a98ed27b89724c8b029a0574
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          UPX2
+0x1D0      0x8   Misc:                          0x7000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x7000    
+0x1D0      0x8   Misc_VirtualSize:              0x7000    
+0x1D4      0xC   VirtualAddress:                0x39000   
+0x1D8      0x10  SizeOfRawData:                 0x6200    
+0x1DC      0x14  PointerToRawData:              0xCA00    
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.588358 (Min=0.0, Max=8.0)
+MD5     hash: cc35499cc6499f3f513f2d7d9118841f
+SHA-1   hash: 2cdf5c8b9bbd45485a35519b5abe636bb0007879
+SHA-256 hash: b22bcf678581177282877cb9cf90f776b3dab5fb7a77791cb181f397f5b41c41
+SHA-512 hash: 7d647857afea027c52446e5645bb6b812c4d75298dfb003952a397468509e754b9f62f633747555ec049172b0a65af881f2c75379d78d57876d04a36a6db3d12
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x39254   
+0xFC       0x4   Size:                          0x5DB8    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x39000   
+0x104      0x4   Size:                          0x254     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x3F00C   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x38680   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0xCC54     0x0   Characteristics:               0x0       
+0xCC58     0x4   TimeDateStamp:                 0x4E8F796C [Fri Oct  7 22:13:00 2011 UTC]
+0xCC5C     0x8   MajorVersion:                  0x0       
+0xCC5E     0xA   MinorVersion:                  0x0       
+0xCC60     0xC   Name:                          0x3A6C2   
+0xCC64     0x10  Base:                          0x1       
+0xCC68     0x14  NumberOfFunctions:             0x207     
+0xCC6C     0x18  NumberOfNames:                 0x207     
+0xCC70     0x1C  AddressOfFunctions:            0x3927C   
+0xCC74     0x20  AddressOfNames:                0x39A98   
+0xCC78     0x24  AddressOfNameOrdinals:         0x3A2B4   
+
+Ordinal      RVA         Name
+1          0x000025A0    _Z13dest_new_gotoP16_PopplerDocumentP8LinkDest
+2          0x00007FC0    _Z17_poppler_page_newP16_PopplerDocumentP4Pagei
+3          0x0000C950    _Z18_poppler_annot_newP5Annot
+4          0x0000E710    _Z18_poppler_layer_newP16_PopplerDocumentP6_LayerP6_GList
+5          0x0000EC90    _Z18_poppler_media_newP14MediaRendition
+6          0x0000F2B0    _Z18_poppler_movie_newP5Movie
+7          0x000027B0    _Z19_poppler_action_newP16_PopplerDocumentP10LinkActionPKc
+8          0x000187F0    _Z20downscale_box_filterPjijjiittttS_i
+9          0x00003320    _Z22_poppler_dest_new_gotoP16_PopplerDocumentP8LinkDest
+10         0x0000C990    _Z23_poppler_annot_text_newP5Annot
+11         0x0000ACB0    _Z23_poppler_attachment_newP8FileSpec
+12         0x0000B1F0    _Z23_poppler_form_field_newP16_PopplerDocumentP10FormWidget
+13         0x0000CB40    _Z24_poppler_annot_movie_newP5Annot
+14         0x0000CBB0    _Z25_poppler_annot_screen_newP5Annot
+15         0x000052C0    _Z27_poppler_goo_string_to_utf8P9GooString
+16         0x0000CAC0    _Z28_poppler_annot_free_text_newP5Annot
+17         0x00006890    _Z28_poppler_document_get_layersP16_PopplerDocument
+18         0x0000CB00    _Z34_poppler_annot_file_attachment_newP5Annot
+19         0x000070A0    _Z34_poppler_convert_pdf_date_to_gtimeP9GooStringPl
+20         0x00006840    _Z35_poppler_document_get_layer_rbgroupP16_PopplerDocumentP6_Layer
+21         0x000129D0    _ZN10CairoImage8setImageEP14_cairo_surface
+22         0x00012860    _ZN10CairoImageC1Edddd
+23         0x00012860    _ZN10CairoImageC2Edddd
+24         0x00012890    _ZN10CairoImageD1Ev
+25         0x00012890    _ZN10CairoImageD2Ev
+26         0x00011BE0    _ZN14CairoOutputDev10updateFontEP8GfxState
+27         0x0001A340    _ZN14CairoOutputDev10upsideDownEv
+28         0x00010A70    _ZN14CairoOutputDev11beginStringEP8GfxStateP9GooString
+29         0x00010750    _ZN14CairoOutputDev11endMaskClipEP8GfxState
+30         0x00016950    _ZN14CairoOutputDev11setMimeDataEP6StreamP6ObjectP14_cairo_surface
+31         0x00013DA0    _ZN14CairoOutputDev11setSoftMaskEP8GfxStatePdbP8FunctionP8GfxColor
+32         0x00012CB0    _ZN14CairoOutputDev11setTextPageEP8TextPage
+33         0x0001A350    _ZN14CairoOutputDev11useDrawCharEv
+34         0x00010980    _ZN14CairoOutputDev12endType3CharEP8GfxState
+35         0x000109B0    _ZN14CairoOutputDev12restoreStateEP8GfxState
+36         0x00010770    _ZN14CairoOutputDev13clearSoftMaskEP8GfxState
+37         0x000164E0    _ZN14CairoOutputDev13drawImageMaskEP8GfxStateP6ObjectP6Streamiibbb
+38         0x00010D50    _ZN14CairoOutputDev13endTextObjectEP8GfxState
+39         0x00014390    _ZN14CairoOutputDev13getScaledSizeEiiPiS0_
+40         0x000168C0    _ZN14CairoOutputDev13getStreamDataEP6StreamPPcPi
+41         0x00011FC0    _ZN14CairoOutputDev13setDefaultCTMEPd
+42         0x000116B0    _ZN14CairoOutputDev13updateLineCapEP8GfxState
+43         0x00010F00    _ZN14CairoOutputDev14beginType3CharEP8GfxStateddddjPji
+44         0x00010690    _ZN14CairoOutputDev14updateFlatnessEP8GfxState
+45         0x000115E0    _ZN14CairoOutputDev14updateLineDashEP8GfxState
+46         0x00011750    _ZN14CairoOutputDev14updateLineJoinEP8GfxState
+47         0x0001A360    _ZN14CairoOutputDev14useShadedFillsEi
+48         0x00011920    _ZN14CairoOutputDev15axialShadedFillEP8GfxStateP15GfxAxialShadingdd
+49         0x00012400    _ZN14CairoOutputDev15beginTextObjectEP8GfxState
+50         0x00014800    _ZN14CairoOutputDev15drawMaskedImageEP8GfxStateP6ObjectP6StreamiiP16GfxImageColorMapbS5_iibb
+51         0x00010B40    _ZN14CairoOutputDev15updateBlendModeEP8GfxState
+52         0x000107A0    _ZN14CairoOutputDev15updateFillColorEP8GfxState
+53         0x00011E40    _ZN14CairoOutputDev15updateLineWidthEP8GfxState
+54         0x00013140    _ZN14CairoOutputDev16clipToStrokePathEP8GfxState
+55         0x00014610    _ZN14CairoOutputDev16downscaleSurfaceEP14_cairo_surface
+56         0x00010CF0    _ZN14CairoOutputDev16endMarkedContentEP8GfxState
+57         0x000117F0    _ZN14CairoOutputDev16radialShadedFillEP8GfxStateP16GfxRadialShadingdd
+58         0x00011660    _ZN14CairoOutputDev16updateMiterLimitEP8GfxState
+59         0x0001A370    _ZN14CairoOutputDev16useFillColorStopEv
+60         0x00012EF0    _ZN14CairoOutputDev17alignStrokeCoordsEPdS0_
+61         0x0001A380    _ZN14CairoOutputDev17deviceHasTextClipEP8GfxState
+62         0x0001A3A0    _ZN14CairoOutputDev17fillMaskCSPatternEP8GfxState
+63         0x00013710    _ZN14CairoOutputDev17tilingPatternFillEP8GfxStateP7CatalogP6ObjectPdiiP4DictS6_S6_iiiidd
+64         0x00012300    _ZN14CairoOutputDev17updateFillOpacityEP8GfxState
+65         0x00010850    _ZN14CairoOutputDev17updateStrokeColorEP8GfxState
+66         0x00010D20    _ZN14CairoOutputDev18beginMarkedContentEPcP4Dict
+67         0x00024134    _ZN14CairoOutputDev18ft_lib_initializedE
+68         0x00017340    _ZN14CairoOutputDev19drawSoftMaskedImageEP8GfxStateP6ObjectP6StreamiiP16GfxImageColorMapbS5_iiS7_b
+69         0x00014750    _ZN14CairoOutputDev19getFilterForSurfaceEP14_cairo_surfaceb
+70         0x0001A3C0    _ZN14CairoOutputDev19interpretType3CharsEv
+71         0x00011DC0    _ZN14CairoOutputDev19updateFillColorStopEP8GfxStated
+72         0x00012380    _ZN14CairoOutputDev19updateStrokeOpacityEP8GfxState
+73         0x00015090    _ZN14CairoOutputDev20drawImageMaskRegularEP8GfxStateP6ObjectP6Streamiibbb
+74         0x00012290    _ZN14CairoOutputDev20endTransparencyGroupEP8GfxState
+75         0x000135A0    _ZN14CairoOutputDev20fillToStrokePathClipEv
+76         0x00013D30    _ZN14CairoOutputDev20popTransparencyGroupEv
+77         0x0001A3D0    _ZN14CairoOutputDev20supportTextCSPatternEP8GfxState
+78         0x0001A3F0    _ZN14CairoOutputDev20useTilingPatternFillEv
+79         0x00012540    _ZN14CairoOutputDev22beginTransparencyGroupEP8GfxStatePdP13GfxColorSpacebbb
+80         0x000155D0    _ZN14CairoOutputDev22drawImageMaskPrescaledEP8GfxStateP6ObjectP6Streamiibbb
+81         0x00014220    _ZN14CairoOutputDev22paintTransparencyGroupEP8GfxStatePd
+82         0x000106A0    _ZN14CairoOutputDev24axialShadedSupportExtendEP8GfxStateP15GfxAxialShading
+83         0x000106C0    _ZN14CairoOutputDev25radialShadedSupportExtendEP8GfxStateP16GfxRadialShading
+84         0x00013330    _ZN14CairoOutputDev4clipEP8GfxState
+85         0x00013BF0    _ZN14CairoOutputDev4fillEP8GfxState
+86         0x00012F70    _ZN14CairoOutputDev6doPathEP6_cairoP8GfxStateP7GfxPath
+87         0x00013280    _ZN14CairoOutputDev6eoClipEP8GfxState
+88         0x000133E0    _ZN14CairoOutputDev6eoFillEP8GfxState
+89         0x00024138    _ZN14CairoOutputDev6ft_libE
+90         0x000134A0    _ZN14CairoOutputDev6strokeEP8GfxState
+91         0x00012040    _ZN14CairoOutputDev7endPageEv
+92         0x000106E0    _ZN14CairoOutputDev7type3D0EP8GfxStatedd
+93         0x00010700    _ZN14CairoOutputDev7type3D1EP8GfxStatedddddd
+94         0x000112D0    _ZN14CairoOutputDev8drawCharEP8GfxStateddddddjiPji
+95         0x00012BF0    _ZN14CairoOutputDev8setCairoEP6_cairo
+96         0x00012DE0    _ZN14CairoOutputDev8startDocEP4XRefP7CatalogP15CairoFontEngine
+97         0x00016A80    _ZN14CairoOutputDev9drawImageEP8GfxStateP6ObjectP6StreamiiP16GfxImageColorMapbPib
+98         0x00010FE0    _ZN14CairoOutputDev9endStringEP8GfxState
+99         0x00010910    _ZN14CairoOutputDev9saveStateEP8GfxState
+100        0x00012080    _ZN14CairoOutputDev9startPageEiP8GfxState
+101        0x00011A00    _ZN14CairoOutputDev9updateAllEP8GfxState
+102        0x00011AD0    _ZN14CairoOutputDev9updateCTMEP8GfxStatedddddd
+103        0x00012A00    _ZN14CairoOutputDevC1Ev
+104        0x00012A00    _ZN14CairoOutputDevC2Ev
+105        0x00012270    _ZN14CairoOutputDevD0Ev
+106        0x000120F0    _ZN14CairoOutputDevD1Ev
+107        0x000120F0    _ZN14CairoOutputDevD2Ev
+108        0x00010320    _ZN14CairoType3Font6createEP7GfxFontP4XRefP7CatalogP15CairoFontEngineb
+109        0x0000F530    _ZN14CairoType3Font7matchesER3Refb
+110        0x00010490    _ZN14CairoType3FontC1E3RefP4XRefP7CatalogP16_cairo_font_facePtjb
+111        0x00010490    _ZN14CairoType3FontC2E3RefP4XRefP7CatalogP16_cairo_font_facePtjb
+112        0x0000FA70    _ZN14CairoType3FontD0Ev
+113        0x0000FA50    _ZN14CairoType3FontD1Ev
+114        0x0000FA50    _ZN14CairoType3FontD2Ev
+115        0x00010590    _ZN15CairoFontEngine7getFontEP7GfxFontP4XRefP7Catalogb
+116        0x000104E0    _ZN15CairoFontEngineC1EP14FT_LibraryRec_
+117        0x000104E0    _ZN15CairoFontEngineC2EP14FT_LibraryRec_
+118        0x00010560    _ZN15CairoFontEngineD1Ev
+119        0x00010560    _ZN15CairoFontEngineD2Ev
+120        0x0000FE10    _ZN17CairoFreeTypeFont6createEP7GfxFontP4XRefP14FT_LibraryRec_b
+121        0x0000FDD0    _ZN17CairoFreeTypeFontC1E3RefP16_cairo_font_facePtjb
+122        0x0000FDD0    _ZN17CairoFreeTypeFontC2E3RefP16_cairo_font_facePtjb
+123        0x0000FAC0    _ZN17CairoFreeTypeFontD0Ev
+124        0x0000FAA0    _ZN17CairoFreeTypeFontD1Ev
+125        0x0000FAA0    _ZN17CairoFreeTypeFontD2Ev
+126        0x0001A400    _ZN19CairoImageOutputDev10updateFontEP8GfxState
+127        0x0001A410    _ZN19CairoImageOutputDev10upsideDownEv
+128        0x0001A420    _ZN19CairoImageOutputDev11needNonTextEv
+129        0x0001A430    _ZN19CairoImageOutputDev11setSoftMaskEP8GfxStatePdbP8FunctionP8GfxColor
+130        0x0001A440    _ZN19CairoImageOutputDev11useDrawCharEv
+131        0x0001A450    _ZN19CairoImageOutputDev12restoreStateEP8GfxState
+132        0x0001A460    _ZN19CairoImageOutputDev13clearSoftMaskEP8GfxState
+133        0x00018390    _ZN19CairoImageOutputDev13drawImageMaskEP8GfxStateP6ObjectP6Streamiibbb
+134        0x0001A470    _ZN19CairoImageOutputDev13setDefaultCTMEPd
+135        0x0001A480    _ZN19CairoImageOutputDev13updateLineCapEP8GfxState
+136        0x0001A490    _ZN19CairoImageOutputDev14updateFlatnessEP8GfxState
+137        0x0001A4A0    _ZN19CairoImageOutputDev14updateLineDashEP8GfxState
+138        0x0001A4B0    _ZN19CairoImageOutputDev14updateLineJoinEP8GfxState
+139        0x0001A4C0    _ZN19CairoImageOutputDev14useShadedFillsEi
+140        0x0001A4D0    _ZN19CairoImageOutputDev15axialShadedFillEP8GfxStateP15GfxAxialShadingdd
+141        0x00017E50    _ZN19CairoImageOutputDev15drawMaskedImageEP8GfxStateP6ObjectP6StreamiiP16GfxImageColorMapbS5_iibb
+142        0x0001A4E0    _ZN19CairoImageOutputDev15updateBlendModeEP8GfxState
+143        0x0001A4F0    _ZN19CairoImageOutputDev15updateFillColorEP8GfxState
+144        0x0001A500    _ZN19CairoImageOutputDev15updateLineWidthEP8GfxState
+145        0x0001A510    _ZN19CairoImageOutputDev16radialShadedFillEP8GfxStateP16GfxRadialShadingdd
+146        0x0001A520    _ZN19CairoImageOutputDev16updateMiterLimitEP8GfxState
+147        0x0001A530    _ZN19CairoImageOutputDev16useFillColorStopEv
+148        0x0001A540    _ZN19CairoImageOutputDev17tilingPatternFillEP8GfxStateP7CatalogP6ObjectPdiiP4DictS6_S6_iiiidd
+149        0x0001A550    _ZN19CairoImageOutputDev17updateFillOpacityEP8GfxState
+150        0x0001A560    _ZN19CairoImageOutputDev17updateStrokeColorEP8GfxState
+151        0x00018020    _ZN19CairoImageOutputDev19drawSoftMaskedImageEP8GfxStateP6ObjectP6StreamiiP16GfxImageColorMapbS5_iiS7_b
+152        0x0001A570    _ZN19CairoImageOutputDev19interpretType3CharsEv
+153        0x0001A580    _ZN19CairoImageOutputDev19updateStrokeOpacityEP8GfxState
+154        0x0001A590    _ZN19CairoImageOutputDev20endTransparencyGroupEP8GfxState
+155        0x0001A5A0    _ZN19CairoImageOutputDev20useTilingPatternFillEv
+156        0x0001A5B0    _ZN19CairoImageOutputDev22beginTransparencyGroupEP8GfxStatePdP13GfxColorSpacebbb
+157        0x0001A5C0    _ZN19CairoImageOutputDev22paintTransparencyGroupEP8GfxStatePd
+158        0x0001A5D0    _ZN19CairoImageOutputDev4clipEP8GfxState
+159        0x0001A5E0    _ZN19CairoImageOutputDev4fillEP8GfxState
+160        0x0001A5F0    _ZN19CairoImageOutputDev6eoClipEP8GfxState
+161        0x0001A600    _ZN19CairoImageOutputDev6eoFillEP8GfxState
+162        0x0001A610    _ZN19CairoImageOutputDev6strokeEP8GfxState
+163        0x000181E0    _ZN19CairoImageOutputDev9drawImageEP8GfxStateP6ObjectP6StreamiiP16GfxImageColorMapbPib
+164        0x00017DE0    _ZN19CairoImageOutputDev9saveImageEP10CairoImage
+165        0x0001A620    _ZN19CairoImageOutputDev9saveStateEP8GfxState
+166        0x0001A630    _ZN19CairoImageOutputDev9updateAllEP8GfxState
+167        0x0001A640    _ZN19CairoImageOutputDev9updateCTMEP8GfxStatedddddd
+168        0x00017D90    _ZN19CairoImageOutputDevC1Ev
+169        0x00017D90    _ZN19CairoImageOutputDevC2Ev
+170        0x000129B0    _ZN19CairoImageOutputDevD0Ev
+171        0x000128B0    _ZN19CairoImageOutputDevD1Ev
+172        0x000128B0    _ZN19CairoImageOutputDevD2Ev
+173        0x0000FC50    _ZN9CairoFont11getFontFaceEv
+174        0x0000FC80    _ZN9CairoFont25getSubstitutionCorrectionEP7GfxFont
+175        0x0000F500    _ZN9CairoFont7matchesER3Refb
+176        0x0000FC60    _ZN9CairoFont8getGlyphEjPji
+177        0x0000FC10    _ZN9CairoFontC1E3RefP16_cairo_font_facePtjbb
+178        0x0000FC10    _ZN9CairoFontC2E3RefP16_cairo_font_facePtjbb
+179        0x0000FAF0    _ZN9CairoFontD0Ev
+180        0x0000FA20    _ZN9CairoFontD1Ev
+181        0x0000FA20    _ZN9CairoFontD2Ev
+182        0x0001A650    _ZN9OutputDev10drawStringEP8GfxStateP9GooString
+183        0x0001A660    _ZN9OutputDev10updateRiseEP8GfxState
+184        0x0001A670    _ZN9OutputDev11endStringOpEP8GfxState
+185        0x0001A680    _ZN9OutputDev11needNonTextEv
+186        0x0001A690    _ZN9OutputDev11processLinkEP9AnnotLinkP7Catalog
+187        0x0001A6A0    _ZN9OutputDev11useDrawFormEv
+188        0x0001A6B0    _ZN9OutputDev12updateRenderEP8GfxState
+189        0x0001A6C0    _ZN9OutputDev13beginStringOpEP8GfxState
+190        0x0001A6D0    _ZN9OutputDev13updateTextMatEP8GfxState
+191        0x0001A6E0    _ZN9OutputDev13updateTextPosEP8GfxState
+192        0x0001A6F0    _ZN9OutputDev14checkPageSliceEP4PageddibbiiiibP7CatalogPFbPvES4_
+193        0x0001A700    _ZN9OutputDev14getProfileHashEv
+194        0x0001A710    _ZN9OutputDev14updateTransferEP8GfxState
+195        0x0001A720    _ZN9OutputDev15updateCharSpaceEP8GfxState
+196        0x0001A730    _ZN9OutputDev15updateTextShiftEP8GfxStated
+197        0x0001A740    _ZN9OutputDev15updateWordSpaceEP8GfxState
+198        0x0001A750    _ZN9OutputDev18functionShadedFillEP8GfxStateP18GfxFunctionShading
+199        0x0001A760    _ZN9OutputDev18getVectorAntialiasEv
+200        0x0001A770    _ZN9OutputDev18setVectorAntialiasEb
+201        0x0001A780    _ZN9OutputDev18updateAlphaIsShapeEP8GfxState
+202        0x0001A790    _ZN9OutputDev18updateHorizScalingEP8GfxState
+203        0x0001A7A0    _ZN9OutputDev18updateStrokeAdjustEP8GfxState
+204        0x0001A7B0    _ZN9OutputDev18updateTextKnockoutEP8GfxState
+205        0x0001A7C0    _ZN9OutputDev19patchMeshShadedFillEP8GfxStateP19GfxPatchMeshShading
+206        0x0001A7D0    _ZN9OutputDev19updateFillOverprintEP8GfxState
+207        0x0001A7E0    _ZN9OutputDev19updateOverprintModeEP8GfxState
+208        0x0001A7F0    _ZN9OutputDev20updateFillColorSpaceEP8GfxState
+209        0x0001A800    _ZN9OutputDev21updateStrokeOverprintEP8GfxState
+210        0x0001A810    _ZN9OutputDev22updateStrokeColorSpaceEP8GfxState
+211        0x0001A820    _ZN9OutputDev25gouraudTriangleShadedFillEP8GfxStateP25GfxGouraudTriangleShading
+212        0x0001A830    _ZN9OutputDev4dumpEv
+213        0x0001A840    _ZN9OutputDev8drawFormE3Ref
+214        0x0001A850    _ZN9OutputDev9psXObjectEP6StreamS1_
+215        0x00022A84    _ZTI10LinkAction
+216        0x00022A8C    _ZTI10LinkLaunch
+217        0x00022A98    _ZTI12LinkOCGState
+218        0x00022AA4    _ZTI13LinkRendition
+219        0x00022AB0    _ZTI14CairoOutputDev
+220        0x00022ABC    _ZTI14CairoType3Font
+221        0x00022AC8    _ZTI14LinkJavaScript
+222        0x00022AD4    _ZTI17CairoFreeTypeFont
+223        0x00022AE0    _ZTI19CairoImageOutputDev
+224        0x00022AEC    _ZTI7LinkURI
+225        0x00022AF8    _ZTI8LinkGoTo
+226        0x00022B04    _ZTI9CairoFont
+227        0x00022B0C    _ZTI9LinkGoToR
+228        0x00022B18    _ZTI9LinkMovie
+229        0x00022B24    _ZTI9LinkNamed
+230        0x00022B30    _ZTI9OutputDev
+231        0x00022B38    _ZTS10LinkAction
+232        0x00022B48    _ZTS10LinkLaunch
+233        0x00022B58    _ZTS12LinkOCGState
+234        0x00022B68    _ZTS13LinkRendition
+235        0x00022B78    _ZTS14CairoOutputDev
+236        0x00022B8C    _ZTS14CairoType3Font
+237        0x00022BA0    _ZTS14LinkJavaScript
+238        0x00022BB4    _ZTS17CairoFreeTypeFont
+239        0x00022BC8    _ZTS19CairoImageOutputDev
+240        0x00022BE0    _ZTS7LinkURI
+241        0x00022BEC    _ZTS8LinkGoTo
+242        0x00022BF8    _ZTS9CairoFont
+243        0x00022C04    _ZTS9LinkGoToR
+244        0x00022C10    _ZTS9LinkMovie
+245        0x00022C1C    _ZTS9LinkNamed
+246        0x00022C28    _ZTS9OutputDev
+247        0x00022C40    _ZTV14CairoOutputDev
+248        0x00022E00    _ZTV14CairoType3Font
+249        0x00022E18    _ZTV17CairoFreeTypeFont
+250        0x00022E40    _ZTV19CairoImageOutputDev
+251        0x00023000    _ZTV9CairoFont
+252        0x0002D9B0    _nm___ZTV9OutputDev
+253        0x0002D9CC    _nm__globalParams
+254        0x0002DA18    _nm__pdfDocEncoding
+255        0x00002190    poppler_action_copy
+256        0x000023D0    poppler_action_free
+257        0x00002530    poppler_action_get_type
+258        0x000015E0    poppler_action_layer_action_get_type
+259        0x00001570    poppler_action_movie_operation_get_type
+260        0x00001490    poppler_action_type_get_type
+261        0x0000C350    poppler_annot_callout_line_copy
+262        0x0000C1F0    poppler_annot_callout_line_free
+263        0x0000E480    poppler_annot_callout_line_get_type
+264        0x0000E4F0    poppler_annot_callout_line_new
+265        0x00001B90    poppler_annot_external_data_type_get_type
+266        0x0000E2A0    poppler_annot_file_attachment_get_attachment
+267        0x0000E400    poppler_annot_file_attachment_get_name
+268        0x0000C6B0    poppler_annot_file_attachment_get_type
+269        0x00001AB0    poppler_annot_flag_get_type
+270        0x0000E1F0    poppler_annot_free_text_get_callout_line
+271        0x0000E140    poppler_annot_free_text_get_quadding
+272        0x0000C610    poppler_annot_free_text_get_type
+273        0x00001C70    poppler_annot_free_text_quadding_get_type
+274        0x0000CC40    poppler_annot_get_annot_type
+275        0x0000D110    poppler_annot_get_color
+276        0x0000CDB0    poppler_annot_get_contents
+277        0x0000D0B0    poppler_annot_get_flags
+278        0x0000D040    poppler_annot_get_modified
+279        0x0000CFD0    poppler_annot_get_name
+280        0x0000D350    poppler_annot_get_page_index
+281        0x0000C3F0    poppler_annot_get_type
+282        0x00007930    poppler_annot_mapping_copy
+283        0x00007810    poppler_annot_mapping_free
+284        0x0000A1B0    poppler_annot_mapping_get_type
+285        0x0000A220    poppler_annot_mapping_new
+286        0x0000DAD0    poppler_annot_markup_get_date
+287        0x0000DCA0    poppler_annot_markup_get_external_data
+288        0x0000D3C0    poppler_annot_markup_get_label
+289        0x0000D9D0    poppler_annot_markup_get_opacity
+290        0x0000D7E0    poppler_annot_markup_get_popup_is_open
+291        0x0000D900    poppler_annot_markup_get_popup_rectangle
+292        0x0000DC00    poppler_annot_markup_get_reply_to
+293        0x0000DB80    poppler_annot_markup_get_subject
+294        0x0000C4D0    poppler_annot_markup_get_type
+295        0x0000D600    poppler_annot_markup_has_popup
+296        0x00001B20    poppler_annot_markup_reply_type_get_type
+297        0x0000D440    poppler_annot_markup_set_label
+298        0x0000DA50    poppler_annot_markup_set_opacity
+299        0x0000D680    poppler_annot_markup_set_popup
+300        0x0000D860    poppler_annot_markup_set_popup_is_open
+301        0x0000E590    poppler_annot_movie_get_movie
+302        0x0000E510    poppler_annot_movie_get_title
+303        0x0000C750    poppler_annot_movie_get_type
+304        0x0000E5A0    poppler_annot_screen_get_action
+305        0x0000C850    poppler_annot_screen_get_type
+306        0x0000D250    poppler_annot_set_color
+307        0x0000CE20    poppler_annot_set_contents
+308        0x0000DE50    poppler_annot_text_get_icon
+309        0x0000DD50    poppler_annot_text_get_is_open
+310        0x0000E030    poppler_annot_text_get_state
+311        0x0000C570    poppler_annot_text_get_type
+312        0x0000C9D0    poppler_annot_text_new
+313        0x0000DED0    poppler_annot_text_set_icon
+314        0x0000DDD0    poppler_annot_text_set_is_open
+315        0x00001C00    poppler_annot_text_state_get_type
+316        0x00001A40    poppler_annot_type_get_type
+317        0x0000ABC0    poppler_attachment_get_type
+318        0x0000AF20    poppler_attachment_save
+319        0x0000ADF0    poppler_attachment_save_to_callback
+320        0x00001FF0    poppler_backend_get_type
+321        0x000077E0    poppler_color_copy
+322        0x000079D0    poppler_color_free
+323        0x00009600    poppler_color_get_type
+324        0x00009670    poppler_color_new
+325        0x00003340    poppler_date_parse
+326        0x00002150    poppler_dest_copy
+327        0x00002390    poppler_dest_free
+328        0x000024C0    poppler_dest_get_type
+329        0x00001500    poppler_dest_type_get_type
+330        0x00005120    poppler_document_find_dest
+331        0x00005000    poppler_document_get_attachments
+332        0x00005800    poppler_document_get_author
+333        0x000072A0    poppler_document_get_creation_date
+334        0x000059E0    poppler_document_get_creator
+335        0x00007020    poppler_document_get_form_field
+336        0x00004B30    poppler_document_get_id
+337        0x00005940    poppler_document_get_keywords
+338        0x00005E10    poppler_document_get_metadata
+339        0x000071F0    poppler_document_get_modification_date
+340        0x00004F10    poppler_document_get_n_attachments
+341        0x00004D30    poppler_document_get_n_pages
+342        0x00004DA0    poppler_document_get_page
+343        0x00004E20    poppler_document_get_page_by_label
+344        0x00005B90    poppler_document_get_page_layout
+345        0x00005C20    poppler_document_get_page_mode
+346        0x000056D0    poppler_document_get_pdf_version
+347        0x00005620    poppler_document_get_pdf_version_string
+348        0x00005CB0    poppler_document_get_permissions
+349        0x00005A80    poppler_document_get_producer
+350        0x000058A0    poppler_document_get_subject
+351        0x00005760    poppler_document_get_title
+352        0x00003F10    poppler_document_get_type
+353        0x00004F90    poppler_document_has_attachments
+354        0x00005B20    poppler_document_is_linearized
+355        0x000045F0    poppler_document_new_from_data
+356        0x000042D0    poppler_document_new_from_file
+357        0x000047F0    poppler_document_save
+358        0x00004990    poppler_document_save_a_copy
+359        0x00001CE0    poppler_error_get_type
+360        0x0000F4B0    poppler_error_quark
+361        0x00006800    poppler_font_info_free
+362        0x00006530    poppler_font_info_get_type
+363        0x00006610    poppler_font_info_new
+364        0x00006760    poppler_font_info_scan
+365        0x00001730    poppler_font_type_get_type
+366        0x000035B0    poppler_fonts_iter_copy
+367        0x00003540    poppler_fonts_iter_free
+368        0x00006430    poppler_fonts_iter_get_file_name
+369        0x00006460    poppler_fonts_iter_get_font_type
+370        0x000063B0    poppler_fonts_iter_get_full_name
+371        0x000063E0    poppler_fonts_iter_get_name
+372        0x00006340    poppler_fonts_iter_get_type
+373        0x000064A0    poppler_fonts_iter_is_embedded
+374        0x000064C0    poppler_fonts_iter_is_subset
+375        0x000064E0    poppler_fonts_iter_next
+376        0x000018F0    poppler_form_button_type_get_type
+377        0x000019D0    poppler_form_choice_type_get_type
+378        0x0000B500    poppler_form_field_button_get_button_type
+379        0x0000B5A0    poppler_form_field_button_get_state
+380        0x0000B5E0    poppler_form_field_button_set_state
+381        0x0000BBE0    poppler_form_field_choice_can_select_multiple
+382        0x0000BC70    poppler_form_field_choice_commit_on_change
+383        0x0000BC20    poppler_form_field_choice_do_spell_check
+384        0x0000BB50    poppler_form_field_choice_get_choice_type
+385        0x0000BCF0    poppler_form_field_choice_get_item
+386        0x0000BCB0    poppler_form_field_choice_get_n_items
+387        0x0000C130    poppler_form_field_choice_get_text
+388        0x0000BBA0    poppler_form_field_choice_is_editable
+389        0x0000BD90    poppler_form_field_choice_is_item_selected
+390        0x0000BE30    poppler_form_field_choice_select_item
+391        0x0000BFB0    poppler_form_field_choice_set_text
+392        0x0000BF10    poppler_form_field_choice_toggle_item
+393        0x0000BED0    poppler_form_field_choice_unselect_all
+394        0x0000B4B0    poppler_form_field_get_action
+395        0x0000B2D0    poppler_form_field_get_field_type
+396        0x0000B3D0    poppler_form_field_get_font_size
+397        0x0000B370    poppler_form_field_get_id
+398        0x0000B6B0    poppler_form_field_get_mapping_name
+399        0x0000B730    poppler_form_field_get_name
+400        0x0000B630    poppler_form_field_get_partial_name
+401        0x0000B0E0    poppler_form_field_get_type
+402        0x0000B440    poppler_form_field_is_read_only
+403        0x00007970    poppler_form_field_mapping_copy
+404        0x00007850    poppler_form_field_mapping_free
+405        0x00009FD0    poppler_form_field_mapping_get_type
+406        0x0000A040    poppler_form_field_mapping_new
+407        0x0000BA80    poppler_form_field_text_do_scroll
+408        0x0000BA30    poppler_form_field_text_do_spell_check
+409        0x0000B9F0    poppler_form_field_text_get_max_len
+410        0x0000B820    poppler_form_field_text_get_text
+411        0x0000B7B0    poppler_form_field_text_get_text_type
+412        0x0000BB10    poppler_form_field_text_is_password
+413        0x0000BAD0    poppler_form_field_text_is_rich_text
+414        0x0000B870    poppler_form_field_text_set_text
+415        0x00001880    poppler_form_field_type_get_type
+416        0x00001960    poppler_form_text_type_get_type
+417        0x0000F4E0    poppler_get_backend
+418        0x0000F4F0    poppler_get_version
+419        0x000078D0    poppler_image_mapping_copy
+420        0x00007890    poppler_image_mapping_free
+421        0x00009A40    poppler_image_mapping_get_type
+422        0x00009AB0    poppler_image_mapping_new
+423        0x00003EB0    poppler_index_iter_copy
+424        0x00003510    poppler_index_iter_free
+425        0x00006080    poppler_index_iter_get_action
+426        0x00005F90    poppler_index_iter_get_child
+427        0x00005EB0    poppler_index_iter_get_type
+428        0x00006060    poppler_index_iter_is_open
+429        0x00005F20    poppler_index_iter_new
+430        0x000062F0    poppler_index_iter_next
+431        0x0000EA40    poppler_layer_get_radio_button_group_id
+432        0x0000E800    poppler_layer_get_title
+433        0x0000E600    poppler_layer_get_type
+434        0x0000E960    poppler_layer_hide
+435        0x0000E9D0    poppler_layer_is_parent
+436        0x0000E860    poppler_layer_is_visible
+437        0x0000E8D0    poppler_layer_show
+438        0x00003E50    poppler_layers_iter_copy
+439        0x000034E0    poppler_layers_iter_free
+440        0x00006B30    poppler_layers_iter_get_child
+441        0x00006C70    poppler_layers_iter_get_layer
+442        0x00006C10    poppler_layers_iter_get_title
+443        0x00006A70    poppler_layers_iter_get_type
+444        0x00006AE0    poppler_layers_iter_new
+445        0x00006CF0    poppler_layers_iter_next
+446        0x00007A60    poppler_link_mapping_copy
+447        0x00007A20    poppler_link_mapping_free
+448        0x00009690    poppler_link_mapping_get_type
+449        0x00009700    poppler_link_mapping_new
+450        0x0000ED40    poppler_media_get_filename
+451        0x0000EE40    poppler_media_get_mime_type
+452        0x0000EB80    poppler_media_get_type
+453        0x0000EDD0    poppler_media_is_embedded
+454        0x0000EFD0    poppler_media_save
+455        0x0000EEA0    poppler_media_save_to_callback
+456        0x0000F390    poppler_movie_get_filename
+457        0x0000F1C0    poppler_movie_get_type
+458        0x0000F3F0    poppler_movie_need_poster
+459        0x0000F450    poppler_movie_show_controls
+460        0x00001D50    poppler_orientation_get_type
+461        0x00009180    poppler_page_add_annot
+462        0x000092E0    poppler_page_find_text
+463        0x00009140    poppler_page_free_annot_mapping
+464        0x00009100    poppler_page_free_form_field_mapping
+465        0x00008DF0    poppler_page_free_image_mapping
+466        0x000090C0    poppler_page_free_link_mapping
+467        0x0000A6C0    poppler_page_free_text_attributes
+468        0x0000A240    poppler_page_get_annot_mapping
+469        0x0000A4A0    poppler_page_get_crop_box
+470        0x00008380    poppler_page_get_duration
+471        0x0000A060    poppler_page_get_form_field_mapping
+472        0x00008D20    poppler_page_get_image
+473        0x00009AD0    poppler_page_get_image_mapping
+474        0x00008130    poppler_page_get_index
+475        0x00008190    poppler_page_get_label
+476        0x00009720    poppler_page_get_link_mapping
+477        0x00008A30    poppler_page_get_selected_region
+478        0x00008B60    poppler_page_get_selected_text
+479        0x00009480    poppler_page_get_selection_region
+480        0x00008060    poppler_page_get_size
+481        0x00008C80    poppler_page_get_text
+482        0x0000A700    poppler_page_get_text_attributes
+483        0x0000A4D0    poppler_page_get_text_layout
+484        0x00008600    poppler_page_get_thumbnail
+485        0x00008870    poppler_page_get_thumbnail_size
+486        0x00009CC0    poppler_page_get_transition
+487        0x00007D60    poppler_page_get_type
+488        0x00001650    poppler_page_layout_get_type
+489        0x000016C0    poppler_page_mode_get_type
+490        0x000083F0    poppler_page_render
+491        0x00008590    poppler_page_render_for_printing
+492        0x00008520    poppler_page_render_for_printing_with_options
+493        0x00008750    poppler_page_render_selection
+494        0x00008E30    poppler_page_render_to_ps
+495        0x000089F0    poppler_page_selection_region_free
+496        0x00001E30    poppler_page_transition_alignment_get_type
+497        0x00009C70    poppler_page_transition_copy
+498        0x00001EA0    poppler_page_transition_direction_get_type
+499        0x000079B0    poppler_page_transition_free
+500        0x00009BE0    poppler_page_transition_get_type
+501        0x00009C50    poppler_page_transition_new
+502        0x00001DC0    poppler_page_transition_type_get_type
+503        0x00001810    poppler_permissions_get_type
+504        0x00001F80    poppler_print_flags_get_type
+505        0x00006FE0    poppler_ps_file_free
+506        0x00006D50    poppler_ps_file_get_type
+507        0x00006E30    poppler_ps_file_new
+508        0x00006FA0    poppler_ps_file_set_duplex
+509        0x00006F50    poppler_ps_file_set_paper_size
+510        0x00007CB0    poppler_rectangle_copy
+511        0x000078B0    poppler_rectangle_free
+512        0x00009250    poppler_rectangle_get_type
+513        0x000092C0    poppler_rectangle_new
+514        0x00001F10    poppler_selection_style_get_type
+515        0x000078F0    poppler_text_attributes_copy
+516        0x000079F0    poppler_text_attributes_free
+517        0x00009570    poppler_text_attributes_get_type
+518        0x000095E0    poppler_text_attributes_new
+519        0x000017A0    poppler_viewer_preferences_get_type
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCA00     0x0   OriginalFirstThunk:            0x0       
+0xCA00     0x0   Characteristics:               0x0       
+0xCA04     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCA08     0x8   ForwarderChain:                0x0       
+0xCA0C     0xC   Name:                          0x39120   
+0xCA10     0x10  FirstThunk:                    0x390C8   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCA14     0x0   OriginalFirstThunk:            0x0       
+0xCA14     0x0   Characteristics:               0x0       
+0xCA18     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCA1C     0x8   ForwarderChain:                0x0       
+0xCA20     0xC   Name:                          0x3912D   
+0xCA24     0x10  FirstThunk:                    0x390E0   
+
+libcairo-2.dll.cairo_clip Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCA28     0x0   OriginalFirstThunk:            0x0       
+0xCA28     0x0   Characteristics:               0x0       
+0xCA2C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCA30     0x8   ForwarderChain:                0x0       
+0xCA34     0xC   Name:                          0x3913C   
+0xCA38     0x10  FirstThunk:                    0x390E8   
+
+libfreetype-6.dll.FT_New_Face Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCA3C     0x0   OriginalFirstThunk:            0x0       
+0xCA3C     0x0   Characteristics:               0x0       
+0xCA40     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCA44     0x8   ForwarderChain:                0x0       
+0xCA48     0xC   Name:                          0x3914E   
+0xCA4C     0x10  FirstThunk:                    0x390F0   
+
+libgcc_s_sjlj-1.dll.__divdi3 Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCA50     0x0   OriginalFirstThunk:            0x0       
+0xCA50     0x0   Characteristics:               0x0       
+0xCA54     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCA58     0x8   ForwarderChain:                0x0       
+0xCA5C     0xC   Name:                          0x39162   
+0xCA60     0x10  FirstThunk:                    0x390F8   
+
+libglib-2.0-0.dll.g_log Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCA64     0x0   OriginalFirstThunk:            0x0       
+0xCA64     0x0   Characteristics:               0x0       
+0xCA68     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCA6C     0x8   ForwarderChain:                0x0       
+0xCA70     0xC   Name:                          0x39174   
+0xCA74     0x10  FirstThunk:                    0x39100   
+
+libgobject-2.0-0.dll.g_type_name Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCA78     0x0   OriginalFirstThunk:            0x0       
+0xCA78     0x0   Characteristics:               0x0       
+0xCA7C     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCA80     0x8   ForwarderChain:                0x0       
+0xCA84     0xC   Name:                          0x39189   
+0xCA88     0x10  FirstThunk:                    0x39108   
+
+libpoppler-18.dll.gfree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCA8C     0x0   OriginalFirstThunk:            0x0       
+0xCA8C     0x0   Characteristics:               0x0       
+0xCA90     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCA94     0x8   ForwarderChain:                0x0       
+0xCA98     0xC   Name:                          0x3919B   
+0xCA9C     0x10  FirstThunk:                    0x39110   
+
+libstdc++-6.dll._Znaj Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0xCAA0     0x0   OriginalFirstThunk:            0x0       
+0xCAA0     0x0   Characteristics:               0x0       
+0xCAA4     0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0xCAA8     0x8   ForwarderChain:                0x0       
+0xCAAC     0xC   Name:                          0x391AB   
+0xCAB0     0x10  FirstThunk:                    0x39118   
+
+msvcrt.dll._iob Hint[0]
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0xC880     0x0   StartAddressOfRawData:         0x6CA38698
+0xC884     0x4   EndAddressOfRawData:           0x6CA3869B
+0xC888     0x8   AddressOfIndex:                0x6CA24148
+0xC88C     0xC   AddressOfCallBacks:            0x6CA3869B
+0xC890     0x10  SizeOfZeroFill:                0x0       
+0xC894     0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x12A0C    0x0   VirtualAddress:                0x38000   
+0x12A10    0x4   SizeOfBlock:                   0x18      
+    0003846Dh HIGHLOW
+    00038665h HIGHLOW
+    00038680h HIGHLOW
+    00038684h HIGHLOW
+    00038688h HIGHLOW
+    0003868Ch HIGHLOW
+    0003869Bh HIGHLOW
+    00038000h ABSOLUTE
+

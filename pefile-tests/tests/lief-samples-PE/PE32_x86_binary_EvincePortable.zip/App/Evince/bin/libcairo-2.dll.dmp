@@ -1,0 +1,667 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F3EDF [Fri Oct  7 18:03:11 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x90A00   
+0x90       0xC   NumberOfSymbols:               0x129     
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x3D000   
+0xA0       0x8   SizeOfInitializedData:         0x3000    
+0xA4       0xC   SizeOfUninitializedData:       0x60000   
+0xA8       0x10  AddressOfEntryPoint:           0x9D0B0   
+0xAC       0x14  BaseOfCode:                    0x61000   
+0xB0       0x18  BaseOfData:                    0x9E000   
+0xB4       0x1C  ImageBase:                     0x68DC0000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0xA1000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x60000   
+0x180      0x8   Misc_PhysicalAddress:          0x60000   
+0x180      0x8   Misc_VirtualSize:              0x60000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x3D000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x3D000   
+0x1A8      0x8   Misc_VirtualSize:              0x3D000   
+0x1AC      0xC   VirtualAddress:                0x61000   
+0x1B0      0x10  SizeOfRawData:                 0x3C400   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.931051 (Min=0.0, Max=8.0)
+MD5     hash: 58b3ecd4a64d1d837353c9e8a0da9d10
+SHA-1   hash: e73274558df6eece0249d734b179b17644902f56
+SHA-256 hash: ff891180cd80f712816e20637b2f12426655eaee638329436214adfc66fac24b
+SHA-512 hash: 0cfc43ca221cf1d28a55e28fee69429f5fd036623d638a5f86eeaebac4a2367a01fc04ba3f35ca995fd1e74c861969820e69249cb4986d7d7782a30efa7e4c68
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          UPX2
+0x1D0      0x8   Misc:                          0x3000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x3000    
+0x1D0      0x8   Misc_VirtualSize:              0x3000    
+0x1D4      0xC   VirtualAddress:                0x9E000   
+0x1D8      0x10  SizeOfRawData:                 0x3000    
+0x1DC      0x14  PointerToRawData:              0x3C600   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.207947 (Min=0.0, Max=8.0)
+MD5     hash: 1396563e709c5275f8b00044fb745805
+SHA-1   hash: 1be4f553327937144b2041c5d739ab4a6d9606be
+SHA-256 hash: 2ce6728241e834f2cd18293d33bc5ad1d7b0823f300d33e17e0e7aba894b644c
+SHA-512 hash: a80532c553431676cf7b4b1175dd33b9d12eadde2328e6110378aceb7f97455315cc830aef26cf520dc634548352421ec229a3d43341e99715b83bc256895eaf
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x9E274   
+0xFC       0x4   Size:                          0x2D4C    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x9E000   
+0x104      0x4   Size:                          0x274     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0xA0FC0   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x9D2D8   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x3C874    0x0   Characteristics:               0x0       
+0x3C878    0x4   TimeDateStamp:                 0x4E8F3EDE [Fri Oct  7 18:03:10 2011 UTC]
+0x3C87C    0x8   MajorVersion:                  0x0       
+0x3C87E    0xA   MinorVersion:                  0x0       
+0x3C880    0xC   Name:                          0x9EF44   
+0x3C884    0x10  Base:                          0x1       
+0x3C888    0x14  NumberOfFunctions:             0x144     
+0x3C88C    0x18  NumberOfNames:                 0x144     
+0x3C890    0x1C  AddressOfFunctions:            0x9E29C   
+0x3C894    0x20  AddressOfNames:                0x9E7AC   
+0x3C898    0x24  AddressOfNameOrdinals:         0x9ECBC   
+
+Ordinal      RVA         Name
+1          0x00010660    cairo_append_path
+2          0x0000EAE0    cairo_arc
+3          0x0000EC00    cairo_arc_negative
+4          0x0000F5B0    cairo_clip
+5          0x0000F600    cairo_clip_extents
+6          0x0000F570    cairo_clip_preserve
+7          0x0000EF30    cairo_close_path
+8          0x0000F6D0    cairo_copy_clip_rectangle_list
+9          0x0000F340    cairo_copy_page
+10         0x000105E0    cairo_copy_path
+11         0x00010620    cairo_copy_path_flat
+12         0x0000D8E0    cairo_create
+13         0x0000E980    cairo_curve_to
+14         0x00013AF0    cairo_debug_reset_static_data
+15         0x0000DA60    cairo_destroy
+16         0x00013DF0    cairo_device_acquire
+17         0x00013F00    cairo_device_destroy
+18         0x00013EB0    cairo_device_finish
+19         0x00013E70    cairo_device_flush
+20         0x00013FD0    cairo_device_get_reference_count
+21         0x00013D30    cairo_device_get_type
+22         0x00013FF0    cairo_device_get_user_data
+23         0x00013CC0    cairo_device_reference
+24         0x00013D50    cairo_device_release
+25         0x00014010    cairo_device_set_user_data
+26         0x00013D10    cairo_device_status
+27         0x0000E790    cairo_device_to_user
+28         0x0000E7C0    cairo_device_to_user_distance
+29         0x0000F320    cairo_fill
+30         0x0000F4E0    cairo_fill_extents
+31         0x0000F2E0    cairo_fill_preserve
+32         0x0000F790    cairo_font_extents
+33         0x000140E0    cairo_font_face_destroy
+34         0x00014180    cairo_font_face_get_reference_count
+35         0x00014160    cairo_font_face_get_type
+36         0x000141B0    cairo_font_face_get_user_data
+37         0x000140C0    cairo_font_face_reference
+38         0x000141D0    cairo_font_face_set_user_data
+39         0x000141A0    cairo_font_face_status
+40         0x00015310    cairo_font_options_copy
+41         0x000152B0    cairo_font_options_create
+42         0x00015380    cairo_font_options_destroy
+43         0x00015420    cairo_font_options_equal
+44         0x000154E0    cairo_font_options_get_antialias
+45         0x000155E0    cairo_font_options_get_hint_metrics
+46         0x000155A0    cairo_font_options_get_hint_style
+47         0x00015520    cairo_font_options_get_subpixel_order
+48         0x00015480    cairo_font_options_hash
+49         0x000153C0    cairo_font_options_merge
+50         0x000154C0    cairo_font_options_set_antialias
+51         0x000155C0    cairo_font_options_set_hint_metrics
+52         0x00015580    cairo_font_options_set_hint_style
+53         0x00015500    cairo_font_options_set_subpixel_order
+54         0x000153A0    cairo_font_options_status
+55         0x000219C0    cairo_format_stride_for_width
+56         0x00065160    cairo_ft_font_face_create_for_ft_face
+57         0x000650F0    cairo_ft_font_face_create_for_pattern
+58         0x000650C0    cairo_ft_font_options_substitute
+59         0x000651D0    cairo_ft_scaled_font_lock_face
+60         0x000652B0    cairo_ft_scaled_font_unlock_face
+61         0x0000FEE0    cairo_get_antialias
+62         0x0000FF30    cairo_get_current_point
+63         0x0000E530    cairo_get_dash
+64         0x0000E4F0    cairo_get_dash_count
+65         0x00010250    cairo_get_fill_rule
+66         0x0000F820    cairo_get_font_face
+67         0x0000F900    cairo_get_font_matrix
+68         0x0000F9A0    cairo_get_font_options
+69         0x000105B0    cairo_get_group_target
+70         0x000102B0    cairo_get_line_cap
+71         0x000102E0    cairo_get_line_join
+72         0x00010280    cairo_get_line_width
+73         0x00010340    cairo_get_matrix
+74         0x00010310    cairo_get_miter_limit
+75         0x0000FE80    cairo_get_operator
+76         0x0000DBC0    cairo_get_reference_count
+77         0x0000FAA0    cairo_get_scaled_font
+78         0x0000E2D0    cairo_get_source
+79         0x00010380    cairo_get_target
+80         0x0000FEB0    cairo_get_tolerance
+81         0x0000DB60    cairo_get_user_data
+82         0x00024EF0    cairo_glyph_allocate
+83         0x0000FB00    cairo_glyph_extents
+84         0x00024F20    cairo_glyph_free
+85         0x0000FE00    cairo_glyph_path
+86         0x0000FF10    cairo_has_current_point
+87         0x0000E710    cairo_identity_matrix
+88         0x00021690    cairo_image_surface_create
+89         0x00021A30    cairo_image_surface_create_for_data
+90         0x00061910    cairo_image_surface_create_from_png
+91         0x000619B0    cairo_image_surface_create_from_png_stream
+92         0x00021700    cairo_image_surface_get_data
+93         0x00021730    cairo_image_surface_get_format
+94         0x000217A0    cairo_image_surface_get_height
+95         0x000217D0    cairo_image_surface_get_stride
+96         0x00021770    cairo_image_surface_get_width
+97         0x0000F690    cairo_in_clip
+98         0x0000F410    cairo_in_fill
+99         0x0000F3A0    cairo_in_stroke
+100        0x0000E8E0    cairo_line_to
+101        0x0000F1A0    cairo_mask
+102        0x0000F1F0    cairo_mask_surface
+103        0x00022510    cairo_matrix_init
+104        0x000224F0    cairo_matrix_init_identity
+105        0x000225F0    cairo_matrix_init_rotate
+106        0x000225C0    cairo_matrix_init_scale
+107        0x00022590    cairo_matrix_init_translate
+108        0x00022BB0    cairo_matrix_invert
+109        0x00022640    cairo_matrix_multiply
+110        0x000226E0    cairo_matrix_rotate
+111        0x00022720    cairo_matrix_scale
+112        0x000227A0    cairo_matrix_transform_distance
+113        0x000227D0    cairo_matrix_transform_point
+114        0x00022760    cairo_matrix_translate
+115        0x0000E820    cairo_move_to
+116        0x0000E7F0    cairo_new_path
+117        0x0000E8C0    cairo_new_sub_path
+118        0x0000F090    cairo_paint
+119        0x0000F0C0    cairo_paint_with_alpha
+120        0x00027EB0    cairo_path_destroy
+121        0x0000F010    cairo_path_extents
+122        0x0002F670    cairo_pattern_add_color_stop_rgb
+123        0x0002F7B0    cairo_pattern_add_color_stop_rgba
+124        0x0002F110    cairo_pattern_create_for_surface
+125        0x0002F210    cairo_pattern_create_linear
+126        0x0002F350    cairo_pattern_create_radial
+127        0x0002EF20    cairo_pattern_create_rgb
+128        0x0002EFE0    cairo_pattern_create_rgba
+129        0x0002F540    cairo_pattern_destroy
+130        0x00032C00    cairo_pattern_get_color_stop_count
+131        0x00032B00    cairo_pattern_get_color_stop_rgba
+132        0x0002FAE0    cairo_pattern_get_extend
+133        0x0002FAB0    cairo_pattern_get_filter
+134        0x00032C50    cairo_pattern_get_linear_points
+135        0x0002FA30    cairo_pattern_get_matrix
+136        0x00032CF0    cairo_pattern_get_radial_circles
+137        0x0002F5F0    cairo_pattern_get_reference_count
+138        0x00032A10    cairo_pattern_get_rgba
+139        0x00032AC0    cairo_pattern_get_surface
+140        0x0002F520    cairo_pattern_get_type
+141        0x0002F610    cairo_pattern_get_user_data
+142        0x0002F4D0    cairo_pattern_reference
+143        0x0002FAC0    cairo_pattern_set_extend
+144        0x0002FA90    cairo_pattern_set_filter
+145        0x0002F940    cairo_pattern_set_matrix
+146        0x0002F630    cairo_pattern_set_user_data
+147        0x0002F530    cairo_pattern_status
+148        0x00074820    cairo_pdf_get_versions
+149        0x00074770    cairo_pdf_surface_create
+150        0x00074700    cairo_pdf_surface_create_for_stream
+151        0x000747D0    cairo_pdf_surface_restrict_to_version
+152        0x00074860    cairo_pdf_surface_set_size
+153        0x00074840    cairo_pdf_version_to_string
+154        0x0000DE20    cairo_pop_group
+155        0x0000E290    cairo_pop_group_to_source
+156        0x0006B160    cairo_ps_get_levels
+157        0x0006B180    cairo_ps_level_to_string
+158        0x0006B050    cairo_ps_surface_create
+159        0x0006B0B0    cairo_ps_surface_create_for_stream
+160        0x0006B410    cairo_ps_surface_dsc_begin_page_setup
+161        0x0006B3C0    cairo_ps_surface_dsc_begin_setup
+162        0x0006B2F0    cairo_ps_surface_dsc_comment
+163        0x0006B1D0    cairo_ps_surface_get_eps
+164        0x0006B120    cairo_ps_surface_restrict_to_level
+165        0x0006B1A0    cairo_ps_surface_set_eps
+166        0x0006B200    cairo_ps_surface_set_size
+167        0x0000DE00    cairo_push_group
+168        0x0000DC60    cairo_push_group_with_content
+169        0x000246E0    cairo_recording_surface_create
+170        0x00024D00    cairo_recording_surface_ink_extents
+171        0x0000EF70    cairo_rectangle
+172        0x000131E0    cairo_rectangle_list_destroy
+173        0x0000DA10    cairo_reference
+174        0x00036380    cairo_region_contains_point
+175        0x00036300    cairo_region_contains_rectangle
+176        0x00035C40    cairo_region_copy
+177        0x00035970    cairo_region_create
+178        0x00035B10    cairo_region_create_rectangle
+179        0x000359C0    cairo_region_create_rectangles
+180        0x00035BD0    cairo_region_destroy
+181        0x000363C0    cairo_region_equal
+182        0x00035D60    cairo_region_get_extents
+183        0x00035CE0    cairo_region_get_rectangle
+184        0x00035EE0    cairo_region_intersect
+185        0x00035F40    cairo_region_intersect_rectangle
+186        0x000362A0    cairo_region_is_empty
+187        0x00035CB0    cairo_region_num_rectangles
+188        0x00035B80    cairo_region_reference
+189        0x00035DD0    cairo_region_status
+190        0x00035DE0    cairo_region_subtract
+191        0x00035E40    cairo_region_subtract_rectangle
+192        0x000362D0    cairo_region_translate
+193        0x00035FE0    cairo_region_union
+194        0x00036040    cairo_region_union_rectangle
+195        0x000360E0    cairo_region_xor
+196        0x000361B0    cairo_region_xor_rectangle
+197        0x0000EE00    cairo_rel_curve_to
+198        0x0000ED70    cairo_rel_line_to
+199        0x0000ECE0    cairo_rel_move_to
+200        0x0000F5D0    cairo_reset_clip
+201        0x0000DC20    cairo_restore
+202        0x0000E650    cairo_rotate
+203        0x0000DBE0    cairo_save
+204        0x0000E600    cairo_scale
+205        0x00037CD0    cairo_scaled_font_create
+206        0x00037B50    cairo_scaled_font_destroy
+207        0x00038530    cairo_scaled_font_extents
+208        0x0003A530    cairo_scaled_font_get_ctm
+209        0x0003A490    cairo_scaled_font_get_font_face
+210        0x0003A4C0    cairo_scaled_font_get_font_matrix
+211        0x0003A630    cairo_scaled_font_get_font_options
+212        0x000384B0    cairo_scaled_font_get_reference_count
+213        0x0003A5A0    cairo_scaled_font_get_scale_matrix
+214        0x00037270    cairo_scaled_font_get_type
+215        0x000384D0    cairo_scaled_font_get_user_data
+216        0x0003A190    cairo_scaled_font_glyph_extents
+217        0x00037B00    cairo_scaled_font_reference
+218        0x000384F0    cairo_scaled_font_set_user_data
+219        0x00037290    cairo_scaled_font_status
+220        0x0003A3C0    cairo_scaled_font_text_extents
+221        0x00039B80    cairo_scaled_font_text_to_glyphs
+222        0x0000F740    cairo_select_font_face
+223        0x0000E350    cairo_set_antialias
+224        0x0000E4A0    cairo_set_dash
+225        0x0000E390    cairo_set_fill_rule
+226        0x0000F7E0    cairo_set_font_face
+227        0x0000F8C0    cairo_set_font_matrix
+228        0x0000F940    cairo_set_font_options
+229        0x0000F880    cairo_set_font_size
+230        0x0000E420    cairo_set_line_cap
+231        0x0000E460    cairo_set_line_join
+232        0x0000E3D0    cairo_set_line_width
+233        0x0000E6D0    cairo_set_matrix
+234        0x0000E570    cairo_set_miter_limit
+235        0x0000DFB0    cairo_set_operator
+236        0x0000F9F0    cairo_set_scaled_font
+237        0x0000DFF0    cairo_set_source
+238        0x0000E1C0    cairo_set_source_rgb
+239        0x0000E0E0    cairo_set_source_rgba
+240        0x0000E040    cairo_set_source_surface
+241        0x0000E300    cairo_set_tolerance
+242        0x0000DB80    cairo_set_user_data
+243        0x0000FB80    cairo_show_glyphs
+244        0x0000F370    cairo_show_page
+245        0x000103B0    cairo_show_text
+246        0x0000FC20    cairo_show_text_glyphs
+247        0x000106F0    cairo_status
+248        0x00024ED0    cairo_status_to_string
+249        0x0000F2C0    cairo_stroke
+250        0x0000F450    cairo_stroke_extents
+251        0x0000F280    cairo_stroke_preserve
+252        0x0003E430    cairo_surface_copy_page
+253        0x00043E00    cairo_surface_create_for_rectangle
+254        0x0003F700    cairo_surface_create_similar
+255        0x0003C8F0    cairo_surface_destroy
+256        0x0003C880    cairo_surface_finish
+257        0x0003C830    cairo_surface_flush
+258        0x0003C1C0    cairo_surface_get_content
+259        0x0003C1E0    cairo_surface_get_device
+260        0x0003D020    cairo_surface_get_device_offset
+261        0x0003D120    cairo_surface_get_fallback_resolution
+262        0x0003C7A0    cairo_surface_get_font_options
+263        0x0003C4A0    cairo_surface_get_mime_data
+264        0x0003C3D0    cairo_surface_get_reference_count
+265        0x0003C1B0    cairo_surface_get_type
+266        0x0003C440    cairo_surface_get_user_data
+267        0x0003E5F0    cairo_surface_has_show_text_glyphs
+268        0x0003CD70    cairo_surface_mark_dirty
+269        0x0003CC40    cairo_surface_mark_dirty_rectangle
+270        0x0003C380    cairo_surface_reference
+271        0x0003CEF0    cairo_surface_set_device_offset
+272        0x0003D040    cairo_surface_set_fallback_resolution
+273        0x0003C530    cairo_surface_set_mime_data
+274        0x0003C460    cairo_surface_set_user_data
+275        0x0003E4B0    cairo_surface_show_page
+276        0x0003C1D0    cairo_surface_status
+277        0x00061810    cairo_surface_write_to_png
+278        0x000618C0    cairo_surface_write_to_png_stream
+279        0x00078970    cairo_svg_get_versions
+280        0x00078840    cairo_svg_surface_create
+281        0x000787D0    cairo_svg_surface_create_for_stream
+282        0x000788A0    cairo_svg_surface_restrict_to_version
+283        0x00078990    cairo_svg_version_to_string
+284        0x00079240    cairo_tee_surface_add
+285        0x000790D0    cairo_tee_surface_create
+286        0x00079550    cairo_tee_surface_index
+287        0x00079410    cairo_tee_surface_remove
+288        0x00024F40    cairo_text_cluster_allocate
+289        0x00024F70    cairo_text_cluster_free
+290        0x00010150    cairo_text_extents
+291        0x0000FFE0    cairo_text_path
+292        0x00047AC0    cairo_toy_font_face_create
+293        0x00047DB0    cairo_toy_font_face_get_family
+294        0x00047E20    cairo_toy_font_face_get_slant
+295        0x00047E70    cairo_toy_font_face_get_weight
+296        0x0000E690    cairo_transform
+297        0x0000E5B0    cairo_translate
+298        0x00049EB0    cairo_user_font_face_create
+299        0x0004A0A0    cairo_user_font_face_get_init_func
+300        0x0004A0F0    cairo_user_font_face_get_render_glyph_func
+301        0x0004A140    cairo_user_font_face_get_text_to_glyphs_func
+302        0x0004A190    cairo_user_font_face_get_unicode_to_glyph_func
+303        0x00049F20    cairo_user_font_face_set_init_func
+304        0x00049F80    cairo_user_font_face_set_render_glyph_func
+305        0x00049FE0    cairo_user_font_face_set_text_to_glyphs_func
+306        0x0004A040    cairo_user_font_face_set_unicode_to_glyph_func
+307        0x0000E730    cairo_user_to_device
+308        0x0000E760    cairo_user_to_device_distance
+309        0x0004A1E0    cairo_version
+310        0x0004A1F0    cairo_version_string
+311        0x0005E600    cairo_win32_font_face_create_for_hfont
+312        0x0005E4D0    cairo_win32_font_face_create_for_logfontw
+313        0x0005E460    cairo_win32_font_face_create_for_logfontw_hfont
+314        0x0005DA90    cairo_win32_printing_surface_create
+315        0x0005E7D0    cairo_win32_scaled_font_done_font
+316        0x00060950    cairo_win32_scaled_font_get_device_to_logical
+317        0x000608A0    cairo_win32_scaled_font_get_logical_to_device
+318        0x00060870    cairo_win32_scaled_font_get_metrics_factor
+319        0x0005E660    cairo_win32_scaled_font_select_font
+320        0x00058990    cairo_win32_surface_create
+321        0x00058AD0    cairo_win32_surface_create_with_ddb
+322        0x00058710    cairo_win32_surface_create_with_dib
+323        0x00058770    cairo_win32_surface_get_dc
+324        0x000587C0    cairo_win32_surface_get_image
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C600    0x0   OriginalFirstThunk:            0x0       
+0x3C600    0x0   Characteristics:               0x0       
+0x3C604    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C608    0x8   ForwarderChain:                0x0       
+0x3C60C    0xC   Name:                          0x9E13C   
+0x3C610    0x10  FirstThunk:                    0x9E0DC   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C614    0x0   OriginalFirstThunk:            0x0       
+0x3C614    0x0   Characteristics:               0x0       
+0x3C618    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C61C    0x8   ForwarderChain:                0x0       
+0x3C620    0xC   Name:                          0x9E149   
+0x3C624    0x10  FirstThunk:                    0x9E0F4   
+
+GDI32.dll.BitBlt Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C628    0x0   OriginalFirstThunk:            0x0       
+0x3C628    0x0   Characteristics:               0x0       
+0x3C62C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C630    0x8   ForwarderChain:                0x0       
+0x3C634    0xC   Name:                          0x9E153   
+0x3C638    0x10  FirstThunk:                    0x9E0FC   
+
+libfontconfig-1.dll.FcFontMatch Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C63C    0x0   OriginalFirstThunk:            0x0       
+0x3C63C    0x0   Characteristics:               0x0       
+0x3C640    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C644    0x8   ForwarderChain:                0x0       
+0x3C648    0xC   Name:                          0x9E167   
+0x3C64C    0x10  FirstThunk:                    0x9E104   
+
+libfreetype-6.dll.FT_New_Face Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C650    0x0   OriginalFirstThunk:            0x0       
+0x3C650    0x0   Characteristics:               0x0       
+0x3C654    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C658    0x8   ForwarderChain:                0x0       
+0x3C65C    0xC   Name:                          0x9E179   
+0x3C660    0x10  FirstThunk:                    0x9E10C   
+
+libpixman-1-0.dll.pixman_fill Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C664    0x0   OriginalFirstThunk:            0x0       
+0x3C664    0x0   Characteristics:               0x0       
+0x3C668    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C66C    0x8   ForwarderChain:                0x0       
+0x3C670    0xC   Name:                          0x9E18B   
+0x3C674    0x10  FirstThunk:                    0x9E114   
+
+libpng15-15.dll.png_error Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C678    0x0   OriginalFirstThunk:            0x0       
+0x3C678    0x0   Characteristics:               0x0       
+0x3C67C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C680    0x8   ForwarderChain:                0x0       
+0x3C684    0xC   Name:                          0x9E19B   
+0x3C688    0x10  FirstThunk:                    0x9E11C   
+
+MSIMG32.DLL.GradientFill Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C68C    0x0   OriginalFirstThunk:            0x0       
+0x3C68C    0x0   Characteristics:               0x0       
+0x3C690    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C694    0x8   ForwarderChain:                0x0       
+0x3C698    0xC   Name:                          0x9E1A7   
+0x3C69C    0x10  FirstThunk:                    0x9E124   
+
+msvcrt.dll.cos Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C6A0    0x0   OriginalFirstThunk:            0x0       
+0x3C6A0    0x0   Characteristics:               0x0       
+0x3C6A4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C6A8    0x8   ForwarderChain:                0x0       
+0x3C6AC    0xC   Name:                          0x9E1B2   
+0x3C6B0    0x10  FirstThunk:                    0x9E12C   
+
+USER32.dll.GetDC Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C6B4    0x0   OriginalFirstThunk:            0x0       
+0x3C6B4    0x0   Characteristics:               0x0       
+0x3C6B8    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C6BC    0x8   ForwarderChain:                0x0       
+0x3C6C0    0xC   Name:                          0x9E1BD   
+0x3C6C4    0x10  FirstThunk:                    0x9E134   
+
+zlib1.dll.deflate Hint[0]
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x3C4D8    0x0   StartAddressOfRawData:         0x68E5D2F0
+0x3C4DC    0x4   EndAddressOfRawData:           0x68E5D2F3
+0x3C4E0    0x8   AddressOfIndex:                0x68E4E274
+0x3C4E4    0xC   AddressOfCallBacks:            0x68E5D2F3
+0x3C4E8    0x10  SizeOfZeroFill:                0x0       
+0x3C4EC    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x3F5C0    0x0   VirtualAddress:                0x9D000   
+0x3F5C4    0x4   SizeOfBlock:                   0x18      
+    0009D0BDh HIGHLOW
+    0009D2BDh HIGHLOW
+    0009D2D8h HIGHLOW
+    0009D2DCh HIGHLOW
+    0009D2E0h HIGHLOW
+    0009D2E4h HIGHLOW
+    0009D2F3h HIGHLOW
+    0009D000h ABSOLUTE
+

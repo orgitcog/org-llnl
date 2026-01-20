@@ -1,0 +1,1856 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F3839 [Fri Oct  7 17:34:49 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0xE7200   
+0x90       0xC   NumberOfSymbols:               0x2F8     
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x3C000   
+0xA0       0x8   SizeOfInitializedData:         0xE000    
+0xA4       0xC   SizeOfUninitializedData:       0xBC000   
+0xA8       0x10  AddressOfEntryPoint:           0xF8DA0   
+0xAC       0x14  BaseOfCode:                    0xBD000   
+0xB0       0x18  BaseOfData:                    0xF9000   
+0xB4       0x1C  ImageBase:                     0x6D580000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x107000  
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0xBC000   
+0x180      0x8   Misc_PhysicalAddress:          0xBC000   
+0x180      0x8   Misc_VirtualSize:              0xBC000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x3C000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x3C000   
+0x1A8      0x8   Misc_VirtualSize:              0x3C000   
+0x1AC      0xC   VirtualAddress:                0xBD000   
+0x1B0      0x10  SizeOfRawData:                 0x3C000   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.912346 (Min=0.0, Max=8.0)
+MD5     hash: bd4d8cf3e2c264a18260bdc8896667ef
+SHA-1   hash: 9032080faa4718da4b548b622c1f4c471a82c71b
+SHA-256 hash: 549bb1112db5c5b1a73639baf077ffbf00a76416ac97fb0c8513b1bee7b9a505
+SHA-512 hash: da9740f4fb718faf6c4c548e9b9a25096f89761d08d8b4fccba93edb5c88fcbc23095195826b085737fa4279bbf89f9d6f7983acc30559ab7911182fb4de0b95
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          .rsrc
+0x1D0      0x8   Misc:                          0xE000    
+0x1D0      0x8   Misc_PhysicalAddress:          0xE000    
+0x1D0      0x8   Misc_VirtualSize:              0xE000    
+0x1D4      0xC   VirtualAddress:                0xF9000   
+0x1D8      0x10  SizeOfRawData:                 0xDC00    
+0x1DC      0x14  PointerToRawData:              0x3C200   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.345794 (Min=0.0, Max=8.0)
+MD5     hash: 97bbb6ad761c2af8749f68696ae53e02
+SHA-1   hash: b7e923726f90ad04e9da1228791b93bd86b3ee06
+SHA-256 hash: 0d5f242dd5a52454e2c91e1b9342243e081f3364323cf67beeb73777fe66f1df
+SHA-512 hash: 6ca583182b07d5f5fb8c8ad9b3d98cf6563c6d01d17a46587fef43fe66dd8a5b1db1e35f176f19b240dea058aeb004b8dc27f3d0ae7668df8fa75f6fee1870ff
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0xF9660   
+0xFC       0x4   Size:                          0xD4AC    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0xF9364   
+0x104      0x4   Size:                          0x2FC     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0xF9000   
+0x10C      0x4   Size:                          0x364     
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x106B0C  
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0xF8FC8   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Version Information----------
+
+[VS_VERSIONINFO]
+0x3C25C    0x0   Length:                        0x308     
+0x3C25E    0x2   ValueLength:                   0x34      
+0x3C260    0x4   Type:                          0x0       
+
+[VS_FIXEDFILEINFO]
+0x3C284    0x0   Signature:                     0xFEEF04BD
+0x3C288    0x4   StrucVersion:                  0x10000   
+0x3C28C    0x8   FileVersionMS:                 0x2001E   
+0x3C290    0xC   FileVersionLS:                 0x0       
+0x3C294    0x10  ProductVersionMS:              0x2001E   
+0x3C298    0x14  ProductVersionLS:              0x0       
+0x3C29C    0x18  FileFlagsMask:                 0x0       
+0x3C2A0    0x1C  FileFlags:                     0x0       
+0x3C2A4    0x20  FileOS:                        0x4       
+0x3C2A8    0x24  FileType:                      0x2       
+0x3C2AC    0x28  FileSubtype:                   0x0       
+0x3C2B0    0x2C  FileDateMS:                    0x0       
+0x3C2B4    0x30  FileDateLS:                    0x0       
+
+[StringFileInfo]
+0x3C2B8    0x0   Length:                        0x266     
+0x3C2BA    0x2   ValueLength:                   0x0       
+0x3C2BC    0x4   Type:                          0x0       
+
+  [StringTable]
+  0x3C2DC    0x0   Length:                        0x242     
+  0x3C2DE    0x2   ValueLength:                   0x0       
+  0x3C2E0    0x4   Type:                          0x0       
+  LangID: 040904B0
+
+    CompanyName: The GLib developer community
+    FileDescription: Gio
+    FileVersion: 2.30.0.0
+    InternalName: libgio-2.0-0
+    LegalCopyright: Copyright \xc2\xa9 2006-2011 Red Hat, Inc. and others.
+    OriginalFilename: libgio-2.0-0.dll
+    ProductName: GLib
+    ProductVersion: 2.30.0
+
+[VarFileInfo]
+0x3C520    0x0   Length:                        0x44      
+0x3C522    0x2   ValueLength:                   0x0       
+0x3C524    0x4   Type:                          0x0       
+
+  [Var]
+  0x3C540    0x0   Length:                        0x24      
+  0x3C542    0x2   ValueLength:                   0x4       
+  0x3C544    0x4   Type:                          0x0       
+    Translation: 0x0409 0x04b0
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x3C860    0x0   Characteristics:               0x0       
+0x3C864    0x4   TimeDateStamp:                 0x4E8F3836 [Fri Oct  7 17:34:46 2011 UTC]
+0x3C868    0x8   MajorVersion:                  0x0       
+0x3C86A    0xA   MinorVersion:                  0x0       
+0x3C86C    0xC   Name:                          0xFCD24   
+0x3C870    0x10  Base:                          0x1       
+0x3C874    0x14  NumberOfFunctions:             0x576     
+0x3C878    0x18  NumberOfNames:                 0x576     
+0x3C87C    0x1C  AddressOfFunctions:            0xF9688   
+0x3C880    0x20  AddressOfNames:                0xFAC60   
+0x3C884    0x24  AddressOfNameOrdinals:         0xFC238   
+
+Ordinal      RVA         Name
+1          0x00055BF0    g_action_activate
+2          0x00055980    g_action_change_state
+3          0x00055B60    g_action_get_enabled
+4          0x000557D0    g_action_get_name
+5          0x00055860    g_action_get_parameter_type
+6          0x00055740    g_action_get_state
+7          0x00055AD0    g_action_get_state_hint
+8          0x000558F0    g_action_get_state_type
+9          0x00055690    g_action_get_type
+10         0x00054710    g_action_group_action_added
+11         0x00054870    g_action_group_action_enabled_changed
+12         0x000547C0    g_action_group_action_removed
+13         0x00054930    g_action_group_action_state_changed
+14         0x00054650    g_action_group_activate_action
+15         0x00054550    g_action_group_change_action_state
+16         0x00054430    g_action_group_get_action_enabled
+17         0x00054280    g_action_group_get_action_parameter_type
+18         0x000544C0    g_action_group_get_action_state
+19         0x000543A0    g_action_group_get_action_state_hint
+20         0x00054310    g_action_group_get_action_state_type
+21         0x00053F10    g_action_group_get_type
+22         0x000541F0    g_action_group_has_action
+23         0x00054160    g_action_group_list_actions
+24         0x00001D10    g_app_info_add_supports_type
+25         0x000023B0    g_app_info_can_delete
+26         0x00001E10    g_app_info_can_remove_supports_type
+27         0x0004F090    g_app_info_create_flags_get_type
+28         0x00051840    g_app_info_create_from_commandline
+29         0x00002440    g_app_info_delete
+30         0x00001580    g_app_info_dup
+31         0x00001610    g_app_info_equal
+32         0x00051D40    g_app_info_get_all
+33         0x00051880    g_app_info_get_all_for_type
+34         0x000019E0    g_app_info_get_commandline
+35         0x00051C10    g_app_info_get_default_for_type
+36         0x00051CB0    g_app_info_get_default_for_uri_scheme
+37         0x000018C0    g_app_info_get_description
+38         0x00001820    g_app_info_get_display_name
+39         0x00001950    g_app_info_get_executable
+40         0x00051BF0    g_app_info_get_fallback_for_type
+41         0x00001FA0    g_app_info_get_icon
+42         0x00001700    g_app_info_get_id
+43         0x00001790    g_app_info_get_name
+44         0x00051BD0    g_app_info_get_recommended_for_type
+45         0x000014D0    g_app_info_get_type
+46         0x00002030    g_app_info_launch
+47         0x00002320    g_app_info_launch_default_for_uri
+48         0x000021F0    g_app_info_launch_uris
+49         0x00001EA0    g_app_info_remove_supports_type
+50         0x00051E40    g_app_info_reset_type_associations
+51         0x00001C10    g_app_info_set_as_default_for_extension
+52         0x00001A70    g_app_info_set_as_default_for_type
+53         0x00001B40    g_app_info_set_as_last_used_for_type
+54         0x00002290    g_app_info_should_show
+55         0x00002160    g_app_info_supports_files
+56         0x000020D0    g_app_info_supports_uris
+57         0x00002580    g_app_launch_context_get_display
+58         0x00002660    g_app_launch_context_get_startup_notify_id
+59         0x000024D0    g_app_launch_context_get_type
+60         0x00002740    g_app_launch_context_launch_failed
+61         0x00002560    g_app_launch_context_new
+62         0x0005A080    g_application_activate
+63         0x00056B50    g_application_command_line_get_arguments
+64         0x00056BD0    g_application_command_line_get_cwd
+65         0x00056BF0    g_application_command_line_get_environ
+66         0x00056E50    g_application_command_line_get_exit_status
+67         0x00056C70    g_application_command_line_get_is_remote
+68         0x00056EB0    g_application_command_line_get_platform_data
+69         0x000569E0    g_application_command_line_get_type
+70         0x00056C00    g_application_command_line_getenv
+71         0x00056C90    g_application_command_line_print
+72         0x00056D40    g_application_command_line_printerr
+73         0x00056DF0    g_application_command_line_set_exit_status
+74         0x000506E0    g_application_flags_get_type
+75         0x000598C0    g_application_get_application_id
+76         0x00059A40    g_application_get_flags
+77         0x00059B50    g_application_get_inactivity_timeout
+78         0x00059D10    g_application_get_is_registered
+79         0x00059D80    g_application_get_is_remote
+80         0x00059200    g_application_get_type
+81         0x0005A000    g_application_hold
+82         0x000597A0    g_application_id_is_valid
+83         0x00059840    g_application_new
+84         0x0005A140    g_application_open
+85         0x00059EF0    g_application_register
+86         0x0005A030    g_application_release
+87         0x0005A470    g_application_run
+88         0x000596F0    g_application_set_action_group
+89         0x00059920    g_application_set_application_id
+90         0x00059AA0    g_application_set_flags
+91         0x00059BB0    g_application_set_inactivity_timeout
+92         0x0004F950    g_ask_password_flags_get_type
+93         0x00002C00    g_async_initable_get_type
+94         0x00002CB0    g_async_initable_init_async
+95         0x00002D50    g_async_initable_init_finish
+96         0x00002FB0    g_async_initable_new_async
+97         0x00002FF0    g_async_initable_new_finish
+98         0x00002F10    g_async_initable_new_valist_async
+99         0x00002E80    g_async_initable_newv_async
+100        0x00003180    g_async_result_get_source_object
+101        0x00003040    g_async_result_get_type
+102        0x000030F0    g_async_result_get_user_data
+103        0x000043A0    g_buffered_input_stream_fill
+104        0x00003EC0    g_buffered_input_stream_fill_async
+105        0x000044D0    g_buffered_input_stream_fill_finish
+106        0x00004790    g_buffered_input_stream_get_available
+107        0x00004080    g_buffered_input_stream_get_buffer_size
+108        0x00003E20    g_buffered_input_stream_get_type
+109        0x00004290    g_buffered_input_stream_new
+110        0x00004310    g_buffered_input_stream_new_sized
+111        0x00004800    g_buffered_input_stream_peek
+112        0x000048F0    g_buffered_input_stream_peek_buffer
+113        0x00004970    g_buffered_input_stream_read_byte
+114        0x000040E0    g_buffered_input_stream_set_buffer_size
+115        0x00005670    g_buffered_output_stream_get_auto_grow
+116        0x00005460    g_buffered_output_stream_get_buffer_size
+117        0x00005390    g_buffered_output_stream_get_type
+118        0x00005830    g_buffered_output_stream_new
+119        0x000058B0    g_buffered_output_stream_new_sized
+120        0x000056D0    g_buffered_output_stream_set_auto_grow
+121        0x000054C0    g_buffered_output_stream_set_buffer_size
+122        0x00071450    g_bus_get
+123        0x000783A0    g_bus_get_finish
+124        0x00078310    g_bus_get_sync
+125        0x0004FF70    g_bus_name_owner_flags_get_type
+126        0x0004FFE0    g_bus_name_watcher_flags_get_type
+127        0x0007DB00    g_bus_own_name
+128        0x0007D950    g_bus_own_name_on_connection
+129        0x0007DD00    g_bus_own_name_on_connection_with_closures
+130        0x0007DC70    g_bus_own_name_with_closures
+131        0x0004FF00    g_bus_type_get_type
+132        0x0007DD70    g_bus_unown_name
+133        0x0007EF30    g_bus_unwatch_name
+134        0x0007EB40    g_bus_watch_name
+135        0x0007ECB0    g_bus_watch_name_on_connection
+136        0x0007EEC0    g_bus_watch_name_on_connection_with_closures
+137        0x0007EE50    g_bus_watch_name_with_closures
+138        0x00006290    g_cancellable_cancel
+139        0x00006440    g_cancellable_connect
+140        0x00006560    g_cancellable_disconnect
+141        0x00005E40    g_cancellable_get_current
+142        0x00006010    g_cancellable_get_fd
+143        0x00005BA0    g_cancellable_get_type
+144        0x00005F90    g_cancellable_is_cancelled
+145        0x00006020    g_cancellable_make_pollfd
+146        0x00005D20    g_cancellable_new
+147        0x00005DB0    g_cancellable_pop_current
+148        0x00005D40    g_cancellable_push_current
+149        0x00006170    g_cancellable_release_fd
+150        0x00005E70    g_cancellable_reset
+151        0x00005FB0    g_cancellable_set_error_if_cancelled
+152        0x00006630    g_cancellable_source_new
+153        0x00007B80    g_charset_converter_get_num_fallbacks
+154        0x000078A0    g_charset_converter_get_type
+155        0x00007B70    g_charset_converter_get_use_fallback
+156        0x00007AF0    g_charset_converter_new
+157        0x00007B40    g_charset_converter_set_use_fallback
+158        0x00006C90    g_content_type_can_be_executable
+159        0x000068D0    g_content_type_equals
+160        0x00006F60    g_content_type_from_mime_type
+161        0x00006B30    g_content_type_get_description
+162        0x00006D20    g_content_type_get_icon
+163        0x00006C10    g_content_type_get_mime_type
+164        0x00006FE0    g_content_type_guess
+165        0x000071C0    g_content_type_guess_for_tree
+166        0x000069E0    g_content_type_is_a
+167        0x00006AD0    g_content_type_is_unknown
+168        0x000070D0    g_content_types_get_registered
+169        0x00007C50    g_converter_convert
+170        0x0004F100    g_converter_flags_get_type
+171        0x00007BA0    g_converter_get_type
+172        0x00008740    g_converter_input_stream_get_converter
+173        0x000085E0    g_converter_input_stream_get_type
+174        0x000086B0    g_converter_input_stream_new
+175        0x00009160    g_converter_output_stream_get_converter
+176        0x00009000    g_converter_output_stream_get_type
+177        0x000090D0    g_converter_output_stream_new
+178        0x00007D50    g_converter_reset
+179        0x0004F170    g_converter_result_get_type
+180        0x00009440    g_credentials_get_native
+181        0x000091D0    g_credentials_get_type
+182        0x00009310    g_credentials_is_same_user
+183        0x00009260    g_credentials_new
+184        0x000094C0    g_credentials_set_native
+185        0x00009280    g_credentials_to_string
+186        0x00050600    g_credentials_type_get_type
+187        0x0000A2D0    g_data_input_stream_get_byte_order
+188        0x0000A4A0    g_data_input_stream_get_newline_type
+189        0x00009DE0    g_data_input_stream_get_type
+190        0x0000A1C0    g_data_input_stream_new
+191        0x0000A500    g_data_input_stream_read_byte
+192        0x0000A580    g_data_input_stream_read_int16
+193        0x0000A6A0    g_data_input_stream_read_int32
+194        0x0000A7C0    g_data_input_stream_read_int64
+195        0x0000A920    g_data_input_stream_read_line
+196        0x0000A0A0    g_data_input_stream_read_line_async
+197        0x0000ABA0    g_data_input_stream_read_line_finish
+198        0x0000AC00    g_data_input_stream_read_line_finish_utf8
+199        0x0000AB00    g_data_input_stream_read_line_utf8
+200        0x0000A610    g_data_input_stream_read_uint16
+201        0x0000A730    g_data_input_stream_read_uint32
+202        0x0000A870    g_data_input_stream_read_uint64
+203        0x0000AEC0    g_data_input_stream_read_until
+204        0x00009F90    g_data_input_stream_read_until_async
+205        0x0000ACA0    g_data_input_stream_read_until_finish
+206        0x0000AD00    g_data_input_stream_read_upto
+207        0x00009E80    g_data_input_stream_read_upto_async
+208        0x0000AF70    g_data_input_stream_read_upto_finish
+209        0x0000A240    g_data_input_stream_set_byte_order
+210        0x0000A330    g_data_input_stream_set_newline_type
+211        0x0000B3C0    g_data_output_stream_get_byte_order
+212        0x0000B130    g_data_output_stream_get_type
+213        0x0000B200    g_data_output_stream_new
+214        0x0000B420    g_data_output_stream_put_byte
+215        0x0000B4B0    g_data_output_stream_put_int16
+216        0x0000B5F0    g_data_output_stream_put_int32
+217        0x0000B730    g_data_output_stream_put_int64
+218        0x0000B890    g_data_output_stream_put_string
+219        0x0000B550    g_data_output_stream_put_uint16
+220        0x0000B690    g_data_output_stream_put_uint32
+221        0x0000B7E0    g_data_output_stream_put_uint64
+222        0x0000B280    g_data_output_stream_set_byte_order
+223        0x0004F1E0    g_data_stream_byte_order_get_type
+224        0x0004F250    g_data_stream_newline_type_get_type
+225        0x00068610    g_dbus_address_get_for_bus_sync
+226        0x00067350    g_dbus_address_get_stream
+227        0x000682B0    g_dbus_address_get_stream_finish
+228        0x000683E0    g_dbus_address_get_stream_sync
+229        0x000875E0    g_dbus_annotation_info_get_type
+230        0x00087E30    g_dbus_annotation_info_lookup
+231        0x00086530    g_dbus_annotation_info_ref
+232        0x000864D0    g_dbus_annotation_info_unref
+233        0x00087570    g_dbus_arg_info_get_type
+234        0x00086550    g_dbus_arg_info_ref
+235        0x00086470    g_dbus_arg_info_unref
+236        0x00068AE0    g_dbus_auth_observer_authorize_authenticated_peer
+237        0x00068990    g_dbus_auth_observer_get_type
+238        0x00068AC0    g_dbus_auth_observer_new
+239        0x00050210    g_dbus_call_flags_get_type
+240        0x000501A0    g_dbus_capability_flags_get_type
+241        0x000766A0    g_dbus_connection_add_filter
+242        0x00077620    g_dbus_connection_call
+243        0x00077690    g_dbus_connection_call_finish
+244        0x000777A0    g_dbus_connection_call_sync
+245        0x000736E0    g_dbus_connection_close
+246        0x000740B0    g_dbus_connection_close_finish
+247        0x000741F0    g_dbus_connection_close_sync
+248        0x00077390    g_dbus_connection_emit_signal
+249        0x00050130    g_dbus_connection_flags_get_type
+250        0x00073780    g_dbus_connection_flush
+251        0x00073E40    g_dbus_connection_flush_finish
+252        0x00073F80    g_dbus_connection_flush_sync
+253        0x00073DE0    g_dbus_connection_get_capabilities
+254        0x000763C0    g_dbus_connection_get_exit_on_close
+255        0x00076420    g_dbus_connection_get_guid
+256        0x00076640    g_dbus_connection_get_peer_credentials
+257        0x00073CB0    g_dbus_connection_get_stream
+258        0x000711F0    g_dbus_connection_get_type
+259        0x00076480    g_dbus_connection_get_unique_name
+260        0x00073D80    g_dbus_connection_is_closed
+261        0x00075CE0    g_dbus_connection_new
+262        0x00075DB0    g_dbus_connection_new_finish
+263        0x00075FB0    g_dbus_connection_new_for_address
+264        0x00076050    g_dbus_connection_new_for_address_finish
+265        0x00076160    g_dbus_connection_new_for_address_sync
+266        0x00075EC0    g_dbus_connection_new_sync
+267        0x00076F00    g_dbus_connection_register_object
+268        0x00077FD0    g_dbus_connection_register_subtree
+269        0x00076790    g_dbus_connection_remove_filter
+270        0x00074390    g_dbus_connection_send_message
+271        0x00073000    g_dbus_connection_send_message_with_reply
+272        0x00075830    g_dbus_connection_send_message_with_reply_finish
+273        0x00075AB0    g_dbus_connection_send_message_with_reply_sync
+274        0x00076230    g_dbus_connection_set_exit_on_close
+275        0x000768A0    g_dbus_connection_signal_subscribe
+276        0x00076DD0    g_dbus_connection_signal_unsubscribe
+277        0x00073D10    g_dbus_connection_start_message_processing
+278        0x000771F0    g_dbus_connection_unregister_object
+279        0x000781E0    g_dbus_connection_unregister_subtree
+280        0x0006F680    g_dbus_error_encode_gerror
+281        0x0006EF10    g_dbus_error_get_remote_error
+282        0x000500C0    g_dbus_error_get_type
+283        0x0006EEC0    g_dbus_error_is_remote_error
+284        0x0006F090    g_dbus_error_new_for_dbus_error
+285        0x0006EB60    g_dbus_error_quark
+286        0x0006E820    g_dbus_error_register_error
+287        0x0006EA00    g_dbus_error_register_error_domain
+288        0x0006F4F0    g_dbus_error_set_dbus_error
+289        0x0006F3B0    g_dbus_error_set_dbus_error_valist
+290        0x0006F5D0    g_dbus_error_strip_remote_error
+291        0x0006EBA0    g_dbus_error_unregister_error
+292        0x000669A0    g_dbus_generate_guid
+293        0x00066ED0    g_dbus_gvalue_to_gvariant
+294        0x00066AE0    g_dbus_gvariant_to_gvalue
+295        0x0008A7D0    g_dbus_interface_get_info
+296        0x0008A860    g_dbus_interface_get_object
+297        0x0008A720    g_dbus_interface_get_type
+298        0x000881C0    g_dbus_interface_info_cache_build
+299        0x000883C0    g_dbus_interface_info_cache_release
+300        0x00087650    g_dbus_interface_info_generate_xml
+301        0x000873B0    g_dbus_interface_info_get_type
+302        0x00087E90    g_dbus_interface_info_lookup_method
+303        0x000880B0    g_dbus_interface_info_lookup_property
+304        0x00087FA0    g_dbus_interface_info_lookup_signal
+305        0x000865D0    g_dbus_interface_info_ref
+306        0x000862C0    g_dbus_interface_info_unref
+307        0x0008A8F0    g_dbus_interface_set_object
+308        0x0008B7C0    g_dbus_interface_skeleton_export
+309        0x000509F0    g_dbus_interface_skeleton_flags_get_type
+310        0x0008B650    g_dbus_interface_skeleton_flush
+311        0x0008B6C0    g_dbus_interface_skeleton_get_connection
+312        0x0008AF60    g_dbus_interface_skeleton_get_flags
+313        0x0008B1E0    g_dbus_interface_skeleton_get_info
+314        0x0008B740    g_dbus_interface_skeleton_get_object_path
+315        0x0008B5D0    g_dbus_interface_skeleton_get_properties
+316        0x0008AD60    g_dbus_interface_skeleton_get_type
+317        0x0008B2A0    g_dbus_interface_skeleton_get_vtable
+318        0x0008B070    g_dbus_interface_skeleton_set_flags
+319        0x0008BA80    g_dbus_interface_skeleton_unexport
+320        0x00068200    g_dbus_is_address
+321        0x00066A60    g_dbus_is_guid
+322        0x000668F0    g_dbus_is_interface_name
+323        0x00066890    g_dbus_is_member_name
+324        0x00066720    g_dbus_is_name
+325        0x00067BB0    g_dbus_is_supported_address
+326        0x00066800    g_dbus_is_unique_name
+327        0x00050670    g_dbus_message_byte_order_get_type
+328        0x0007A690    g_dbus_message_bytes_needed
+329        0x0007CE50    g_dbus_message_copy
+330        0x000502F0    g_dbus_message_flags_get_type
+331        0x0007BF20    g_dbus_message_get_arg0
+332        0x0007A630    g_dbus_message_get_body
+333        0x00079F30    g_dbus_message_get_byte_order
+334        0x0007B550    g_dbus_message_get_destination
+335        0x0007B8F0    g_dbus_message_get_error_name
+336        0x0007A140    g_dbus_message_get_flags
+337        0x0007A350    g_dbus_message_get_header
+338        0x0007A550    g_dbus_message_get_header_fields
+339        0x0007A8A0    g_dbus_message_get_interface
+340        0x0007CCC0    g_dbus_message_get_locked
+341        0x0007A9C0    g_dbus_message_get_member
+342        0x0007A020    g_dbus_message_get_message_type
+343        0x0007BFF0    g_dbus_message_get_num_unix_fds
+344        0x0007AAE0    g_dbus_message_get_path
+345        0x0007A7B0    g_dbus_message_get_reply_serial
+346        0x0007B430    g_dbus_message_get_sender
+347        0x0007A260    g_dbus_message_get_serial
+348        0x0007BA10    g_dbus_message_get_signature
+349        0x00079E80    g_dbus_message_get_type
+350        0x00050360    g_dbus_message_header_field_get_type
+351        0x0007CDD0    g_dbus_message_lock
+352        0x00079F10    g_dbus_message_new
+353        0x0007ADE0    g_dbus_message_new_from_blob
+354        0x0007B790    g_dbus_message_new_method_call
+355        0x0007BEF0    g_dbus_message_new_method_error
+356        0x0007BCF0    g_dbus_message_new_method_error_literal
+357        0x0007BEA0    g_dbus_message_new_method_error_valist
+358        0x0007B670    g_dbus_message_new_method_reply
+359        0x0007B320    g_dbus_message_new_signal
+360        0x0007C8D0    g_dbus_message_print
+361        0x0007BB70    g_dbus_message_set_body
+362        0x00079F90    g_dbus_message_set_byte_order
+363        0x0007B5C0    g_dbus_message_set_destination
+364        0x0007B960    g_dbus_message_set_error_name
+365        0x0007A1A0    g_dbus_message_set_flags
+366        0x0007A3F0    g_dbus_message_set_header
+367        0x0007A910    g_dbus_message_set_interface
+368        0x0007AA30    g_dbus_message_set_member
+369        0x0007A080    g_dbus_message_set_message_type
+370        0x0007C6D0    g_dbus_message_set_num_unix_fds
+371        0x0007B270    g_dbus_message_set_path
+372        0x0007A820    g_dbus_message_set_reply_serial
+373        0x0007B4A0    g_dbus_message_set_sender
+374        0x0007A2C0    g_dbus_message_set_serial
+375        0x0007BAC0    g_dbus_message_set_signature
+376        0x0007C060    g_dbus_message_to_blob
+377        0x0007C750    g_dbus_message_to_gerror
+378        0x00050280    g_dbus_message_type_get_type
+379        0x00087420    g_dbus_method_info_get_type
+380        0x000865B0    g_dbus_method_info_ref
+381        0x00086400    g_dbus_method_info_unref
+382        0x00088860    g_dbus_method_invocation_get_connection
+383        0x00088740    g_dbus_method_invocation_get_interface_name
+384        0x000888C0    g_dbus_method_invocation_get_message
+385        0x000887A0    g_dbus_method_invocation_get_method_info
+386        0x00088800    g_dbus_method_invocation_get_method_name
+387        0x000886E0    g_dbus_method_invocation_get_object_path
+388        0x00088920    g_dbus_method_invocation_get_parameters
+389        0x00088680    g_dbus_method_invocation_get_sender
+390        0x000885F0    g_dbus_method_invocation_get_type
+391        0x00088980    g_dbus_method_invocation_get_user_data
+392        0x00088E80    g_dbus_method_invocation_return_dbus_error
+393        0x000892E0    g_dbus_method_invocation_return_error
+394        0x00089160    g_dbus_method_invocation_return_error_literal
+395        0x00089220    g_dbus_method_invocation_return_error_valist
+396        0x00089000    g_dbus_method_invocation_return_gerror
+397        0x00088C60    g_dbus_method_invocation_return_value
+398        0x000890C0    g_dbus_method_invocation_take_error
+399        0x00087B00    g_dbus_node_info_generate_xml
+400        0x00087340    g_dbus_node_info_get_type
+401        0x000884E0    g_dbus_node_info_lookup_interface
+402        0x00087C90    g_dbus_node_info_new_for_xml
+403        0x000865F0    g_dbus_node_info_ref
+404        0x00086250    g_dbus_node_info_unref
+405        0x0008BF20    g_dbus_object_get_interface
+406        0x0008BEF0    g_dbus_object_get_interfaces
+407        0x0008BEC0    g_dbus_object_get_object_path
+408        0x0008BE10    g_dbus_object_get_type
+409        0x00050A60    g_dbus_object_manager_client_flags_get_type
+410        0x000900B0    g_dbus_object_manager_client_get_connection
+411        0x000901B0    g_dbus_object_manager_client_get_flags
+412        0x00090130    g_dbus_object_manager_client_get_name
+413        0x00090230    g_dbus_object_manager_client_get_name_owner
+414        0x0008EB50    g_dbus_object_manager_client_get_type
+415        0x0008FB50    g_dbus_object_manager_client_new
+416        0x0008FCD0    g_dbus_object_manager_client_new_finish
+417        0x0008FED0    g_dbus_object_manager_client_new_for_bus
+418        0x00090030    g_dbus_object_manager_client_new_for_bus_finish
+419        0x0008FD50    g_dbus_object_manager_client_new_for_bus_sync
+420        0x0008F9A0    g_dbus_object_manager_client_new_sync
+421        0x0008DBB0    g_dbus_object_manager_get_interface
+422        0x0008DB30    g_dbus_object_manager_get_object
+423        0x0008DAD0    g_dbus_object_manager_get_object_path
+424        0x0008DB00    g_dbus_object_manager_get_objects
+425        0x0008DA20    g_dbus_object_manager_get_type
+426        0x00091D90    g_dbus_object_manager_server_export
+427        0x00091E30    g_dbus_object_manager_server_export_uniquely
+428        0x00091CE0    g_dbus_object_manager_server_get_connection
+429        0x00091460    g_dbus_object_manager_server_get_type
+430        0x000919C0    g_dbus_object_manager_server_new
+431        0x00091A30    g_dbus_object_manager_server_set_connection
+432        0x00092010    g_dbus_object_manager_server_unexport
+433        0x0008D320    g_dbus_object_proxy_get_connection
+434        0x0008D050    g_dbus_object_proxy_get_type
+435        0x0008D4A0    g_dbus_object_proxy_new
+436        0x0008C750    g_dbus_object_skeleton_add_interface
+437        0x0008CCF0    g_dbus_object_skeleton_flush
+438        0x0008C130    g_dbus_object_skeleton_get_type
+439        0x0008C500    g_dbus_object_skeleton_new
+440        0x0008C980    g_dbus_object_skeleton_remove_interface
+441        0x0008CB90    g_dbus_object_skeleton_remove_interface_by_name
+442        0x0008C570    g_dbus_object_skeleton_set_object_path
+443        0x000503D0    g_dbus_property_info_flags_get_type
+444        0x00087500    g_dbus_property_info_get_type
+445        0x00086570    g_dbus_property_info_ref
+446        0x00086340    g_dbus_property_info_unref
+447        0x00082C60    g_dbus_proxy_call
+448        0x00082CB0    g_dbus_proxy_call_finish
+449        0x00082E00    g_dbus_proxy_call_sync
+450        0x00050050    g_dbus_proxy_flags_get_type
+451        0x000818E0    g_dbus_proxy_get_cached_property
+452        0x00081770    g_dbus_proxy_get_cached_property_names
+453        0x00082260    g_dbus_proxy_get_connection
+454        0x00082510    g_dbus_proxy_get_default_timeout
+455        0x000822C0    g_dbus_proxy_get_flags
+456        0x00082730    g_dbus_proxy_get_interface_info
+457        0x000824B0    g_dbus_proxy_get_interface_name
+458        0x00082320    g_dbus_proxy_get_name
+459        0x00082380    g_dbus_proxy_get_name_owner
+460        0x00082450    g_dbus_proxy_get_object_path
+461        0x00080E50    g_dbus_proxy_get_type
+462        0x00081BC0    g_dbus_proxy_new
+463        0x00081D70    g_dbus_proxy_new_finish
+464        0x00081FA0    g_dbus_proxy_new_for_bus
+465        0x000820F0    g_dbus_proxy_new_for_bus_finish
+466        0x00082110    g_dbus_proxy_new_for_bus_sync
+467        0x00081DF0    g_dbus_proxy_new_sync
+468        0x00081A10    g_dbus_proxy_set_cached_property
+469        0x000825E0    g_dbus_proxy_set_default_timeout
+470        0x000829C0    g_dbus_proxy_set_interface_info
+471        0x00050590    g_dbus_send_message_flags_get_type
+472        0x000504B0    g_dbus_server_flags_get_type
+473        0x0008A3D0    g_dbus_server_get_client_address
+474        0x0008A490    g_dbus_server_get_flags
+475        0x0008A430    g_dbus_server_get_guid
+476        0x00089F50    g_dbus_server_get_type
+477        0x0008A4F0    g_dbus_server_is_active
+478        0x0008A2A0    g_dbus_server_new_sync
+479        0x0008A550    g_dbus_server_start
+480        0x0008A610    g_dbus_server_stop
+481        0x00050520    g_dbus_signal_flags_get_type
+482        0x00087490    g_dbus_signal_info_get_type
+483        0x00086590    g_dbus_signal_info_ref
+484        0x000863A0    g_dbus_signal_info_unref
+485        0x00050440    g_dbus_subtree_flags_get_type
+486        0x0000BF50    g_drive_can_eject
+487        0x0000BFE0    g_drive_can_poll_for_media
+488        0x0000C920    g_drive_can_start
+489        0x0000C9B0    g_drive_can_start_degraded
+490        0x0000CC60    g_drive_can_stop
+491        0x0000C070    g_drive_eject
+492        0x0000C160    g_drive_eject_finish
+493        0x0000C290    g_drive_eject_with_operation
+494        0x0000C3C0    g_drive_eject_with_operation_finish
+495        0x0000C800    g_drive_enumerate_identifiers
+496        0x0000BBF0    g_drive_get_icon
+497        0x0000C730    g_drive_get_identifier
+498        0x0000BB60    g_drive_get_name
+499        0x0000C890    g_drive_get_start_stop_type
+500        0x0000B950    g_drive_get_type
+501        0x0000BD10    g_drive_get_volumes
+502        0x0000BEC0    g_drive_has_media
+503        0x0000BC80    g_drive_has_volumes
+504        0x0000BDA0    g_drive_is_media_check_automatic
+505        0x0000BE30    g_drive_is_media_removable
+506        0x0000C510    g_drive_poll_for_media
+507        0x0000C600    g_drive_poll_for_media_finish
+508        0x0000CA40    g_drive_start
+509        0x0000CB30    g_drive_start_finish
+510        0x0004F5D0    g_drive_start_flags_get_type
+511        0x0004F640    g_drive_start_stop_type_get_type
+512        0x0000CCF0    g_drive_stop
+513        0x0000CDE0    g_drive_stop_finish
+514        0x0000F1C0    g_emblem_get_icon
+515        0x0000F250    g_emblem_get_origin
+516        0x0000EDA0    g_emblem_get_type
+517        0x0000EE60    g_emblem_new
+518        0x0000EFA0    g_emblem_new_with_origin
+519        0x0004FB80    g_emblem_origin_get_type
+520        0x0000FAD0    g_emblemed_icon_add_emblem
+521        0x0000FA50    g_emblemed_icon_clear_emblems
+522        0x0000F9F0    g_emblemed_icon_get_emblems
+523        0x0000F990    g_emblemed_icon_get_icon
+524        0x0000F710    g_emblemed_icon_get_type
+525        0x0000FBA0    g_emblemed_icon_new
+526        0x000134E0    g_file_append_to
+527        0x00013D90    g_file_append_to_async
+528        0x00013E40    g_file_append_to_finish
+529        0x0004F330    g_file_attribute_info_flags_get_type
+530        0x0001A050    g_file_attribute_info_list_add
+531        0x00018F40    g_file_attribute_info_list_dup
+532        0x00019390    g_file_attribute_info_list_get_type
+533        0x00019F90    g_file_attribute_info_list_lookup
+534        0x00019ED0    g_file_attribute_info_list_new
+535        0x00019F20    g_file_attribute_info_list_ref
+536        0x00019040    g_file_attribute_info_list_unref
+537        0x00020210    g_file_attribute_matcher_enumerate_namespace
+538        0x000202D0    g_file_attribute_matcher_enumerate_next
+539        0x0001EA20    g_file_attribute_matcher_get_type
+540        0x000201A0    g_file_attribute_matcher_matches
+541        0x0001EC80    g_file_attribute_matcher_matches_only
+542        0x0001EA90    g_file_attribute_matcher_new
+543        0x0001D1E0    g_file_attribute_matcher_ref
+544        0x0001D0F0    g_file_attribute_matcher_unref
+545        0x0004F3A0    g_file_attribute_status_get_type
+546        0x0004F2C0    g_file_attribute_type_get_type
+547        0x00015EE0    g_file_copy
+548        0x00014AA0    g_file_copy_async
+549        0x00015BD0    g_file_copy_attributes
+550        0x00014BC0    g_file_copy_finish
+551        0x0004F6B0    g_file_copy_flags_get_type
+552        0x000135E0    g_file_create
+553        0x00013F70    g_file_create_async
+554        0x00014020    g_file_create_finish
+555        0x0004F480    g_file_create_flags_get_type
+556        0x000138E0    g_file_create_readwrite
+557        0x000146D0    g_file_create_readwrite_async
+558        0x00014780    g_file_create_readwrite_finish
+559        0x000150E0    g_file_delete
+560        0x00011BA0    g_file_dup
+561        0x000173B0    g_file_eject_mountable
+562        0x000174A0    g_file_eject_mountable_finish
+563        0x000175D0    g_file_eject_mountable_with_operation
+564        0x00017700    g_file_eject_mountable_with_operation_finish
+565        0x00012340    g_file_enumerate_children
+566        0x000124B0    g_file_enumerate_children_async
+567        0x00012560    g_file_enumerate_children_finish
+568        0x0001AA80    g_file_enumerator_close
+569        0x0001AD40    g_file_enumerator_close_async
+570        0x0001AE60    g_file_enumerator_close_finish
+571        0x0001B0C0    g_file_enumerator_get_container
+572        0x0001A6B0    g_file_enumerator_get_type
+573        0x0001AFE0    g_file_enumerator_has_pending
+574        0x0001AF70    g_file_enumerator_is_closed
+575        0x0001A910    g_file_enumerator_next_file
+576        0x0001A740    g_file_enumerator_next_files_async
+577        0x0001AC10    g_file_enumerator_next_files_finish
+578        0x0001B050    g_file_enumerator_set_pending
+579        0x00011CC0    g_file_equal
+580        0x000130D0    g_file_find_enclosing_mount
+581        0x00013220    g_file_find_enclosing_mount_async
+582        0x000132C0    g_file_find_enclosing_mount_finish
+583        0x00011960    g_file_get_basename
+584        0x000122A0    g_file_get_child
+585        0x00011F30    g_file_get_child_for_display_name
+586        0x00011DB0    g_file_get_parent
+587        0x00011B10    g_file_get_parse_name
+588        0x000119F0    g_file_get_path
+589        0x000120F0    g_file_get_relative_path
+590        0x000111E0    g_file_get_type
+591        0x00011A80    g_file_get_uri
+592        0x000118D0    g_file_get_uri_scheme
+593        0x00011E40    g_file_has_parent
+594        0x00012000    g_file_has_prefix
+595        0x00011810    g_file_has_uri_scheme
+596        0x00011C30    g_file_hash
+597        0x0001B870    g_file_icon_get_file
+598        0x0001B630    g_file_icon_get_type
+599        0x0001B720    g_file_icon_new
+600        0x0001D520    g_file_info_clear_status
+601        0x0001D2D0    g_file_info_copy_into
+602        0x0001D440    g_file_info_dup
+603        0x0001DC20    g_file_info_get_attribute_as_string
+604        0x0001DED0    g_file_info_get_attribute_boolean
+605        0x0001DD90    g_file_info_get_attribute_byte_string
+606        0x0001D9B0    g_file_info_get_attribute_data
+607        0x0001E010    g_file_info_get_attribute_int32
+608        0x0001E140    g_file_info_get_attribute_int64
+609        0x0001DC50    g_file_info_get_attribute_object
+610        0x0001DA20    g_file_info_get_attribute_status
+611        0x0001DCF0    g_file_info_get_attribute_string
+612        0x0001DE30    g_file_info_get_attribute_stringv
+613        0x0001D820    g_file_info_get_attribute_type
+614        0x0001DF70    g_file_info_get_attribute_uint32
+615        0x0001E0B0    g_file_info_get_attribute_uint64
+616        0x0001E670    g_file_info_get_content_type
+617        0x0001E4A0    g_file_info_get_display_name
+618        0x0001E530    g_file_info_get_edit_name
+619        0x0001E900    g_file_info_get_etag
+620        0x0001E1D0    g_file_info_get_file_type
+621        0x0001E5C0    g_file_info_get_icon
+622        0x0001E2F0    g_file_info_get_is_backup
+623        0x0001E260    g_file_info_get_is_hidden
+624        0x0001E380    g_file_info_get_is_symlink
+625        0x0001E790    g_file_info_get_modification_time
+626        0x0001E410    g_file_info_get_name
+627        0x0001E700    g_file_info_get_size
+628        0x0001E990    g_file_info_get_sort_order
+629        0x0001E870    g_file_info_get_symlink_target
+630        0x0001D220    g_file_info_get_type
+631        0x0001D5A0    g_file_info_has_attribute
+632        0x0001D640    g_file_info_has_namespace
+633        0x0001D710    g_file_info_list_attributes
+634        0x0001D2B0    g_file_info_new
+635        0x0001D8D0    g_file_info_remove_attribute
+636        0x0001FFF0    g_file_info_set_attribute
+637        0x0001FA60    g_file_info_set_attribute_boolean
+638        0x0001FB40    g_file_info_set_attribute_byte_string
+639        0x0001F8A0    g_file_info_set_attribute_int32
+640        0x0001F6B0    g_file_info_set_attribute_int64
+641        0x000200A0    g_file_info_set_attribute_mask
+642        0x0001FEA0    g_file_info_set_attribute_object
+643        0x0001DAD0    g_file_info_set_attribute_status
+644        0x0001FC60    g_file_info_set_attribute_string
+645        0x0001FD80    g_file_info_set_attribute_stringv
+646        0x0001F980    g_file_info_set_attribute_uint32
+647        0x0001F7B0    g_file_info_set_attribute_uint64
+648        0x0001F0E0    g_file_info_set_content_type
+649        0x0001F340    g_file_info_set_display_name
+650        0x0001F280    g_file_info_set_edit_name
+651        0x0001F5E0    g_file_info_set_file_type
+652        0x0001F1A0    g_file_info_set_icon
+653        0x0001F550    g_file_info_set_is_hidden
+654        0x0001F4C0    g_file_info_set_is_symlink
+655        0x0001EF30    g_file_info_set_modification_time
+656        0x0001F400    g_file_info_set_name
+657        0x0001F030    g_file_info_set_size
+658        0x0001EDE0    g_file_info_set_sort_order
+659        0x0001EE70    g_file_info_set_symlink_target
+660        0x0001D4B0    g_file_info_unset_attribute_mask
+661        0x00020640    g_file_input_stream_get_type
+662        0x000209A0    g_file_input_stream_query_info
+663        0x00020AA0    g_file_input_stream_query_info_async
+664        0x00020BA0    g_file_input_stream_query_info_finish
+665        0x00023DC0    g_file_io_stream_get_etag
+666        0x00023560    g_file_io_stream_get_type
+667        0x00023AA0    g_file_io_stream_query_info
+668        0x00023BA0    g_file_io_stream_query_info_async
+669        0x00023CA0    g_file_io_stream_query_info_finish
+670        0x00011780    g_file_is_native
+671        0x00017FB0    g_file_load_contents
+672        0x00018250    g_file_load_contents_async
+673        0x00018480    g_file_load_contents_finish
+674        0x00018190    g_file_load_partial_contents_async
+675        0x00018280    g_file_load_partial_contents_finish
+676        0x00014CF0    g_file_make_directory
+677        0x00014DE0    g_file_make_directory_with_parents
+678        0x00014F60    g_file_make_symbolic_link
+679        0x00017A20    g_file_monitor
+680        0x000216F0    g_file_monitor_cancel
+681        0x00017860    g_file_monitor_directory
+682        0x00021A00    g_file_monitor_emit_event
+683        0x0004F870    g_file_monitor_event_get_type
+684        0x00017960    g_file_monitor_file
+685        0x0004F720    g_file_monitor_flags_get_type
+686        0x000213A0    g_file_monitor_get_type
+687        0x00021620    g_file_monitor_is_cancelled
+688        0x000218A0    g_file_monitor_set_rate_limit
+689        0x00017C60    g_file_mount_enclosing_volume
+690        0x00017D60    g_file_mount_enclosing_volume_finish
+691        0x00016CD0    g_file_mount_mountable
+692        0x00016DD0    g_file_mount_mountable_finish
+693        0x000165C0    g_file_move
+694        0x00017B80    g_file_new_for_commandline_arg
+695        0x00017A90    g_file_new_for_path
+696        0x00017AE0    g_file_new_for_uri
+697        0x000137F0    g_file_open_readwrite
+698        0x00014500    g_file_open_readwrite_async
+699        0x000145A0    g_file_open_readwrite_finish
+700        0x00023180    g_file_output_stream_get_etag
+701        0x00022920    g_file_output_stream_get_type
+702        0x00022E60    g_file_output_stream_query_info
+703        0x00022F60    g_file_output_stream_query_info_async
+704        0x00023060    g_file_output_stream_query_info_finish
+705        0x00017B30    g_file_parse_name
+706        0x00018C10    g_file_poll_mountable
+707        0x00018D00    g_file_poll_mountable_finish
+708        0x00017E90    g_file_query_default_handler
+709        0x00012A90    g_file_query_exists
+710        0x000129F0    g_file_query_file_type
+711        0x00012D80    g_file_query_filesystem_info
+712        0x00012EF0    g_file_query_filesystem_info_async
+713        0x00012FA0    g_file_query_filesystem_info_finish
+714        0x00012690    g_file_query_info
+715        0x00012BA0    g_file_query_info_async
+716        0x00012C50    g_file_query_info_finish
+717        0x0004F410    g_file_query_info_flags_get_type
+718        0x00015670    g_file_query_settable_attributes
+719        0x00015780    g_file_query_writable_namespaces
+720        0x000133F0    g_file_read
+721        0x00013AF0    g_file_read_async
+722        0x00013B90    g_file_read_finish
+723        0x000136E0    g_file_replace
+724        0x00014150    g_file_replace_async
+725        0x000184C0    g_file_replace_contents
+726        0x00014210    g_file_replace_contents_async
+727        0x00018650    g_file_replace_contents_finish
+728        0x00014320    g_file_replace_finish
+729        0x000139E0    g_file_replace_readwrite
+730        0x000148B0    g_file_replace_readwrite_async
+731        0x00014970    g_file_replace_readwrite_finish
+732        0x000121E0    g_file_resolve_relative_path
+733        0x00015890    g_file_set_attribute
+734        0x00016B70    g_file_set_attribute_byte_string
+735        0x00016BF0    g_file_set_attribute_int32
+736        0x00016C80    g_file_set_attribute_int64
+737        0x00016B30    g_file_set_attribute_string
+738        0x00016BB0    g_file_set_attribute_uint32
+739        0x00016C30    g_file_set_attribute_uint64
+740        0x00016930    g_file_set_attributes_async
+741        0x00016A30    g_file_set_attributes_finish
+742        0x00015AC0    g_file_set_attributes_from_info
+743        0x000152C0    g_file_set_display_name
+744        0x00015460    g_file_set_display_name_async
+745        0x00015540    g_file_set_display_name_finish
+746        0x000187B0    g_file_start_mountable
+747        0x000188B0    g_file_start_mountable_finish
+748        0x000189E0    g_file_stop_mountable
+749        0x00018AE0    g_file_stop_mountable_finish
+750        0x00018E30    g_file_supports_thread_contexts
+751        0x000151D0    g_file_trash
+752        0x0004F790    g_file_type_get_type
+753        0x00016F00    g_file_unmount_mountable
+754        0x00016FF0    g_file_unmount_mountable_finish
+755        0x00017120    g_file_unmount_mountable_with_operation
+756        0x00017250    g_file_unmount_mountable_with_operation_finish
+757        0x00022360    g_filename_completer_get_completion_suffix
+758        0x000224E0    g_filename_completer_get_completions
+759        0x00022230    g_filename_completer_get_type
+760        0x00022340    g_filename_completer_new
+761        0x00022620    g_filename_completer_set_dirs_only
+762        0x0004F800    g_filesystem_preview_type_get_type
+763        0x00024200    g_filter_input_stream_get_base_stream
+764        0x00024260    g_filter_input_stream_get_close_base_stream
+765        0x00024020    g_filter_input_stream_get_type
+766        0x000242E0    g_filter_input_stream_set_close_base_stream
+767        0x00024800    g_filter_output_stream_get_base_stream
+768        0x00024860    g_filter_output_stream_get_close_base_stream
+769        0x00024620    g_filter_output_stream_get_type
+770        0x000248E0    g_filter_output_stream_set_close_base_stream
+771        0x00024BA0    g_icon_equal
+772        0x00024A60    g_icon_get_type
+773        0x00024B10    g_icon_hash
+774        0x00024F80    g_icon_new_for_string
+775        0x00024C20    g_icon_to_string
+776        0x00026580    g_inet_address_equal
+777        0x00025D50    g_inet_address_get_family
+778        0x00025DB0    g_inet_address_get_is_any
+779        0x00025F20    g_inet_address_get_is_link_local
+780        0x00025E60    g_inet_address_get_is_loopback
+781        0x00026110    g_inet_address_get_is_mc_global
+782        0x00026190    g_inet_address_get_is_mc_link_local
+783        0x00026210    g_inet_address_get_is_mc_node_local
+784        0x00026290    g_inet_address_get_is_mc_org_local
+785        0x00026310    g_inet_address_get_is_mc_site_local
+786        0x00026080    g_inet_address_get_is_multicast
+787        0x00025FC0    g_inet_address_get_is_site_local
+788        0x00025D30    g_inet_address_get_native_size
+789        0x00025880    g_inet_address_get_type
+790        0x00025B40    g_inet_address_new_any
+791        0x00025950    g_inet_address_new_from_bytes
+792        0x000259D0    g_inet_address_new_from_string
+793        0x00025AC0    g_inet_address_new_loopback
+794        0x00025CD0    g_inet_address_to_bytes
+795        0x00025BC0    g_inet_address_to_string
+796        0x00026DA0    g_inet_socket_address_get_address
+797        0x00026E00    g_inet_socket_address_get_port
+798        0x000269A0    g_inet_socket_address_get_type
+799        0x00026D50    g_inet_socket_address_new
+800        0x00026E70    g_initable_get_type
+801        0x00026F20    g_initable_init
+802        0x000270F0    g_initable_new
+803        0x00027050    g_initable_new_valist
+804        0x00026FB0    g_initable_newv
+805        0x000283E0    g_input_stream_clear_pending
+806        0x000284C0    g_input_stream_close
+807        0x00027F70    g_input_stream_close_async
+808        0x00027C70    g_input_stream_close_finish
+809        0x00027770    g_input_stream_get_type
+810        0x00027E10    g_input_stream_has_pending
+811        0x00027DA0    g_input_stream_is_closed
+812        0x00028730    g_input_stream_read
+813        0x000288F0    g_input_stream_read_all
+814        0x00028230    g_input_stream_read_async
+815        0x00027830    g_input_stream_read_finish
+816        0x00027E80    g_input_stream_set_pending
+817        0x000285F0    g_input_stream_skip
+818        0x000280A0    g_input_stream_skip_async
+819        0x00027B30    g_input_stream_skip_finish
+820        0x0004F8E0    g_io_error_enum_get_type
+821        0x00028A10    g_io_error_from_errno
+822        0x00028A30    g_io_error_from_win32_error
+823        0x000289F0    g_io_error_quark
+824        0x000299F0    g_io_extension_get_name
+825        0x00029A00    g_io_extension_get_priority
+826        0x000299E0    g_io_extension_get_type
+827        0x00029830    g_io_extension_point_get_extension_by_name
+828        0x00029810    g_io_extension_point_get_extensions
+829        0x000297A0    g_io_extension_point_get_required_type
+830        0x00029880    g_io_extension_point_implement
+831        0x00029710    g_io_extension_point_lookup
+832        0x00029020    g_io_extension_point_register
+833        0x00029790    g_io_extension_point_set_required_type
+834        0x000299C0    g_io_extension_ref_class
+835        0x00028DC0    g_io_module_get_type
+836        0x00028E60    g_io_module_new
+837        0x00028CD0    g_io_module_scope_block
+838        0x00050BB0    g_io_module_scope_flags_get_type
+839        0x00028CA0    g_io_module_scope_free
+840        0x00028C50    g_io_module_scope_new
+841        0x00028FE0    g_io_modules_load_all_in_directory
+842        0x00028ED0    g_io_modules_load_all_in_directory_with_scope
+843        0x00029420    g_io_modules_scan_all_in_directory
+844        0x00029120    g_io_modules_scan_all_in_directory_with_scope
+845        0x00029E20    g_io_scheduler_cancel_all_jobs
+846        0x00029EE0    g_io_scheduler_job_send_to_mainloop
+847        0x0002A060    g_io_scheduler_job_send_to_mainloop_async
+848        0x00029CD0    g_io_scheduler_push_job
+849        0x0002ADE0    g_io_stream_clear_pending
+850        0x0002AE90    g_io_stream_close
+851        0x0002AAF0    g_io_stream_close_async
+852        0x0002AFC0    g_io_stream_close_finish
+853        0x0002A770    g_io_stream_get_input_stream
+854        0x0002A7C0    g_io_stream_get_output_stream
+855        0x0002A640    g_io_stream_get_type
+856        0x0002A990    g_io_stream_has_pending
+857        0x0002A700    g_io_stream_is_closed
+858        0x0002AA00    g_io_stream_set_pending
+859        0x0002B180    g_io_stream_splice_async
+860        0x0002A530    g_io_stream_splice_finish
+861        0x0004FB10    g_io_stream_splice_flags_get_type
+862        0x0005CAD0    g_keyfile_settings_backend_new
+863        0x0002B540    g_loadable_icon_get_type
+864        0x0002B690    g_loadable_icon_load
+865        0x0002B730    g_loadable_icon_load_async
+866        0x0002B7D0    g_loadable_icon_load_finish
+867        0x0002D800    g_memory_input_stream_add_data
+868        0x0002D6E0    g_memory_input_stream_get_type
+869        0x0002D7E0    g_memory_input_stream_new
+870        0x0002D8F0    g_memory_input_stream_new_from_data
+871        0x0002E400    g_memory_output_stream_get_data
+872        0x0002E4C0    g_memory_output_stream_get_data_size
+873        0x0002E460    g_memory_output_stream_get_size
+874        0x0002E290    g_memory_output_stream_get_type
+875        0x0002E3A0    g_memory_output_stream_new
+876        0x0002E520    g_memory_output_stream_steal_data
+877        0x0005D180    g_memory_settings_backend_new
+878        0x0002C020    g_mount_can_eject
+879        0x0002BF90    g_mount_can_unmount
+880        0x0002C2D0    g_mount_eject
+881        0x0002C3C0    g_mount_eject_finish
+882        0x0002C770    g_mount_eject_with_operation
+883        0x0002C8A0    g_mount_eject_with_operation_finish
+884        0x0002BC20    g_mount_get_default_location
+885        0x0002BF00    g_mount_get_drive
+886        0x0002BD50    g_mount_get_icon
+887        0x0002BCC0    g_mount_get_name
+888        0x0002BB90    g_mount_get_root
+889        0x0002B9D0    g_mount_get_type
+890        0x0002BDE0    g_mount_get_uuid
+891        0x0002BE70    g_mount_get_volume
+892        0x0002CC10    g_mount_guess_content_type
+893        0x0002CD00    g_mount_guess_content_type_finish
+894        0x0002CE30    g_mount_guess_content_type_sync
+895        0x0002CF00    g_mount_is_shadowed
+896        0x0004F4F0    g_mount_mount_flags_get_type
+897        0x0002EF70    g_mount_operation_get_anonymous
+898        0x0002F250    g_mount_operation_get_choice
+899        0x0002F060    g_mount_operation_get_domain
+900        0x0002EE80    g_mount_operation_get_password
+901        0x0002F160    g_mount_operation_get_password_save
+902        0x0002ECA0    g_mount_operation_get_type
+903        0x0002ED80    g_mount_operation_get_username
+904        0x0002ED60    g_mount_operation_new
+905        0x0002F4A0    g_mount_operation_reply
+906        0x0004FA30    g_mount_operation_result_get_type
+907        0x0002EFD0    g_mount_operation_set_anonymous
+908        0x0002F2B0    g_mount_operation_set_choice
+909        0x0002F0C0    g_mount_operation_set_domain
+910        0x0002EEE0    g_mount_operation_set_password
+911        0x0002F1C0    g_mount_operation_set_password_save
+912        0x0002EDE0    g_mount_operation_set_username
+913        0x0002C9F0    g_mount_remount
+914        0x0002CAE0    g_mount_remount_finish
+915        0x0002CFD0    g_mount_shadow
+916        0x0002C0B0    g_mount_unmount
+917        0x0002C1A0    g_mount_unmount_finish
+918        0x0004F560    g_mount_unmount_flags_get_type
+919        0x0002C4F0    g_mount_unmount_with_operation
+920        0x0002C620    g_mount_unmount_with_operation_finish
+921        0x0002D0A0    g_mount_unshadow
+922        0x0002F5A0    g_native_volume_monitor_get_type
+923        0x00030810    g_network_address_get_hostname
+924        0x00030870    g_network_address_get_port
+925        0x000308D0    g_network_address_get_scheme
+926        0x0002FDD0    g_network_address_get_type
+927        0x0002FEC0    g_network_address_new
+928        0x0002FF10    g_network_address_parse
+929        0x00030730    g_network_address_parse_uri
+930        0x00031300    g_network_service_get_domain
+931        0x000312A0    g_network_service_get_protocol
+932        0x00031360    g_network_service_get_scheme
+933        0x00031240    g_network_service_get_service
+934        0x00031100    g_network_service_get_type
+935        0x000311F0    g_network_service_new
+936        0x000317D0    g_network_service_set_scheme
+937        0x0005D3A0    g_null_settings_backend_new
+938        0x00033120    g_output_stream_clear_pending
+939        0x000332F0    g_output_stream_close
+940        0x00032B10    g_output_stream_close_async
+941        0x000327A0    g_output_stream_close_finish
+942        0x00033580    g_output_stream_flush
+943        0x00032CA0    g_output_stream_flush_async
+944        0x00032670    g_output_stream_flush_finish
+945        0x00032340    g_output_stream_get_type
+946        0x000329B0    g_output_stream_has_pending
+947        0x000328D0    g_output_stream_is_closed
+948        0x00032940    g_output_stream_is_closing
+949        0x00032A20    g_output_stream_set_pending
+950        0x000333F0    g_output_stream_splice
+951        0x00032DD0    g_output_stream_splice_async
+952        0x00032540    g_output_stream_splice_finish
+953        0x0004FAA0    g_output_stream_splice_flags_get_type
+954        0x00033670    g_output_stream_write
+955        0x00033830    g_output_stream_write_all
+956        0x00032F70    g_output_stream_write_async
+957        0x00032400    g_output_stream_write_finish
+958        0x0004F9C0    g_password_save_get_type
+959        0x00033C50    g_permission_acquire
+960        0x00033C80    g_permission_acquire_async
+961        0x00033CB0    g_permission_acquire_finish
+962        0x00033D70    g_permission_get_allowed
+963        0x00033D80    g_permission_get_can_acquire
+964        0x00033D90    g_permission_get_can_release
+965        0x00033B90    g_permission_get_type
+966        0x00033DA0    g_permission_impl_update
+967        0x00033CE0    g_permission_release
+968        0x00033D10    g_permission_release_async
+969        0x00033D40    g_permission_release_finish
+970        0x00034040    g_pollable_input_stream_can_poll
+971        0x000341F0    g_pollable_input_stream_create_source
+972        0x00033F90    g_pollable_input_stream_get_type
+973        0x000340D0    g_pollable_input_stream_is_readable
+974        0x00034280    g_pollable_input_stream_read_nonblocking
+975        0x00034470    g_pollable_output_stream_can_poll
+976        0x00034620    g_pollable_output_stream_create_source
+977        0x000343C0    g_pollable_output_stream_get_type
+978        0x00034500    g_pollable_output_stream_is_writable
+979        0x000346B0    g_pollable_output_stream_write_nonblocking
+980        0x00034340    g_pollable_source_new
+981        0x000424A0    g_proxy_address_enumerator_get_type
+982        0x000415A0    g_proxy_address_get_destination_hostname
+983        0x000415B0    g_proxy_address_get_destination_port
+984        0x000415D0    g_proxy_address_get_password
+985        0x00041590    g_proxy_address_get_protocol
+986        0x00041410    g_proxy_address_get_type
+987        0x000415C0    g_proxy_address_get_username
+988        0x00041500    g_proxy_address_new
+989        0x00040CB0    g_proxy_connect
+990        0x00040D50    g_proxy_connect_async
+991        0x00040E00    g_proxy_connect_finish
+992        0x00040C60    g_proxy_get_default_for_protocol
+993        0x00040BB0    g_proxy_get_type
+994        0x00034C40    g_proxy_resolver_get_default
+995        0x00034B90    g_proxy_resolver_get_type
+996        0x00034C80    g_proxy_resolver_is_supported
+997        0x00034DF0    g_proxy_resolver_lookup
+998        0x00034EC0    g_proxy_resolver_lookup_async
+999        0x00034F90    g_proxy_resolver_lookup_finish
+1000       0x00040E90    g_proxy_supports_hostname
+1001       0x0004FBF0    g_resolver_error_get_type
+1002       0x00035CF0    g_resolver_error_quark
+1003       0x000356B0    g_resolver_free_addresses
+1004       0x00035CB0    g_resolver_free_targets
+1005       0x00035410    g_resolver_get_default
+1006       0x00035150    g_resolver_get_type
+1007       0x000356F0    g_resolver_lookup_by_address
+1008       0x000357D0    g_resolver_lookup_by_address_async
+1009       0x000358B0    g_resolver_lookup_by_address_finish
+1010       0x00035490    g_resolver_lookup_by_name
+1011       0x000351E0    g_resolver_lookup_by_name_async
+1012       0x000355B0    g_resolver_lookup_by_name_finish
+1013       0x00035970    g_resolver_lookup_service
+1014       0x00035AA0    g_resolver_lookup_service_async
+1015       0x00035BF0    g_resolver_lookup_service_finish
+1016       0x00035460    g_resolver_set_default
+1017       0x000361A0    g_seekable_can_seek
+1018       0x000362F0    g_seekable_can_truncate
+1019       0x00036060    g_seekable_get_type
+1020       0x00036230    g_seekable_seek
+1021       0x00036110    g_seekable_tell
+1022       0x00036380    g_seekable_truncate
+1023       0x00062E90    g_settings_apply
+1024       0x0005DBC0    g_settings_backend_changed
+1025       0x0005E0C0    g_settings_backend_changed_tree
+1026       0x0005DFC0    g_settings_backend_flatten_tree
+1027       0x0005E2F0    g_settings_backend_get_default
+1028       0x0005DA00    g_settings_backend_get_type
+1029       0x0005DC80    g_settings_backend_keys_changed
+1030       0x0005DD80    g_settings_backend_path_changed
+1031       0x0005DF00    g_settings_backend_path_writable_changed
+1032       0x0005DE40    g_settings_backend_writable_changed
+1033       0x00063E30    g_settings_bind
+1034       0x00050C20    g_settings_bind_flags_get_type
+1035       0x00063870    g_settings_bind_with_mapping
+1036       0x000636B0    g_settings_bind_writable
+1037       0x00062DB0    g_settings_delay
+1038       0x00062860    g_settings_get
+1039       0x00062CA0    g_settings_get_boolean
+1040       0x000631F0    g_settings_get_child
+1041       0x00062C30    g_settings_get_double
+1042       0x00062000    g_settings_get_enum
+1043       0x00062310    g_settings_get_flags
+1044       0x00062ED0    g_settings_get_has_unapplied
+1045       0x00062B50    g_settings_get_int
+1046       0x000628F0    g_settings_get_mapped
+1047       0x000634C0    g_settings_get_range
+1048       0x00062AD0    g_settings_get_string
+1049       0x00062D10    g_settings_get_strv
+1050       0x000617D0    g_settings_get_type
+1051       0x00062BC0    g_settings_get_uint
+1052       0x00061F20    g_settings_get_value
+1053       0x00063090    g_settings_is_writable
+1054       0x000633E0    g_settings_list_children
+1055       0x00063320    g_settings_list_keys
+1056       0x0005EA50    g_settings_list_relocatable_schemas
+1057       0x0005EA30    g_settings_list_schemas
+1058       0x00061C30    g_settings_new
+1059       0x00061D40    g_settings_new_with_backend
+1060       0x00061E00    g_settings_new_with_backend_and_path
+1061       0x00061C90    g_settings_new_with_path
+1062       0x00063640    g_settings_range_check
+1063       0x00063020    g_settings_reset
+1064       0x00062EB0    g_settings_revert
+1065       0x000628B0    g_settings_set
+1066       0x00062CE0    g_settings_set_boolean
+1067       0x00062C70    g_settings_set_double
+1068       0x000621B0    g_settings_set_enum
+1069       0x00062500    g_settings_set_flags
+1070       0x00062B90    g_settings_set_int
+1071       0x00062B20    g_settings_set_string
+1072       0x00062D60    g_settings_set_strv
+1073       0x00062C00    g_settings_set_uint
+1074       0x000626E0    g_settings_set_value
+1075       0x00063080    g_settings_sync
+1076       0x00063E90    g_settings_unbind
+1077       0x00055CD0    g_simple_action_get_parameter_type
+1078       0x00055F40    g_simple_action_get_type
+1079       0x00055290    g_simple_action_group_add_entries
+1080       0x00054E90    g_simple_action_group_get_type
+1081       0x00055040    g_simple_action_group_insert
+1082       0x00054FD0    g_simple_action_group_lookup
+1083       0x00054FB0    g_simple_action_group_new
+1084       0x000551D0    g_simple_action_group_remove
+1085       0x000564F0    g_simple_action_new
+1086       0x00056580    g_simple_action_new_stateful
+1087       0x00056470    g_simple_action_set_enabled
+1088       0x000562A0    g_simple_action_set_state
+1089       0x00037520    g_simple_async_report_error_in_idle
+1090       0x00037650    g_simple_async_report_gerror_in_idle
+1091       0x00037710    g_simple_async_report_take_gerror_in_idle
+1092       0x00037120    g_simple_async_result_complete
+1093       0x000372D0    g_simple_async_result_complete_in_idle
+1094       0x00036A70    g_simple_async_result_get_op_res_gboolean
+1095       0x000368B0    g_simple_async_result_get_op_res_gpointer
+1096       0x00036990    g_simple_async_result_get_op_res_gssize
+1097       0x00036750    g_simple_async_result_get_source_tag
+1098       0x00036550    g_simple_async_result_get_type
+1099       0x00037470    g_simple_async_result_is_valid
+1100       0x00036610    g_simple_async_result_new
+1101       0x00036E40    g_simple_async_result_new_error
+1102       0x00036B70    g_simple_async_result_new_from_error
+1103       0x00036CA0    g_simple_async_result_new_take_error
+1104       0x000367B0    g_simple_async_result_propagate_error
+1105       0x00037380    g_simple_async_result_run_in_thread
+1106       0x00036F60    g_simple_async_result_set_error
+1107       0x00036D30    g_simple_async_result_set_error_va
+1108       0x00036AD0    g_simple_async_result_set_from_error
+1109       0x000366F0    g_simple_async_result_set_handle_cancellation
+1110       0x000369F0    g_simple_async_result_set_op_res_gboolean
+1111       0x00036830    g_simple_async_result_set_op_res_gpointer
+1112       0x00036910    g_simple_async_result_set_op_res_gssize
+1113       0x00036C00    g_simple_async_result_take_error
+1114       0x00037800    g_simple_permission_get_type
+1115       0x000378A0    g_simple_permission_new
+1116       0x0003A8A0    g_socket_accept
+1117       0x0003BB10    g_socket_address_enumerator_get_type
+1118       0x0003BBA0    g_socket_address_enumerator_next
+1119       0x0003BCB0    g_socket_address_enumerator_next_async
+1120       0x0003BD30    g_socket_address_enumerator_next_finish
+1121       0x0003B4D0    g_socket_address_get_family
+1122       0x0003B5F0    g_socket_address_get_native_size
+1123       0x0003B410    g_socket_address_get_type
+1124       0x0003B6E0    g_socket_address_new_from_native
+1125       0x0003B660    g_socket_address_to_native
+1126       0x000395D0    g_socket_bind
+1127       0x00039740    g_socket_check_connect_result
+1128       0x0003D970    g_socket_client_add_application_proxy
+1129       0x0003D160    g_socket_client_connect
+1130       0x0003CC70    g_socket_client_connect_async
+1131       0x0003D8A0    g_socket_client_connect_finish
+1132       0x0003D5C0    g_socket_client_connect_to_host
+1133       0x0003D700    g_socket_client_connect_to_host_async
+1134       0x0003D8E0    g_socket_client_connect_to_host_finish
+1135       0x0003D630    g_socket_client_connect_to_service
+1136       0x0003D7A0    g_socket_client_connect_to_service_async
+1137       0x0003D910    g_socket_client_connect_to_service_finish
+1138       0x0003D690    g_socket_client_connect_to_uri
+1139       0x0003D800    g_socket_client_connect_to_uri_async
+1140       0x0003D940    g_socket_client_connect_to_uri_finish
+1141       0x0003CF00    g_socket_client_get_enable_proxy
+1142       0x0003CDA0    g_socket_client_get_family
+1143       0x0003CE60    g_socket_client_get_local_address
+1144       0x0003CE20    g_socket_client_get_protocol
+1145       0x0003CDE0    g_socket_client_get_socket_type
+1146       0x0003CEC0    g_socket_client_get_timeout
+1147       0x0003CF40    g_socket_client_get_tls
+1148       0x0003CF80    g_socket_client_get_tls_validation_flags
+1149       0x0003CB80    g_socket_client_get_type
+1150       0x0003CD80    g_socket_client_new
+1151       0x0003CF10    g_socket_client_set_enable_proxy
+1152       0x0003CDB0    g_socket_client_set_family
+1153       0x0003CE70    g_socket_client_set_local_address
+1154       0x0003CE30    g_socket_client_set_protocol
+1155       0x0003CDF0    g_socket_client_set_socket_type
+1156       0x0003CED0    g_socket_client_set_timeout
+1157       0x0003CF50    g_socket_client_set_tls
+1158       0x0003CF90    g_socket_client_set_tls_validation_flags
+1159       0x00039CC0    g_socket_close
+1160       0x0003A0C0    g_socket_condition_check
+1161       0x0003A110    g_socket_condition_wait
+1162       0x0003A680    g_socket_connect
+1163       0x0003DA60    g_socket_connectable_enumerate
+1164       0x0003D9B0    g_socket_connectable_get_type
+1165       0x0003DAF0    g_socket_connectable_proxy_enumerate
+1166       0x0003E3E0    g_socket_connection_factory_create_connection
+1167       0x0003E330    g_socket_connection_factory_lookup_type
+1168       0x0003E200    g_socket_connection_factory_register_type
+1169       0x0003E1C0    g_socket_connection_get_local_address
+1170       0x0003E1E0    g_socket_connection_get_remote_address
+1171       0x0003E160    g_socket_connection_get_socket
+1172       0x0003E090    g_socket_connection_get_type
+1173       0x0003E6D0    g_socket_control_message_deserialize
+1174       0x0003E580    g_socket_control_message_get_level
+1175       0x0003E5F0    g_socket_control_message_get_msg_type
+1176       0x0003E510    g_socket_control_message_get_size
+1177       0x0003E480    g_socket_control_message_get_type
+1178       0x0003E660    g_socket_control_message_serialize
+1179       0x00039EE0    g_socket_create_source
+1180       0x0004FC60    g_socket_family_get_type
+1181       0x00038C40    g_socket_get_blocking
+1182       0x0003B200    g_socket_get_credentials
+1183       0x000391D0    g_socket_get_family
+1184       0x000392F0    g_socket_get_fd
+1185       0x00038DC0    g_socket_get_keepalive
+1186       0x00038E30    g_socket_get_listen_backlog
+1187       0x00039350    g_socket_get_local_address
+1188       0x00039290    g_socket_get_protocol
+1189       0x00039890    g_socket_get_remote_address
+1190       0x00039230    g_socket_get_socket_type
+1191       0x00038F40    g_socket_get_timeout
+1192       0x00038820    g_socket_get_type
+1193       0x00039EC0    g_socket_is_closed
+1194       0x00039450    g_socket_is_connected
+1195       0x000394C0    g_socket_listen
+1196       0x0003FB00    g_socket_listener_accept
+1197       0x0003FC50    g_socket_listener_accept_async
+1198       0x0003FC80    g_socket_listener_accept_finish
+1199       0x0003F990    g_socket_listener_accept_socket
+1200       0x0003F1B0    g_socket_listener_accept_socket_async
+1201       0x0003FB60    g_socket_listener_accept_socket_finish
+1202       0x0003F510    g_socket_listener_add_address
+1203       0x0003FEF0    g_socket_listener_add_any_inet_port
+1204       0x0003F670    g_socket_listener_add_inet_port
+1205       0x0003F410    g_socket_listener_add_socket
+1206       0x0003FDE0    g_socket_listener_close
+1207       0x0003F310    g_socket_listener_get_type
+1208       0x0003F3F0    g_socket_listener_new
+1209       0x0003FCE0    g_socket_listener_set_backlog
+1210       0x0004FD40    g_socket_msg_flags_get_type
+1211       0x00038AF0    g_socket_new
+1212       0x00038B50    g_socket_new_from_fd
+1213       0x0004FDB0    g_socket_protocol_get_type
+1214       0x0003A640    g_socket_receive
+1215       0x0003B1A0    g_socket_receive_from
+1216       0x0003AE30    g_socket_receive_message
+1217       0x0003A4B0    g_socket_receive_with_blocking
+1218       0x0003A470    g_socket_send
+1219       0x0003AA50    g_socket_send_message
+1220       0x0003ADD0    g_socket_send_to
+1221       0x0003A2F0    g_socket_send_with_blocking
+1222       0x000428B0    g_socket_service_get_type
+1223       0x00042990    g_socket_service_is_active
+1224       0x00042B50    g_socket_service_new
+1225       0x00042A00    g_socket_service_start
+1226       0x00042AC0    g_socket_service_stop
+1227       0x00038B90    g_socket_set_blocking
+1228       0x00038CB0    g_socket_set_keepalive
+1229       0x00038E90    g_socket_set_listen_backlog
+1230       0x00038FA0    g_socket_set_timeout
+1231       0x00039B90    g_socket_shutdown
+1232       0x00039720    g_socket_speaks_ipv4
+1233       0x0004FCD0    g_socket_type_get_type
+1234       0x00042CA0    g_srv_target_copy
+1235       0x00042BA0    g_srv_target_free
+1236       0x00042CD0    g_srv_target_get_hostname
+1237       0x00042CE0    g_srv_target_get_port
+1238       0x00042CF0    g_srv_target_get_priority
+1239       0x00042BD0    g_srv_target_get_type
+1240       0x00042D00    g_srv_target_get_weight
+1241       0x00042D10    g_srv_target_list_sort
+1242       0x00042C40    g_srv_target_new
+1243       0x00043660    g_tcp_connection_get_graceful_disconnect
+1244       0x00043400    g_tcp_connection_get_type
+1245       0x00043550    g_tcp_connection_set_graceful_disconnect
+1246       0x00043B20    g_tcp_wrapper_connection_get_base_io_stream
+1247       0x00043900    g_tcp_wrapper_connection_get_type
+1248       0x000439D0    g_tcp_wrapper_connection_new
+1249       0x00044B40    g_themed_icon_append_name
+1250       0x00044AE0    g_themed_icon_get_names
+1251       0x000447C0    g_themed_icon_get_type
+1252       0x00044880    g_themed_icon_new
+1253       0x000448E0    g_themed_icon_new_from_names
+1254       0x00044A70    g_themed_icon_new_with_default_fallbacks
+1255       0x00044C30    g_themed_icon_prepend_name
+1256       0x00045730    g_threaded_resolver_get_type
+1257       0x00044070    g_threaded_socket_service_get_type
+1258       0x00044140    g_threaded_socket_service_new
+1259       0x00050830    g_tls_authentication_mode_get_type
+1260       0x00045A50    g_tls_backend_get_certificate_type
+1261       0x00045A80    g_tls_backend_get_client_connection_type
+1262       0x00045900    g_tls_backend_get_default
+1263       0x000459B0    g_tls_backend_get_default_database
+1264       0x00045AE0    g_tls_backend_get_file_database_type
+1265       0x00045AB0    g_tls_backend_get_server_connection_type
+1266       0x00045850    g_tls_backend_get_type
+1267       0x00045940    g_tls_backend_supports_tls
+1268       0x000507C0    g_tls_certificate_flags_get_type
+1269       0x000464F0    g_tls_certificate_get_issuer
+1270       0x00045D00    g_tls_certificate_get_type
+1271       0x000463F0    g_tls_certificate_list_new_from_file
+1272       0x00046280    g_tls_certificate_new_from_file
+1273       0x000462E0    g_tls_certificate_new_from_files
+1274       0x00046140    g_tls_certificate_new_from_pem
+1275       0x00046530    g_tls_certificate_verify
+1276       0x00046AE0    g_tls_client_connection_get_accepted_cas
+1277       0x000468C0    g_tls_client_connection_get_server_identity
+1278       0x000466B0    g_tls_client_connection_get_type
+1279       0x000469E0    g_tls_client_connection_get_use_ssl3
+1280       0x000467C0    g_tls_client_connection_get_validation_flags
+1281       0x00046760    g_tls_client_connection_new
+1282       0x00046960    g_tls_client_connection_set_server_identity
+1283       0x00046A60    g_tls_client_connection_set_use_ssl3
+1284       0x00046840    g_tls_client_connection_set_validation_flags
+1285       0x00047AD0    g_tls_connection_emit_accept_certificate
+1286       0x000473F0    g_tls_connection_get_certificate
+1287       0x00047280    g_tls_connection_get_database
+1288       0x00047550    g_tls_connection_get_interaction
+1289       0x000475F0    g_tls_connection_get_peer_certificate
+1290       0x00047680    g_tls_connection_get_peer_certificate_errors
+1291       0x00047880    g_tls_connection_get_rehandshake_mode
+1292       0x00047780    g_tls_connection_get_require_close_notify
+1293       0x00046C70    g_tls_connection_get_type
+1294       0x00047130    g_tls_connection_get_use_system_certdb
+1295       0x00047900    g_tls_connection_handshake
+1296       0x00047990    g_tls_connection_handshake_async
+1297       0x00047A20    g_tls_connection_handshake_finish
+1298       0x00047320    g_tls_connection_set_certificate
+1299       0x000471B0    g_tls_connection_set_database
+1300       0x00047480    g_tls_connection_set_interaction
+1301       0x00047800    g_tls_connection_set_rehandshake_mode
+1302       0x00047700    g_tls_connection_set_require_close_notify
+1303       0x000470B0    g_tls_connection_set_use_system_certdb
+1304       0x00048BA0    g_tls_database_create_certificate_handle
+1305       0x000484B0    g_tls_database_get_type
+1306       0x00048CA0    g_tls_database_lookup_certificate_for_handle
+1307       0x00048ED0    g_tls_database_lookup_certificate_for_handle_async
+1308       0x00049060    g_tls_database_lookup_certificate_for_handle_finish
+1309       0x00049190    g_tls_database_lookup_certificate_issuer
+1310       0x000493E0    g_tls_database_lookup_certificate_issuer_async
+1311       0x000495B0    g_tls_database_lookup_certificate_issuer_finish
+1312       0x000496E0    g_tls_database_lookup_certificates_issued_by
+1313       0x00049910    g_tls_database_lookup_certificates_issued_by_async
+1314       0x00049AC0    g_tls_database_lookup_certificates_issued_by_finish
+1315       0x00050B40    g_tls_database_lookup_flags_get_type
+1316       0x00048540    g_tls_database_verify_chain
+1317       0x00048810    g_tls_database_verify_chain_async
+1318       0x00048A70    g_tls_database_verify_chain_finish
+1319       0x00050AD0    g_tls_database_verify_flags_get_type
+1320       0x00050750    g_tls_error_get_type
+1321       0x00047AB0    g_tls_error_quark
+1322       0x00049C50    g_tls_file_database_get_type
+1323       0x00049D00    g_tls_file_database_new
+1324       0x0004A620    g_tls_interaction_ask_password
+1325       0x0004A1A0    g_tls_interaction_ask_password_async
+1326       0x0004A750    g_tls_interaction_ask_password_finish
+1327       0x0004A110    g_tls_interaction_get_type
+1328       0x0004A370    g_tls_interaction_invoke_ask_password
+1329       0x00050980    g_tls_interaction_result_get_type
+1330       0x00050910    g_tls_password_flags_get_type
+1331       0x0004AE40    g_tls_password_get_description
+1332       0x0004AD20    g_tls_password_get_flags
+1333       0x0004AA70    g_tls_password_get_type
+1334       0x0004AB70    g_tls_password_get_value
+1335       0x0004AF40    g_tls_password_get_warning
+1336       0x0004AB30    g_tls_password_new
+1337       0x0004AEA0    g_tls_password_set_description
+1338       0x0004ADD0    g_tls_password_set_flags
+1339       0x0004AC70    g_tls_password_set_value
+1340       0x0004ABF0    g_tls_password_set_value_full
+1341       0x0004B0D0    g_tls_password_set_warning
+1342       0x000508A0    g_tls_rehandshake_mode_get_type
+1343       0x0004B2F0    g_tls_server_connection_get_type
+1344       0x0004B3A0    g_tls_server_connection_new
+1345       0x0004FE90    g_unix_socket_address_type_get_type
+1346       0x0004C6D0    g_vfs_get_default
+1347       0x0004C450    g_vfs_get_file_for_path
+1348       0x0004C500    g_vfs_get_file_for_uri
+1349       0x0004C710    g_vfs_get_local
+1350       0x0004C5B0    g_vfs_get_supported_uri_schemes
+1351       0x0004C270    g_vfs_get_type
+1352       0x0004C300    g_vfs_is_active
+1353       0x0004C620    g_vfs_parse_name
+1354       0x0004CC30    g_volume_can_eject
+1355       0x0004CBA0    g_volume_can_mount
+1356       0x0004CF70    g_volume_eject
+1357       0x0004D060    g_volume_eject_finish
+1358       0x0004D190    g_volume_eject_with_operation
+1359       0x0004D2C0    g_volume_eject_with_operation_finish
+1360       0x0004D4E0    g_volume_enumerate_identifiers
+1361       0x0004D570    g_volume_get_activation_root
+1362       0x0004CA80    g_volume_get_drive
+1363       0x0004C960    g_volume_get_icon
+1364       0x0004D410    g_volume_get_identifier
+1365       0x0004CB10    g_volume_get_mount
+1366       0x0004C8D0    g_volume_get_name
+1367       0x0004C760    g_volume_get_type
+1368       0x0004C9F0    g_volume_get_uuid
+1369       0x0004C190    g_volume_monitor_adopt_orphan_mount
+1370       0x0004BFD0    g_volume_monitor_get
+1371       0x0004DB30    g_volume_monitor_get_connected_drives
+1372       0x0004DD30    g_volume_monitor_get_mount_for_uuid
+1373       0x0004DC10    g_volume_monitor_get_mounts
+1374       0x0004D630    g_volume_monitor_get_type
+1375       0x0004DC80    g_volume_monitor_get_volume_for_uuid
+1376       0x0004DBA0    g_volume_monitor_get_volumes
+1377       0x0004CD50    g_volume_mount
+1378       0x0004CE40    g_volume_mount_finish
+1379       0x0004CCC0    g_volume_should_automount
+1380       0x00053770    g_win32_input_stream_get_close_handle
+1381       0x000537D0    g_win32_input_stream_get_handle
+1382       0x000535A0    g_win32_input_stream_get_type
+1383       0x00053680    g_win32_input_stream_new
+1384       0x000536F0    g_win32_input_stream_set_close_handle
+1385       0x00053E50    g_win32_output_stream_get_close_handle
+1386       0x00053EB0    g_win32_output_stream_get_handle
+1387       0x00053C80    g_win32_output_stream_get_type
+1388       0x00053D60    g_win32_output_stream_new
+1389       0x00053DD0    g_win32_output_stream_set_close_handle
+1390       0x00052A20    g_win32_resolver_get_type
+1391       0x0004FE20    g_zlib_compressor_format_get_type
+1392       0x0004E5B0    g_zlib_compressor_get_file_info
+1393       0x0004E4B0    g_zlib_compressor_get_type
+1394       0x0004E570    g_zlib_compressor_new
+1395       0x0004E610    g_zlib_compressor_set_file_info
+1396       0x0004F020    g_zlib_decompressor_get_file_info
+1397       0x0004EF30    g_zlib_decompressor_get_type
+1398       0x0004EFF0    g_zlib_decompressor_new
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C564    0x0   OriginalFirstThunk:            0x0       
+0x3C564    0x0   Characteristics:               0x0       
+0x3C568    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C56C    0x8   ForwarderChain:                0x0       
+0x3C570    0xC   Name:                          0xF94D8   
+0x3C574    0x10  FirstThunk:                    0xF9468   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C578    0x0   OriginalFirstThunk:            0x0       
+0x3C578    0x0   Characteristics:               0x0       
+0x3C57C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C580    0x8   ForwarderChain:                0x0       
+0x3C584    0xC   Name:                          0xF94E5   
+0x3C588    0x10  FirstThunk:                    0xF9480   
+
+ADVAPI32.DLL.IsValidSid Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C58C    0x0   OriginalFirstThunk:            0x0       
+0x3C58C    0x0   Characteristics:               0x0       
+0x3C590    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C594    0x8   ForwarderChain:                0x0       
+0x3C598    0xC   Name:                          0xF94F2   
+0x3C59C    0x10  FirstThunk:                    0xF9488   
+
+DNSAPI.DLL.DnsQuery_A Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C5A0    0x0   OriginalFirstThunk:            0x0       
+0x3C5A0    0x0   Characteristics:               0x0       
+0x3C5A4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C5A8    0x8   ForwarderChain:                0x0       
+0x3C5AC    0xC   Name:                          0xF94FD   
+0x3C5B0    0x10  FirstThunk:                    0xF9490   
+
+libglib-2.0-0.dll.g_log Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C5B4    0x0   OriginalFirstThunk:            0x0       
+0x3C5B4    0x0   Characteristics:               0x0       
+0x3C5B8    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C5BC    0x8   ForwarderChain:                0x0       
+0x3C5C0    0xC   Name:                          0xF950F   
+0x3C5C4    0x10  FirstThunk:                    0xF9498   
+
+libgmodule-2.0-0.dll.g_module_close Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C5C8    0x0   OriginalFirstThunk:            0x0       
+0x3C5C8    0x0   Characteristics:               0x0       
+0x3C5CC    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C5D0    0x8   ForwarderChain:                0x0       
+0x3C5D4    0xC   Name:                          0xF9524   
+0x3C5D8    0x10  FirstThunk:                    0xF94A0   
+
+libgobject-2.0-0.dll.g_type_init Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C5DC    0x0   OriginalFirstThunk:            0x0       
+0x3C5DC    0x0   Characteristics:               0x0       
+0x3C5E0    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C5E4    0x8   ForwarderChain:                0x0       
+0x3C5E8    0xC   Name:                          0xF9539   
+0x3C5EC    0x10  FirstThunk:                    0xF94A8   
+
+libintl-8.dll.libintl_bind_textdomain_codeset Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C5F0    0x0   OriginalFirstThunk:            0x0       
+0x3C5F0    0x0   Characteristics:               0x0       
+0x3C5F4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C5F8    0x8   ForwarderChain:                0x0       
+0x3C5FC    0xC   Name:                          0xF9547   
+0x3C600    0x10  FirstThunk:                    0xF94B0   
+
+msvcrt.dll._iob Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C604    0x0   OriginalFirstThunk:            0x0       
+0x3C604    0x0   Characteristics:               0x0       
+0x3C608    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C60C    0x8   ForwarderChain:                0x0       
+0x3C610    0xC   Name:                          0xF9552   
+0x3C614    0x10  FirstThunk:                    0xF94B8   
+
+SHELL32.DLL.SHGetFileInfoW Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C618    0x0   OriginalFirstThunk:            0x0       
+0x3C618    0x0   Characteristics:               0x0       
+0x3C61C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C620    0x8   ForwarderChain:                0x0       
+0x3C624    0xC   Name:                          0xF955E   
+0x3C628    0x10  FirstThunk:                    0xF94C0   
+
+SHLWAPI.DLL.AssocQueryKeyW Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C62C    0x0   OriginalFirstThunk:            0x0       
+0x3C62C    0x0   Characteristics:               0x0       
+0x3C630    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C634    0x8   ForwarderChain:                0x0       
+0x3C638    0xC   Name:                          0xF956A   
+0x3C63C    0x10  FirstThunk:                    0xF94C8   
+
+WS2_32.DLL.bind Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x3C640    0x0   OriginalFirstThunk:            0x0       
+0x3C640    0x0   Characteristics:               0x0       
+0x3C644    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x3C648    0x8   ForwarderChain:                0x0       
+0x3C64C    0xC   Name:                          0xF9575   
+0x3C650    0x10  FirstThunk:                    0xF94D0   
+
+zlib1.dll.deflate Hint[0]
+
+----------Resource directory----------
+
+[IMAGE_RESOURCE_DIRECTORY]
+0x3C200    0x0   Characteristics:               0x0       
+0x3C204    0x4   TimeDateStamp:                 0x4E8F3835 [Fri Oct  7 17:34:45 2011 UTC]
+0x3C208    0x8   MajorVersion:                  0x0       
+0x3C20A    0xA   MinorVersion:                  0x0       
+0x3C20C    0xC   NumberOfNamedEntries:          0x0       
+0x3C20E    0xE   NumberOfIdEntries:             0x1       
+  Id: [0x10] (RT_VERSION)
+  [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+  0x3C210    0x0   Name:                          0x10      
+  0x3C214    0x4   OffsetToData:                  0x80000018
+    [IMAGE_RESOURCE_DIRECTORY]
+    0x3C218    0x0   Characteristics:               0x0       
+    0x3C21C    0x4   TimeDateStamp:                 0x4E8F3835 [Fri Oct  7 17:34:45 2011 UTC]
+    0x3C220    0x8   MajorVersion:                  0x0       
+    0x3C222    0xA   MinorVersion:                  0x0       
+    0x3C224    0xC   NumberOfNamedEntries:          0x0       
+    0x3C226    0xE   NumberOfIdEntries:             0x1       
+      Id: [0x1]
+      [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+      0x3C228    0x0   Name:                          0x1       
+      0x3C22C    0x4   OffsetToData:                  0x80000030
+        [IMAGE_RESOURCE_DIRECTORY]
+        0x3C230    0x0   Characteristics:               0x0       
+        0x3C234    0x4   TimeDateStamp:                 0x4E8F3835 [Fri Oct  7 17:34:45 2011 UTC]
+        0x3C238    0x8   MajorVersion:                  0x0       
+        0x3C23A    0xA   MinorVersion:                  0x0       
+        0x3C23C    0xC   NumberOfNamedEntries:          0x0       
+        0x3C23E    0xE   NumberOfIdEntries:             0x1       
+        \--- LANG [9,1][LANG_ENGLISH,SUBLANG_ENGLISH_US]
+          [IMAGE_RESOURCE_DIRECTORY_ENTRY]
+          0x3C240    0x0   Name:                          0x409     
+          0x3C244    0x4   OffsetToData:                  0x48      
+            [IMAGE_RESOURCE_DATA_ENTRY]
+            0x3C248    0x0   OffsetToData:                  0xF905C   
+            0x3C24C    0x4   Size:                          0x308     
+            0x3C250    0x8   CodePage:                      0x0       
+            0x3C254    0xC   Reserved:                      0x0       
+
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x3C1C8    0x0   StartAddressOfRawData:         0x6D678FE0
+0x3C1CC    0x4   EndAddressOfRawData:           0x6D678FE3
+0x3C1D0    0x8   AddressOfIndex:                0x6D64CCFC
+0x3C1D4    0xC   AddressOfCallBacks:            0x6D678FE3
+0x3C1D8    0x10  SizeOfZeroFill:                0x0       
+0x3C1DC    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x49D0C    0x0   VirtualAddress:                0xF8000   
+0x49D10    0x4   SizeOfBlock:                   0x18      
+    000F8DADh HIGHLOW
+    000F8FADh HIGHLOW
+    000F8FC8h HIGHLOW
+    000F8FCCh HIGHLOW
+    000F8FD0h HIGHLOW
+    000F8FD4h HIGHLOW
+    000F8FE3h HIGHLOW
+    000F8000h ABSOLUTE
+

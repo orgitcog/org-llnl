@@ -1,0 +1,612 @@
+----------Parsing Warnings----------
+
+Suspicious flags set for section 0. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Suspicious flags set for section 1. Both IMAGE_SCN_MEM_WRITE and IMAGE_SCN_MEM_EXECUTE are set. This might indicate a packed executable.
+
+Imported symbols contain entries typical of packed executables.
+
+----------DOS_HEADER----------
+
+[IMAGE_DOS_HEADER]
+0x0        0x0   e_magic:                       0x5A4D    
+0x2        0x2   e_cblp:                        0x90      
+0x4        0x4   e_cp:                          0x3       
+0x6        0x6   e_crlc:                        0x0       
+0x8        0x8   e_cparhdr:                     0x4       
+0xA        0xA   e_minalloc:                    0x0       
+0xC        0xC   e_maxalloc:                    0xFFFF    
+0xE        0xE   e_ss:                          0x0       
+0x10       0x10  e_sp:                          0xB8      
+0x12       0x12  e_csum:                        0x0       
+0x14       0x14  e_ip:                          0x0       
+0x16       0x16  e_cs:                          0x0       
+0x18       0x18  e_lfarlc:                      0x40      
+0x1A       0x1A  e_ovno:                        0x0       
+0x1C       0x1C  e_res:                         
+0x24       0x24  e_oemid:                       0x0       
+0x26       0x26  e_oeminfo:                     0x0       
+0x28       0x28  e_res2:                        
+0x3C       0x3C  e_lfanew:                      0x80      
+
+----------NT_HEADERS----------
+
+[IMAGE_NT_HEADERS]
+0x80       0x0   Signature:                     0x4550    
+
+----------FILE_HEADER----------
+
+[IMAGE_FILE_HEADER]
+0x84       0x0   Machine:                       0x14C     
+0x86       0x2   NumberOfSections:              0x3       
+0x88       0x4   TimeDateStamp:                 0x4E8F3ED5 [Fri Oct  7 18:03:01 2011 UTC]
+0x8C       0x8   PointerToSymbolTable:          0x2FE00   
+0x90       0xC   NumberOfSymbols:               0x165     
+0x94       0x10  SizeOfOptionalHeader:          0xE0      
+0x96       0x12  Characteristics:               0x2306    
+Flags: IMAGE_FILE_32BIT_MACHINE, IMAGE_FILE_DEBUG_STRIPPED, IMAGE_FILE_DLL, IMAGE_FILE_EXECUTABLE_IMAGE, IMAGE_FILE_LINE_NUMS_STRIPPED
+
+----------OPTIONAL_HEADER----------
+
+[IMAGE_OPTIONAL_HEADER]
+0x98       0x0   Magic:                         0x10B     
+0x9A       0x2   MajorLinkerVersion:            0x2       
+0x9B       0x3   MinorLinkerVersion:            0x15      
+0x9C       0x4   SizeOfCode:                    0x11000   
+0xA0       0x8   SizeOfInitializedData:         0x3000    
+0xA4       0xC   SizeOfUninitializedData:       0x29000   
+0xA8       0x10  AddressOfEntryPoint:           0x3A8A0   
+0xAC       0x14  BaseOfCode:                    0x2A000   
+0xB0       0x18  BaseOfData:                    0x3B000   
+0xB4       0x1C  ImageBase:                     0x68F00000
+0xB8       0x20  SectionAlignment:              0x1000    
+0xBC       0x24  FileAlignment:                 0x200     
+0xC0       0x28  MajorOperatingSystemVersion:   0x4       
+0xC2       0x2A  MinorOperatingSystemVersion:   0x0       
+0xC4       0x2C  MajorImageVersion:             0x1       
+0xC6       0x2E  MinorImageVersion:             0x0       
+0xC8       0x30  MajorSubsystemVersion:         0x4       
+0xCA       0x32  MinorSubsystemVersion:         0x0       
+0xCC       0x34  Reserved1:                     0x0       
+0xD0       0x38  SizeOfImage:                   0x3E000   
+0xD4       0x3C  SizeOfHeaders:                 0x1000    
+0xD8       0x40  CheckSum:                      0x0       
+0xDC       0x44  Subsystem:                     0x3       
+0xDE       0x46  DllCharacteristics:            0x0       
+0xE0       0x48  SizeOfStackReserve:            0x200000  
+0xE4       0x4C  SizeOfStackCommit:             0x1000    
+0xE8       0x50  SizeOfHeapReserve:             0x100000  
+0xEC       0x54  SizeOfHeapCommit:              0x1000    
+0xF0       0x58  LoaderFlags:                   0x0       
+0xF4       0x5C  NumberOfRvaAndSizes:           0x10      
+DllCharacteristics: 
+
+----------PE Sections----------
+
+[IMAGE_SECTION_HEADER]
+0x178      0x0   Name:                          UPX0
+0x180      0x8   Misc:                          0x29000   
+0x180      0x8   Misc_PhysicalAddress:          0x29000   
+0x180      0x8   Misc_VirtualSize:              0x29000   
+0x184      0xC   VirtualAddress:                0x1000    
+0x188      0x10  SizeOfRawData:                 0x0       
+0x18C      0x14  PointerToRawData:              0x200     
+0x190      0x18  PointerToRelocations:          0x0       
+0x194      0x1C  PointerToLinenumbers:          0x0       
+0x198      0x20  NumberOfRelocations:           0x0       
+0x19A      0x22  NumberOfLinenumbers:           0x0       
+0x19C      0x24  Characteristics:               0xE0000080
+Flags: IMAGE_SCN_CNT_UNINITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 0.000000 (Min=0.0, Max=8.0)
+MD5     hash: d41d8cd98f00b204e9800998ecf8427e
+SHA-1   hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-256 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA-512 hash: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+[IMAGE_SECTION_HEADER]
+0x1A0      0x0   Name:                          UPX1
+0x1A8      0x8   Misc:                          0x11000   
+0x1A8      0x8   Misc_PhysicalAddress:          0x11000   
+0x1A8      0x8   Misc_VirtualSize:              0x11000   
+0x1AC      0xC   VirtualAddress:                0x2A000   
+0x1B0      0x10  SizeOfRawData:                 0x10C00   
+0x1B4      0x14  PointerToRawData:              0x200     
+0x1B8      0x18  PointerToRelocations:          0x0       
+0x1BC      0x1C  PointerToLinenumbers:          0x0       
+0x1C0      0x20  NumberOfRelocations:           0x0       
+0x1C2      0x22  NumberOfLinenumbers:           0x0       
+0x1C4      0x24  Characteristics:               0xE0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_EXECUTE, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 7.918673 (Min=0.0, Max=8.0)
+MD5     hash: b37f97ef2c8135442c318f48f04a95bd
+SHA-1   hash: da7fe3e3f57f5f479f599afa349b3222db903cec
+SHA-256 hash: b7c4f03088b2c7983864d30f2eb719d57f1d05e95f3048d178ab91f717704b9c
+SHA-512 hash: 290ecb762acb8e897ea0a61aebf01df57db645454f0d1f41b40c366d44386399e76265eac88eefb85529746220f2354e5fe0f0ef4479477fc97e39cb867a6840
+
+[IMAGE_SECTION_HEADER]
+0x1C8      0x0   Name:                          UPX2
+0x1D0      0x8   Misc:                          0x3000    
+0x1D0      0x8   Misc_PhysicalAddress:          0x3000    
+0x1D0      0x8   Misc_VirtualSize:              0x3000    
+0x1D4      0xC   VirtualAddress:                0x3B000   
+0x1D8      0x10  SizeOfRawData:                 0x2800    
+0x1DC      0x14  PointerToRawData:              0x10E00   
+0x1E0      0x18  PointerToRelocations:          0x0       
+0x1E4      0x1C  PointerToLinenumbers:          0x0       
+0x1E8      0x20  NumberOfRelocations:           0x0       
+0x1EA      0x22  NumberOfLinenumbers:           0x0       
+0x1EC      0x24  Characteristics:               0xC0000040
+Flags: IMAGE_SCN_CNT_INITIALIZED_DATA, IMAGE_SCN_MEM_READ, IMAGE_SCN_MEM_WRITE
+Entropy: 5.228106 (Min=0.0, Max=8.0)
+MD5     hash: 54490053da320b04f9d126c0c3241162
+SHA-1   hash: deee9fade1767c3cbe5870f576f961b1721f3953
+SHA-256 hash: 837fb80ac045ef7039d3249f862c01173c78e4ba1432d9598f375ed74908206f
+SHA-512 hash: d34e6d2c31e4bb4fda56e16a687238cbe3d2b0fb83016dcb2caea458876b2be4fd658bd9803d1364f708012bffa1ff7a03fa654d0261bc233ea0e0a0ba7ada3b
+
+----------Directories----------
+
+[IMAGE_DIRECTORY_ENTRY_EXPORT]
+0xF8       0x0   VirtualAddress:                0x3B24C   
+0xFC       0x4   Size:                          0x24D0    
+[IMAGE_DIRECTORY_ENTRY_IMPORT]
+0x100      0x0   VirtualAddress:                0x3B000   
+0x104      0x4   Size:                          0x24C     
+[IMAGE_DIRECTORY_ENTRY_RESOURCE]
+0x108      0x0   VirtualAddress:                0x0       
+0x10C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_EXCEPTION]
+0x110      0x0   VirtualAddress:                0x0       
+0x114      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_SECURITY]
+0x118      0x0   VirtualAddress:                0x0       
+0x11C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BASERELOC]
+0x120      0x0   VirtualAddress:                0x3D71C   
+0x124      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_DEBUG]
+0x128      0x0   VirtualAddress:                0x0       
+0x12C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COPYRIGHT]
+0x130      0x0   VirtualAddress:                0x0       
+0x134      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_GLOBALPTR]
+0x138      0x0   VirtualAddress:                0x0       
+0x13C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_TLS]
+0x140      0x0   VirtualAddress:                0x3AAC8   
+0x144      0x4   Size:                          0x18      
+[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG]
+0x148      0x0   VirtualAddress:                0x0       
+0x14C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
+0x150      0x0   VirtualAddress:                0x0       
+0x154      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_IAT]
+0x158      0x0   VirtualAddress:                0x0       
+0x15C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT]
+0x160      0x0   VirtualAddress:                0x0       
+0x164      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+0x168      0x0   VirtualAddress:                0x0       
+0x16C      0x4   Size:                          0x0       
+[IMAGE_DIRECTORY_ENTRY_RESERVED]
+0x170      0x0   VirtualAddress:                0x0       
+0x174      0x4   Size:                          0x0       
+
+----------Exported symbols----------
+
+[IMAGE_EXPORT_DIRECTORY]
+0x1104C    0x0   Characteristics:               0x0       
+0x11050    0x4   TimeDateStamp:                 0x4E8F3ED5 [Fri Oct  7 18:03:01 2011 UTC]
+0x11054    0x8   MajorVersion:                  0x0       
+0x11056    0xA   MinorVersion:                  0x0       
+0x11058    0xC   Name:                          0x3BD5A   
+0x1105C    0x10  Base:                          0x1       
+0x11060    0x14  NumberOfFunctions:             0x117     
+0x11064    0x18  NumberOfNames:                 0x117     
+0x11068    0x1C  AddressOfFunctions:            0x3B274   
+0x1106C    0x20  AddressOfNames:                0x3B6D0   
+0x11070    0x24  AddressOfNameOrdinals:         0x3BB2C   
+
+Ordinal      RVA         Name
+1          0x0000B210    get_gsf_odf_version
+2          0x0000B200    get_gsf_odf_version_string
+3          0x0000B220    get_gsf_ooo_ns
+4          0x00001B50    gsf_base64_decode_simple
+5          0x00001AA0    gsf_base64_decode_step
+6          0x000019E0    gsf_base64_encode_close
+7          0x00001AD0    gsf_base64_encode_simple
+8          0x00001A60    gsf_base64_encode_step
+9          0x0001DEC0    gsf_blob_get_size
+10         0x0001DCE0    gsf_blob_get_type
+11         0x0001DD70    gsf_blob_new
+12         0x0001DF20    gsf_blob_peek_data
+13         0x0001E240    gsf_clip_data_get_data_blob
+14         0x0001E1E0    gsf_clip_data_get_format
+15         0x0001E0B0    gsf_clip_data_get_type
+16         0x0001E2B0    gsf_clip_data_get_windows_clipboard_format
+17         0x0001E140    gsf_clip_data_new
+18         0x0001E4A0    gsf_clip_data_peek_real_data
+19         0x00001570    gsf_debug_flag
+20         0x000052B0    gsf_doc_meta_data_foreach
+21         0x00004E10    gsf_doc_meta_data_get_type
+22         0x00004FA0    gsf_doc_meta_data_insert
+23         0x00004F00    gsf_doc_meta_data_lookup
+24         0x00004EE0    gsf_doc_meta_data_new
+25         0x00005060    gsf_doc_meta_data_remove
+26         0x000053B0    gsf_doc_meta_data_size
+27         0x00005100    gsf_doc_meta_data_steal
+28         0x000051D0    gsf_doc_meta_data_store
+29         0x000053F0    gsf_doc_meta_dump
+30         0x00005650    gsf_doc_prop_dump
+31         0x00004D50    gsf_doc_prop_free
+32         0x000055B0    gsf_doc_prop_get_link
+33         0x00005480    gsf_doc_prop_get_name
+34         0x000054C0    gsf_doc_prop_get_val
+35         0x00005420    gsf_doc_prop_new
+36         0x000055F0    gsf_doc_prop_set_link
+37         0x00005500    gsf_doc_prop_set_val
+38         0x00005570    gsf_doc_prop_swap_val
+39         0x00005810    gsf_docprop_vector_append
+40         0x000058A0    gsf_docprop_vector_as_string
+41         0x00005990    gsf_docprop_vector_get_type
+42         0x00005A60    gsf_docprop_vector_new
+43         0x00001F00    gsf_error_quark
+44         0x000018D0    gsf_extension_pointer
+45         0x00001990    gsf_filename_to_utf8
+46         0x00001960    gsf_iconv_close
+47         0x0000FFC0    gsf_infile_child_by_aname
+48         0x00010270    gsf_infile_child_by_index
+49         0x0000FE90    gsf_infile_child_by_name
+50         0x00010120    gsf_infile_child_by_vaname
+51         0x00010250    gsf_infile_child_by_vname
+52         0x0000FE50    gsf_infile_get_type
+53         0x000121B0    gsf_infile_msole_get_class_id
+54         0x00010DE0    gsf_infile_msole_get_type
+55         0x00011A10    gsf_infile_msole_new
+56         0x00012870    gsf_infile_msvba_get_modules
+57         0x000122A0    gsf_infile_msvba_get_type
+58         0x00012390    gsf_infile_msvba_new
+59         0x000128D0    gsf_infile_msvba_steal_modules
+60         0x0000FE10    gsf_infile_name_by_index
+61         0x0000FDD0    gsf_infile_num_children
+62         0x00012BB0    gsf_infile_stdio_get_type
+63         0x00012D60    gsf_infile_stdio_new
+64         0x00013230    gsf_infile_tar_get_type
+65         0x00013CC0    gsf_infile_tar_new
+66         0x00014960    gsf_infile_zip_get_type
+67         0x00015380    gsf_infile_zip_new
+68         0x000017E0    gsf_init
+69         0x000015E0    gsf_init_dynamic
+70         0x0000BC70    gsf_input_container
+71         0x0000C5B0    gsf_input_copy
+72         0x00001650    gsf_input_dump
+73         0x0000C450    gsf_input_dup
+74         0x0000BD60    gsf_input_eof
+75         0x0000C5A0    gsf_input_error
+76         0x0000C420    gsf_input_error_id
+77         0x00012940    gsf_input_find_vba
+78         0x0000BB10    gsf_input_get_type
+79         0x0001E8A0    gsf_input_gio_get_type
+80         0x0001EB70    gsf_input_gio_new
+81         0x0001EE80    gsf_input_gio_new_for_path
+82         0x0001EE10    gsf_input_gio_new_for_uri
+83         0x0000D340    gsf_input_gzip_get_type
+84         0x0000D980    gsf_input_gzip_new
+85         0x0000E020    gsf_input_http_get_content_type
+86         0x0000DB60    gsf_input_http_get_type
+87         0x0000E0B0    gsf_input_http_get_url
+88         0x0000DEF0    gsf_input_http_new
+89         0x0000E2D0    gsf_input_memory_get_type
+90         0x0000E500    gsf_input_memory_new
+91         0x0000E3B0    gsf_input_memory_new_clone
+92         0x0000C7D0    gsf_input_memory_new_from_bzip
+93         0x0000E140    gsf_input_memory_new_from_iochannel
+94         0x0000E5A0    gsf_input_mmap_new
+95         0x0000BC10    gsf_input_name
+96         0x0000E950    gsf_input_proxy_get_type
+97         0x0000EC60    gsf_input_proxy_new
+98         0x0000EA50    gsf_input_proxy_new_section
+99         0x0000BDC0    gsf_input_read
+100        0x0000BE40    gsf_input_remaining
+101        0x0000C080    gsf_input_seek
+102        0x0000C390    gsf_input_seek_emulate
+103        0x0000C290    gsf_input_set_container
+104        0x0000C1A0    gsf_input_set_name
+105        0x0000C210    gsf_input_set_name_from_filename
+106        0x0000C320    gsf_input_set_size
+107        0x0000BCD0    gsf_input_sibling
+108        0x0000BD20    gsf_input_size
+109        0x0000EEF0    gsf_input_stdio_get_type
+110        0x0000F320    gsf_input_stdio_new
+111        0x0000F170    gsf_input_stdio_new_FILE
+112        0x0000BE90    gsf_input_tell
+113        0x0000F920    gsf_input_textline_ascii_gets
+114        0x0000F630    gsf_input_textline_get_type
+115        0x0000F810    gsf_input_textline_new
+116        0x0000FB70    gsf_input_textline_utf8_gets
+117        0x0000C6A0    gsf_input_uncompress
+118        0x000017C0    gsf_le_get_double
+119        0x00001790    gsf_le_get_float
+120        0x00001770    gsf_le_get_guint64
+121        0x000018B0    gsf_le_set_double
+122        0x000017B0    gsf_le_set_float
+123        0x00001620    gsf_mem_dump
+124        0x00008080    gsf_msole_codepage_to_lid
+125        0x00008C10    gsf_msole_iconv_open_codepage_for_export
+126        0x00008370    gsf_msole_iconv_open_codepage_for_import
+127        0x00008B20    gsf_msole_iconv_open_codepages_for_export
+128        0x00008C30    gsf_msole_iconv_open_for_export
+129        0x00008460    gsf_msole_iconv_open_for_import
+130        0x000082D0    gsf_msole_iconv_win_codepage
+131        0x00008C50    gsf_msole_inflate
+132        0x00008040    gsf_msole_language_for_lid
+133        0x00007FD0    gsf_msole_lid_for_language
+134        0x00008160    gsf_msole_lid_to_codepage
+135        0x00008290    gsf_msole_lid_to_codepage_str
+136        0x00008480    gsf_msole_metadata_read
+137        0x00007D40    gsf_msole_metadata_write
+138        0x00021120    gsf_ooo_ns
+139        0x0000AA10    gsf_open_pkg_error_id
+140        0x00009BF0    gsf_open_pkg_foreach_rel
+141        0x00009F80    gsf_open_pkg_get_rel_by_id
+142        0x00009F50    gsf_open_pkg_get_rel_by_type
+143        0x00009BC0    gsf_open_pkg_lookup_rel_by_id
+144        0x00009B90    gsf_open_pkg_lookup_rel_by_type
+145        0x000098D0    gsf_open_pkg_open_rel
+146        0x00009C40    gsf_open_pkg_open_rel_by_id
+147        0x00009D00    gsf_open_pkg_open_rel_by_type
+148        0x00009DC0    gsf_open_pkg_parse_rel_by_id
+149        0x00009850    gsf_open_pkg_rel_get_target
+150        0x00009890    gsf_open_pkg_rel_get_type
+151        0x00009810    gsf_open_pkg_rel_is_extern
+152        0x0000B300    gsf_opendoc_metadata_read
+153        0x0000B230    gsf_opendoc_metadata_subtree
+154        0x0000B3C0    gsf_opendoc_metadata_write
+155        0x00019C20    gsf_outfile_get_type
+156        0x0001A270    gsf_outfile_msole_get_type
+157        0x0001B9A0    gsf_outfile_msole_new
+158        0x0001B620    gsf_outfile_msole_new_full
+159        0x0001B9D0    gsf_outfile_msole_set_class_id
+160        0x00019BF0    gsf_outfile_new_child
+161        0x00019B90    gsf_outfile_new_child_full
+162        0x00019B30    gsf_outfile_new_child_varg
+163        0x0000A9E0    gsf_outfile_open_pkg_add_extern_rel
+164        0x0000A950    gsf_outfile_open_pkg_add_rel
+165        0x00009FB0    gsf_outfile_open_pkg_get_type
+166        0x0000A490    gsf_outfile_open_pkg_new
+167        0x0000A780    gsf_outfile_open_pkg_relate
+168        0x0000A610    gsf_outfile_open_pkg_set_content_type
+169        0x0000A4D0    gsf_outfile_open_pkg_set_sink
+170        0x0001BAF0    gsf_outfile_stdio_get_type
+171        0x0001BD30    gsf_outfile_stdio_new
+172        0x0001BD00    gsf_outfile_stdio_new_full
+173        0x0001BB70    gsf_outfile_stdio_new_valist
+174        0x0001C2A0    gsf_outfile_zip_get_type
+175        0x0001D230    gsf_outfile_zip_new
+176        0x0001D2B0    gsf_outfile_zip_set_compression_method
+177        0x000165E0    gsf_output_bzip_get_type
+178        0x00016820    gsf_output_bzip_new
+179        0x00016210    gsf_output_close
+180        0x00015870    gsf_output_container
+181        0x00017080    gsf_output_csv_get_type
+182        0x00016E10    gsf_output_csv_quoting_mode_get_type
+183        0x00017150    gsf_output_csv_write_eol
+184        0x000171D0    gsf_output_csv_write_field
+185        0x00015CC0    gsf_output_error
+186        0x00016060    gsf_output_error_id
+187        0x000155C0    gsf_output_get_type
+188        0x0001EFA0    gsf_output_gio_get_type
+189        0x0001F2B0    gsf_output_gio_new
+190        0x0001F470    gsf_output_gio_new_for_path
+191        0x0001F3E0    gsf_output_gio_new_for_uri
+192        0x00017A10    gsf_output_gzip_get_type
+193        0x00017D90    gsf_output_gzip_new
+194        0x00018430    gsf_output_iconv_get_type
+195        0x000185D0    gsf_output_iconv_new
+196        0x00018760    gsf_output_iochannel_get_type
+197        0x000189C0    gsf_output_iochannel_new
+198        0x00015940    gsf_output_is_closed
+199        0x00018B90    gsf_output_memory_get_bytes
+200        0x00018BD0    gsf_output_memory_get_type
+201        0x00018E60    gsf_output_memory_new
+202        0x00015810    gsf_output_name
+203        0x00016450    gsf_output_printf
+204        0x00016480    gsf_output_puts
+205        0x00015B60    gsf_output_seek
+206        0x00015E40    gsf_output_set_container
+207        0x00016090    gsf_output_set_error
+208        0x00015D20    gsf_output_set_name
+209        0x00015DA0    gsf_output_set_name_from_filename
+210        0x000158D0    gsf_output_size
+211        0x00019050    gsf_output_stdio_get_type
+212        0x00019A00    gsf_output_stdio_new
+213        0x00019A30    gsf_output_stdio_new_FILE
+214        0x000199D0    gsf_output_stdio_new_full
+215        0x000195E0    gsf_output_stdio_new_valist
+216        0x000159A0    gsf_output_tell
+217        0x00015FC0    gsf_output_unwrap
+218        0x00016360    gsf_output_vprintf
+219        0x00015EE0    gsf_output_wrap
+220        0x00016140    gsf_output_write
+221        0x00001E80    gsf_property_settings_collect
+222        0x00001B90    gsf_property_settings_collect_valist
+223        0x00001EB0    gsf_property_settings_free
+224        0x0001D360    gsf_shared_memory_get_type
+225        0x0001D3F0    gsf_shared_memory_mmapped_new
+226        0x0001D3A0    gsf_shared_memory_new
+227        0x000015D0    gsf_shutdown
+228        0x00001610    gsf_shutdown_dynamic
+229        0x0001D680    gsf_structured_blob_get_type
+230        0x0001D850    gsf_structured_blob_read
+231        0x0001DAA0    gsf_structured_blob_write
+232        0x0000B680    gsf_timestamp_as_string
+233        0x0000B560    gsf_timestamp_copy
+234        0x0000B760    gsf_timestamp_equal
+235        0x0000B4C0    gsf_timestamp_free
+236        0x0000B580    gsf_timestamp_from_string
+237        0x0000B4E0    gsf_timestamp_get_type
+238        0x0000B750    gsf_timestamp_hash
+239        0x0000B540    gsf_timestamp_new
+240        0x0000B660    gsf_timestamp_parse
+241        0x0000B7A0    gsf_timestamp_set_time
+242        0x00005A30    gsf_value_get_docprop_varray
+243        0x000059D0    gsf_value_get_docprop_vector
+244        0x0000B780    gsf_value_set_timestamp
+245        0x00003430    gsf_xmlDocFormatDump
+246        0x00002EF0    gsf_xml_gvalue_from_str
+247        0x00003C30    gsf_xml_in_check_ns
+248        0x000036F0    gsf_xml_in_doc_add_nodes
+249        0x00003660    gsf_xml_in_doc_free
+250        0x00003960    gsf_xml_in_doc_new
+251        0x00003B70    gsf_xml_in_doc_parse
+252        0x00003A30    gsf_xml_in_doc_set_unknown_handler
+253        0x00003C20    gsf_xml_in_get_input
+254        0x00003CE0    gsf_xml_in_namecmp
+255        0x00003A70    gsf_xml_in_push_state
+256        0x00004CA0    gsf_xml_out_add_base64
+257        0x00004630    gsf_xml_out_add_bool
+258        0x000047F0    gsf_xml_out_add_color
+259        0x000042D0    gsf_xml_out_add_cstr
+260        0x00004210    gsf_xml_out_add_cstr_unchecked
+261        0x00004840    gsf_xml_out_add_enum
+262        0x00004720    gsf_xml_out_add_float
+263        0x000048F0    gsf_xml_out_add_gvalue
+264        0x00004660    gsf_xml_out_add_int
+265        0x000046E0    gsf_xml_out_add_uint
+266        0x00004080    gsf_xml_out_end_element
+267        0x00004D10    gsf_xml_out_get_output
+268        0x00003D80    gsf_xml_out_get_type
+269        0x00003E50    gsf_xml_out_new
+270        0x00003EB0    gsf_xml_out_set_doc_type
+271        0x000045E0    gsf_xml_out_simple_element
+272        0x000047A0    gsf_xml_out_simple_float_element
+273        0x000046A0    gsf_xml_out_simple_int_element
+274        0x00003EE0    gsf_xml_out_start_element
+275        0x00003410    gsf_xml_parser_context
+276        0x00003530    gsf_xml_probe
+277        0x00021308    libgsf_major_version
+278        0x00021300    libgsf_micro_version
+279        0x00021304    libgsf_minor_version
+
+----------Imported symbols----------
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10E00    0x0   OriginalFirstThunk:            0x0       
+0x10E00    0x0   Characteristics:               0x0       
+0x10E04    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10E08    0x8   ForwarderChain:                0x0       
+0x10E0C    0xC   Name:                          0x3B120   
+0x10E10    0x10  FirstThunk:                    0x3B0C8   
+
+KERNEL32.DLL.LoadLibraryA Hint[0]
+KERNEL32.DLL.GetProcAddress Hint[0]
+KERNEL32.DLL.VirtualProtect Hint[0]
+KERNEL32.DLL.VirtualAlloc Hint[0]
+KERNEL32.DLL.VirtualFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10E14    0x0   OriginalFirstThunk:            0x0       
+0x10E14    0x0   Characteristics:               0x0       
+0x10E18    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10E1C    0x8   ForwarderChain:                0x0       
+0x10E20    0xC   Name:                          0x3B12D   
+0x10E24    0x10  FirstThunk:                    0x3B0E0   
+
+bz2-1.dll.BZ2_bzCompress@8 Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10E28    0x0   OriginalFirstThunk:            0x0       
+0x10E28    0x0   Characteristics:               0x0       
+0x10E2C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10E30    0x8   ForwarderChain:                0x0       
+0x10E34    0xC   Name:                          0x3B137   
+0x10E38    0x10  FirstThunk:                    0x3B0E8   
+
+libgio-2.0-0.dll.g_file_dup Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10E3C    0x0   OriginalFirstThunk:            0x0       
+0x10E3C    0x0   Characteristics:               0x0       
+0x10E40    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10E44    0x8   ForwarderChain:                0x0       
+0x10E48    0xC   Name:                          0x3B148   
+0x10E4C    0x10  FirstThunk:                    0x3B0F0   
+
+libglib-2.0-0.dll.g_log Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10E50    0x0   OriginalFirstThunk:            0x0       
+0x10E50    0x0   Characteristics:               0x0       
+0x10E54    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10E58    0x8   ForwarderChain:                0x0       
+0x10E5C    0xC   Name:                          0x3B15A   
+0x10E60    0x10  FirstThunk:                    0x3B0F8   
+
+libgobject-2.0-0.dll.g_type_init Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10E64    0x0   OriginalFirstThunk:            0x0       
+0x10E64    0x0   Characteristics:               0x0       
+0x10E68    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10E6C    0x8   ForwarderChain:                0x0       
+0x10E70    0xC   Name:                          0x3B16F   
+0x10E74    0x10  FirstThunk:                    0x3B100   
+
+libintl-8.dll.libintl_setlocale Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10E78    0x0   OriginalFirstThunk:            0x0       
+0x10E78    0x0   Characteristics:               0x0       
+0x10E7C    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10E80    0x8   ForwarderChain:                0x0       
+0x10E84    0xC   Name:                          0x3B17D   
+0x10E88    0x10  FirstThunk:                    0x3B108   
+
+libxml2-2.dll.xmlFree Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10E8C    0x0   OriginalFirstThunk:            0x0       
+0x10E8C    0x0   Characteristics:               0x0       
+0x10E90    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10E94    0x8   ForwarderChain:                0x0       
+0x10E98    0xC   Name:                          0x3B18B   
+0x10E9C    0x10  FirstThunk:                    0x3B110   
+
+msvcrt.dll._iob Hint[0]
+
+[IMAGE_IMPORT_DESCRIPTOR]
+0x10EA0    0x0   OriginalFirstThunk:            0x0       
+0x10EA0    0x0   Characteristics:               0x0       
+0x10EA4    0x4   TimeDateStamp:                 0x0        [Thu Jan  1 00:00:00 1970 UTC]
+0x10EA8    0x8   ForwarderChain:                0x0       
+0x10EAC    0xC   Name:                          0x3B196   
+0x10EB0    0x10  FirstThunk:                    0x3B118   
+
+zlib1.dll.crc32 Hint[0]
+
+----------TLS----------
+
+[IMAGE_TLS_DIRECTORY]
+0x10CC8    0x0   StartAddressOfRawData:         0x68F3AAE0
+0x10CCC    0x4   EndAddressOfRawData:           0x68F3AAE3
+0x10CD0    0x8   AddressOfIndex:                0x68F2C164
+0x10CD4    0xC   AddressOfCallBacks:            0x68F3AAE3
+0x10CD8    0x10  SizeOfZeroFill:                0x0       
+0x10CDC    0x14  Characteristics:               0x0       
+
+----------Base relocations----------
+
+[IMAGE_BASE_RELOCATION]
+0x1351C    0x0   VirtualAddress:                0x3A000   
+0x13520    0x4   SizeOfBlock:                   0x18      
+    0003A8ADh HIGHLOW
+    0003AAADh HIGHLOW
+    0003AAC8h HIGHLOW
+    0003AACCh HIGHLOW
+    0003AAD0h HIGHLOW
+    0003AAD4h HIGHLOW
+    0003AAE3h HIGHLOW
+    0003A000h ABSOLUTE
+
