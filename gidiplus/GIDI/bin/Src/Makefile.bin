@@ -1,0 +1,26 @@
+# <<BEGIN-copyright>>
+# <<END-copyright>>
+
+.PHONY: default bin clean realclean
+
+local_CXXFLAGS += $(LIB_PATHS) -I$(GIDI_PATH)/Test/Utilities -L$(GIDI_PATH)/Test/Utilities
+
+LIBS = -lGIDI_testUtilities -lGIDI -lPoPI -lRISI -lGUPI -lLUPI -lHAPI -lnumericalfunctions -lstatusMessageReporting -lexpat -lpugixml -lm $(HDF5_LIBS)
+
+EXES = $(CppSources:.cpp=)
+
+default: bin
+
+%: %.cpp ../../../../include/*.h* ../../../../lib/*.a
+	echo "    "$@
+	$(CXX) $(local_CXXFLAGS) $< -o $@ $(LIBS)
+
+bin: $(EXES)
+	cp $(EXES) ../..
+
+clean:
+	rm -f $(EXES)
+
+realclean: clean
+	rm -rf *.dSYM
+	cd ../../; rm -f $(EXES)

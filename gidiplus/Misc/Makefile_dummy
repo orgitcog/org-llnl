@@ -1,0 +1,12 @@
+SHELL = /bin/sh
+
+# <<BEGIN-copyright>>
+# <<END-copyright>>
+
+.PHONY: default clean realclean
+
+default:
+
+clean:
+
+realclean:

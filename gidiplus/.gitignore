@@ -1,0 +1,44 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.app
+
+# build artifacts:
+include/*.h
+include/*.hpp
+*/include/*.h
+*/include/*.hpp
+*/*/include/*.h
+lib/*.a
+lib/__.SYMDEF
+lib/__.SYMDEF\ SORTED
+*/lib/__.SYMDEF\ SORTED
+
+pugixml*
