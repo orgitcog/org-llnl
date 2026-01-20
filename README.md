@@ -2,6 +2,19 @@
 
 A unified repository containing **632 open-source projects** from Lawrence Livermore National Laboratory (LLNL), organized by domain for efficient agent navigation and integration.
 
+## Quick Start (Optimized Clone)
+
+```bash
+# Fastest: Sparse checkout for single project
+git clone --depth 1 --filter=blob:none --sparse https://github.com/orgitcog/org-llnl.git
+cd org-llnl && git sparse-checkout set 01-hpc-parallel/RAJA
+
+# For AI agents: Treeless clone (lazy-load on demand)
+git clone --filter=tree:0 https://github.com/orgitcog/org-llnl.git
+```
+
+> Full clone is ~22GB with 312K+ files. See [CLAUDE.md](CLAUDE.md) for detailed size optimization strategies.
+
 ## Quick Navigation for Agents
 
 ```
@@ -143,11 +156,13 @@ See `.github/workflows/` for workflow definitions.
 | Metric | Value |
 |--------|-------|
 | Total Projects | 632 |
+| Total Files | 312,594 |
 | C/C++ Projects | 142 |
 | Python Projects | 147 |
 | JavaScript Projects | 14 |
 | Rust Projects | 1 |
-| Total Size | ~22 GB |
+| Full Clone Size | ~22 GB |
+| Sparse Clone Size | ~50 MB |
 
 ## Source
 

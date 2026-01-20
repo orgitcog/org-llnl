@@ -52,12 +52,46 @@ org-llnl/
 
 ## Working with This Repository
 
-Due to the large size (~22 GB), use sparse checkout when working with specific projects:
+### Repository Size Optimization
+
+This repository contains 312,000+ files across 632 projects. To make it accessible:
+
+| Clone Method | Size | Use Case |
+|-------------|------|----------|
+| Full clone | ~22 GB | Not recommended |
+| Shallow + sparse | ~50 MB | Single project work |
+| Treeless clone | ~500 MB | Browse multiple projects |
+| Blobless clone | ~2 GB | Full history, lazy blobs |
+
+### Recommended: Sparse Checkout (Fastest)
 
 ```bash
+# Clone with minimal data
 git clone --depth 1 --filter=blob:none --sparse https://github.com/orgitcog/org-llnl.git
 cd org-llnl
+
+# Checkout only the project you need
 git sparse-checkout set 01-hpc-parallel/RAJA
+
+# Add more projects as needed
+git sparse-checkout add 06-devtools/Spack
+```
+
+### For AI Agents: Treeless Clone
+
+```bash
+# Fetch commits but not tree/blob data until needed
+git clone --filter=tree:0 https://github.com/orgitcog/org-llnl.git
+```
+
+### Browse Without Checkout
+
+```bash
+# List all files without downloading content
+git ls-tree -r --name-only HEAD
+
+# View file content on demand
+git show HEAD:path/to/file.py
 ```
 
 ## Project Structure Convention
@@ -74,7 +108,25 @@ project-name/
 └── docs/
 ```
 
+## Size Contributors (For Maintainers)
+
+The largest directories by file count:
+
+| Directory | Files | Notes |
+|-----------|-------|-------|
+| `01-hpc-parallel/HPAC` | 94,738 | Full LLVM monorepo fork |
+| `06-devtools/SAFIRE` | 28,290 | Large codebase |
+| `06-devtools/WVL` | 8,191 | Includes Mac binaries |
+| `05-data-viz/MEAGraph` | 8,004 | Run artifacts |
+| `test/` directories | 115,567 | Test fixtures across projects |
+
+To further reduce size, consider:
+- Converting HPAC to a git submodule referencing upstream LLVM
+- Moving large test fixtures to Git LFS or external storage
+- Removing build artifacts tracked before .gitignore updates
+
 ## Notes
 
 - Each project retains its original license - check individual LICENSE files
 - Source: [LLNL GitHub Organization](https://github.com/LLNL)
+- See `.gitignore` for excluded file patterns and rationale
