@@ -1,0 +1,61 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+/.idea/
+/build/
+/build_remote/
+
+/.clion.source.upload.marker
+/test/posix/pegasus/pegasus/work/
+/test/posix/pegasus/pegasus/pegasus.properties
+/test/posix/pegasus/pegasus/replicas.yml
+/test/posix/pegasus/pegasus/sites.yml
+/test/posix/pegasus/pegasus/transformations.yml
+/test/posix/pegasus/pegasus/workflow.yml
+/test/posix/pegasus/pegasus_athena/work/
+/test/posix/pegasus/pegasus_athena/pegasus.properties
+/test/posix/pegasus/pegasus_athena/replicas.yml
+/test/posix/pegasus/pegasus_athena/sites.yml
+/test/posix/pegasus/pegasus_athena/transformations.yml
+/test/posix/pegasus/pegasus_athena/workflow.yml
+/test/posix/pegasus/pegasus_athena/pmc_wrapper.sh
+/test/posix/pegasus/pegasus_athena/workflow.py
+/test/posix/pegasus/pegasus_athena/scratch/
+/test/stdio/pegasus/athena/scratch/
+/test/stdio/pegasus/athena/work/
+/test/stdio/pegasus/athena/pegasus.properties
+/test/stdio/pegasus/athena/pmc_wrapper.sh
+/test/stdio/pegasus/athena/replicas.yml
+/test/stdio/pegasus/athena/sites.yml
+/test/stdio/pegasus/athena/transformations.yml
+/test/stdio/pegasus/athena/workflow.py
+/test/stdio/pegasus/athena/workflow.yml

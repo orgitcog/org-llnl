@@ -1,0 +1,7 @@
+importlib_resources; python_version < '3.7'
+coloredlogs
+click
+numpy
+pyDOE3
+scipy
+scikit-learn

@@ -1,0 +1,16 @@
+build/
+install/
+generated-docs/
+
+*.sh~
+*.cpp~
+*.hpp~
+*.txt~
+.gitignore~
+*.py~
+*.in~
+*.md~
+*.swp
+*.DS_Store
+
+.dir-locals.el

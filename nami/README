@@ -1,0 +1,11 @@
+===============================================================
+= Nami                                         /|             =
+= Parallel Wavelet Compression Library      __/  \  .__       =
+= by Todd Gamblin, tgamblin@llnl.gov              \/          =
+===============================================================
+
+This is Nami, a library for parallel wavelet compression.
+
+Installation and usage instructions can be found in the 'docs' directory.
+
+See the LICENSE file for license and distribution information.  

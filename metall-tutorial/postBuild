@@ -1,0 +1,6 @@
+git clone --recursive https://github.com/LLNL/metall.git && \
+wget -q --no-check-certificate https://boostorg.jfrog.io/artifactory/main/release/1.75.0/source/boost_1_75_0.tar.gz && \
+tar xf boost_1_75_0.tar.gz && \
+rm -f boost_1_75_0.tar.gz && \
+mv boost_1_75_0 boost && \
+cp Makefile metall/tutorial/hands_on/

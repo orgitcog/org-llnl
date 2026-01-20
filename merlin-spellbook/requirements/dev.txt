@@ -1,0 +1,11 @@
+# Development dependencies.
+pylint
+black
+dep-license
+flake8
+isort
+pytest
+build
+twine
+sphinx>=2.0.0
+alabaster

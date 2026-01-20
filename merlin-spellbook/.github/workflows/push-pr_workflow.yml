@@ -1,0 +1,92 @@
+name: Python CI
+
+on: [push, pull_request]
+
+jobs:
+  Changelog:
+    name: CHANGELOG.md updated
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Checkout the whole history, in case the target is way far behind
+
+    - name: Check if target branch has been merged
+      run: |
+        if git merge-base --is-ancestor ${{ github.event.pull_request.base.sha }} ${{ github.sha }}; then
+          echo "Target branch has been merged into the source branch."
+        else
+          echo "Target branch has not been merged into the source branch. Please merge in target first."
+          exit 1
+        fi
+
+    - name: Check that CHANGELOG has been updated
+      run: |
+        # If this step fails, this means you haven't updated the CHANGELOG.md file with notes on your contribution.
+        if git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -q '^CHANGELOG.md$'; then
+          echo "Thanks for helping keep our CHANGELOG up-to-date!"
+        else
+          echo "Please update the CHANGELOG.md file with notes on your contribution."
+          exit 1
+        fi
+
+  Lint:
+    runs-on: ubuntu-latest
+    env:
+      MAX_LINE_LENGTH: 127
+      MAX_COMPLEXITY: 15
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: ./.github/actions/setup-python
+      with:
+        python-version: '3.x'    
+
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --max-complexity=$MAX_COMPLEXITY --statistics --max-line-length=$MAX_LINE_LENGTH
+
+    - name: Lint with isort
+      run: |
+        isort --check --line-length $MAX_LINE_LENGTH spellbook tests *.py
+
+    - name: Lint with Black
+      run: |
+        black --check --line-length $MAX_LINE_LENGTH --target-version py311 spellbook tests *.py
+
+    - name: Lint with PyLint
+      run: |
+        pylint spellbook tests --rcfile=setup.cfg --exit-zero
+
+  Local-test-suite:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: ./.github/actions/setup-python
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install merlin-spellbook to run unit tests
+      run: |
+        pip3 install -e .
+
+    - name: Run pytest over unit test suite
+      run: |
+        python3 -m pytest tests/
+
+    - name: Run integration test suite
+      run: |
+        python3 tests/command_line_tests.py
+
