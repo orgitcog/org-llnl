@@ -1,0 +1,190 @@
+# =============================================================================
+# org-llnl Agent-Optimized .gitignore
+# =============================================================================
+# This file excludes large data directories, pre-trained models, and datasets
+# to reduce repository size from ~22GB to a more manageable footprint for
+# AI agent parsing and faster clone times.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# LARGE DATA DIRECTORIES (Top 5+ by size)
+# -----------------------------------------------------------------------------
+
+# 02-ml-ai/CRADL - 6.7GB (numpy training data)
+02-ml-ai/CRADL/data/
+
+# 01-hpc-parallel/HPAC - 1.3GB (LLVM/Clang compiler binaries)
+01-hpc-parallel/HPAC/llvm/
+01-hpc-parallel/HPAC/clang/
+
+# 02-ml-ai/CREPE - 954MB (prediction dictionaries and datasets)
+02-ml-ai/CREPE/datasets/pred_dicts_train/
+02-ml-ai/CREPE/datasets/pred_dicts_train_cmr/
+02-ml-ai/CREPE/datasets/pred_dicts_test/
+02-ml-ai/CREPE/datasets/pred_dicts_test_cmr/
+
+# 06-devtools/conduit - 589MB (large source tree)
+# Note: Keep conduit source for architecture integration, but ignore build artifacts
+06-devtools/conduit/build/
+
+# 06-devtools/WVL - 302MB (Mac-specific Priithon binaries)
+06-devtools/WVL/Priithon_27_mac/
+
+# 03-simulation/pefile-tests - 291MB (test binaries)
+03-simulation/pefile-tests/tests/
+
+# 02-ml-ai/PDBspheres - 284MB (library data)
+02-ml-ai/PDBspheres/PDBspheres-Libraries/
+
+# 05-data-viz/MEAGraph - 251MB (run artifacts)
+05-data-viz/MEAGraph/run/
+
+# 05-data-viz/axom_data - 221MB (large data files)
+05-data-viz/axom_data/
+
+# 03-simulation/Yet-Another-Hauser-Feshbach-Code - 246MB
+# Keep source, ignore generated data
+03-simulation/Yet-Another-Hauser-Feshbach-Code/data/
+
+# -----------------------------------------------------------------------------
+# LARGE FILE TYPES (Common across all projects)
+# -----------------------------------------------------------------------------
+
+# Machine Learning Models & Weights
+*.pth
+*.pt
+*.onnx
+*.h5
+*.hdf5
+*.keras
+*.pb
+*.tflite
+*.caffemodel
+*.model
+*.pkl
+*.pickle
+
+# Large Data Files
+*.npy
+*.npz
+*.mat
+*.parquet
+*.feather
+*.arrow
+
+# Compressed Archives (can be re-downloaded)
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tar.xz
+*.zip
+*.7z
+*.rar
+
+# Binary Data
+*.bin
+*.dat
+*.raw
+*.dataset
+
+# Video/Audio (if any)
+*.mp4
+*.avi
+*.mov
+*.wav
+*.mp3
+
+# Large Images/Datasets
+*.tif
+*.tiff
+*.fits
+
+# -----------------------------------------------------------------------------
+# BUILD ARTIFACTS & GENERATED FILES
+# -----------------------------------------------------------------------------
+
+# CMake
+build/
+_build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+ENV/
+env/
+.venv/
+
+# Node.js
+node_modules/
+
+# Compiled Objects
+*.o
+*.a
+*.lo
+*.la
+*.dylib
+*.dll
+*.exe
+
+# -----------------------------------------------------------------------------
+# IDE & EDITOR FILES
+# -----------------------------------------------------------------------------
+
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# -----------------------------------------------------------------------------
+# DOCUMENTATION BUILD OUTPUTS
+# -----------------------------------------------------------------------------
+
+docs/_build/
+site/
+_site/
+
+# -----------------------------------------------------------------------------
+# TESTING & COVERAGE
+# -----------------------------------------------------------------------------
+
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# -----------------------------------------------------------------------------
+# LOGS & TEMPORARY FILES
+# -----------------------------------------------------------------------------
+
+*.log
+logs/
+tmp/
+temp/
+*.tmp
