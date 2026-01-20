@@ -1,0 +1,58 @@
+UpdateCTestConfiguration  from :/Users/harrison37/Work/github/llnl/conduit/build-debug/DartConfiguration.tcl
+Parse Config file:/Users/harrison37/Work/github/llnl/conduit/build-debug/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/Users/harrison37/Work/github/llnl/conduit/build-debug/DartConfiguration.tcl
+Parse Config file:/Users/harrison37/Work/github/llnl/conduit/build-debug/DartConfiguration.tcl
+Test project /Users/harrison37/Work/github/llnl/conduit/build-debug
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 152
+    Start 152: t_conduit_docs_tutorial_python_ownership
+
+152: Test command: /Users/harrison37/Work/github/llnl/conduit/uberenv_libs/spack/opt/spack/darwin-mojave-skylake/clang-10.0.0-apple/python-3.8.11-ov6mkajdxwik3reewjwupqv3qeyygnsd/bin/python3.8 "-B" "-m" "unittest" "-v" "t_conduit_docs_tutorial_python_ownership"
+152: Environment variables: 
+152:  PYTHONPATH=/Users/harrison37/Work/github/llnl/conduit/build-debug/python-modules/:/Users/harrison37/Work/github/llnl/conduit/src/tests/docs
+152: Test timeout computed to be: 1500
+152: test_001_mem_ownership_external (t_conduit_docs_tutorial_python_ownership.Conduit_Tutorial_Python_Ownership) ... ok
+152: 
+152: ----------------------------------------------------------------------
+152: Ran 1 test in 0.001s
+152: 
+152: OK
+152: BEGIN_EXAMPLE("py_mem_ownership_external")
+152: 
+152: mem_spaces: 
+152:   0x7ff801065e60: 
+152:     path: "v_owned"
+152:     type: "allocated"
+152:     bytes: 40
+152:     allocator_id: 0
+152:   0x7ff7ff45fdf0: 
+152:     path: "v_external"
+152:     type: "external"
+152: total_bytes_allocated: 40
+152: total_bytes_mmaped: 0
+152: total_bytes_compact: 80
+152: total_strided_bytes: 80
+152: 
+152: 
+152: v_owned: [0.0, 0.0, 0.0, 0.0, 0.0]
+152: v_external: [0.0, 0.0, 0.0, 0.0, 0.0]
+152: 
+152: 
+152: v_owned: [0.0, 0.0, 0.0, 0.0, 0.0]
+152: v_external: [3.1415, 0.0, 0.0, 0.0, 0.0]
+152: 
+152: [3.1415 0.     0.     0.     0.    ]
+152: END_EXAMPLE("py_mem_ownership_external")
+1/1 Test #152: t_conduit_docs_tutorial_python_ownership ...   Passed    0.51 sec
+
+The following tests passed:
+	t_conduit_docs_tutorial_python_ownership
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.53 sec

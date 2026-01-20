@@ -1,0 +1,99 @@
+Running main() from C:\Users\capps2\Documents\projects\axom\src\cmake\blt\thirdparty_builtin\googletest\googletest\src\gtest_main.cc
+[==========] Running 12 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 12 tests from conduit_tutorial
+[ RUN      ] conduit_tutorial.numeric_as_dtype
+BEGIN_EXAMPLE("numeric_as_dtype")
+100
+END_EXAMPLE("numeric_as_dtype")
+[       OK ] conduit_tutorial.numeric_as_dtype (0 ms)
+[ RUN      ] conduit_tutorial.numeric_via_value
+BEGIN_EXAMPLE("numeric_via_value")
+100
+END_EXAMPLE("numeric_via_value")
+[       OK ] conduit_tutorial.numeric_via_value (0 ms)
+[ RUN      ] conduit_tutorial.numeric_ptr_as_dtype
+BEGIN_EXAMPLE("numeric_ptr_as_dtype")
+my_vals[0] = 100
+my_vals[1] = 200
+my_vals[2] = 300
+my_vals[3] = 400
+END_EXAMPLE("numeric_ptr_as_dtype")
+[       OK ] conduit_tutorial.numeric_ptr_as_dtype (0 ms)
+[ RUN      ] conduit_tutorial.numeric_ptr_via_value
+BEGIN_EXAMPLE("numeric_ptr_via_value")
+my_vals[0] = 100
+my_vals[1] = 200
+my_vals[2] = 300
+my_vals[3] = 400
+END_EXAMPLE("numeric_ptr_via_value")
+[       OK ] conduit_tutorial.numeric_ptr_via_value (0 ms)
+[ RUN      ] conduit_tutorial.numeric_strided_data_array
+BEGIN_EXAMPLE("numeric_strided_data_array")
+my_vals[0] = 100
+my_vals[1] = 300
+[100, 300]
+END_EXAMPLE("numeric_strided_data_array")
+[       OK ] conduit_tutorial.numeric_strided_data_array (0 ms)
+[ RUN      ] conduit_tutorial.numeric_data_accessor_start
+BEGIN_EXAMPLE("numeric_data_accessor")
+[       OK ] conduit_tutorial.numeric_data_accessor_start (0 ms)
+[ RUN      ] conduit_tutorial.numeric_data_accessor
+int64 case: 
+[100.0, 300.0]
+Some stats:
+	 min: 100
+	 max: 300
+	 sum: 400
+	 mean: 200
+vals[0] = 100
+vals[1] = 300
+float64 case: 
+[2.2, 4.4, 6.6]
+Some stats:
+	 min: 2.2
+	 max: 6.6
+	 sum: 13.2
+	 mean: 4.4
+vals[0] = 2.2
+vals[1] = 4.4
+vals[2] = 6.6
+[       OK ] conduit_tutorial.numeric_data_accessor (0 ms)
+[ RUN      ] conduit_tutorial.numeric_data_accessor_end
+END_EXAMPLE("numeric_data_accessor")
+[       OK ] conduit_tutorial.numeric_data_accessor_end (0 ms)
+[ RUN      ] conduit_tutorial.numeric_double_conversion_start
+BEGIN_EXAMPLE("numeric_double_conversion")
+[       OK ] conduit_tutorial.numeric_double_conversion_start (0 ms)
+[ RUN      ] conduit_tutorial.numeric_double_conversion
+float32 case: 
+ converting to temporary double array 
+[100.0, 200.0, 300.0, 400.0]
+vals[0] = 100
+vals[1] = 200
+vals[2] = 300
+vals[3] = 400
+double case: 
+ using existing buffer
+[1000.0, 2000.0, 3000.0, 4000.0]
+vals[0] = 1000
+vals[1] = 2000
+vals[2] = 3000
+vals[3] = 4000
+[       OK ] conduit_tutorial.numeric_double_conversion (0 ms)
+[ RUN      ] conduit_tutorial.numeric_double_conversion_end
+END_EXAMPLE("numeric_double_conversion")
+[       OK ] conduit_tutorial.numeric_double_conversion_end (0 ms)
+[ RUN      ] conduit_tutorial.numeric_cxx11_init
+BEGIN_EXAMPLE("numeric_cxx11_init")
+[100, 200, 300]
+[100, 200, 300]
+[1.0, 2.0, 3.0]
+[1.0, 2.0, 3.0]
+END_EXAMPLE("numeric_cxx11_init")
+[       OK ] conduit_tutorial.numeric_cxx11_init (0 ms)
+[----------] 12 tests from conduit_tutorial (2 ms total)
+
+[----------] Global test environment tear-down
+[==========] 12 tests from 1 test suite ran. (3 ms total)
+[  PASSED  ] 12 tests.

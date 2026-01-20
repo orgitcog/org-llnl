@@ -1,0 +1,26 @@
+Running main() from /Users/harrison37/Work/github/llnl/conduit/src/blt/thirdparty_builtin/googletest-master-2020-01-07/googletest/src/gtest_main.cc
+[==========] Running 3 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 3 tests from conduit_tutorial
+[ RUN      ] conduit_tutorial.error_handlers_funcs_start
+BEGIN_EXAMPLE("error_handlers_funcs")
+[       OK ] conduit_tutorial.error_handlers_funcs_start (0 ms)
+[ RUN      ] conduit_tutorial.error_handlers_funcs_end
+END_EXAMPLE("error_handlers_funcs")
+[       OK ] conduit_tutorial.error_handlers_funcs_end (0 ms)
+[ RUN      ] conduit_tutorial.error_handlers
+BEGIN_EXAMPLE("error_handlers_rewire")
+[INFO] An info message
+[WARNING!] Node::as_float32() const -- DataType float64 at path my_value does not equal expected DataType float32
+[ERROR!] Cannot fetch_existing, Node(my_value) is not an object
+END_EXAMPLE("error_handlers_rewire")
+BEGIN_EXAMPLE("error_handlers_reset")
+END_EXAMPLE("error_handlers_reset")
+BEGIN_EXAMPLE("error_handlers_current_push_pop")
+END_EXAMPLE("error_handlers_current_push_pop")
+[       OK ] conduit_tutorial.error_handlers (1 ms)
+[----------] 3 tests from conduit_tutorial (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test suite ran. (1 ms total)
+[  PASSED  ] 3 tests.

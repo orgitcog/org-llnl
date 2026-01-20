@@ -1,0 +1,213 @@
+Running main() from /Users/harrison37/Work/github/llnl/conduit/src/blt/thirdparty_builtin/googletest-master-2020-01-07/googletest/src/gtest_main.cc
+[==========] Running 10 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 10 tests from conduit_tutorial
+[ RUN      ] conduit_tutorial.basics_very_basic
+BEGIN_EXAMPLE("basics_very_basic")
+
+my: "data"
+
+END_EXAMPLE("basics_very_basic")
+[       OK ] conduit_tutorial.basics_very_basic (0 ms)
+[ RUN      ] conduit_tutorial.basics_hierarchial
+BEGIN_EXAMPLE("basics_hierarchial")
+
+my: "data"
+a: 
+  b: 
+    c: "d"
+    e: 64.0
+
+total bytes: 15
+END_EXAMPLE("basics_hierarchial")
+[       OK ] conduit_tutorial.basics_hierarchial (0 ms)
+[ RUN      ] conduit_tutorial.basics_object_and_list
+BEGIN_EXAMPLE("basics_object_and_list")
+
+object_example: 
+  val1: "data"
+  val2: 10
+  val3: 3.1415
+list_example: 
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+
+END_EXAMPLE("basics_object_and_list")
+[       OK ] conduit_tutorial.basics_object_and_list (0 ms)
+[ RUN      ] conduit_tutorial.basics_object_and_list_itr
+BEGIN_EXAMPLE("basics_object_and_list_itr")
+
+object_example: 
+  val1: "data"
+  val2: 10
+  val3: 3.1415
+list_example: 
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+
+val1: "data"
+val2: 10
+val3: 3.1415
+
+0
+1
+2
+3
+4
+END_EXAMPLE("basics_object_and_list_itr")
+[       OK ] conduit_tutorial.basics_object_and_list_itr (0 ms)
+[ RUN      ] conduit_tutorial.basics_mem_spaces
+BEGIN_EXAMPLE("basics_mem_spaces")
+
+mem_spaces: 
+  0x7ff3dc9049b0: 
+    path: "my"
+    type: "allocated"
+    bytes: 5
+    allocator_id: 0
+  0x7ff3dc904d90: 
+    path: "a/b/c"
+    type: "allocated"
+    bytes: 2
+    allocator_id: 0
+  0x7ff3dc904d80: 
+    path: "a/b/e"
+    type: "allocated"
+    bytes: 8
+    allocator_id: 0
+total_bytes_allocated: 15
+total_bytes_mmaped: 0
+total_bytes_compact: 15
+total_strided_bytes: 15
+
+END_EXAMPLE("basics_mem_spaces")
+[       OK ] conduit_tutorial.basics_mem_spaces (0 ms)
+[ RUN      ] conduit_tutorial.basics_bw_style
+BEGIN_EXAMPLE("basics_bw_style")
+
+test: 100
+
+
+{
+  "test": 
+  {
+    "dtype":"uint32",
+    "number_of_elements": 1,
+    "offset": 0,
+    "stride": 4,
+    "element_bytes": 4,
+    "endianness": "little",
+    "value": 100
+  }
+}
+END_EXAMPLE("basics_bw_style")
+[       OK ] conduit_tutorial.basics_bw_style (0 ms)
+[ RUN      ] conduit_tutorial.basics_bw_style_from_native
+BEGIN_EXAMPLE("basics_bw_style_from_native")
+
+{
+  "test": 
+  {
+    "dtype":"int32",
+    "number_of_elements": 1,
+    "offset": 0,
+    "stride": 4,
+    "element_bytes": 4,
+    "endianness": "little",
+    "value": 100
+  }
+}
+END_EXAMPLE("basics_bw_style_from_native")
+[       OK ] conduit_tutorial.basics_bw_style_from_native (1 ms)
+[ RUN      ] conduit_tutorial.basics_node_refs
+BEGIN_EXAMPLE("basics_node_refs")
+
+my: 
+  nested: 
+    path: 0.0
+
+
+my: 
+  nested: 
+    path: 42.0
+
+END_EXAMPLE("basics_node_refs")
+[       OK ] conduit_tutorial.basics_node_refs (0 ms)
+[ RUN      ] conduit_tutorial.basics_node_refs_bad
+BEGIN_EXAMPLE("basics_node_refs_bad")
+
+my: 
+  nested: 
+    path: 0.0
+
+
+my: 
+  nested: 
+    path: 0.0
+
+END_EXAMPLE("basics_node_refs_bad")
+[       OK ] conduit_tutorial.basics_node_refs_bad (0 ms)
+[ RUN      ] conduit_tutorial.basics_const_vs_non_const
+BEGIN_EXAMPLE("basics_const_vs_non_const")
+== n1 == 
+
+my: 
+  important: 
+    but: 
+      mistyped: 
+        path: 
+          to: 
+            data: 42.0
+
+
+==> important: 0
+n1 after calling `important_suprise`
+
+my: 
+  important: 
+    but: 
+      mistyped: 
+        path: 
+          to: 
+            data: 42.0
+    data: 
+
+== n2 == 
+
+my: 
+  important: 
+    but: 
+      mistyped: 
+        path: 
+          to: 
+            data: 42.0
+
+
+file: /Users/harrison37/Work/github/llnl/conduit/src/libs/conduit/conduit_node.cpp
+line: 14182
+message: 
+Cannot fetch non-existent child "data" from Node(my/important)
+
+n2 after calling `important`
+
+my: 
+  important: 
+    but: 
+      mistyped: 
+        path: 
+          to: 
+            data: 42.0
+
+END_EXAMPLE("basics_const_vs_non_const")
+[       OK ] conduit_tutorial.basics_const_vs_non_const (0 ms)
+[----------] 10 tests from conduit_tutorial (2 ms total)
+
+[----------] Global test environment tear-down
+[==========] 10 tests from 1 test suite ran. (2 ms total)
+[  PASSED  ] 10 tests.
