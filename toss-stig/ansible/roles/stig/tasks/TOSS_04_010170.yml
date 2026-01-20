@@ -1,0 +1,34 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252927
+
+# Verify the rsyslog service is enabled and active with the following commands:
+#
+#     $ sudo systemctl is-enabled rsyslog
+#     enabled
+#
+#     $ sudo systemctl is-active rsyslog
+#     active
+#
+# If the service is not "enabled" and "active", this is a finding.
+#
+# If "rsyslog" is not enabled, ask the System Administrator how system error
+# logging is performed on the system. If there is no evidence of system logging
+# being performed on the system, this is a finding.
+
+
+- name: TOSS-04-010170 - The TOSS operating system must be configured to preserve log records from failure events.
+  ansible.builtin.systemd:
+    name: rsyslog
+    enabled: true
+    state: started
+    masked: false
+  when:
+    - toss_04_010170 | bool
+  tags:
+    - V-252927
+    - SRG-OS-000269-GPOS-00103
+    - TOSS-04-010170
+    - DISA-STIG-TOSS-04-010170
+    - medium_severity
+    - CCI-001665
+    - NASA-ASCS-20103
+    - DISA-STIG-RHEL-08-010561

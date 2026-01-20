@@ -1,0 +1,47 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252917
+
+# Verify that the pam_unix.so module is configured to use sha512.
+#
+# Check that the pam_unix.so module is configured to use sha512 in
+# /etc/pam.d/password-auth with the following command:
+#
+#     $ sudo grep password /etc/pam.d/password-auth | grep pam_unix
+#     password sufficient pam_unix.so sha512
+#
+# If "sha512" is missing, or is commented out, this is a finding.
+
+
+- name: TOSS-04-010060 - The TOSS pam_unix.so module must be configured in the password-auth file to use a FIPS 140-2-approved cryptographic hashing algorithm for system authentication.
+  block:
+    - name: TOSS-04-010060 - Check bad algorithms are absent
+      community.general.pamd:
+        name: password-auth
+        type: password
+        control: sufficient
+        module_path: pam_unix.so
+        module_arguments:
+          - descrypt
+          - bigcrypt
+          - md5
+          - sha256
+        state: args_absent
+        backup: true
+    - name: TOSS-04-010060 - Check good algorithms are present
+      community.general.pamd:
+        name: password-auth
+        type: password
+        control: sufficient
+        module_path: pam_unix.so
+        module_arguments: sha512
+        state: args_present
+        backup: true
+  when:
+    - toss_04_010060 | bool
+  tags:
+    - V-252917
+    - SRG-OS-000120-GPOS-00061
+    - TOSS-04-010060
+    - DISA-STIG-TOSS-04-010060
+    - medium_severity
+    - CCI-000803
+    - NASA-ASCS-20180

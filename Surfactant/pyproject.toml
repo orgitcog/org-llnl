@@ -1,0 +1,137 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Surfactant"
+authors = [
+    {name = "Ryan Mast", email = "mast9@llnl.gov"},
+    {name = "Levi Lloyd", email = "lloyd27@llnl.gov"},
+    {name = "Micaela Gallegos", email = "gallegos31@llnl.gov"},
+    {name = "Alexander Armstrong", email = "armstrong48@llnl.gov"},
+    {name = "Shayna Kapadia", email = "kapadia2@llnl.gov"},
+    {name = "Asriel Margarian", email = "margarian1@llnl.gov"},
+    {name = "Matthew Kelley", email = "kelley41@llnl.gov"},
+]
+maintainers = [
+    {name = "Ryan Mast", email = "mast9@llnl.gov"},
+]
+description = "Modular framework to gather file information, analyze dependencies, and generate an SBOM"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["sbom", "pe", "elf", "ole", "msi"]
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Security",
+    "Topic :: Software Development",
+    "Topic :: System",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "dataclasses_json==0.6.*",
+    "pyelftools==0.32.*",
+    # This isn't semver so fix it to a specific release
+    "pefile==2024.8.26",
+    "dnfile==0.17.*",
+    "olefile==0.47.*",
+    "defusedxml==0.7.*",
+    "spdx-tools==0.8.*",
+    # Pinned to specific version for potential breaking changes
+    "cyclonedx-python-lib==11.6.0",
+    "pluggy==1.*",
+    "click==8.*",
+    "loguru==0.7.*",
+    "tomlkit==0.13.*",
+    "textual==7.*",
+    "requests>=2.32.3",
+    "rarfile==4.2.*",
+    "networkx>=2.6",
+    "regex; platform_python_implementation == 'CPython'",
+    # Pinned to specific version for potential breaking changes
+    "python-msi==0.0.0b3",
+    # Pinned to specific version for potential breaking changes
+    "rpmfile==2.1.0",
+]
+dynamic = ["version"]
+
+[dependency-groups]
+test = ["pytest"]
+dev = ["build", "pre-commit"]
+docs = ["sphinx", "myst-parser", "furo>=2025.9.25", "sphinx-copybutton>=0.5.2"]
+
+[project.optional-dependencies]
+macho = ["lief==0.17.2"]
+java = ["javatools>=1.6,==1.*"]
+test = ["pytest", "pytest-asyncio"]
+dev = ["build", "pre-commit"]
+docs = ["sphinx", "myst-parser", "furo>=2025.9.25", "sphinx-copybutton>=0.5.2"]
+
+[project.scripts]
+surfactant = "surfactant.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/LLNL/Surfactant"
+Discussions = "https://github.com/LLNL/Surfactant/discussions"
+Documentation = "https://surfactant.readthedocs.io/en/latest/"
+"Issue Tracker" = "https://github.com/LLNL/Surfactant/issues"
+"Source Code" = "https://github.com/LLNL/Surfactant"
+
+[tool.setuptools.packages.find]
+include = ["surfactant", "surfactant.*"]
+
+[tool.setuptools_scm]
+version_file = "surfactant/_version.py"
+
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib", "--ignore=plugins"]
+pythonpath = "."
+
+[tool.ruff]
+line-length = 100
+indent-width = 4
+
+[tool.ruff.lint]
+# ruff defaults: E4, E7, E9, F
+select = ["E", "F", "B", "I"]
+ignore = ["E501", "F841"]
+# don't fix flake8-bugbear (`B`) violations
+unfixable = ["B"]
+
+# Ignore `E402` import violations in plugin manager
+[tool.ruff.lint.per-file-ignores]
+"surfactant/plugin/manager.py" = ["E402"]
+
+[tool.pylint.messages_control]
+max-line-length = "100"
+good-names-rgxs = "x,y,e,md,sw"
+disable = [
+  "line-too-long",
+  "missing-module-docstring",
+  "missing-class-docstring",
+  "missing-function-docstring",
+  "duplicate-code",
+  "too-many-branches",
+  "too-many-statements",
+  "unused-variable",
+  "invalid-name",
+  "no-member",
+  "too-many-nested-blocks",
+  "fixme",
+  "too-many-locals",
+  "too-many-arguments",
+  "unused-argument",
+  "unspecified-encoding",
+  "import-error",
+]

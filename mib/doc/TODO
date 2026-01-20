@@ -1,0 +1,31 @@
+o  The error reporting needs to be much more refined.
+  -  Look for places where ASSERT should be used
+  -  The __FILE__ and __LINE__ macros already give
+     enough info to document which MPI_wrapper failed
+  -  System calls should be handled differently from library calls
+     and the errors returned should each be handled sensibly.  This may
+     end up being quite machine dependent
+  -  The idea of some errors being reported out of the base task, as
+     mib errors rather than system errors, is a good one, but needs to
+     be handled carefully and with attention to detail
+  -  The error reporting needs to be aware of both dychotomies:
+     *  Exit immediately with an MPI_Abort or hold off and report back
+        to base task
+     *  Let __FILE__, __LINE__, and errno document the error or make up
+        a mib_specific error condition
+
+o  Test against arbitrary subcommunicators of MPI_COMM_WORLD
+
+o  Respond to Signals
+
+o Very small xfer sizes may want very large numbers of xfers.  See
+  what is involved in allowing for that.  Perhaps I should gather and
+  reduce the data before sending it to the profile files.  
+
+o Random seeks in writes as well
+
+o Collectively check version number and bail if there is disagreement.
+
+o Output should report if the test was stonewalling, non-stonewalling,
+  or inbetween.
+

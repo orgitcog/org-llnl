@@ -1,0 +1,54 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-253091
+
+# Verify the OpenSSL library is configured to use only ciphers employing
+# FIPS 140-2-approved algorithms:
+#
+# Verify that system-wide crypto policies are in effect:
+#
+#     $ sudo grep -i opensslcnf.config /etc/pki/tls/openssl.cnf
+#     .include /etc/crypto-policies/back-ends/opensslcnf.config
+#
+# If the "opensslcnf.config" is not defined in the "/etc/pki/tls/openssl.cnf"
+# file, this is a finding.
+#
+# Verify which system-wide crypto policy is in use:
+#
+#     $ sudo update-crypto-policies --show
+#     FIPS:OSPP
+#
+# If the system-wide crypto policy is set to anything other than "FIPS"
+# or "FIPS:OSPP", this is a finding.
+
+
+- name: TOSS-04-040440 - TOSS must implement DoD-approved encryption in the OpenSSL package.
+  block:
+    - name: TOSS-04-040440 - Verify that system-wide crypto policies are in effect
+      ansible.builtin.lineinfile:
+        path: /etc/pki/tls/openssl.cnf
+        regexp: '^.include /etc/crypto-policies/back-ends/opensslcnf.config'
+        line: ".include /etc/crypto-policies/back-ends/opensslcnf.config"
+        mode: '0644'
+        create: true
+    - name: TOSS-04-040440 - Check which system-wide crypto policy is in use
+      ansible.builtin.command: update-crypto-policies --show
+      register: crypto_policy_output
+      changed_when: false
+      check_mode: false
+    - name: TOSS-04-040440 - Configure the TOSS OpenSSL library to use only ciphers employing FIPS 140-2-approved algorithms
+      ansible.builtin.command: fips-mode-setup --enable
+      # Note: Running this command will create a symlink from opensshserver.config and openssh.config to other files,  making permission look like '0777' to ansible's checks
+      changed_when: fips_setup_output.rc is defined
+      register: fips_setup_output
+      when: "'FIPS' not in crypto_policy_output.stdout"
+  when:
+    - toss_04_040440 | bool
+  tags:
+    - V-253091
+    - SRG-OS-000393-GPOS-00173
+    - TOSS-04-040440
+    - DISA-STIG-TOSS-04-040440
+    - medium_severity
+    - CCI-002890
+    - hpc_issue
+    - pki_authentication
+    - DISA-STIG-RHEL-08-010293

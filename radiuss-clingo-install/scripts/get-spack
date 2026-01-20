@@ -1,0 +1,37 @@
+#!/bin/bash
+
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+set -e
+
+#[get-spack--]
+if [[ ! -d ${CI_SPACK_PATH} ]]
+then
+  mkdir -p ${CI_SPACK_PATH}/..
+  # A shallow clone is enough, and much faster.
+  git clone ${CI_SPACK_REPO} --depth 1 --branch develop ${CI_SPACK_PATH}
+fi
+
+if [[ ${CI_SPACK_COMMIT} ]]
+then
+  cd ${CI_SPACK_PATH}
+  git checkout -b temp
+  git branch -D ${CI_SPACK_REF}
+  git fetch --depth 1 ${CI_SPACK_REPO} ${CI_SPACK_REF}:${CI_SPACK_REF}
+  git checkout ${CI_SPACK_REF}
+  git tag ${CI_PIPELINE_ID}
+  git branch -D temp
+  cd -
+else
+  cd ${CI_SPACK_PATH}
+  git fetch --depth 1 ${CI_SPACK_REPO} ${CI_SPACK_REF}
+  git checkout ${CI_SPACK_REF}
+  git tag ${CI_PIPELINE_ID}
+  cd -
+fi
+#[--get-spack]

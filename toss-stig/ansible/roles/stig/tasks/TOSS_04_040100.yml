@@ -1,0 +1,26 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-253065
+
+# Check to see if the rsh-server package is installed with the
+# following command:
+#
+#     $ sudo yum list installed rsh-server
+#
+# If the rsh-server package is installed, this is a finding.
+
+
+- name: TOSS-04-040100 - TOSS must not have the rsh-server package installed.
+  ansible.builtin.package:
+    name: rsh-server
+    state: absent
+  when:
+    - toss_04_040100 | bool
+  tags:
+    - V-253065
+    - SRG-OS-000074-GPOS-00042
+    - TOSS-04-040100
+    - DISA-STIG-TOSS-04-040100
+    - medium_severity
+    - CCI-000197
+    - CCI-000381
+    - NASA-ASCS-20240
+    - DISA-STIG-RHEL-08-040010

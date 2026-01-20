@@ -1,0 +1,58 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252962
+
+# Verify local interactive users on TOSS have a home directory assigned with
+# the following command:
+#
+#     $ sudo pwck -r
+#     user 'lp': directory '/var/spool/lpd' does not exist
+#     user 'news': directory '/var/spool/news' does not exist
+#     user 'uucp': directory '/var/spool/uucp' does not exist
+#     user 'www-data': directory '/var/www' does not exist
+#
+# Ask the System Administrator (SA) if any users found without home directories
+# are local interactive users. If the SA is unable to provide a response, check
+# for users with a User Identifier (UID) of 1000 or greater with the following
+# command:
+#
+#     $ sudo awk -F: '($3>=1000)&&($7 !~ /nologin/){print $1, $3, $6}' /etc/passwd
+#
+# If any interactive users do not have a home directory assigned, this is a finding.
+
+
+- name: TOSS-04-020230 - All TOSS local interactive users must have a home directory assigned in the /etc/passwd file.
+  block:
+    - name: TOSS-04-020230 - Get all /etc/passwd file entries
+      ansible.builtin.getent:
+        database: passwd
+        split: ':'
+    - name: TOSS-04-020230 - Create local_users variable from the getent output
+      ansible.builtin.set_fact:
+        local_users: '{{ ansible_facts.getent_passwd | dict2items }}'
+    - name: TOSS-04-020230 - Gather the home directories of local, interactive users
+      ansible.builtin.stat:
+        path: '{{ item.value.4 }}' # The path to the interactive user's home directory, ex: /g/g0/defrates
+      register: home_dirs
+      loop: '{{ local_users }}'
+      when:
+        - item.value.1 | int >= 1000 and '/nologin' not in item.value.5 and '/false' not in item.value.5 and '/dev/null' not in item.value.5
+        # item.value.1 is the UID                      and item.value.5 is the user's login script
+    - name: TOSS-04-020230 - Verify that all interactive users have a home directory. Users without a home directory might not be enabled and can be set as noninteractive (login shell set to /bin/false)
+      ansible.builtin.user:
+        name: '{{ item.item.key }}'
+        shell: /bin/false
+      check_mode: true
+      loop: '{{ home_dirs.results }}'
+      when:
+        - "item.stat is defined"
+        - "not item.stat.exists"
+  when:
+    - toss_04_020230 | bool
+  tags:
+    - V-252962
+    - SRG-OS-000480-GPOS-00227
+    - TOSS-04-020230
+    - DISA-STIG-TOSS-04-020230
+    - medium_severity
+    - CCI-000366
+    - hpc_issue
+    - user_permissions

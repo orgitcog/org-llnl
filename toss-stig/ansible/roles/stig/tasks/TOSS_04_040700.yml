@@ -1,0 +1,58 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-253111
+
+# Verify the system is configured to prevent unrestricted mail relaying.
+#
+# Determine if "postfix" is installed with the following commands:
+#
+#     $ sudo yum list installed postfix
+#     postfix.x86_64  2:3.5.8-2.el8
+#
+# If postfix is not installed, this is Not Applicable.
+#
+# If postfix is installed, determine if it is configured to reject connections
+# from unknown or untrusted networks with the following command:
+#
+#     $ sudo postconf -n smtpd_client_restrictions
+#     smtpd_client_restrictions = permit_mynetworks, reject
+#
+# If the "smtpd_client_restrictions" parameter contains any entries other than
+# "permit_mynetworks" and "reject", this is a finding.
+
+
+- name: TOSS-04-040700 - TOSS must be configured to prevent unrestricted mail relaying.
+  block:
+    - name: TOSS-04-040700 - Check for duplicate values
+      ansible.builtin.lineinfile:
+        path: /etc/postfix/main.cf
+        create: false
+        regexp: ^[ \t]*smtpd_client_restrictions\s*=\s*
+        state: absent
+      check_mode: true
+      changed_when: false
+      register: dupes
+    - name: TOSS-04-040700 - Deduplicate values from /etc/postfix/main.cf
+      ansible.builtin.lineinfile:
+        path: /etc/postfix/main.cf
+        create: false
+        regexp: ^[ \t]*smtpd_client_restrictions\s*=\s*
+        state: absent
+      when: dupes.found is defined and dupes.found > 1
+    - name: TOSS-04-040700 - Insert correct line to /etc/postfix/main.cf
+      ansible.builtin.lineinfile:
+        path: /etc/postfix/main.cf
+        create: true
+        regexp: ^[ \t]*smtpd_client_restrictions\s*=\s*
+        line: smtpd_client_restrictions = permit_mynetworks,reject
+        state: present
+        mode: '644'
+  when:
+    - toss_04_040700 | bool
+    - '"postfix" in ansible_facts.packages'
+  tags:
+    - V-253111
+    - SRG-OS-000480-GPOS-00227
+    - TOSS-04-040700
+    - DISA-STIG-TOSS-04-040700
+    - medium_severity
+    - CCI-000366
+    - DISA-STIG-RHEL-08-040290

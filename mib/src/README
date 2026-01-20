@@ -1,0 +1,207 @@
+****************************************************************************\
+  $Id: README,v 1.9 2005/11/30 20:24:57 auselton Exp $
+****************************************************************************
+  Copyright (C) 2001-2002 The Regents of the University of California.
+  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
+  Written by Andrew Uselton <uselton2@llnl.gov>
+  UCRL-CODE-2006-xxx.
+  
+  This file is part of Mib, an MPI-based parallel I/O benchamrk
+  For details, see <http://www.llnl.gov/linux/mib/>.
+  
+  Mib is free software; you can redistribute it and/or modify it under
+  the terms of the GNU General Public License as published by the Free
+  Software Foundation; either version 2 of the License, or (at your option)
+  any later version.
+  
+  Mib is distributed in the hope that it will be useful, but WITHOUT 
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License 
+  for more details.
+  
+  You should have received a copy of the GNU General Public License along
+  with Mib; if not, write to the Free Software Foundation, Inc.,
+  59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
+****************************************************************************/
+
+			       MIB
+		    MPI (POSIX) I/O BENCHMARK
+			Andrew C. Uselton
+		     Updated April 5, 2006
+
+Mib is an outgrowth of Lustre (http://www.lustre.org/) benchmarking
+efforts at LLNL, though its operation does not require Lustre.  It
+resembles the IOR benchmark (ftp://ftp.llnl.gov/pub/siop/ior/) in that
+it carries out I/O to a parallel file system from within a coordinated
+parallel MPI application.  
+
+  Mib is an MPI I/O test that has each MPI task perform I/O of a
+fixed size per system call.  The tasks first write to and then read
+from files named in a conventional way.  Mib assumes that the files
+are on a parallel file system. The file a task reads from is
+distinct from the file written to, if possible.  This defeats
+caching at the clients.  Optionally, detailed timing data for
+the system calls is sent to a file (one for writes and one for
+reads) after the I/O is complete.
+ 
+  Mib is intended to be as simple as possible (but no simpler).
+The results are easy to interpret. The code is easy to extend.
+
+  Mib has all the tasks stop after the same amount of time.  This
+is "stonewalling" mode.  It will also stop after all tasks complete
+a fixed number of system calls.  This is non-stonewalling mode.
+Whichever citerion is satisfied first within a task ends I/O from
+that task.  It is possible for system call limits and time limits
+to be chosen so that some tasks finish due to one limit and other
+tasks due to the other limit.  I don't see how that could be
+desirable, but is allowed and no special note is made if it does
+happen.  In order to be sure one is in stonewalling mode or
+non-stornewalling mode one needs to have a good idea about the
+relative progress of the fastest and slowest tasks in a test.  For
+stonewalling one sets the limit on system calls above what even the
+fastest task would achieve given the time limit.  Conversely, for
+non-stonewalling mode set the limit on system calls below what even
+the slowest would achieve in the time limit.  Note that stonewalling
+mode will give the best estimate for maximum sustained throughput,
+while non-stonewalling mode will more closely reflect actual "user"
+experience (users of the file system not users of mib).   
+
+Mib has two advantages over IOR.  First, it is very simple.  Following
+the idea of "do only one thing, and do it well," mib avoids the
+complexity and size associated with IOR.  It loads quickly.  It is
+easily modified to suit specific local needs.  Second, it will
+optionally produce a "profile" of the timing of every system call.
+These timings are synchronized and coordinated accross all tasks.
+Post-processing tools (see the "mib-tools" RPM) can manipulate
+the profiles to give a graphical view of the dynamic behavior of the
+file system under the load provided by mib.  These graphs have proven
+valuable in isolating performance bottlenecks in Lustre.  Mib is not
+intended to replace IOR but rather to compliment it.  IOR operates in
+mnay more modes and with much wider applicability than mib.
+
+Mib is characterized by the following:
+o Both MPI and non-MPI operation
+o POSIX system calls only
+o One file per MPI task
+o The test runs exactly once with the given parameters
+
+$mib -V
+mib-1.9.6-i386
+$mib -h
+usage: mib [b::EFIhHl:L:Mnp:PrRs:St:VW]
+See the man page for "long_opts" equivalents.
+    -b [<gran>]     :  Random seeks (optional granularity) before each read.
+    -E              :  Show environment of test in output.
+    -F              :  Mib does not normally allow I/O to any FS
+                    :  but Lustre.  This overrides the "safety".
+    -I              :  Show intermediate values in output.
+    -h              :  Print this message and exit.
+    -H              :  Show headers in output.
+    -l <call_limit> :  Issue no more than this many system calls.
+    -L <time_limit> :  Do not issue new system calls after this many
+                    :    seconds (limits are per phase for write and
+                    :    read phases).
+    -M              :  Do not use MPI even if it is available.
+    -n              :  Create new files if files were already present
+                    :    (will always create new files if none were
+                    :    present).
+    -p <profiles>   :  Output system call timing profiles to 
+                    :    <profiles>.write and <profiles>.read.
+    -P              :  Show progress bars during testing.
+    -r              :  Remove files when done.
+    -R              :  Only perform the read test.
+    -s <call_size>  :  Use system calls of this size (default 512k).
+                    :    Numbers may use abreviations k, K, m, or M.
+    -S              :  Show signon message, including date, program
+                    :    name, and version.
+    -t <test_dir>   :  Required. I/O transactions to and from this
+                    :    directory.
+    -V              :  Print the version and exit.
+    -W              :  Only perform the write test
+                    :    (if -R and -W are both present both tests 
+                    :     will run, but that's the default anyway).
+
+In the LLNL Linux clusters environment the SLURM
+(http://www.llnl.gov/linux/slurm/) command "srun" launches MPI
+applications.  A typical invokation might be 
+
+srun -N8 -p ltest mib -t /p/ga2/lustre-test/mib/newfiles
+ |    |      |     |       |
+ |    |      |     |       ---target directory
+ |    |      |     -----------MPI application
+ |    |      -----------------partition (group of target nodes)
+ |    ------------------------number of tasks
+ -----------------------------SLURM MPI launcher
+
+This example would run 8 MPI tasks on nodes taken from the "ltest"
+group of compute nodes and the mib executable would open, write to,
+close, open, read from, and close, a unique file for each task all in
+the given directory.  The I/O would continue for the default amount of
+time or the default number of transfers (whichever comes frst), and
+would involve system calls using the default amount of data.  In the
+following discussion assume the following shell variables are defined
+to create the above command line: 
+
+SCOM="srun -N8 -p ltest"
+MCOM="mib -t /p/ga2/lustre-test/mib/newfiles"
+
+The most common use would include a limit on the number of system
+calls, a limit on time, and a system call size.  For instance if we
+wanted to perform per taks no more than 4096 system calls of 512k
+bytes each and to cease issuing system calls after 60 seconds, the
+command would look like this:
+
+$SCOM $MCOM -l 1024 -L 60 -s 512k
+
+A typical result for the above command (as observed on the ALC
+cluster) would look like this:
+
+
+Fri Mar 17 22:50:59 2006      8    4M  4500   300	897.07     566.20
+
+The "-H" option provides an informative header:
+
+$SCOM $MCOM -l 1024 -L 60 -s 512k -H
+
+           date            tasks  xfer  call  time      write       read
+                                       limit limit       MB/s       MB/s
+ ------------------------ ------ ----- ----- ----- ---------- ----------
+ Fri Mar 17 22:50:59 2006      8    4M  4500   300     897.07      566.20
+
+The next most common use for mib is to generate a system casll timing
+profile.  The command:
+
+$SCOM $MCOM -l 1024 -L 60 -s 512k -p ~/alc/profile
+
+creates two files, "~/alc/profile.write" and "~/alc/profile.read".
+Each of those is a table with one line per system call, and on each
+line, one floating point number per task.  Each number is the
+timestamp of the corresponding system call (i.e. the MPI_Wtime() at
+which it returned) on the corresponding task.  The timestamps are all
+relative to a "zero" at the beginning of the test coordinated accross
+all tasks and adjusted for any skew in the "MPI_Wtime()" global clock
+reading.  
+
+
+Apendix:
+ A note on configuring, compiling, and running.
+
+One of the (possibly poor) choices I made in designing mib was to
+enable it to detect if SLURM and/or MPI was available and react
+accordingly.  At congigure time the "configure" script make some
+guesses about the environment based on the architecture.  These are
+entirely local to LLNL.  A _real_ configure script, in the auto-conf
+mold, would do things right.  This one does not.  In any case an effort
+is made to identify the MPI and interconnect headers and libraries,
+and a similar check should set the "rpath" option to the compiler,
+since the mpi and interconnect libraries are loaded dynamically.  I
+have not implemented that yet, so if the /etc/ld.so.conf file does not
+explicitly identify the path to the correct library directories you
+will see mib running with "NO MPI" (use the -E command line option
+to get confirmation about what mib thinks its environment is).  You
+can work around the problem by explicitly setting:
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:<path to lib>"
+
+If you have access you can put the path(s) in "/etc/ld.so.conf", though
+you need to remember to run "ldconfig" afterwards.  

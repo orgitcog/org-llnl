@@ -1,0 +1,29 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252936
+
+# Verify TOSS is configured to mask the debug-shell systemd service
+# with the following command:
+#
+#     $ sudo systemctl status debug-shell.service
+#     debug-shell.service
+#     Loaded: masked (Reason: Unit debug-shell.service is masked.)
+#     Active: inactive (dead)
+#
+# If the "debug-shell.service" is loaded and not masked, this is a finding.
+
+
+- name: TOSS-04-010340 - The debug-shell systemd service must be disabled on TOSS.
+  ansible.builtin.systemd:
+    name: debug-shell.service
+    enabled: false
+    state: stopped
+    masked: true
+  when:
+    - toss_04_010340 | bool
+  tags:
+    - V-252936
+    - SRG-OS-000480-GPOS-00227
+    - TOSS-04-010340
+    - DISA-STIG-TOSS-04-010340
+    - medium_severity
+    - CCI-000366
+    - DISA-STIG-RHEL-08-040180

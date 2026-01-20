@@ -1,0 +1,17 @@
+#!/bin/bash
+
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+set -e
+
+if [[ ! -d ${CI_SPACK_PATH}/.. ]]
+then
+  echo "Spack directory not found"
+else
+  rm -rf ${CI_SPACK_PATH}/..
+fi

@@ -1,0 +1,42 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-253022
+
+# Verify the audit tools are owned by "root" to prevent any unauthorized
+# access, deletion, or modification.
+#
+# Check the owner of each audit tool by running the following command:
+#
+#     $ sudo stat -c "%U %n" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/rsyslogd /sbin/augenrules
+#     root /sbin/auditctl
+#     root /sbin/aureport
+#     root /sbin/ausearch
+#     root /sbin/autrace
+#     root /sbin/auditd
+#     root /sbin/rsyslogd
+#     root /sbin/augenrules
+#
+# If any of the audit tools are not owned by "root", this is a finding.
+
+
+- name: TOSS-04-030750 - TOSS audit tools must be owned by "root".
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: root
+  loop:
+    - { path: '/sbin/auditctl' }
+    - { path: '/sbin/aureport' }
+    - { path: '/sbin/ausearch' }
+    - { path: '/sbin/autrace' }
+    - { path: '/sbin/auditd' }
+    - { path: '/sbin/rsyslogd' }
+    - { path: '/sbin/augenrules' }
+  when:
+    - toss_04_030750 | bool
+  tags:
+    - V-253022
+    - SRG-OS-000256-GPOS-00097
+    - TOSS-04-030750
+    - DISA-STIG-TOSS-04-030750
+    - medium_severity
+    - CCI-001493
+    - CCI-001494
+    - CCI-001495

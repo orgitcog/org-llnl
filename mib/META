@@ -1,0 +1,5 @@
+Meta:		1
+Name:		lustre-mib
+Version:	1.9.10
+Release:	1
+SOURCE: https://eris.llnl.gov/svn/chaos/private/mib/

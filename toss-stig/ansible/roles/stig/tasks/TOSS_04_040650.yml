@@ -1,0 +1,31 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-253106
+
+# Verify the SSH daemon performs strict mode checking of home directory
+# configuration files with the following command:
+#
+#     $ sudo grep -i strictmodes /etc/ssh/sshd_config
+#     StrictModes yes
+#
+# If "StrictModes" is set to "no", is missing, or the returned line is
+# commented out, this is a finding.
+
+
+- name: TOSS-04-040650 - The TOSS SSH daemon must perform strict mode checking of home directory configuration files.
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    create: true
+    regexp: (?i)^#*\s*StrictModes\s+
+    line: StrictModes yes
+    state: present
+    validate: /usr/sbin/sshd -t -f %s
+    mode: '600'
+  notify: Restart sshd
+  when:
+    - toss_04_040650 | bool
+  tags:
+    - V-253106
+    - SRG-OS-000480-GPOS-00227
+    - TOSS-04-040650
+    - DISA-STIG-TOSS-04-040650
+    - medium_severity
+    - CCI-000366

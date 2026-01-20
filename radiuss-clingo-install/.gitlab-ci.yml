@@ -1,0 +1,37 @@
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+variables:
+  CI_SPACK_PATH: "./spack"
+
+# If a configuration file is given, the pipeline is included.
+# CI_CONFIG_FILE must be defined in the UI.
+include:
+  - local: $CI_CONFIG_FILE
+    rules:
+      - if: $CI_CONFIG_FILE != null
+  - local: .gitlab/pipeline.yml
+    rules:
+      - if: $CI_CONFIG_FILE != null
+
+# We only do one generation per stage because we found conflicts otherwise
+stages:
+  - setup
+
+# Run a simple job to display instructions when no config name was specified.
+no-config-file:
+  tags: [shell, ruby]
+  rules:
+    - if: $CI_CONFIG_FILE == null
+      when: always
+    - when: never
+  stage: setup
+  script:
+    - |
+      echo -e "\e[31mVariable \"CI_CONFIG_FILE\" was not set.\e[0m"
+      echo -e "\e[31m\"CI_CONFIG_FILE\" is required and should point to a configuration file.\e[0m"
+      echo -e "\e[31m\"CI_CONFIG_FILE\" can only be defined in GitLab UI (see documentation).\e[0m"

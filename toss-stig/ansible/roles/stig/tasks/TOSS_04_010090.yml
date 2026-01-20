@@ -1,0 +1,27 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252920
+
+# Verify that TOSS verifies the correct operation of all security functions.
+#
+# Check if "SELinux" is active and in "Enforcing" mode with the following command:
+#
+#     $ sudo getenforce
+#     Enforcing
+#
+# If "SELinux" is not active or not in "Enforcing" mode, this is a finding.
+
+
+- name: TOSS-04-010090 - TOSS must use a Linux Security Module configured to enforce limits on system services.
+  ansible.posix.selinux:
+    state: 'enforcing'
+    policy: targeted
+  when:
+    - toss_04_010090 | bool
+  tags:
+    - CCI-001084
+    - DISA-STIG-TOSS-04-010090
+    - hpc_issue
+    - medium_severity
+    - NASA-ASCS-20280
+    - SRG-OS-000134-GPOS-00068
+    - TOSS-04-010090
+    - V-252920

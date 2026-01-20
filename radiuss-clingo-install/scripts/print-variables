@@ -1,0 +1,21 @@
+#!/bin/bash
+
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+vars="CI_CONFIG_FILE LLNL_SERVICE_USER CUSTOM_CI_BUILDS_DIR CI_SPACK_REF CI_SPACK_REPO CI_SPACK_PATH"
+
+echo "--------------------------------"
+echo "---- Variables of interest "
+echo "--------------------------------"
+
+for var in ${vars};
+do
+  echo "---- ${var} = ${!var} "
+done
+
+echo "--------------------------------"

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "surfactantplugin_grype"
+authors = [
+    {name = "Kendall Harter", email = "harter8@llnl.gov"},
+]
+description = "Surfactant plugin for running grype on files"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["surfactant"]
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Environment :: Console",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+]
+dependencies = [
+    "loguru",
+]
+
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = ["pytest", "docker>=6.1.3", "requests>=2.31.0", "pytest>=7.0.0"]
+
+[project.entry-points."surfactant"]
+"surfactantplugin_grype" = "surfactantplugin_grype"
+
+[tool.setuptools]
+py-modules=["surfactantplugin_grype"]
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+fallback_version = "0.0.1"

@@ -1,0 +1,25 @@
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+.build-job-slurm:
+  rules:
+    # We ignore failure and run all the tests all the time.
+    - when: always
+  script:
+    - scripts/print-variables
+    - scripts/get-spack
+    - . ${CI_SPACK_PATH}/share/spack/setup-env.sh
+    - srun -N 1 -p pdebug spack -d spec zlib
+
+.build-job-lsf:
+  rules:
+    - when: always
+  script:
+    - scripts/print-variables
+    - scripts/get-spack
+    - . ${CI_SPACK_PATH}/share/spack/setup-env.sh
+    - lalloc 1 spack -d spec zlib

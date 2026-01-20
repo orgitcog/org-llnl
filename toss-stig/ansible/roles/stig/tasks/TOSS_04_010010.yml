@@ -1,0 +1,56 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252912
+
+# Verify TOSS for PKI-based authentication has valid certificates by
+# constructing a certification path (which includes status information) to an
+# accepted trust anchor.
+# Check that the system has a valid DoD root CA installed with the following
+# command:
+#
+#     Note: If the system does not support PKI authentication, this requirement
+#           is Not Applicable.
+#
+#     $ sudo openssl x509 -text -in /etc/sssd/pki/sssd_auth_ca_db.pem
+#
+#     Certificate:
+#     Data:
+#     Version: 3 (0x2)
+#     Serial Number: 1 (0x1)
+#     Signature Algorithm: sha256WithRSAEncryption
+#     Issuer: C = US, O = U.S. Government, OU = DoD, OU = PKI, CN = DoD Root CA 3
+#     Validity
+#     Not Before: Mar 20 18:46:41 2012 GMT
+#     Not After : Dec 30 18:46:41 2029 GMT
+#     Subject: C = US, O = U.S. Government, OU = DoD, OU = PKI, CN = DoD Root CA 3
+#     Subject Public Key Info:
+#     Public Key Algorithm: rsaEncryption
+#
+# If the root ca file is not a DoD-issued certificate with a valid date and
+# installed in the /etc/sssd/pki/sssd_auth_ca_db.pem location, this is a finding.
+
+
+- name: TOSS-04-010010 - TOSS, for PKI-based authentication, must validate certificates by constructing a certification path (which includes status information) to an accepted trust anchor.
+  block:
+    - name: TOSS-04-010010 - Check that the system has a DoD issued root CA installed
+      ansible.builtin.command: "openssl x509 -issuer -in /etc/sssd/pki/sssd_auth_ca_db.pem"
+      register: certificate_issuer
+      check_mode: false
+      changed_when: false
+      failed_when: certificate_issuer.rc != 0 or 'OU = DoD' not in certificate_issuer
+    - name: TOSS-04-010010 - Check that the root CA has not expired
+      ansible.builtin.command: "openssl x509 -checkend 0 -in /etc/sssd/pki/sssd_auth_ca_db.pem"
+      register: certificate_expiration
+      check_mode: false
+      changed_when: false
+      failed_when: certificate_expiration.rc != 0
+  when:
+    - toss_04_010010 | bool
+  tags:
+    - V-252912
+    - SRG-OS-000066-GPOS-00034
+    - TOSS-04-010010
+    - DISA-STIG-TOSS-04-010010
+    - medium_severity
+    - CCI-000185
+    - CCI-001991
+    - DISA-STIG-RHEL-08-010090
+    - pki_authentication

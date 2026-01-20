@@ -1,0 +1,15 @@
+//////////////////////////////////////////////////////////////////////////////
+// Copyright 2017-2020 Lawrence Livermore National Security, LLC and other
+// UMAP Project Developers. See the top-level LICENSE file for details.
+//
+// SPDX-License-Identifier: LGPL-2.1-only
+//////////////////////////////////////////////////////////////////////////////
+
+#ifndef _UMAP_UMAPCONFIG_H
+#define _UMAP_UMAPCONFIG_H
+#define UMAP_VERSION_MAJOR @umap_VERSION_MAJOR@
+#define UMAP_VERSION_MINOR @umap_VERSION_MINOR@
+#define UMAP_VERSION_PATCH @umap_VERSION_PATCH@
+#cmakedefine UMAP_DEBUG_LOGGING
+#cmakedefine UMAP_DISPLAY_STATS
+#endif

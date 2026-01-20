@@ -1,0 +1,44 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252971
+
+# Check that all user home directories are owned by the user's primary group
+# with the following command:
+#
+#     $ awk -F: '($3>=1000)&&($7 !~ /nologin/)&&("stat -c '%g' " $6 | getline dir_group)&&(dir_group!=$4){print $1,$6}' /etc/passwd
+#     admin /home/admin
+#
+# Check each user's primary group with the following command (example
+# command is for the "admin" user):
+#
+#     $ sudo grep "^admin" /etc/group
+#     admin:x:250:smithj,jonesj,jacksons
+#
+# If the user home directory referenced in "/etc/passwd" is not group-owned
+# by that user's primary GID, this is a finding.
+
+
+- name: TOSS-04-020320 - All TOSS local interactive user home directories must be owned by the user's primary group.
+  block:
+    - name: TOSS-04-020320 - Get the list of home directories owned by interactive users
+      ansible.builtin.shell:
+        cmd: "awk -F: '($3>=1000)&&($7 !~ /nologin/)&&($7 !~ /false/)&&($7 !~ /null/){print $1,$6,$4}' /etc/passwd"
+      register: home_dirs
+      changed_when: false
+      failed_when: home_dirs.rc not in [0,1]
+      check_mode: false
+    - name: TOSS-04-020320 - Set the group of the local interactive user's home directory
+      ansible.builtin.file:
+        path: '{{ item.split().1 }}'
+        group: '{{ item.split().2 }}'
+      loop: '{{ home_dirs.stdout_lines }}'
+      failed_when: false # This was include to ignore home directories that aren't mounted, but are in /etc/passwd
+                         # Functionally the same as "ignore_errors: true", but will mark the missing home dirs as ok instead of failed, which seemed clearer to me since that is expected behavior
+  when:
+    - toss_04_020320 | bool
+  tags:
+    - V-252971
+    - SRG-OS-000480-GPOS-00230
+    - TOSS-04-020320
+    - DISA-STIG-TOSS-04-020320
+    - medium_severity
+    - CCI-000366
+    - user_permissions

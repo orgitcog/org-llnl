@@ -1,0 +1,49 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-252961
+
+# Verify the assigned home directory of all local interactive users is
+# group-owned by that user's primary GID with the following command:
+#
+# Note: This may miss local interactive users that have been assigned a
+# privileged UID. Evidence of interactive use may be obtained from a number
+# of log files containing system logon information. The returned directory
+# "/home/smithj" is used as an example.
+#
+#     $ sudo ls -ld $(awk -F: '($3>=1000)&&($7 !~ /nologin/){print $6}' /etc/passwd)
+#     drwxr-x--- 2 smithj admin 4096 Jun 5 12:41 smithj
+#
+# Check the user's primary group with the following command:
+#
+#     $ sudo grep $(grep smithj /etc/passwd | awk -F: '{print $4}') /etc/group
+#     admin:x:250:smithj,jonesj,jacksons
+#
+# If the user home directory referenced in "/etc/passwd" is not group-owned
+# by that user's primary GID, this is a finding.
+
+
+- name: TOSS-04-020210 - All TOSS local interactive user home directories must be group-owned by the home directory owner's primary group.
+  block:
+    - name: TOSS-04-020210 - Get the list of home directories owned by interactive users
+      ansible.builtin.shell:
+        cmd: "awk -F: '($3>=1000)&&($7 !~ /nologin/)&&($7 !~ /false/)&&($7 !~ /null/){print $1,$6,$4}' /etc/passwd"
+      register: home_dirs
+      changed_when: false
+      failed_when: home_dirs.rc not in [0,1]
+      check_mode: false
+    - name: TOSS-04-020210 - Set the group of the local interactive user's home directory
+      ansible.builtin.file:
+        path: '{{ item.split().1 }}'
+        group: '{{ item.split().2 }}'
+      loop: '{{ home_dirs.stdout_lines }}'
+      failed_when: false # This was include to ignore home directories that aren't mounted, but are in /etc/passwd
+                         # Functionally the same as "ignore_errors: true", but will mark the missing home dirs as ok instead of failed, which seemed clearer to me since that is expected behavior
+  when:
+    - not toss_04_020320 | bool
+    - toss_04_020210 | bool
+  tags:
+    - V-252961
+    - SRG-OS-000480-GPOS-00227
+    - TOSS-04-020210
+    - DISA-STIG-TOSS-04-020210
+    - medium_severity
+    - CCI-000366
+    - user_permissions

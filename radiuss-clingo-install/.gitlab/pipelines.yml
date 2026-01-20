@@ -1,0 +1,49 @@
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+# We only do one generation per stage because we found conflicts otherwise
+stages:
+  - setup
+  - ruby
+  - lassen
+  - corona
+
+clean-bootstrap:
+  tags: [shell, ruby]
+  stage: setup
+  script:
+    - scripts/print-variables
+    - CI_SPACK_PATH=${CI_SPACK_PATH:-"./spack"}
+    - scripts/get-spack
+    - . ${CI_SPACK_PATH}/share/spack/setup-env.sh
+    # Clean bootstrap
+    - spack clean -b
+
+# Trigger sub-pipelines:
+ruby:
+  stage: ruby
+  trigger:
+    include: .gitlab/ruby.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+
+lassen:
+  stage: lassen
+  trigger:
+    include: .gitlab/lassen.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+
+corona:
+  stage: corona
+  trigger:
+    include: .gitlab/corona.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true

@@ -1,0 +1,29 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-253052
+
+# Verify the TOSS audit Daemon is configured to include local events, with
+# the following command:
+#
+#     $ sudo grep local_events /etc/audit/auditd.conf
+#     local_events = yes
+#
+# If the value of the "local_events" option is not set to "yes", or the
+# line is commented out, this is a finding.
+
+
+- name: TOSS-04-031350 - The TOSS audit system must audit local events.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    create: true
+    regexp: (?i)^\s*local_events\s*=\s*
+    line: local_events = yes
+    state: present
+    mode: '640'
+  when:
+    - toss_04_031350 | bool
+  tags:
+    - V-253052
+    - SRG-OS-000480-GPOS-00227
+    - TOSS-04-031350
+    - DISA-STIG-TOSS-04-031350
+    - medium_severity
+    - CCI-000366

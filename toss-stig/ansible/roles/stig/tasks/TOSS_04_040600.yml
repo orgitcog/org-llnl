@@ -1,0 +1,72 @@
+# https://www.stigviewer.com/stig/tri-lab_operating_system_stack_toss_4/2022-08-29/finding/V-253102
+
+# Verify the TFTP daemon is configured to operate in secure mode with the
+# following commands:
+#
+#     $ sudo yum list installed tftp-server
+#     tftp-server.x86_64 x.x-x.el8
+#
+# If a TFTP server is not installed, this is Not Applicable.
+#
+# If a TFTP server is installed, check for the server arguments with the
+# following command:
+#
+#     $ sudo grep server_args /etc/xinetd.d/tftp
+#     server_args = -s /var/lib/tftpboot
+#
+# If the "server_args" line does not have a "-s" option, and a subdirectory
+# is not assigned, this is a finding.
+
+
+- name: TOSS-04-040600 - If the Trivial File Transfer Protocol (TFTP) server is required, the TOSS TFTP daemon must be configured to operate in secure mode.
+  block:
+    - name: TOSS-04-040590 - Gather the package facts
+      ansible.builtin.package_facts:
+        manager: auto
+    - name: TOSS-04-040590 - Verify the TFTP daemon is configured to operate in secure mode
+      block:
+        - name: TOSS-04-040590 - Check if /etc/xinetd.d/tftp exists
+          ansible.builtin.stat:
+            path: /etc/xinetd.d/tftp
+          register: xinetd_tftp_file
+        - name: TOSS-04-040590 - If /etc/xinetd.d/tftp exists, ensure that TFTP server is configured to start with secure directory
+          ansible.builtin.lineinfile:
+            path: /etc/xinetd.d/tftp
+            regexp: ^[\s]*(server_args[\s]*=[\s]*)(.*)$
+            line: \1-s {{ var_tftpd_secure_directory }}
+            state: present
+            backrefs: true
+          register: xinetd_tftp_setup
+          when:
+            - xinetd_tftp_file.stat.exists
+        - name: TOSS-04-040590 - If TFTP is not configured with xinetd, check systemd
+          block:
+            - name: TOSS-04-040590 - Check if /lib/systemd/system/tftp.service exists
+              ansible.builtin.stat:
+                path: /lib/systemd/system/tftp.service
+              register: systemd_tftp_file
+            - name: TOSS-04-040590 - If /lib/systemd/system/tftp.service exists, ensure that TFTP server is configured to start with secure directory
+              ansible.builtin.lineinfile:
+                path: /lib/systemd/system/tftp.service
+                regexp: ^[\s]*(ExecStart[\s]*=[\s]*)(.*)$
+                line: \1/usr/sbin/in.tftpd -s {{ var_tftpd_secure_directory }}
+                state: present
+                backrefs: true
+              register: systemd_tftp_setup
+              when:
+                - systemd_tftp_file.stat.exists
+          when:
+            - not xinetd_tftp_file.stat.exists or xinetd_tftp_setup.changed is defined
+      when:
+        - '"tftp-server" in ansible_facts.packages'
+  when:
+    - toss_04_040600 | bool
+  tags:
+    - V-253102
+    - SRG-OS-000480-GPOS-00227
+    - TOSS-04-040600
+    - DISA-STIG-TOSS-04-040600
+    - medium_severity
+    - CCI-000366
+    - DISA-STIG-RHEL-08-040190
+    - toss_stig
