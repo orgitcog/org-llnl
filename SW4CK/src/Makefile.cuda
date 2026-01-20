@@ -1,0 +1,51 @@
+include configs/make.cuda
+buildir=./
+
+ifdef EXTRA_CXX_FLAGS
+   CXXFLAGS2 += $(EXTRA_CXX_FLAGS2)
+   CXXFLAGS += $(EXTRA_CXX_FLAGS)
+endif
+
+ifdef EXTRA_LINK_FLAGS
+   linklibs += $(EXTRA_LINK_FLAGS)
+endif
+
+# sw4 main program (kept separate)
+OBJSW4 = 
+
+OBJ  = curvitest.o curvilinear4sgc.o Events.o
+
+
+# prefix object files with build directory
+FSW4 = $(addprefix $(builddir)/,$(OBJSW4))
+FOBJ = $(addprefix $(builddir)/,$(OBJ)) $(addprefix $(builddir)/,$(QUADPACK))
+
+# prefix
+sw4ck: $(FSW4) $(FOBJ)
+	@echo "*** Configuration file: '" $(foundincfile) "' ***"
+	@echo "********* User configuration variables **************"
+	@echo "debug=" $(debug) " proj=" $(proj) " etree=" $(etree) " SW4ROOT"= $(SW4ROOT) 
+	@echo "CXX=" $(CXX) "EXTRA_CXX_FLAGS"= $(EXTRA_CXX_FLAGS)
+	@echo "FC=" $(FC) " EXTRA_FORT_FLAGS=" $(EXTRA_FORT_FLAGS)
+	@echo "EXTRA_LINK_FLAGS"= $(EXTRA_LINK_FLAGS)
+	@echo "******************************************************"
+	nvcc -dlink -arch=sm_70 -o file_link.o $(OBJ) $(LINKFLAGS) -lcudadevrt -lcudart -lnvidia-ml
+	$(LINKER) $(LINKFLAGS) -o $@ file_link.o $(OBJ) $(linklibs)
+# test: linking with openmp for the routine rhs4sgcurv.o
+#	cd $(builddir); $(CXX) $(CXXFLAGS) -qopenmp -o $@ main.o $(OBJ) $(QUADPACK) $(linklibs)
+	@echo "*** Build directory: " $(builddir) " ***"
+
+
+
+
+$(builddir)/%.o:./%.C
+	 $(CXX) $(CXXFLAGS) -c $< 
+
+clean:
+	/bin/rm -f sw4ck *.o
+
+format:
+	clang-format -style Google -i *.C
+	clang-format -style Google -i *.h
+tags:
+	etags -o TAGS *.C *.h 

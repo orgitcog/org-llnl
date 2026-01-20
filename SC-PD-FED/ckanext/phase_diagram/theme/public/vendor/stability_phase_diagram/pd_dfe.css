@@ -1,0 +1,18 @@
+#pd-dfe > div {
+    display: inline-block;
+    margin: 10px 10px;
+}
+p {
+}
+
+#dfe-labels {
+    padding: 10px;
+    z-index: 1000;
+    position: absolute;
+    top: 13%;
+    right: 5%;
+}
+
+#pd-elements {
+    display: inline-block;
+}

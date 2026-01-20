@@ -1,0 +1,389 @@
+*saloon.txt* Plugin to manage Python linters and fixers from a sidebar.
+
+===============================================================================
+CONTENTS                                                      *saloon-contents*
+
+    Introduction.............................|saloon-introduction|
+    Commands/KeyBindings.....................|saloon-commands|
+    - SaloonCommands...........................|SaloonCommands|
+    - ProspectorCommands.......................|ProspectorCommands|
+      - ProspectorFlagCommands...................|ProspectorFlagCommands|
+      - ProspectorLinterCommands.................|ProspectorLinterCommands|
+    GlobalOptions............................|saloon-options|
+
+===============================================================================
+Introduction                                              *saloon-introduction*
+
+Saloon is a Vim plugin designed to help Python developers write higher
+quality code by simplifying interaction with ALE's capabilities.
+
+
+===============================================================================
+Commands/KeyBindings                                          *saloon-commands*
+
+-------------------------------------------------------------------------------
+Saloon Commands                                                *SaloonCommands*
+-------------------------------------------------------------------------------
+
+Saloon                                                                 *Saloon*
+
+  Open Saloon window.
+  Plug mapping `<Plug>(saloon_open)` used as shown below. >
+
+    nmap <localleader>so <Plug>(saloon_open)
+<
+SaloonClose                                                       *SaloonClose*
+
+  Close Saloon window.
+  Plug mapping `<Plug>(saloon_close)` used as shown below. >
+
+    nmap <localleader>sc <Plug>(saloon_close)
+<
+SaloonToggle                                                     *SaloonToggle*
+
+  Toggle Saloon window.
+  Plug mapping `<Plug>(saloon_toggle)` used as shown below. >
+
+    nmap <localleader>s <Plug>(saloon_toggle)
+<
+SaloonEnableProspector                                 *SaloonEnableProspector*
+
+  Override ALE's linter settings and enable prospector for python files.
+  Plug mapping `<Plug>(saloon_enable_prospector)` used as shown below. >
+
+    nmap <localleader>sp <Plug>(saloon_enable_prospector)
+<
+-------------------------------------------------------------------------------
+Prospector Commands                                        *ProspectorCommands*
+-------------------------------------------------------------------------------
+
+ProspectorMoreStrict                                     *ProspectorMoreStrict*
+
+  Increase strictness of checker. Based on prospector's default profiles.
+  Strictness levels are: [veryhigh, high, medium, low, verylow] or (off).
+  Plug mapping `<Plug>(saloon_prospector_more_strict)` used as shown below. >
+
+    nmap <localleader>m <Plug>(saloon_prospector_more_strict)
+<
+ProspectorLessStrict                                     *ProspectorLessStrict*
+
+  Decrease strictness of checker. Based on prospector's default profiles.
+  Strictness levels are: [veryhigh, high, medium, low, verylow] or (off).
+  Plug mapping `<Plug>(saloon_prospector_less_strict)` used as shown below. >
+
+    nmap <localleader>l <Plug>(saloon_prospector_less_strict)
+<
+-------------------------------------------------------------------------------
+Prospector Flag Commands                               *ProspectorFlagCommands*
+-------------------------------------------------------------------------------
+
+ProspectorDisableDocWarnings                     *ProspectorDisableDocWarnings*
+
+  Enable/disable warnings about documentation. Overlaps with PEP257.
+  TODO: Explain how this setting and PEP257 overlap.
+  Plug mapping `<Plug>(saloon_prospector_disable_doc_warnings)` used as shown below. >
+
+    nmap <localleader>dw <Plug>(saloon_prospector_disable_doc_warnings)
+<
+ProspectorEnableDocWarnings                       *ProspectorEnableDocWarnings*
+
+  Enable/disable warnings about documentation. Overlaps with PEP257.
+  TODO: Explain how this setting and PEP257 overlap.
+  Plug mapping `<Plug>(saloon_prospector_enable_doc_warnings)` used as shown below. >
+
+    nmap <localleader>dw <Plug>(saloon_prospector_enable_doc_warnings)
+<
+ProspectorTogglegDocWarnings                     *ProspectorTogglegDocWarnings*
+
+  Enable/disable warnings about documentation. Overlaps with PEP257.
+  TODO: Explain how this setting and PEP257 overlap.
+  Plug mapping `<Plug>(saloon_prospector_toggle_doc_warnings)` used as shown below. >
+
+    nmap <localleader>dw <Plug>(saloon_prospector_toggle_doc_warnings)
+<
+ProspectorDisableFullPep8                           *ProspectorDisableFullPep8*
+
+  Plug mapping `<Plug>(saloon_prospector_disable_full_pep8)` used as shown below. >
+
+    nmap <localleader>na <Plug>(saloon_prospector_disable_no_autodetect)
+<
+ProspectorEnableFullPep8                             *ProspectorEnableFullPep8*
+
+  Plug mapping `<Plug>(saloon_prospector_enable_full_pep8)` used as shown below. >
+
+    nmap <localleader>na <Plug>(saloon_prospector_enable_no_autodetect)
+<
+ProspectorToggleFullPep8                             *ProspectorToggleFullPep8*
+
+  Plug mapping `<Plug>(saloon_prospector_toggle_full_pep8)` used as shown below. >
+
+    nmap <localleader>na <Plug>(saloon_prospector_toggle_no_autodetect)
+<
+ProspectorToggleNoAutodetect                     *ProspectorToggleNoAutodetect*
+
+  TODO:
+  Not sure how practical this is. Need to test with Django and similar
+  frameworks and libraries.
+  Plug mapping `<Plug>(saloon_prospector_toggle_no_autodetect)` used as shown below. >
+
+    nmap <localleader>na <Plug>(saloon_prospector_toggle_no_autodetect)
+<
+ProspectorDisableNoAutodetect                   *ProspectorDisableNoAutodetect*
+
+  TODO:
+  Not sure how practical this is. Need to test with Django and similar
+  frameworks and libraries.
+  Plug mapping `<Plug>(saloon_prospector_disable_no_autodetect)` used as shown below. >
+
+    nmap <localleader>na <Plug>(saloon_prospector_disable_no_autodetect)
+<
+ProspectorEnableNoAutodetect                     *ProspectorEnableNoAutodetect*
+
+  TODO:
+  Not sure how practical this is. Need to test with Django and similar
+  frameworks and libraries.
+  Plug mapping `<Plug>(saloon_prospector_enable_no_autodetect)` used as shown below. >
+
+    nmap <localleader>na <Plug>(saloon_prospector_enable_no_autodetect)
+<
+ProspectorToggleNoAutodetect                     *ProspectorToggleNoAutodetect*
+
+  TODO:
+  Not sure how practical this is. Need to test with Django and similar
+  frameworks and libraries.
+  Plug mapping `<Plug>(saloon_prospector_toggle_no_autodetect)` used as shown below. >
+
+    nmap <localleader>na <Plug>(saloon_prospector_toggle_no_autodetect)
+<
+ProspectorDisableNoBlending                       *ProspectorDisableNoBlending*
+
+  Turn off blending of messages. Prospector will merge together messages
+  from different tools if they represent the same error. Use this option to
+  see all unmerged messages.
+  Plug mapping `<Plug>(saloon_prospector_disable_no_blending)` used as shown below. >
+
+    nmap <localleader>nb <Plug>(saloon_prospector_disable_no_blending)
+<
+ProspectorEnableNoBlending                         *ProspectorEnableNoBlending*
+
+  Turn off blending of messages. Prospector will merge together messages
+  from different tools if they represent the same error. Use this option to
+  see all unmerged messages.
+  Plug mapping `<Plug>(saloon_prospector_enable_no_blending)` used as shown below. >
+
+    nmap <localleader>nb <Plug>(saloon_prospector_enable_no_blending)
+<
+ProspectorToggleNoBlending                         *ProspectorToggleNoBlending*
+
+  Turn off blending of messages. Prospector will merge together messages
+  from different tools if they represent the same error. Use this option to
+  see all unmerged messages.
+  Plug mapping `<Plug>(saloon_prospector_toggle_no_blending)` used as shown below. >
+
+    nmap <localleader>nb <Plug>(saloon_prospector_toggle_no_blending)
+<
+ProspectorDisableNoStyleWarnings             *ProspectorDisableNoStyleWarnings*
+
+  Enable/disable excluding warnings about style.
+  This disables the PEP8 tool and similar checks for formatting.
+  Plug mapping `<Plug>(saloon_prospector_disable_no_style_warnings)` used as shown below. >
+
+    nmap <localleader>sw <Plug>(saloon_prospector_disable_no_style_warnings)
+<
+ProspectorEnableNoStyleWarnings               *ProspectorEnableNoStyleWarnings*
+
+  Enable/disable excluding warnings about style.
+  This disables the PEP8 tool and similar checks for formatting.
+  Plug mapping `<Plug>(saloon_prospector_enable_no_style_warnings)` used as shown below. >
+
+    nmap <localleader>sw <Plug>(saloon_prospector_enable_no_style_warnings)
+<
+ProspectorToggleNoStyleWarnings               *ProspectorToggleNoStyleWarnings*
+
+  Enable/disable excluding warnings about style.
+  This disables the PEP8 tool and similar checks for formatting.
+  Plug mapping `<Plug>(saloon_prospector_toggle_no_style_warnings)` used as shown below. >
+
+    nmap <localleader>sw <Plug>(saloon_prospector_toggle_no_style_warnings)
+<
+ProspectorDisableTestWarnings                     *ProspectorDisableTestWarnings*
+
+  Enable/disable checking test modules and packages.
+  Plug mapping `<Plug>(saloon_prospector_disable_test_warnings)` used as shown below. >
+
+    nmap <localleader>tw <Plug>(saloon_prospector_disable_test_warnings)
+<
+ProspectorEnableTestWarnings                     *ProspectorEnableTestWarnings*
+
+  Enable/disable checking test modules and packages.
+  Plug mapping `<Plug>(saloon_prospector_enable_test_warnings)` used as shown below. >
+
+    nmap <localleader>tw <Plug>(saloon_prospector_enable_test_warnings)
+<
+ProspectorToggleTestWarnings                     *ProspectorToggleTestWarnings*
+
+  Enable/disable checking test modules and packages.
+  Plug mapping `<Plug>(saloon_prospector_toggle_test_warnings)` used as shown below. >
+
+    nmap <localleader>tw <Plug>(saloon_prospector_toggle_test_warnings)
+<
+-------------------------------------------------------------------------------
+Prospector Linter Commands                           *ProspectorLinterCommands*
+-------------------------------------------------------------------------------
+
+ProspectorToggleBandit                                 *ProspectorToggleBandit*
+
+  Enable/disable Bandit in list of prospector's used linters.
+  A plug mapping `<Plug>(saloon_prospector_toggle_bandit)` is defined for this command.
+  Plug mapping `<Plug>(saloon_prospector_toggle_bandit)` used as shown below. >
+
+    nmap <localleader>b <Plug>(saloon_prospector_toggle_bandit)
+<
+ProspectorToggleDodgy                                   *ProspectorToggleDodgy*
+
+  Enable/disable Dodgy in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_dodgy)` used as shown below. >
+
+    nmap <localleader>d <Plug>(saloon_prospector_toggle_dodgy)
+<
+ProspectorToggleFrosted                               *ProspectorToggleFrosted*
+
+  Enable/disable Frosted in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_frosted)` used as shown below. >
+
+    nmap <localleader>f <Plug>(saloon_prospector_toggle_frosted)
+<
+ProspectorToggleMccabe                                 *ProspectorToggleMccabe*
+
+  Enable/disable Mccabe in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_mccabe)` used as shown below. >
+
+    nmap <localleader>mc <Plug>(saloon_prospector_toggle_mccabe)
+<
+ProspectorToggleMyPy                                     *ProspectorToggleMyPy*
+
+  Enable/disable MyPy in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_mypy)` used as shown below. >
+
+    nmap <localleader>my <Plug>(saloon_prospector_toggle_mypy)
+<
+ProspectorTogglePep257                                 *ProspectorTogglePep257*
+
+  Enable/disable PEP257 in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_pep257)` used as shown below. >
+
+    nmap <localleader>2 <Plug>(saloon_prospector_toggle_pep257)
+<
+ProspectorTogglePep8                                     *ProspectorTogglePep8*
+
+  Enable/disable PEP8 in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_pep8)` used as shown below. >
+
+    nmap <localleader>8 <Plug>(saloon_prospector_toggle_pep8)
+<
+ProspectorToggleProfileValidator             *ProspectorToggleProfileValidator*
+
+  Enable/disable Profile Validator in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_profile_validator)` used as shown below. >
+
+    nmap <localleader>pv <Plug>(saloon_prospector_toggle_profile_validator)
+<
+ProspectorTogglePyflakes                             *ProspectorTogglePyflakes*
+
+  Enable/disable Pyflakes in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_pyflakes)` used as shown below. >
+
+    nmap <localleader>pf <Plug>(saloon_prospector_toggle_pyflakes)
+<
+ProspectorTogglePylint                                 *ProspectorTogglePylint*
+
+  Enable/disable Pylint in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_pylint)` used as shown below. >
+
+    nmap <localleader>l <Plug>(saloon_prospector_toggle_pylint)
+<
+ProspectorTogglePyroma                                 *ProspectorTogglePyroma*
+
+  Enable/disable Pyroma in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_pyroma)` used as shown below. >
+
+    nmap <localleader>r <Plug>(saloon_prospector_toggle_pyroma)
+<
+ProspectorToggleVulture                               *ProspectorToggleVulture*
+
+  Enable/disable Vulture in list of prospector's used linters.
+  Plug mapping `<Plug>(saloon_prospector_toggle_vulture)` used as shown below. >
+
+    nmap <localleader>v <Plug>(saloon_prospector_toggle_vulture)
+<
+
+===============================================================================
+Global Options                                                 *saloon-options*
+
+g:SaloonAutoLint                                             *g:SaloonAutoLint*
+
+  Type: |Number|
+  Default: `1`
+
+  Determines if Saloon should rerun linters each time configurations in the
+  Saloon UI window are made. Enabled by default.
+
+g:SaloonEventIncreaseStrictness               *g:SaloonEventIncreaseStrictness*
+
+  Type: |String|
+  Default: `i`
+
+  Key used in Saloon UI to increase Prospector strictness.
+  Prospector provides five "profiles" that scale downward in strictness.
+  The strictest profile provides the most checks and subsequent profiles
+  ease up on checks performed by specifying which linters to disable or
+  individual checks to ignore. Lenient profiles inherit from their stricter
+  neighbor, so "5" inherits from "4", "4" inherits from "3", and so on.
+
+g:SaloonEventDecreaseStrictness               *g:SaloonEventDecreaseStrictness*
+
+  Type: |String|
+  Default: `d`
+
+  Key used in Saloon UI to decrease Prospector strictness.
+  Prospector provides five "profiles" that scale downward in strictness.
+  The strictest profile provides the most checks and subsequent profiles
+  ease up on checks performed by specifying which linters to disable or
+  individual checks to ignore. Lenient profiles inherit from their stricter
+  neighbor, so "5" inherits from "4", "4" inherits from "3", and so on.
+
+g:SaloonEventToggle                                       *g:SaloonEventToggle*
+
+  Type: |String|
+  Default: `<CR>`
+
+  Key used in Saloon UI to toggle options on or off.
+  See |keycodes| for alternatives.
+
+g:SaloonEventQuit                                           *g:SaloonEventQuit*
+
+  Type: |String|
+  Default: `q`
+
+  Key used in Saloon UI to close Saloon window.
+
+g:SaloonWinPos                                                 *g:SaloonWinPos*
+
+  Type: |String|
+  Values: `left` or `right`
+  Default: `right`
+
+  Determines where the Saloon window is placed on the screen.
+  This setting makes it possible to use two different explorer plugins
+  simultaneously. For example, you could have the NERDTree plugin on the left
+  of the window and the Saloon on the right.
+
+g:SaloonWinWidth                                             *g:SaloonWinWidth*
+
+  Type: |Number|
+  Default: `31`
+
+  Determines the width of the Saloon UI window.
+
+===============================================================================
+  vim:tw=78:ts=8:ft=help:norl:

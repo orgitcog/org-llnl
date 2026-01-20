@@ -1,0 +1,43 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = {version = "*", extras = ["jupyter"]}
+isort = "*"
+ipykernel = "*"
+mypy = "*"
+nbstripout = "*"
+pytest = "*"
+sqlfluff = "*"
+types-pyyaml = "*"
+
+[packages]
+altair = "*"
+boto3 = "*"
+duckdb = "*"
+dynaconf = "*"
+fsspec = "*"
+humanfriendly = "*"
+importlib_resources = "*"
+ipyfilechooser = "*"
+jinja2 = "*"
+jinjasql = "*"
+lxml = "*"
+matplotlib = "*"
+networkx = "*"
+pandas = "*"
+pyarrow = "*"
+python-dotenv = "*"
+toml = "*"
+tqdm = "*"
+gitpython = "*"
+mitreattack-python = "*"
+duckdb-engine = "*"
+jupysql = "*"
+magic-duckdb = "*"
+pyyaml = "*"
+
+[requires]
+python_version = "3.11"

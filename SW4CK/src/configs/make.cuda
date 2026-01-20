@@ -1,0 +1,24 @@
+FC = xlf
+LINKER = g++
+CXX = $(PREP) nvcc
+
+spill_warns = no
+
+RAJA_HOME = /usr/workspace/wsrzd/ramesh/RAJA/RAJA-v0.11.0/install_new
+
+
+
+
+# --verbose -res-usage to find resource usage
+MORE_FLAGS = -DENABLE_CUDA=1 -DNO_RAJA=1 
+MORE_LINK_FLAGS = 
+
+ifeq ($(spill_warns),yes)
+MORE_FLAGS+=  -Xptxas -v,--warn-on-spills
+endif 
+
+LINKFLAGS = 
+
+EXTRA_CXX_FLAGS =  -O3 -lineinfo -use_fast_math $(MORE_FLAGS) -ccbin g++ -Xcompiler="" -std=c++11 --expt-extended-lambda -restrict -arch=sm_70 -I $(CUDA_HOME)/include -I$(RAJA_HOME)/include  --x cu  -DRAJA_USE_RESTRICT_PTR -DCUDA_CODE -DENABLE_CUDA -dc 
+
+EXTRA_LINK_FLAGS =   -dc -L $(CUDA_HOME)/lib64 -lcudart -lnvToolsExt -lcuda -lcudadevrt -L/usr/lib64/nvidia -lnvidia-ml  $(MORE_LINK_FLAGS)
