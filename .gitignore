@@ -286,15 +286,32 @@ deps/
 # LARGE EXTERNAL PROJECTS (Use submodules instead)
 # -----------------------------------------------------------------------------
 
-# HPAC contains full LLVM monorepo - reference as submodule
-01-hpc-parallel/HPAC/llvm/
+# HPAC contains full LLVM monorepo (94,738 files) - ignore entirely
+# Keep only README and LICENSE at root level
+01-hpc-parallel/HPAC/approx/
+01-hpc-parallel/HPAC/bolt/
 01-hpc-parallel/HPAC/clang/
-01-hpc-parallel/HPAC/libcxx/
-01-hpc-parallel/HPAC/lldb/
-01-hpc-parallel/HPAC/mlir/
+01-hpc-parallel/HPAC/clang-tools-extra/
+01-hpc-parallel/HPAC/cmake/
 01-hpc-parallel/HPAC/compiler-rt/
-01-hpc-parallel/HPAC/lld/
+01-hpc-parallel/HPAC/cross-project-tests/
 01-hpc-parallel/HPAC/flang/
+01-hpc-parallel/HPAC/libc/
+01-hpc-parallel/HPAC/libclc/
+01-hpc-parallel/HPAC/libcxx/
+01-hpc-parallel/HPAC/libcxxabi/
+01-hpc-parallel/HPAC/libunwind/
+01-hpc-parallel/HPAC/lld/
+01-hpc-parallel/HPAC/lldb/
+01-hpc-parallel/HPAC/llvm/
+01-hpc-parallel/HPAC/llvm-libgcc/
+01-hpc-parallel/HPAC/mlir/
+01-hpc-parallel/HPAC/openmp/
+01-hpc-parallel/HPAC/polly/
+01-hpc-parallel/HPAC/pstl/
+01-hpc-parallel/HPAC/runtimes/
+01-hpc-parallel/HPAC/third-party/
+01-hpc-parallel/HPAC/.github/
 
 # Playwright test repos (use npm install)
 06-devtools/playwright/
@@ -302,22 +319,40 @@ deps/
 06-devtools/playwright-tracegen/
 
 # -----------------------------------------------------------------------------
-# TEST FIXTURES & SAMPLE DATA
+# TEST DIRECTORIES (All test files - 115K+ files)
 # -----------------------------------------------------------------------------
 
-# Large test data directories
-**/test/fixtures/
-**/tests/data/
+# Ignore all test directories across the repo
+**/test/
+**/tests/
+**/testing/
 **/testdata/
 **/test_data/
+**/__tests__/
+**/__test__/
+**/spec/
+**/specs/
 **/__fixtures__/
+**/fixtures/
+
+# Test-related files
+**/*_test.py
+**/*_test.go
+**/*_test.js
+**/*_test.ts
+**/*.test.py
+**/*.test.js
+**/*.test.ts
+**/*.spec.js
+**/*.spec.ts
+
+# Benchmark directories
+**/benchmarks/
+**/benchmark/
 
 # Sample/example data
 **/examples/data/
 **/samples/
-
-# Benchmark data
-**/benchmarks/data/
 
 # -----------------------------------------------------------------------------
 # DOCUMENTATION BUILD OUTPUTS (Comprehensive)
