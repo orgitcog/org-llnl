@@ -1,0 +1,21 @@
+# Always ignored
+*__pycache__/
+*.ipynb_checkpoints
+*build/
+*dist/
+*.egg-info/
+vis/node_modules/
+
+# Profiling
+*.pstats
+
+# Testing
+*out*.txt
+
+# Build
+*build/
+*dist/
+*.egg-info/
+
+**/node_modules/
+**/package-lock.json
