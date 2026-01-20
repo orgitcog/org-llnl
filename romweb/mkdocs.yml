@@ -1,0 +1,41 @@
+site_name: libROM
+site_url: https://www.librom.net
+docs_dir: 'src'
+use_directory_urls: false
+
+markdown_extensions:
+- extra  # allow markdown in <div markdown="1">
+- fenced_code  # GitHub style code blocks, e.g. ```python, see http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html for a list of languages
+- footnotes
+- attr_list  # Allow us to add link attributes
+
+repo_url: https://github.com/LLNL/libROM
+remote_name: origin
+
+nav:
+- Home: index.md
+- Features: features.md
+- DDFEM: foundation_models.md
+- Examples:
+  - 'Examples': examples.md
+  - 'ScaleupROM': scaleup.md
+- Documentation:
+  - '_News': news.md   # pages starting with '_' are hidden from the menu
+  - 'Building libROM': building.md
+  - 'Poisson equation': poisson.md
+  - 'Greedy for Poisson': poisson_greedy.md
+  - 'Publications': publications.md
+  - 'About': about.md
+- Gallery: gallery.md
+- Download: download.md
+- DDPS: ddps.md
+- HLCS: hlcs.md
+
+theme:
+  name: mkdocs  # required. Can be anything as long as custom_dir is set correctly below
+  custom_dir: template
+
+extra:
+  include_next_prev: false  # turn off next/previous buttons
+
+google_analytics: ['UA-101697-3', 'librom.net']
