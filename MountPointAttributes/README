@@ -1,0 +1,90 @@
+Mount Point Attributes turns expensive, non-scalable file system calls into simple string comparison operations.
+
+1. Configuration 
+
+    If building from the GIT repository first run:
+    % boostrap
+
+    
+    % mkdir <platform> (e.g., RHEL6_x86_64_ib)
+    % cd <platform>
+    % ../configure --prefix=<your install path>
+
+    
+    For Blue Gene/Q Compute Node: 
+    % configure CXX=powerpc64-bgq-linux-g++ LDFLAGS="-dynamic" --prefix=<your install path>
+    Note that you should not use bgxlC when this module
+    is run on the I/O Nodes of Blue Gene
+
+
+    For Blue Gene/P Compute Node: 
+    % configure CXX=bgxlC --prefix=<your install path>
+    Note that you should not use bgxlC when this module
+    is run on the I/O Nodes of Blue Gene
+
+
+    For Blue Gene/L Compute Node:
+    % configure CXX=bgxlC LDFLAGS="-lnss_files -lnss_dns -lresolv -lc -lnss_files -lnss_dns -lresolv" --prefix=<your install path>
+
+
+    For Cray XT/XE Compute Node
+    % module load gcc/4.4.2 #or whatever the right gcc version for CN
+    % configure CXX=CC --prefix=<your install path> --disable-shared
+   
+
+2. Build and Installation
+
+    % make
+    % make install
+
+
+3. Testing
+
+    % cd share/MountPointAttr/tests
+
+    Test cases are installed into this directory. If you want to 
+    increase the verbosity level, use the MPA_TEST_ENABLE_VERBOSE
+    environment variable. E.g., 
+
+    % setenv MPA_TEST_ENABLE_VERBOSE 1 
+
+    The current test cases:
+    * test001_recursive_walk_remote: 
+        takes an absolute path and tests if it is serviced by a remote 
+        file server. If the path is a directory, this test checks all 
+        files in it and its subdirectories by recursively walking the 
+        directories. It prints out "PASS", when all files are evaluated
+        to be "remote."
+
+    * test002_recursive_walk_local: 
+        takes an absolute path and tests if it is serviced by a local 
+        file system. Otherwise, the behavior is the same as 
+        test001_recursive_walk_remote.
+
+    * test003_corner_path:
+        takes no arguments. It tests if MPA can handle ill-formed paths: 
+        relative paths and invalid paths. At the end of the test, it tests 
+        if MPA returns error codes on the home directory (using $HOME) 
+        that should not be invalid. It prints out "PASS," when succeeds.
+
+    * test004_hardlink_path:
+        takes no arguments. It tests if MPA can properly handle hardlinks.
+        It prints out "PASS," when succeeds. 
+
+
+4. Documents
+
+    To build the programming guide documents, assuming you have a recent 
+    version of doxygen installed on your build system:
+    
+    % cd doc
+    % doxygen doxy_conf.txt
+
+    Above commands will produce html directory. You can access
+    the main page by pointing html/index.html to your favorate 
+    web browser.  In addition, man directory contains the same 
+    information in the manpage format.  Further, if you want to build 
+    a latex-based reference manual
+   
+    % cd latex
+    % make
