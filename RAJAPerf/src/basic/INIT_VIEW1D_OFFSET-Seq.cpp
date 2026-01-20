@@ -1,0 +1,104 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+// Copyright (c) Lawrence Livermore National Security, LLC and other 
+// RAJA Project Developers. See top-level LICENSE and COPYRIGHT
+// files for dates and other details. No copyright assignment is required
+// to contribute to RAJA Performance Suite.
+//
+// SPDX-License-Identifier: (BSD-3-Clause)
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+#include "INIT_VIEW1D_OFFSET.hpp"
+
+#include "RAJA/RAJA.hpp"
+
+#include <iostream>
+
+namespace rajaperf
+{
+namespace basic
+{
+
+
+void INIT_VIEW1D_OFFSET::runSeqVariant(VariantID vid)
+{
+  const Index_type run_reps = getRunReps();
+  const Index_type ibegin = 1;
+  const Index_type iend = getActualProblemSize()+1;
+
+  INIT_VIEW1D_OFFSET_DATA_SETUP;
+
+  switch ( vid ) {
+
+    case Base_Seq : {
+
+      startTimer();
+      // Loop counter increment uses macro to quiet C++20 compiler warning
+      for (RepIndex_type irep = 0; irep < run_reps; RP_REPCOUNTINC(irep)) {
+
+        for (Index_type i = ibegin; i < iend; ++i ) {
+          INIT_VIEW1D_OFFSET_BODY;
+        }
+
+      }
+      stopTimer();
+
+      break;
+    }
+
+#if defined(RUN_RAJA_SEQ)
+    case Lambda_Seq : {
+
+      auto initview1doffset_base_lam = [=](Index_type i) {
+                                         INIT_VIEW1D_OFFSET_BODY;
+                                       };
+
+      startTimer();
+      // Loop counter increment uses macro to quiet C++20 compiler warning
+      for (RepIndex_type irep = 0; irep < run_reps; RP_REPCOUNTINC(irep)) {
+
+        for (Index_type i = ibegin; i < iend; ++i ) {
+          initview1doffset_base_lam(i);
+        }
+
+      }
+      stopTimer();
+
+      break;
+    }
+
+    case RAJA_Seq : {
+
+      auto res{getHostResource()}; 
+
+      INIT_VIEW1D_OFFSET_VIEW_RAJA;
+
+      auto initview1doffset_lam = [=](Index_type i) {
+                                    INIT_VIEW1D_OFFSET_BODY_RAJA;
+                                  };
+
+      startTimer();
+      // Loop counter increment uses macro to quiet C++20 compiler warning
+      for (RepIndex_type irep = 0; irep < run_reps; RP_REPCOUNTINC(irep)) {
+
+        RAJA::forall<RAJA::seq_exec>( res,
+          RAJA::RangeSegment(ibegin, iend), initview1doffset_lam);
+
+      }
+      stopTimer();
+
+      break;
+    }
+#endif // RUN_RAJA_SEQ
+
+    default : {
+      getCout() << "\n  INIT_VIEW1D_OFFSET : Unknown variant id = " << vid << std::endl;
+    }
+
+  }
+
+}
+
+RAJAPERF_DEFAULT_TUNING_DEFINE_BOILERPLATE(INIT_VIEW1D_OFFSET, Seq, Base_Seq, Lambda_Seq, RAJA_Seq)
+
+} // end namespace basic
+} // end namespace rajaperf
