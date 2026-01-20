@@ -1,0 +1,12 @@
+UIImageOrientation
+3 = right; 4
+2 = left; 3
+1 = down; 2
+0 = up; 1
+
+
+UIDevice.current.orientation
+1 - portrait (image shows landscapeLeft?)
+2 - portraitUpsideDown (image shows landscapeRight?)
+3 - landscapeLeft (image shows upside)
+4 - landscapeRight (image shows upsideDown?)

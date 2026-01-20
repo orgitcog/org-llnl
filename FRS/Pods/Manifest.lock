@@ -1,0 +1,49 @@
+PODS:
+  - AWSCognito (2.9.10):
+    - AWSCore (= 2.9.10)
+  - AWSCognitoIdentityProvider (2.9.10):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.9.10)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.9.10)
+  - AWSDynamoDB (2.9.10):
+    - AWSCore (= 2.9.10)
+  - AWSIoT (2.9.10):
+    - AWSCore (= 2.9.10)
+  - AWSRekognition (2.9.10):
+    - AWSCore (= 2.9.10)
+  - AWSS3 (2.9.10):
+    - AWSCore (= 2.9.10)
+
+DEPENDENCIES:
+  - AWSCognito
+  - AWSCognitoIdentityProvider
+  - AWSDynamoDB
+  - AWSIoT
+  - AWSRekognition
+  - AWSS3
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AWSCognito
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSDynamoDB
+    - AWSIoT
+    - AWSRekognition
+    - AWSS3
+
+SPEC CHECKSUMS:
+  AWSCognito: 1dd5b0e1d9e0706f9757ccce7c6fad9dc1d25ddb
+  AWSCognitoIdentityProvider: 5e72467f174a970e9d357fc06666e3f32e6eda70
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: 22b6bbc6761ca9981d878155d11bc02edd681a64
+  AWSDynamoDB: 87d0b2f44fc85f719921ad2df0dcc4c31c9be96a
+  AWSIoT: c3025e194f45d00070ef074df53aa87cc53fb2a6
+  AWSRekognition: f02321aec5cf2c004508c9dcdc80e28a4fec575f
+  AWSS3: fe0221519fe4d05adf4c3fdf0cb4477f5e433ee6
+
+PODFILE CHECKSUM: 768eaa5957e3c857e4b0abcd108db0ab7f4ea6f1
+
+COCOAPODS: 1.6.2

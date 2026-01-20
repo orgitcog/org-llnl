@@ -1,0 +1,172 @@
+1. Fast Global File Status
+   
+     Large-scale systems typically mount many different file systems 
+     with distinct performance characteristics and capacity. High 
+     performance computing (HPC) applications must efficiently use 
+     this storage in order to realize their full performance potential. 
+     Users must take into account potential file replication throughout
+     the storage hierarchy as well as contention in lower levels of the
+     I/O system, and must consider communicating the results of file
+     I/O between application processes to reduce file system accesses.
+     Addressing these issues and optimizing file accesses requires
+     detailed run-time knowledge of file system performance
+     characteristics and the location(s) of files on them.
+
+     We developed Fast Global File Status (FGFS) to provide a scalable
+     mechanism to retrieve such information of a file, including its
+     degree of distribution or replication and consistency. FGFS uses
+     a novel node-local technique that turns expensive, non-scalable
+     file system calls into simple string comparison operations.
+     FGFS raises the namespace of a locally-defined file path to a
+     global namespace with little or no file system calls to obtain
+     global file properties efficiently. Our evaluation on a large
+     multi-physics application showed that most FGFS file status queries
+     on its executable and 848 shared library files complete in 272
+     milliseconds or faster at 32,768 MPI processes. Even the most
+     expensive operation, which checks global file consistency, completes
+     in under 7 seconds at this scale, an improvement of several orders
+     of magnitude over the traditional checksum technique.
+
+
+2. Dependencies
+
+   A. Mount Point Attributes module
+    
+     The main abstractions that enable raising the namespace of local
+     file names are packaged up into the MountPointAttributes module.
+     Because some tools wish to use this module by itself, we have 
+     created its own repostory. 
+
+     You can download the latest version of MountPointAttributes in 
+     Github: https://github.com/LLNL/MountPointAttributes
+
+   B. MRNet
+
+     This package has been ported to both MPI and MRNet. To build the 
+     complete package, you must have MRNet installed on your system. 
+
+     You can download a version of MRNet in http://www.paradyn.org/mrnet
+
+   C. OpenSSL
+
+     Fast Global File Status allows its user to define a function that
+     computes consistency between two physically different files. To 
+     develop unit test cases for this functionality, we have used the
+     MD5 function that comes w/ OpenSSL. Thus to build test cases, you 
+     must have OpenSSL on your system. 
+
+
+3. Compatibility
+
+     Fast Global File Status v1.1.1
+       - MountPointAttributes (v1.1.1)
+       - MRNet (v3.1.0, v4.0.0 w/ performance patch, v5.x)
+       - OpenSSL (v1.0.0)
+
+
+4. Configuration 
+
+     * Please follow README of MountPointAttributes (MPA) to configure, 
+       build and install this dependent module.
+
+     * If building from the GIT repository, first run:
+
+       % bootstrap
+
+     * Assuming MPA has been installed in <your_install_path> and also MPI
+       is available through normal installations, the following command 
+       should configure this package for both MPI and MRNet:
+
+       % mkdir <platform> (e.g., RHEL6_x86_64_ib)
+       % cd <platform>
+       % ../configure --prefix=<your_install_path> \
+                      --with-mrnet=<MRNet installation root> \
+                      --with-max-dist-degree=intVal
+
+       Note that --with-max-dist-degree=intVal sets the maximum number of 
+       remote servers on which a file can be possibly distributed or duplicated. 
+       This should be the site-wide worse case. When the file is served locally 
+       via some local file systems such as RAMDISK, FGFS has ways to 
+       determine this condition. So the maintainer must set this value with respect to
+       the worst "remote-server" case (e.g., a set of NFS file servers serve
+       a file to the processes), which is typically much smaller than the 
+       the worse "local" case. For LLNL Linux clusters, we set this to 20, as 
+       the worst case is when one NFS server per scalable unit (SU: 156 16-way 
+       compute nodes) serves files to the processes.
+
+       Note that if MPA is installed somewhere other than <your_install_path>, 
+       you can use the optional --with-mpa=<mpa path>.
+
+
+5. Build and Installation
+
+    % make
+    % make install
+
+
+6. Testing
+
+    % cd share/FastGlobalFileStatus/tests
+
+    Test cases are installed into this directory. If you want to 
+    increase the verbosity level, use the MPA_TEST_ENABLE_VERBOSE
+    environment variable. E.g., 
+
+    % setenv MPA_TEST_ENABLE_VERBOSE 1 
+
+    The current test cases:
+    * MPIScalingSetup.sh: sets up scaling experiments for 
+        FGFS global file status queries with MPI in ./FGFS.Scaling.MPI.
+        The generated scripts/batchscripts are for MOAB/SLURM environment.
+        We appreciate any effort to port these experiments to other grid 
+        software and/or resource manager software. See the header of 
+        this testing script for more details.
+
+    * MRNetScalingSetup.sh: sets up scaling experiments for 
+        FGFS global file status queries with MRNet in ./FGFS.Scaling.MRNet.
+        The generated scripts/batchscripts are for MOAB/SLURM environment.
+        We appreciate any effort to port these experiments to other grid 
+        software and/or resource manager software. See the header of
+        this testing script for more details.
+
+    * st_classifier_constmem_per_proc: tests FGFS global file systems 
+        status queries. Processes perform 4 separate file systems 
+        status queries with equal per-process storage requirements:
+        1MB, 1GB, 2GB, and 4GB. This test is configured with MPI 
+        and also requires manual validation whether the returned match 
+        vector meets the requirement. 
+
+    * st_classifier_big_on_oneproc: tests FGFS global file systems 
+        status queries. Processes perform 6 separate file systems 
+        status queries with only one process asking for much larger 
+        amounts. All but one process (MPI rank process 1) alwasy ask 
+        for 1MB whereas MPI rank 1 requests 4GB, 8GB, 16GB, 32GB, 
+        1TB and 4TB across these 6 queries. This test is configuted 
+        with MPI and also requires manual validation 
+        whether the returned match vector meets the requirement. 
+
+    * st_classifier_c_lang: tests calling from within a C routine FGFS
+        global file systems status queries which are written in C++.
+        This is configured with MPI and also requires manual validation 
+        whether the returned match vector meets the requirement.
+
+    * st_mountpoint_classifier: prints out the classifier information 
+        on all of the mount points. This requires manual validation.
+
+7. Documents 
+
+    To build the programming guide documents, assuming you have a recent
+    version of doxygen installed on your build system:
+
+    % cd doc
+    % doxygen doxy_conf.txt
+
+    Above commands will produce html directory. You can access
+    the main page by pointing html/index.html to your favorate
+    web browser.  In addition, man directory contains the same
+    information in the manpage format.  Further, if you want to build
+    a latex-based reference manual
+
+    % cd latex
+    % make
+
