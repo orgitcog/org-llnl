@@ -1,0 +1,8 @@
+# Always ignored
+*__pycache__/
+*.ipynb_checkpoints
+
+# Build
+*build/
+*dist/
+*.egg-info/

@@ -1,0 +1,46 @@
+Intellectual Property Notice
+----------------------------
+
+TreeScape is licensed under the MIT license,
+(MIT or https://opensource.org/licenses/MIT).
+
+See the LICENSE file for details.
+
+Copyrights and patents in the TreeScape project are retained by contributors. No
+copyright assignment is required to contribute to TreeScape.
+
+
+SPDX usage
+----------
+
+Individual files contain SPDX tags instead of the full license text.
+This enables machine processing of license information based on the SPDX
+License Identifiers that are available here: https://spdx.org/licenses/
+
+Files that are licensed as MIT contain the following
+text in the license header:
+
+    SPDX-License-Identifier: (MIT)
+
+External Packages
+-------------------
+TreeScape has some external dependencies, which are bundled in the TreeScape
+repository. These packages are covered by various permissive licenses. A
+summary listing follows. See the license included with each package for full
+details.
+
+PackageName: jQuery
+PackageHomePage: https://jquery.com/
+PackageLicenseDeclared: MIT
+
+PackageName: md5
+PackageHomePage: https://github.com/emn178/js-md5
+PackageLicenseDeclared: MIT
+
+PackageName: Vue
+PackageHomePage: https://vuejs.org/
+PackageLicenseDeclared: MIT
+
+PackageName: chart.js
+PackageHomePage: https://www.chartjs.org
+PackageLicenseDeclared: MIT

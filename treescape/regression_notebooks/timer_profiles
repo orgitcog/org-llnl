@@ -1,0 +1,87 @@
+https://lc.llnl.gov/orbit/gravitate/oslic9/user/pascal/lab/tree/treescape/regression
+Regular
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007456     | 0.007456
+before cali reader | after cali reader  | 0.940478     | 0.947934
+after cali reader  | after grapher      | 0.721242     | 1.669175
+after grapher      | after render       | 0.464350     | 2.133526
+
+
+
+6 months
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.006973     | 0.006973
+before cali reader | after cali reader  | 5.367663     | 5.374636
+after cali reader  | after grapher      | 1.021465     | 6.396101
+after grapher      | after render       | 2.829433     | 9.225534
+
+
+
+24 months
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007704     | 0.007704
+before cali reader | after cali reader  | 18.819229    | 18.826933
+after cali reader  | after grapher      | 3.655808     | 22.482741
+after grapher      | after render       | 12.470189    | 34.952929
+
+From                      | To                        | Interval (s) | Total (s)
+--------------------------+---------------------------+--------------+----------
+Start                     | before cali reader        | 0.007788     | 0.007788
+before cali reader        | after cali                | 16.965245    | 16.973033
+after cali                | after cali tsm and sorted | 1.119739     | 18.092772
+after cali tsm and sorted | after grapher             | 3.877513     | 21.970284
+after grapher             | after render              | 12.758793    | 34.729078
+
+
+Localhost Optimized: test_plus_24
+From                      | To                        | Interval (s) | Total (s)
+--------------------------+---------------------------+--------------+----------
+Start                     | before cali reader        | 0.102236     | 0.102236
+before cali reader        | after cali                | 20.770861    | 20.873097
+after cali                | after cali tsm and sorted | 0.349734     | 21.222831
+after cali tsm and sorted | after grapher             | 1.943766     | 23.166597
+after grapher             | after render              | 6.097377     | 29.263974
+
+Localhost Regular: test_plus_24
+From                      | To                        | Interval (s) | Total (s)
+--------------------------+---------------------------+--------------+----------
+Start                     | before cali reader        | 0.098838     | 0.098838
+before cali reader        | after cali                | 21.858754    | 21.957591
+after cali                | after cali tsm and sorted | 0.458537     | 22.416128
+after cali tsm and sorted | after grapher             | 1.933715     | 24.349843
+after grapher             | after render              | 7.774819     | 32.124663
+
+RZ
+https://rzlc.llnl.gov/orbit/gravitate/rzgenie2/user/pascal/lab/tree/treescape/regression/NightlyTestDemo.ipynb
+with newdemo/test   is 176.23 MB
+cali_file_loc = "/usr/gapps/spot/datasets/newdemo/test"
+test: 176 mb / 175 mb
+cali_file_loc = "/g/g0/pascal/cali_data/test_plus_24c"
+Mem = 594 MB, 593.55 MB, 653 MB,
+
+CZ:
+https://lc.llnl.gov/orbit/gravitate/oslic9/user/pascal/lab/tree/treescape/regression/NightlyTestDemo.ipynb
+cali_file_loc = "/usr/gapps/spot/datasets/newdemo/test"
+Memory usage (RSS): 176.93 MB
+cali_file_loc = "/g/g0/pascal/datasets/newdemo/test_plus_6"
+Memory usage (RSS): 278.52 MB
+cali_file_loc = "/g/g0/pascal/datasets/newdemo/test_plus_24c"
+Memory usage (RSS): 652.19 MB
+
+localhost:
+test: 229 MB
+test_plus_6: 427 mb
+test_plus_24c: 834 mb
+
+Using this code:
+        import psutil
+        import os
+
+        process = psutil.Process(os.getpid())
+        memory_info = process.memory_info()
+
+        # Resident Set Size (RSS) is the non-swapped physical memory a process has used
+        print(f"Memory usage (RSS): {memory_info.rss / (1024 * 1024):.2f} MB")

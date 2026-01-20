@@ -1,0 +1,248 @@
+.flameContainer {
+	width: 980px;
+	display: none;
+	border: 1px solid #cccccc;
+	background-color: white;
+	margin-top: 0;
+	top: -1px;
+	position: relative;
+}
+
+.stacked-line-component {
+	overflow: hidden;
+}
+
+.flamegraph {
+	text-align: left;
+	padding: 2px 0 0 0;
+}
+
+.block {
+	height: 38px;
+	width: 100px;
+	margin: 0;
+	position: relative;
+	border-bottom: 1px solid #000000;
+	border-left: 0px solid #000000;
+	border-right: 1px solid #000000;
+	overflow: hidden;
+}
+
+.children {
+}
+
+.leaf + .leaf {
+	left: -1px;
+	position: relative;
+}
+
+.block .text {
+	position: absolute;
+	top: 11px;
+	left: 6px;
+}
+
+.leaf {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.red {
+	background-color: #f6b3b3;
+	border: 1px solid #f19797;
+}
+
+.orange {
+	background-color: #f8d3a3;
+	border: 1px solid #f6c27e;
+}
+
+.blue {
+	background-color: #99c3ea;
+	border: 1px solid #67a8e5;
+}
+
+.col0 {
+	background-color: #94ee81;
+	border: 1px solid #5ae33e;
+}
+
+.col1 {
+	background-color: #8dc7ff;
+	border: 1px solid #5ca8ef;
+}
+
+.col2 {
+	background-color: #b6bea0;
+	border: 1px solid #8d9870;
+}
+
+.row1 {
+	position: relative;
+	top: -2px;
+}
+
+.row2 {
+	position: relative;
+	top: -4px;
+}
+
+.drillUp, .toggle-open-close {
+	height: auto;
+	font-size: 11px;
+	padding: 3px 12px;
+	margin: 0 10px 0 0;
+}
+
+.toggle-open-close {
+	float: right;
+}
+
+.selectContainer {
+	padding: 10px;
+	background-color: transparent;
+	border: 1px solid #e2e2e2;
+}
+
+.selectContainer .vert {
+	display: inline-block;
+}
+
+.selectContainer select {
+	padding: 4px;
+	margin: 0 30px 0 6px;
+}
+
+.popupAttributes {
+	height: 400px;
+	background-color: white;
+	z-index: 1;
+	overflow-y: scroll;
+	border: 1px solid #cccccc;
+	padding: 10px;
+}
+
+.tab_header {
+	width: 980px;
+	z-index: 5;
+	position: relative;
+}
+
+.tab_header .tab {
+	padding: 6px;
+	border-top: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	cursor: pointer;
+	display: inline-block;
+	width: 100px;
+	margin: 0 15px 0 0;
+	border-top-right-radius: 7px;
+	border-top-left-radius: 7px;
+	text-align: center;
+	background-color: #f2f2f2;
+	position: relative;
+	top: 2px;
+}
+
+.tab_header .tab.active {
+	border-bottom: 2px solid white;
+	background-color: white;
+	position: relative;
+	top: 2px;
+}
+
+.open-close-widget {
+	width: 300px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	font-family: Arial, sans-serif;
+	overflow: hidden;
+}
+
+.toggle-bellow-section {
+	width: 22px;
+	height: 22px;
+	position: static;
+	top: 10px;
+	right: 0;
+	font-size: 12px;
+	background-color: #EEEEEE;
+	border: 1px solid #dddddd;
+	z-index: 100;
+}
+
+.toggle-bellow-section span {
+	top: 9px;
+	position: absolute;
+	width: 14px;
+	height: 4px;
+	background-color: black; /* Replace 'white' with your desired color */
+	display: inline-block;
+	transition: all 0.2s ease;
+}
+
+.toggle-bellow-section span:first-of-type {
+	left: 0;
+	transform: scale(0.9) rotate(45deg);
+}
+
+.toggle-bellow-section span:last-of-type {
+	right: 0;
+	transform: scale(0.9) rotate(-45deg);
+}
+
+.toggle-bellow-section.open span:first-of-type {
+	transform: scale(0.9) rotate(-45deg);
+}
+
+.toggle-bellow-section.open span:last-of-type {
+	transform: scale(0.9) rotate(45deg);
+}
+
+.toggle-bellow-section:hover {
+	cursor: pointer;
+}
+
+.content {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease-out;
+	padding: 0 10px;
+}
+
+.content p {
+	margin: 10px 0;
+}
+
+.content.open {
+	max-height: 100px; /* Adjust based on content height */
+	padding: 10px 10px;
+}
+
+.button_and_bellow {
+	position: relative;
+	top: 10px;
+	height: 30px;
+}
+
+.bellow-section {
+	display: none;
+}
+
+.scale_container {
+	position: relative;
+}
+
+.scale_container .scale {
+	display: inline-block;
+	width: 83px;
+	padding: 0 0 0 5px;
+	color: #666666;
+	border-left: 1px solid #bbbbbb;
+	background-color: transparent;
+	font-size: 12px;
+	overflow-x: hidden;
+	position: absolute;
+}

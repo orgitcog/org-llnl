@@ -1,0 +1,105 @@
+RAN on RZ
+/g/g0/pascal/cali_data/test_plus_24c
+-------------------------------------------------------------------
+5 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007315     | 0.007315
+before cali reader | after cali reader  | 44.447025    | 44.454340
+after cali reader  | after grapher      | 3.532211     | 47.986551
+after grapher      | after render       | 10.412106    | 58.398657
+
+15 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007167     | 0.007167
+before cali reader | after cali reader  | 18.331412    | 18.338579
+after cali reader  | after grapher      | 4.051402     | 22.389981
+after grapher      | after render       | 12.790699    | 35.180680
+
+20 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007053     | 0.007053
+before cali reader | after cali reader  | 13.470596    | 13.477649
+after cali reader  | after grapher      | 3.666753     | 17.144402
+after grapher      | after render       | 10.350075    | 27.494477
+
+25 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.006834     | 0.006834
+before cali reader | after cali reader  | 11.807537    | 11.814371
+after cali reader  | after grapher      | 3.664417     | 15.478788
+after grapher      | after render       | 10.496152    | 25.974939
+
+30 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.006748     | 0.006748
+before cali reader | after cali reader  | 10.503382    | 10.510130
+after cali reader  | after grapher      | 4.129602     | 14.639733
+after grapher      | after render       | 11.673628    | 26.313361
+
+35 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007056     | 0.007056
+before cali reader | after cali reader  | 9.466244     | 9.473300
+after cali reader  | after grapher      | 4.074361     | 13.547661
+after grapher      | after render       | 12.139511    | 25.687172
+
+45 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007641     | 0.007641
+before cali reader | after cali reader  | 10.444424    | 10.452065
+after cali reader  | after grapher      | 4.234495     | 14.686560
+after grapher      | after render       | 11.641891    | 26.328451
+
+70 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007642     | 0.007642
+before cali reader | after cali reader  | 10.604971    | 10.612613
+after cali reader  | after grapher      | 3.604864     | 14.217477
+after grapher      | after render       | 10.356834    | 24.574311
+
+100 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007003     | 0.007003
+before cali reader | after cali reader  | 9.222908     | 9.229911
+after cali reader  | after grapher      | 3.452808     | 12.682719
+after grapher      | after render       | 9.721592     | 22.404310
+
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007826     | 0.007826
+before cali reader | after cali reader  | 9.125113     | 9.132939
+after cali reader  | after grapher      | 3.670945     | 12.803884
+after grapher      | after render       | 10.092458    | 22.896341
+
+130 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.006933     | 0.006933
+before cali reader | after cali reader  | 9.872087     | 9.879020
+after cali reader  | after grapher      | 3.909733     | 13.788753
+after grapher      | after render       | 10.429841    | 24.218594
+
+180 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.006640     | 0.006640
+before cali reader | after cali reader  | 10.455253    | 10.461893
+after cali reader  | after grapher      | 3.477385     | 13.939279
+after grapher      | after render       | 9.664670     | 23.603948
+
+220 pools
+From               | To                 | Interval (s) | Total (s)
+-------------------+--------------------+--------------+----------
+Start              | before cali reader | 0.007796     | 0.007796
+before cali reader | after cali reader  | 10.568318    | 10.576114
+after cali reader  | after grapher      | 3.683896     | 14.260010
+after grapher      | after render       | 9.459328     | 23.719338

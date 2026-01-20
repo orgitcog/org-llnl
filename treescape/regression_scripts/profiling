@@ -1,0 +1,13 @@
+
+/Users/aschwanden1/datasets/newdemo/test
+926 files
+Cali Reader     2.55s (15 pools)
+ThicketReader   49s
+
+The next data set basically is test copied 5 times.
+/Users/aschwanden1/datasets/newdemo/test_plus_6
+6469 files
+Cali Reader     6.44s (15 pools)
+ThicketReader   1536s
+
+
