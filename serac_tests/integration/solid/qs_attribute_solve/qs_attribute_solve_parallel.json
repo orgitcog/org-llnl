@@ -1,0 +1,27 @@
+
+{
+  "mpi_rank_count": 2,
+  "curves": 
+  {
+    "t": 1.0,
+    "smith_velocity": 
+    {
+      "l1norms": 0.0,
+      "l2norms": 0.0,
+      "linfnorms": 0.0,
+      "avgs": 0.0,
+      "mins": 0.0,
+      "maxs": 0.0
+    },
+    "smith_displacement": 
+    {
+      "l1norms": 0.0305176507712678,
+      "l2norms": 0.0333011511288585,
+      "linfnorms": 0.0572973843134552,
+      "avgs": -0.00499999999484847,
+      "mins": -0.05,
+      "maxs": 0.03
+    }
+  },
+  "sidre_group_name": "smith_summary"
+}

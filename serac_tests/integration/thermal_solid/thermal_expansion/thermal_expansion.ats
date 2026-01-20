@@ -1,0 +1,17 @@
+##############################################################################
+# Copyright (c) Lawrence Livermore National Security, LLC and
+# other Smith Project Developers. See the top-level COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (BSD-3-Clause)
+##############################################################################
+
+# TODO: Re-enable after thermal solid lua is updated
+# https://github.com/LLNL/smith/issues/1066
+
+# tolerance_test(name="thermal_expansion_serial",
+#     input_file="{0}/tests/thermal_solid/thermal_expansion.lua".format(smith_input_files_dir))
+
+# tolerance_test(name="thermal_expansion_parallel",
+#     input_file="{0}/tests/thermal_solid/thermal_expansion.lua".format(smith_input_files_dir),
+#     num_mpi_tasks=2)
+

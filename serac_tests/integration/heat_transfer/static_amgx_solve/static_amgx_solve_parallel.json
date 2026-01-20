@@ -1,0 +1,20 @@
+
+{
+  "user_name": "meemee",
+  "host_name": "lassen530",
+  "mpi_rank_count": 2,
+  "curves": 
+  {
+    "t": 1.0,
+    "smith_temperature": 
+    {
+      "l1norms": 4.09106474783117,
+      "l2norms": 2.02263811670466,
+      "linfnorms": 1.00000123796089,
+      "avgs": 1.00000005554728,
+      "mins": 0.999998423922456,
+      "maxs": 1.0000017908183
+    }
+  },
+  "sidre_group_name": "smith_summary"
+}

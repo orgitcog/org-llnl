@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "repligit"
+version = "0.2.0"
+dependencies = []
+authors = [
+  { name="Alec Scott" },
+  { name="Caetano Melone"},
+]
+description = "A python library implementing the git http transfer protocol."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "Apache-2.0 WITH LLVM-exception"
+
+[project.urls]
+Homepage = "https://github.com/llnl/repligit"
+Issues = "https://github.com/llnl/repligit/issues"
+
+[project.optional-dependencies]
+aiohttp = ["aiohttp"]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
+
+[tool.ruff]
+line-length = 88
+exclude = ["spack"]
+
+[tool.bandit]
+exclude_dirs = []
+# allow use of assert
+skips = ["B101"]

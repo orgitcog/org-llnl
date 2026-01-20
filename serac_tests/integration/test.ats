@@ -1,0 +1,238 @@
+##############################################################################
+# Copyright (c) Lawrence Livermore National Security, LLC and
+# other Smith Project Developers. See the top-level COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (BSD-3-Clause)
+##############################################################################
+
+import glob
+import os
+import shutil
+import socket
+import sys
+import json
+
+glue(independent=True)
+
+# Keeps the individual test's output
+glue(keep=True)
+
+#
+# Handle required environment variables that define project structure
+#
+
+# Check for required environment variables
+for var in ["ATS_SMITH_BIN_DIR", "ATS_SMITH_REPO_DIR", "ATS_SMITH_BASELINE"]:
+    if not os.environ.get(var):
+        print("ERROR: Required environment variable not found: {0}".format(var))
+        sys.exit(1)
+
+# Helpful directories
+smith_bin_dir = os.environ.get("ATS_SMITH_BIN_DIR")
+smith_repo_dir = os.environ.get("ATS_SMITH_REPO_DIR")
+
+# Flags
+smith_baseline = os.environ.get("ATS_SMITH_BASELINE")
+if "," in smith_baseline:
+    smith_baseline = smith_baseline.split(",")
+elif smith_baseline != "none" and smith_baseline != "all":
+    # Put baseline in List if single baseline
+    smith_baseline = [smith_baseline]
+
+#
+# Add variables to be used in individually sourced test files with define()
+#
+
+# Path to integration tests
+smith_integration_test_dir = os.path.join(smith_repo_dir, "tests", "integration")
+define(smith_integration_test_dir=smith_integration_test_dir)
+
+# Path to Smith driver
+smith_path = os.path.join(smith_bin_dir, "smith")
+define(smith_path=smith_path)
+
+# Path to input files directory
+smith_input_files_dir = os.path.join(smith_repo_dir, "data", "input_files")
+define(smith_input_files_dir=smith_input_files_dir)
+
+# Path to input files directory
+smith_test_scripts_dir = os.path.join(smith_repo_dir, "scripts", "testing")
+define(smith_test_scripts_dir=smith_test_scripts_dir)
+
+# Tolerance checker path
+smith_tolerance_checker = os.path.join(smith_test_scripts_dir, "tolerance_test.py")
+define(smith_tolerance_checker=smith_tolerance_checker)
+
+# Tolerance json file(s) directory
+smith_tolerance_json = os.path.join(smith_integration_test_dir, "tolerances")
+define(smith_tolerance_json=smith_tolerance_json)
+
+# Copy script file path
+smith_copy = os.path.join(smith_integration_test_dir, "copy.sh")
+define(smith_copy=smith_copy)
+
+#
+# Add variables based on a current platform's configuration file
+#
+
+if "SYS_TYPE" in os.environ:
+    platform_name = os.environ["SYS_TYPE"]
+else:
+    platform_name = socket.gethostname().rstrip('1234567890')
+
+# Read/ set configs from file
+smith_config_json = os.path.join(smith_repo_dir, "ats-config", "{0}.json".format(platform_name))
+if os.path.exists(smith_config_json):
+    with open(smith_config_json) as config_file:
+        config_dict = json.load(config_file)
+    smith_cuda_enabled = config_dict["CUDA"]
+else:
+    # Print warning and set default configs
+    print("Warning: No config file created for current platform: {0}".format(platform_name))
+    print("         Will be setting default configs")
+    print("         Create a configuration file in {0}".format(smith_config_json))
+    smith_cuda_enabled = False
+
+define(smith_cuda_enabled=smith_cuda_enabled)
+
+print("Configuration set for {0}:".format(platform_name))
+print(" - Cuda enabled: {0}".format(smith_cuda_enabled))
+
+#
+# Wrapper for ATS's test()/testif()
+#
+
+def tolerance_test(name, input_file, num_mpi_tasks=1, tolerance=0.00001,
+    restart_cycle=None):
+    """
+    # _smith_tolerance_test_start
+    Adds a test and dependent tolerance check for the given arguments
+
+    Parameters
+    ----------
+    name : str
+        The name of the test
+    input_file : str
+        Path to the input file
+    num_mpi_tasks : int, optional
+        The number of MPI tasks (default is 1)
+    tolerance : str, optional
+        The allowed tolerance in test results (default is 0.00001)
+        Note: If using options 2 or 3 a "default" value is required unless you've
+              specified all parameters
+        Three options:
+            1.) Either single value such as 0.00001
+            2.) Multiple values in this format: default:0.1,velocity:0.22
+            3.) Path to a tolerance JSON file
+    restart_cycle: int, optional
+        The cycle to run from and test
+        Note: If given a value, it will perform a tolerance test for both the normal
+              Smith run and also the restart Smith run using the specified cycle
+        Note: If ats.sh has the baseline option set, it will copy the restart's summary
+              file to the restart baseline location.
+
+    Note: Paths in this function are relative to where the function is called from
+          not this file
+    # _smith_tolerance_test_end
+    """
+
+    # Set normal test variables
+    normal_output_dir    = os.path.abspath("{0}_output".format(name))
+    normal_test_file     = os.path.join(normal_output_dir, "summary.json")
+    normal_baseline_file = os.path.abspath("{0}.json".format(name))
+
+    # Set restart test variables
+    restart_output_dir    = os.path.abspath("{0}_output_restart_{1}".format(name, restart_cycle))
+    restart_test_file     = os.path.join(restart_output_dir, "summary.json")
+    restart_baseline_file = os.path.abspath("{0}_restart_{1}.json".format(name, restart_cycle))
+
+    tolerance_arg = "--tolerance={0}".format(tolerance)
+    if ".json" in str(tolerance):
+        tolerance_arg = "--tolerance-file={0}".format(tolerance)
+
+    # If should baseline...
+    if smith_baseline != "none":
+        if smith_baseline == "all" or name in smith_baseline:
+            # Remove test from list as they are baselined
+            if name in smith_baseline:
+                smith_baseline.remove(name)
+
+            # Copy pre-existing normal Smith summary file to baseline location
+            copy_args = "{0} {1}".format(normal_test_file, normal_baseline_file)
+            test(
+                executable=smith_copy,
+                clas=copy_args,
+                label=name,
+                nosrun=True)
+
+            # Copy pre-existing restart Smith summary file to baseline location
+            if restart_cycle is not None:
+                copy_args = "{0} {1}".format(restart_test_file, restart_baseline_file)
+                test(
+                    executable=smith_copy,
+                    clas=copy_args,
+                    label="{0}_restart_{1}".format(name, restart_cycle),
+                    nosrun=True)
+    else:
+        # Run Smith normally
+        normal_test_args = "-i {0} -o {1}".format(input_file, normal_output_dir)
+        my_normal_test = test(
+            executable=smith_path,
+            clas=normal_test_args,
+            label=name,
+            np=num_mpi_tasks)
+
+        # Tolerance test of normal baseline vs normal test
+        normal_checker_args = "--baseline={0} --test={1} {2}".format(
+            normal_baseline_file, normal_test_file, tolerance_arg)
+        my_normal_checker = testif(
+            my_normal_test,
+            executable=smith_tolerance_checker,
+            clas=normal_checker_args,
+            label=name,
+            nosrun=True)
+
+        if restart_cycle is not None:
+            # Copy normal Smith output to restart location
+            copy_args = "{0} {1}".format(normal_output_dir, restart_output_dir)
+            my_copy = testif(
+                my_normal_checker,
+                executable=smith_copy,
+                clas=copy_args,
+                label=name,
+                nosrun=True)
+
+            # Run Smith with restart option
+            restart_test_args = "-i {0} -o {1} -c {2}".format(input_file,
+                restart_output_dir, restart_cycle)
+            my_restart_test = testif(
+                my_copy,
+                executable=smith_path,
+                clas=restart_test_args,
+                label="{0}_restart_{1}".format(name, restart_cycle),
+                np=num_mpi_tasks)
+
+            # Tolerance test of restart baseline vs restart test
+            restart_checker_args = "--baseline={0} --test={1} {2}".format(
+                restart_baseline_file, restart_test_file, tolerance_arg)
+            my_restart_checker = testif(
+                my_restart_test,
+                executable=smith_tolerance_checker,
+                clas=restart_checker_args,
+                label=name,
+                nosrun=True)
+
+define(tolerance_test=tolerance_test)
+
+#
+# Add individual tests found in subdirectories
+#
+
+test_files = glob.glob(os.path.join(smith_integration_test_dir, "*/*", "*.ats"))
+for test_file in test_files:
+    source(test_file)
+
+# Check if any tests indicated for baseline by user were not baselined
+if smith_baseline != "none" and smith_baseline != "all":
+    for test_name in smith_baseline:
+        print("Warning: Could not find test \"{0}\" to baseline.".format(test_name))

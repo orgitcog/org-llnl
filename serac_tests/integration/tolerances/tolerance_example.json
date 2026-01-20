@@ -1,0 +1,5 @@
+{
+    "default": 0.0001,
+    "smith_velocity": 0.001,
+    "smith_displacement": 0.1
+}

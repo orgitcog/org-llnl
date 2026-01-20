@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Install dev versions of packages if available.
+# --pre
+
+cached-property
+numpy
+parse
+
+# needed for functionality:
+jsonschema
+pandas
+scipy
+
+# optional (could be removed with a small amount of work):
+pyyaml
+
+# used for development and documentation:
+sphinx
+sphinx_rtd_theme
+flake8
+pytest
+wheel
+pytest-cov
+twine
+tbump
+MarkdownPP
+build

@@ -1,0 +1,5 @@
+*~
+*.pyc
+mapfile*
+_build
+MANIFEST

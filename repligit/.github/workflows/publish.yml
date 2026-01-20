@@ -1,0 +1,50 @@
+name: Building & Publishing Package to PyPI
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      with:
+        persist-credentials: false
+
+    - name: Set up Python
+      uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
+      with:
+        cache: 'pip'
+        cache-dependency-path: '.github/workflows/requirements/publish.txt'
+
+    - name: Install Python dependencies
+      run: |
+        pip install -r .github/workflows/requirements/publish.txt
+
+    - name: Build package
+      run: |
+        python3 -m build
+
+    - name: Save distribution files as artifact
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+      with:
+        name: python-package-distributions
+        path: dist/
+
+  push:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/repligit
+    permissions:
+      id-token: write
+    steps:
+    - name: Download distribution files from artifact
+      uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131
+      with:
+        name: python-package-distributions
+        path: dist/
+
+    - name: Publish package to PyPI
+      uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e

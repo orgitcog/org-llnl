@@ -1,0 +1,13 @@
+-r production.txt
+
+# Development tools
+ipython
+twine
+
+# Testing tools
+bandit
+black
+flake8
+isort
+pyflakes
+safety

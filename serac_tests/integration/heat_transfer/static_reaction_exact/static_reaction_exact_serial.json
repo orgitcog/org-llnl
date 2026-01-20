@@ -1,0 +1,18 @@
+
+{
+  "mpi_rank_count": 1,
+  "curves": 
+  {
+    "t": 1.0,
+    "smith_temperature": 
+    {
+      "l1norms": 0.862452496845749,
+      "l2norms": 0.643674506713085,
+      "linfnorms": 1.60116770909853,
+      "avgs": 3.63624930062115e-08,
+      "mins": -1.62966789714194,
+      "maxs": 1.62966789714194
+    }
+  },
+  "sidre_group_name": "smith_summary"
+}

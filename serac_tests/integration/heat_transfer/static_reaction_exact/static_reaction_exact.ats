@@ -1,0 +1,17 @@
+##############################################################################
+# Copyright (c) Lawrence Livermore National Security, LLC and
+# other Smith Project Developers. See the top-level COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (BSD-3-Clause)
+##############################################################################
+
+# TODO: Re-enable after 'source' is supported
+# https://github.com/LLNL/smith/issues/1065
+
+#tolerance_test(name="static_reaction_exact_serial",
+#    input_file="{0}/tests/heat_transfer/static_reaction_exact.lua".format(smith_input_files_dir))
+
+#tolerance_test(name="static_reaction_exact_parallel",
+#    input_file="{0}/tests/heat_transfer/static_reaction_exact.lua".format(smith_input_files_dir),
+#    num_mpi_tasks=2)
+

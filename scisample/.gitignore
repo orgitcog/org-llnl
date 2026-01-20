@@ -1,0 +1,14 @@
+*~
+*.egg-info
+__pycache__
+build/
+dist/
+venv*/
+*#
+docs/source/modules.rst
+docs/source/scisample.rst
+htmlcov
+scisample-*
+venv*
+__pycache__
+*~

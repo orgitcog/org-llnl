@@ -1,0 +1,28 @@
+{
+    "agency": "DOE",
+    "organization": "Lawrence Livermore National Laboratory",
+    "contact_email": "open-source@llnl.gov",
+    "github_orgs": [
+        "chaos",
+        "esgf",
+        "flux-framework",
+        "glvis",
+        "llnl",
+        "mfem",
+        "pruners",
+        "rose-compiler",
+        "spack",
+        "uv-cdat",
+        "zfsonlinux"
+    ],
+    "github_repos": [
+        "ceed/laghos",
+        "dun/conman",
+        "dun/munge",
+        "frankieli/icenine",
+        "hpc/dcp",
+        "hpc/mpifileutils",
+        "hpc/openlorenz",
+        "hpc/spindle"
+    ]
+}

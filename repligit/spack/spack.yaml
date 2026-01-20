@@ -1,0 +1,22 @@
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  # add package specs to the `specs` list
+  repos:
+  - $env/repos/spack_repo/repligit
+  specs:
+  - py-codespell
+  - py-pytest
+  - py-repligit
+  - py-bandit
+  - py-ruff
+  - py-pip
+  view: true
+  concretizer:
+    unify: true
+  develop:
+    py-repligit:
+      spec: py-repligit@=main
+      path: $env/../
