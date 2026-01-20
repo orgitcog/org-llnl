@@ -1,0 +1,67 @@
+
+# initialisation
+units metal
+# mass -> grams/mole
+# distance -> Angstroms (A)
+# time -> picoseconds (ps)
+# energy -> eV
+# velocity -> A/ps
+# force -> eV/A
+# torque -> eV
+# temperature -> K
+# pressure -> bars
+# dynamic viscosity -> Poise
+# charge -> e
+# dipole -> e*A
+# electric field -> V/A
+# density -> gram/cm^3
+
+atom_style atomic
+
+boundary p p p
+atom_modify map array
+
+######################
+### create the box ###
+######################
+
+## temperature ##
+variable T equal 300.0
+variable T2 equal 2*${T}
+
+## load structure from input ##
+read_data struc_in.data
+
+## potential in use ##
+pair_style eam/alloy
+pair_coeff * * Cu.eam Cu
+
+#############################
+### intergration timestep ###
+#############################
+timestep 1e-5
+
+################################
+### Integrator and eph model ###
+################################
+
+## use velocity verlet integration 
+#fix integrate all nve
+
+## eph model ##
+## model is applied only to the PKA atom (a small error is created because of this) ##
+fix friction all eph/atomic 1111 7 ${T} NULL 10 NULL Cu.beta Cu.kappa Cu
+run 0
+
+##############
+### Output ###
+##############
+## print stuff into stdout every 1000 steps (atoms moves about 1A in that time) ##
+thermo_style custom step time temp press pe ke etotal f_friction[1] f_friction[2]
+thermo 100
+
+##########################
+### run the simulation ###
+##########################
+run 1000000
+
