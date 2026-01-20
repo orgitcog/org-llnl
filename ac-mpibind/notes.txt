@@ -1,0 +1,37 @@
+
+1 - NUMA / hwloc_package
+Late in the internship I realised (thanks to Edgar) that hwloc is not 
+consistent with NUMA and packages objects. 
+Sometimes package = NUMA, and others there are multiple NUMA in one package.
+This might have led to small errors in the implementation.
+I made some tests and everything seems fine with topologies that look like
+I thought they all would (quartz, lassen_login, and so on). 
+However it does not with the epyc_dual_soc one where packages contain
+multiple numas. In this case my program only uses the first numa.
+
+2 - GPU detection
+In the mpibind script, finding the gpu used for computation is done by checking
+there name. This is not done in the c implementation, thus the display gpus 
+might be distributed by the algorithm and used for computation.
+
+3 - Print function
+My print function (mpibind_print) is not using strings and some glibc 
+functions (I checked my code with valegrind and it finds invalid
+write and jump/move).
+
+
+
+
+
+Notes on the handle usage:
+    - if mpibind_set_user_num_thread() is not used when initialising the handle
+      or if -1 is set, then the target application will use one thread per
+      process.
+    - if 0 is set, then the application will be threaded and mpibind will
+      compute the number of threads, using all the available threads.
+
+
+
+# export LD_LIBRARY_PATH=$HOME/Work/loussert-mpibind/bin:$LD_LIBRARY_PATH
+# export MPIBIND_TOPOLOGY_FILE=$HOME/Work/loussert-mpibind/topos/lassen_login.xml
+# export MPIBIND=v.dry.smt=2

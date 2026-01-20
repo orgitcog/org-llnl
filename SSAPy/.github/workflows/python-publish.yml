@@ -1,0 +1,38 @@
+name: Upload Python Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/llnl-ssapy
+    permissions:
+      id-token: write
+      
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential git git-lfs cmake
+          git lfs install
+          git lfs pull
+          python -m pip install --upgrade pip build
+          python -m pip install -r requirements.txt
+          
+      - name: Build source distribution
+        run: python -m build --sdist
+        
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

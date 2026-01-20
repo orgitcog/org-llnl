@@ -1,0 +1,24 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/cpp
+{
+	"name": "C++",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"workspaceFolder": "/workspaces/jsonlogic/cpp",
+	"customizations": {
+		"vscode": {
+
+        "extensions": [
+				"llvm-vs-code-extensions.vscode-clangd"
+            // add other extensions as needed
+        ]
+		}
+	}
+	// "mounts": [
+  	// 	"type=bind,source=${env:SSH_AUTH_SOCK},target=/ssh-agent"
+	// ],
+	// "remoteEnv": {
+  	// 	"SSH_AUTH_SOCK": "/ssh-agent"
+	// }	
+}

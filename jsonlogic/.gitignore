@@ -1,0 +1,16 @@
+.DS_Store
+CMakeFiles/
+Testing/
+**/build/
+.cache/
+CMakeCache.txt
+Makefile
+*.cmake
+*.so
+testeval.bin
+__pycache__
+venv
+*.core
+setup.cfg
+*.egg-info
+.coverage

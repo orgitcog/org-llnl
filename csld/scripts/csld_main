@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+
+import sys
+import os
+import argparse
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib.backends.backend_pdf import PdfPages
+from configparser import ConfigParser
+import atexit
+
+import csld.config as config
+from csld.symmetry_structure import SymmetrizedStructure
+from csld.lattice_dynamics import init_ld_model
+#from csld.polaron_force import PolaronFF
+from csld.common_main import *
+from csld.csld_main_functions import save_pot, predict, phonon_step, fit_data
+
+
+def print_logo():
+    print(""" Lattice Dynamics """, end='')
+
+
+def init_cmdline_settingfile():
+    """
+    Parse command line options and settings (.INI format) file
+    #  Tasks of the CSLD program
+    #
+    # 1. Init structure and symmetry
+    # 2. Init lattice model (find clusters)
+    # 3. Symmetrize model
+    # 4. Calculate correlation matrix
+    # 5. Perform CS
+    # 6. Export potential
+    # 7. Phonon
+    # 8. BTE, etc (planned)
+    :return: options, settings
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--file", "-f", help="settings file. Default csld.in", default='csld.in')
+    parser.add_argument('--pdfout', help="PDF file of plots. Default plots.pdf", default='plots.pdf')
+    parser.add_argument("--ldff_step", type=int, help="Force field interactions. *0 = skip, 2 = generate", default=0)
+    parser.add_argument("--phonon_step", type=int, help="Phonon. 0 = skip, *1 = calculate", default=1)
+    parser.add_argument("--phonon", action='store_true',
+                        help="Equivalent to \"--cont --save_pot_step 0 --pred_step 0\". Default: False", default=False)
+    parser.add_argument("--save_pot_step", type=int, help="Save .lat and .pot files. *0= skip, 1= save", default=0)
+    parser.add_argument("--pot", action='store_true', help="Save potential.", default=False)
+    add_common_parameter(parser)
+    options = parser.parse_args()
+    config.debug_level = options.log_level
+    #logging.basicConfig(level=options.log_level)
+    if options.log_level > 0:
+        print_logo()
+        print_version(config.VERSION)
+
+    if options.phonon:
+        options.cont= True
+    if options.predict:
+        options.phonon_step = 0
+    if options.pot:
+        options.cont= True
+        options.phonon_step = 1
+        options.save_pot_step = 1
+    process_common_options(options)
+
+    settings = ConfigParser()
+    if not os.path.exists(options.file):
+        print("ERROR: settings file %s not found" % (options.file))
+        exit(-1)
+    settings.read(options.file)
+    # set default values
+    settings['DEFAULT'] = {
+        "qpoint_fractional": False,
+        "true_v_fit": 'true_fit.txt',
+        'epsilon': '0.05',
+        "bcs_reweight": 'True',
+        "bcs_penalty": 'arctan',
+        "bcs_jcutoff": '1E-8'}
+    override_from_commandline(options.override, settings)
+    print('*'*6, "Settings from", options.file, '*'*6)
+    settings.write(sys.stdout)
+    print('*'*10, 'END', '*'*10)
+    return options, settings
+
+
+if __name__ == '__main__':
+    logger = logging.getLogger(__name__)
+    options, settings = init_cmdline_settingfile()
+    logger.setLevel(level=options.log_level)
+    pdfout = PdfPages(options.pdfout.strip()) if options.pdfout.strip() else None
+    atexit.register(upon_exit, pdfout)
+
+    prim = SymmetrizedStructure.init_structure(settings['structure'], options.symm_step, options.symm_prim, options.log_level)
+    model = init_ld_model(prim, settings['model'], settings['LDFF'] if 'LDFF' in settings.sections() else {}, options.clus_step,
+                          options.symC_step, options.ldff_step)
+    Amat, fval = init_training(model, settings['training'], options.train_step)
+    ibest, solutions, rel_err = fit_data(model, Amat, fval, settings['fitting'], options.fit_step, pdfout)
+    if settings.has_section('phonon'):
+        phonon = phonon_step(model, solutions, settings['phonon'], options.phonon_step, pdfout, prim)
+    if settings.has_section('export_potential'):
+        save_pot(model, solutions[ibest], settings['export_potential'], options.save_pot_step, phonon)
+    if settings.has_section('prediction'):
+        predict(model, solutions, settings['prediction'], options.pred_step)
+
