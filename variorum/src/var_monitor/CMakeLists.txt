@@ -1,0 +1,46 @@
+# Copyright 2019-2023 Lawrence Livermore National Security, LLC and other
+# Variorum Project Developers. See the top-level LICENSE file for details.
+#
+# SPDX-License-Identifier: MIT
+
+target_link_libraries(variorum ${variorum_deps})
+
+set(CMAKE_C_FLAGS "-pthread")
+set(CMAKE_CXX_FLAGS "-pthread")
+
+message(STATUS "Adding variorum demoapps")
+
+set(var_monitor_sources
+  highlander.c
+  var_monitor.c
+)
+message(STATUS " [*] Adding demoapp: var_monitor")
+add_executable(var_monitor ${var_monitor_sources})
+target_link_libraries(var_monitor variorum ${variorum_deps})
+
+set(power_wrapper_static_sources
+  highlander.c
+  power_wrapper_static.c
+)
+message(STATUS " [*] Adding demoapp: power_wrapper_static")
+add_executable(power_wrapper_static ${power_wrapper_static_sources})
+target_link_libraries(power_wrapper_static variorum ${variorum_deps})
+
+set(power_wrapper_dynamic_sources
+  highlander.c
+  power_wrapper_dynamic.c
+)
+message(STATUS " [*] Adding demoapp: power_wrapper_dynamic")
+add_executable(power_wrapper_dynamic ${power_wrapper_dynamic_sources})
+target_link_libraries(power_wrapper_dynamic variorum ${variorum_deps})
+
+include_directories(${CMAKE_SOURCE_DIR}/variorum
+                    ${CMAKE_SOURCE_DIR}/variorum/Intel)
+
+install(TARGETS var_monitor power_wrapper_static power_wrapper_dynamic
+        DESTINATION bin)
+
+# quick hack
+if(VARIORUM_WITH_INTEL_GPU)
+	set(CMAKE_EXE_LINKER_FLAGS "-lze_loader -lstdc++ -L${APMIDG_DIR}/lib64/ -lapmidg")
+endif()

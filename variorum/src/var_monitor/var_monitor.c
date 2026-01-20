@@ -1,0 +1,438 @@
+// Copyright 2019-2023 Lawrence Livermore National Security, LLC and other
+// Variorum Project Developers. See the top-level LICENSE file for details.
+//
+// SPDX-License-Identifier: MIT
+
+#define _GNU_SOURCE
+
+#include <ctype.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+#include "highlander.h"
+
+#define FASTEST_SAMPLE_INTERVAL_MS 50
+
+#if 0
+/********/
+/* RAPL */
+/********/
+static double total_joules = 0.0;
+static double limit_joules = 0.0;
+static double max_watts = 0.0;
+static double min_watts = 1024.0;
+#endif
+
+/*************************/
+/* HW Counter Structures */
+/*************************/
+static unsigned long start;
+static unsigned long end;
+static FILE *summaryfile = NULL;
+static FILE *logfile = NULL;
+// Create another file for logging utilization samples
+// At some point, we want this to be a condition/macro
+static FILE *utilfile = NULL;
+
+static pthread_mutex_t mlock;
+static int *shmseg;
+static int shmid;
+
+static int running = 1;
+
+#include "common.c"
+
+int main(int argc, char **argv)
+{
+    const char *usage = "\n"
+                        "NAME\n"
+                        "    var_monitor - Sampler for domain power usage and limits\n"
+                        "\n"
+                        "SYNOPSIS\n"
+                        "    var_monitor [--help | -h] [OPTIONS]... -a \"executable [<exec-args>]\"\n"
+                        "\n"
+                        "OVERVIEW\n"
+                        "    The var_monitor is a utility for sampling and printing domain power usage\n"
+                        "    and power limits.\n"
+                        "\n"
+                        "REQUIRED\n"
+                        "    -a \"executable [<exec-args>]\"\n"
+                        "        Application and arguments surrounded by quotes.\n"
+                        "\n"
+                        "OPTIONS\n"
+                        "    --help | -h\n"
+                        "        Display this help information, then exit.\n"
+                        "\n"
+                        "    -c\n"
+                        "        Remove stale shared memory.\n"
+                        "\n"
+                        "    -p path_to_trace\n"
+                        "        Path to store application trace.\n"
+                        "\n"
+                        "    -i ms_interval"
+                        "        Sampling interval in milliseconds (default = 50ms).\n"
+                        "\n"
+                        "    -v\n"
+                        "        Verbose output that includes all sensors or registers.\n"
+                        "\n"
+                        "    -u\n"
+                        "        Sampling and printing node utilization \n"
+                        "\n";
+
+    if (argc == 1 || (argc > 1 && (
+                          strncmp(argv[1], "--help", strlen("--help")) == 0 ||
+                          strncmp(argv[1], "-h", strlen("-h")) == 0)))
+    {
+        printf("%s", usage);
+        return 0;
+    }
+
+    int opt;
+    char *app;
+    char **arg = NULL;
+    int set_app = 0;
+    char *logpath = NULL;
+    // Default struct with sampling interval of 50ms and verbosity of 0.
+    struct thread_args th_args;
+    th_args.sample_interval = FASTEST_SAMPLE_INTERVAL_MS;
+    th_args.measure_all = false;
+    th_args.power_with_util = false;
+
+    while ((opt = getopt(argc, argv, "ca:p:i:v:u")) != -1)
+    {
+        switch (opt)
+        {
+            case 'c':
+                highlander_clean();
+                printf("Exiting var_monitor...\n");
+                return 0;
+            case 'a':
+                app = optarg;
+                set_app = 1;
+                break;
+            case 'p':
+                logpath = strdup(optarg);
+                break;
+            case 'i':
+                th_args.sample_interval = atol(optarg);
+                if (th_args.sample_interval < FASTEST_SAMPLE_INTERVAL_MS)
+                {
+                    printf("Warning: Specified sample interval (-i) is faster than default. Setting to default sampling interval of %d milliseconds.\n",
+                           FASTEST_SAMPLE_INTERVAL_MS);
+                    th_args.sample_interval = FASTEST_SAMPLE_INTERVAL_MS;
+                }
+                break;
+            case 'v':
+                th_args.measure_all = true;
+                break;
+            case 'u':
+                th_args.power_with_util = true;
+                break;
+            case '?':
+                if (optopt == 'a')
+                {
+                    fprintf(stderr, "Option -%c requires an argument.\n", optopt);
+                }
+                else if (isprint(optopt))
+                {
+                    fprintf(stderr, "\nError: unknown parameter \"-%c\"\n", optopt);
+                }
+                else
+                {
+                    fprintf(stderr, "Unknown option character `\\x%x'.\n", optopt);
+                }
+                fprintf(stderr, "%s", usage);
+                return 1;
+            default:
+                return 1;
+        }
+    }
+
+    if (!set_app)
+    {
+        printf("Error: Must specify -a flag with application and arguments in quotes.\n");
+        printf("%s", usage);
+        return 0;
+    }
+
+    char *app_split = strtok(app, " ");
+    int n_spaces = 0;
+    while (app_split)
+    {
+        arg = realloc(arg, sizeof(char *) * ++n_spaces);
+
+        if (arg == NULL)
+        {
+            return 1; /* memory allocation failed */
+        }
+        arg[n_spaces - 1] = app_split;
+        app_split = strtok(NULL, " ");
+    }
+    arg = realloc(arg, sizeof(char *) * (n_spaces + 1));
+    arg[n_spaces] = 0;
+
+#ifdef VARIORUM_DEBUG
+    int i;
+    for (i = 0; i < (n_spaces + 1); ++i)
+    {
+        printf("arg[%d] = %s\n", i, arg[i]);
+    }
+#endif
+
+    char *fname_dat = NULL;
+    char *fname_util = NULL;
+    char *fname_summary = NULL;
+    int rc;
+
+    if (highlander())
+    {
+        /* Start the log file. */
+        int logfd;
+        int logfd_util;
+        char hostname[64];
+        gethostname(hostname, 64);
+
+        if (logpath)
+        {
+            /* Output trace data into the specified location. */
+            rc = asprintf(&fname_dat, "%s/%s.var_monitor.dat", logpath, hostname);
+            if (rc == -1)
+            {
+                fprintf(stderr,
+                        "%s:%d asprintf failed, perhaps out of memory.\n",
+                        __FILE__, __LINE__);
+            }
+
+            // Also create a utilization logfile if this option is selected.
+            if (th_args.power_with_util)
+            {
+                /* Output trace data into the specified location. */
+                rc = asprintf(&fname_util, "%s/%s.util.dat", logpath, hostname);
+                if (rc == -1)
+                {
+                    fprintf(stderr,
+                            "%s:%d asprintf failed, perhaps out of memory.\n",
+                            __FILE__, __LINE__);
+                }
+            }
+        }
+        else
+        {
+            /* Output trace data into the default location. */
+            rc = asprintf(&fname_dat, "%s.var_monitor.dat", hostname);
+            if (rc == -1)
+            {
+                fprintf(stderr,
+                        "%s:%d asprintf failed, perhaps out of memory.\n",
+                        __FILE__, __LINE__);
+            }
+
+            // Also create a utilization logfile if this option is selected.
+            if (th_args.power_with_util)
+            {
+                /* Output trace data into the specified location. */
+                rc = asprintf(&fname_util, "%s.util.dat", hostname);
+                if (rc == -1)
+                {
+                    fprintf(stderr,
+                            "%s:%d asprintf failed, perhaps out of memory.\n",
+                            __FILE__, __LINE__);
+                }
+            }
+        }
+
+        logfd = open(fname_dat, O_WRONLY | O_CREAT | O_EXCL | O_NOATIME | O_NDELAY,
+                     S_IRUSR | S_IWUSR);
+        if (logfd < 0)
+        {
+            fprintf(stderr,
+                    "Fatal Error: %s on %s cannot open the appropriate fd for %s -- %s.\n", argv[0],
+                    hostname, fname_dat, strerror(errno));
+            return 1;
+        }
+        logfile = fdopen(logfd, "w");
+        if (logfile == NULL)
+        {
+            fprintf(stderr, "Fatal Error: %s on %s fdopen failed for %s -- %s.\n", argv[0],
+                    hostname, fname_dat, strerror(errno));
+            return 1;
+        }
+
+        // Open the utilization file if the option is selected.
+        if (th_args.power_with_util)
+        {
+
+            logfd_util = open(fname_util,
+                              O_WRONLY | O_CREAT | O_EXCL | O_NOATIME | O_NDELAY,
+                              S_IRUSR | S_IWUSR);
+            if (logfd_util < 0)
+            {
+                fprintf(stderr,
+                        "Fatal Error: %s on %s cannot open the appropriate fd for %s -- %s.\n", argv[0],
+                        hostname, fname_util, strerror(errno));
+                return 1;
+            }
+            utilfile = fdopen(logfd_util, "w");
+
+            if (utilfile == NULL)
+            {
+                fprintf(stderr, "Fatal Error: %s on %s fdopen failed for %s -- %s.\n", argv[0],
+                        hostname, fname_util, strerror(errno));
+                return 1;
+            }
+        }
+
+        if (logpath)
+        {
+            printf("Trace and summary files will be dumped in %s/\n", logpath);
+        }
+        else
+        {
+            printf("Trace and summary files will be dumped in ./\n");
+        }
+
+        /* Start power measurement thread. */
+        pthread_attr_t mattr;
+        pthread_t mthread;
+        pthread_attr_init(&mattr);
+        pthread_attr_setdetachstate(&mattr, PTHREAD_CREATE_DETACHED);
+        pthread_mutex_init(&mlock, NULL);
+        pthread_create(&mthread, &mattr, power_measurement, (void *) &th_args);
+
+        /* Fork. */
+        pid_t app_pid = fork();
+        if (app_pid == 0)
+        {
+            /* I'm the child. */
+            printf("Profiling:");
+            int i = 0;
+            for (i = 0; i < n_spaces; i++)
+            {
+                printf(" %s", arg[i]);
+            }
+            printf("\n");
+            execvp(arg[0], &arg[0]);
+            printf("Fork failure\n");
+            return 1;
+        }
+        /* Wait. */
+        waitpid(app_pid, NULL, 0);
+        sleep(1);
+
+        highlander_wait();
+
+        /* Stop power measurement thread. */
+        running = 0;
+        take_measurement(th_args.measure_all, th_args.power_with_util);
+        end = now_ms();
+
+        if (logpath)
+        {
+            /* Output summary data into the specified location. */
+            rc = asprintf(&fname_summary, "%s/%s.power.summary", logpath, hostname);
+            if (rc == -1)
+            {
+                fprintf(stderr,
+                        "%s:%d asprintf failed, perhaps out of memory.\n",
+                        __FILE__, __LINE__);
+            }
+        }
+        else
+        {
+            /* Output summary data into the default location. */
+            rc = asprintf(&fname_summary, "%s.power.summary", hostname);
+            if (rc == -1)
+            {
+                fprintf(stderr,
+                        "%s:%d asprintf failed, perhaps out of memory.\n",
+                        __FILE__, __LINE__);
+            }
+        }
+
+        logfd = open(fname_summary, O_WRONLY | O_CREAT | O_EXCL | O_NOATIME | O_NDELAY,
+                     S_IRUSR | S_IWUSR);
+        if (logfd < 0)
+        {
+            fprintf(stderr,
+                    "Fatal Error: %s on %s cannot open the appropriate fd for %s -- %s.\n", argv[0],
+                    hostname, fname_summary, strerror(errno));
+            return 1;
+        }
+        summaryfile = fdopen(logfd, "w");
+        if (summaryfile == NULL)
+        {
+            fprintf(stderr, "Fatal Error: %s on %s fdopen failed for %s -- %s.\n", argv[0],
+                    hostname, fname_summary, strerror(errno));
+            return 1;
+        }
+
+        char *msg;
+        rc = asprintf(&msg,
+                      "host: %s\npid: %d\nruntime ms: %lu\nstart: %lu\nend: %lu\n",
+                      hostname, app_pid, end - start, start, end);
+        if (-1 == rc)
+        {
+            fprintf(stderr,
+                    "%s:%d asprintf failed, perhaps out of memory.\n",
+                    __FILE__, __LINE__);
+        }
+
+        fprintf(summaryfile, "%s", msg);
+        free(msg);
+        fclose(summaryfile);
+        fflush(utilfile);
+        close(logfd);
+        close(logfd_util);
+
+        shmctl(shmid, IPC_RMID, NULL);
+        shmdt(shmseg);
+
+        pthread_attr_destroy(&mattr);
+    }
+    else
+    {
+        /* Fork. */
+        pid_t app_pid = fork();
+        if (app_pid == 0)
+        {
+            /* I'm the child. */
+            execvp(arg[0], &arg[0]);
+            printf("Fork failure: %s\n", argv[1]);
+            return 1;
+        }
+        /* Wait. */
+        waitpid(app_pid, NULL, 0);
+
+        highlander_wait();
+    }
+
+    if (th_args.power_with_util == true)
+    {
+        printf("Output Files:\n"
+               "  %s\n"
+               "  %s\n"
+               "  %s\n\n", fname_dat, fname_util, fname_summary);
+    }
+    else
+    {
+        printf("Output Files:\n"
+               "  %s\n"
+               "  %s\n\n", fname_dat, fname_summary);
+    }
+
+    highlander_clean();
+    free(fname_dat);
+    free(fname_util);
+    free(fname_summary);
+    return 0;
+}
