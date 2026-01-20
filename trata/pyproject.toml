@@ -1,0 +1,77 @@
+[tool]
+[tool.poetry]
+name = "trata"
+version = "1.2.1"
+description = "A tool to facilitate standard and adaptive sampling."
+
+license = "BSD 3-Clause License"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers", "Intended Audience :: Education",
+    "Intended Audience :: Science/Research", "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Programming Language :: Python :: 3",
+]
+homepage = "https://github.com/llnl/trata"
+documentation = "https://trata.readthedocs.io/"
+authors = [
+    "Andrew Fillmore <fillmore1@llnl.gov>", "Andrew Fillmore",
+]
+maintainers = [
+    "Renee Olson <olson59@llnl.gov>", "Renee Olson",
+]
+readme = "README.md"
+packages = [
+    { include = 'trata', from = 'src'}
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+numpy = "*"
+scikit-learn = "*"
+scipy = "*"
+matplotlib = "*"
+
+[tool.poetry.group.dev.dependencies]
+sphinx_rtd_theme = "*"
+sphinx = "*"
+pytest = "*"
+nbconvert = "*"
+sphinx-autoapi = "*"
+
+nbsphinx = "*"
+six = "*"
+
+
+[tool.poetry.plugins."console_scripts"]
+"trata" = "trata.trata:__init__"
+
+[build-system]
+requires = ["poetry-core>=1.0.8", "wheel"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/LLNL/trata/issues"
+"Discussions" = "https://github.com/LLNL/trata/discussions"
+
+[tool.black]
+line-length = 79
+
+[tool.bumpver]
+current_version = "1.2.1"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = [
+    'current_version = "{version}"',
+]
+"README.md" = [
+    "{version}",
+    "{pep440_version}",
+]
+
