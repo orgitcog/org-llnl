@@ -1,0 +1,12 @@
+include(setup_omp)
+
+add_metall_executable(run_bfs_bench_metall run_bfs_bench_metall.cpp)
+setup_omp_target(run_bfs_bench_metall)
+
+add_metall_executable(run_bfs_bench_metall_multiple run_bfs_bench_metall_multiple.cpp)
+setup_omp_target(run_bfs_bench_metall_multiple)
+
+add_metall_executable(run_bfs_bench_bip run_bfs_bench_bip.cpp)
+setup_omp_target(run_bfs_bench_bip)
+
+configure_file(run_bench.sh run_bench.sh COPYONLY)

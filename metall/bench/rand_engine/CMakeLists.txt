@@ -1,0 +1,1 @@
+add_metall_executable(run_rand_engine_bench run_rand_engine_bench.cpp)

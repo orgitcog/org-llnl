@@ -1,0 +1,1 @@
+add_metall_executable(verify_logger verify_logger.cpp)
