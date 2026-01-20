@@ -1,0 +1,39 @@
+name: Regression Tests
+on: [push, pull_request]
+jobs:
+  regression-tests:
+    strategy:
+      matrix:
+        mpi: [mpich-3.4, openmpi-4.1.1, openmpi-3.1.6]
+        python-version: [3.7, 3.8, 3.9]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Maybe use cached MPI
+        id: cache-mpi
+        uses: actions/cache@v2
+        with:
+          path: ~/mpi
+          # NOTE: without the `-v2' an empty cache dir will be used because the initial caching
+          # of ~/mpi was incorrect. caches cannot be cleared:
+          # https://github.com/actions/cache/issues/2
+          key: ${{ runner.os }}-${{ matrix.mpi }}-v2
+      - name: Maybe build ${{ matrix.MPI }}
+        if: steps.cache-mpi.outputs.cache-hit != 'true'
+        run: bash ./.github/scripts/install-mpi.sh ${{ matrix.MPI }} ~/mpi
+      - name: Add mpi to path
+        run: echo "PATH=$HOME/mpi/bin:$PATH" >> $GITHUB_ENV
+      - name: Install Python Requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Install Pyranda
+        run: |
+          python setup.py build
+          python setup.py install
+      - name: Run Regression Tests
+        run: cd tests && python run_tests.py 1

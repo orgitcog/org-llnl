@@ -1,0 +1,7 @@
+docs/build/*
+*/.DS_Store
+.devcontainer/*
+.DS_Store
+*/__pycache__/*
+__pycache__/*
+satist/__pycache__/*

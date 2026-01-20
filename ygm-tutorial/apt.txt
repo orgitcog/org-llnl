@@ -1,0 +1,10 @@
+#build-essential
+#gcc-8
+#g++-8
+cmake
+vim
+emacs
+tmux
+mpi-default-dev
+openmpi-bin
+openmpi-common

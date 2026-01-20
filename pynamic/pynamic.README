@@ -1,0 +1,265 @@
+#
+# FILE: pynamic.README
+#
+# Updates:
+#          Nov 05 2021 MPL: Add support for python3 when built with mpi4py
+#          Feb 26 2018 GLL: Allow parallel builds with -j option
+#                           updated config.guess (to work for ppc64le)
+#          Apr 29 2014 GLL: Renamed pynamic-bigexe to pynamic-bigexe-pyMPI
+#                           create pynamic-bigexe-sdb-pyMPI
+#                           added libmodulefinal with break_here function
+#                           code cleanup
+#          Apr 28 2014 GLL: Create system dynamic build (sdb) Pynamic
+#                           make pynamic-bigexe optional with -b flag
+#                           add support to build with xl compilers
+#                           code cleanup
+#          Jul 08 2013 GLL: Create mpi4py driver
+#                           tag version 1.3
+#          Jul 03 2013 GLL: Create pyMPI, pynamic-pyMPI, and pynamic-bigexe
+#                           get-symtab-sizes update to include base executable
+#                           tag version 1.2
+#          Nov 01 2012 GLL: Fixed build of vanilla pyMPI (via configure)
+#                           Cleaned up generation of pynamic_driver.py
+#                           Modified get-symtab-sizes to be more portable/robust
+#          Feb 16 2012 JCG: Hacked in generation of ~200MB pyMPI executable
+#          Jun 17 2011 GLL: Updated to pyMPI-2.6a1
+#          Mar 12 2007 DHA: change the suggested parameter
+#                           set to simulate an important multi-
+#                           physics application.
+#          Feb 16 2007 DHA:
+#                      GLL: Update HOWTOs for a set of new
+#                           functionality Greg Lee has added.
+#          Jan 30 2007 DHA: file created	
+#                           So far, Linux/x86 and
+#			    and Linux/x86-64 support
+#				
+#
+#
+
+		Table Of Contents
+		=================
+
+1. OVERVIEW
+
+2. METHOD OF SOLUTION
+
+3. HOW TO BUILD AND TEST
+   3.1 TO BUILD
+   3.2 TO TEST
+
+4. CONTACTS
+
+--------------------------------------------------------
+1. OVERVIEW
+  Pynamic is a benchmark designed to test a system's ability
+  to handle the Dynamic Linking and Loading requirements
+  of Python-based scientific applications. This benchmark
+  is developed to add a workload to our testing environment,
+  workload that represents a newly emerging class of DLL behaviors.
+  Pynamic builds on pyMPI, an MPI extension to Python.
+  Our augmentation includes a code generator that automatically
+  generates Python C-extension dummy codes and a glue layer
+  that facilitates linking and loading of the generated dynamic
+  modules into the resulting pyMPI. Pynamic is configurable, enabling
+  modeling the static properties of a specific code as described
+  in section 2 and 3. It does not, however, model any significant
+  computations of the target and hence it is not subjected to
+  the same level of control as the target code. In fact, HPC computer
+  vendors and tool developers will be encouraged to add it
+  to their testing suite once the code release is completed.
+  An ability to produce and run this benchmark is an effective
+  test for validating the capability of a compiler and
+  a linker/loader as well as an OS kernel and other runtime systems
+  of HPC computer vendors. In addition, the benchmark is designed
+  as a stress test case for code development tools. Though Python
+  has recently gained popularity in the HPC community, its heavy
+  DLL operations have hindered certain HPC code development
+  tools, notably parallel debuggers, from performing optimally.
+
+--------------------------------------------------------
+2. METHOD OF SOLUTION
+  The heart of Pynamic is a Python script that generates C files
+  and compiles them into shared object libraries.  Each library
+  contains a Python callable entry function as well as a number
+  of utility functions.  The user can also enable cross library
+  function calls with a command line argument. The Pynamic configure
+  script then links these libraries into the pynamic-pyMPI executable
+  and creates a pyMPI driver script to exercise the functions in the
+  generated libraries.  An additional mpi4py driver script is also
+  generated.  The user can specify the number of libraries
+  to create, as well as the average number of utility functions
+  per library, thus tailoring the benchmark to match some application
+  of interest. Pynamic introduces randomness in the number of functions
+  per module and the function signatures, thus ensuring some
+  heterogeneity of the libraries and functions.
+
+--------------------------------------------------------
+3. HOW TO BUILD AND TEST
+
+If you are building pynamic against a Python version 2, then pynamic will
+build against its included pympi implementation.  If you are building
+against Python version 3, then pynamic will use mpi4py, which must be loaded
+into an existing python3 environment.
+
+  3.1 To BUILD
+    % cd pynamic-pyMPI-2.6a1
+    % config_pynamic.py
+
+      USAGE:
+              config_pynamic.py <num_files> <avg_num_functions> [options] [-c <configure_options>]
+
+              <num_files> = total number of shared objects to produce
+              <avg_num_functions> = average number of functions per shared object
+
+      OPTIONS:
+
+      -c <configure_options>
+              pass the whitespace separated list of <configure_options> to configure
+              when building pyMPI.  All args after -c are sent to configure and not
+              interpreted by Pynamic
+
+      -b
+              generate the pynamic-bigexe-pyMPI and pynamic-bigexe-sdb-pyMPI executables
+
+      -d <call_depth>
+              maximum Pynamic call stack depth, default = 10
+
+      -e
+              enables external functions to call across modules
+
+      -i <python_include_dir>
+              add <python_include_dir> when compiling modules
+
+      -j <num_processes>
+              build in parallel with a max of <num_processes> processes
+
+      -n <length>
+              add <length> characters to the function names
+
+      -p
+              add a print statement to every generated function
+
+      -s <random_seed>
+              seed to the random number generator
+
+      -u <num_utility_mods> <avg_num_u_functions>
+              create <num_utility_mods> math library-like utility modules
+              with an average of <avg_num_u_functions> functions
+              NOTE: Number of python modules = <num_files> - <avg_num_u_functions>
+
+      --with-cc=<command>
+              use the C compiler located at <command> to build Pynamic modules.
+
+      --with-python=<command>
+              use the python located at <command> to build Pynamic modules.  Will
+              also be passed to the pyMPI configure script.
+
+      --with-mpi4py
+              Build against mpi4py rather than pyMPI.  This requires the backing
+              python to have the mpi4py module installed, and is default when
+              building pynamic with Python3+.
+
+
+    --------------------------------------------------------
+
+    Building a large number of shared objects may take a long time, in
+    which case it is advised to compiler those files in parallel using
+    the -j option, setting the value to the number of cores on the node.
+
+    Options and arguments are provided so that a tester can model certain
+    static properties of a Python-based scientific applications.
+    For example, if the tester wants to model a code that has
+    following properties (this was actually taken from an important
+    LLNL application),
+
+    + Number of shared libraries: ~900
+      - Python callable C-extension libraries: ~550
+      - Utility libraries (python "uncallable"): ~(900-550)=350
+
+    + Aggregate total of shared libraries: 2.3GB
+      - Aggregate text size of shared libraries: 619.4MB
+      - Aggregate data size of shared libraries: 17.3MB
+      - Aggregate debug section size of shared libraries: 1.4GB
+      - Aggregate symbol table size of shared libraries: 44.4MB
+      - Aggregate string table size of shared libraries: 196.1MB
+
+    a tester may use:
+      % config_pynamic.py 900 1250 -e -u 350 1250 -n 150
+
+    Please examine other options to model a target code better.
+
+    When a Pynamic build is complete, it prints out a summary
+    message about the static properties for each generated executable.
+
+    ************************************************
+    summary of pynamic-pyMPI executable and 914 shared libraries
+    Size of aggregate total of shared libraries: 2.1GB
+    Size of aggregate texts of shared libraries: 694.6MB
+    Size of aggregate data of shared libraries: 18.1MB
+    Size of aggregate debug sections of shared libraries: 1.1GB
+    Size of aggregate symbol tables of shared libraries: 45.6MB
+    Size of aggregate string table size of shared libraries: 311.2MB
+    ************************************************
+
+    When more details on static properties for individual
+    shared libraries are desired, please look into the full report:
+    "sharedlib_section_info_<exe_name>"
+
+    WITH PYTHON2 AND PYMPI:
+    
+    Pynamic creates 3 executables: 1. pyMPI, which is a vanilla pyMPI that
+    must dlopen imported modules; 2. pynamic-pyMPI, which is dynamically
+    linked to the generated modules and utility libraries; 3. pynamic-sdb-pyMPI,
+    which statically links in the generated modules and utility libraries.
+    An optional 4th pynamic-bigexe-pyMPI and 5th pynamic-bigexe-sdb-pyMPI
+    executable can be built with the -b option, which is equivalent to
+    pynamic-pyMPI and pynamic-sdb-pyMPI respectively, but with extra code to
+    make the base executable much larger (this may take a long time to compile).
+
+    WITH PYTHON3+ AND MPI4PY:
+
+    Pynamic creates one executable pynamic-mpi4py, which is dynamically
+    linked to the generated modules and utility libraries.  Optionally,
+    pynamic can be configured to create a pynamic-bigexe-mpi4py with the
+    -b option to configure.
+
+  3.1 TO TEST
+
+    WITH PYTHON2 AND PYMPI:
+
+    % python pynamic_driver.py `date +%s`
+
+      or in a batchxterm:
+
+    % srun pyMPI pynamic_driver.py `date +%s`
+
+    % srun pynamic-pyMPI pynamic_driver.py `date +%s`
+
+    % srun pynamic-sdb-pyMPI pynamic_driver.py `date +%s`
+
+    % srun pynamic-bigexe pynamic_driver.py `date +%s`
+
+    # note: Pynamic creates 3 executables:
+    #    pyMPI - a vanilla pyMPI build
+    #    pynamic-pyMPI - pyMPI with the generated .so's linked in
+    #    pynamic-sdb-pyMPI - pyMPI with the generated libraries statically linked in
+    # and 2 optional executables (with the -b flag)
+    #    pynamic-bigexe-pyMPI - a larger pyMPI with the generated .so's linked in
+    #    pynamic-bigexe-sdb-pyMPI - a larger pyMPI with the generated libraries staically linked in
+
+    WITH PYTHON3+ AND MPI4PY:
+
+    % srun pynamic-mpi4py `date +%s`
+
+    % srun pynamic-bigexe-mpi4py `date +%s`
+    
+--------------------------------------------------------
+4. CONTACTS
+   Greg Lee <lee218@llnl.gov>	
+   Dong Ahn <ahn1@llnl.gov>
+   Bronis de Supinski <desupinski1@llnl.gov>
+   John Gyllenhaal <gyllenhaal1@llnl.gov>
+
+
+
+

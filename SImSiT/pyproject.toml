@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "SImSiT"
+version = "0.2.0"
+description = "A python package designed to generate diverse and realistic satellite imaging scenarios."
+authors = [{ name = "LLNL SImSiT Team", email = "mcgill5@llnl.gov" }]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+dependencies = ["scipy", "numpy", "matplotlib", "scikit-learn", "galsim", "astropy", "astroplan", "llnl-ssapy", "pytest", "astroquery", "lsst-sphgeom", "pyyaml", "sphinx_rtd_theme", "spextra"]
+
+[project.urls]
+Homepage = "https://github.com/LLNL/SImSiT"
+Documentation = ""
+Repository = "https://github.com/LLNL/SImSiT"
+Issues = ""
+Changelog = ""
+
+[tool.hatch.build.targets.wheel]
+packages = ["satist"]

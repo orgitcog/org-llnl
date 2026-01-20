@@ -1,0 +1,9 @@
+.DS_Store
+build
+playground
+.vscode
+dump
+*.msh
+*.msh.mfem
+__pycache__
+dependencies

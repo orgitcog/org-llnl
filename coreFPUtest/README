@@ -1,0 +1,35 @@
+This test is designed to perform a specific calculation that has been shown to exhibit rounding differences on certain "bad" AMD Opteron chips.  These differences have been found on model: 65, model name: Dual-Core AMD Opteron(tm) Processor 8216 (information from /proc/cpuinfo).  When run with no options, this test will loop over a specific calculation using random inputs, which on bad CPUs will yield different rounding results for certain inputs. A seed to the random number generator can be specified with the --seed option, which defaults to 0, and the number of loop iterations can be set with the --iterations option, which defaults to 1 million.  The resulting output from the random number test can be piped into md5sum to compare runs across different CPUs.  This test is best run with the numactl utility and the --physcpubind option to bind the process to a specific core.  This test should also be run with the CPU running at full clock rate.
+
+Note the Makefile defaults to the PGI C compiler, as the rounding error appears to occur more consistently in early iterations (i.e., ~1 thousand) of the loop when using this compiler.  By contrast, when built with the GNU C compiler the rounding error sometimes appears in early iterations and sometimes doesn't show up until after a million iterations.  An executable built with the PGI compiler on a RHEL5-based system is included.  When running the test built with the GNU C compiler, it is advised that more than the default 1 million iterations be specified with the --iterations option.
+
+The "exampleoutput" directory contains three files with data gathered from a debugger using various configurations of the corefputest.  The file array_good.txt shows the calculated values with random inputs and can be compared to array_bad.txt, which was run with the same inputs on a "bad" CPU.  The file array_same_calc.txt shows the results when running with a fixed set of inputs (with the --fixed option) to the calculation on a "bad" CPU.  Note the fixed input set was generated based on one specific failing CPU and was designed as a further diagnosis rather than a definitive test, thus it is advisable to use the random input test to validate a CPU.  In fact, the fixed input set did not detect rounding error on another "bad" CPU that was caught with the random test.
+
+The test.sh script can be used to automate the testing process.  This script iterates over all CPUs on a node and stores the test results to a file.
+
+For any questions, please contact Greg Lee <lee218@llnl.gov>.
+
+###########
+# BAD CPU #
+###########
+atlas587@lee218:make
+pgcc -g -O0 corefputest.c -o corefputest
+
+atlas587@lee218:numactl --physcpubind=0 corefputest --iterations=1000000 --seed=0 --random | md5sum
+aacd7418e676827fac10c4959850083d  -
+
+atlas587@lee218:numactl --physcpubind=0 corefputest --iterations=1000000 --seed=0 --random | md5sum
+7fa7f60fcee4684705fa3bb0807f4d22  -
+
+
+############
+# GOOD CPU #
+############
+atlas0@lee218:make
+pgcc -g -O0 corefputest.c -o corefputest
+
+atlas0@lee218:numactl --physcpubind=0 corefputest --iterations=1000000 --seed=0 --random | md5sum
+c4d45706be3eb2eafe9329a5ab934eec  -
+
+atlas0@lee218:numactl --physcpubind=0 corefputest --iterations=1000000 --seed=0 --random | md5sum
+c4d45706be3eb2eafe9329a5ab934eec  -
+

@@ -1,0 +1,92 @@
+
+This file includes instructions and information on how to build and
+use the SAAMGE library.
+
+1. License and Disclaimer Statements
+
+SAAMGE: smoothed aggregation element based algebraic multigrid hierarchies
+        and solvers.
+
+Copyright (c) 2018, Lawrence Livermore National Security,
+LLC. Developed under the auspices of the U.S. Department of Energy by
+Lawrence Livermore National Laboratory under Contract
+No. DE-AC52-07NA27344. Written by Delyan Kalchev, Andrew T. Barker,
+and Panayot S. Vassilevski. Released under LLNL-CODE-667453.
+
+This file is part of SAAMGE. 
+
+Please also read the full notice of copyright and license in the file
+LICENSE.
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License (as
+published by the Free Software Foundation) version 2.1 dated February
+1999.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the IMPLIED WARRANTY OF
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the terms and
+conditions of the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this program; if not, see
+<http://www.gnu.org/licenses/>.
+
+2. Requirements
+
+The code almost entirely relies on standard language (C++)
+features. Additionally, a few POSIX functions are used but only for
+less important functionalities in the code. It is tested for:
+
+GCC 4.4.7 20120313 (http://gcc.gnu.org/)
+MFEM 3.1 (http://www.mfem.org)
+GLVIS 3.0 (http://www.glvis.org)
+METIS 5.0.2 (http://glaros.dtc.umn.edu/gkhome/views/metis)
+HYPRE 2.10.0b (https://computation-rnd.llnl.gov/linear_solvers/)
+
+The build system relies on UNIX-like properties of the environment. It
+is not tested if it would work properly when emulated environments
+like CYGWIN are used.
+
+The compiler must be invoked with parameters enabling Run-Time Type
+Information (RTTI). Usually this is enabled by default for GCC.
+
+2. Libraries, Tools, and Header Files Needed
+
+2.1 Libraries
+
+When linking SAAMGE against executables, you will need to link against
+all the libraries listed above, and in addition:
+
+BLAS (http://www.netlib.org/blas/, see also http://math-atlas.sourceforge.net/)
+LAPACK (http://www.netlib.org/lapack/)
+
+Additionally, due to the use of FORTRAN, the libraries GFORTRAN
+(http://gcc.gnu.org/fortran/) and/or G2C (http://www.kilmnj.com/g77/)
+may be required depending on the FORTRAN compiler. Currently, GFORTRAN
+is assumed and expected by default.
+
+We use CMake (www.cmake.org) for configuring and building SAAMGE.
+
+2.2 Tools
+
+If visualization is desired, GLVIS has to be running. It requires MFEM
+and also other libraries like GL, GLU, X11, PTHREAD, and possibly
+others. That is, some modifications of the makefile and extra work
+might be necessary depending on the circumstances. Once the executable
+is available it only needs to be executed in some terminal to have
+GLVIS up and running. Have in mind that GLVIS generates a lot of
+output so even if it is executed in background (unless the standard
+outputs are redirected) the terminal will still not be very usable.
+
+3. Building
+
+To configure and build, see the file 'BASE/amg/sample_config.sh'
+which gives an example of how to use CMake to create GNU
+makefiles. Then typing 'make' in the build directory shold
+build the library, tests, and examples.
+
+4. Output and Debug
+
+In 'BASE/amg/inc/config.hpp' settings for the debug and
+output levels can be found and modified as necessary.

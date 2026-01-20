@@ -1,0 +1,28 @@
+mesh:
+  filename: meshes/dd_mms.mesh
+
+    #domain-decomposition:
+    #  type: none
+
+discretization:
+  order: 2
+  full-discrete-galerkin: false
+
+visualization:
+  enabled: false
+  file_path:
+    prefix: dd_mms_output
+  visualize_error: true
+  unified_paraview: true
+
+manufactured_solution:
+  number_of_refinement: 4
+  amp1: 1.23
+  amp2: 3.13
+  constant: 1.11
+
+adv-diff:
+  peclet_number: 1.1
+
+stokes:
+  nu: 1.2

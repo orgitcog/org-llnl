@@ -1,0 +1,36 @@
+language: python
+
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"
+
+os:
+  - linux
+
+env:
+  - MPI=mpich
+  - MPI=openmpi
+
+addons:
+  apt:
+    packages:
+    - gfortran
+
+cache:
+  directories:
+  - openmpi
+  - mpich
+
+before_install:
+  - ./github/scripts/install-mpi.sh $MPI
+  - export PATH=$(pwd)/${MPI}/bin:${PATH}
+  - export LD_LIBRARY_PATH=$(pwd)/${MPI}/lib:${LD_LIBRARY_PATH}
+
+install:
+  - pip install -r requirements.txt
+  - python setup.py build
+  - python setup.py install
+
+script:
+  - cd tests && python run_tests.py 1

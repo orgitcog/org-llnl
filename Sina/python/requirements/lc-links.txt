@@ -1,0 +1,9 @@
+# For use on LLNL's OCF Network.
+ --index https://wci-repo.llnl.gov/repository/pypi-group/pypi
+ --index-url https://wci-repo.llnl.gov/repository/pypi-group/simple
+
+# Developers working locally on their laptops depend on the LC-managed wheels 
+# on the web, so include the LC wheelhouse URL.  This link also comes in handy 
+# when working on LC machines when the directory and URL are out-of-sync.
+ --trusted-host wci-repo.llnl.gov
+ --find-links https://wci-repo.llnl.gov/repository/pypi-group/simple
