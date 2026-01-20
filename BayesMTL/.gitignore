@@ -1,0 +1,4 @@
+data/simulated/* 
+methods/mtl/__pycache__
+methods/mtl/__pycache__/*
+*.pyc

@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: BinCFG
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Justin Allen
+    email: glorifiedstatistics@gmail.com
+    affiliation: Lawrence Livermore National Laboratory
+    orcid: 'https://orcid.org/0009-0006-3282-2676'
+repository-code: 'https://github.com/LLNL/BinCFG'
+abstract: >-
+  A Python tool designed to parse binary analyzer outputs to
+  produce call flow graphs (CFG), tokenize and normalize the
+  assembly lines within those CFGs, and convert that data
+  into ML-ready formats.
+keywords:
+  - Control Flow Graph
+  - Binary Analysis
+  - Static Analysis
+  - Assembly Normalization
+license: MIT
+version: 1.0.2
+date-released: '2024-05-31'

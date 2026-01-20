@@ -1,0 +1,16 @@
+__pycache__
+*.pkl
+ghidra/
+.mypy_cache
+venv
+.coverage*
+*.egg-info
+.pytest_cache
+.tox
+build
+*.sif
+tox_output.txt
+.ipynb_checkpoints
+.DS_Store
+*.lock
+.vscode

@@ -1,0 +1,14 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: AnalyticMGOpac
+message: LLNL-CODE-858992
+type: software
+authors:
+  - given-names: Thomas A.
+    family-names: Brunner
+    affiliation: Lawrence Livermore National Laboratory
+    orcid: 'https://orcid.org/0000-0002-0629-6397'
+repository-code: 'https://github.com/LLNL/AnalyticMGOpac'
+license: MIT

@@ -1,0 +1,11 @@
+numpy
+pytest
+pytest-cov
+tox
+tox-conda
+pandas
+mypy
+networkx
+atomicwrites
+sphinx
+sphinxcontrib-confluencebuilder

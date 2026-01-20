@@ -1,0 +1,155 @@
+/* Reset default browser styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container styles */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Tab buttons */
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  border: none;
+  outline: none;
+  background-color: #ddd;
+  color: #333;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.tab-button.active {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Tab content */
+
+.tab-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
+}
+
+/* Panels */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.panel {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.panel-header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.panel-header h3 {
+  margin: 0;
+}
+
+.panel-content {
+  margin-top: 10px;
+  height: 400px;
+  overflow: auto;
+}
+
+.panel-footer {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-footer p {
+  margin: 0;
+}
+
+/* action button */
+
+.action-buttons {
+  display: flex;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.action-button i {
+  margin-right: 5px;
+}
+
+/* SVG */
+
+.svg_container {
+  overflow:hidden;
+}
+.svg_container SVG {
+  width: 100%;
+  height: auto;
+}
+
+/* Collapsible */
+
+.collapsible {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.collapsible h3 {
+  margin: 0;
+  padding: 10px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.collapsible h3 i {
+  margin-right: 5px;
+}
+
+.collapsible .content {
+  display: none;
+  padding: 10px;
+}

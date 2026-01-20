@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: bayesmtl
+Version: 0.0.2
+Summary: Bayesian Multitask Learning framework
+Home-page: UNKNOWN
+Author: LLNL
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Topic : Multitask Learning
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# BayesMTL
+
+This project is an impelemntation of the Bayesian Multitask Learning (BayesMTL) from the paper Hierarchical Sparse Bayesian Multitask Model with Scalable Inference for Microbiome Analysis. 
+
+
+# Dependencies 
+The required library for this project includes:
+numpy, scipy
+
+# Running the experiment 
+python -m bayesmtl.test.run --menu config/experiment.json
+
