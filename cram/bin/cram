@@ -1,0 +1,60 @@
+#!/usr/bin/env python
+
+def add_prefix_to_path(pkg_name, *pkg_paths):
+    """Assuming the containing script is in $prefix/bin.  Given no args,
+       adds $prefix to PYTHONPATH.  Given a prefix-relative path, adds
+       $prefix/relative/path to PYTHONPATH."""
+    my_file = os.path.realpath(os.path.expanduser(__file__))
+    prefix = os.path.dirname(os.path.dirname(my_file))
+    if pkg_paths:
+        for path in pkg_paths:
+            pkg_path = os.path.join(prefix, path)
+            pkg_dir = os.path.join(pkg_path, pkg_name)
+            if os.path.isdir(pkg_dir):
+                sys.path.insert(0, pkg_path)
+    else:
+        sys.path.insert(0, prefix)
+
+
+def check_python_version(version_tuple):
+    """Die if the python version isn't newer than version_tuple"""
+    sys_ver = sys.version_info[:len(version_tuple)]
+    if not sys_ver >= version_tuple:
+        print "Cramrequires Python %s, but this is Python %s." % (
+            '.'.join(str(v) for v in version_tuple),
+            '.'.join(str(v) for v in sys_ver))
+        sys.exit(1)
+
+
+import sys
+import os
+check_python_version((2,7))
+add_prefix_to_path(
+    'cram', 'src/python',
+    'lib/python%d.%d/site-packages' % sys.version_info[:2])
+
+import cram
+import argparse
+
+# Command parsing
+parser = argparse.ArgumentParser(
+    description='cram: Crams small MPI jobs into a single large one.')
+
+# each command module implements a parser() function, to which we pass its
+# subparser for setup.
+subparsers = parser.add_subparsers(metavar='SUBCOMMAND', dest="subcommand")
+
+import cram.cmd
+for cmd in cram.cmd.commands:
+    module = cram.cmd.get_module(cmd)
+    subparser = subparsers.add_parser(cmd, help=module.description)
+    module.setup_parser(subparser)
+args = parser.parse_args()
+
+# Try to load the particular command asked for and run it
+subcommand = cram.cmd.get_command(args.subcommand)
+try:
+    subcommand(parser, args)
+except KeyboardInterrupt:
+    print "Got a keyboard interrupt from the user."
+    sys.exit(1)

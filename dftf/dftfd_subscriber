@@ -1,0 +1,390 @@
+#!/usr/bin/python3.9
+
+# Copyright 2024 Lawrence Livermore National Security, LLC and other
+# DFTF Project Developers. See the top-level LICENSE file for details.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+import argparse
+from collections import defaultdict
+from dataclasses import dataclass, InitVar
+import hostlist
+import itertools
+import logging
+import multiprocessing
+import redfish
+import redfish_utilities
+import signal
+import subprocess
+import sys
+import time
+from typing import Optional
+import yaml
+
+signal_caught = None
+logger = None
+
+@dataclass
+class Config:
+    config_file: str = '/etc/dftfd_subscriber.yaml'
+    refresh_interval: int = 3600
+    context_prefix: str = ''
+    purge_unrecognized: bool = False
+    max_workers: int = 400
+    log_level: str = 'warning'
+    redfish_username: Optional[str] = None
+    redfish_password: Optional[str] = None
+config = Config()
+
+DEBUG2=logging.DEBUG-1
+DEBUG3=logging.DEBUG-2
+logging.addLevelName(DEBUG2, 'DEBUG2')
+logging.addLevelName(DEBUG3, 'DEBUG3')
+
+verbosity_levels = {
+    'critical': logging.CRITICAL,
+    'error': logging.ERROR,
+    'warning': logging.WARNING,
+    'info': logging.INFO,
+    'debug': logging.DEBUG,
+    'debug2': DEBUG2,
+    'debug3': DEBUG3
+}
+
+def interrupt_handler(signum, frame):
+    global signal_caught
+    # We'll ignore overlapping signals
+    if signal_caught is None:
+        signal_caught = signum
+signal.signal(signal.SIGHUP, interrupt_handler)
+signal.signal(signal.SIGUSR1, interrupt_handler)
+signal.signal(signal.SIGUSR2, interrupt_handler)
+
+def getent_hosts(hostname_or_ip):
+    hosts = None
+    try:
+        hosts = subprocess.run(['getent', 'hosts', hostname_or_ip], stdout=subprocess.PIPE)
+        hosts = hosts.stdout.decode("utf-8").split()
+    except:
+        # FIXME, fake_ip_ line only for testing
+        #raise
+        return ['FIXME_'+hostname_or_ip]
+    return hosts
+
+def process_config_yaml(from_yaml):
+    subs = defaultdict(list)
+
+    try:
+        config.log_level = from_yaml['log_level']
+    except:
+        pass
+    try:
+        config.refresh_interval = from_yaml['refresh_interval']
+    except:
+        pass
+    try:
+        config.context_prefix = from_yaml['context_prefix']
+    except:
+        pass
+    try:
+        config.purge_unrecognized = from_yaml['purge_unrecognized']
+    except:
+        pass
+    try:
+        config.max_workers = from_yaml['max_workers']
+    except:
+        pass
+    try:
+        config.redfish_username = from_yaml['redfish_username']
+    except:
+        raise Exception(f'Missing "redfish_username" field')
+    try:
+        config.redfish_password = from_yaml['redfish_password']
+    except:
+        raise Exception(f'Missing "redfish_password" field')
+
+    for subscription in from_yaml['subscriptions']:
+        try:
+            val = subscription['servers']
+        except:
+            try:
+                val = from_yaml['servers']
+            except:
+                raise Exception(f'Missing "servers" field')
+        # 'servers' can be a string or list of strings
+        # each string may be a hostlist
+        if not isinstance(val, list):
+            val = [val]
+        servers = []
+        for v in val:
+            servers.extend(hostlist.string_to_list(v))
+
+        try:
+            destinations = subscription['destinations']
+        except:
+            try:
+                destinations = from_yaml['destinations']
+            except:
+                raise Exception(f'Missing "destinations" field')
+        try:
+            destinations_port = subscription['destinations_port']
+        except:
+            try:
+                destinations_port = from_yaml['destinations_port']
+            except:
+                raise Exception(f'Missing "destinations_port" field')
+        try:
+            destinations_use_ip = subscription['destinations_use_ip']
+        except:
+            try:
+                destinations_use_ip = from_yaml['destinations_use_ip']
+            except:
+                destinations_use_ip = False
+
+
+        destinations = hostlist.string_to_list(destinations)
+        if destinations_use_ip:
+            destinations = [getent_hosts(d)[0] for d in destinations]
+
+        for server, destination in zip(servers, itertools.cycle(destinations)):
+            try:
+                sub = dict(subscription['properties'])
+            except:
+                sub = dict()
+            sub['Destination'] = destination+':'+str(from_yaml['destinations_port'])+'/redfish'
+            if 'Context' not in sub:
+                try:
+                    sub['Context'] = config.context_prefix + subscription['context']
+                except:
+                    raise Exception(f'missing "context" or "Context" in config')
+            if 'Protocol' not in sub:
+                sub['Protocol'] = 'Redfish'
+            subs[server].append(sub)
+
+    return subs
+
+def field_match(field, requested, existing):
+    if field in requested and field in existing:
+        # if they are lists, sort them so we can test equivalence
+        if isinstance(existing[field], list):
+            existing[field] = sorted(existing[field])
+        if isinstance(requested[field], list):
+            requested[field] = sorted(requested[field])
+
+        if existing[field] == requested[field]:
+            return True
+        else:
+            return False
+    elif field not in requested and field not in existing:
+        # field not in either
+        return True
+    elif field not in requested:
+        # an empty list is considered equivalent to no entry
+        if isinstance(existing[field], list) and len(existing[field]) == 0:
+            return True
+        else:
+            return False
+    elif field not in existing:
+        # an empty list is considered equivalent to no entry
+        if isinstance(requested[field], list) and len(requested[field]) == 0:
+            return True
+        else:
+            return False
+    else:
+        # should never get here.
+        return True
+
+def partial_match(requested, existing):
+    if field_match('Context', requested, existing):
+        return True
+    return False
+
+known_subscription_properties = [
+    'Context',
+    'Destination',
+    'RegistryPrefixes',
+    'ExcludeRegistryPrefixes',
+    'MessageIds',
+    'ExcludeMessageIds',
+    'Protocol'
+]
+
+def full_match(requested, existing):
+    for prop in known_subscription_properties:
+        if not field_match(prop, requested, existing):
+            return False
+    return True
+
+def compare_subscriptions(requested_subs, existing_subs):
+    keep = []
+    remove = []
+    add = []
+    for requested in requested_subs:
+        found = False
+        for existing in existing_subs:
+            if partial_match(requested, existing):
+                found = True
+                if full_match(requested, existing):
+                    keep.append(existing)
+                else:
+                    remove.append(existing)
+                    add.append(requested)
+                existing_subs.remove(existing)
+                break
+        if not found:
+            add.append(requested)
+    for sub in existing_subs:
+        if (config.context_prefix and sub['Context'][:len(config.context_prefix)] == config.context_prefix) \
+           or config.purge_unrecognized:
+            remove.append(sub)
+        else:
+            keep.append(sub)
+
+    return keep, remove, add
+
+def remove_subscription(session, sub):
+    session.delete(sub['@odata.id'])
+
+def create_subscription(session, sub):
+    event_service = redfish_utilities.get_event_service(session)
+    if "Subscriptions" not in event_service:
+        raise Exception("Service does not contain a subsciption collection")
+    result = session.post(event_service["Subscriptions"]["@odata.id"],
+                          body = sub)
+
+# If subs is None or an emptry list, we will only potentially
+# remove subscriptions.
+def update_one_server(server, subs=None):
+    if subs is None:
+        subs = []
+    try:
+        session = redfish.redfish_client(base_url="https://"+server,
+                                         username=config.redfish_username,
+                                         password=config.redfish_password,
+                                         default_prefix="/redfish/v1",
+                                         timeout=10,
+                                         max_retry=1)
+        session.login(auth="session")
+    except:
+        logger.debug(f'failed to connect to redfish server "{server}"')
+        return
+    try:
+        existing = redfish_utilities.get_event_subscriptions(session)
+    except:
+        logger.debug(f'failed to get subscription list from redfish server "{server}"')
+        try:
+            session.logout()
+        except:
+            pass
+        return
+
+    try:
+        keep, remove, add = compare_subscriptions(subs, existing)
+    except Exception as inst:
+        logger.warning(f'Unexpected exception during compare_subscriptions for server {server}, {inst}')
+        try:
+            session.logout()
+        except:
+            pass
+        return
+
+    for sub in keep:
+        logger.debug(f'Server {server}, keeping sub Context={sub["Context"]}, Destination={sub["Destination"]}')
+    for sub in remove:
+        logger.debug(f'Server {server}, removing sub Context={sub["Context"]}, Destination={sub["Destination"]}')
+        try:
+            remove_subscription(session, sub)
+        except:
+            logger.warning(f'Unable to remove subscription {sub} from redfish server "{server}"')
+    for sub in add:
+        logger.debug(f'Server {server}, adding sub Context={sub["Context"]}, Destination={sub["Destination"]}')
+        try:
+            create_subscription(session, sub)
+        except:
+            logger.warning(f'Unable to create subscription {sub} on redfish server "{server}"')
+
+    try:
+        session.logout()
+    except:
+        logger.debug(f'Session logout failed from redfish server "{server}"')
+
+def update_all_servers(subs_map):
+    logger.info('Subscription update cycle beginning')
+    num_pool_processes = min(config.max_workers, len(subs_map))
+    with multiprocessing.Pool(num_pool_processes) as pool:
+        result = pool.starmap(update_one_server, subs_map.items())
+    logger.info('Subscription update cycle finished')
+
+def purge_all_servers(subs_map):
+    logger.warning('Subscription purge cycle beginning')
+    num_pool_processes = min(config.max_workers, len(subs_map))
+    with multiprocessing.Pool(num_pool_processes) as pool:
+        result = pool.map(update_one_server, subs_map.keys())
+    logger.warning('Subscription purge cycle finished')
+
+def read_config_file():
+    subs_map = None
+    try:
+        with open(config.config_file, 'r') as cf:
+            from_yaml = yaml.safe_load(cf)
+            subs_map = process_config_yaml(from_yaml)
+    except Exception as inst:
+        logger.error(f'Unable to read config file {config.config_file}, {inst}')
+        sys.exit(1)
+    return subs_map
+
+def initialize_configuration():
+    global config
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--config",
+                        help="configuration file",
+                        metavar="FILE",
+                        default=argparse.SUPPRESS)
+    parser.add_argument("-v", "--verbosity",
+                        choices=verbosity_levels.keys(),
+                        default=argparse.SUPPRESS)
+    args = parser.parse_args()
+    if 'config' in args:
+        config.config_file = args.config
+    subs_map = read_config_file()
+    if  'verbosity' in args:
+        config.log_level = args.verbosity
+
+    return subs_map
+
+def main():
+    global signal_caught
+    global logger
+
+    logger = logging.getLogger(__name__)
+    subs_map = initialize_configuration()
+    logger = multiprocessing.log_to_stderr(level=verbosity_levels[config.log_level])
+
+    last_update = 0
+    while True:
+        time.sleep(0.2)
+        if signal_caught is not None:
+            sig = signal_caught
+            signal_caught = None # reset to allow the next signal
+            if sig == signal.SIGHUP \
+               or sig == signal.SIGUSR1:
+                last_update = time.time()
+                logger.info(f'Got signal {sig}')
+                subs_map = read_config_file()
+                update_all_servers(subs_map)
+            elif sig == signal.SIGUSR2:
+                logger.info(f'Got signal {sig}')
+                purge_all_servers(subs_map)
+                sys.exit(0)
+            else:
+                raise Exception(f'unexpected signal {sig}')
+        else:
+            now = time.time()
+            if (now - last_update) > config.refresh_interval:
+                last_update = now
+                update_all_servers(subs_map)
+            pass
+
+if __name__ == '__main__':
+    main()

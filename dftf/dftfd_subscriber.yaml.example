@@ -1,0 +1,28 @@
+log_level: debug
+context_prefix: "dftfsub_"
+purge_unrecognized: True
+refresh_interval: 3600
+redfish_username: username
+redfish_password: password
+destinations: barnode
+destinations_port: 9127
+# Convert destinations hostnames to IPs.
+destinations_use_ip: yes
+subscriptions:
+  - servers: foo-cmm[1-2],foo-sssw[2-9],pfoo[201-202],foo-jbod[201-202],pfoo[1001-1018]
+    context: all_events
+  - servers:
+    - foo-cmm[1-2]
+    - foo-sssw[2-9]
+    - pfoo[201-202]
+    - foo-jbod[201-202]
+    - pfoo[1001-1018]
+    context: cray_telemetry
+    properties:
+      RegistryPrefixes:
+      - CrayTelemetry
+  - servers: foo-cmm[1,2]
+    context: cdu_alarms
+    properties:
+      RegistryPrefixes:
+      - HPE_CDUAlarms

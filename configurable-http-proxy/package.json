@@ -1,0 +1,50 @@
+{
+  "version": "3.1.2-dev",
+  "name": "configurable-http-proxy",
+  "description": "A configurable-on-the-fly HTTP Proxy",
+  "author": "Jupyter Developers",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jupyterhub/configurable-http-proxy.git"
+  },
+  "dependencies": {
+    "commander": "~2.15.0",
+    "http-proxy": "~1.17.0",
+    "lynx": "^0.2.0",
+    "strftime": "~0.10.0",
+    "winston": "~2.4.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.0.0",
+    "jshint": "^2.9.2",
+    "nyc": "^11.0.2",
+    "prettier": "^1.4.4",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.4",
+    "ws": "^5.0.0"
+  },
+  "engines": {
+    "node": ">= 4.0"
+  },
+  "engineStrict": true,
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "lib/configproxy.js",
+    "lib/store.js",
+    "lib/trie.js",
+    "lib/error/*.html",
+    "bin/configurable-http-proxy"
+  ],
+  "bin": {
+    "configurable-http-proxy": "bin/configurable-http-proxy"
+  },
+  "scripts": {
+    "lint": "jshint bin/ lib/ test/",
+    "fmt": "prettier --write *.js bin/* lib/*.js test/*.js --trailing-comma es5 --print-width 100",
+    "test": "nyc jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
+    "coverage-html": "nyc report --reporter=html",
+    "codecov": "nyc report --reporter=lcov && codecov"
+  }
+}
