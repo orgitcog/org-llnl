@@ -1,0 +1,155 @@
+#!/bin/bash
+
+# The script compacts trace files by process ID and splits into files with the specified number of lines per file.
+
+compressed=0
+input_dir=$PWD
+num_lines=10000
+output_dir=$PWD/output
+output_prefix=app
+override=0
+log_file="dftracer_compact_by_pid.log"
+
+function log {
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$log_file"
+}
+
+function usage {
+  echo "usage: dftracer_compact_by_pid [-fcv] [-d input_directory] [-o output_directory] [-l num_lines] [-p output_prefix]"
+  echo "  -f                      override output directory"
+  echo "  -c                      compress output file"
+  echo "  -v                      enable verbose mode"
+  echo "  -d input_directory      specify input directories (must contain .pfw or .pfw.gz files)"
+  echo "  -o output_directory     specify output directory"
+  echo "  -l num_lines            lines per output file"
+  echo "  -p output_prefix        prefix for output files"
+  exit 1
+}
+
+# Parse command-line arguments
+while getopts ':cvfd:o:l:p:h' opt; do
+  case "$opt" in
+  d)
+    input_dir="${OPTARG}"
+    ;;
+  o)
+    output_dir="${OPTARG}"
+    ;;
+  l)
+    num_lines="${OPTARG}"
+    ;;
+  p)
+    output_prefix="${OPTARG}"
+    ;;
+  f)
+    override=1
+    ;;
+  v)
+    set -x
+    ;;
+  c)
+    compressed=1
+    ;;
+  h)
+    usage
+    ;;
+  :)
+    echo "Option $OPTARG requires an argument."
+    usage
+    ;;
+  ?)
+    echo "Invalid command option."
+    usage
+    ;;
+  esac
+done
+
+input_dir=$(realpath "$input_dir")
+output_dir=$(realpath "$output_dir")
+
+shift "$(($OPTIND - 1))"
+
+# Initialize log file
+> "$log_file"
+log "Script started."
+
+# Check and prepare the output directory
+if [ ${override} -eq 0 ]; then
+  if [ -d "${output_dir}" ] && [ -n "$(ls -A "${output_dir}")" ]; then
+    log "Error: Output directory ${output_dir} is not empty. Use -f to override."
+    exit 1
+  fi
+fi
+
+log "Setting up output directory."
+rm -rf "${output_dir}"
+mkdir -p "${output_dir}"
+
+# Check for input traces
+log "Searching for input trace files in ${input_dir}."
+trace_files=$(find "$input_dir" -maxdepth 1 -type f \( -name "*.pfw" -o -name "*.gz" \))
+if [ -z "$trace_files" ]; then
+  log "Error: No input traces found in '$input_dir'."
+  exit 1
+fi
+
+# Count number of trace files
+num_files=$(echo "$trace_files" | wc -l)
+log "Found $num_files trace files. Now grouping them by process ID."
+
+# Process .pfw and .pfw.gz files by extracting process ID and grouping data
+for f in $trace_files; do
+  [[ -e "$f" ]] || break
+  file_name=$(basename "$f")
+  file_name="${file_name%.gz}"
+  file_name="${file_name%.pfw}"
+  IFS='-' read -r -a parts <<<"$file_name"
+  if [[ ${#parts[@]} -lt 3 ]]; then
+    log "Error: Filename $f is missing fields to extract process ID."
+    continue
+  fi
+  pid=${parts[-2]}
+  if ! [[ $pid =~ ^[0-9]+$ ]]; then
+    log "Error: Component parts[2] of $f is not a numeric PID: $pid."
+    continue
+  fi
+  if [[ -r "$f" ]]; then
+    log "Processing file $f for PID $pid."
+    if [[ $f == *.gz ]]; then
+      gzip -dc "$f" | grep -v "^\[" | grep -v "^\]" | jq -c '.' >>"${output_dir}/temp_${pid}"
+    else
+      grep -v "^\[" "$f" | grep -v "^\]" | jq -c '.' >>"${output_dir}/temp_${pid}"
+    fi
+  fi
+done
+
+cd "$output_dir" || return
+
+# Split each temp_${pid} file into chunks and format as valid JSON arrays
+for temp_file in temp_*; do
+  if [[ ! -f "$temp_file" ]]; then
+    continue
+  fi
+  pid=$(basename "$temp_file" | cut -d '_' -f 2)
+  log "Processing PID $pid with $num_lines lines per file."
+  split -l "$num_lines" --numeric-suffixes=1 --additional-suffix=.pfw "${temp_file}" "${output_prefix}-${pid}-"
+  for file in "${output_prefix}-${pid}-"*.pfw; do
+    if [[ -f "$file" ]]; then
+      echo "[" >"${file}_tmp"
+      cat "$file" >>"${file}_tmp"
+      echo "]" >>"${file}_tmp"
+      mv "${file}_tmp" "$file"
+    fi
+  done
+  rm "$temp_file"
+done
+
+# Compress files if required
+if [ $compressed -eq 1 ]; then
+  log "Compressing files."
+  gzip "${output_prefix}"-*.pfw
+fi
+
+total_files=$(find "${output_dir}" -type f | wc -l)
+log "Done. Total files created: $total_files."
+log "Script completed."

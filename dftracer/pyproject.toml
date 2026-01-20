@@ -1,0 +1,137 @@
+[build-system]
+requires = [
+    "setuptools>=64", 
+    "setuptools-scm>=8",
+    "wheel",
+    "ninja",
+    "cmake>=3.12",
+    "pybind11"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dftracer"
+description = "I/O profiler for deep learning python apps. Specifically for dlio_benchmark."
+readme = "README.md"
+requires-python = '>=3.7'
+
+authors = [
+  { name = "Hariharan Devarajan (Hari)", email = "hariharandev1@llnl.gov" }
+]
+keywords = [
+  "profiler", 
+  "deep learning", 
+  "I/O", 
+  "benchmark", 
+  "NPZ", 
+  "pytorch benchmark", 
+  "tensorflow benchmark",
+]
+classifiers = [
+  # How mature is this project? Common values are
+  #   3 - Alpha
+  #   4 - Beta
+  #   5 - Production/Stable
+  "Development Status :: 3 - Alpha",
+  # Indicate who your project is intended for
+  "Intended Audience :: Science/Research",
+  "Topic :: Software Development :: Build Tools",
+  # Pick your license as you wish
+  "License :: OSI Approved :: MIT License",
+  # Specify the Python versions you support here. In particular, ensure
+  # that you indicate you support Python 3. These classifiers are *not*
+  # checked by 'pip install'. See instead 'python_requires' below.
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3 :: Only",
+]
+dynamic = ["version"]
+dependencies = [
+  "pybind11", 
+  "setuptools>=64", 
+  "setuptools-scm>=8",
+  "dftracer-utils>=0.0.5",
+  "pydftracer>=2.0.2"
+]
+
+[project.urls]
+Homepage = "https://github.com/LLNL/dftracer"
+Repository = "https://github.com/LLNL/dftracer"
+"Bug Tracker" = "https://github.com/LLNL/dftracer/issues"
+Documentation = "https://dftracer.readthedocs.io/en/latest/"
+
+[project.optional-dependencies]
+test = ['pytest>=6.0']
+dfanalyzer = [
+    'dftracer-analyzer>=0.0.5'
+]
+dfanalyzer_old = [
+    'seaborn>=0.13.2', 
+    'bokeh>=2.4.2', 
+    'pybind11', 
+    'pandas>=2.0.3', 
+    'dask>=2023.5.0', 
+    'distributed', 
+    'numpy>=1.24.3', 
+    'pyarrow>=12.0.1', 
+    'rich>=13.6.0', 
+    'python-intervals>=1.10.0.post1', 
+    'matplotlib>=3.7.3'
+]
+dynamo = [
+    'torch>=2.5.1'
+]
+
+[tool]
+files = "setup.py"
+python_version = "3.7"
+strict = true
+show_error_codes = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+warn_unreachable = true
+
+[[tool.overrides]]
+module = ["ninja"]
+ignore_missing_imports = true
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
+filterwarnings = ["error"]
+testpaths = ["tests"]
+
+[tool.cibuildwheel]
+test-command = "pytest {project}/tests"
+test-extras = ["test"]
+test-skip = ["*universal2:arm64"]
+# Setuptools bug causes collision between pypy and cpython artifacts
+before-build = "rm -rf {project}/build"
+
+[tool.ruff]
+extend-select = [
+  "B",    # flake8-bugbear
+  "B904",
+  "I",    # isort
+  "PGH",  # pygrep-hooks
+  "RUF",  # Ruff-specific
+  "UP",   # pyupgrade
+]
+extend-ignore = [
+  "E501",   # Line too long
+]
+target-version = "py38"
+
+[tool.setuptools]
+script-files = [
+  "script/git_sparse_clone_interactive",
+  "script/git_sparse_push_interactive",
+]
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+write_to = "python/dftracer/_version.py"
+

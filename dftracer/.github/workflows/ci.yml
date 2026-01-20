@@ -1,0 +1,217 @@
+name: Build and Test
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+
+jobs:
+  build-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Test one GCC version with multiple Python versions
+          - python_version: "3.9"
+            gcc_version: "11"
+            compiler: "gcc"
+          - python_version: "3.10"
+            gcc_version: "11"
+            compiler: "gcc"
+          - python_version: "3.11"
+            gcc_version: "11"
+            compiler: "gcc"
+          - python_version: "3.12"
+            gcc_version: "11"
+            compiler: "gcc"
+          # Test one Python version with multiple GCC versions
+          - python_version: "3.11"
+            gcc_version: "9"
+            compiler: "gcc"
+          - python_version: "3.11"
+            gcc_version: "10"
+            compiler: "gcc"
+          - python_version: "3.11"
+            gcc_version: "12"
+            compiler: "gcc"
+          - python_version: "3.11"
+            gcc_version: "13"
+            compiler: "gcc"
+
+    name: Python-${{ matrix.python_version }}-GCC-${{ matrix.gcc_version }}
+    runs-on: ubuntu-22.04
+
+    env:
+      CC: gcc-${{ matrix.gcc_version }}
+      CXX: g++-${{ matrix.gcc_version }}
+      INSTALL_MODE: pip
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python_version }}
+
+      - name: Free up disk space
+        run: |
+          echo "Available disk space before cleanup:"
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          echo "Available disk space after cleanup:"
+          df -h
+
+      - name: Install system dependencies (similar to Dockerfile.dev)
+        run: |
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            cmake \
+            ninja-build \
+            git \
+            wget \
+            curl \
+            ca-certificates \
+            pkg-config \
+            libyaml-cpp-dev \
+            hwloc \
+            libhwloc-dev \
+            mpich \
+            libmpich-dev \
+            python3-dev \
+            python3-venv \
+            software-properties-common \
+            jq \
+            gcovr
+
+          # Add Ubuntu toolchain PPA and install specific GCC version
+          sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+          sudo apt-get update
+          sudo apt-get install -y gcc-${{ matrix.gcc_version }} g++-${{ matrix.gcc_version }}
+
+          # Set as default
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${{ matrix.gcc_version }} 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-${{ matrix.gcc_version }} 100
+
+      - name: Create Python virtual environment
+        run: |
+          # For act (local testing), create venv in /tmp to avoid bind mount issues
+          if [ -n "$ACT" ]; then
+            VENV_DIR=/tmp/venv
+            python -m venv $VENV_DIR
+            echo "VENV_PATH=/tmp/venv" >> $GITHUB_ENV
+          else
+            VENV_DIR=venv
+            python -m venv $VENV_DIR
+            echo "VENV_PATH=$PWD/venv" >> $GITHUB_ENV
+          fi
+          source $VENV_DIR/bin/activate
+          python -m pip install --upgrade pip setuptools wheel
+          pip install pybind11 ninja cmake>=3.12 setuptools>=64 setuptools-scm>=8
+          pip install pytest>=6.0 numpy>=1.24.3 pandas>=2.0.3
+
+      - name: Build and test with pip install mode
+        run: |
+          source ${VENV_PATH:-venv}/bin/activate
+          ./autobuild.sh --enable-tests --enable-coverage
+          pip install -r test/py/requirements.txt
+
+      - name: Run unit tests (non-coverage builds)
+        if: github.event_name != 'pull_request' || matrix.python_version != '3.11' || matrix.gcc_version != '11'
+        run: |
+          source ${VENV_PATH:-venv}/bin/activate
+          DFTRACER_DIR=$(realpath $(find build -type d -name "dftracer.dftracer" | head -n 1))
+          echo "DFTRACER_DIR=$DFTRACER_DIR"
+          cd "$DFTRACER_DIR"
+          ctest -R unit_test
+
+      - name: Generate coverage data
+        if: github.event_name == 'pull_request' && matrix.python_version == '3.11' && matrix.gcc_version == '11'
+        run: |
+          source ${VENV_PATH:-venv}/bin/activate
+          DFTRACER_DIR=$(realpath $(find build -type d -name "dftracer.dftracer" | head -n 1))
+          echo "DFTRACER_DIR=$DFTRACER_DIR"
+          echo "COVERAGE_DIR=$DFTRACER_DIR/coverage" >> $GITHUB_ENV
+          BUILD_DIR=$DFTRACER_DIR SOURCE_DIR=$PWD ./script/coverage_after_autobuild.sh --clean
+
+          # Find the base coverage file
+          COVERAGE_FILE="$DFTRACER_DIR/coverage/coveralls.json"
+          if [ ! -f "$COVERAGE_FILE" ]; then
+            echo "✗ Coverage file not found at $COVERAGE_FILE"
+            exit 1
+          fi
+
+          # Add GitHub metadata to the coverage file
+          echo "Adding GitHub metadata to coverage file..."
+          cat "$COVERAGE_FILE" | jq \
+            --arg repo "${{ github.repository }}" \
+            --arg sha "${{ github.sha }}" \
+            --arg branch "${{ github.ref_name }}" \
+            --arg pr_number "${{ github.event.pull_request.number }}" \
+            --arg service_job_id "${{ github.run_id }}" \
+            --arg service_number "${{ github.run_number }}" \
+            '. + {
+              service_name: "github-actions",
+              service_job_id: $service_job_id,
+              service_number: $service_number,
+              service_pull_request: $pr_number,
+              repo_name: $repo,
+              git: {
+                head: {
+                  id: $sha
+                },
+                branch: $branch
+              }
+            }' > "${COVERAGE_FILE}.final"
+
+          mv "${COVERAGE_FILE}.final" "$COVERAGE_FILE"
+          echo "COVERAGE_FILE=$COVERAGE_FILE" >> $GITHUB_ENV
+          echo "✓ Coverage file prepared: $COVERAGE_FILE"
+
+          # Show metadata summary
+          echo "Coverage metadata:"
+          cat "$COVERAGE_FILE" | jq 'del(.source_files) | {service_name, repo_name, git, service_pull_request}'
+
+      - name: Upload Coverage to Coveralls
+        if: github.event_name == 'pull_request' && matrix.python_version == '3.11' && matrix.gcc_version == '11'
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coveralls-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          file: ${{ env.COVERAGE_FILE }}
+          format: coveralls
+          flag-name: cpp-coverage
+          parallel: false
+
+      - name: Upload Coverage Artifacts
+        if: github.event_name == 'pull_request' && matrix.python_version == '3.11' && matrix.gcc_version == '11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpp-coverage-reports
+          path: ${{ env.COVERAGE_DIR }}
+          retention-days: 7
+
+      - name: C/C++ Coverage Summary
+        if: github.event_name == 'pull_request' && matrix.python_version == '3.11' && matrix.gcc_version == '11'
+        run: |
+          SOURCE_DIR="$PWD"
+          cd "$(dirname ${{ env.COVERAGE_FILE }})"
+          echo "## C/C++ Coverage Summary" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          gcovr -r "$SOURCE_DIR" . \
+            --filter "$SOURCE_DIR/src/" \
+            --filter "$SOURCE_DIR/include/" \
+            --exclude "$SOURCE_DIR/test/" \
+            --exclude "$SOURCE_DIR/examples/" \
+            --exclude "$SOURCE_DIR/dependency/" \
+            --exclude "$SOURCE_DIR/build/" \
+            --exclude "$SOURCE_DIR/install/" \
+            --exclude "$SOURCE_DIR/python/" \
+            --exclude-unreachable-branches \
+            --exclude-throw-branches >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
