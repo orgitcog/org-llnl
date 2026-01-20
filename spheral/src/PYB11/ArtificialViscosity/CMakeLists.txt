@@ -1,0 +1,1 @@
+spheral_add_pybind11_library(ArtificialViscosity SPHERAL_MODULE_LIST)

@@ -1,0 +1,19 @@
+copyright:
+- Copyright Shroud Project Developers. See LICENSE file for details.
+-
+- "SPDX-License-Identifier: (BSD-3-Clause)"
+-
+
+# Wrap some C routine which do not require any c wrappers.
+# Only an INTERFACE block is created in the Fortran
+
+library: Interface
+cxx_header: interface.h
+language: c
+
+options:
+  debug: True
+
+declarations:
+- decl: void Function1()
+- decl: double Function2(double arg1, int arg2)

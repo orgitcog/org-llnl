@@ -1,0 +1,10 @@
+copyright:
+- Copyright Shroud Project Developers. See LICENSE file for details.
+-
+- "SPDX-License-Identifier: (BSD-3-Clause)"
+-
+#
+#  Try totally (mostly) empty file to check defaults
+#
+options:
+  literalinclude: True

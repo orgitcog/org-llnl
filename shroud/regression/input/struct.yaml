@@ -1,0 +1,248 @@
+copyright:
+- Copyright Shroud Project Developers. See LICENSE file for details.
+-
+- "SPDX-License-Identifier: (BSD-3-Clause)"
+-
+
+# Wrap a C library with structs
+# This file is tested as language=c and c++.
+# Only C features are tested here.
+# cxxlibrary.yaml has additional struct tests with C++ specific features.
+
+# Several tests have a 'char *outbuf+intent(out)' argument
+# which will force a C bufferify wrapper to be created.
+# The size of this buffer is controlled by lenoutbuf.
+# This feature is helpful for the C tests since a C wrapper is not required
+# for each function since we do not need to deal with name mangling
+# like in C++.
+
+library: struct
+cxx_header: struct.h
+
+language: c
+
+options:
+  debug: True
+  wrap_python: True
+  PY_write_helper_in_util: True
+
+format:
+  # Avoid conflict with builtin module
+  PY_module_name: cstruct
+  # Remove these methods to make documentation less cluttered.
+  F_name_associated:
+  F_name_instance_get:
+  F_name_instance_set:
+
+declarations:
+
+- decl: struct Cstruct1 {
+          int ifield;
+          double dfield;
+        };
+  options:
+    literalinclude: True
+
+- decl: int passStructByValue(Cstruct1 arg)
+  options:
+    literalinclude: True
+
+- decl: int passStruct1(const Cstruct1 *arg)
+  options:
+    literalinclude: True
+
+- decl: int passStruct2(const Cstruct1 *s1, char *outbuf+intent(out)+charlen(LENOUTBUF))
+  doxygen:
+    description: |
+      Pass name argument which will build a bufferify function.
+
+- decl: int acceptStructInPtr(Cstruct1 *arg +intent(in))
+
+- decl: void acceptStructOutPtr(Cstruct1 *arg +intent(out), int i, double d)
+  doxygen:
+    description: |
+      Pass name argument which will build a bufferify function.
+
+- decl: void acceptStructInOutPtr(Cstruct1 *arg +intent(inout))
+
+######################################################################
+- decl: Cstruct1 returnStructByValue(int i, double d);
+
+- decl: Cstruct1 *returnStructPtr1(int i, double d)
+  doxygen:
+    brief: Return a pointer to a struct
+    description: |
+      Does not generate a bufferify C wrapper.
+
+- decl: Cstruct1 *returnStructPtr2(int i, double d,
+            char *outbuf+intent(out)+charlen(LENOUTBUF))
+  doxygen:
+    brief: Return a pointer to a struct
+    description: |
+      Generates a bufferify C wrapper function.
+
+- decl: Cstruct1 *returnStructPtrArray() +dimension(2)
+  doxygen:
+    brief: Return a pointer to an array of structs
+    # XXX - struct-class is not creating an array
+
+######################################################################
+#- decl: int callback1(Cstruct1 *arg, int (*work)(Cstruct1 *arg))
+#  doxygen:
+#    brief: Pass struct as function pointer argument
+#    description: |
+#      The arguments to the function pointer include a pointer to struct.
+#      The struct in C and C++ have different names.
+#      Must cast function pointer.
+
+######################################################################
+- decl: struct Cstruct_ptr
+  declarations:
+  - decl: char *cfield;
+  - decl: const double *const_dvalue;
+        # dvalue is implied +readonly because of const.
+
+######################################################################
+- decl: struct Cstruct_list {
+          int nitems;
+          int *ivalue     +dimension(nitems+nitems);
+          double *dvalue  +dimension(nitems*TWO);
+          char **svalue   +dimension(nitems);
+        };
+  options:
+    PY_array_arg: list
+
+- decl: Cstruct_list *get_global_struct_list();
+#- decl: Cstruct_list *get_global_struct_list(void);
+
+######################################################################
+- decl: struct Cstruct_numpy {
+          int nitems;
+          int *ivalue     +dimension(nitems);
+          double *dvalue  +dimension(nitems);
+        };
+  options:
+    F_struct_getter_setter: False
+    PY_array_arg: numpy
+
+######################################################################
+- decl: struct Arrays1 {
+          char name[20];
+          int count[10];
+        };
+  options:
+    PY_array_arg: numpy
+
+######################################################################
+#  test struct-as-class
+
+# start Cstruct_as_class
+- decl: struct Cstruct_as_class {
+          int x1, y1;
+        };
+  options:
+    wrap_struct_as: class
+# end Cstruct_as_class
+    wrap_python: False  # tested in struct-py.yaml
+    literalinclude: True
+  doxygen:
+    description: |
+      Treat a struct as a class, i.e. create a shadow derived type.
+
+# start Create_Cstruct_as_class
+# The option.class_ctor defaults +owner(caller)
+- decl: Cstruct_as_class *Create_Cstruct_as_class(void)
+  options:
+    class_ctor: Cstruct_as_class
+# end Create_Cstruct_as_class
+    wrap_python: False
+    literalinclude: True
+- decl: Cstruct_as_class *Create_Cstruct_as_class_args(int x, int y)
+  options:
+    wrap_python: False
+    class_ctor: Cstruct_as_class
+
+
+#####
+#   C_shadow_result: False
+# Return a pointer to static variable.
+# Defaults to +owner(library)
+
+- decl: Cstruct_as_class *Return_Cstruct_as_class(void)
+  options:
+    C_shadow_result: False
+    wrap_python: False
+- decl: Cstruct_as_class *Return_Cstruct_as_class_args(int x, int y)
+  options:
+    C_shadow_result: False
+    wrap_python: False
+
+#####
+
+# start Cstruct_as_class_sum
+- decl: int Cstruct_as_class_sum(const Cstruct_as_class *point +pass)
+  options:
+    wrap_python: False
+    class_method: Cstruct_as_class
+  format:
+    F_name_function: sum
+# end Cstruct_as_class_sum
+
+
+- decl: struct Cstruct_as_subclass {
+          int x1;
+          int y1;
+          int z1;
+        };
+  options:
+    wrap_struct_as: class
+    class_baseclass: Cstruct_as_class
+    wrap_python: False
+    literalinclude: True
+  doxygen:
+    description: |
+      Treat a struct as a subclass of another struct
+
+- decl: Cstruct_as_subclass *Create_Cstruct_as_subclass_args(int x, int y, int z)
+  options:
+    wrap_python: False
+    class_ctor: Cstruct_as_subclass
+
+- decl: Cstruct_as_subclass *Return_Cstruct_as_subclass_args(int x, int y, int z)
+  options:
+    C_shadow_result: False
+    wrap_python: False
+
+######################################################################
+# char * members in struct
+# Create a f_name_instance_set to aid in testing.
+
+- decl: struct Cstruct_as_class2
+  options:
+    wrap_struct_as: class
+    wrap_python: False
+  format:
+    F_name_instance_set: set_instance
+  declarations:
+  - decl: char *name
+  - decl: char *name_ptr  +deref(pointer)
+  - decl: char *name_copy +deref(copy)    +readonly
+
+
+######################################################################
+# recursive struct
+# This wraps both a C and C++ library, so must use 'struct s_nested'
+
+- decl: struct s_nested
+  options:
+    wrap_python: False
+  declarations:
+  - decl: int sublevels
+#  - decl: struct s_nested *parent
+#  - decl: struct s_nested **child
+
+######################################################################
+splicer_code:
+  f:
+    module_top:
+    -  "integer, parameter :: MAXNAME = 20"

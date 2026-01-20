@@ -1,0 +1,65 @@
+{
+  "name": "axom",
+  "version-string": "develop",
+  "homepage": "https://github.com/llnl/axom",
+  "description": "Host-config generator for Axom TPLs",
+  "dependencies": ["blt"],
+  "default-features": [
+    "conduit",
+    "lua",
+    "mfem",
+    "openmp",
+    "opencascade",
+    "raja"
+  ],
+  "features": {
+    "conduit": {
+      "description": "conduit functionality for axom",
+      "dependencies": ["conduit"]
+    },
+    "lua": {
+      "description": "lua functionality for axom",
+      "dependencies": ["lua"]
+    },
+    "mfem": {
+      "description": "mfem functionality for axom",
+      "dependencies" : ["mfem"]
+    },
+    "opencascade": {
+      "description": "opencascade functionality for axom",
+      "dependencies": [
+        {
+          "name": "opencascade",
+          "default-features": false,
+          "features": []
+        }
+      ]
+    },
+    "raja": {
+      "description": "raja functionality for axom",
+      "dependencies": ["raja"]
+    },
+    "umpire": {
+      "description": "umpire functionality for axom",
+      "dependencies": ["umpire"]
+    },
+    "openmp": {
+      "description": "openmp functionality for axom",
+      "dependencies": [
+        {
+          "name": "raja",
+          "features": [
+            "openmp"
+          ]
+        },
+        {
+          "name": "umpire",
+          "features": [
+            "openmp"
+          ]
+        }
+      ]
+    }
+  },
+  "supports": "!uwp"
+}

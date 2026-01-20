@@ -1,0 +1,18 @@
+default:
+  id_tokens:
+    SITE_ID_TOKEN:
+      aud: https://izlc.llnl.gov/gitlab
+
+stages:
+  - build
+
+build lmt:
+  stage: build
+  variables:
+    FF_ENABLE_JOB_CLEANUP:
+      value: "1"
+  tags:
+    - shell
+    - tyche3
+  script:
+    sh autogen.sh && ./configure && make && make -C test check

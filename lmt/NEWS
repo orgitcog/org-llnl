@@ -1,0 +1,206 @@
+========================================================================
+Release Notes for LMT 3.2.8                                 25 Nov 2019
+========================================================================
+
+* #49 handle lustre version file containing bare version
+* #49 Revert "Add /sys in Lustre version checking (#31)"
+* Recovery status reported for any status other than COMPLETE
+* #33 build: Fix autotools warnings
+* #30 Fix "lmtmetric: osc metric: No such file or directory"
+* #44 Fully expand ${prefix} in configure so make install works
+
+========================================================================
+Release Notes for LMT 3.2.7                                 23 Oct 2019
+========================================================================
+
+* #40 ltop fix to run without MDTs or OSTs
+* #38 Space and Inodes for MDTs show in ltop
+
+========================================================================
+Release Notes for LMT 3.2.6                                 06 May 2019
+========================================================================
+
+* #36 look in /sys and /proc as necessary - Lustre 2.12 compatability
+
+========================================================================
+Release Notes for LMT 3.2.5                                 17 Sep 2018
+========================================================================
+
+* Fix omission of 'z' in ltop.1 man page
+
+========================================================================
+Release Notes for LMT 3.2.4                                 17 Sep 2018
+========================================================================
+
+* In ltop ensure MDT and OST windows have 3 rows
+* ltop monitor file systems with only MDTs or only OSTs
+
+========================================================================
+Release Notes for LMT 3.2.3                                 26 Feb 2018
+========================================================================
+
+* #29 Add MDT count to FS selection list
+* #31 Add /sys in Lustre version checking
+
+========================================================================
+Release Notes for LMT 3.2.0                                 01 Apr 2016
+========================================================================
+
+* #28 Add MDT sub-window
+
+========================================================================
+Release Notes for LMT 3.1.10                                16 Mar 2016
+========================================================================
+
+* #27 Report recovery status for MDT
+
+========================================================================
+Release Notes for LMT 3.1.9                                 27 Oct 2014
+========================================================================
+
+* #24 Fix compilation against Lua 5.2
+* #25 Fix _find_all_fs() so it finds all the filesystems
+
+========================================================================
+Release Notes for LMT 3.1.8                                 22 Aug 2014
+========================================================================
+
+* Update license headers for GPLv2+
+
+* Stop tracking autotools products.
+
+========================================================================
+Release Notes for LMT 3.1.6                                 26 Apr 2013
+========================================================================
+
+* Ignore missing ost brw_stats file in lustre
+
+========================================================================
+Release Notes for LMT 3.1.5                                 03 Apr 2012
+========================================================================
+
+* Redraw OST window correctly after selecting new filesystem.
+
+========================================================================
+Release Notes for LMT 3.1.4                                 03 Apr 2012
+========================================================================
+
+* Issue 13: fix path to mdt stats for Lustre 2.x
+
+* Issue 3: allow switching between filesystems while running
+
+========================================================================
+Release Notes for LMT 3.1.3                                 04 Mar 2011
+========================================================================
+
+* Issue 53: ltop should not display FQDN in OSS column
+
+========================================================================
+Release Notes for LMT 3.1.2                                 11 Feb 2011
+========================================================================
+
+* Issue 48: lmtinit cannot handle hyphen in database name
+
+* Issue 50: ltop not working with hyphenated file system name
+
+* ltop: added options description to Usage message.
+
+========================================================================
+Release Notes for LMT 3.1.1                                 03 Dec 2010
+========================================================================
+
+* Issue 47: ltop should highlight the ost column header used for sorting
+  Added a '>' character in front of the current sort field.
+
+========================================================================
+Release Notes for LMT 3.1.0                                 03 Dec 2010
+========================================================================
+
+* Merge lustre 2.x portability changes from lmt-lustre2x branch.
+
+* Add temporary workaround for missing mdt, ldlm proc files in 2.0.50.zfs
+  and also some variant of 1.8.3 discussed in issue 28.
+
+========================================================================
+Release Notes for LMT 3.0.4                                 03 Dec 2010
+========================================================================
+
+* Issue 45: ltop doesn't show ost's if mdt metric isn't reporting in
+  Fix curses update problem in this case
+
+* Issue 46: handle duplicate statfs line in /proc/fs/lustre/mds/target/stats   	
+  Change stats hashing code to allow duplicates (last in wins).
+
+* Enable protocol debugging in lmtmetric to get verbose errors.
+
+========================================================================
+Release Notes for LMT 3.0.3                                 03 Dec 2010
+========================================================================
+
+Fixes for various issues.  More detail is available via the issues tab at:
+
+http://code.google.com/p/lmt/
+
+* Issue 20: ltop error message not correct
+  Make ltop error message more clear when no file system data is present.
+
+* Issue 22: lmt_db_host setting does not work
+  Add double quotes to lmt.conf man page option descriptions.
+
+* Issue 27: Installation documentation is still not very clear
+  Fix lmtsh getopt to handle --help sensibly.
+
+* Issue 29: ltop doesn't report correctly OSTs information
+  Fix bug that made the last OST in a single-page display invisible.
+
+* Issue 30: ltop improperly truncates oss names
+  Left truncate hostnames in ltop column to preserve numerical suffixes.
+
+* Issue 33: ltop shouldn't try to parse lmt.conf
+  Ltop doesn't use lmt.conf info so why should it fail if lmt.conf has error?
+
+* Issue 34: old monitor module can't grok new router metric data
+  Fix lmt3 router metric version string so it works with both lmt3 and lmt2.
+
+* Issue 41: LMT Router Bandwidth Variable Needed For Aggregation Script
+  This missing row in ROUTER_VARIABLE_INFO broke router aggregation.
+  Add to schema script so it will be created for new database configs.
+
+* Issue 43: existing ROUTER_INFO entries conflict with lmt3 autoconf entries
+  Manually adding routers to the database while lmt is running caused problems.
+  Add a couple of new error messages that would make this easier to debug.
+
+* Issue 44: mkusers.sql doesn't include host 
+  The mkusers.sql script provided should include @localhost for lwatchclient.
+
+========================================================================
+Release Notes for LMT 3.0.2                                 10 Nov 2010
+========================================================================
+
+* Fix issue 19: memory leak in lmt_osc on client nodes
+
+========================================================================
+Release Notes for LMT 3.0.1                                 02 Nov 2010
+========================================================================
+
+* Fix issue 18: ltop hides OST data if recovery status is INACTIVE.
+
+========================================================================
+Release Notes for LMT 3.0.0                                 01 Nov 2010
+========================================================================
+
+* Once a database has been created for a particular file system, its
+  Lustre configuration is determined on the fly as servers report in.
+
+* ltop now interfaces directly with cerebro (not mysql).  See ltop(1).
+
+* There is one config file for database users, etc: /etc/lmt/lmt.conf,
+  see lmt.conf(5)
+
+* Protocol has been updated.  The old protocol is supported for migration:
+  1) Update monitor (mysql server) node first, then
+  2) update metric (lustre servers) second.
+
+* Logging and error handling is improved.
+
+* lwatch client is now released in separate lmt-gui package.

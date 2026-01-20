@@ -1,0 +1,41 @@
+name: Test external build.
+
+on:
+  pull_request:
+    paths:
+      - scripts/spack/**
+      - scripts/devtools/**
+      - scripts/runtime-requirements.txt.in
+      - scripts/build-requirements.txt
+      - Dockerfile
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: llnl/spheral
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Log into registry ${{ env.REGISTRY }}
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: build env image
+      run: docker build --target spheral-build-env-local --tag spheral-build-env .
+
+    - name: build spheral image
+      run: docker build --target spheral --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --network none .
+

@@ -1,0 +1,9 @@
+src/*.o
+bin/internals/symt_addr2line
+lib
+lib/*.so
+.*.swp
+*/.*.swp
+*.dot
+examples/*.dot
+bin/*.dot

@@ -1,0 +1,29 @@
+LMT3 - Lustre Monitoring Tool
+
+LMT is a distributed system that provides a "top"-like display of the
+activity levels of the server-side (MDS, OSSes, and LNET routers)
+nodes of one or more Lustre-based filesystems.  It is possible to watch
+server metrics in real time, and to graph past behavior.  The clients
+provide this capability, but it is also possible to directly mine the
+MySQL database, e.g. with SQL scripts and GNU plot.
+
+Real time and historical data is kept in the MySQL datbase.  The java
+clients, lwatch (GUI) and lstat (command line) interface only to MySQL.
+The clients are part of the lmt-gui package, now separately distributed.
+
+There are four Cerebro "metric modules", lmt_mdt, lmt_ost, lmt_osc, and
+lmt_router, which collect data from /proc on servers and inject messages
+into the cerebro monitoring network.  The collection plugins are part of
+the lmt-server-agent package.
+
+Cerebro data is extracted and inserted into the database by a single cerebro
+"monitor module".  The monitor module and support utilities, including
+the new ltop client (C/curses) which interfaces directly to cerebro,
+are part of the lmt-server package.
+
+For more information, review the LMT wiki pages:
+
+http://github.com/llnl/lmt/wiki
+
+Jim Garlick
+October, 2010

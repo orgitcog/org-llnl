@@ -1,0 +1,78 @@
+#
+# API for Spio
+#
+copyright:
+  -
+  - Copyright (c) 2017-2025, Lawrence Livermore National Security, LLC and
+  - other Axom Project Developers. See the top-level LICENSE file for details.
+  -
+  - "SPDX-License-Identifier: (BSD-3-Clause)"
+
+library: SPIO
+namespace: axom sidre
+
+options:
+#  debug: True
+  C_line_length: 1000
+  F_module_name_library_template: axom_{library_lower}
+  F_module_per_class: False
+
+format:
+  C_prefix: SPIO_
+  # Any C++ function which returns a string will be wrapped in
+  # Fortran as a subroutine with an additional character argument
+  # for the result.
+
+typemap:
+- type: axom::sidre::DataStore
+  fields:
+    base: shadow
+    wrap_header: axom/sidre/interface/c_fortran/wrapDataStore.h
+    c_type: SIDRE_DataStore
+    f_module_name: axom_sidre
+    f_derived_type: SidreDataStore
+    f_capsule_data_type: SIDRE_SHROUD_capsule_data
+    f_to_c: '{f_var}%cxxmem'
+
+- type: axom::sidre::Group
+  fields:
+    base: shadow
+    wrap_header: axom/sidre/interface/c_fortran/wrapGroup.h
+    c_type: SIDRE_Group
+    f_module_name: axom_sidre
+    f_derived_type: SidreGroup
+    f_capsule_data_type: SIDRE_SHROUD_capsule_data
+    f_to_c: '{f_var}%cxxmem'
+
+declarations:
+- decl: class IOManager
+  cxx_header: axom/sidre/spio/IOManager.hpp
+  format:
+    F_derived_name: iomanager
+    C_name_scope: IOManager_
+  declarations:
+  - decl: IOManager(MPI_Comm com, bool use_scr = false)
+    default_arg_suffix:
+    -  _default
+    -  _usescr
+  - decl: ~IOManager() +name(delete)
+  - decl: void write(Group * group,
+                     int num_files,
+                     const std::string& file_string,
+                     const std::string& protocol,
+                     const std::string& tree_pattern = "datagroup_%07d")
+  - decl: void writeGroupToRootFile(Group * group,
+                                    const std::string& file_name)
+  - decl: void writeBlueprintIndexToRootFile(DataStore* datastore,
+                                             const std::string& domain_path,
+                                             const std::string& file_name,
+                                             const std::string& mesh_path)
+  - decl: void read(Group * group,
+                    const std::string& file_string,
+                    const std::string& protocol,
+                    bool preserve_contents = false)
+  - decl: void read(Group * group,
+                    const std::string& root_file,
+                    bool preserve_contents = false)
+  - decl: void loadExternalData(Group * group,
+                                const std::string& root_file)

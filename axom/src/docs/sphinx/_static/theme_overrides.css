@@ -1,0 +1,30 @@
+/* override table width restrictions */
+@media screen and (min-width: 767px) {
+
+   .wy-table-responsive table td {
+      /* !important prevents the common CSS stylesheets from overriding
+         this as on RTD they are loaded after this stylesheet */
+      white-space: normal !important;
+   }
+
+   .wy-table-responsive {
+      overflow: visible !important;
+   }
+}
+
+/* Expand the main content column width, adjusting the content wrapper to account for the sidebar */
+@media screen and (min-width: 767px) {
+   .wy-nav-content {
+      max-width: 940px;
+      width: 940px;
+   }
+}
+
+a img.logo {
+    transform: scale(.75)
+}
+
+/* Sidebar header (and topbar for mobile) */
+.wy-side-nav-search, .wy-nav-top {
+  background: #343131;
+}

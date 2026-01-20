@@ -1,0 +1,15 @@
+This is a script to merge IBM BlueGene lightweight core files into STAT prefix trees.
+
+To build, cd into the src directory and modify the variables in the compile.sh script.  The GRAPHLIBPREFIX and STACKWALKERPREFIX are the INSTALLDIR set in the script-stat-install script if you used that to install STAT.  Note that graphlib must be installed for this to work.  Stackwalker (and the SymtabAPI) are only required for an alternative to the system default addr2line utility, so you may still run core_stack_merge even if you do not have Stackwalker installed or if you fail to build the symt_addr2line utility.
+
+After building, you will also need to modify the bin/STATview and bin/core_stack_merge scripts, modifying _prefix to point to the directory where you installed this utility.
+
+To run, invoke the bin/core_stack_merge script, which will print usage instructions.  An example executable and core files can be found in the examples directory and can be merge with the following command:
+
+./bin/core_stack_merge -x examples/virtual_ring_mpi -c examples/core.*
+
+The resulting .dot files can be viewed with:
+
+./bin/stat-view *.dot
+
+For any questions, contact Greg Lee <lee218@llnl.gov>.

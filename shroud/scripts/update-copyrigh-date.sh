@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+#=============================================================================
+# Change the copyright date in all files that contain the text
+# We restrict to this subset of files
+# since we do not want to modify files we do not own (e.g., other repos
+# included as submodules). Note that this file and *.git files are omitted
+# as well.
+#
+# IMPORTANT: Since this file is not modified (it is running the shell
+# script commands), you must EDIT THE COPYRIGHT DATES ABOVE MANUALLY.
+#
+# Edit the 'find' command below to change the set of files that will be
+# modified.
+#
+# Change the 'sed' command below to change the content that is changed
+# in each file and what it is changed to.
+#
+#=============================================================================
+#
+# If you need to modify this script, you may want to run each of these
+# commands individual from the command line to make sure things are doing
+# what you think they should be doing. This is why they are separated into
+# steps here.
+#
+#=============================================================================
+
+#=============================================================================
+# First find all the files we want to modify
+#=============================================================================
+rm -f files2change
+git grep -l "Shroud Project Developers" | grep -v update-copyright > files2change
+
+#=============================================================================
+# Replace the old copyright dates with new dates
+#=============================================================================
+for i in `cat files2change`
+do
+    echo $i
+    cp $i $i.sed.bak
+done
+
+#echo LICENSE
+#cp LICENSE LICENSE.sed.bak
+#sed "s/Copyright (c) 2017-2025/Copyright (c) 2017-2025/" LICENSE.sed.bak > LICENSE
+
+#echo RELEASE
+#cp RELEASE RELEASE.sed.bak
+#sed "s/2017-2020/2017-2020/" RELEASE.sed.bak > RELEASE
+
+#echo README
+#cp README.md README.md.sed.bak
+#sed "s/2017-2024/2017-2025/" README.md.sed.bak > README.md
+
+#echo RELEASE-NOTES
+#cp RELEASE-NOTES.md RELEASE-NOTES.md.sed.bak
+#sed "s/2017-2020/2017-2022/" RELEASE-NOTES.md.sed.bak > RELEASE-NOTES.md
+
+#echo docs/conf.py
+#cp docs/conf.py docs/conf.py.sed.bak
+#sed "s/2017-2024/2017-2025/" docs/conf.py.sed.bak > docs/conf.py
+
+#=============================================================================
+# Remove temporary files created in the process
+#=============================================================================
+find . -name \*.sed.bak -exec rm {} \;
+#rm files2change

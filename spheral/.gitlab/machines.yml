@@ -1,0 +1,87 @@
+# ------------------------------------------------------------------------------
+# MACHINE TEMPLATES
+
+.on_tioga:
+  tags:
+    - tioga
+    - flux
+  variables:
+    JACAMAR_SCHEDULER_ACTION: default
+    SCHEDULER_PARAMETERS: "--exclusive -N 1 -t 60"
+    NPROC: 64
+    HOSTNAME: 'tioga'
+  timeout: 24 hours
+  extends: [.on_toss_4_x86_cray]
+
+.tioga_shell:
+  tags:
+    - tioga
+    - shell
+  variables:
+    ENVIRONMENT: "INTERACTIVE"
+  timeout: 24 hours
+  extends: [.on_toss_4_x86_cray]
+
+.on_dane:
+  tags:
+    - dane
+    - batch
+  variables:
+    JACAMAR_SCHEDULER_ACTION: default
+    SCHEDULER_PARAMETERS: "--reservation=ci --exclusive -N 1 -t 120"
+    NPROC: 112
+    HOSTNAME: 'dane'
+  timeout: 24 hours
+  extends: [.on_toss_4_x86]
+
+.dane_shell:
+  tags:
+    - dane
+    - shell
+  variables:
+    ENVIRONMENT: "INTERACTIVE"
+  timeout: 24 hours
+  extends: [.on_toss_4_x86]
+
+# ------------------------------------------------------------------------------
+
+.toss_resource_general:
+  extends: [.on_dane]
+
+.cray_resource_general:
+  extends: [.on_tioga]
+
+.toss_shell1:
+  extends: [.dane_shell]
+
+# Use for performance tests
+.toss_shell2:
+  extends: [.dane_shell]
+
+.cray_shell1:
+  extends: [.tioga_shell]
+
+.cray_shell2:
+  extends: [.tioga_shell]
+
+# ------------------------------------------------------------------------------
+#
+.toss_resource1:
+  resource_group: toss1
+  extends: [.toss_resource_general]
+
+.toss_resource2:
+  resource_group: toss2
+  extends: [.toss_resource_general]
+
+.toss_resource3:
+  resource_group: toss3
+  extends: [.toss_resource_general]
+
+.cray_resource1:
+  resource_group: cray1
+  extends: [.cray_resource_general]
+
+.cray_resource2:
+  resource_group: cray2
+  extends: [.cray_resource_general]

@@ -1,0 +1,63 @@
+#!/bin/bash
+
+set -e
+set -u
+
+TEST=$(basename $0 | cut -d- -f1)
+# test $(id -u) == 0 || exit 77 #skip if not root
+
+test_metrics() {
+    local path=$1
+    local version=$(basename $path)
+    local exp_file=$path/outputs/$TEST.exp
+    local out_file=$TEST-$version.out
+    local ref_file=$TEST-$version.ref
+    local fault_file=$TEST-$version.fault
+    local diff_file=$TEST-$version.diff
+
+    [ -r $exp_file ] || {
+        echo "$exp_file is not readable" > $out_file
+        exit 1
+    }
+
+    rm -f $out_file
+    rm -f $ref_file
+    rm -f $fault_file
+    rm -f $diff_file
+    
+    while read line; do
+	if [ -z "$line" ]; then
+		echo "skipping empty line"
+		continue
+	fi
+        ref_string="$(eval echo "\"$line\"")"
+        m_name=$(echo $ref_string | cut -f1 -d:)
+        tst_string=$(../utils/lmtmetric -r $path/ -m $m_name)
+        echo $tst_string >> $out_file
+        if [ "$ref_string" != "$tst_string" ]; then
+            echo $ref_string >> $ref_file
+            echo $ref_string | tr ";" "\n" >> $ref_file
+
+            echo $tst_string >> $fault_file
+            echo $tst_string | tr ";" "\n" >> $fault_file
+            diff -u $ref_file $fault_file >> $diff_file || true
+        fi
+    done < $exp_file
+
+    if [ -s $diff_file ]; then
+        echo "  $version: FAIL"
+        PASS=false
+    else
+        echo "  $version: PASS"
+    fi
+}
+
+PASS=true
+
+echo -e "\n$(basename $0):"
+
+for path in lustre_versions/*; do
+    test_metrics $path
+done
+
+$PASS

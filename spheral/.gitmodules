@@ -1,0 +1,13 @@
+
+[submodule "blt"]
+	path = cmake/blt
+	url = https://github.com/llnl/blt
+[submodule "extern/PYB11Generator"]
+	path = extern/PYB11Generator
+	url = https://github.com/LLNL/PYB11Generator
+[submodule "extern/PolyClipper"]
+	path = extern/PolyClipper
+	url = https://github.com/LLNL/PolyClipper
+[submodule "extern/ATS"]
+	path = extern/ATS
+	url = https://github.com/LLNL/ATS

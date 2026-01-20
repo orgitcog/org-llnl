@@ -1,0 +1,88 @@
+# Copyright (c) 2017-2025, Lawrence Livermore National Security, LLC and
+# other Axom Project Developers. See the top-level LICENSE file for details.
+#
+# SPDX-License-Identifier: (BSD-3-Clause)
+
+####
+# This is the share configuration of jobs for lassen
+.on_lassen:
+  variables:
+    SCHEDULER_PARAMETERS: "-nnodes 1 -W ${ALLOC_TIME} -q pci -alloc_flags atsdisable"
+  tags:
+    - batch
+    - lassen
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /_lnone/ || $ON_LASSEN == "OFF"' #run except if ...
+      when: never
+    - when: on_success
+  before_script:
+    - module load cuda/11.2.0
+    - module load cmake/3.21.1
+
+####
+# Template
+.src_build_on_lassen:
+  variables:
+    ALLOC_TIME: "40"
+  extends: [.src_build_script, .on_lassen, .src_workflow]
+  needs: []
+
+.full_build_on_lassen:
+  variables:
+    ALLOC_TIME: "60"
+  extends: [.full_build_script, .on_lassen, .full_workflow]
+  needs: []
+
+####
+# PR Build jobs
+lassen-clang_10_0_1-src:
+  variables:
+    COMPILER: "clang@10.0.1.1"
+    HOST_CONFIG: "lassen-blueos_3_ppc64le_ib_p9-${COMPILER}.cmake"
+  extends: [.src_build_on_lassen]
+
+lassen-clang_10_0_1_cuda-src:
+  variables:
+    COMPILER: "clang@10.0.1.2_cuda"
+    HOST_CONFIG: "lassen-blueos_3_ppc64le_ib_p9-${COMPILER}.cmake"
+  extends: [.src_build_on_lassen]
+
+lassen-gcc_8_3_1-src:
+  variables:
+    COMPILER: "gcc@8.3.1.1"
+    HOST_CONFIG: "lassen-blueos_3_ppc64le_ib_p9-${COMPILER}.cmake"
+  extends: [.src_build_on_lassen]
+
+lassen-gcc_8_3_1_cuda-src:
+  variables:
+    COMPILER: "gcc@8.3.1.2_cuda"
+    HOST_CONFIG: "lassen-blueos_3_ppc64le_ib_p9-${COMPILER}.cmake"
+  extends: [.src_build_on_lassen]
+
+####
+# Full Build jobs
+lassen-clang_10_0_1-full:
+  variables:
+    COMPILER: "clang@10.0.1.1"
+    SPEC: "%${COMPILER}+mfem~openmp"
+  extends: [.full_build_on_lassen]
+
+lassen-clang_10_0_1_cuda-full:
+  variables:
+    COMPILER: "clang@10.0.1.2"
+    SPEC: "%${COMPILER}+mfem+cuda~openmp"
+    EXTRA_SPEC: "cuda_arch=70"
+  extends: [.full_build_on_lassen]
+
+lassen-gcc_8_3_1-full:
+  variables:
+    COMPILER: "gcc@8.3.1.1"
+    SPEC: "%${COMPILER}+mfem"
+  extends: [.full_build_on_lassen]
+
+lassen-gcc_8_3_1_cuda-full:
+  variables:
+    COMPILER: "gcc@8.3.1.2"
+    SPEC: "%${COMPILER}~mfem+cuda"
+    EXTRA_SPEC: "cuda_arch=70"
+  extends: [.full_build_on_lassen]

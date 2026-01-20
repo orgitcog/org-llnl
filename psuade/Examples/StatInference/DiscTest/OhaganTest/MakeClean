@@ -1,0 +1,3 @@
+clean:
+	rm -f simulator experiment simdata MCMC* simdata expdata *.m *.sci mcmcpredict* psDiscrepancy* expdata psuadeData processExp script.* exp.std
+

@@ -1,0 +1,16 @@
+*.pyc
+.cache
+.pytest_cache
+.ipynb_checkpoints
+
+build
+docs/_build
+hatchet/cython_modules/libs/graphframe_modules.*.so
+hatchet/cython_modules/libs/reader_modules.*.so
+hatchet/cython_modules/*.c
+hatchet/vis/*node_modules*
+hatchet/vis/static/*_bundle*
+*package-lock.json
+
+dist/
+llnl_hatchet.egg-info/

@@ -1,0 +1,9 @@
+pysaber==1.*
+numpy
+pyyaml
+scipy
+scikit-image
+scikit-learn
+matplotlib
+sphinxcontrib-napoleon
+sphinx-automodapi

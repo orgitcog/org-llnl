@@ -1,0 +1,36 @@
+# Copyright Shroud Project Developers. See LICENSE file for details.
+#
+# SPDX-License-Identifier: (BSD-3-Clause)
+########################################################################
+dist: xenial 
+sudo: false
+
+language: python
+python:
+- "2.7"
+- "3.4"
+- "3.5"
+- "3.6"
+- "3.7"
+- "3.8"
+- "3.9"
+
+# Command to install dependencies.
+# This installs Shroud into the virtualenv.
+install:
+   - python setup.py install
+#  - pip install -r requirements.txt
+
+# Command to run tests.
+script:
+  # echo make version
+  - make --version
+  - make PYTHONEXE=python test
+  - make PYTHONEXE=python do-test
+
+notifications:
+  email:
+    recipients:
+      - taylor16@llnl.gov
+    on_success: always
+    on_failure: always

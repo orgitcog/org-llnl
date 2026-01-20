@@ -1,0 +1,57 @@
+copyright:
+- Copyright Shroud Project Developers. See LICENSE file for details.
+-
+- "SPDX-License-Identifier: (BSD-3-Clause)"
+-
+library: statement
+cxx_header: statement.hpp
+
+options:
+  debug: True
+#  wrap_python: True
+#  wrap_lua: True
+#  literalinclude2: True
+
+format:
+  C_prefix: STMT_
+
+declarations:
+
+- decl: int GetNameLength() +pure
+  doxygen:
+    brief: helper function for Fortran to get length of name.
+  splicer:
+    c:
+    - "return getNameErrorPattern().length();"
+
+- decl: const string& getNameErrorPattern()
+  fattrs:
+    len: get_name_length()
+  C_error_pattern: C_invalid_name
+  PY_error_pattern: PY_invalid_name
+
+- decl: bool nameIsValid(const std::string& name)
+   # The concept of a valid name is different for C++, C and Fortran
+   # The wrappers create a different implementation that the C++ function.
+  options:
+    F_create_bufferify_function: false
+  splicer:
+    c:
+    - "return name != NULL;"
+    f:
+    - 'SHT_rv = name .ne. " "'
+
+
+######################################################################
+patterns:
+    C_invalid_name: |
+        if (! isNameValid({cxx_var})) {{
+            return NULL;
+        }}
+    PY_invalid_name: |
+        if (! isNameValid({cxx_var})) {{
+            PyErr_SetString(PyExc_KeyError, "XXX need value of name");
+            return NULL;
+        }}
+
+

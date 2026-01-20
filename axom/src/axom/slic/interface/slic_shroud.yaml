@@ -1,0 +1,98 @@
+#
+# API for SLIC
+#
+copyright:
+  -
+  - Copyright (c) 2017-2025, Lawrence Livermore National Security, LLC and
+  - other Axom Project Developers. See the top-level LICENSE file for details.
+  -
+  - "SPDX-License-Identifier: (BSD-3-Clause)"
+
+library: SLIC
+cxx_header: axom/slic/interface/slic.hpp
+namespace: axom slic
+
+options:
+#  debug: True
+  C_line_length: 1000
+  F_module_name_library_template: axom_{library_lower}
+  # Change the default template for Fortran functions to include the library name.
+  F_name_impl_template: "{library_lower}_{F_name_scope}{F_name_api}{function_suffix}"
+  F_result_as_arg: name
+
+format:
+  C_prefix: SLIC_
+  # Any C++ function which returns a string will be wrapped in
+  # Fortran as a subroutine with an additional character argument
+  # for the result.
+
+######################################################################
+
+declarations:
+- decl: namespace message
+  # MessageLevel.h
+  options:
+    flatten_namespace: True
+  declarations:
+  - decl: |
+        enum Level
+        {
+          Error,
+          Warning,
+          Info,
+          Debug,
+          Num_Levels
+        };
+
+- decl: class GenericOutputStream
+  cxx_header: axom/slic/streams/GenericOutputStream.hpp
+  format:
+    F_derived_name:  SlicGenericOutputStream
+  declarations:
+  - decl: GenericOutputStream(const std::string& stream)
+    format:
+      function_suffix: _default
+  - decl: GenericOutputStream(const std::string& stream, const std::string& format)
+    format:
+      function_suffix: _format
+  - decl: ~GenericOutputStream() +name(delete)
+
+- decl: void initialize()
+- decl: bool isInitialized()
+
+- decl: void createLogger( const std::string& name, char imask )
+- decl: bool activateLogger( const std::string& name )
+- decl: std::string getActiveLoggerName()
+- decl: message::Level getLoggingMsgLevel()
+- decl: void setLoggingMsgLevel( message::Level level )
+- decl: void addStreamToMsgLevel(GenericOutputStream* ls, message::Level level)
+- decl: void addStreamToAllMsgLevels(GenericOutputStream* ls)
+
+- decl: void setAbortOnError( bool status )
+- decl: void enableAbortOnError()
+- decl: void disableAbortOnError()
+- decl: bool isAbortOnErrorsEnabled()
+
+- decl: void setAbortOnWarning( bool status )
+- decl: void enableAbortOnWarning()
+- decl: void disableAbortOnWarning()
+- decl: bool isAbortOnWarningsEnabled()
+
+- decl: void logMessage( message::Level level,
+                         const std::string& message,
+                         const std::string& fileName,
+                         int line,
+                         bool filter_duplicates = false )
+  default_arg_suffix:
+  - _file_line
+  - _file_line_filter
+- decl: void logMessage( message::Level level,
+                         const std::string& message,
+                         bool filter_duplicates = false )
+  default_arg_suffix:
+  -
+  - _filter
+
+- decl: void flushStreams()
+- decl: void finalize()
+  
