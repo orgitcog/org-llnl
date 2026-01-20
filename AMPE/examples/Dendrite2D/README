@@ -1,0 +1,9 @@
+set utilsdir = ../../utils
+set bindir   = ../../build/cab-mpiicpc-14.0.174-ifort-14.0.174-opt/exec/
+
+#create initial conditions
+python $utilsdir/make_nuclei.py -x 1024 -y 1024 -z 1 -r 50 -q 2 -b \
+   --ngrains 1 1grainR50_1024.nc --temperature-out 0.5 --temperature-in 1. --width 3.
+
+#run PFM
+srun -ppdebug -n16 $bindir/ampe2d dendrite.input

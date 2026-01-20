@@ -1,0 +1,19 @@
+python ../../utils/make_nuclei.py -s --ngrains 9 -q 4 -n 512 -r 22 -c 0.25 \
+      --concentration-in 0.096 9grains_512_r22.nc
+
+set exe = ../../build/ansel-mpiicpc-12.1.293-ifort-12.1.293-opt/exec/ampe2d
+#set exe = /usr/gapps/phasefield/bin/ampe2d
+set ncpus = 32
+
+ln -fs ../../thermodynamic_data/calphadAuNi.dat
+
+#initial run
+set input   = 9grains_AuNi_initial.input
+
+srun -ppdebug -n $ncpus $exe $input
+
+#new run
+set input   = 9grains_AuNi.input
+
+srun -ppdebug -n $ncpus $exe $input
+

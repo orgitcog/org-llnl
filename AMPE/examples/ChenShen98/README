@@ -1,0 +1,21 @@
+// Chen and Shen, Comput. Phys. Comm. 108 (1998), 147-158
+// 2D single grain shrinks, phase only
+// Parameters adapted to our AMPE code by change of variable
+
+#generate initial conditions: grain of radius 100 cells in 256 x 256 square
+python ../../utils/make_sphere.py -x 256 -y 256 -z 1 -r 100 --qlen 1 initial256.nc
+
+set exe = ampe2d
+
+srun -ppdebug -n16 $exe gg2d_256.input
+
+python dtvst.py gg2d_256.log > dtvst.dat
+
+gnuplot dtvst.plt
+
+#increase resolution: 512 x 512 mesh
+python ../../utils/make_sphere.py -x 512 -y 512 -z 1 -r 200 --qlen 1 initial512.nc
+
+srun -ppdebug -N1 -n16 $exe gg2d_512.input
+
+python dtvst.py gg2d_512.log > dtvst.dat

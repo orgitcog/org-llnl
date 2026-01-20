@@ -1,0 +1,89 @@
+// 
+// Input for Hu, Baskes, Stan and Mitchell grain growth
+// Units are:
+//   length: um = 10^-6 m
+//   energy: pJ = 10^-12 J
+//
+model_type = "Quat"
+
+max_timesteps       = 2000
+end_time            = 1.75
+
+Verbosity {  // optional, block
+   initial_energy_diagnostics = TRUE  // optional, default=FALSE
+}
+
+Visit {
+   interval = 0.25
+   interval_type = "time"
+}
+
+TimerManager {
+    timer_list = "solv::*::*","xfer::*::*","AMPE::*::*"
+    print_threshold = 0.0
+}
+
+ModelParameters {
+   H_parameter = 0.001
+   epsilon_orient = 0.1
+   
+   temperature = 873.
+   dtemperaturedt     = -20.
+   target_temperature = 573.
+
+   epsilon_phi = 0.165   // [(pJ/um)^1/2]
+
+   orient_mobility  = 200.
+   phi_mobility     = 200.
+   
+   // free energy parameters:
+   // f(phi) = scale_energy_well*g(phi)
+   //        + p(phi)*(free_energy_solid-free_energy_liquid)
+   // where g is a double well potential and p an interpolation function s.t.
+   // p(0)=0 and p(1)=1
+   // scale_energy_well set to zero to simulate KWC model
+   phi_well_scale = 0.4125  // 6.6/16. [pJ/um^3]
+   phi_well_func_type = "double"
+   phi_interp_func_type ="hbsm"
+   
+   orient_grad_floor = 0.1
+
+   ConcentrationModel{
+      model    = "quadratic"
+      molar_volume_solid_A = 1.5e-5 // [m^3/mol]
+      molar_volume_liquid  = 1.5e-5 // [m^3/mol]
+      D_solid  =  1.3e8
+      D_liquid  = 5.6e4
+      Q0_solid  = 156377.   // Edwards et al. [J/mol]
+      Q0_liquid = 55329.    // Wade 1971      [J/mol]
+      mobility = 1.
+      Quadratic {
+         A_liquid = 1.e4 
+         A_solid  = 1.e4
+         Ceq_liquid = 0.05
+         Ceq_solid  = 0.10
+      }
+   }
+}
+
+Integrator {
+   atol = 1.e-4
+}
+
+ScalarDiagnostics {
+   interval = 0.05
+   interval_type = "time"
+   include_first_step = TRUE
+   include_last_step  = TRUE
+   extra_energy_detail = TRUE
+}   
+
+InitialConditions {
+   filename = "restart_2spheres_init.nc"
+}
+
+Geometry{
+   coarsest_level_resolution = 128, 128
+   x_lo         = -3.2, -3.2 // lower end of computational domain.
+   x_up         =  3.2,  3.2 // upper end of computational domain.
+}

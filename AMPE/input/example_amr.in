@@ -1,0 +1,90 @@
+// Copyright (c) 2018, Lawrence Livermore National Security, LLC.
+// Produced at the Lawrence Livermore National Laboratory
+// Written by M.R. Dorr, J.-L. Fattebert and M.E. Wickett
+// LLNL-CODE-747500
+// All rights reserved.
+// This file is part of AMPE. 
+// For details, see https://github.com/LLNL/AMPE
+// Please also read AMPE/LICENSE.
+// 
+end_time = 10.0
+//max_timesteps = 20
+
+verbosity = 1
+
+Amr {
+   enabled = TRUE
+
+   Regrid {
+      interval = 0.1
+      interval_type = "time"
+   }
+
+   TaggingCriteria {
+      Phase {
+         threshold_untagged = 0.04
+         threshold_tagged = 0.02
+      }
+   }
+
+   GriddingAlgorithm{
+      max_levels = 2
+
+      ratio_to_coarser {
+         level_1 = 2, 2
+      }
+
+      largest_patch_size {
+         level_0 = 1280, 1280
+      }
+
+      smallest_patch_size {
+         level_0 = 10, 10
+      }
+
+      efficiency_tolerance    = 0.85e0
+      combine_efficiency      = 0.95e0
+
+      allow_patches_smaller_than_ghostwidth = TRUE
+      resolve_nonnesting_tags = 'e'
+   }
+}
+
+Restart {
+   interval = 500
+}
+
+InitialConditions {
+   //filename = "init_circle_128_q1_two_2.nc"
+   filename = "init_sphere_128_q4_two.nc"
+   amr_level_of_data = 1
+}
+
+Geometry {
+   coarsest_level_resolution = 64, 64
+   x_lo = -1.0, -1.0
+   x_up =  1.0,  1.0
+}
+
+Visit {
+   interval = 0.5
+   interval_type = "time"
+}
+
+ModelParameters {
+   H_parameter = 1.5
+   temperature = 1.0
+
+   epsilon_phi = 0.125
+   epsilon_orient = 0.075
+
+   phi_mobility = 1.0
+   orient_mobility = 10.0
+
+   free_energy_solid = 0.0
+   free_energy_liquid = 1.0
+}
+
+Integrator {
+   tolerance = 3.e-4
+}

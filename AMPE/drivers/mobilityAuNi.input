@@ -1,0 +1,16 @@
+// Input for computeMobilityZetaFactor
+// Units are:
+//   length: um = 10^-6 m
+//   energy: pJ = 10^-12 J
+//
+
+ModelParameters {
+   initial_guess = 0.2, 0.1
+
+   phaseL = "PhaseL"
+   phaseS = "PhaseA"
+
+   calphad_filename ="calphadAuNi.dat"
+   D_liquid  = 1.e2 //um**2/s
+   Q0_liquid = 0.   // [J/mol]
+}

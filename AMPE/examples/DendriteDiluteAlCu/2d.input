@@ -1,0 +1,106 @@
+// Units are:
+//   length: um = 10^-6 m
+//   time  : seconds
+//   energy: pJ = 10^-12 J
+//
+end_time      = 1.e-2  // required
+max_timesteps = 1500   // optional, default is INT_MAX (alias: max_cycles)
+
+Visit {
+   interval = 1.e-4 // s
+   interval_type = "time"
+}
+
+ModelParameters {  // required block
+
+   Interface {
+      sigma = 0.1    // J/mol
+      delta = 0.0625 // um
+   }
+
+   epsilon_anisotropy = 0.03 //delta
+
+   PhaseMobility{
+      type = "kim"
+   }
+
+   Temperature{
+      // specify a uniform and constant scalar field
+      type = "scalar"
+      temperature = 915.
+   }
+
+   ConcentrationModel {
+      model = "dilute"
+      //antitrapping = TRUE
+      rhs_form = "ebs"
+      molar_volume = 1.095e-5
+
+      // phase diagram information
+      liquidus_slope = -640 // K / atomic fraction
+      meltingT = 933. // K
+      keq      = 0.14
+
+      // D = D_phase * exp( -Q0_phase / (R*T) )
+      diffusion_type = "temperature_dependent"
+      D_solid  =  3.e-1 //um**2/s
+      D_liquid  = 3.e3  //um**2/s
+      Q0_solid  = 0.    // [J/mol]
+   }
+
+   // interpolation polynomials
+   phi_interp_func_type ="pbg"
+   conc_interp_func_type = "l"
+
+   // boundary conditions for non-periodic directions
+   // options are "slope" or "value"
+   BoundaryConditions {
+      Phase{
+         boundary_0 = "slope", "0"
+         boundary_1 = "slope", "0"
+         boundary_2 = "slope", "0"
+         boundary_3 = "slope", "0"
+      }
+      Conc{
+         boundary_0 = "slope", "0"
+         boundary_1 = "slope", "0"
+         boundary_2 = "slope", "0"
+         boundary_3 = "slope", "0"
+      }
+      Quat{
+         boundary_0 = "slope", "0"
+         boundary_1 = "slope", "0"
+         boundary_2 = "slope", "0"
+         boundary_3 = "slope", "0"
+      }
+   }
+}
+
+InitialConditions {
+   // phase field and composition
+   filename = "512x512.nc"  // required
+   // quaternion field rotated by 45 deg around z-axis
+   // q = (cos(angle/2), nx*sin(angle/2),  ny*sin(angle/2), nz*sin(angle/2))
+   init_q   = 0.924, 0., 0., 0.383
+}
+
+ScalarDiagnostics {
+   interval = 1.e-4
+   interval_type = "time"
+}
+
+Integrator {
+   atol = 1.e-5
+}
+
+Geometry{
+   // periodic BC: 1, non-periodic BC: 0
+   periodic_dimension = 0, 0
+   coarsest_level_resolution = 512, 512  // required
+   x_lo         = 0.,   0.   // lower end of computational domain.
+   x_up         = 32.0, 32.0 // upper end of computational domain.
+}
+
+TimerManager {
+    timer_list = "AMPE::*::*"
+}

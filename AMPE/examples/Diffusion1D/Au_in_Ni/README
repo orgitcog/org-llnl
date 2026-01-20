@@ -1,0 +1,23 @@
+ln -sf ../../../utils/make_bilayer.py
+ln -sf ../../../thermodynamic_data/calphadAuNi.dat  
+
+#generate initial conditions
+python make_bilayer.py -x 512 -y 16 -z 1 -r 16 -c 0.07125 \
+  --concentration-in 0.99 -o 1.0 --qlen 1 Au_in_Ni_512x16_r16.nc
+
+#run AMPE
+srun -ppdebug -n8 ampe2d Au_in_Ni.input
+
+#analyse composition evolution
+cd v.Au_in_Ni
+
+ln -sf ../../../../utils/lineplotPhiQuat.py 
+
+#create 1d plots of composition profiles -> concentration0_*.dat
+visit -nowin -cli -verbose -s lineplotPhiQuat.py
+
+#visualize results
+ln -s ../../../../utils/plotConcentrations.py
+python plotConcentrations.py
+display figure.png
+ 

@@ -1,0 +1,7 @@
+#!/bin/csh
+module load netcdf-c
+module load netcdf-cxx4
+module load hdf5
+module load boost
+module load python
+module load cmake

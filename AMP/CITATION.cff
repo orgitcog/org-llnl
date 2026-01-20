@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+authors:
+- family-names: "Anirudh"
+  given-names: "Rushil"
+- family-names: "Thiagarajan"
+  given-names: "Jayaraman J."
+title: "Out of Distribution Detection via Neural Network Anchoring"
+version: 0.1
+doi: 
+date-released: 2022-09-01
+url: https://github.com/LLNL/AMP
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Anirudh"
+    given-names: "Rushil"
+  - family-names: "Thiagarajan"
+    given-names: "Jayaraman J."
+  title: "Out of Distribution Detection via Neural Network Anchoring"
+  conference: "Asian Conference on Machine Learning (ACML)"
+  title: "Out of Distribution Detection via Neural Network Anchoring"
+  year: 2022
+  organization: "PMLR"

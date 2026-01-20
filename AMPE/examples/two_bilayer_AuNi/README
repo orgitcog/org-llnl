@@ -1,0 +1,10 @@
+python /usr/gapps/phasefield/utils/make_bilayer.py -2 -x 256 -y 8 -z 1 -r 8 -d 4 -c 0.25 --concentration-in 0.11 --qlen 2 two_bilayer_256x8_r8_d4_c0.25_0.11.nc
+
+set exe = /usr/gapps/phasefield/bin/ampe2d_hera-mpig++-mpigfortran-opt_r1080
+
+#relax q
+srun -ppdebug -N1 -n8 $exe two_bilayer_AuNi.input
+
+srun -ppdebug -N1 -n8 $exe two_bilayer_AuNi_restart1.input
+
+srun -ppdebug -N1 -n8 $exe two_bilayer_AuNi_restart2.input
