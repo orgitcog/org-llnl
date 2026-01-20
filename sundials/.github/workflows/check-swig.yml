@@ -1,0 +1,54 @@
+name: Checks - swig
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  swig_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install pcre
+        run: |
+          sudo apt install libpcre3-dev
+
+      - name: Install swig
+        run: |
+          git clone https://github.com/sundials-codes/swig
+          cd swig
+          ./autogen.sh
+          ./configure --prefix=/usr/
+          make
+          sudo make install
+          swig -version
+
+      - name: Check out repository code
+        uses: actions/checkout@v5
+
+      - name: Add safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Run swig on code
+        run: |
+          cd swig
+          make all32
+          make all64
+
+      - name: Run git diff to see if anything changed
+        run: /usr/bin/git diff --exit-code
+
+      - name: Run git diff if we failed
+        if: failure()
+        run:  /usr/bin/git diff > swig.patch
+
+      - name: Archive diff as a patch if we failed
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: swig.patch
+          path: |
+            ${{ github.workspace }}/swig.patch
