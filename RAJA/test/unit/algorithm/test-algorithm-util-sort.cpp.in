@@ -1,0 +1,38 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+// Copyright (c) Lawrence Livermore National Security, LLC and other
+// RAJA Project Developers. See top-level LICENSE and COPYRIGHT
+// files for dates and other details. No copyright assignment is required
+// to contribute to RAJA.
+//
+// SPDX-License-Identifier: (BSD-3-Clause)
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//
+// test/include headers
+//
+#include "RAJA_test-base.hpp"
+#include "RAJA_test-camp.hpp"
+
+//
+// Header for tests in ./tests directory
+//
+// Note: CMake adds ./tests as an include dir for these tests.
+//
+#include "test-algorithm-util-sort.hpp"
+
+
+//
+// Cartesian product of types used in parameterized tests
+//
+using @ALG_BACKEND@@UTIL_ALG@SortTypes =
+  Test< camp::cartesian_product<@ALG_BACKEND@@UTIL_ALG@SortSorters,
+                                @ALG_BACKEND@ResourceList,
+                                SortKeyTypeList,
+                                SortMaxNList@ALG_SIZE@ > >::Types;
+
+//
+// Instantiate parameterized test
+//
+INSTANTIATE_TYPED_TEST_SUITE_P( @ALG_BACKEND@,
+                                SortUnitTest,
+                                @ALG_BACKEND@@UTIL_ALG@SortTypes );

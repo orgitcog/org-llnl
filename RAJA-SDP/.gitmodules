@@ -1,0 +1,11 @@
+[submodule "camp"]
+	path = camp
+	url = https://github.com/llnl/camp
+	branch = feature/devices
+[submodule "chai"]
+	path = chai
+	url = https://github.com/llnl/chai
+[submodule "src/chai"]
+	path = src/chai
+	url = https://github.com/llnl/chai
+	branch = feature/device-context-integration

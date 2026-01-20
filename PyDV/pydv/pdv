@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+pth=$(realpath $0)
+pth=$(dirname $pth)
+pth="$pth/pdv_launcher.py $*"
+
+if [[ $pth == *"pdv-sa"* ]]; then
+
+    /usr/tce/bin/python3 $pth
+
+else
+
+    FILE="/usr/apps/weave/weave-prod-cpu/bin/activate"
+
+    if [ -e "$FILE" ]; then
+
+        source $FILE
+
+    fi
+
+    python3 $pth
+
+fi
