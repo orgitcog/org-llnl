@@ -1,0 +1,5 @@
+IMAGE_LOAD_TABLE = "sigma_process_image_load"
+NETWORK_TABLE = "sigma_process_net_conn"
+PROCESS_TABLE = "process"
+REGISTRY_TABLE = "sigma_process_registry"
+JOINED_PROCESS_TABLE = "joined_process"

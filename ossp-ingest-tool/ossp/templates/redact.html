@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <form action="/" method="GET">
+            <button class="btn home-button">Home</button>
+        </form>
+
+    </header>
+    <div class="container">
+        <div id="main-container" class="workflow-container">
+            <h1 class="text-center mb-4">OSS Prevalence Ingest Tool</h1>
+            <!-- Results Box -->
+            <div class="section">
+                <div class="flex mb-3" style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button id="run-redaction-btn" type="button" class="btn btn-primary w-40 redact-btn">
+                        <span id="redact-spinner"><i class="bi bi-play-circle me-2"></i>Run Redaction</span>
+                    </button>
+                    <button id="download-redaction-btn" type="button" class="btn btn-primary w-40 redact-btn" disabled>Download
+                        Redacted Data
+                    </button>
+                    <button id="reset-values-btn" type="button" class="btn btn-primary w-40 redact-btn">Reset Values
+                    </button>
+                </div>
+
+
+                <!-- 1) Presets: choose or define first -->
+    <section class="section">
+        <h3 class="section-title">1. Choose a Base Redaction Policy</h3>
+
+        <label for="presetSelect" class="form-label">Policy</label>
+        <div class="input-group" style="max-width: 520px;">
+            <select id="presetSelect" class="form-select" aria-label="Select preset">
+            <option value="">None - start blank</option>
+            <!-- Populated dynamically by JS from /redact/presets -->
+            </select>
+            <button id="applyPresetBtn" type="button" class="btn btn-secondary">
+            Apply Policy
+            </button>
+        </div>
+
+        <div class="form-text mt-2">
+            Applying a policy replaces the current rules below. You can still add, edit, or remove rules afterward.
+        </div>
+        <div class="form-text mt-2">
+            <strong>**Note: When no policy is selected, Run Redaction uses only the rules in the table below. If no rules are added, it performs no redaction..**</strong>
+        </div>
+    </section>
+
+    <!-- 2) Rule Builder: checkboxes and inputs -->
+    <form id="redaction-form" method="POST" action="/run/redaction">
+      <section class="section">
+        <h3 class="section-title">2. Add More Redaction Rules</h3>
+
+        <div class="accordion" id="redactModesAccordion">
+          <!-- Redact by key/field name -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingByKeyName">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseByKeyName"
+                aria-expanded="false"
+                aria-controls="collapseByKeyName">
+                <span class="fw-bold"> Redact by key or field name</span>
+              </button>
+            </h2>
+            <div
+              id="collapseByKeyName"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingByKeyName"
+              data-bs-parent="#redactModesAccordion">
+              <div class="accordion-body">
+                <label for="selectByKeyName" class="form-label">Choose field names to redact</label>
+                <select id="selectByKeyName" class="form-select" size="10">
+                  <option value="" disabled selected>Select Key</option>
+                  {% for key in key_names %}
+                    <option value="{{ key }}">{{ key }}</option>
+                  {% endfor %}
+                </select>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-success mt-2 add-rule-btn"
+                  data-type="byKeyName"
+                  data-key-select="#selectByKeyName">
+                  Add Rule
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Redact by field value -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingByFieldValue">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseByFieldValue"
+                aria-expanded="false"
+                aria-controls="collapseByFieldValue">
+                <span class="fw-bold"> Redact by field value</span>
+              </button>
+            </h2>
+            <div
+              id="collapseByFieldValue"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingByFieldValue"
+              data-bs-parent="#redactModesAccordion">
+              <div class="accordion-body">
+                <label for="fieldValueKeySelect" class="form-label">Choose field name</label>
+                <select id="fieldValueKeySelect" class="form-select">
+                  <option value="" disabled selected>Select Key</option>
+                  {% for key in key_names %}
+                    <option value="{{ key }}">{{ key }}</option>
+                  {% endfor %}
+                </select>
+
+                <label for="fieldValueRegexInput" class="form-label mt-2">Value or regex</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fieldValueRegexInput"
+                  placeholder="Ex: Cisco.*">
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-success mt-2 add-rule-btn"
+                  data-type="byFieldValue"
+                  data-key-select="#fieldValueKeySelect"
+                  data-value-input="#fieldValueRegexInput">
+                  Add Rule
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Redact entire row by field value -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingRowByFieldValue">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseRowByFieldValue"
+                aria-expanded="false"
+                aria-controls="collapseRowByFieldValue">
+                <span class="fw-bold"> Redact entire row by field value</span>
+              </button>
+            </h2>
+            <div
+              id="collapseRowByFieldValue"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingRowByFieldValue"
+              data-bs-parent="#redactModesAccordion">
+              <div class="accordion-body">
+                <label for="rowFieldKeySelect" class="form-label">Choose field name</label>
+                <select id="rowFieldKeySelect" class="form-select">
+                  <option value="" disabled selected>Select Key</option>
+                  {% for key in key_names %}
+                    <option value="{{ key }}">{{ key }}</option>
+                  {% endfor %}
+                </select>
+
+                <label for="rowFieldValueInput" class="form-label mt-2">Value or regex</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="rowFieldValueInput"
+                  placeholder="Ex: Sel.*">
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-success mt-2 add-rule-btn"
+                  data-type="rowByFieldValue"
+                  data-key-select="#rowFieldKeySelect"
+                  data-value-input="#rowFieldValueInput">
+                  Add Rule
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Redact multiple values when KEY = VALUE -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingRedactValuesForKey">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseRedactValuesForKey"
+                aria-expanded="false"
+                aria-controls="collapseRedactValuesForKey">
+                <span class="fw-bold">Redact multiple fields when a specific KEY equals VALUE</span>
+              </button>
+            </h2>
+            <div
+              id="collapseRedactValuesForKey"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingRedactValuesForKey"
+              data-bs-parent="#redactModesAccordion">
+              <div class="accordion-body row g-3" id="groupRedactValuesForKey">
+                <div class="col-md-4">
+                  <label for="redactKeySelect" class="form-label">Key</label>
+                  <select class="form-select" id="redactKeySelect">
+                    <option value="" disabled selected>Select Key</option>
+                    {% for key in key_names %}
+                      <option value="{{ key }}">{{ key }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="redactValueInput" class="form-label">Value or regex</label>
+                  <input type="text" class="form-control" id="redactValueInput" placeholder="Ex: Cisco.*">
+                </div>
+                <div class="col-md-4">
+                  <label for="redactFieldsSelect" class="form-label">Fields to redact</label>
+                  <select class="form-select" id="redactFieldsSelect" multiple size="5">
+                    {% for key in key_names %}
+                      <option value="{{ key }}">{{ key }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-12">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-success mt-1 add-rule-btn"
+                    data-type="multiKeyValue"
+                    data-key-select="#redactKeySelect"
+                    data-value-input="#redactValueInput"
+                    data-fields-select="#redactFieldsSelect">
+                    Add Rule
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hidden fields carried with Run -->
+      <input type="hidden" name="rules_json" id="rules_json" />
+      <input type="hidden" name="preset" id="selectedPresetInput" />
+    </form>
+
+    <!-- 3) Rules Table: shows the result of your selections -->
+    <section class="section mt-4">
+      <h3>3. Current Redaction Rules</h3>
+    <!-- Save current rules as preset toolbar -->
+    <div class="row g-2 align-items-end mb-3">
+        <div class="col-md-6 col-lg-5">
+        <label for="presetNameInput" class="form-label">Save current rules as</label>
+        <input id="presetNameInput" type="text" class="form-control" placeholder="Enter new redaction policy name">
+        </div>
+        <div class="col-auto">
+        <button id="savePresetBtn" type="button" class="btn btn-outline-primary">
+            Save Policy
+        </button>
+        </div>
+    </div>
+
+      <div id="rules-table-wrap" class="table-responsive">
+        <table class="table table-bordered" id="rules-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Mode</th>
+              <th>Key</th>
+              <th>Value(s)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="rules-table-body">
+            <!-- Filled by redact.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+               
+
+    <footer>
+        <p>OSS Prevalence - LLNL</p>
+    </footer>
+    
+    </div>
+</div>
+
+    
+</body>
+<script src="{{ url_for('static', filename='js/redact.js')}}" type="text/javascript"></script>
+
+</html>

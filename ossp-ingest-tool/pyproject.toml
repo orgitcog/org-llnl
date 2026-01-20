@@ -1,0 +1,37 @@
+[project]
+authors = [
+  {name = "Aaron Wegner", email = "wegner2@llnl.gov"},
+  {name = "Micaela Gallegos", email = "gallegos31@llnl.gov"},
+  {name = "Shayna Kapadia", email = "kapadia2@llnl.gov"}
+
+]
+name = "database-population"
+version = "0.1.0"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent"
+]
+requires-python = ">=3.10"
+dependencies = [
+    "flask==3.1.1",
+    "jinja2",
+    "loguru==0.7.3",
+    "matplotlib==3.9.4",
+    "networkx",
+    "openpyxl==3.1.5",
+    "pandas==2.2.3",
+    "pyjq==2.6.0",
+    "pyvis",
+    "requests==2.32.3",
+    "tomli==2.2.1",
+    "types-requests==2.32.0.20250328",
+    "tomli_w",
+]
+description = "OSSP Prevalence Web Tool"
+[project.optional-dependencies]
+dev = ["build", "virtualenv"]
+test = [
+  "pytest"
+]
+[tool.setuptools.packages.find]
+where = ["ossp"] 

@@ -1,0 +1,6 @@
+*.pyc
+.DS_Store
+py_hostlist.egg-info
+docs/_build/
+dist/
+build/

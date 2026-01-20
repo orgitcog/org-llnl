@@ -1,0 +1,1 @@
+CREATE VIEW IF NOT EXISTS "ParentChildView" AS select Parent.FirmwareID, ParentComponentID, Parent.Component as ParentComponent, ChildComponentID, Child.Component as ChildComponent from SubComponent inner join FirmwareSummary as Parent ON Parent.ComponentID = ParentComponentID inner join FirmwareSummary as Child ON Child.ComponentID = ChildComponentID

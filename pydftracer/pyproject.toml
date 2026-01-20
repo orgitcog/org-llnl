@@ -1,0 +1,159 @@
+[build-system]
+requires = ["setuptools>=80", "wheel", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydftracer"
+dynamic = ["version"]
+description = "Python libs for DFTracer"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    { name = "Hariharan Devarajan (Hari)", email = "hariharandev1@llnl.gov" },
+    { name = "Ray Andrew Sinurat", email = "raydreww@gmail.com" }
+]
+maintainers = [
+    { name = "Hariharan Devarajan (Hari)", email = "hariharandev1@llnl.gov" },
+    { name = "Ray Andrew Sinurat", email = "raydreww@gmail.com" }
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Topic :: Software Development :: Build Tools",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3 :: Only",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "typing_extensions>=4.0; python_version < '3.10'",
+]
+
+[project.urls]
+Homepage = "https://github.com/LLNL/pydftracer"
+Repository = "https://github.com/LLNL/pydftracer"
+"Bug Tracker" = "https://github.com/LLNL/pydftracer/issues"
+Documentation = "https://dftracer.readthedocs.io/en/latest/"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov",
+    "pytest-xdist",
+    "h5py",
+    "numpy",
+    "pillow",
+    "ruff",
+    "mypy",
+    "torch>=2.5.1",
+    "torchvision",
+    "tensorboard",
+]
+dynamo = [
+    "torch>=2.5.1"
+]
+docs = [
+    "sphinx>=5.0",
+    "sphinx-rtd-theme>=1.0",
+    "myst-parser>=0.18",
+]
+
+[tool.setuptools.package-dir]
+"" = "python"
+
+[tool.setuptools.packages.find]
+where = ["python"]
+include = ["dftracer*"]
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --strict-markers --tb=short"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "subprocess: marks tests that run in subprocess",
+]
+
+[tool.coverage.run]
+source = ["python/dftracer"]
+omit = [
+    "tests/*",
+    "demo_*.py",
+    "test_*.py",
+    "python/dftracer/dbg/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "I", "UP"]
+ignore = [
+    "E501",   # line too long, handled by formatter
+    "B006",   # Do not use mutable data structures for argument defaults - acceptable in some cases
+    "B008",   # do not perform function calls in argument defaults
+    "C901",   # too complex
+    "F403",   # Star imports - used for __all__ exports and acceptable in __init__ files
+    "UP006",  # Use `list` instead of `List` for type annotation - keep for older Python compatibility
+    "UP028",  # Use `X | Y` for union types - keep for older Python compatibility
+    "UP035",  # typing.Dict/List is deprecated - keeping for older Python compatibility
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011", "B023"]
+"python/dftracer/python/logger.py" = ["E402", "F405"]
+"python/dftracer/python/dbg/logger.py" = ["E402", "F405"]
+"python/dftracer/python/dbg/ai.py" = ["E402"]
+"python/dftracer/python/ai.py" = ["E402"]
+"python/dftracer/python/ai_common.py" = ["F405"]
+"python/dftracer/python/ai_init.py" = ["F405"]
+"python/dftracer/python/common.py" = ["E701", "F405"]
+"python/dftracer/python/dynamo.py" = ["B904"]
+"python/dftracer/python/torch/profiler.py" = ["E402"]
+"python/dftracer/python/dbg/torch/profiler.py" = ["E402"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[[tool.mypy.overrides]]
+module = [
+    "torch.*",
+    "functorch.*",
+]
+ignore_missing_imports = true
+follow_imports = "skip"
+
+[[tool.mypy.overrides]]
+module = "dftracer.python.dynamo"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+version_file = "python/dftracer/python/_version.py"
