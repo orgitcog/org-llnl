@@ -1,0 +1,32 @@
+
+cmake_minimum_required(VERSION 3.10)
+project(sundials5_build)
+
+include(ExternalProject)
+ExternalProject_Add(
+  sundials5
+  URL        https://github.com/LLNL/sundials/archive/refs/tags/v5.8.0.tar.gz
+  URL_HASH   MD5=a087032a72127c12e162bfe4405b03cd
+  LIST_SEPARATOR |
+  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${sundials_prefix}
+             -DCMAKE_CUDA_ARCHITECTURES=${CMAKE_CUDA_ARCHITECTURES_EXT}
+             -DEXAMPLES_ENABLE_C=OFF
+             -DEXAMPLES_ENABLE_CXX=OFF
+             -DEXAMPLES_ENABLE_CUDA=OFF
+             -DEXAMPLES_INSTALL=OFF
+             -DBUILD_SHARED_LIBS=OFF
+             -DBUILD_NVECTOR_MPIMANYVECTOR=OFF
+             -DENABLE_MPI=${ENABLE_MPI}
+             -DCMAKE_BUILD_TYPE=${ZERORK_EXTERNALS_BUILD_TYPE}
+             -DCMAKE_GENERATOR_PLATFORM=${CMAKE_GENERATOR_PLATFORM}
+             -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW
+             -DCMAKE_MSVC_RUNTIME_LIBRARY=${CMAKE_MSVC_RUNTIME_LIBRARY}
+             -DENABLE_CUDA=${ENABLE_GPU}
+             -DENABLE_LAPACK=${ZERORK_ENABLE_SUNDIALS_LAPACK}
+             -DLAPACK_LIBRARIES=""
+             -DLAPACK_WORKS:BOOL=TRUE
+             -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+             -DSUNDIALS_INDEX_SIZE=32
+             ${MAGMA_ARGS}
+)
+

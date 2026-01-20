@@ -1,0 +1,61 @@
+# Test overview:
+#    1 sampler (v4.3.3, named samp-4.3.3)
+#       |
+#       V
+#    L1 agg (v4.3.3, named agg-4.3.3)
+#       |
+#       V
+#    L2 agg (OVIS-4, named agg-4)
+#
+# Scenario
+# - samp-4.3.3 started (1 set: meminfo)
+# - agg-4.3.3 started, collecting sets from samp-4.3.3
+# - agg-4 started, collecting sets from agg-4.3.3
+# - ldms_ls to agg-4.3.3 & verify that it is not empty
+# - ldms_ls to agg-4 & verify that it is the same as agg-4.3.3
+# - kill samp-4.3.3
+# - ldms_ls to agg-4.3.3 & verify that dir result is empty
+# - ldms_ls to agg-4 & verify that dir result is empty
+
+name: Compatibility test with OVIS-4.3.3
+
+on:
+  push:
+    branches:
+      - main
+      - 'b[0-9]+.[0-9]+'
+  pull_request:
+    branches:
+      - main
+      - 'b[0-9]+.[0-9]+'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: ovishpc/ldms-compat-alma-8:latest-amd64
+    steps:
+    - uses: actions/checkout@v1
+    - run: sh autogen.sh
+    - name: build and install
+      run: |
+        .github/compat/build-install.sh
+    - name: test preparation
+      run: |
+        .github/compat/prep.sh
+    - name: compatibility test
+      if: ${{ success() }} # all previous steps are good
+      run: |
+        .github/compat/compat-test.sh
+    - name: compatibility test with munge
+      if: ${{ success() }} # all previous steps are good
+      run: |
+        .github/compat/compat-test-munge.sh
+    - name: enum compatibility check
+      if: ${{ success() }} # all previous steps are good
+      run: |
+        .github/enum-check/enum-check.sh

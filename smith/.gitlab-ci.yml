@@ -1,0 +1,165 @@
+##############################################################################
+# Copyright (c) Lawrence Livermore National Security, LLC and
+# other Smith Project Developers. See the top-level LICENSE file for
+# details.
+#
+# SPDX-License-Identifier: (BSD-3-Clause)
+##############################################################################
+
+variables:
+  #TODO: uncomment this when everyone has service user access across all the machines
+  #LLNL_SERVICE_USER: asmith
+  GIT_STRATEGY: clone
+  GIT_SUBMODULE_STRATEGY: recursive
+  PROJECT_ALLOC_NAME: ${CI_PROJECT_NAME}_ci_${CI_PIPELINE_ID}
+  BUILD_ROOT: ${CI_PROJECT_DIR}
+  FULL_BUILD_ROOT: ${CI_BUILDS_DIR}/smith/${CI_JOB_NAME}
+  ALLOC_BANK: eng
+  SPOT_DIR: ${BUILD_ROOT}/califiles
+
+# Whether and how to update uberenv
+.run_update_uberenv: &run_update_uberenv |
+  [[ -n "${UPDATE_UBERENV}" ]] && ./scripts/gitlab/update-uberenv.sh "${UPDATE_UBERENV}"
+
+stages:
+  - src
+  - tpl
+  - examples
+  - benchmarks
+  - comparison
+
+# Run src build each push
+# NOTE: When you add a new workflow, remember to add it to this `if` statement!
+.src_workflow:
+  stage: src
+  rules:
+    - if: $SMITH_CI_WORKFLOW_TYPE != "examples" &&
+          $SMITH_CI_WORKFLOW_TYPE != "tpl" &&
+          $SMITH_CI_WORKFLOW_TYPE != "benchmarks" &&
+          $SMITH_CI_WORKFLOW_TYPE != "comparison"
+
+# Run examples as a nightly scheduled pipeline
+.examples_workflow:
+  stage: examples
+  rules:
+    - if: $SMITH_CI_WORKFLOW_TYPE == "examples"
+
+# Run tpl build as a nightly scheduled pipeline
+.tpl_workflow:
+  stage: tpl
+  rules:
+    - if: $SMITH_CI_WORKFLOW_TYPE == "tpl"
+
+# Run benchmarks build as a weekly scheduled pipeline
+# or, run benchmarks and save them in tmp location for comparison
+.benchmarks_workflow:
+  stage: benchmarks
+  rules:
+    - if: $SMITH_CI_WORKFLOW_TYPE == "benchmarks"
+      variables:
+        # Note: make sure this matches what's in common_build_functions.py!
+        SPOT_DIR: /usr/workspace/smithdev/califiles/smith
+    - if: $SMITH_CI_WORKFLOW_TYPE == "comparison"
+
+# Compare caliper files (generated from .benchmarks_workflow) against develop
+.comparison_workflow:
+  stage: comparison
+  rules:
+    - if: $SMITH_CI_WORKFLOW_TYPE == "comparison"
+  dependencies:
+    # TODO re-enable with CZMatrix
+    # - blueos-clang_14_0_5-benchmarks
+    - toss4-gcc_13_3_1-benchmarks
+    - toss4-llvm_19_1_3-benchmarks
+
+####
+# Templates
+.src_build_script:
+  script:
+    # Build source, run unit tests, and test install examples. Conditionally run
+    # integration tests
+    - echo -e "section_start:$(date +%s):src_build_and_unit_test\r\e[0K
+      Source Build and Unit Tests ${CI_PROJECT_NAME}"
+    - ./scripts/gitlab/build_and_test.sh
+    - echo -e "section_end:$(date +%s):src_build_and_unit_test\r\e[0K"
+  artifacts:
+    expire_in: 2 weeks
+    when: always
+    paths:
+      - _smith_build_and_test_*/output.log*.txt
+      - _smith_build_and_test_*/build-*/output.log*.txt
+      - _smith_build_and_test_*/build-*/*.*.logs/*.log
+      - _smith_build_and_test_*/build-*/*.*.logs/*.err
+    reports:
+      junit:
+      - _smith_build_and_test_*/build-*/junit.xml
+      - _smith_build_and_test_*/build-*/*.*.logs/atsr.xml
+
+.tpl_build_script:
+  script:
+    - *run_update_uberenv
+    # Build TPLs, src, and run unit tests
+    - echo -e "section_start:$(date +%s):tpl_build_and_unit_test\r\e[0K
+      TPL Build and Unit Test ${CI_PROJECT_NAME}"
+    - ${ALLOC_COMMAND} python3 scripts/llnl/build_tpls.py -v ${SPEC} --directory=${FULL_BUILD_ROOT} --short-path
+    - echo -e "section_end:$(date +%s):tpl_build_and_unit_test\r\e[0K"
+  artifacts:
+    expire_in: 2 weeks
+    when: always
+    paths:
+      - ${FULL_BUILD_ROOT}/${SYS_TYPE}/*/output.log*.txt
+      - ${FULL_BUILD_ROOT}/${SYS_TYPE}/*/_smith_build_and_test_*/output.log*.txt
+      - ${FULL_BUILD_ROOT}/${SYS_TYPE}/*/_smith_build_and_test_*/build-*/output.log*.txt
+    reports:
+      junit: ${FULL_BUILD_ROOT}/${SYS_TYPE}/*/_smith_build_and_test_*/build-*/junit.xml
+
+.examples_build_script:
+  script:
+    # Build src and run examples
+    - echo -e "section_start:$(date +%s):examples_build_and_unit_test\r\e[0K
+      Source Build and Unit Test with Examples ${CI_PROJECT_NAME}"
+    - ${ALLOC_COMMAND} python3 scripts/llnl/run_examples.py
+    - echo -e "section_end:$(date +%s):examples_build_and_unit_test\r\e[0K"
+  artifacts:
+    expire_in: 2 weeks
+    when: always
+    paths:
+      - _smith_build_and_test_*/output.log*.txt
+      - _smith_build_and_test_*/build-*/output.log*.txt
+      - _smith_build_and_test_*/build-*/*.*.logs/*.log
+      - _smith_build_and_test_*/build-*/*.*.logs/*.err
+
+.benchmarks_build_script:
+  script:
+    # Builds src, runs benchmarks, and stores Caliper files in shared location
+    - echo -e "section_start:$(date +%s):benchmarks_build\r\e[0K
+      Benchmarks Build ${CI_PROJECT_NAME}"
+    - mkdir -p ${SPOT_DIR}
+    - ${ALLOC_COMMAND} python3 scripts/llnl/run_benchmarks.py --spot-dir ${SPOT_DIR}
+    - echo -e "section_end:$(date +%s):benchmarks_build\r\e[0K"
+  artifacts:
+    expire_in: 2 weeks
+    when: always
+    paths:
+      - _smith_build_and_test_*/output.log*.txt
+      - _smith_build_and_test_*/build-*/output.log*.txt
+      - ${SPOT_DIR}/*.cali
+
+.comparison_build_script:
+  script:
+    # Takes Caliper files from previous jobs and performs benchmark analysis
+    - echo -e "section_start:$(date +%s):comparison\r\e[0K
+      Comparison Build ${CI_PROJECT_NAME}"
+    - ls ${SPOT_DIR}
+    - ls ${SPOT_DIR} | wc -l
+    - ${ALLOC_COMMAND} python3 scripts/llnl/compare_benchmarks.py --current-cali-dir ${SPOT_DIR} --verbose
+    - echo -e "section_end:$(date +%s):comparison\r\e[0K"
+
+# This is where jobs are included for each system
+include:
+  # TODO re-enable with CZMatrix
+  # - local: .gitlab/build_blueos.yml
+  - local: .gitlab/build_toss4.yml
+  - local: .gitlab/build_toss4_cray.yml
+  - project: 'lc-templates/id_tokens'
+    file: 'id_tokens.yml'

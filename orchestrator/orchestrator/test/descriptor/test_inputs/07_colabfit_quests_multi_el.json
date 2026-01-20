@@ -1,0 +1,19 @@
+{
+    "storage":{
+        "storage_type":"COLABFIT",
+        "storage_args":{
+            "credential_file":"<STORAGE_CREDENTIAL_PATH>",
+            "dataset_name":"07_colabfit_quests_multi_el"
+        }
+    },
+    "init_config_path":"../multi_element_configs/",
+    "descriptors":{
+        "descriptor_type":"QUESTSDescriptor",
+        "path_type":"07_colabfit_quests_multi_el",
+        "descriptor_args": {
+            "num_nearest_neighbors":32,
+            "cutoff": 5.0,
+            "species": ["Na", "Cl"]
+        }
+    }
+}

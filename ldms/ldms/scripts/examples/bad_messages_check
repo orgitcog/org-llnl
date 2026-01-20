@@ -1,0 +1,132 @@
+# This test emulates the stream traffic but not the set traffic of linux_proc_sampler
+# by recycling some captured and anonymized json.
+export plugname=linux_proc_sampler
+export dsname=$(ldms_dstat_schema_name mmalloc=1 io=1 fd=1 stat=1 auto-schema=1)
+export dstat_schema=$dsname
+export LDMSD_LOG_TIME_SEC=1
+export LDMSD_EXTRA="-m 128m"
+
+SET_LOG_LEVEL DEBUG
+
+portbase=11000
+DAEMONS 3
+/bin/rm -f $LOGDIR/json*.log
+/bin/rm -f $LOGDIR/nl.log
+/bin/rm -f $LOGDIR/vg.*
+
+#jvg="valgrind -v --leak-check=full --track-origins=yes --trace-children=yes --show-leak-kinds=all --time-stamp=yes --keep-debuginfo=yes --malloc-fill=0 --log-file=$LOGDIR/vg.replay"
+
+function REPLAY_JSON {
+	# args: daemon-number repeat count filename ...
+	# Send each unpathed file to port using tag=(filename less suffix starting with -) repeatedly
+	# in line mode, with reconnection each time the file is resent for about 11 days or until killed.
+	# json input files must be next to the input case script.
+	target_num=$1
+	repeats=$2
+	iport=${ports[$target_num]}
+	shift
+	shift
+	files="$*"
+	replay_json_pidlist=""
+	for f in $files; do
+		tag=$(echo $f | cut -d- -f1)
+		ldms_msg_publish -p "$iport" -a none -m $tag -t json -x $XPRT -h $HOST \
+			-i 1000000 -W 1000 -l -r $repeats -R -v \
+			-f $(dirname $input)/$f \
+			> $LOGDIR/pub.$target_num.$tag 2>&1 &
+		replay_json_pidlist="$! $replay_json_pidlist"
+	done
+	echo $replay_json_pidlist
+}
+
+# log whether or not the given pids are found
+function CHECK_PIDS {
+	echo check_pids $1
+	label=$1
+	present=$2
+	absent=$3
+	shift
+	shift
+	shift
+	for cpid in $* ; do
+		if ps -p $cpid > /dev/null; then
+			echo $present for $label pid: $cpid
+		else
+			echo $absent for $label pid: $cpid
+		fi
+	done
+}
+
+# WAIT_DETACHED_PIDS timeout_sec pid...
+# wait up to timeout for all given pids to die.
+function WAIT_DETACHED_PIDS {
+	pidsmaxwait=$1
+	shift
+	MESSAGE "waiting up to $pidsmaxwait seconds for pids to complete: $*"
+	pidtend=$(( $(date +%s) + $pidsmaxwait))
+	while /bin/true; do
+		pidtnow=$(date +%s)
+		if test $pidtnow -gt $pidtend; then
+			MESSAGE "timed-out: WAIT_DETACHED_PIDS after $pidsmaxwait seconds for $*"
+			break
+		fi
+		seen=0
+		for i in $*; do
+			if ps -p $i > /dev/null; then
+				seen=1
+				break
+			fi
+		done
+		if test $seen = "0"; then
+			MESSAGE "completed: WAIT_DETACHED_PIDS took $(( $pidsmaxwait - ($pidtend - $pidtnow) ))"
+			break
+		fi
+	done
+}
+
+VGARGS="--tool=drd --trace-cond=yes --trace-fork-join=yes"
+VGARGS="--leak-check=full --track-origins=yes --trace-children=yes --show-leak-kinds=definite --time-stamp=yes --keep-debuginfo=yes --gen-suppressions=all --suppressions=$(dirname $input)/memcheck.config.supp"
+# use stdio instead of file specification by uncommenting next line
+#LOGOPT=""
+#sampler
+#vgon
+LDMSD 1
+vgoff
+# L1
+#vgon
+LDMSD 2
+#vgoff
+# L2
+vgon
+LDMSD 3
+vgoff
+SLEEP 5
+# start publisher loops before ldmsd 1
+# All input objects are missing their final } except the slurm input.
+# For plugins that want json, no data should get stored.
+# No data should get leaked due to parse failures.
+REPLAY_PIDS=$(REPLAY_JSON 1 1 bad.linux_proc_sampler_argv-1.json  bad.linux_proc_sampler_env-1.json  bad.linux_proc_sampler_files-1.json slurm-1.json)
+echo $REPLAY_PIDS
+
+SLEEP 10
+
+MESSAGE msg_client_stats L0
+echo msg_client_stats | ldmsd_controller -h localhost -p $port1 -a none -x sock
+MESSAGE msg_client_stats L1
+echo msg_client_stats | ldmsd_controller -h localhost -p $port2 -a none -x sock
+MESSAGE msg_client_stats L2
+echo msg_client_stats | ldmsd_controller -h localhost -p $port3 -a none -x sock
+
+# all the replayers should be done
+CHECK_PIDS "message publisher" "unexpectedly still here" "gone as expected" $REPLAY_PIDS
+KILL_LDMSD 1 2 3
+SLEEP 5
+
+file_created $STOREDIR/node/$dsname
+
+if grep 'definitely lost: 0 bytes in 0 blocks' $LOGDIR/vg.3.*; then
+	echo "yay, no bad-json-related leaks!"
+else
+	echo "FAIL: definite leaks found at the L2; see $LOGDIR/vg.3.*"
+	bypass=1
+fi

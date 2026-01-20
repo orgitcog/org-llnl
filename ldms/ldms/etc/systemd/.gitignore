@@ -1,0 +1,5 @@
+/ldmsd.aggregator.service
+/ldmsd.kokkos.service
+/ldmsd.sampler.service
+/papi-sampler.service
+/ldmsd@.service

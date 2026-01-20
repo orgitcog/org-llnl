@@ -1,0 +1,75 @@
+{
+  "type" : "CSVDatasetID",
+  "csvFileName" : "target/scala-2.11/test-classes/nodeFlops.csv",
+  "options" : {
+    "header" : "true",
+    "delimiter" : ","
+  },
+  "sparkSchema" : {
+    "type" : "struct",
+    "fields" : [ {
+      "name" : "node",
+      "type" : "string",
+      "nullable" : true,
+      "metadata" : { }
+    }, {
+      "name" : "time",
+      "type" : "string",
+      "nullable" : true,
+      "metadata" : {
+        "scrubJayType" : {
+          "type" : "LocalDateTimeString",
+          "dateformat" : "yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    }, {
+      "name" : "flops",
+      "type" : "integer",
+      "nullable" : true,
+      "metadata" : { }
+    } ]
+  },
+  "originalScrubJaySchema": {
+    "columns": [
+      {
+        "name" : "node",
+        "domain" : true,
+        "dimension" : {
+          "name": "node",
+          "ordered": false,
+          "continuous": false
+        },
+        "units" : {
+          "name" : "identifier",
+          "elementType" : "POINT"
+        }
+      },
+      {
+        "name" : "time",
+        "domain" : true,
+        "dimension" : {
+          "name": "time",
+          "ordered": true,
+          "continuous": true
+        },
+        "units" : {
+          "name" : "datetimestamp",
+          "elementType" : "POINT"
+        }
+      },
+      {
+        "name" : "flops",
+        "domain" : false,
+        "dimension" : {
+          "name": "flops",
+          "ordered": true,
+          "continuous": true
+        },
+        "units" : {
+          "name" : "count",
+          "elementType" : "POINT"
+        }
+      }
+    ]
+  }
+}

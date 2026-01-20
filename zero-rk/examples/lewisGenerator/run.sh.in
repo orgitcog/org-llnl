@@ -1,0 +1,7 @@
+
+app=lewisGenerator.x
+inp=lewis_generator.yml
+
+"@CMAKE_INSTALL_PREFIX@/bin/$app" $inp
+
+

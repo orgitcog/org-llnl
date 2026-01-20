@@ -1,0 +1,14 @@
+sphinx==7.2.3
+sphinx_rtd_theme
+sphinxcontrib-bibtex
+nbsphinx
+numpy
+astropy
+jupyter
+jupyterlab
+asdf
+scipy
+matplotlib
+pandas
+popclass
+scikit-learn

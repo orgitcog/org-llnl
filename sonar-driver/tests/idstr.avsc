@@ -1,0 +1,15 @@
+{
+    "type": "record",
+    "name": "test",
+    "fields":
+    [
+        {
+            "type": "int",
+            "name": "id"
+        },
+        {
+            "type": "string",
+            "name": "str"
+        }
+    ]
+}

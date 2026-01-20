@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+import os, sys
+import yaml
+import errno
+import argparse
+from ldmsd.parser_util import *
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description='LDMS Monitoring YAML Cluster Configuration Parser')
+    required = parser.add_argument_group('required arguments')
+    required.add_argument('--ldms_config', metavar='FILE', required=True,
+                        help='Path to LDMSD YAML configuration file. ')
+    parser.add_argument('--generate_config_path', metavar="STRING", required=False,
+                        help='Path to directory to store generated v4 configuration files for an entire LDMS cluster. '
+                             'Samplers with similar configurations share a single configuration file. ',
+                        default=False)
+    parser.add_argument('--daemon_name', metavar='STRING', required=False,
+                        default=False,
+                        help='Daemon name to generate configuration from YAML file')
+    parser.add_argument('--debug', action='store_true',
+                        help='Enable debug information')
+    args = parser.parse_args()
+    if not args.debug:
+        import sys
+        sys.tracebacklimit=0
+    config_fp = open(args.ldms_config)
+    conf_spec = yaml.safe_load(config_fp)
+
+    if not isinstance(conf_spec, (list, dict)):
+        print(f"Error: input {args.ldms_config} is not yaml. Contents:", file=sys.stderr)
+        print(conf_spec, file=sys.stderr)
+        sys.exit(errno.EINVAL)
+
+    cluster = YamlCfg(None, None, conf_spec, args)
+
+    if args.daemon_name and args.generate_config_path:
+        print(f'Parameters "daemon_name" and "generate_config_path" are mutually exclusive.\n'
+              f'Specifying the "daemon_name" parameter will generate the configuration for a single ldmsd\n'
+              f'Specifying the "generate_config_path" parameter will generate an entire cluster\'s\n'
+              f'v4 configuration files in the path provided.\n', file=sys.stderr)
+        sys.exit(errno.EINVAL)
+
+    if args.daemon_name:
+        ldmsd_cfg_str = cluster.daemon_config(args.ldms_config, args.daemon_name.rstrip('0'))
+        print(f'{ldmsd_cfg_str}')
+        sys.exit(0)
+
+    if args.generate_config_path:
+        rc = cluster.config_v4(args.generate_config_path)
+        if rc:
+            sys.exit(rc)
+        print('LDMSD v4 config files generated', file=sys.stderr)
+        sys.exit(0)
+
+    if not args.generate_config_path and not args.ldms_config and not args.daemon_name:
+        print(f'No action detected. Exiting.', file=sys.stderr)
+
+    sys.exit(0)

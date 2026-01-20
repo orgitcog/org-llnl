@@ -1,0 +1,10 @@
+*.pyc
+*~
+\#*\#
+__pycache__
+_build
+spack.lock
+configure.yaml
+.spack-env
+.env
+.DS_Store

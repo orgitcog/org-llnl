@@ -1,0 +1,17 @@
+---
+key: SAMRAI_ORIGINAL
+date: 2012-11-10
+author: pave
+application: {
+  centers: [cx, cy, cz],
+  sizes: [sx, sy, sz],
+  patch_table: samr_data.yaml
+}
+---
+filetype: table
+filename: samr_data.yaml
+domain: APP
+type: PATCH
+field: patchid
+flags: 0
+...

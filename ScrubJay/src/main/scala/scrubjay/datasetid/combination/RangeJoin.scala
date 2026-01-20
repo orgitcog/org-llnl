@@ -1,0 +1,69 @@
+// Copyright 2018 Lawrence Livermore National Security, LLC and other
+// ScrubJay Project Developers. See the top-level COPYRIGHT file for details.
+//
+// SPDX-License-Identifier: (Apache-2.0 OR MIT)
+
+package scrubjay.datasetid.combination
+
+/*
+case class RangeJoin(dsID1: DatasetID, dsID2: DatasetID)
+  extends DatasetID(dsID1, dsID2) {
+
+  // Determine common continuous (point, range) column pairs and and discrete dimension columns
+  val commonDimensions: Seq[(MetaDimension, MetaEntry, MetaEntry)] = MetaSource.commonDimensionEntries(dsID1.sparkSchema, dsID2.sparkSchema).toSeq
+  val commonContinuousDimensions: Seq[(MetaDimension, MetaEntry, MetaEntry)] = commonDimensions.filter(d =>
+    d._1.dimensionType == DimensionSpace.CONTINUOUS &&
+    d._2.units.unitsTag.domainType == DomainType.RANGE &&
+    d._3.units.unitsTag.domainType == DomainType.POINT)
+  val commonDiscreteDimensions: Seq[(MetaDimension, MetaEntry, MetaEntry)] = commonDimensions.filter(_._1.dimensionType == DimensionSpace.DISCRETE)
+
+  val continuousDimColumn1: String = commonContinuousDimensions.flatMap { case (_, me1, _) => dsID1.sparkSchema.columnForEntry(me1) }.head
+  val continuousDimColumn2: String = commonContinuousDimensions.flatMap { case (_, _, me2) => dsID2.sparkSchema.columnForEntry(me2) }.head
+
+  val discreteDimColumns1: Seq[String] = commonDiscreteDimensions.flatMap { case (_, me1, _) => dsID1.sparkSchema.columnForEntry(me1) }
+  val discreteDimColumns2: Seq[String] = commonDiscreteDimensions.flatMap { case (_, _, me2) => dsID2.sparkSchema.columnForEntry(me2) }
+
+  // Restrict to single continuous axis for now
+  def isValid: Boolean = commonContinuousDimensions.length == 1
+
+  val sparkSchema: MetaSource = dsID1.sparkSchema
+    .withoutColumns(discreteDimColumns2)
+    .withoutColumns(Seq(continuousDimColumn2))
+    .withMetaEntries(dsID2.sparkSchema)
+
+  def realize: ScrubJayRDD = {
+
+    val ds1 = dsID1.realize
+    val ds2 = dsID2.realize
+
+    val rdd: RDD[DataRow] = {
+
+      // Cartesian
+      val cartesian = ds1.cartesian(ds2)
+
+      // Filter out all pairs where the discrete columns don't match
+      val discreteMatch = cartesian.filter { case (row1, row2) => discreteDimColumns1.map(row1) == discreteDimColumns2.map(row2) }
+
+      // Remove redundant discrete entries
+      val filteredDiscrete = discreteMatch.map { case (row1, row2) => (row1, row2.filterNot { case (k, _) => discreteDimColumns2.contains(k) } ) }
+
+      // Filter out all pairs where the POINT in ds2 does not reside in the RANGE of ds1
+      val continuousMatch = filteredDiscrete.filter { case (row1, row2) =>
+        val range = row1(continuousDimColumn1).asInstanceOf[ContinuousRange[_]]
+        val point = row2(continuousDimColumn2).asInstanceOf[Continuous]
+        range.min.asInstanceOf[Continuous].asDouble <= point.asDouble && point.asDouble <= range.asInstanceOf[Continuous].asDouble
+      }
+
+      // Reduce all points that fall in a range using the appropriate reducer for those units
+      val meta = ds1.sparkContext.broadcast(dsID2.sparkSchema)
+      val reducedMatch = continuousMatch.mapValues(_.toSeq).reduceByKey(_ ++ _)
+        .mapValues(_.groupBy(_._1).map(kv => (kv._1, meta.value(kv._1).units.unitsTag.reduce(kv._2.map(_._2)))).toMap[String, Units[_]])
+
+      // Remove redundant continuous entries from row2 and combine results
+      reducedMatch.map { case (row1, row2) => row1 ++ row2.filterNot { case (k, _) => k == continuousDimColumn2 } }
+    }
+    
+    new ScrubJayRDD(rdd)
+  }
+}
+*/

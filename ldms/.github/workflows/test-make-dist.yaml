@@ -1,0 +1,29 @@
+name: Test "make dist"
+
+on:
+  push:
+    branches:
+      - main
+      - 'b[0-9]+.[0-9]+'
+  pull_request:
+    branches:
+      - main
+      - 'b[0-9]+.[0-9]+'
+
+jobs:
+  build:
+    # Make sure that create-release.yaml has the same "runs-on" and
+    # "container" as used here.
+    runs-on: ubuntu-latest
+    container:
+      image: ovishpc/ldms-dev-ubuntu-2204:latest-amd64
+
+    steps:
+    - uses: actions/checkout@v4
+    - run: git config --global --add safe.directory ${PWD}
+    - name: autogen
+      run: sh autogen.sh
+    - name: configure
+      run: ./configure
+    - name: make dist
+      run: make dist

@@ -1,0 +1,77 @@
+    <div class="grid">
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div>
+                        <span class="block text-500 font-medium mb-3">Total Events</span>
+                        <div id="totalEvents" class="text-900 font-medium text-xl">{{ kpi?.totalEvents | number }}</div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-chart-line text-blue-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-500">since Wintap start</span>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div>
+                        <span class="block text-500 font-medium mb-3">Max Events Per Second</span>
+                        <div class="text-900 font-medium text-xl">{{ kpi?.maxEventsPerSecond | number }}</div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-orange-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-arrow-up text-orange-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-500">Happened at: {{ kpi?.maxEventTime | date:'short' }}</span>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0 bg-red2" [ngClass]="{'card-warn': kpi!.eventsPerSecond > 100 && kpi!.eventsPerSecond <= 150, 'card-danger': kpi!.eventsPerSecond > 150}">
+                <div class="flex justify-content-between mb-3">
+                    <div>
+                        <span class="block text-500 font-medium mb-3" >Events Per Second</span>
+                        <div class="text-900 font-medium text-xl">{{ kpi?.eventsPerSecond | number }}</div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-red-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-map-marker text-cyan-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-500">last value</span>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div>
+                        <span class="block text-500 font-medium mb-3">Wintap Uptime</span>
+                        <div class="text-900 font-medium text-xl">{{ kpi?.runtime }}</div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-clock text-purple-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-500">Days</span>
+            </div>
+        </div>
+
+        <div class="col-15 xl:col-9">
+            <div class="card">
+                <h5>Current Activity</h5>
+                <p-chart #chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
+            </div>
+        </div>
+        <div class="col-3 xl:col-3">
+            <div class="card">
+                <h5>Sensor Health</h5>
+                <div style="margin:20px">
+                    <i #wintapCoreStatus class="pi pi-circle-on text-xl" class="{{kpi?.wintapOK ? 'text-green-500' : 'text-red-700'}}" style="margin:10px"></i>Wintap Sensor
+                </div>
+                <div style="margin:20px">
+                    <i #wintapEtlStatus class="pi pi-circle-on text-xl " class="{{kpi?.collectorOK ? 'text-green-500' : 'text-red-700'}}" style="margin:10px"></i>Data Collect Plugin
+                </div>
+            </div>
+        </div>
+    </div>
+

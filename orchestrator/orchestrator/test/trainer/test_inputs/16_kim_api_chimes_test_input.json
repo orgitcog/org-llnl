@@ -1,0 +1,5 @@
+{"example_kimcode_prefix" : "ChIMES_Ta",
+"model_driver" : "no-driver",
+"trainer_test_input_file": "test_inputs/05_chimes_test_input.json",
+"lammps_executable": "<LAMMPS_PATH>"
+}
