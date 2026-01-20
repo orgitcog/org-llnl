@@ -1,0 +1,60 @@
+language: python
+python:
+  - "3.7"
+cache: pip
+
+branches:
+  only:
+    - develop
+    - /^releases\/.*$/
+
+install:
+  - pip install --upgrade -r requirements.txt
+  - git clone https://github.com/LLNL/Caliper.git
+  - cd Caliper
+  - mkdir build && cd build
+  - cmake -DCMAKE_INSTALL_PREFIX=${VIRTUAL_ENV} ../
+  - make && make install
+  - cd ../../
+  - rm -rf Caliper
+  - python setup.py install
+  - npm install --prefix=app
+  - npm run lint --prefix=app
+
+jobs:
+  fast_finish: true
+  include:
+    - stage: "tests"
+      script:
+        - echo -e "Running test (caliper-simple-json)"
+        - callflow --process --ensemble_process --reset --data_path ./data/caliper-simple-json --profile_format caliper_json
+
+        - echo -e "Running test (caliper-lulesh-json)"
+        - callflow --process --ensemble_process --reset --data_path ./data/caliper-lulesh-json --profile_format caliper_json
+
+        - echo -e "Running test (caliper-simple-cali)"
+        - callflow --process --ensemble_process --reset --data_path ./data/caliper-simple-cali --profile_format caliper
+
+        - echo -e "Running test (caliper-lulesh-cali)"
+        - callflow --process --ensemble_process --reset --data_path ./data/caliper-lulesh-cali --profile_format caliper
+
+        - echo -e "Running test (hpctoolkit-cpi-database)"
+        - callflow --process --ensemble_process --reset --data_path ./data/hpctoolkit-cpi-database --profile_format hpctoolkit
+
+        - echo -e "Running test (hpctoolkit-allgather-database)"
+        - callflow --process --ensemble_process --reset --data_path ./data/hpctoolkit-allgather-database --profile_format hpctoolkit
+
+    - stage: "style check"
+      install: skip
+      script:
+        - pip install --upgrade black flake8 pylint
+        - flake8 --exclude=examples
+        - black --diff --check .
+        - pylint --disable=all --enable=missing-docstring callflow
+
+notifications:
+  email:
+    recipients:
+      - spkesavan@ucdavis.edu
+    on_success: change
+    on_failure: always

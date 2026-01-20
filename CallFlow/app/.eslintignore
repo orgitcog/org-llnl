@@ -1,0 +1,6 @@
+node_modules/**
+.gitignore
+build/**
+src/lib/backup/*
+src/lib/interactions/spin.js
+vue.config.js

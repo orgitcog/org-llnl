@@ -1,0 +1,51 @@
+# ------------------------------------------------------------------------------
+# callflow specific
+
+*.csv
+*.h5
+
+.callflow
+
+data/*
+app/node_modules*
+
+# symlinks for installation
+callflow/app
+callflow/data
+callflow/examples
+callflow/server
+
+designs/*
+videos/*
+
+# ------------------------------------------------------------------------------
+# Editor hidden directories
+*.DS_Store
+.vscode
+*~
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.cache
+.pytest_cache
+
+# Distribution / packaging
+.Python
+*.egg-info/
+*.egg
+build/
+dist/
+docs/_build
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore Screenshots
+*.png
+
+#  Pycharm IDE files
+.idea/*
+venv/*
