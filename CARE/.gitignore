@@ -1,0 +1,9 @@
+*.swp
+*.swo
+build
+build-*
+build_*/*
+hc-*
+*.orig
+*.vscode
+spack-*.txt

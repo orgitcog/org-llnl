@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Windows_NT-MSVC10-SERIAL_DEBUG_DEV"
+	BuildStamp="20110724-1515-Experimental"
+	Name="hut11.kitware"
+	Generator="ctest-2.8.4.20110707-g0eecf"
+	Append="true"
+	CompilerName=""
+	OSName="Windows"
+	Hostname="hut11"
+	OSRelease="7"
+	OSVersion=" (Build 7600)"
+	OSPlatform="x86"
+	Is64Bits="0"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="10"
+	ProcessorCacheSize="-1"
+	NumberOfLogicalCPU="1"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="2047"
+	TotalPhysicalMemory="9206"
+	LogicalProcessorsPerPhysical="16"
+	ProcessorClockFrequency="2672"
+>
+<Subproject name="Didasko">
+</Subproject>
+<Labels>
+  <Label>Didasko</Label>
+</Labels>
+<Build>
+	<StartDateTime>Jul 24 11:38 Eastern Daylight Time</StartDateTime>
+	<StartBuildTime>1311521938</StartBuildTime>
+<BuildCommand>nmake /NOLOGO  -i</BuildCommand>
+	<Failure type="Warning">
+		<!-- Meta-information about the build action -->
+		<Action>
+			<TargetName>didasko</TargetName>
+			<Language>C++</Language>
+			<SourceFile>packages/didasko/src/fake.cpp</SourceFile>
+			<OutputFile>CMakeFiles\didasko.dir\fake.cpp.obj</OutputFile>
+			<OutputType>object file</OutputType>
+		</Action>
+
+		<!-- Details of command -->
+		<Command>
+			<WorkingDirectory>C:/K/SERIAL_DEBUG_DEV/BUILD/packages/didasko/src</WorkingDirectory>
+			<Argument>C:\PROGRA~2\MICROS~2.0\VC\bin\cl.exe</Argument>
+		</Command>
+
+		<!-- Result of command -->
+		<Result>
+			<StdOut>fake.cpp
+warning</StdOut>
+			<StdErr></StdErr>
+			<ExitCondition>2</ExitCondition>
+		</Result>
+
+		<!-- Interested parties -->
+		<Labels>
+			<Label>Didasko</Label>
+		</Labels>
+	</Failure>
+	<Log Encoding="base64" Compression="/bin/gzip">
+	</Log>
+	<EndDateTime>Jul 24 11:39 Eastern Daylight Time</EndDateTime>
+	<EndBuildTime>1311521961</EndBuildTime>
+<ElapsedMinutes>0.3</ElapsedMinutes></Build>
+</Site>

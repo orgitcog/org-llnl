@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+title: Compile. Analyze. Prepare.
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Justin Allen
+    email: glorifiedstatistics@gmail.com
+    affiliation: Lawrence Livermore National Laboratory
+    orcid: 'https://orcid.org/0009-0006-3282-2676'
+repository-code: 'https://github.com/LLNL/CAP'
+abstract: >-
+  A python tool to help automate much of the tedious compile -> analyze -> preprocess pipeline required when performing large-scale binary analysis.
+keywords:
+  - Control Flow Graph
+  - Binary Analysis
+  - HPC
+  - Compilation
+  - Containers
+license: MIT
+version: 1.0.0
+date-released: '2024-06-23'

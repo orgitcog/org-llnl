@@ -1,0 +1,123 @@
+#!/bin/bash
+
+build_compilers=false
+build_single=false
+get_compiler_list=false
+make_clean=false
+
+# Get command line args
+if [ $# -eq 0 ]
+    then
+        build_compilers=true
+        get_compiler_list=true
+    else
+        if [ $1 == 'all' ]; then
+            build_compilers=true
+            get_compiler_list=true
+        elif [ $1 == 'compilers' ]; then
+            build_compilers=true
+            get_compiler_list=true
+        elif [ $1 == 'compiler_list' ] || [ $1 == 'list' ]; then
+            get_compiler_list=true
+        elif [ $1 == 'clean' ]; then
+            make_clean=true
+        else
+
+            # Check if we are building a single file
+            for compiler in ./vm_shared/containers/*; do
+                CN="$(basename $compiler .dockerfile)"
+                if [ $1 == $CN ]; then
+                    build_single=true
+                fi
+            done
+
+            if [ $build_single = false ]; then
+                echo "Error: unknown build command '$1'"
+                exit 0
+            fi
+        fi
+fi
+
+# Turn on vagrant VM
+vagrant up
+
+# Build each dockerfile/singularity container in compilers
+if [ $build_compilers = true ]; then
+    echo "Building all compilers"
+    rm ./vm_shared/containers/Dockerfile
+    for compiler in ./vm_shared/containers/*; do
+        if [[ $compiler == *.dockerfile ]]; then
+
+            # Copy the dockerfile to Dockerfile and get the image name
+            cp $compiler ./vm_shared/containers/Dockerfile
+            CN="$(basename $compiler .dockerfile)"
+            echo "Building $CN"
+
+            # Build the docker image, make the correct singularity definition file, convert docker to singularity image file
+            rm ./vm_shared/images/$CN.sif
+            vagrant ssh -c "cd /vm_shared/containers \
+                && sudo docker build --no-cache --progress=plain . -t $CN 2>&1 | tee /vm_shared/containers/$CN.buildlog \
+                && printf 'bootstrap: docker-daemon\nfrom: $CN:latest' > ./Singularity \
+                && sudo singularity build ../images/$CN.sif ./Singularity \
+                && sudo docker system prune -a -f"
+            
+        fi
+    done
+    rm ./vm_shared/containers/Dockerfile ./vm_shared/containers/Singularity
+fi
+
+# If we are building just a single file
+if [ $build_single = true ]; then
+    echo "Building single compiler"
+
+    # Check if it's a compiler file
+    for compiler in ./vm_shared/containers/*; do
+
+        if [[ $compiler == *.dockerfile ]]; then
+            CN="$(basename $compiler .dockerfile)"
+
+            if [ $1 == $CN ]; then
+                echo "Building $CN"
+
+                # Copy the dockerfile to Dockerfile and get the image name
+                cp $compiler ./vm_shared/containers/Dockerfile
+
+                # Build the docker image, make the correct singularity definition file, convert docker to singularity image file
+                rm ./vm_shared/images/$CN.sif
+                vagrant ssh -c "cd /vm_shared/containers \
+                    && sudo docker build --no-cache . -t $CN \
+                    && printf 'bootstrap: docker-daemon\nfrom: $CN:latest' > ./Singularity \
+                    && sudo singularity build ../images/$CN.sif ./Singularity \
+                    && sudo docker system prune -a -f"
+                
+                rm ./vm_shared/containers/Dockerfile ./vm_shared/containers/Singularity
+            fi
+            
+        fi
+
+    done
+
+fi
+
+# Get the list of compilers we now have
+if [ $get_compiler_list = true ]; then
+    echo "Getting compiler list"
+    rm ./vm_shared/containers/compilers.txt
+    for compiler in ./vm_shared/containers/*; do
+        if [[ $compiler == *.dockerfile ]]; then
+            CN="$(basename $compiler .dockerfile)"
+            vagrant ssh -c "cd /vm_shared/containers \
+                && sudo singularity run --bind /vm_shared/containers:/mounted /vm_shared/containers/$CN.sif /bin/bash -c '/mounted/version_info.sh >> /mounted/compilers.txt'"
+        fi
+    done
+fi
+
+# If we are cleaning
+if [ $make_clean = true ]; then
+    echo "Cleaning files"
+    vagrant ssh -c "sudo docker system prune -a -f"
+    rm ./rose/Dockerfile ./rose/Singularity ./containers/Dockerfile ./containers/Singularity
+fi
+
+# Turn off vagrant VM
+vagrant suspend

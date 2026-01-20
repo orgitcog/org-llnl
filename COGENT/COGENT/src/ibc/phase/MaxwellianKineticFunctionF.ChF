@@ -1,0 +1,207 @@
+#include "CONSTANTS.H"
+
+      subroutine set_maxwell4d(
+     &     CHF_FRA[f],
+     &     CHF_BOX[box],
+     &     CHF_CONST_FRA[coords],
+     &     CHF_CONST_FRA1[dens],
+     &     CHF_CONST_FRA1[temp],
+     &     CHF_CONST_FRA1[vshift],
+     &     CHF_CONST_FRA1[b],
+     &     CHF_CONST_REAL[mass],
+
+     &     )
+c     Sets distribution function for 2D temperature and density
+      integer CHF_DDECL[i;j;k;l;m],n
+      integer ivp,imu
+      REAL_T denloc, temploc, vshiftloc, bloc
+      REAL_T vpar, mu
+      REAL_T eparnorm, munorm
+      REAL_T factor, val
+      REAL_T minf, maxf
+c
+      minf=1.0d30
+      maxf=zero
+c
+      factor = dsqrt(PI*(two/mass)**3)
+c
+      ivp = CHF_NCOMP[coords]-2
+      imu = CHF_NCOMP[coords]-1
+
+c
+      do n=0,CHF_NCOMP[f]-1
+      CHF_MULTIDO[box;i;j;k;l;m]
+c
+#if CH_SPACEDIM==4
+         vshiftloc = vshift(i,j,CHF_LBOUND[temp;2],CHF_LBOUND[temp;3])
+         temploc   = temp(i,j,CHF_LBOUND[temp;2],CHF_LBOUND[temp;3])
+         denloc    = dens(i,j,CHF_LBOUND[dens;2],CHF_LBOUND[dens;3])
+         bloc      = b(i,j,CHF_LBOUND[b;2],CHF_LBOUND[b;3])
+#else
+         vshiftloc = vshift(i,j,k,CHF_LBOUND[temp;3],CHF_LBOUND[temp;4])
+         temploc   = temp(i,j,k,CHF_LBOUND[temp;3],CHF_LBOUND[temp;4])
+         denloc    = dens(i,j,k,CHF_LBOUND[dens;3],CHF_LBOUND[dens;4])
+         bloc      = b(i,j,k,CHF_LBOUND[b;3],CHF_LBOUND[b;4])
+#endif
+c
+         vpar     = coords(CHF_IX[i;j;k;l;m],ivp)
+         mu       = coords(CHF_IX[i;j;k;l;m],imu)
+         eparnorm = half * mass * (vpar-vshiftloc)**2 / temploc
+         munorm   = half * bloc * mu / temploc
+         val      = dexp( -( eparnorm + munorm ) )
+
+c
+         val    = val * denloc / ( factor * dsqrt( temploc) * temploc )
+c
+         minf = min(minf,val)
+         maxf = max(maxf,val)
+         f(CHF_IX[i;j;k;l;m],n) = val
+c
+      CHF_ENDDO
+      enddo
+c
+
+      return
+      end
+
+      subroutine set_canonical_maxwell(
+     &     CHF_FRA1[f],
+     &     CHF_BOX[box],
+     &     CHF_CONST_FRA[coords],
+     &     CHF_CONST_FRA[toroidal_coords],
+     &     CHF_CONST_FRA1[B_inj],
+     &     CHF_CONST_FRA1[psi_inj],
+     &     CHF_CONST_REAL[RBtor],
+     &     CHF_CONST_REAL[R0],
+     &     CHF_CONST_REAL[dpsidr_p],
+     &     CHF_CONST_REAL[psi_p],
+     &     CHF_CONST_REAL[r_p],
+     &     CHF_CONST_VR[n],
+     &     CHF_CONST_VR[T],
+     &     CHF_CONST_VR[mode_coeff],
+     &     CHF_CONST_REAL[mass],
+     &     CHF_CONST_REAL[charge],
+     &     CHF_CONST_REAL[larmor],
+     &     CHF_CONST_INT[option]
+     &     )
+c     Sets distribution function for 5D canonical Maxwellian
+c     with (m,n) [poloilda, toridal] perturbations
+
+      integer CHF_DDECL[i;j;k;l;m]
+      integer ivp,imu
+      REAL_T den, temp, B, psi
+      REAL_T psi_inv, rho_inv, rho_p, vpar, mu, phi, theta, r
+      REAL_T eparnorm, munorm
+      REAL_T factor, norm_mom, norm_psi, norm_kappa, norm_kappaN, norm_kappaT
+      REAL_T val, arg, rad_prof, pi
+
+      pi = four*datan(one)
+
+      ivp = CHF_NCOMP[coords]-2
+      imu = CHF_NCOMP[coords]-1
+
+      CHF_MULTIDO[box;i;j;k;l;m]
+
+#if CH_SPACEDIM==4
+         B      = B_inj(i,j,CHF_LBOUND[B_inj;2],CHF_LBOUND[B_inj;3])
+         psi    = psi_inj(i,j,CHF_LBOUND[psi_inj;2],CHF_LBOUND[psi_inj;3])
+
+         r =      toroidal_coords(i,j,CHF_LBOUND[toroidal_coords;2],CHF_LBOUND[toroidal_coords;3],0)
+         phi    = zero
+         theta  = toroidal_coords(i,j,CHF_LBOUND[toroidal_coords;2],CHF_LBOUND[toroidal_coords;3],1)
+#else
+         B      = B_inj(i,j,k,CHF_LBOUND[B_inj;3],CHF_LBOUND[B_inj;4])
+         psi    = psi_inj(i,j,k,CHF_LBOUND[psi_inj;3],CHF_LBOUND[psi_inj;4])
+
+         r =      toroidal_coords(i,j,k,CHF_LBOUND[toroidal_coords;3],CHF_LBOUND[toroidal_coords;4],0)
+         phi    = toroidal_coords(i,j,k,CHF_LBOUND[toroidal_coords;3],CHF_LBOUND[toroidal_coords;4],1)
+         theta  = toroidal_coords(i,j,k,CHF_LBOUND[toroidal_coords;3],CHF_LBOUND[toroidal_coords;4],2)
+#endif
+
+         vpar     = coords(CHF_IX[i;j;k;l;m],ivp)
+         mu       = coords(CHF_IX[i;j;k;l;m],imu)
+
+         norm_mom = larmor * mass / charge
+         psi_inv  = psi + norm_mom * RBtor/B*vpar
+
+         if (option.eq.1) then 
+          
+          rho_inv = psi_inv
+          rho_p = psi_p
+
+c         Legend: 0 -value, 1 - kappa, 2 - width, 3 - flatTop factor 
+
+          norm_kappaT = one/(dpsidr_p *R0)/dtanh(T(3)/T(2));
+          norm_kappaN = one/(dpsidr_p *R0)/dtanh(n(3)/n(2));
+          den   = n(0) * (dcosh((rho_inv - rho_p + n(3))/n(2))/dcosh((rho_inv - rho_p - n(3))/n(2)))**(-half*norm_kappaN*n(1)*n(2))
+          temp  = T(0) * (dcosh((rho_inv - rho_p + T(3))/T(2))/dcosh((rho_inv - rho_p - T(3))/T(2)))**(-half*norm_kappaT*T(1)*T(2))  
+
+         else if  (option.eq.2) then
+
+          rho_inv = psi_inv
+          rho_p = psi_p 
+
+c         Legend: 0 -value, 1 - kappa, 2 - width
+
+          norm_kappa = one/(dpsidr_p *R0)
+          den   = n(0) * dexp(-norm_kappa * n(1) * n(2) * dtanh((rho_inv-rho_p)/n(2)))  
+          temp  = T(0) * dexp(-norm_kappa * T(1) * T(2) * dtanh((rho_inv-rho_p)/T(2)))  
+
+         endif
+
+         eparnorm = half * mass * vpar**2 / temp
+         munorm   = half * B * mu / temp
+         val      = dexp( -( eparnorm + munorm ) )
+
+         factor   = dsqrt(PI*(two/mass)**3)
+         val      = val * den / ( factor * dsqrt( temp) * temp )
+
+c        Add perturbations: 
+c        Legend: 0 - amplitude, 1 - radial width, 2 - (n), 3 - (m)
+         
+         arg      = mode_coeff(2)*phi + mode_coeff(3)*theta
+         rad_prof = dexp(-half*((rho_inv - rho_p)/mode_coeff(1))**2)
+         val      = val * (one + mode_coeff(0)*rad_prof*cos(arg))
+         
+         f(CHF_IX[i;j;k;l;m]) = val
+
+      CHF_ENDDO
+
+      return
+      end
+
+      subroutine enforce_input_dens_prof(
+     &     CHF_FRA[f],
+     &     CHF_BOX[box],
+     &     CHF_CONST_FRA1[dens_moment],
+     &     CHF_CONST_FRA1[dens_prof]
+     &     )
+c     Sets distribution function for 2D temperature and density
+      integer CHF_DDECL[i;j;k;l;m],n
+      REAL_T denloc_mom, denloc_prof
+      REAL_T fac
+c
+
+c
+      do n=0,CHF_NCOMP[f]-1
+      CHF_MULTIDO[box;i;j;k;l;m]
+c
+#if CH_SPACEDIM==4
+         denloc_mom    = dens_moment(i,j,CHF_LBOUND[dens_moment;2],CHF_LBOUND[dens_moment;3])
+         denloc_prof    = dens_prof(i,j,CHF_LBOUND[dens_prof;2],CHF_LBOUND[dens_prof;3])
+#else
+         denloc_mom    = dens_moment(i,j,k,CHF_LBOUND[dens_moment;3],CHF_LBOUND[dens_moment;4])
+         denloc_prof    = dens_prof(i,j,k,CHF_LBOUND[dens_prof;3],CHF_LBOUND[dens_prof;4])
+#endif
+
+         fac    = denloc_prof/denloc_mom
+c
+ 
+         f(CHF_IX[i;j;k;l;m],n) = fac * f(CHF_IX[i;j;k;l;m],n)
+c
+      CHF_ENDDO
+      enddo
+c
+      return
+      end
+

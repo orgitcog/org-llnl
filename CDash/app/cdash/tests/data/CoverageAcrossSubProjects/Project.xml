@@ -1,0 +1,15 @@
+<Project name="CrossSubProjectExample">
+  <SubProject name="MyThirdPartyDependency" group="Third Party">
+    <Path>MyThirdPartyDependency</Path>
+  </SubProject>
+  <SubProject name="MyExperimentalFeature" group="Experimental">
+    <Path>MyExperimentalFeature</Path>
+    <Dependency name="MyThirdPartyDependency"/>
+  </SubProject>
+  <SubProject name="MyProductionCode" group="Production">
+    <Path>MyProductionCode</Path>
+    <Dependency name="MyThirdPartyDependency"/>
+  </SubProject>
+  <SubProject name="MyEmptyCoverage" group="Production">
+  </SubProject>
+</Project>

@@ -1,0 +1,9 @@
+FROM kitware/cdash_common
+LABEL MAINTAINER="Kitware, Inc. <cdash@public.kitware.com>"
+
+EXPOSE 80
+
+WORKDIR /home/kitware/cdash/_build
+
+ENTRYPOINT ["/bin/bash", "/docker-entrypoint.sh"]
+CMD ["serve"]

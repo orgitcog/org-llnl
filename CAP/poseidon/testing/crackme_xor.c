@@ -1,0 +1,38 @@
+// Takes an input password and tells you whether or not the password is correct. However, the password is not stored
+//   in plaintext and instead is xor-ed with the 'serial' variable below
+//   password is: 'elite'
+#include <stdio.h>
+#include <stdlib.h>
+
+char *serial = "\x31\x3e\x3d\x26\x31";
+
+void RIVERTestOneInput(char *ptr)
+{
+  int i = 0;
+
+  while (i < 5){
+    if (((ptr[i] - 1) ^ 0x55) != serial[i])
+    {
+      printf("Print wrong password\n");
+      return;
+    }
+    
+    i++;
+  }
+  
+  printf("Good password ! You got it !\n");
+}
+
+int main(int ac, char **av)
+{
+  int ret;
+
+  if (ac != 2)
+  {
+    printf("First param must be the string password");
+    return -1;
+  }
+
+  RIVERTestOneInput(av[1]);
+}
+

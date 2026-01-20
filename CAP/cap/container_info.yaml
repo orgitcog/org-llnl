@@ -1,0 +1,248 @@
+# See the README.md, 'Extend Me' - 'Compiler Info' for info on how to edit this file
+GCC:
+  type: 'compiler'
+  container: 'gcc-{v0}'
+
+  # Turn off warnings in GCC cause it can mess up compiling
+  force_flags:
+    w: False
+    fpermissive: False
+
+  compilers:
+
+    # The 'gcc' compiler should have all the containers correct, so we don't need to use_previous for any versions. We
+    #   only need to set g++ to use 'gcc' as previous, add 'c++' as an accepted language, and change all the binary
+    #   names for the versions
+    g++:
+      supported_languages: ['c', 'c++']
+      use_previous: 'gcc'
+
+    # g++ will copy from this as previous
+    gcc:
+      supported_languages: 'c'
+
+      versions:
+
+        # All of these versions are built off of v5.5.0
+        v6.5.0:
+        v7.5.0:
+        v8.4.0:
+        v9.5.0:
+        v10.3.0:
+        v11.3.0:
+        v12.1.0:
+
+        # Currently the oldest version, and the base of architecture flags
+        v5.5.0:
+          architectures:
+            x86:
+              binary_name: 'i686-linux-gnu-{compiler}-{v0}'
+              flags:
+                m: ['', '32', '64', 'x32']
+                mtune: ['=', 'i386', 'i486', 'i586', 'pentium', 'pentium-mmx', 'pentiumpro', 'i686', 'pentium2', 'pentium3', 'pentium3m', 'pentium-m', 'pentium4', 'pentium4m', 'prescott', 'nocona', 'core2', 'nehalem', 'westmere', 'sandybridge', 'ivybridge', 'haswell', 'broadwell', 'bonnell', 'silvermont', 'knl', 'k6', 'k6-2', 'k6-3', 'athlon', 'athlon-tbird', 'athlon-4', 'athlon-xp', 'athlon-mp', 'k8', 'opteron', 'athlon64', 'athlon-fx', 'k8-sse3', 'opteron-sse3', 'athlon64-sse3', 'amdfam10', 'barcelona', 'bdver1', 'bdver2', 'bdver3', 'bdver4', 'btver1', 'btver2', 'winchip-c6', 'winchip2', 'c3', 'c3-2', 'geode', 'generic', 'intel']
+                mfpmath: ['=', '387', 'sse']
+                mrecip: ['=', 'all', 'default', 'none', 'div', 'vec-div', 'sqrt', 'vec-sqrt']
+                mstringop-strategy: ['=', 'rep_byte', 'rep_4byte', 'rep_8byte', 'byte_loop', 'loop', 'unrolled_loop', 'libcall']
+                mno-fp-ret-in-387: False
+                mmmx: True
+                msse: True
+                msse2: True
+                msse3: True
+                mssse3: True
+                msse4: True
+                msse4a: True
+                msse4.1: True
+                msse4.2: True
+                mavx: True
+                mavx2: True
+                mavx512f: True
+                mavx512pf: True
+                mavx512er: True
+                mavx512cd: True
+                msha: True
+                maes: True
+                mpclmul: True
+                mclfushopt: True
+                mfsgsbase: True
+                mrdrnd: True
+                mf16c: True
+                mfma: True
+                mfma4: True
+                mprefetchwt1: True
+                mxop: True
+                mlwp: True
+                m3dnow: True
+                mpopcnt: True
+                mabm: True
+                mbmi: True
+                mbmi2: True
+                mlzcnt: True
+                mfxsr: True
+                mxsave: True
+                mxsaveopt: True
+                mxsavec: True
+                mxsaves: True
+                mrtm: True
+                mtbm: True
+                mmpx: True
+                mmwaitx: True
+                mprefer-avx128: False
+                msahf: False
+                mmovbe: False
+                mpush-args: True
+                maccumulate-outgoing-args: False
+                minline-all-stringops: False
+                minline-stringops-dynamically: False
+                momit-leaf-frame-pointer: False
+                mskip-rax-setup: True
+                m8bit-idiv: True
+                mavx256-split-unaligned-load: False
+                mavx256-split-unaligned-store: False
+
+          # Flags that are the same accross all gcc versions (As of now, starting at gcc-5)
+          flags:
+            O: ['', '0', '1', '2', '3', 's', 'fast', 'g']
+            fdefer-pop: True
+            fforward-propagate: True
+            ffp-contract: ['=', 'off', 'on', 'fast']
+            fomit-frame-pointer: True
+            foptimize-sibling-calls: True
+            foptimize-strlen: True
+            finline: True
+            finline-small-functions: True
+            findirect-inlining: True
+            finline-functions: True
+            finline-functions-called-once: True
+            fearly-inlining: True
+            fipa-sra: True
+            finline-limit: ['=', '']
+            fkeep-inline-dllexport: True
+            fkeep-inline-functions: True
+            fkeep-static-functions: True
+            fkeep-static-consts: True
+            fmerge-constants: True
+            fmerge-all-constants: True
+            fmodulo-sched: True
+            fmodulo-sched-allow-regmoves: True
+            fbranch-count-reg: True
+            ffunction-cse: True
+            fthread-jumps: True
+            fsplit-wide-types: True
+            fsplit-wide-types-early: True
+            fcse-follow-jumps: True
+            fcse-skip-blocks: True
+            frerun-cse-after-loop: True
+            fgcse: True
+            fgcse-lm: True
+            fgcse-sm: True
+            fgcse-las: True
+            fgcse-after-reload: True
+            faggressive-loop-optimizations: True
+            fcrossjumping: True
+            fauto-inc-dec: True
+            fdce: True
+            fdse: True
+            fif-conversion: True
+            fif-conversion2: True
+            fdeclone-ctor-dtor: True
+            fdelete-null-pointer-checks: True
+            fdevirtualize: True
+            fdevirtualize-speculatively: True
+            fdevirtualize-at-ltrans: True
+            fexpensive-optimizations: True
+            free: True
+            flifetime-dse: ['=', '0', '1', '2']
+            flive-range-shrinkage: True
+            fira-algorithm: ['=', 'priority', 'CB']
+            fira-region: ['=', 'all', 'mixed', 'one']
+            fira-hoist-pressure: True
+            fira-loop-pressure: True
+            fira-share-save-slots: True
+            fira-share-spill-slots: True
+            flra-remat: True
+            fdelayed-branch: True
+            fschedule-insns: True
+            fschedule-insns2: True
+            fsched-interblock: True
+            fsched-spec: True
+            fsched-pressure: True
+            fsched-spec-load: True
+            fsched-spec-load-dangerous: True
+            fsched-stalled-insns: ['=', '$$CFRange(0, 100)$$']
+            fno-sched-stalled-insns: False
+            fsched-stalled-insns-dep: ['=', '$$CFRange(0, 100)$$']
+            fsched2-use-superblocks: True
+            fsched-group-heuristic: True
+            fsched-critical-path-heuristic: True
+            fsched-spec-insn-heuristic: True
+            fsched-rank-heuristic: True
+            fsched-last-insn-heuristic: True
+            fsched-dep-count-heuristic: True
+            freschedule-modulo-scheduled-loops: True
+            fselective-scheduling: True
+            fselective-scheduling2: True
+            fsel-sched-pipelining: True
+            fsel-sched-pipelining-outer-loops: True
+            #fsemantic-interposition: True
+            fshrink-wrap: True
+            fshrink-wrap-separate: True
+            fcaller-saves: True
+
+JavaC:
+  type: 'compiler'
+  container: 'javac-{v0}'
+  compilers:
+    javac:
+      supported_languages: 'java'
+
+      # We need to specify that javac should be looking at UTF-8 files, since the Java spec allows for unicode characters
+      force_flags:
+        encoding: [' ', 'utf8']
+
+      versions:
+
+        v7:
+        v8:
+        v11:
+        v17:
+        v20:
+
+        v6:
+          architectures:
+            java-bytecode:
+              binary_name: 'javac'
+              flags: {}
+
+
+Dotnet:
+  type: 'compiler'
+  container: 'dotnet-{v0}'
+  compilers:
+    dotnet:
+      supported_languages: 'c#'
+
+      # We need at least one flag to make sure the CompilerMethod doesn't prune this branch. This will also turn off
+      #   the logo/copyright message printed during each compile, saving some space
+      # Also have to put a bunch of other flags that force rebuilding and remove any cached things
+      force_flags:
+        -nologo: False
+        #-no-restore: False
+        #-no-incremental: False
+        #-disable-build-servers: False
+
+      versions:
+        v8.0:
+          architectures:
+            cil:
+              binary_name: '/app/dotnet-build'
+              flags: {}
+
+
+# The Rose analyzer
+Rose:
+  type: 'analyzer'
+  container: 'rose-binary-analysis'
+  analysis_cmd: "cd /mounted
+    && (export LD_LIBRARY_PATH=/mounted:\\$LD_LIBRARY_PATH; /opt/rose/bin/bat-ana -o /mounted/{binary_basename}.rba /mounted/{binary_basename})
+    && /opt/rose/bin/bat-cfg --format gv --prefix /mounted/{binary_basename} /mounted/{binary_basename}.rba
+    && rm -f /mounted/{binary_basename}.rba && mv /mounted/{binary_basename}cfg-global /mounted/{analyzer_output_basename}"
