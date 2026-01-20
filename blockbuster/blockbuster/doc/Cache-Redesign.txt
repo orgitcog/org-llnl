@@ -1,0 +1,53 @@
+
+The Preload() mechanism was used before.  This basically just told the cache through a torturous set of calls to preload some frames.  Dumb.  
+
+Every time a frame was rendered, just afterward, movie.cpp told Canvas to tell the Renderer to ask the Cache to preload some frames.  
+
+The sequence was
+1. canvas->Render() (which calls glRenderer->Render() which calls Renderer->GetImage() which calls ImageCache->GetImage()!!!)
+2. canvas->ReleaseFrame()
+3. canvas->Preload()
+4. canvas->SwapBuffers()
+
+The pertinent code was as follows
+
+Renderer.cpp:92 & 99 decides how many frames to preload. 
+ void Renderer::Preload(uint32_t frameNumber,
+                     const Rectangle *imageRegion, uint32_t levelOfDetail) {
+AND
+   void Renderer::Preload(uint32_t frameNumber, uint32_t preloadFrames, 
+                       int playDirection, 
+                       uint32_t minFrame, uint32_t maxFrame,
+                       const Rectangle *imageRegion, 
+                       uint32_t levelOfDetail) {
+
+cache.cpp:1046 actually preloads the images.  
+void ImageCache::PreloadImage(uint32_t frameNumber, 
+	const Rectangle *region, uint32_t levelOfDetail)
+
+GetImage() is in cache.cpp:686
+Image *ImageCache::GetImage(uint32_t frameNumber,
+                            const Rectangle *newRegion, uint32_t levelOfDetail)
+
+------------------------------------------------------------------------------------
+DONE:
+As a first step, let's change all input to round-robin instead of dogpile.  This is going to pay off in the long run as almost all mutexes will go away.  Each thread will have their own cached images and their own job queue.  
+
+------------------------------------------------------------------------------------
+Next I will change all the readData() calls in getFrame() and getTiledFrame() in smBase.C to read from a buffer read in a separate thread.  This requires least code changes.  
+
+Step 1: For SM, read buffer has to know what to read, where to put it, and how to signal the data is ready.
+The decompression threads should decide for themselves how much to buffer based on the current frame, the play direction, and the nature of the images.  So PreloadHint() should be eliminated and the play direction should be included in GetImage().  
+
+Here's how it works.  Numbers will be adjustible of course in the future: 
+The SM movie object has multiple input buffers.  Cache limit is 500MB.  Each buffer has a 50MB capacity. The actual contents will be less than 50MB as only whole frames are buffered.  Nonetheless, 10 buffers of 50MB each will be created.  Note that due to decompression, a 500MB cache means up to 2 GB of movie data including the decompressed frames.  
+  
+We open up a 1GB movie.  An SM reader thread is started immediately.  If nothing else happens, it happily continues buffering until adding all buffers contain all their intended raw frame data. 
+
+Each time a new SM buffer is filled with raw data, the cache worker threads can begin decompressing frames from it up to the cache limit.  Perhaps this can be done with a call to PreloadFrames() or something.  It certainly seems some of the information about how much to cache has to come from the frameList.  
+
+movie.cpp asks to render frame 0. The buffer is told that the current frame is 0, which changes nothing. 
+GetImage() is called, which calls smBase::readTiledFrame() eventually.  Success.
+
+movie.cpp asks to render frame 1.  When the buffer learns the current frame is 1, it checks its buffer targets.  If the new frame is "past" the "earliest" buffer's end, then we can deallocate the first buffer and allocate a new buffer if needed and start reading into it.  
+

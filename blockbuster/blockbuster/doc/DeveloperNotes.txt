@@ -1,0 +1,59 @@
+
+DEVELOPMENT TASKS:all now tracked on sourceforge website
+
+--------------------------------------------------------------------------------
+FEATURES: all now tracked on sourceforge website
+
+----------------------------------------------------------------------------------------------------------
+BUGS: all are now in http://blockbuster.sourceforge.net/tracker
+
+-------------------------------------------------------------
+VERSION RELEASE MANAGEMENT: 
+Create new versions using finalizeVersion.sh at top level directory.  
+Then upload the resulting tarball to sourceforge using their web interface. 
+Be sure to mark this as the default download if appropriate.  
+
+-------------------------------------------------------------
+DOCUMENTATION USING SCREENSTEPS SOFTWARE: 
+Documentation is created using ScreenSteps software on the Mac. http://www.bluemangolearning.com/screensteps/.  I export it to HTML.  See 
+
+ I am thinking to add the use of doxygen for doc generation, so much easier!  Stay tuned. 
+
+To update the sourceforge web page, you  sftp to web.sourceforge.net:
+
+alias ftpblockbuster='sftp wealthychef@web.sourceforge.net:/home/project-web/blockbuster/htdocs'
+
+
+-------------------------------------------------------------
+LLNL INSTALLATION: 
+There is a wrapper script at /usr/gapps/asciviz/blockbuster/bin/blockbuster_wrapper.sh, which is pointed to by symlinks named "blockbuster", "sidecar", "img2sm" etc.  This location is put in your PATH using dotkit:  "use asciviz"
+
+-------------------------------------------------------------
+STRACE: 
+Using strace:  Here is how I captured the network delay bug I was having, where sidecar was several frames behind blockbuster, which was causing weird looping stuff to happen in blockbuster. 
+Note that most of the relevant args are handled by the wrapper script at /usr/gapps/asciviz/blockbuster/bin/blockbuster_wrapper.sh, which is pointed to by all symlinks.  
+
+blockbuster -dev -strace-args "-ttt -e trace=desc -e write=15 -e verbose=write" -messageLevel debug ~/dataAndImages/langer.sm >blockbuster.out 2>&1
+
+sidecar -dev -strace-args "-ttt -e trace=desc -e read=11" ../../doc/Testing.cues  >sidecar.out 2>&1
+
+Looking at the logs, I found that sidecar was reading its events and then responding to an event that was very old.  This led me directly to look at SideCar::checkBlockbusterData(), where I changed:
+  if (mBlockbusterSocket && mBlockbusterSocket->canReadLine()) {
+to
+  while (mBlockbusterSocket && mBlockbusterSocket->canReadLine()) {
+voila!  
+
+
+=============================================================================
+NewRenderers:  x11Renderer, glRenderer, glStereoRenderer, glTextureRenderer, dmxRenderer
+
+Major modes: 
+CACHING:  DMX vs. local
+RENDERING:  DMX vs. x11 vs. gl 
+USER INTERFACE:  It's all Qt and X11.
+
+Blockbuster invocation modes:  Local vs. DMX master vs. DMX slave:
+In general:  
+local is local caching, gl rendering, Qt controls
+DMX master is DMX caching, DMX rendering, Qt controls
+DMX slave is local caching, gl rendering, no Qt controls

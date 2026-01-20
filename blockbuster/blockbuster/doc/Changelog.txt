@@ -1,0 +1,611 @@
+CHANGELOG FOR BLOCKBUSTER
+For outstanding bugs, as always, please look at https://sourceforge.net/projects/blockbuster/.  To report blockbuster bugs, you can go to the sourceforge website or send email to rcook@llnl.gov.  
+
+===============================================================================
+VERSION 2.8.7a (git tag blockbuster-v2.8.7a) Thu Dec  3 16:14:49 PST 2015
+-- BUGFIX:  Eliminated "No matching signal for on_loopCheckBox_stateChanged"
+-- BUGFIX:  Fixed reversed image width, height in sidecar Info window. 
+-- FEATURE: Tweak build so it preferentially builds with Qt 5.x
+
+===============================================================================
+VERSION 2.8.6l (git tag blockbuster-v2.8.6l) Tue Jul 28 17:06:15 PDT 2015
+-- BUGFIX:  Fixed bug in blockbuster preventing sidecar launches from working because DISPLAY was not being set properly. 
+-- BUGFIX:  Fixed bugs in blockbuster launch dialog for Sidecar that failed to launch when blank fields were seen in the dialog.
+
+===============================================================================
+VERSION 2.8.6k (git tag blockbuster-v2.8.6k) Mon Jul 27 12:14:42 PDT 2015
+-- FEATURE: sm2mpg and img2mpg now use ffmpeg for everything by default.  mpeg is only used for the '.mpeg' extension.  ffmpeg is much more robust. 
+-- FEATURE: combine sm2img into smcat to avoid errors arising from code duplication. 
+
+===============================================================================
+VERSION 2.8.6j (git tag blockbuster-v2.8.6j) Mon Apr 20 15:40:01 PDT 2015
+-- BUGFIX:  img2sm no longer fails when there is only one input image
+
+===============================================================================
+VERSION 2.8.6i (git tag blockbuster-v2.8.6i) Wed Apr  1 17:29:26 PDT 2015
+-- BUGFIX:  sidecar used wrong default path in blockbuster launch dialog
+
+===============================================================================
+VERSION 2.8.6h (git tag blockbuster-v2.8.6h) Wed Mar 25 16:31:03 PDT 2015
+-- BUGFIX:  Fix a bug in img2mpg causing input image sizes to be ignored
+-- BUGFIX:  Fix a hanging bug in img2mpg for sequences input without a template
+
+===============================================================================
+VERSION 2.8.6g (git tag blockbuster-v2.8.6g) Thu Feb 26 15:21:25 PST 2015
+-- FEATURE: Created img2mpg to allow direct creation of MPEG movies from image sequences.  
+-- FEATURE: img2mpg creates higher quality mp4 movies than old sm2mpg
+-- FEATURE: Properly use frame rates for mpeg to match ISO/IEC 13818
+-- FEATURE: sm2mpg uses img2mpg to make its movies, ensuring consistency.
+-- BUGFIX:  sm2mpg now correctly preserves all input frames when FPS is given
+-- BUGFIX:  List allowable mpeg frame rates in mpeg man page 
+-- BUGFIX:  copy mpeg man page to INSTALL_DIR 
+
+===============================================================================
+VERSION 2.8.6f (git tag blockbuster-v2.8.6f) Tue Dec  9 10:16:00 PST 2014
+-- FEATURE:  Created smrecolor tool to change movie colors.  Right now it only supports the -min feature, which specifies a minimum color to replace very dark colors in the movie using ImageMagick's "Lighten" command. 
+-- FEATURE:  Created blockbuster option "--bgcolor" to change the "background" color of a movie from black to any arbitrary RGB value.  Currently useful mainly to match the powerwall "black" to the appropriate shade of gray.   
+
+===============================================================================
+VERSION 2.8.6e (git tag blockbuster-v2.8.6e) Thu Dec  4 18:07:49 PST 2014
+-- FEATURE:  smquery now exports poster frames to jpeg with Exif metadata for use with PhotoFloat image gallery javascript library
+-- FEATURE:  Modify smquery to require user specify location of output json and poster frames.  Useful for movie cataloguing tool in progress.  
+
+===============================================================================
+VERSION 2.8.6d (git tag blockbuster-v2.8.6d) Wed Nov 12 15:55:07 PST 2014
+-- FEATURE:  Added ability to export poster frames to movies in smquery.  
+
+===============================================================================
+VERSION 2.8.6c (git tag blockbuster-v2.8.6c) Thu Oct  9 15:22:00 PDT 2014
+-- FEATURE:  Enable JSON output to handle errors in movies and to write to stdout. This is to prepare for MovieBrowser toolset to come. 
+-- BUGFIX:  Fixed bug in parsing of file sizes in smcat. 
+
+===============================================================================
+VERSION 2.8.6b (git tag blockbuster-v2.8.6b) Mon Aug 25 11:45:09 PDT 2014
+-- BUGFIX:  Fix bug in sm2mpg that could catastrophically destroy user directories
+-- BUGFIX:  Fix bug in sm2mpg that was preventing proper movie creation.
+-- FEATURE: Add ffmpeg capabilities and customizations of codecs to sm2mpg.  This brings h264 and mjpeg encoding capabilities and avoids crashes in mpeg, which is getting long in the tooth. 
+
+===============================================================================
+VERSION 2.8.6a (git tag blockbuster-v2.8.6a) Tue Aug  5 10:49:23 PDT 2014
+-- BUGFIX:  No longer need to replace window when switching between fullscreen and non-fullcreen.
+-- BUGFIX:  Improve the packaging of Qt libraries.  
+-- BUGFIX:  sm2mpg "unexpected token" error fixed, and also checked to make sure temp files are properly deleted.  
+-- BUGFIX:  Fixed a regression causing blockbuster to ignore "MOVIE_QUIT" in scripts.  
+-- BUGFIX:  Fixed a bug where "Repeat Forever" was ignored if "Play Movie" was not checked in a cue.  
+-- FEATURE: Arguments to sidecar and blockbuster now follow standard convention, e.g. get help with "--help/-h" instead of "-help"
+-- FEATURE: Some GUI changes in the blockbuster control and the movie cue manager widgets.  
+-- FEATURE: Now make blockbuster tracefiles on by default, save them and make backups for historical purposes into temp directories.
+
+===============================================================================
+VERSION 2.8.5a (git tag blockbuster-v2.8.5a) Fri Apr  4 19:13:55 PDT 2014
+-- FEATURE: Switching from stereo to non-stereo movies no longer destroys the window to get a new context. (Ticket 131)
+-- FEATURE: Allow loading a stereo movie in non-stereo from a movie cue in sidecar.  (Ticket 149)
+-- FEATURE: Added "-traceEvents" flag to enable reproducing of blockbuster sessions for forensics and other purposes.  (Ticket 146)
+-- FEATURE: Changed Zoom To Fit and Full Screen buttons to checkboxes  as they are really states, not actions. 
+-- FEATURE: Added ability to test multiple movies with smtest. 
+-- BUGFIX:  Fixed bugs in smtest that were causing incorrect behaviors, such as ignoring LOD 0
+-- BUGFIX:  Fixed behavior of Zoom To Fit and Full Screen buttons in blockbuster and sidecar control interfaces.  (Ticket 121)
+-- BUGFIX:  Fixed a bug in caching stereo movies, especially when playing with non-stereo renderers.
+-- BUGFIX:  Stereo checkbox in interface now correctly updates when a stereo movie is loaded.  
+-- BUGFIX:  Taking snapshot no longer changes FPS in current cue. (Ticket 115)
+-- BUGFIX:  -help argument no longer fails if DISPLAY is not set (Ticket 93)
+-- BUGFIX:  Information window now fits its contents properly (Ticket 50)
+-- BUGFIX:  Taking snapshot no longer sets cue start frame to movie current frame.  (Ticket 124)
+-- BUGFIX:  Zoom To Fit now works in blockbuster.  
+-- BUGFIX:  Taking snapshot now should do the right thing with respect to zooming, full screen, and zoom to fit.  (Ticket 84)
+-- BUGFIX:  Fixed bug in resizing from larger movie to smaller movie when "no small windows" feature is in effect.
+
+===============================================================================
+VERSION 2.8.1f (git tag blockbuster-v2.8.1f) Sat Mar 15 12:32:15 PDT 2014
+-- FEATURE: Add support for scroll wheel zooming
+-- FEATURE: "Fill" means "toggle to/from full screen" and "Fit" means "zoom image to fit window"
+-- FEATURE: Change "loop" to "repeat" for clarity.
+-- FEATURE: Allow tmp directory to be chosen in sm2qt and sm2mpg
+-- FEATURE: img2sm and smcat now both use 8 threads by default
+-- BUGFIX: Fixed the -w option
+-- BUGFIX: When launching blockbuster with -loops, correctly set the GUI checkboxes
+-- BUGFIX: gltexture renderer works again.  
+-- BUGFIX: Make error messages threadsafe.
+-- BUGFIX: Fixed bug in cache causing "Cache is full" errors.  
+
+===============================================================================
+VERSION 2.8.1e (git tag blockbuster-v2.8.1e) Wed Feb 26 17:34:47 PST 2014
+-- BUGFIX:  Snapshots are working again.  
+-- BUGFIX:  Fix "zoom to fill" behavior in blockbuster and in snapshots.  
+
+===============================================================================
+VERSION 2.8.1d (git tag blockbuster-v2.8.1c) Tue Feb 25 10:57:45 PST 2014
+-- FEATURE:  increased FPS accuracy in playback
+-- BUGFIX:  -framerate works again. 
+
+===============================================================================
+VERSION 2.8.1c (git tag blockbuster-v2.8.1c) Tue Feb 25 10:57:45 PST 2014
+-- BUGFIX: Properly handle switching between stereo and non-stereo sidecar cues.
+-- BUGFIX: Appropriately set "stereo" checkbox in sidecar GUI when a movie is loaded.  
+
+===============================================================================
+VERSION 2.8.1b (git tag blockbuster-v2.8.1b) Mon Feb 24 18:07:17 PST 2014
+-- BUGFIX -play and -playexit arguments did not do anything 
+-- Allow -threads 0, -cachesize 0 and/or -preload 0 if the user wishes. 
+
+===============================================================================
+VERSION 2.8.1a (git tag blockbuster-v2.8.1a) Mon Feb 24 10:11:58 PST 2014
+-- This is just a rebranding of 2.8.0p, no changes.  
+
+===============================================================================
+VERSION 2.8.0p (git tag blockbuster-v2.8.0p) Tue Feb 18 18:00:43 PST 2014
+-- Fixed a bug in movie fullscreen behavior when "fill" box was checked.
+-- Starting without a movie is no longer a blockbuster emergency.  No window opens in this case.  
+-- Fixed crashing bug where thread IDs were exceeding cache slots.  
+-- Refactored code to improve file loading procedure.  (Internal change)
+-- Fix resizing regression bug when launching new movies  
+-- When launching from a cue with "fullscreen" checked, do not preload blockbuster with a movie but do this with the cue itself.  
+-- Improved launch dialog layout to improve readability and interaction.
+-- Added "-no-small-windows" option to blockbuster and "No small windows" checkbox in sidecar launch dialog to workaround window manager resizing bug on powerwall when launching with movies bigger than one monitor can hold.  
+-- Added "automatic" checkbox to blockbuster command to generate full path to blockbuster as default remote command.  This should make -dev sidecar run -dev blockbuster on our clusters when checked.  
+-- Added tracefile output to blockbuster to allow precise forensics and event replays.  Also using event names instead of numbers for the same reason. 
+-- Fixed bug causing zooms to be ignored if full screen was used and zoom was set to exactly 1.
+-- Attempt to be more graceful when launching the first full-screen movie from a sidecar cuefile.  
+-- Fix bug in RLE reader causing huge slowdown due to debug statements. 
+-- Added ability for smtest to take multiple moviename arguments.  
+  
+
+===============================================================================
+VERSION 2.8.0o (git tag blockbuster-v2.8.0o) Thu Jan 23 18:43:09 PST 2014
+-- Fixed bug:  Blockbuster dumped core when opening 29 movies in a row. (was not releasing file descriptors)
+-- Fixed bug:  Typing "H" into sidecar when keyboard connected caused crash. 
+-- Fixed bug:  Some keyboard shortcuts between sidecar and blockbuster were inconsistent.   
+-- Fixed bug:  Large movies now play much more smoothly, correcting "herky jerky" bug.  
+-- Fixed bug:  Ignore '@' sign in movie cues, which are used in the command line to specify a movie on a remote host.  
+-- Fixed bug:  You are now able to delete the last user host profile in your list if you desire.  
+
+===============================================================================
+VERSION 2.8.0n (git tag blockbuster-v2.8.0n) Fri Jan 17 18:01:36 PST 2014
+-- switched to git 
+-- Improved argument handling in img2sm and smcat
+-- Improved metadata handling in smcat. 
+-- Make a slightly better attempt to delete large "smBase" temp files if sm2img or smcat are interrupted.  
+
+===============================================================================
+VERSION 2.8.0m (r1049) Wed Dec  4 17:43:59 PST 2013
+-- Fixed error in smcat documentation src-subregion flag
+-- Improve error handling in smtools so that empty movies are not left behind when errors are encountered during creation.  
+-- Added ability to recognize frame sequences containing "left" and "right" in the names as being stereo and properly order them.
+-- Added mpg2sm and mpg2img utilities
+-- Added -FSF flag to enable more frequent frame rate reporting. 
+-- now use zlib 1.2.8 with dynamic linking. 
+-- Add LZMA to smcat
+
+===============================================================================
+VERSION 2.8.0l (r1010) Mon Sep 30 11:14:44 PDT 2013
+-- fix how files are cleaned up in sm2mpg and sm2qt scripts and to handle stereo movies correctly. 
+-- Fix bug in opening files that required movies to be write-enabled even when only reading them.
+
+===============================================================================
+VERSION 2.8.0k (r1005) Thu Sep 26 17:48:05 PDT 2013
+-- fix bug sm2mpg that prevented valid movies from being processed
+-- allow user to specify that a movie is stereo even if stereo flag is not set
+
+===============================================================================
+VERSION 2.8.0j (r987) Wed Sep 18 15:40:09 PDT 2013
+-- support builds of boost on machines where needed
+-- establish "reserved tags" that always match for every movie, corresponding to metadata output from sminfo.  See smquery --reserved-tag-list for details.
+
+===============================================================================
+VERSION 2.8.0i (r987) Wed Sep 18 15:40:09 PDT 2013
+-- Changed sm2mpg and sm2qt args with identical meanings to match each other. 
+-- Fixed builds on older machines.
+-- Fixed bug playing stereo movies with -no-stereo-switch flag.
+
+===============================================================================
+VERSION 2.8.0h (r984) Fri Sep 13 11:45:03 PDT 2013
+-- Fix sm2mpg and sm2qt scripts to work properly
+
+===============================================================================
+VERSION 2.8.0g (r973) Mon Sep  9 14:35:36 PDT 2013
+-- Fix format detection code in img2sm to correctly capture input file types. 
+
+===============================================================================
+VERSION 2.8.0f (r968) Fri Sep  6 14:08:34 PDT 2013
+-- change "H" to "M" to hide mouse in sidecar to match blockbuster behavior
+
+===============================================================================
+VERSION 2.8.0e (r964) Wed Sep  4 14:24:54 PDT 2013
+-- fix segfault in img2sm
+
+===============================================================================
+VERSION 2.8.0d (r957) Fri Aug 30 17:53:35 PDT 2013
+-- img2sm: Give better error message when a frame has a different size than other frames
+-- img2sm: Search for the first 100 possible files in a sequence, rather than assuming file number is 0.  (This was the old behavior)
+
+===============================================================================
+VERSION 2.8.0c (r950) Wed Aug 14 16:05:09 PDT 2013
+-- blockbuster is now fully scriptable
+-- improved unit tests to guarantee sm2img and smtag do not harm movies
+
+===============================================================================
+VERSION 2.8.0b (r926) Thu Aug  8 12:16:57 PDT 2013
+-- bugfix release
+
+===============================================================================
+VERSION 2.8.0a (r886) Tue Jul 16 14:25:59 PDT 2013
+-- Added metadata support to smtools and blockbuster. 
+-- Lorenz movie browser format (JSON) is supported
+-- Added LZMA compression option for movies.  
+-- Build is now more parallel.     
+-- Input and output files for sm2img and img2sm are now recognized by extension when possible, or defaults to PNG -- don't need -form argument for most cases.
+-- Improved unit tests
+-- Changed the way smtools parse arguments.
+
+===============================================================================
+VERSION 2.7.3d (r747) Mon Jun 10 14:28:11 PDT 2013
+-- Fixed a crashing bug in handling version 1 movies.  
+
+===============================================================================
+VERSION 2.7.3c (r683) Fri Jul 20 16:21:34 PDT 2012
+-- Fix a segfault in settings.
+-- improve packaging mechanism for distribution
+-- Suppress a warning dialog about threads and make it go to stderr instead. 
+
+===============================================================================
+VERSION 2.7.3b (r665) Mon Jul  2 09:32:40 PDT 2012
+-- Allow whitespace in "blockbuster path" in sidecar's "blockbuster launch" dialog, thus enabling special args to be saved as needed
+-- sminfo now reports exact bytes compressed and uncompressed
+-- use two less than the number of processors for threads by default.  Also preload 100 frames by default. 
+
+===============================================================================
+VERSION 2.7.3a (r642) Tue Jun  5 14:27:58 PDT 2012
+-- Fixed a long standing blockbuster bug that limited multithreaded performance
+-- Use 4 threads by default is number of processors supports it. 
+  
+===============================================================================
+VERSION 2.7.2b (r581) Fri Feb 10 15:12:27 PST 2012
+-- Fixed a bug in img2sm when creating multires SM files.   
+
+===============================================================================
+VERSION 2.7.2 (r561) Fri Oct 28 15:25:11 PDT 2011
+-- Fixed nonoperative "stereo" checkbox in sidecar's Blockbuster Remote Control GUI.  
+-- Fixed crashing bug in opening new second movie while first is running.  
+-- Blockbuster is now available as a binary release for certain platforms. 
+-- Restore ability to compile without DMX and MPI to allow binary releases on non-MPI linuxes.
+-- A minimal set of needed Qt libraries are now packaged in with the installation, so dependency on huge external Qt library collections are eliminated. 
+
+===============================================================================
+VERSION 2.7.1c (r532) Thu Sep 29 16:06:14 PDT 2011
+-- Bugfix:  Rendering in stereo when using DMX was broken since the auto-detect feature was added in version 2.6.3n.  It now works. 
+
+===============================================================================
+VERSION 2.7.1b (r528) Mon Sep 26 18:45:19 PDT 2011
+-- Added "noscreensaver" option to sidecar GUI and blockbuster command line/environment parser, which generates a fake mouse click every 90 seconds to prevent screensavers from activating.
+-- Throttle back CPU usage when blockbuster is idle. 
+-- Fixed a bug when blockbuster cannot connect to sidecar -- it could not be killed because mrsh does not kill its child when it dies.  So now blockbuster commits suicide if it cannot find sidecar when launched with -sidecar flag. 
+
+===============================================================================
+VERSION 2.7.1a (r510) Tue Jul 12 16:59:29 PDT 2011
+-- fixed a bug preventing slaves from communicating errors to frontend.  Errors on backends are now much clearer and easier to understand.  
+-- Include more information from the launch dialog in the host profile to reduce clicks.  
+-- Fixed crashing bug in img2sm and fixed the -ignore flag so you can make a movie out of a single file.
+-- Added -profile option and SIDECAR_DEFAULT_PROFILE to allow user and site admin (me) to set the default profile to use on startup.  
+-- Remember the last profile a user used and use it for the next launch.  NOTE:  This preference only persists for the next sidecar session if not overridden by SIDECAR_DEFAULT_PROFILE or -profile options.  
+
+===============================================================================
+VERSION 2.7.0b (r492) Mon Jun 27 18:07:09 PDT 2011
+-- Fixed a sidecar crash when no host profiles are found at startup'
+-- Fixed a miscreant blockbuster error in parsing args when run under sidecar
+
+===============================================================================
+VERSION 2.7.0a (r476) Fri Jun 10 14:26:43 PDT 2011
+-- If no files are given on the command line, blockbuster now opens a file dialog
+-- Allow the user to set the local hostname manually, so blockbuster can find sidecar when the localhost name differs from its external network name. 
+-- If a DMX slave cannot find a file on the remote host, try to handle it better.  
+
+===============================================================================
+VERSION 2.6.3o (r467) Fri Jun  3 18:21:13 PDT 2011
+-- sidecar now announces its version
+-- fixed a segfault in sidecar that happened when blockbuster disappeared unexpectedly
+-- made managing host profiles more intuitive in sidecar
+-- improved sorting of sidecar host profiles 
+-- fixed a bug in movie lists and enabled deleting of movies from the list
+-- Handle crashing and misbehaving blockbuster processes much better, i.e., without crashing.  
+
+===============================================================================
+VERSION 2.6.3n (r458) Wed Jun  1 11:34:52 PDT 2011
+-- opening a stereo movie now enables stereo mode automatically, unless -no-stereo-switch is given on the command line
+
+===============================================================================
+VERSION 2.6.3m (r453) Tue May 31 17:16:36 PDT 2011
+-- report versions from smtools now
+-- fixed "trying to preload non-existent frame" error with short movies
+
+===============================================================================
+VERSION 2.6.3l (r441) Wed May 18 10:32:49 PDT 2011
+-- changed smlib to support independent compression and I/O for performance
+-- smcat, img2sm and sm2img are now much faster with multithreading.  Basically, you are bound by I/O performance, RAM, and number of cores now, not bad code.
+-- sminfo now accepts multiple filenames
+
+===============================================================================
+VERSION 2.6.3k (r424) Wed May  4 13:59:13 PDT 2011
+-- smcat now is threaded.  Still maximum throughput not attained since I/O is combined with compression inappropriately, but it's a great improvement. 
+-- implemented host profiles in sidecar launch dialogs, so that you don't have to always reenter the information. 
+
+===============================================================================VERSION 2.6.3j (r404)
+-- In blockbuster, always swap buffers in display loop.  This eliminates black frames at start of movie.  
+-- Fix some oddities when zooming and resizing in blockbuster. 
+-- img2sm and sm2img now properly use pthreads. Result is a respectable speedup on systems with good I/O. 
+ 
+===============================================================================VERSION 2.6.3i (r368)
+-- Set DISPLAY to :0 when launching a remote blockbuster.
+-- Allow blockbuster to switch to and from stereo mode in mid-movie
+-- Set default cue LOD to 0 instead of 1 
+
+================================================================================
+VERSION 2.6.3h (r363)
+- Fixed stereo rendering on powerwall
+
+================================================================================
+VERSION 2.6.3g
+-- fixed bug in getting number of CPUs on OS X
+-- fixed bug in display for OS X
+
+================================================================================
+VERSION 2.6.3f
+October 15, 2010
+-- fixes bug in the -display bugfix from 2.6.3d  that caused unresponsive mouse and keyboard among other issues
+
+================================================================================
+VERSION 2.6.3d
+October 4, 2010
+-- fixed bug where -display flag is not passed on to X11 render context, breaking display on beast
+-- fixed segfault in blockbuster when -sidecar flag is given.
+-- fixed segfault in smtest when no args are given
+-- Use tiling by default in img2sm and smcat
+-- fixed segfault in img2sm when JPEG or PNGs are being converted to a movie, the -first flag is used, and the user makes a typo specifying the file locations. 
+
+
+================================================================================
+VERSION 2.6.3c
+September 24, 2009
+-- (r245) by not invalidating cache members so aggressively, got nice responsiveness increase.  This warrants its own release. 
+
+================================================================================
+VERSION 2.6.3b
+September 22, 2009
+-- fixed a regression preventing stereo movies from being stereo
+-- reduced Qt widget recursion
+-- fixed a couple of bugs in the cache.  One caused crashes when frames were deleted improperly, and one caused hangs when the cache filled with frames that should be deleted.
+
+================================================================================
+VERSION 2.6.3a
+June 29, 2009
+-- Rewrote smlib to remove ALL mutexes and Direct IO technology references. 
+-- Fixed a bug causing cache frames to be invalidated inappropriately, so causing very slow playback.  
+-- fixed LOD bug allowing level of detail to go negative
+-- fixed a bug that caused blockbuster to play past the EndFrame in a cue for very short play times. 
+-- fixed a bug that caused blockbuster to start on frame 2 of a movie given on the command line
+-- hopefully fixed a bug causing the spacebar to not stop a movie promptly 
+-- fixed bugs dealing with low frame rates in blockbuster and sidecar.  Now values less than 0.2 are not accepted.  I can imagine for a kiosk you might want slower rates, so add a feature request for "kiosk mode" allowing one frame every n seconds instead of a n frames per second... perhaps some clever notation would work.  
+-- fixed a bug causing blockbuster to incorrectly respond to frame numbers in cues and the frame slider in certain instances
+-- re-added movie title to blockbuster title bars, lost when the change to Qt occurred.  
+-- fixed a problem where sidecar would not exit after playing a movie 
+-- fixed a but in cue playback preventing blockbuster from stopping a cue while looping
+-- fixed a bug causing a cue to not execute properly if its end frame was 0 and the preceding cue's movie executed past the number of frames than in the current cue's movie (really!)
+
+================================================================================
+VERSION 2.6.2a
+June 8, 2009
+-- DRAMATIC speed increase due to improved network performance and better threading code.  A test movie that was limited to 13 frames per sec is now playing at over 100 FPS. 
+-- Switched code repository from CVS to Subversion.  
+-- using lzolib 2.03 now to build on new Darwin 9.7.0 kernels (OS X)
+-- now add $INSTALL_DIR/lib to rpath, meaning that Qt libs can be shipped with blockbuster for binary releases, greatly reducing difficulty in distributing the code.  This is not done on OS X yet as it broke the build there. 
+-- Fixed bug when duplicating cues in sidecar. 
+-- Fixed bug setting frame rate in cues.
+-- Enabled setting level of detail in movie cues. 
+-- Escape key now exits blockbuster, just like the good old days.  'q' still works too!  In sidecar, this has to be shift-Escape because of interface collisions. 
+-- Fixed some problems with looping and executing cue sequences. 
+
+================================================================================
+VERSION 2.6.1a
+May 2009
+-- User can now execute and loop over multiple cues in the cue list.  Each cue will execute to its end frame and then the next will execute.  Interrupting the movie also interrupts the cue stack.  
+-- Frame Rate stuff:  move FPS back to main control window,  correctly report frame rate setting in GUI at startup, and respect any FPS value in the movie
+-- Remove references to "frame" position in GUI and replace it with "Window" for clarity.  
+
+================================================================================
+VERSION 2.6.0b
+Apr 9, 2009
+-- fixed bugs in 2.6.0a
+-- now blockbuster randomizes its port to prevent conflicts with other blockbusters and with sidecar
+-- debugging and testing is a bit easier
+
+================================================================================
+VERSION 2.6.0a
+Nov 26, 2008
+-- changed blockbuster user interface to Qt from GTK
+-- added a -help option to sidecar
+-- added -keyhelp option for sidecar and blockbuster, for getting help with keyboard controls
+-- added ability to start a movie on a remote host from the sidecar command line, and begin playing it immediately (-play and -movie options)
+-- simplified the access to stereo.  Simply typing -stereo will use stereo on the back end if you are using DMX and will use stereo on the front end if not.  
+-- worked around an apparent Qt bug where old events are spontaneously reappearing from the network completely out of sequence
+-- Added dialogs to prompt user to save unsaved changes if windows close or application is quit while working. 
+-- Fixed bug that caused interface to be disabled after deleting a cue. 
+-- Added ability to save the current frame as a PNG file. 
+-- Added ability to hide the cursor
+-- Blockbuster now prompts to accept incoming sidecar connections to prevent hijacking by an intruder. 
+-- Simplified underlying communication protocol to allow more flexibility in the future. 
+-- Added a history to the movie paths field in sidecar. 
+-- Various bugfixes.
+
+================================================================================
+VERSION 2.5.6a
+Oct 17, 2008
+-- Broke out the Cue Manger and Movie Info interfaces as separate windows to use the screen space better.  
+-- Double clicking on a cue now executes that cue. 
+-- Added tool tips to Movie Cue Manger interface. 
+-- Sidecar now notices when user quits a connected blockbuster without doing it through sidecar. 
+-- Added "Current Frame" field in cues to enable going directly to a frame, reducing flicker on new cue loads
+-- Improved error reporting and handling between sidecar and blockbuster, so that for example if a file cannot be found, sidecar reports that error, and not something else it makes up out of frustration
+-- Implemented the items in the sidecar File menu
+-- Cues now default to full screen to reflect most common current use case
+
+================================================================================
+VERSION 2.5.5g
+Sep 4, 2008
+-- added -stereo and -dmxstereo flags to blockbuster
+-- hide the toolbox on slave nodes. 
+-- add -dmx and -movie flags to sidecar
+-- fix issues of communication and feedback between blockbuster and sidecar GUIs where changes in one were not clearly reflected or even canceled out by another, especially when playing movies. 
+-- add the ability to reset start and end frames in a movie cue to reflect movie length, which was a problem before when you had set the end frame and wanted to change it to something bigger.
+-- sidecar interface is a bit smaller
+-- added a "pingpong" feature in blockbuster and sidecar that allows movie to play alternately back and forth forever.  This is useful in presenting some scientific simulations. 
+-- zoom to 100% now also resizes the window to fit the image
+
+================================================================================
+VERSION 2.5.5f
+August 11, 2008
+-- bugfix release
+
+================================================================================
+VERSION 2.5.5e
+July 24, 2008
+-- Added omplete remote control of blockbuster with apparently no hit on performance and excellent user feedback.  
+-- Allow capture of start and end frame from blockbuster current frame by clicking "Start Frame" or "End Frame" button
+-- fix a few interface bugs in blockbuster and sidecar
+
+================================================================================
+VERSION 2.5.5d
+July 9, 2008
+-- sidecar can now take a "snapshot" of the current blockbuster state and place the information into the current cue.  So designing a presentation just got easier. Put your movie in the desired state, take a snapshot, then fiddle with details as desired.  Rinse and repeat.  
+-- Added zoom field to sidecar cues. 
+-- Support a need at ORNL to have idle slaves on some nodes.  So if a slave connects to blockbuster and there is no DMX window for it, the slave is put into "idle mode", where it basically just waits for an exit command, responds to "heartbeats", and doesn't do much else.  
+-- Added repeatable test procedure in doc/Testing.txt to ensure more reliable deployments.  
+
+================================================================================
+VERSION 2.5.5c
+July 2, 2008
+-- blockbuster now connects back to sidecar on launch or connections, allowing sidecar to know that blockbuster is alive, and allowing future communications such as current frame, fps, etc from blockbuster to user in sidecar
+
+================================================================================
+VERSION 2.5.5b
+July 1, 2008 
+-- sidecar can now exit blockbuster automatically and reliably
+-- fixed various bugs relating to launch feature
+-- various interface bugfixes and improvements
+
+
+================================================================================
+VERSION 2.5.5a
+June 24, 2008 
+-- user can now control blockbuster with keystrokes like space bar from sidecar without interacting with blockbuster
+-- sidecar now knows how to launch blockbuster in both DMX and non-DMX modes
+
+================================================================================
+VERSION 2.5.4a
+June 19, 2008
+-- Blockbuster no longer hangs when sidecar sends it cues in rapid succession
+-- A stable release which supports MPI framesync seems worthy of a numerical change.  
+-- new file format: cuefiles are now human readable and editable and more robust
+-- socket communications are now simpler
+-- user can set image position on canvas using sidecar
+
+================================================================================
+VERSION 2.5.3f
+May 16, 2008
+-- Sidecar correctly saves and loads cuefiles now.  
+-- Blockbuster no longer appears to crash when sidecar executes a cue.  
+-- slaves launched without the -mpi batch flag no longer try to use MPI, which resulted in an error.  
+
+================================================================================
+VERSION 2.5.3e
+March 5, 2008
+
+-- MPI framesync now works!  It's so smooth, it's like buttah. 
+-- Slaves no longer get left around if blockbuster is killed with control-C or otherwise exits ungracefully.  
+
+
+================================================================================
+VERSION 2.5.3d
+Feb 11, 2008
+--------------------------------------------------------------------------------
+-- implemented "talkback" channel from slaves to masters as a platform for error handling in the future
+-- fixed crash when viewing movies greater than 4GB
+-- improved frame synchronization to ensure that no slave swaps buffers before all have finished the previous frame.  Still not good enough, but better than it was. 
+-- Added LLNL auspices and disclaimer to sidecar code.
+-- fixed crashing bugs when no file is selected at program start
+-- added support for gprof and gcov.  Use GPROF=TRUE make to enable.  Might have to make clean in src/blockbuster to pick up the changes to makefiles. 
+================================================================================
+VERSION 2.5.3
+Aug 30, 2007
+--------------------------------------------------------------------------------
+Now include mpeg from Stanford to enable sm2mpg script. 
+Updated changelog with proper dates. 
+
+================================================================================
+VERSION 2.5.2b
+July 27, 2007
+--------------------------------------------------------------------------------
+Fixed the following urgent bugs: 
+	  -- Blockbuster converts movie file names to full paths before processing. 
+	  This prevents the backend nodes from getting confused by relative paths. 
+
+================================================================================
+VERSION 2.5.2
+July 26, 2007
+--------------------------------------------------------------------------------
+Fixed the following bugs: 
+	  -- Blockbuster was crashing in DMX mode.  Found an uninitialized struct in 
+	  some old code and fixed it.  
+	  -- fixed options parsing bug
+	  -- error checking was improved some in certain areas of the code
+
+================================================================================
+VERSION 2.5.1
+July 23, 2007
+--------------------------------------------------------------------------------
+Fixed the following bugs: 
+	-- Sidecar remote "hide blockbuster controls" capability works now
+    -- Looping specified from the command line now works correctly
+    -- When "loop" is remotely specified, blockbuster now updates GUI correctly
+	-- When starting a movie with a window larger than the movie, blockbuster
+	   now stretches the movie to fit the window.  
+
+================================================================================
+VERSION 2.5.0
+June 13, 2007
+--------------------------------------------------------------------------------
+NEW FEATURES:
+	-- allow user to load cue file on the command line DONE 5/17/07
+	-- allow sizing of movie width and height to powerwalls DONE 5/18/07
+	-- add window positioning via Sidecar by calling ÒgtkMove()Ó DONE on 5/20/07
+	-- add loop over frame range DONE 5/18/07
+	-- Created Sidecar!  Allows cueing of movie events, remote command execution
+	-- turn off error notifications  (FIXED 5/21/07) 
+	-- need to report version from blockbuster with -v DONE 6/11/07
+	-- start versioning to track changes DONE 6/11/07
+	-- get blockbuster building in Qt style  DONE
+	-- command language over TCP sockets, and Qt based "remote control" utility, 
+			   which will become SideCar
+		-- make blockbuster listen for commands and respond 
+		-- create Sidecar as a Qt application with Connect, Play, and Disconnect 
+
+------------------------------------------------------------------------------
+BUGFIXES:
+	-- Blockbuster crashes gtk+ conflicts with Qt 4.2.3's glib have to use 
+				   QT_NO_GLIB or you get segfault FIXED 6/7/07
+	-- Sidecar window now properly resizing after removing widgets
+	-- If a movie longer than the ensuing movie is played, now correctly handle 
+	   ending frame number.
+ 	-- repositioning now works correctly in cues
+	-- if new movie is loaded when using -r dmx -D, movie now takes whole screen
+	-- if Load Movie is not checked, Sidecar no longer sends "load movie"cue
+	-- "Delete cue" now prompts "are you sure?"	
+	-- when reloading cues from a file, the checkbox for "load movie" now gets 
+		checked properly  
+	-- BB now auto-loops 
+	-- BB improperly no longer improperly exits after n loops 
+	-- Looping a single time with -L 1 now works properly.
+	-- framerate set on command line is no longer ignored
+
+--------------------------------------------------------------------------------
+OTHER:
+	-- break out blockbuster from ascivis_source DONE 6/5/07  
+	-- create changelog DONE 6/13/07
