@@ -1,0 +1,927 @@
+/*
+* Copyright (c) 2022, Lawrence Livermore National Security, LLC. Produced at the Lawrence Livermore National Laboratory
+* CODE-743439.
+* All rights reserved.
+* This file is part of CCT. For details, see https://github.com/LLNL/coda-calibration-tool.
+*
+* Licensed under the Apache License, Version 2.0 (the “Licensee”); you may not use this file except in compliance with the License.  You may obtain a copy of the License at:
+* http://www.apache.org/licenses/LICENSE-2.0
+* Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and limitations under the license.
+*
+* This work was performed under the auspices of the U.S. Department of Energy
+* by Lawrence Livermore National Laboratory under Contract DE-AC52-07NA27344.
+*/
+package gov.llnl.gnem.apps.coda.spectra.model.domain;
+
+import java.util.Objects;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
+import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
+import org.springframework.format.annotation.NumberFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "Spectra_Ratio_Pair_Inversion_Sample")
+public class SpectraRatioPairInversionResult {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private Long id;
+
+    @Version
+    private Integer version = 0;
+
+    @Column
+    @NotNull
+    private String eventIdA;
+
+    @Column
+    @NotNull
+    private String eventIdB;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float momentEstimateA;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float cornerEstimateA;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double cornerEstimateA1Min;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double cornerEstimateA2Min;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double cornerEstimateA1Max;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double cornerEstimateA2Max;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float momentEstimateB;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float cornerEstimateB;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double cornerEstimateB1Min;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double cornerEstimateB2Min;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double cornerEstimateB1Max;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double cornerEstimateB2Max;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float apparentStressEstimateA;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double apparentStressA1Min;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double apparentStressA2Min;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double apparentStressA1Max;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double apparentStressA2Max;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float apparentStressEstimateB;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double apparentStressB1Min;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double apparentStressB2Min;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double apparentStressB1Max;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double apparentStressB2Max;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float misfit;
+
+    @Column
+    @NotNull
+    @Lob
+    @Basic
+    private FloatArrayList m0samples = new FloatArrayList(0);
+
+    @Column
+    @NotNull
+    @Lob
+    @Basic
+    private IntArrayList m0XIndex = new IntArrayList(0);
+
+    @Column
+    @NotNull
+    @Lob
+    @Basic
+    private IntArrayList m0YIndex = new IntArrayList(0);
+
+    @Column
+    @NotNull
+    @Lob
+    @Basic
+    private FloatArrayList stressSamples = new FloatArrayList(0);
+
+    @Column
+    @NotNull
+    @Lob
+    @Basic
+    private IntArrayList stressXIndex = new IntArrayList(0);
+
+    @Column
+    @NotNull
+    @Lob
+    @Basic
+    private IntArrayList stressYIndex = new IntArrayList(0);
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float m0minX;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float m0maxX;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float m0minY;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float m0maxY;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private int m0Xdim;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private int m0Ydim;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float appStressMin;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private float appStressMax;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private int appStressXdim;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private int appStressYdim;
+
+    @Column
+    @NumberFormat
+    @NotNull
+    private double kConstant;
+
+    public SpectraRatioPairInversionResult() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public SpectraRatioPairInversionResult setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public SpectraRatioPairInversionResult setVersion(Integer version) {
+        this.version = version;
+        return this;
+    }
+
+    public String getEventIdA() {
+        return eventIdA;
+    }
+
+    public SpectraRatioPairInversionResult setEventIdA(String eventIdA) {
+        this.eventIdA = eventIdA;
+        return this;
+    }
+
+    public String getEventIdB() {
+        return eventIdB;
+    }
+
+    public SpectraRatioPairInversionResult setEventIdB(String eventIdB) {
+        this.eventIdB = eventIdB;
+        return this;
+    }
+
+    public float getMomentEstimateA() {
+        return momentEstimateA;
+    }
+
+    public SpectraRatioPairInversionResult setMomentEstimateA(float momentEstimate) {
+        this.momentEstimateA = momentEstimate;
+        return this;
+    }
+
+    public float getCornerEstimateA() {
+        return cornerEstimateA;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateA(float cornerEstimate) {
+        this.cornerEstimateA = cornerEstimate;
+        return this;
+    }
+
+    public float getMomentEstimateB() {
+        return momentEstimateB;
+    }
+
+    public SpectraRatioPairInversionResult setMomentEstimateB(float momentEstimate) {
+        this.momentEstimateB = momentEstimate;
+        return this;
+    }
+
+    public float getCornerEstimateB() {
+        return cornerEstimateB;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateB(float cornerEstimate) {
+        this.cornerEstimateB = cornerEstimate;
+        return this;
+    }
+
+    public float getApparentStressEstimateA() {
+        return apparentStressEstimateA;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressEstimateA(float apparentStressEstimateA) {
+        this.apparentStressEstimateA = apparentStressEstimateA;
+        return this;
+    }
+
+    public float getApparentStressEstimateB() {
+        return apparentStressEstimateB;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressEstimateB(float apparentStressEstimateB) {
+        this.apparentStressEstimateB = apparentStressEstimateB;
+        return this;
+    }
+
+    public double getCornerEstimateA1Min() {
+        return cornerEstimateA1Min;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateA1Min(double cornerEstimateA1Min) {
+        this.cornerEstimateA1Min = cornerEstimateA1Min;
+        return this;
+    }
+
+    public double getCornerEstimateA2Min() {
+        return cornerEstimateA2Min;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateA2Min(double cornerEstimateA2Min) {
+        this.cornerEstimateA2Min = cornerEstimateA2Min;
+        return this;
+    }
+
+    public double getCornerEstimateA1Max() {
+        return cornerEstimateA1Max;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateA1Max(double cornerEstimateA1Max) {
+        this.cornerEstimateA1Max = cornerEstimateA1Max;
+        return this;
+    }
+
+    public double getCornerEstimateA2Max() {
+        return cornerEstimateA2Max;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateA2Max(double cornerEstimateA2Max) {
+        this.cornerEstimateA2Max = cornerEstimateA2Max;
+        return this;
+    }
+
+    public double getCornerEstimateB1Min() {
+        return cornerEstimateB1Min;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateB1Min(double cornerEstimateB1Min) {
+        this.cornerEstimateB1Min = cornerEstimateB1Min;
+        return this;
+    }
+
+    public double getCornerEstimateB2Min() {
+        return cornerEstimateB2Min;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateB2Min(double cornerEstimateB2Min) {
+        this.cornerEstimateB2Min = cornerEstimateB2Min;
+        return this;
+    }
+
+    public double getCornerEstimateB1Max() {
+        return cornerEstimateB1Max;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateB1Max(double cornerEstimateB1Max) {
+        this.cornerEstimateB1Max = cornerEstimateB1Max;
+        return this;
+    }
+
+    public double getCornerEstimateB2Max() {
+        return cornerEstimateB2Max;
+    }
+
+    public SpectraRatioPairInversionResult setCornerEstimateB2Max(double cornerEstimateB2Max) {
+        this.cornerEstimateB2Max = cornerEstimateB2Max;
+        return this;
+    }
+
+    public double getApparentStressA1Min() {
+        return apparentStressA1Min;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressA1Min(double apparentStressA1Min) {
+        this.apparentStressA1Min = apparentStressA1Min;
+        return this;
+    }
+
+    public double getApparentStressA2Min() {
+        return apparentStressA2Min;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressA2Min(double apparentStressA2Min) {
+        this.apparentStressA2Min = apparentStressA2Min;
+        return this;
+    }
+
+    public double getApparentStressA1Max() {
+        return apparentStressA1Max;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressA1Max(double apparentStressA1Max) {
+        this.apparentStressA1Max = apparentStressA1Max;
+        return this;
+    }
+
+    public double getApparentStressA2Max() {
+        return apparentStressA2Max;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressA2Max(double apparentStressA2Max) {
+        this.apparentStressA2Max = apparentStressA2Max;
+        return this;
+    }
+
+    public double getApparentStressB1Min() {
+        return apparentStressB1Min;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressB1Min(double apparentStressB1Min) {
+        this.apparentStressB1Min = apparentStressB1Min;
+        return this;
+    }
+
+    public double getApparentStressB2Min() {
+        return apparentStressB2Min;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressB2Min(double apparentStressB2Min) {
+        this.apparentStressB2Min = apparentStressB2Min;
+        return this;
+    }
+
+    public double getApparentStressB1Max() {
+        return apparentStressB1Max;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressB1Max(double apparentStressB1Max) {
+        this.apparentStressB1Max = apparentStressB1Max;
+        return this;
+    }
+
+    public double getApparentStressB2Max() {
+        return apparentStressB2Max;
+    }
+
+    public SpectraRatioPairInversionResult setApparentStressB2Max(double apparentStressB2Max) {
+        this.apparentStressB2Max = apparentStressB2Max;
+        return this;
+    }
+
+    public float getMisfit() {
+        return misfit;
+    }
+
+    public SpectraRatioPairInversionResult setMisfit(float misfit) {
+        this.misfit = misfit;
+        return this;
+    }
+
+    public double getkConstant() {
+        return kConstant;
+    }
+
+    public SpectraRatioPairInversionResult setkConstant(double kConstant) {
+        this.kConstant = kConstant;
+        return this;
+    }
+
+    @JsonIgnore
+    public FloatArrayList getM0data() {
+        return m0samples;
+    }
+
+    @JsonIgnore
+    public SpectraRatioPairInversionResult setM0data(FloatArrayList m0samples) {
+        this.m0samples = m0samples;
+        return this;
+    }
+
+    public float[] getM0samples() {
+        return m0samples.toArray();
+    }
+
+    public SpectraRatioPairInversionResult setM0samples(float[] m0samples) {
+        this.m0samples = new FloatArrayList(m0samples);
+        return this;
+    }
+
+    @JsonIgnore
+    public IntArrayList getM0XIdx() {
+        return m0XIndex;
+    }
+
+    @JsonIgnore
+    public SpectraRatioPairInversionResult setM0XIdx(IntArrayList m0xIndex) {
+        m0XIndex = m0xIndex;
+        return this;
+    }
+
+    public int[] getM0XIndex() {
+        return m0XIndex.toArray();
+    }
+
+    public SpectraRatioPairInversionResult setM0XIndex(int[] m0xIndex) {
+        m0XIndex = new IntArrayList(m0xIndex);
+        return this;
+    }
+
+    @JsonIgnore
+    public IntArrayList getM0YIdx() {
+        return m0YIndex;
+    }
+
+    @JsonIgnore
+    public SpectraRatioPairInversionResult setM0YIdx(IntArrayList m0yIndex) {
+        m0YIndex = m0yIndex;
+        return this;
+    }
+
+    public int[] getM0YIndex() {
+        return m0YIndex.toArray();
+    }
+
+    public SpectraRatioPairInversionResult setM0YIndex(int[] m0yIndex) {
+        m0YIndex = new IntArrayList(m0yIndex);
+        return this;
+    }
+
+    @JsonIgnore
+    public FloatArrayList getStressData() {
+        return stressSamples;
+    }
+
+    @JsonIgnore
+    public SpectraRatioPairInversionResult setStressData(FloatArrayList stressSamples) {
+        this.stressSamples = stressSamples;
+        return this;
+    }
+
+    public float[] getStressSamples() {
+        return stressSamples.toArray();
+    }
+
+    public SpectraRatioPairInversionResult setStressSamples(float[] stressSamples) {
+        this.stressSamples = new FloatArrayList(stressSamples);
+        return this;
+    }
+
+    @JsonIgnore
+    public IntArrayList getStressXIdx() {
+        return stressXIndex;
+    }
+
+    @JsonIgnore
+    public SpectraRatioPairInversionResult setStressXIdx(IntArrayList stressXIndex) {
+        this.stressXIndex = stressXIndex;
+        return this;
+    }
+
+    public int[] getStressXIndex() {
+        return stressXIndex.toArray();
+    }
+
+    public SpectraRatioPairInversionResult setStressXIndex(int[] stressXIndex) {
+        this.stressXIndex = new IntArrayList(stressXIndex);
+        return this;
+    }
+
+    @JsonIgnore
+    public IntArrayList getStressYIdx() {
+        return stressYIndex;
+    }
+
+    @JsonIgnore
+    public SpectraRatioPairInversionResult setStressYIdx(IntArrayList stressYIndex) {
+        this.stressYIndex = stressYIndex;
+        return this;
+    }
+
+    public int[] getStressYIndex() {
+        return stressYIndex.toArray();
+    }
+
+    public SpectraRatioPairInversionResult setStressYIndex(int[] stressYIndex) {
+        this.stressYIndex = new IntArrayList(stressYIndex);
+        return this;
+    }
+
+    public float getM0minX() {
+        return m0minX;
+    }
+
+    public SpectraRatioPairInversionResult setM0minX(float m0minX) {
+        this.m0minX = m0minX;
+        return this;
+    }
+
+    public float getM0maxX() {
+        return m0maxX;
+    }
+
+    public SpectraRatioPairInversionResult setM0maxX(float m0maxX) {
+        this.m0maxX = m0maxX;
+        return this;
+    }
+
+    public float getM0minY() {
+        return m0minY;
+    }
+
+    public SpectraRatioPairInversionResult setM0minY(float m0minY) {
+        this.m0minY = m0minY;
+        return this;
+    }
+
+    public float getM0maxY() {
+        return m0maxY;
+    }
+
+    public SpectraRatioPairInversionResult setM0maxY(float m0maxY) {
+        this.m0maxY = m0maxY;
+        return this;
+    }
+
+    public float getAppStressMin() {
+        return appStressMin;
+    }
+
+    public SpectraRatioPairInversionResult setAppStressMin(float appStressMin) {
+        this.appStressMin = appStressMin;
+        return this;
+    }
+
+    public float getAppStressMax() {
+        return appStressMax;
+    }
+
+    public SpectraRatioPairInversionResult setAppStressMax(float appStressMax) {
+        this.appStressMax = appStressMax;
+        return this;
+    }
+
+    public int getM0Xdim() {
+        return m0Xdim;
+    }
+
+    public SpectraRatioPairInversionResult setM0Xdim(int m0Xdim) {
+        this.m0Xdim = m0Xdim;
+        return this;
+    }
+
+    public int getM0Ydim() {
+        return m0Ydim;
+    }
+
+    public SpectraRatioPairInversionResult setM0Ydim(int m0Ydim) {
+        this.m0Ydim = m0Ydim;
+        return this;
+    }
+
+    public int getAppStressXdim() {
+        return appStressXdim;
+    }
+
+    public SpectraRatioPairInversionResult setAppStressXdim(int appStressXdim) {
+        this.appStressXdim = appStressXdim;
+        return this;
+    }
+
+    public int getAppStressYdim() {
+        return appStressYdim;
+    }
+
+    public SpectraRatioPairInversionResult setAppStressYdim(int appStressYdim) {
+        this.appStressYdim = appStressYdim;
+        return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                appStressMax,
+                    appStressMin,
+                    appStressXdim,
+                    appStressYdim,
+                    apparentStressA1Max,
+                    apparentStressA1Min,
+                    apparentStressA2Max,
+                    apparentStressA2Min,
+                    apparentStressB1Max,
+                    apparentStressB1Min,
+                    apparentStressB2Max,
+                    apparentStressB2Min,
+                    apparentStressEstimateA,
+                    apparentStressEstimateB,
+                    cornerEstimateA,
+                    cornerEstimateA1Max,
+                    cornerEstimateA1Min,
+                    cornerEstimateA2Max,
+                    cornerEstimateA2Min,
+                    cornerEstimateB,
+                    cornerEstimateB1Max,
+                    cornerEstimateB1Min,
+                    cornerEstimateB2Max,
+                    cornerEstimateB2Min,
+                    eventIdA,
+                    eventIdB,
+                    id,
+                    kConstant,
+                    m0XIndex,
+                    m0Xdim,
+                    m0YIndex,
+                    m0Ydim,
+                    m0maxX,
+                    m0maxY,
+                    m0minX,
+                    m0minY,
+                    m0samples,
+                    misfit,
+                    momentEstimateA,
+                    momentEstimateB,
+                    stressSamples,
+                    stressXIndex,
+                    stressYIndex,
+                    version);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof SpectraRatioPairInversionResult)) {
+            return false;
+        }
+        SpectraRatioPairInversionResult other = (SpectraRatioPairInversionResult) obj;
+        return Float.floatToIntBits(appStressMax) == Float.floatToIntBits(other.appStressMax)
+                && Float.floatToIntBits(appStressMin) == Float.floatToIntBits(other.appStressMin)
+                && appStressXdim == other.appStressXdim
+                && appStressYdim == other.appStressYdim
+                && Double.doubleToLongBits(apparentStressA1Max) == Double.doubleToLongBits(other.apparentStressA1Max)
+                && Double.doubleToLongBits(apparentStressA1Min) == Double.doubleToLongBits(other.apparentStressA1Min)
+                && Double.doubleToLongBits(apparentStressA2Max) == Double.doubleToLongBits(other.apparentStressA2Max)
+                && Double.doubleToLongBits(apparentStressA2Min) == Double.doubleToLongBits(other.apparentStressA2Min)
+                && Double.doubleToLongBits(apparentStressB1Max) == Double.doubleToLongBits(other.apparentStressB1Max)
+                && Double.doubleToLongBits(apparentStressB1Min) == Double.doubleToLongBits(other.apparentStressB1Min)
+                && Double.doubleToLongBits(apparentStressB2Max) == Double.doubleToLongBits(other.apparentStressB2Max)
+                && Double.doubleToLongBits(apparentStressB2Min) == Double.doubleToLongBits(other.apparentStressB2Min)
+                && Float.floatToIntBits(apparentStressEstimateA) == Float.floatToIntBits(other.apparentStressEstimateA)
+                && Float.floatToIntBits(apparentStressEstimateB) == Float.floatToIntBits(other.apparentStressEstimateB)
+                && Float.floatToIntBits(cornerEstimateA) == Float.floatToIntBits(other.cornerEstimateA)
+                && Double.doubleToLongBits(cornerEstimateA1Max) == Double.doubleToLongBits(other.cornerEstimateA1Max)
+                && Double.doubleToLongBits(cornerEstimateA1Min) == Double.doubleToLongBits(other.cornerEstimateA1Min)
+                && Double.doubleToLongBits(cornerEstimateA2Max) == Double.doubleToLongBits(other.cornerEstimateA2Max)
+                && Double.doubleToLongBits(cornerEstimateA2Min) == Double.doubleToLongBits(other.cornerEstimateA2Min)
+                && Float.floatToIntBits(cornerEstimateB) == Float.floatToIntBits(other.cornerEstimateB)
+                && Double.doubleToLongBits(cornerEstimateB1Max) == Double.doubleToLongBits(other.cornerEstimateB1Max)
+                && Double.doubleToLongBits(cornerEstimateB1Min) == Double.doubleToLongBits(other.cornerEstimateB1Min)
+                && Double.doubleToLongBits(cornerEstimateB2Max) == Double.doubleToLongBits(other.cornerEstimateB2Max)
+                && Double.doubleToLongBits(cornerEstimateB2Min) == Double.doubleToLongBits(other.cornerEstimateB2Min)
+                && Objects.equals(eventIdA, other.eventIdA)
+                && Objects.equals(eventIdB, other.eventIdB)
+                && Objects.equals(id, other.id)
+                && Double.doubleToLongBits(kConstant) == Double.doubleToLongBits(other.kConstant)
+                && Objects.equals(m0XIndex, other.m0XIndex)
+                && m0Xdim == other.m0Xdim
+                && Objects.equals(m0YIndex, other.m0YIndex)
+                && m0Ydim == other.m0Ydim
+                && Float.floatToIntBits(m0maxX) == Float.floatToIntBits(other.m0maxX)
+                && Float.floatToIntBits(m0maxY) == Float.floatToIntBits(other.m0maxY)
+                && Float.floatToIntBits(m0minX) == Float.floatToIntBits(other.m0minX)
+                && Float.floatToIntBits(m0minY) == Float.floatToIntBits(other.m0minY)
+                && Objects.equals(m0samples, other.m0samples)
+                && Float.floatToIntBits(misfit) == Float.floatToIntBits(other.misfit)
+                && Float.floatToIntBits(momentEstimateA) == Float.floatToIntBits(other.momentEstimateA)
+                && Float.floatToIntBits(momentEstimateB) == Float.floatToIntBits(other.momentEstimateB)
+                && Objects.equals(stressSamples, other.stressSamples)
+                && Objects.equals(stressXIndex, other.stressXIndex)
+                && Objects.equals(stressYIndex, other.stressYIndex)
+                && Objects.equals(version, other.version);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("SpectraRatioPairInversionResult [id=")
+               .append(id)
+               .append(", version=")
+               .append(version)
+               .append(", eventIdA=")
+               .append(eventIdA)
+               .append(", eventIdB=")
+               .append(eventIdB)
+               .append(", momentEstimateA=")
+               .append(momentEstimateA)
+               .append(", cornerEstimateA=")
+               .append(cornerEstimateA)
+               .append(", cornerEstimateA1Min=")
+               .append(cornerEstimateA1Min)
+               .append(", cornerEstimateA2Min=")
+               .append(cornerEstimateA2Min)
+               .append(", cornerEstimateA1Max=")
+               .append(cornerEstimateA1Max)
+               .append(", cornerEstimateA2Max=")
+               .append(cornerEstimateA2Max)
+               .append(", momentEstimateB=")
+               .append(momentEstimateB)
+               .append(", cornerEstimateB=")
+               .append(cornerEstimateB)
+               .append(", cornerEstimateB1Min=")
+               .append(cornerEstimateB1Min)
+               .append(", cornerEstimateB2Min=")
+               .append(cornerEstimateB2Min)
+               .append(", cornerEstimateB1Max=")
+               .append(cornerEstimateB1Max)
+               .append(", cornerEstimateB2Max=")
+               .append(cornerEstimateB2Max)
+               .append(", apparentStressEstimateA=")
+               .append(apparentStressEstimateA)
+               .append(", apparentStressA1Min=")
+               .append(apparentStressA1Min)
+               .append(", apparentStressA2Min=")
+               .append(apparentStressA2Min)
+               .append(", apparentStressA1Max=")
+               .append(apparentStressA1Max)
+               .append(", apparentStressA2Max=")
+               .append(apparentStressA2Max)
+               .append(", apparentStressEstimateB=")
+               .append(apparentStressEstimateB)
+               .append(", apparentStressB1Min=")
+               .append(apparentStressB1Min)
+               .append(", apparentStressB2Min=")
+               .append(apparentStressB2Min)
+               .append(", apparentStressB1Max=")
+               .append(apparentStressB1Max)
+               .append(", apparentStressB2Max=")
+               .append(apparentStressB2Max)
+               .append(", misfit=")
+               .append(misfit)
+               .append(", m0samples=")
+               .append(m0samples)
+               .append(", m0XIndex=")
+               .append(m0XIndex)
+               .append(", m0YIndex=")
+               .append(m0YIndex)
+               .append(", stressSamples=")
+               .append(stressSamples)
+               .append(", stressXIndex=")
+               .append(stressXIndex)
+               .append(", stressYIndex=")
+               .append(stressYIndex)
+               .append(", m0minX=")
+               .append(m0minX)
+               .append(", m0maxX=")
+               .append(m0maxX)
+               .append(", m0minY=")
+               .append(m0minY)
+               .append(", m0maxY=")
+               .append(m0maxY)
+               .append(", m0Xdim=")
+               .append(m0Xdim)
+               .append(", m0Ydim=")
+               .append(m0Ydim)
+               .append(", appStressMin=")
+               .append(appStressMin)
+               .append(", appStressMax=")
+               .append(appStressMax)
+               .append(", appStressXdim=")
+               .append(appStressXdim)
+               .append(", appStressYdim=")
+               .append(appStressYdim)
+               .append(", kConstant=")
+               .append(kConstant)
+               .append("]");
+        return builder.toString();
+    }
+
+}

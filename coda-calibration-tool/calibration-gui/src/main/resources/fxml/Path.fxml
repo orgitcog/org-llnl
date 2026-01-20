@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="path" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="465.0" prefWidth="505.0" stylesheets="@CommonGui.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gov.llnl.gnem.apps.coda.calibration.gui.controllers.PathController">
+	<children>
+		<VBox>
+			<children>
+				<HBox prefWidth="200.0">
+					<children>
+						<Pane prefWidth="30.0" HBox.hgrow="NEVER" />
+						<VBox>
+							<children>
+								<Label text="Frequency Band" />
+								<ComboBox fx:id="frequencyBandComboBox" prefWidth="150.0" />
+							</children>
+						</VBox>
+						<Pane prefWidth="30.0" />
+						<VBox>
+							<children>
+								<Label text="Station 1" />
+								<ComboBox fx:id="station1ComboBox" prefWidth="150.0" />
+							</children>
+						</VBox>
+						<Pane layoutX="190.0" layoutY="20.0" prefWidth="30.0" />
+						<VBox layoutX="220.0" layoutY="20.0">
+							<children>
+								<Label text="Station 2" />
+								<ComboBox fx:id="station2ComboBox" prefWidth="150.0" />
+							</children>
+						</VBox>
+                  <Pane prefWidth="30.0" />
+                  <VBox>
+                     <children>
+                        <Label text="Min Event Count" />
+                        <Spinner fx:id="stationCountFilterField" editable="true" prefWidth="60.0">
+                          <valueFactory>
+					        <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="3" max="100" min="0" />
+					      </valueFactory>
+                        </Spinner>
+                     </children>
+                  </VBox>
+						<Pane prefWidth="30.0" />
+					</children>
+					<VBox.margin>
+						<Insets />
+					</VBox.margin>
+					<padding>
+						<Insets bottom="10.0" top="10.0" />
+					</padding>
+				</HBox>
+				<SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+					<items>
+						<StackPane>
+							<children>
+								<Pane fx:id="sdPlotPane" />
+							</children>
+						</StackPane>
+						<StackPane>
+							<children>
+								<Pane fx:id="stationPlotPane" />
+							</children>
+						</StackPane>
+					</items>
+				</SplitPane>
+			</children>
+		</VBox>
+	</children>
+</StackPane>

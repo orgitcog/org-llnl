@@ -1,0 +1,19 @@
+{
+    "schemaVersion": 1,
+    "type": "llnl/coda-calibration-tool",
+    "measured-events": [
+        {
+            "eventId": "0331199924",
+            "datetime": "2011-12-03T10:15:30Z",
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "mw": 3.3,
+            "apparentStressInMpa": 0.7,
+            "refMw" : 3.3,
+            "refApparentStressInMpa" : 0.7,
+            "dataCount": 123,
+            "stationCount": 7,
+            "bandCoverage": 0.677
+        }
+    ]
+}

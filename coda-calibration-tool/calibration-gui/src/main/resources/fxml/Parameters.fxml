@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="parameters" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@CommonGui.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gov.llnl.gnem.apps.coda.calibration.gui.controllers.parameters.ParametersController">
+	<children>
+		<VBox StackPane.alignment="CENTER_RIGHT">
+			<children>
+				<TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+					<tabs>
+						<Tab closable="false" text="Coda Parameters">
+							<content>
+								<fx:include fx:id="sharedBand" source="SharedBand.fxml" />
+							</content>
+						</Tab>
+						<Tab closable="false" text="Model">
+							<content>
+								<fx:include fx:id="model" source="Model.fxml" />
+							</content>
+						</Tab>
+						<Tab closable="false" text="Station Specific">
+							<content>
+								<fx:include fx:id="siteBand" source="SiteBand.fxml" />
+							</content>
+						</Tab>
+                  <Tab closable="false" text="Constraints">
+                     <content>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                                <tabs>
+                                    <Tab text="Velocity">
+                                       <content>
+                  		                      <fx:include fx:id="velocityConfig" source="Velocity.fxml" />
+                                       </content>
+                                    </Tab>
+                                  <Tab text="Shape">
+                                       <content>
+                                          <fx:include fx:id="shapeConfig" source="ShapeConstraints.fxml" />
+                                       </content>
+                                    </Tab>
+                                </tabs>
+                              </TabPane>
+                           </center>
+                        </BorderPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Settings">
+                     <content>
+                        <fx:include fx:id="calibrationSettings" source="CalibrationSettings.fxml" />
+                     </content>
+                  </Tab>
+					</tabs>
+				</TabPane>
+			</children>
+		</VBox>
+	</children>
+</StackPane>
