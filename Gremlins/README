@@ -1,0 +1,139 @@
+##############################################################################
+# Copyright (c) 2013-2014, Lawrence Livermore National Security, LLC.
+# Produced at the Lawrence Livermore National Laboratory
+#
+# Written by Martin Schulz et al <schulzm@llnl.gov>
+# LLNL-CODE-645436
+# All rights reserved.
+#
+# This file is part of the GREMLINS framework.
+# For details, see http://scalability.llnl.gov/gremlins.
+# Please read the LICENSE file for further information.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the disclaimer below.
+#
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the disclaimer (as
+#       noted below) in the documentation and/or other materials
+#       provided with the distribution.
+#
+#     * Neither the name of the LLNS/LLNL nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL LAWRENCE
+# LIVERMORE NATIONAL SECURITY, LLC, THE U.S. DEPARTMENT OF ENERGY OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Written by Martin Schulz and Matthias Maiterth
+##############################################################################
+
+
+-------------------------------------------------------------------------------
+
+                                   GREMLINs
+              Emulating Exascale Conditions on Today's Platforms
+
+-------------------------------------------------------------------------------
+
+1. INTRODUCTION
+
+The GREMLINs emulate the behavior of anticipated future architectures on 
+current machines. We focus on the impact of resource limitations (by 
+artificially restricting them), as well as noise and faults by using injection 
+techniques--these issues are generally expected to be the dominating challenges 
+in future machine generations.
+
+We have four different classes of GREMLINS: 
+
+(1) Power: artificially reduce the operating power using DVFS or cap power on a 
+per node basis; 
+(2) Memory: limit resources in the memory hierarchy such as cache size or 
+memory bandwidth by running interference threads; 
+(3) Reselience: inject faults into target applications and enable us to study 
+the efficiency and correctness of recovery techniques;
+(4) Noise: inject periodic or random noise events to emulate system and OS 
+interference
+
+
+2. CODE STRUCTURE
+
+\gremlin-release
+ \BUILD
+ \cmakefiles
+ \latency  
+ \memory
+ \noise
+ \power
+ \resilience
+ \thermal
+ |-CMakeList.txt
+ |-LICENSE
+ |-README
+
+The cmakefiles folder contains cmake specifications. The BUILD folder is used for out of source builds.
+
+All other folders should be named according to the resource they focus on.
+In each of these the CMakeList.txt describes how the gremlins in the folder are built.
+There should be at least one gremlin that measures the resource and one that controlls or influences it.
+
+
+
+3. INSTALL
+
+Build using cmake
+
+E.g.:
+mkdir BUILD
+cd BUILD
+cmake .. -DLIBMSR_HOME=/*YOUR_PATH_TO_LIBMSR_HOME*/libmsr -DCMAKE_INSTALL_PREFIX=../INSTALL -DCMAKE_BUILD_TYPE=RelWithDebugInfo -Dwrap_DIR=/*YOUR_PATH_TO_PnMPI_INSTALL*/share/cmake/PnMPI
+make 
+make install 
+
+This will create a BUILD directory and configure all out of source configure files.
+Calling make in the BUILD directory creates the files as specified by cmake.
+make install copies the binaries to the INSTALL folder.
+
+LIBMSR can be obtained from Barry Roundtree (https://github.com/scalability-llnl/libmsr)
+
+To genearte source code from the wrapper files, the pnmpi wrapper is used.
+
+
+To change these settings, see the cmake manual or use ccmake in the BUILD directory
+
+
+The structure of the INSTALL folder is
+\INSTALL
+ \lib
+
+,where lib contains all dynamic linked libraries.
+
+
+
+These libraries can be used using LD_PRELOAD:
+
+export LD_PRELOAD=$INSTALL/lib/libPowerMeter.so  
+srun -n 16 ./helloMPI
+export LD_PRELOAD=""
+
+
+
+The Gremlins framework supports multiple preloads for the combination of different GREMLINS and to study their impacts.
+This is achieved using pnmpi (https://computation-rnd.llnl.gov/pnmpi/). 
+Please make sure the pnmpi version used supports signals and multiple preloads of libraries using signals.
+
+The wrapper script used is provided by pnmpi.

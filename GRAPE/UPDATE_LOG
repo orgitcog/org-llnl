@@ -1,0 +1,1175 @@
+
+
+Wed Dec  6 09:03:02 2017 Peter B. Robinson
+v1.21.17
+Reviewers: Ben Liu
+
+Updates master to v1.22.0.
+
+
+Wed Oct  4 16:40:26 2017 Benjamin T. Liu
+v1.21.16
+Reviewers: Peter Robinson
+
+Make grape bundle more robust to missing tags by falling back to SHA for description
+
+
+Tue Sep 26 09:19:46 2017 Benjamin T. Liu
+v1.21.15
+Reviewers: Peter Robinson
+
+Make test clone robust to user grapeconfigs
+
+
+Mon Sep 25 08:46:05 2017 Benjamin T. Liu
+v1.21.14
+Reviewers: Peter Robinson
+
+Harden grape bundle to repos with no version tags
+
+
+Mon Aug 28 09:13:05 2017 Peter B. Robinson
+v1.21.13
+Reviewers: Benjamin T. Liu
+
+Fixes a hang / windows compatibility issue in grape uv when you have new submodules as a result of amerge
+
+
+Tue Jul 11 10:46:33 2017 Peter B. Robinson
+v1.21.12
+Reviewers: Benjamin T. Liu
+
+bugfix for uv add /rm feature (accidentally disabled all nested subprojects when we used this.)
+
+
+Fri Jul  7 14:25:25 2017 Peter B. Robinson
+v1.21.11
+Reviewers: Benjamin T. Liu
+
+Adds --add and --rm options to grape uv.
+
+
+Thu Jul  6 11:43:08 2017 Peter B. Robinson
+v1.21.10
+Reviewers: Benjamin T. Liu
+
+Refreshes the grape config read before calling grape uv in a grape checkout. This should ensure nested subprojects that have been added as a result of the checkout have their branches updated.
+
+
+Thu Jul  6 10:41:04 2017 Peter B. Robinson
+v1.21.9
+Reviewers: Benjamin T. Liu
+
+Adds some fixes to publishing with cascade policies.
+
+
+Thu Jul  6 09:27:03 2017 Peter B. Robinson
+v1.21.8
+Reviewers: Benjamin T. Liu
+
+Mergeback of 4.20.7 (includes fix for erroneous checkout of \"develop\" on submodules.)
+
+
+
+Fri Jun 16 09:06:50 2017 Benjamin T. Liu
+v1.20.7
+Reviewers: Peter Robinson
+
+If grape review cannot create a pull request for a modified subproject, add a link to the branch itself
+
+
+Tue May 16 15:18:56 2017 Benjamin T. Liu
+v1.20.6
+Reviewers: Peter Robinson, David M. Dawson
+
+Fix uv to switch and detach from correct public branch for submodules
+Mon May 15 14:07:59 2017 Benjamin T. Liu
+v1.21.7
+Reviewers: David M. Dawson
+
+Mergeback of v1.20.5: Fix error in uv due to attempting to fetch a public branch when already on the branch
+
+
+
+Tue May  9 09:22:54 2017 Benjamin T. Liu
+v1.21.6
+Reviewers: David M. Dawson
+
+Prepend grape to python path to ensure requests is imported correctly
+- Affects atd and offsite build scripts
+
+
+Wed Apr 26 09:10:04 2017 Benjamin T. Liu
+v1.21.5
+Reviewers: David M. Dawson
+
+- Fix grape bundle for case where bundled tags are missing
+- Fix grape status to properly detect if a nested subproject is not on a user branch
+
+
+Fri Apr  7 15:38:20 2017 Benjamin T. Liu
+v1.21.4
+Reviewers: Albert L. Nichols III, David M. Dawson
+
+Bugfix for issue with checkout/uv of submodules that have never fetched the requested branch.
+This issue occurred when trying to get ale3d on a fresh clone if the default branch for the submodule was something else
+
+Also detach from the public branch before querying for creation.
+
+Fix fetches in updateView and checkout to handle new default fetch in git.
+Thu Mar 30 15:36:59 2017 -0700 Benjamin T. Liu
+v1.21.3
+- Switch to corresponding public branch if branch not found in subproject during uv
+- Fix typo in review that causes fatal error
+- Fix branch slot for master
+
+
+Tue Mar 28 12:58:43 2017 Benjamin T. Liu
+v1.21.2
+Reviewers: David M. Dawson
+
+Fix for bug that prevents new branch from being created if the user answers 'y' instead of 'a' at the prompt
+
+
+Fri Mar 24 09:24:30 2017 Benjamin T. Liu
+v1.21.1
+Reviewers: David M. Dawson
+
+Remove extraneous query for branch deletion.
+Clarify meaning of --deleteTopic
+Branch deletion logic was changed during merge into master
+
+
+Mon Mar 13 07:53:56 2017 Peter B. Robinson
+v1.20.0
+Reviewers: Ben Liu
+
+Updating master from 1.19.13
+
+
+Wed Mar  8 06:46:10 2017 Peter B. Robinson
+v1.19.13
+Reviewers: Aaron C. Fisher
+
+Fix a formatting issue in a message during checkout.
+
+
+Tue Mar  7 13:16:35 2017 Benjamin T. Liu
+v1.19.12
+Reviewers: David M. Dawson, Peter Robinson
+
+Update publish/review to handle new atlassian message for merged pull requests
+
+
+Fri Mar  3 08:53:24 2017 Benjamin T. Liu
+v1.19.11
+Reviewers: Peter Robinson
+
+Allow newlines in command-line review message
+- \n is converted to a newline
+- \\\\n can be used if \n is actually desired
+
+
+Wed Jan 25 15:39:56 2017 Peter B. Robinson
+v1.19.10
+Reviewers: Ben Liu
+
+Fixes GRP-185.
+
+
+Tue Dec  6 13:43:41 2016 Benjamin T. Liu
+v1.19.9
+Reviewers: Peter Robinson
+
+Bugfixes for bundle
+
+
+Tue Nov 29 16:11:25 2016 Benjamin T. Liu
+v1.19.8
+Reviewers: Peter Robinson
+
+Ensure that tags get unbundled.
+
+
+Tue Nov  8 14:17:30 2016 Peter B. Robinson
+v1.19.7
+Reviewers: Aaron C. Fisher
+
+Adds --noUpdateView and updateView options to grape checkout.
+
+
+Wed Oct 26 16:46:17 2016 Peter B. Robinson
+v1.19.6
+Reviewers: Ben Liu
+
+Fixes an issue where grape publish gets farther than it should when you give it a bad file path.
+
+
+Mon Oct 24 11:09:14 2016 Peter B. Robinson
+v1.19.5
+Reviewers: Aaron C. Fisher, Ben Liu
+
+SUMMARY: Performance and robustness improvements, along with new grape bundle / grape unbundle implementations and server-side merges available during publish. 
+
+DETAILS: 
+Addresses an issue where grape review would crash if your branch modified a submodule that was not present in your workspaces. 
+During grape checkout of a branch that does not yet exist, selecting 'a' will create new branches in parallel. 
+Grape bundle and grape unbundle have been refactored to use parallel infrastructure, and not require submodule level .grapeconfigs. Grape unbundle can now be called once from the top level workspace, and does not need to be called from every repo in the workspace.
+
+
+Thu Oct 13 10:18:19 2016 Peter B. Robinson
+v1.19.4
+Reviewers: Ben Liu
+
+Fixes a bug in isWorkspaceClean checks that relied on old versions of git printing a particular message.
+
+
+Fri Sep 23 14:40:33 2016 Benjamin T. Liu
+v1.19.3
+Reviewers: Peter B. Robinson
+
+Handle Windows and UTF-8 encoding for update description file.
+
+
+Wed Sep 14 16:18:32 2016 Benjamin T. Liu
+v1.19.2
+Reviewers: Emily Ruth Diana, Ben Liu, t
+
+Resolve GRP-150 (branch consistency check), GRP-161 (fix crashes when switching to fewer nested subprojects), and GRP-170 (noSubproject and noSubmodule options for grape foreach)
+
+
+Mon Sep 12 17:13:33 2016 Peter B. Robinson
+v1.19.1
+Reviewers: Peter B. Robinson, n
+
+Fix bug in reviewer list when author is not the publisher
+
+
+Wed Aug 17 13:03:35 2016 Benjamin T. Liu
+v1.17.9
+Reviewers: Tim Dunn, Peter B. Robinson
+
+- Update grape w to diff against common ancestor by default
+- Allow grape w to handle branches that don't exist in nested subprojects
+- Add emailFooter option for publish
+
+
+Thu May 26 11:54:21 2016 Peter B. Robinson
+v1.17.8
+Reviewers: Ben Liu
+
+Fixes a GRP-166.
+
+
+Wed Apr 27 08:29:36 2016 Benjamin T. Liu
+v1.17.7
+Reviewers: Peter B. Robinson
+
+Handle submodules during publish even if there are no changes to ensure that everyone is on the public branch after the publish
+
+
+Mon Apr  4 14:04:11 2016 Peter B. Robinson
+v1.17.6
+Reviewers: Ben Liu
+
+Brings user interactivity to earlier in the publish process.
+
+
+Mon Apr  4 12:43:32 2016 Peter B. Robinson
+v1.17.5
+Reviewers: Ben Liu
+
+Grape status now is parallel across all projects in workspace.
+
+
+Fri Apr  1 09:46:03 2016 Peter B. Robinson
+v1.17.4
+Reviewers: Aaron C. Fisher
+
+Converts newFlowBranch to work in parallel.
+
+
+Wed Mar 30 09:24:42 2016 Peter B. Robinson
+v1.16.3
+Reviewers: David M. Dawson
+
+fixed an issue that was causing nsquared git fetches when calling grape md
+
+
+Tue Mar 29 16:50:37 2016 Peter B. Robinson
+v1.16.2 (and v1.17.2)
+Reviewers: Aaron C. Fisher, Ben Liu
+
+Fixes performance issues in grape up, fixes multiprocess safety for grape up.
+
+
+Fri Mar 25 14:42:16 2016 Peter B. Robinson
+v1.16.1 (and v1.17.1)
+Reviewers: Ben Liu
+
+Fixes a critical issue that can hose your workspace if you run grape up in parallel while on a public branch with an https remote.
+
+
+Fri Mar  18 17:47:00 2016 Peter B. Robinson
+v1.17.0
+Same as v1.16.0 
+
+
+Fri Mar  18 17:47:00 2016 Peter B. Robinson
+v1.16.0
+Same as v1.13.8 with a couple of hotfixes fo grape up. 
+
+v1.13.8
+Reviewers: Peter B. Robinson
+
+Fix issue if reviewer is the pull request author
+Wed Mar  9 10:47:26 2016 Benjamin T. Liu
+v1.13.8
+Reviewers: Peter B. Robinson
+
+Fix issue if reviewer is the pull request author
+
+
+Mon Mar  7 11:49:18 2016 Benjamin T. Liu
+v1.13.7
+Reviewers: Peter B. Robinson
+
+First cut at replacement for walkthrough
+- GUI only
+- Will show whether inactive submodules differ but will not show file diffs
+- Will not show differences in inactive nested subprojects
+- Nested subtree and submodule changes will not show up in outer level diff
+
+
+Fri Jan 29 14:12:59 2016 Peter B. Robinson
+v1.13.6
+Reviewers: Ben Liu, Aaron C. Fisher
+
+
+
+
+Thu Jan 21 11:36:34 2016 Benjamin T. Liu
+v1.13.5
+Reviewers: Peter B. Robinson
+
+Revert title of pull requests including version number
+
+
+Thu Dec 10 08:55:03 2015 Benjamin T. Liu
+v1.13.4
+Reviewers: Peter B. Robinson
+
+Fix grape review for the case where a pull request has no changes.  This should only occur when the public branch of a subproject is behind origin/public (not sure whether it can happen in submodules).  There might be better fixes such as fetching the public branch and ensuring the getModifiedNestedSubprojects checks origin/public rather than public.
+
+
+Thu Dec  3 14:16:48 2015 Peter B. Robinson
+v1.13.3
+Reviewers: Ben Liu
+
+add some parallel error handling to grape db.
+
+
+Wed Nov 18 15:02:52 2015 Benjamin T. Liu
+v1.13.2
+Reviewers: Chris White
+
+Fix version checking to deal with older mac versions of git that report 'git version 1.8.5.2 (Apple Git-48)'
+
+
+Wed Nov 18 09:34:55 2015 Benjamin T. Liu
+v1.13.1
+Reviewers: Peter B. Robinson
+
+
+
+
+Fri Nov 13 16:18:58 2015 Peter B. Robinson
+v1.13.0
+Reviewers: Ben Liu
+
+Same as 1.12.12
+
+
+Fri Nov 13 14:41:12 2015 Peter B. Robinson
+v1.12.12
+Reviewers: Aaron C. Fisher, Ben Liu
+
+Adds --squash option to grape m, mr, and md. 
+
+
+Wed Nov 11 14:51:50 2015 Peter B. Robinson
+v1.12.11
+Reviewers: Ben Liu
+
+fix a crash in grape checkout
+
+
+Tue Nov 10 13:22:16 2015 Benjamin T. Liu
+v1.12.10
+Reviewers: Peter B. Robinson
+
+Fix offer to return to topic branch.
+
+
+Mon Nov  9 09:31:16 2015 Benjamin T. Liu
+v1.12.9
+Reviewers: Peter B. Robinson, Bryan G. Simpkins
+
+Offer to return to topic branch after publish (if not deleted)
+
+
+Thu Nov  5 11:00:37 2015 Peter B. Robinson
+v1.12.8
+Reviewers: Ben Liu
+
+Fix incorrect diagnosis of files being present but not a git repository.
+
+
+Thu Nov  5 08:43:50 2015 Peter B. Robinson
+v1.12.7
+Reviewers: Emily Ruth Diana, Ben Liu, Aaron C. Fisher
+
+SUMMARY:
+Adds repo-level parallelism to the grape checkout, grape uv, grape db, and grape push.
+Adds the ability to configure whether or not the checkout process syncs the branch you check out with origin. This is controlled with .grapeconfig.post-checkout.syncWithOrigin or through the new --sync option in grape checkout and/or grape uv.
+
+
+Wed Nov  4 17:02:52 2015 Peter B. Robinson
+v1.12.6
+Reviewers: Ben Liu, Aaron C. Fisher
+
+Fixes from bugfixday.
+Adds a --norecurse option to grape review.
+
+
+Wed Nov  4 14:55:58 2015 Emily Diana
+v1.12.5
+Reviewers: Aaron C. Fisher, Peter B. Robinson, Jamie A. Bramwell
+
+BRANCH: Bugfix/diana1/locking
+REVIEWERS: Peter Robinson, Jamie Bramwell, Aaron Fisher
+SUMMARY: Update to grape publish locking mechanism
+DETAILS: 
+* Added another 'md' step after 'mark in progress' for grape publish.
+* md1 and md2 description added
+* md1 and md2 mapped to same md command
+
+
+Tue Nov  3 09:27:19 2015 Benjamin T. Liu
+v1.12.4
+Reviewers: Peter B. Robinson
+
+Add author to reviewer list if author is not the one doing the publish
+
+
+Mon Nov  2 21:14:43 2015 Benjamin T. Liu
+v1.12.3
+Reviewers: Peter B. Robinson, Al Nichols
+
+Update --ay and --at merge options; add --aY/--aT for legacy behavior
+
+
+Thu Oct 29 10:12:09 2015 Benjamin T. Liu
+v1.12.2
+Reviewers: Peter B. Robinson, Aaron C. Fisher
+
+Allow choice of merge strategy by subproject with md --askAll (GRP-151)
+
+
+Thu Oct 29 10:06:54 2015 Benjamin T. Liu
+v1.12.1
+Reviewers: Peter B. Robinson, Aaron C. Fisher
+
+Quit after publish --abort (GRP-72); write progress file after stopAt; validate stopAt input; quit after invalid startAt/stopAt input
+
+
+Wed Oct 21 07:44:53 2015 Benjamin T. Liu
+v1.11.2
+Reviewers: Peter B. Robinson
+
+Query user before autopush in uv GRP-152
+
+
+Thu Aug  6 11:51:30 2015 Benjamin T. Liu
+v1.11.1
+Reviewers: Peter B. Robinson, Aaron C. Fisher
+
+Remove erroneous branchPrefix call in mergeDevelop.  This bug has the potential to cause a key error in looking up submodule public branch mappings.
+
+
+Wed Jul 15 09:52:47 2015 Peter B. Robinson
+v1.11.0
+Reviewers: Ben Liu, Bill Aimonetti
+
+fixed bug in grape md that caused submodules to merge in the wrong branch if anything other than the default mapping was required.
+
+
+v1.10.3
+Reviewers: Bill Aimonetti, Ben Liu
+fixed an issue where grape md used wrong public branch in submodules. 
+
+Wed Jul  8 10:23:51 2015 Peter B. Robinson
+v1.10.2
+Reviewers: Aaron C. Fisher, Ben Liu
+
+fixed an issue where grape m (and thus mr and pull) would always trigger merges of public branches into topic branches for submodules, regardless of what was actually asked for.
+
+
+Mon Jul  6 16:27:32 2015 Peter B. Robinson
+v1.10.0
+Reviewers: Ben Liu
+
+Same as v1.9.5.
+
+
+Mon Jul  6 16:17:37 2015 Peter B. Robinson
+v1.9.5
+Reviewers: Ben Liu
+
+Fixes a crash in grape review when creating a new pull request with a description for submodules.
+
+
+Mon Jul  6 16:05:36 2015 Benjamin T. Liu
+v1.9.4
+Reviewers: Peter B. Robinson
+
+Check git version
+
+
+Fri Jun 12 10:56:03 2015 Peter B. Robinson
+v1.9.3
+Reviewers: Ben Liu, Aaron C. Fisher
+
+SUMMARY: Fixes GRP-122 and GRP-144. Adds grape stash and grape stash pop. Tweaks grape config so that it is scriptable. Fixes an issue where grape mr and grape pull did nothing to main repository in workspace.
+
+
+Thu Jun  4 16:40:04 2015 Benjamin T. Liu
+v1.9.2
+Reviewers: Peter B. Robinson, David M. Dawson
+
+Update publish to only update public branch
+
+
+Thu May 21 09:00:48 2015 Peter B. Robinson
+v1.9.1
+Reviewers: Ben Liu, Aaron C. Fisher, Randy Settgast
+
+Adjusts mr semantics to make it friendly for shared branches. Pull is now a wrapper to mr so conflicts in submodules are handled.
+
+
+Tue May 19 09:17:53 2015 Peter B. Robinson
+v1.9.0
+Reviewers: Ben Liu
+
+Fixes md bug when submodules are not present.
+
+
+Fri May 15 16:59:34 2015 Peter B. Robinson
+v1.8.1
+Reviewers: Aaron C. Fisher, Ben Liu
+
+Some uv and md fixes.
+
+
+Wed May 13 17:05:40 2015 Peter B. Robinson
+v1.8.0
+Reviewers: Ben Liu
+
+SUMMARY:  Merges 1.6.x and 1.7.x lines of development to master. 
+
+DETAILS:  On Posix systems, grape will now start following long lasting processes. This can be disabled. using grape --noProgress.
+grape has learned to do a pull (finally!). Also, grape pull is in parallel!
+grape md now attempts appropriate merges in all submodules, not just submodules that have SHA conflicts. 
+grape publish --startAt is a bit more robust. 
+grape uv now allows you to create new branches for (a)ll subprojects, or allows you to (s)kip the creation of branches for all subprojects. 
+grape m, mr, and md will now check for branch consistency before performing merges.
+grape commit doesn't fail if there are untracked files in your subprojects.
+grape review propagates reviewers, descriptions, and titles to subprojects' corresponding pull requests. 
+The output for grape uv is a bit clearer when you try to remove modified subprojects as result of a workspace change.
+
+
+Fri May  8 07:57:06 2015 Peter B. Robinson
+v1.7.6
+Reviewers: No reviewers
+
+removed unnecessary print statement.
+
+
+Thu May  7 11:39:39 2015 Peter B. Robinson
+v1.7.5
+Reviewers: Ben Liu
+
+quick fix to pull
+
+
+Thu May  7 08:17:17 2015 Peter B. Robinson
+v1.7.4
+Reviewers: Aaron C. Fisher, Ben Liu
+
+Addresses GRP-133, GRP-121, GRP-140, GRP-134, and GRP-136. Adds a parallel pull. Disables tailing commands on Windows.
+
+
+Wed Apr 29 16:29:27 2015 Benjamin T. Liu
+v1.7.3
+Reviewers: Peter B. Robinson
+
+Fix publish to prevent exceptions when used with --startAt (GRP-135)
+
+
+Mon Apr 27 16:21:27 2015 Peter B. Robinson
+v1.7.2
+Reviewers: Ben Liu
+
+Be more conservative with grape md in submodules...
+
+
+
+Tue Apr 21 15:03:42 2015 Peter B. Robinson
+v1.7.1
+Reviewers: Ben Liu
+
+Fix for pulls on feature branches and N^2 bundles..
+
+
+Thu Apr  9 10:37:36 2015 Peter B. Robinson
+v1.7.0
+Reviewers: Ben Liu
+
+Hotfix to fix unintentional removal of submodules in updateView.
+
+
+
+Wed Apr  8 14:59:45 2015 Benjamin T. Liu
+v1.6.3
+Reviewers: Aaron C. Fisher, Peter B. Robinson
+
+Fixes for grape publish --abort: Allow abort if nothing has yet been committed and allow release of lock for open, rather than merged, pull requests (not sure how this ever worked for abort).
+
+
+Fri Apr  3 14:31:05 2015 Peter B. Robinson
+v1.6.2
+Reviewers: Ben Liu, Aaron C. Fisher
+
+Adds grape pull as an option.
+
+
+Wed Apr  1 16:21:23 2015 Peter B. Robinson
+v1.6.1
+Reviewers: Christopher A. White, Aaron C. Fisher, Benjamin T. Liu
+
+Adds the capability for grape to print output of processes that last more than a few seconds. Adds the capability to disable this using --noProgress.
+
+
+
+
+
+Fri Mar 27 14:10:12 2015 Peter B. Robinson
+v1.6.0
+Reviewers: Benjamin T. Liu
+
+This is the equivalent of v1.5.10. 
+
+INTERFACE CHANGES: 
+Grape's verbosity mechanism has received a significant overhaul, and is significantly less noisy. There is now a global -v option for verbose, and -q option for quiet. All options have lost their own -v flag.
+Grape has learned how to report its version, grape --version. 
+All grape commands that had the --norecurse option now have --noRecurse instead. 
+Grape m has lost it's --quiet flag.
+Grape review has gained --subprojectsOnly, which causes only pull requests associated with submodules and nested subprojects to be created/updated. 
+Grape test has gained --debug mode, which dumps all output in tests to stdout. 
+Grape up has gained --wd=<working dir> , which specifies which repository to update public branches in. 
+
+INTERNAL CHANGES
+grape m, mr, and md all share the same code path (lives in md).
+
+
+Fri Mar 27 13:33:36 2015 Peter B. Robinson
+v1.5.10
+Reviewers: Benjamin T. Liu
+
+Resolves GRP-119, GRP-131, and GRP-82.
+
+Details:
+Publish will now ensure any modified submodules you have are active before publishing.
+Publish now always executes from the workspaceDirectory.
+Users now confirm whether they want to update the view if submodules/subprojects are added or removed.
+Related to https://rzlc.llnl.gov/stash/projects/GRP/repos/grape/pull-requests/106/overview
+
+
+Fri Mar 27 11:53:29 2015 Peter B. Robinson
+v1.5.9
+Reviewers: Christopher A. White, Benjamin T. Liu
+
+DEVELOPERS: Peter Robinson and Al Nichols
+REVIEWERS: Chris White and Aaron Fisher
+SUMMARY:
+Addresses GRP-112 and GRP-114. 
+For the purposes of consistency, all --norecurse CLI options have been converted to camelcase, --noRecurse. 
+DETAILS:
+Grape commit without the -a flag with staged changes in submodules will now stage and commit the modified gitlink of the submodules with staged changes.
+Grape push is now branch model aware for submodules. 
+Fixes a windows issue where parsing output from git submodule foreach left carriage returns in the tokens.
+Merge and mergedevelop have been merged!
+
+
+Thu Mar 26 13:07:18 2015 Benjamin T. Liu
+v1.5.8
+Reviewers: Peter B. Robinson, Christopher A. White
+Fix extraneous nested subproject in updated file list.  
+Add reviewer header option for publish log/email messages.
+
+
+Wed Mar 25 14:59:39 2015 Peter B. Robinson
+v1.5.7
+
+DEVELOPER: Peter Robinson
+REVIEWERS: Aaron Fisher, Ben LIu
+
+Sumamry: Fixes GRP-57 and GRP-108
+
+Details: 
+grape m and grape mr now call grape md by default, so that all three options treat submodules and nested subprojects correctly.
+
+
+Tue Mar 24 11:24:55 2015 Peter B. Robinson
+v1.5.6
+
+Addresses GRP-111 and GRP-104 by adding the option for pull and push to throw exceptions.
+
+
+Mon Mar 23 11:32:40 2015 Peter B. Robinson
+v1.5.5
+
+
+
+
+Wed Mar 18 11:14:58 2015 Peter B. Robinson
+v1.5.4
+
+DEVELOPER: Peter Robinson
+REVIEWERS: Aaron Fisher, Benjamin Liu
+SUMMARY: Tweaks verbosity, fixes obscenely long new branch creation
+
+
+Tue Mar 17 11:33:07 2015 Peter B. Robinson
+v1.5.3
+
+Developer: Peter Robinson
+Reviewers: Ben Liu, Aaron Fisher, Chris White. 
+
+SUMMARY: Overhaul of GRAPE's verbosity mechanism. 
+
+DETAILS: All menu options have lost their [-v] flag. Grape itself has gained the options [--version] [-v | -q]. 
+Default verbosity: 
+ utility.printMsg commands, typically used for general progress in GRAPE,  are printed, as well as user input prompts.
+[-v] All subprocess launches (mostly git commands ) will print out what is being run and where, with output being printed out upon completion. 
+[-q] utility.printMsg commands are muted. User input prompts are still printed. 
+[--version] grape will print the version of grape being used and then exit.
+
+
+Thu Mar 12 09:19:37 2015 Benjamin T. Liu
+v1.5.2
+
+Reduce the amount of fetches that occur during a grape up.  This especially should help grape md, which calls grape up prior to the merge.
+- Only branches/public branches that are not up-to-date with the fetched gitlinks are fetched.
+- Also removed extraneous recursive call to up in merge and merge Develop (which resulted in N-squared fetches in submodules)
+- Added fetch grid test and two-client test scenario
+
+
+Fri Mar  6 10:43:23 2015 Peter B. Robinson
+v1.5.1
+
+Cleans up some publish output, fixes some subtree publish path bugs.
+
+
+Wed Mar  4 11:12:52 2015 Peter B. Robinson
+v1.5.0
+
+Same as v1.4.5
+Grape publish will now ask before deleting branches.
+Grape publish has much more robust --continue support during the PERFORM CASCADE step.
+grape installHooks is now workspace aware - won't break if called from within submodules or nested subprojects.
+Fix up to only fetch public branches of active submodules
+Ensure upstream branch is created/pushed when new branch is created during checkout or uv
+Limit git submodule init in uv --checkSubprojects to active submodules
+Set defaults in uv based on current state
+Update local branches before md. GRP-110
+
+
+
+Tue Mar  3 17:13:02 2015 Peter B. Robinson
+v1.4.5
+
+Grape publish will now ask before deleting branches. 
+Grape publish has much more robust --continue support during the PERFORM CASCADE step.
+
+
+Mon Mar  2 16:12:27 2015 Peter B. Robinson
+v1.4.4
+
+grape installHooks is now workspace aware - won't break if called from within submodules or nested subprojects.
+
+
+Mon Mar  2 14:42:38 2015 Benjamin T. Liu
+v1.4.3
+
+Fix up to only fetch public branches of active submodules
+
+
+Mon Mar  2 10:27:58 2015 Benjamin T. Liu
+v1.4.2
+
+- Ensure upstream branch is created/pushed when new branch is created during checkout or uv
+- Limit git submodule init in uv --checkSubprojects to active submodules
+- Set defaults in uv based on current state
+
+
+Wed Feb 25 14:22:31 2015 Benjamin T. Liu
+v1.4.1
+
+Update local branches before md. GRP-110
+
+
+Mon Feb 23 17:30:41 2015 Peter B. Robinson
+v1.4.0
+
+Same as 1.3.5
+
+
+Mon Feb 23 17:28:24 2015 Peter B. Robinson
+v1.3.5
+
+Ensures version ticking is done according to what publish thinks the public branch should be.
+
+
+Mon Feb 23 14:51:19 2015 Peter B. Robinson
+v1.3.4
+
+Same as 1.3.3
+
+
+
+Mon Feb 23 14:42:11 2015 Peter B. Robinson
+v1.3.3
+
+subtree publish fixes and subtree update capability is added.
+
+
+Mon Feb 23 12:14:52 2015 Benjamin T. Liu
+v1.3.2
+
+- Fix for deletion of nested subproject branch after publish (it is merged up to HEAD, but not pushed)
+- Initialize submodules during uv --subprojects (this prevents crash if a new submodule appears, as after a md with new submodules)
+
+
+Fri Feb 13 10:48:57 2015 Peter B. Robinson
+v1.3.1
+
+Addresses GRP-86 (new / dropped nested subproject detection on checkout) and GRP-83 (suggested version string for grape publish --startAt)
+
+
+Thu Feb 12 10:39:47 2015 Peter B. Robinson
+v1.3.1
+
+Addresses GRP-86 (new / dropped nested subproject detection on checkout) and GRP-83 (suggested version string for grape publish --startAt)
+
+
+Tue Feb 10 13:58:37 2015 Peter B. Robinson
+v1.3.0
+
+Same as 1.2.7.
+
+
+Tue Feb 10 10:34:11 2015 Peter B. Robinson
+v1.2.7
+
+SUMMARY: Adds public branch and branch model consistency checks to grape status. 
+
+
+
+DETAILS - GRAPE: 
+BREAKING CHANGE - Grape config has lost the out-of-date --cv / --nocv options. They have been replaced with uv / --nouv options instead. 
+
+Grape clone has learned the \"--allNested\" option, which will clone all nested subprojects without asking for user input. 
+Grape config can pass options to grape uv using the [--uvArg=<arg>] flag. 
+Grape status has learned the --failIfInconsistent, --failIfMissingPublicBranches, and --failIfOnInconsistentBranches flags. These affect the return code when grape detects missing public branches and inconsistent subproject branches. Grape status will always print a message when detecting these issues regardless of the use of these flags. 
+Grape publish now uses grape status --failIfInconsistent as part of its checkForCleanWorkspace step. 
+An individual suite can now be tested using grape test. 
+grape uv has learned the --allSubmodules and --allNestedSubprojects flags. 
+
+DETAILS - TESTING
+TestGrape can now switch back and forth from hiding stdout, allowing easier debugging of failing tests. 
+Grape status is now tested using the new grid testing infrastructure.
+
+
+Fri Feb  6 10:56:22 2015 Benjamin T. Liu
+v1.2.6
+
+Ensure uv operates from the project level
+
+
+Wed Feb  4 15:25:24 2015 Benjamin T. Liu
+v1.2.5
+
+Extend commit file list to handle submodules and nested subprojects
+Extend prepublish to commit to nested subprojects
+Print notification email to display, even if not being sent
+
+
+Tue Jan 13 10:37:32 2015 Peter B. Robinson
+v1.2.4
+
+Moved md to first publish step to ensure submodules are up to date, preventing situations where ensure review will fail.
+
+
+Mon Jan 12 16:03:17 2015 Aaron Fisher
+v1.1.10
+
+Adds some machinery for creating grids of unit tests with various grape projects in different states being run through a list of tests wrapped up in a Class.
+
+
+Mon Jan 12 14:58:21 2015 Peter B. Robinson
+v1.1.9
+
+Exposes full CLI syntax to the grape menu.
+
+
+Mon Jan 12 14:53:24 2015 Benjamin T. Liu
+v1.1.8
+
+Fixes for publish
+
+
+Fri Jan  9 14:15:58 2015 Peter B. Robinson
+v1.2.0
+
+Equivalent to grape 1.1.7.  (Previously 1.0.4) See UPDATE_LOG for more details.
+
+
+Fri Jan  9 13:14:57 2015 Benjamin T. Liu
+v1.1.7
+
+Miscellaneous fixes:
+
+Fix config to run clean
+Fix db for subprojects (GRP-80)
+Fix bundle at top level (GRP-89)
+
+
+Wed Jan  7 15:09:30 2015 Benjamin T. Liu
+v1.1.7
+
+Miscellaneous fixes:
+
+Fix config to run clean
+Fix db for subprojects (GRP-80)
+
+
+Thu Dec 18 15:57:06 2014 Peter B. Robinson
+v1.1.6
+
+Make subprojects fetch before merging, updating status message to reflect subproject merges.
+
+
+Thu Dec 18 07:56:59 2014 Benjamin T. Liu
+v1.1.5
+
+* Properly revert external diff.
+* Extend grape push to nested subprojects
+* Fix uv when local is ahead of remote
+
+
+Fri Dec 12 13:35:03 2014 Peter B. Robinson
+v1.1.4
+
+SUMMARY: Fixes several critical issues with nested subprojects and version tagging.  Adds arbitrary cascade definitions for publish policies. 
+BREAKING CHANGE: moved .grapeuserconfig location to workspace .git directory. This prevents the accidental removal of .grapeuserconfig with git clean calls. 
+
+DETAILS: 
+Fixes an issue where submodules did not get new branches if the user had an active nested subproject. 
+Fixed uv bug that could put .grapuserconfig in a bad state and cause requested nested projects to not clone.
+Fix branch tagging for squash and cascade commits, respecting branch-specific tag suffixes. 
+Adds arbitrary cascade definitions for publish policies.  New grape config syntax is: 
+[flow]
+publishpolicy = PUBLICBRANCH:cascade->BRANCH1->BRANCH2->...->BRANCHN
+Adds cascade commits as a separate publish step.
+
+
+Tue Dec  9 16:21:19 2014 Peter B. Robinson
+v1.1.3
+
+Removes git basedir call from workspaceDir - git basedir ignores current working directory when git is calling grape runHook. I do not know how this happens, can only observe that it does.
+
+
+Mon Dec  8 16:12:21 2014 Peter B. Robinson
+v1.1.1
+
+Nested Project bugfixes, adds python version check, changes core subprocess execution in hopes of eliminating hangs in grape hooks.
+
+
+Wed Dec  3 15:24:08 2014 Peter B. Robinson
+v1.1.0
+
+SUMMARY: This updates the master branch from 1.0.0 to the state of develop 1.0.5.
+
+
+Wed Dec  3 15:20:22 2014 Peter B. Robinson
+v1.0.5
+
+Addes nested subproject compatibility for grape foreach and grape bundle. Grape publish should now tag nested subprojects.
+
+
+Fri Nov 21 15:35:46 2014 Peter B. Robinson
+v1.0.4
+
+DEVELOPER: Peter Robinson
+REVIEWERS: Ben Liu, Chris White, Aaron Fisher
+
+SUMMARY
+NEW FEATURE: grape now can manage nested subprojects. These are nested repositories that are ignore by git and managed entirely by grape. 
+Nested Subprojects: 
+can be created using grape addSubproject --nested
+can be activated using grape uv
+are active (cloned, checked out, and managed by grape) only when a user activates them using grape uv. 
+are ignored by git (entire directory is added to the outer level .gitignore)
+have a branch structure identical to the outer repository. 
+are ideal for repositories containing large binary data that you don't want clogging up your source code repository.
+
+
+Thu Nov  6 16:14:55 2014 Peter B. Robinson
+v1.0.3
+
+Adds nested subprojects as a subproject type, allowing users to add grape managed repos that are ignored by git to a repository.
+
+
+Tue Oct 21 11:20:38 2014 Benjamin T. Liu
+v1.0.2
+
+Prevent error if missing submodule directory does not exist
+
+
+Fri Oct  3 16:07:46 2014 Peter B. Robinson
+v1.0.1
+
+Changed the behavior of grape checkout to be aware of your submodule branching model.
+Switching to a branch with a new submodule triggers a full call to grape uv, starting a dialogue asking the user which submodules she wants. 
+Switching to a branch that doesn't have a submodule that was on the previous branch will now trigger a dialogue asking if that user wants to delete the submodule, so long as the submodule is in a clean state.
+
+
+Wed Sep 24 10:06:18 2014 Peter B. Robinson
+v1.0.0
+
+Releasing develop version 0.2.1 as 1.0.
+
+
+Wed Sep 24 08:53:01 2014 Peter B. Robinson
+v0.2.1
+
+DEVELOPER: Peter Robinson
+REVIEWERS: Ben Liu, Chris White
+SUMMARY: 
+Adds the necessary features to enable a gitflow workflow (finally!)
+Adds a BSD LICENSE file in preparation for an open source release. 
+Updates grape's .grapeconfig to have publish processes for internal releases and external releases. 
+
+DETAILS:
+COMMAND LINE OPTIONS
+
+grape writeConfig : now has the --gitflow option which will tweak the resulting grapeconfig file to be configured for a gitflow workflow. 
+
+grape bundle : now has the --bundleTags option, which enables branch specific tags to be bundled. 
+
+grape unbundle now takes one file per branch to unbundle. 
+
+grape publish : the --cascade option is now --cascade=<branch> - you must define which branch to cascade to when using this option. 
+
+grape publish and grape review : now have --stashURL and --verifySSL options that enable specifying the URL of your stash repository and disabling SSL checking (not recommended unless absolutely necessary). 
+
+grape publish --quick : now allows --noReview and --public to be used. 
+
+grape mr : now has verbosity controls with -v and --quiet. 
+
+
+GRAPE CONFIG OPTIONS
+[flow] has a new config option, topicDestinationMappings. This overrides where branches are published to. If a topic branch type doesn't have a mapping here, the topicprefixmapping is still used as before to determine the public branch to publish to. 
+
+ISSUES FIXED
+Addresses GRP-67,GRP-60, GRP-30 GRP-58, GRP-63, GRP-59
+grape checkout now pulls preexisting branches before updating submodules. This should help with submodules' gitlinks being in a dirty state after a fresh checkout. 
+
+grape checkout is now more verbose by default. 
+
+grape config now asks before enabling https credential cacheing.  (this would break Windows git configurations). 
+
+The Tutorial has been updated to instruct new users to use the gitflow configuration by default.
+Fri Jun 13 12:19:29 2014 Peter B. Robinson
+v0.2.0
+
+SUMMARY OF CHANGES: 
+Improved subtree support during publish and addSubproject. 
+Allows -v and --user option for grape publish --quick
+Allows db to delete the current branch when recursing into submodules. 
+Improved documentation and adds a tutorial to the Readme. 
+Adds grape push. 
+grape checkout more robust to a mixture of branches being and not being present in submodules. 
+grape publish now frontloads all user input to before the build step. 
+grape --continue and grape --abort are now enforced as mutually exclusive options by the parser. 
+quieting some extra output in grape uv and grape bundle. 
+
+Mon Jun  2 16:38:07 2014 Peter B. Robinson
+v0.1.20
+
+Moves all user input to before the build step.Mon Jun  2 16:24:08 2014 Peter B. Robinson
+v0.1.18
+
+Moves all user input that normally was asked during the publish step into a step that occurs before build.Mon Jun  2 16:06:40 2014 Peter B. Robinson
+v0.1.17
+
+Fri May  9 16:29:32 2014 Peter B. Robinson
+v0.1.16
+
+Fri Apr 25 13:32:19 2014 Peter B. Robinson
+v0.1.12
+
+Testing the publish capability. 
+
+Throwing in some apostro"hes and quote's for good measure. 
+Fri Apr 25 13:12:34 2014 Peter B. Robinson
+v0.1.11
+
+
+Fri Apr 25 09:15:06 2014 Peter B. Robinson
+v0.1.10
+
+Testing the publish capability. 
+
+Throwing in some apostro"hes and quote's for good measure. 
+Fri Apr 25 09:13:03 2014 Peter B. Robinson
+v0.1.9
+
+Testing the publish capability. 
+
+Throwing in some apostro"hes and quote's for good measure. 
+Fri Apr 25 08:59:55 2014 Peter B. Robinson
+v0.1.7
+
+Testing the publish capability. 
+
+Throwing in some apostro"hes and quote's for good measure. 
+Thu Apr 24 21:16:06 2014 Peter B. Robinson
+v0.1.6
+
+Testing the publish capability. 
+
+Throwing in some apostro"hes and quote's for good measure. 
+Thu Apr 24 21:12:21 2014 Peter B. Robinson
+v0.1.4
+
+Testing the publish capability. 
+
+Throwing in some apostro"hes and quote's for good measure. 
+Thu Apr 24 21:07:11 2014 Peter B. Robinson
+v0.1.3
+
+Testing the publish capability. 
+
+Throwing in some apostro"hes and quote's for good measure. 
