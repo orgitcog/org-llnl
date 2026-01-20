@@ -1,0 +1,4 @@
+This example demonstrates a common error condition:
+- an overlapping data map
+
+Vendors should provide sufficient error messages from these use cases for a developer to be able to track down where in the code the error is originating.  Some solutions are adding tracing info to the runtime, or having the runtime hook into the DWARF info from a debug executable.

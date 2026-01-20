@@ -1,0 +1,94 @@
+name: hip
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.head_ref }}-hip
+  cancel-in-progress: true
+
+jobs:
+  tests-hip:
+    name: HIP ROCm C++17 [tests]
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Dependencies
+      run: |
+        .github/workflows/dependencies/dependencies_hip.sh 6.3.2
+        .github/workflows/dependencies/dependencies_ccache.sh
+    - name: Set Up Cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ccache
+        key: ccache-${{ github.workflow }}-${{ github.job }}-git-${{ github.sha }}
+        restore-keys: |
+             ccache-${{ github.workflow }}-${{ github.job }}-git-
+    - name: Build & Install
+      # Have to remove "-fno-operator-names to avoid
+      #    /opt/rocm-6.1.0/include/rocprim/device/detail/device_adjacent_difference.hpp:198:26: error: token is not a valid binary operator in a preprocessor subexpression
+      #      198 | #if defined(__gfx1102__) or defined(__gfx1030__)
+      #          |     ~~~~~~~~~~~~~~~~~~~~~^~
+      env: {CXXFLAGS: "-Werror -Wall -Wextra -Wpedantic -Wnull-dereference -Wfloat-conversion -Wshadow -Woverloaded-virtual -Wextra-semi -Wunreachable-code -Wnon-virtual-dtor -Wno-unused-parameter"}
+      run: |
+        export CCACHE_COMPRESS=1
+        export CCACHE_COMPRESSLEVEL=10
+        export CCACHE_MAXSIZE=100M
+        ccache -z
+
+        source /etc/profile.d/rocm.sh
+        hipcc --version
+        which clang
+        which clang++
+        which flang
+
+        cmake -S . -B build                               \
+            -DCMAKE_VERBOSE_MAKEFILE=ON                   \
+            -DAMReX_GPU_BACKEND=HIP                       \
+            -DAMReX_AMD_ARCH=gfx908                       \
+            -DAMReX_ROCTX=ON                              \
+            -DCMAKE_C_COMPILER=$(which clang)             \
+            -DCMAKE_CXX_COMPILER=$(which clang++)         \
+            -DCMAKE_CXX_STANDARD=17
+        cmake --build build -j 2
+
+  tests-hip-wrapper:
+    name: HIP ROCm GFortran@9.3 C++17 [tests-hipcc]
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Dependencies
+      run: |
+        .github/workflows/dependencies/dependencies_hip.sh 6.3.2
+        .github/workflows/dependencies/dependencies_ccache.sh
+    - name: Set Up Cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ccache
+        key: ccache-${{ github.workflow }}-${{ github.job }}-git-${{ github.sha }}
+        restore-keys: |
+             ccache-${{ github.workflow }}-${{ github.job }}-git-
+    - name: Build & Install
+      # Have to remove "-fno-operator-names to avoid
+      #    /opt/rocm-6.1.0/include/rocprim/device/detail/device_adjacent_difference.hpp:198:26: error: token is not a valid binary operator in a preprocessor subexpression
+      #      198 | #if defined(__gfx1102__) or defined(__gfx1030__)
+      #          |     ~~~~~~~~~~~~~~~~~~~~~^~
+      env: {CXXFLAGS: "-Werror -Wall -Wextra -Wpedantic -Wnull-dereference -Wfloat-conversion -Wshadow -Woverloaded-virtual -Wextra-semi -Wunreachable-code -Wnon-virtual-dtor -Wno-unused-parameter"}
+      run: |
+        export CCACHE_COMPRESS=1
+        export CCACHE_COMPRESSLEVEL=10
+        export CCACHE_MAXSIZE=40M
+        ccache -z
+
+        source /etc/profile.d/rocm.sh
+        hipcc --version
+
+        cmake -S . -B build_full_legacywrapper            \
+            -DCMAKE_VERBOSE_MAKEFILE=ON                   \
+            -DAMReX_GPU_RDC=OFF                           \
+            -DAMReX_GPU_BACKEND=HIP                       \
+            -DAMReX_AMD_ARCH=gfx908                       \
+            -DAMReX_ROCTX=ON                              \
+            -DCMAKE_C_COMPILER=$(which clang)             \
+            -DCMAKE_CXX_COMPILER=$(which hipcc)           \
+            -DCMAKE_CXX_STANDARD=17
+        cmake --build build_full_legacywrapper -j 2
