@@ -165,9 +165,22 @@ Thumbs.db
 # DOCUMENTATION BUILD OUTPUTS
 # -----------------------------------------------------------------------------
 
+# Sphinx build directories (anywhere in tree)
+**/_build/
+**/docs/_build/
 docs/_build/
 site/
 _site/
+
+# Sphinx doctree files
+*.doctree
+
+# Font files (often bundled in docs)
+*.woff
+*.woff2
+*.ttf
+*.eot
+*.otf
 
 # -----------------------------------------------------------------------------
 # TESTING & COVERAGE
@@ -188,3 +201,51 @@ logs/
 tmp/
 temp/
 *.tmp
+
+# -----------------------------------------------------------------------------
+# PROFILING & INSTRUMENTATION DATA
+# -----------------------------------------------------------------------------
+
+# Caliper profiling files
+*.cali
+*.json.cali
+
+# LLVM/Compiler artifacts (generated files)
+# Note: Uncomment if you don't need to track LLVM IR or assembly
+# *.ll
+# *.s
+
+# -----------------------------------------------------------------------------
+# DATABASE FILES
+# -----------------------------------------------------------------------------
+
+*.db
+*.sqlite
+*.sqlite3
+
+# -----------------------------------------------------------------------------
+# ADDITIONAL LARGE/BINARY FILES
+# -----------------------------------------------------------------------------
+
+# Checkpoint files
+*.ckpt
+*.checkpoint
+
+# TensorBoard logs
+events.out.tfevents.*
+runs/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Spack build directories
+spack-*/
+
+# Autotools generated
+*.la
+autom4te.cache/
+config.status
+config.log
+Makefile.in
+aclocal.m4
+configure
