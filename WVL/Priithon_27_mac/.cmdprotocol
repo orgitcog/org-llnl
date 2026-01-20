@@ -1,0 +1,183 @@
+2011-10-10 13:17:24 #243> cd shaase/Py/Priithon_27_mac/
+2011-10-10 13:18:34 #243> ln -s ../Priithon_PySrc Priithon
+2011-10-17 16:36:18 #156> cd Priithon_27_mac/
+2011-10-17 16:36:33 #156> cp -p ../Priithon_25_mac/priithon_script .
+2011-10-17 16:36:40 #156> cp -p ../Priithon_25_mac/priithon_script_oldDiv .
+2011-10-18 16:55:59 #14958> cd Py/Priithon_27_mac/
+2011-10-18 16:56:09 #14958> ln -s ../Priithon_PySrc Priithon
+2011-10-18 16:56:12 #14958> ls -la
+2012-01-26 11:15:46 #8952> cd Py/Priithon_27_mac/
+2012-01-26 11:15:47 #8952> ls -la
+2012-01-26 11:15:55 #8952> mv numpy numpy_
+2012-01-26 11:15:52 #31727> cd Priithon_27_mac/
+2012-01-26 11:15:59 #31727> mv numpy numpy_1.6.1
+2012-01-26 11:16:37 #31727> mv numpy_1.6.1 numpy
+2012-02-28 10:00:20 #2648> cd Priithon_27_mac/
+2012-02-28 10:00:24 #2648> ls -lrt
+2012-02-28 10:00:29 #2648> cd wxPy
+2012-02-28 10:13:12 #13501> cd Py/Priithon_27_mac/
+2012-02-28 10:13:13 #13501> ls- l
+2012-02-28 10:13:15 #13501> ls -l
+2012-02-28 10:13:22 #13501> ls wxPython-2.9.3.1/
+2012-02-28 10:13:23 #13501> ls wxPython-2.9.3.1/lib/
+2012-02-28 10:13:26 #13501> ls wxPython-2.9.3.1/lib/python2.7/
+2012-02-28 10:13:29 #13501> ls wxPython-2.9.3.1/lib/python2.7/wxhack.p
+2012-02-28 10:13:33 #13501> ls wxPython-2.9.3.1/lib/python2.7/site-packages/
+2012-02-28 10:13:38 #13501> ls wxPython-2.9.3.1/lib/python2.7/site-packages/wx-2.9.3-osx_cocoa/
+2012-02-28 10:13:45 #13501> ls wxPython-2.9.3.1/lib/python2.7/site-packages/wx-2.9.3-osx_cocoa/wx
+2012-02-28 10:13:51 #13501> ln -s wxPython-2.9.3.1/lib/python2.7/site-packages/wx-2.9.3-osx_cocoa/wx .
+2012-02-28 10:13:52 #13501> ls -l
+2012-02-28 10:14:02 #2648> ..
+2012-02-28 10:14:04 #2648> ls -l
+2012-02-28 10:14:09 #2648> less wx
+2012-02-28 10:14:29 #13501> ./priithon_script
+2012-02-28 10:15:21 #13501> ls wxPython-2.9.3.1/lib/python2.7/
+2012-02-28 10:15:25 #13501> ls wxPython-2.9.3.1/lib/
+2012-02-28 10:15:29 #13501> ls -l wxPython-2.9.3.1/lib/
+2012-02-28 10:15:43 #13501> ls -l wxPython-2.9.3.1/lib/wx/
+2012-02-28 10:15:46 #13501> ls -l wxPython-2.9.3.1/lib/wx/config/
+2012-02-28 10:15:51 #13501> ls -l wxPython-2.9.3.1/lib/wx/include/
+2012-02-28 10:15:54 #13501> ls -l wxPython-2.9.3.1/lib/
+2012-02-28 10:16:37 #13501> ln -s wxPython-2.9.3.1/lib/libwx_osx_cocoau* wxPyLibs/
+2012-02-28 10:16:41 #13501> ls -l wxPyLibs/
+2012-02-28 10:16:47 #13501> ./priithon_script
+2012-02-28 10:18:54 #13501> ./priithon_script -i
+2012-02-28 10:19:01 #13501> otool /Users/shaase/Py/Priithon_27_mac/wx/_core_.so
+2012-02-28 10:19:08 #13501> otool -L /Users/shaase/Py/Priithon_27_mac/wx/_core_.so
+2012-02-28 10:19:32 #13501> ls -l /usr/local/lib/wxPython-2.9.3.1/lib/libwx_osx_cocoau-2.9.3.0.0.dylib
+2012-02-28 10:19:41 #13501> ls -l
+2012-02-28 10:20:26 #13501> hh
+2012-02-28 10:20:34 #13501> rm wxPyLibs/libwx_osx_cocoau*
+2012-02-28 10:20:58 #13501> cd ..
+2012-02-28 10:21:48 #13501> ./priithon_script
+2012-02-28 10:21:55 #13501> ls -l
+2012-02-28 10:22:20 #13501> ls Python.framework/
+2012-02-28 10:22:24 #13501> ls Python.framework/Versions/
+2012-02-28 10:22:27 #13501> ls Python.framework/Versions/2.7/
+2012-02-28 10:22:32 #13501> ls Python.framework/Versions/2.7/lib/
+2012-02-28 10:22:36 #13501> ls Python.framework/Versions/2.7/lib/python2.7/
+2012-02-28 10:22:39 #13501> ls Python.framework/Versions/2.7/lib/
+2012-02-28 10:22:49 #13501> ls Python.framework/Versions/2.7/lib/python2.7/site-packages/
+2012-02-28 10:22:54 #13501> ls
+2012-02-28 10:23:09 #13501> diff Python.framework/Versions/2.7/lib/python2.7/site-packages/numpy-1.6.1-py2.7.egg-info numpy-1.6.1-py2.7.egg-info
+2012-02-28 10:23:17 #13501> diff -rq Python.framework/Versions/2.7/lib/python2.7/site-packages/numpy-1.6.1-py2.7.egg-info numpy-1.6.1-py2.7.egg-info/
+2012-02-28 10:23:39 #13501> diff -rq Python.framework/Versions/2.7/lib/python2.7/site-packages/numpy numpy
+2012-02-28 10:24:06 #13501> diff -rq Python.framework/Versions/2.7/lib/python2.7/site-packages/numpy numpy | grep -v \.pyc
+2012-02-28 10:24:25 #13501> rm -r Python.framework/Versions/2.7/lib/python2.7/site-packages/numpy
+2012-02-28 10:24:59 #13501> export PYTHONPATH=wx/py
+2012-02-28 10:25:04 #13501> export PYTHONPATH=wx/py
+2012-02-28 10:25:05 #13501> export PYTHONPATH=wx/py
+2012-02-28 10:25:11 #13501> export PYTHONPATH=wx
+2012-02-28 10:48:22 #13501> priithon
+2012-05-12 15:32:42 #2484> cd Priithon_27_mac
+2012-05-12 15:32:43 #2484> ls -l
+2012-05-12 15:32:55 #2484> less wx
+2012-08-10 16:16:26 #6230> cd Py/Priithon_27_mac
+2012-08-10 16:16:27 #6230> ls -l
+2012-08-10 16:16:32 #6230> ls -l wxPyLibs/
+2012-08-10 16:16:44 #6230> ls wx_bin/
+2012-08-10 16:16:48 #6230> ls -l wx_bin/
+2012-08-10 16:19:16 #6230> ls wxPython-2.9.3.1/
+2012-08-10 16:22:43 #6230> ls -l
+2012-08-10 16:22:59 #6230> less wx
+2012-08-10 16:23:08 #6230> ls -l wx_bin/
+2012-08-10 16:23:24 #6230> L pysliceshell
+2014-07-30 15:15:52 #21963> cd Py/Priithon_27_mac
+2014-07-30 15:15:59 #21963> ./priithon_script
+2014-07-30 15:16:03 #21963> ls -l
+2014-07-30 15:16:15 #21963> less wx
+2014-07-30 15:16:45 #21963> mv wx wx__2012
+2014-07-30 15:16:57 #21963> ln -s wxPython-2.9.3.1 wx
+2014-07-30 15:17:10 #21963> ls -l
+2014-07-30 15:17:23 #21963> ls -l wx
+2014-07-30 15:17:32 #21963> ls -l wxPython-2.9.3.1/
+2014-07-30 15:17:36 #21963> ls -l wxPython-2.9.4.0/
+2014-07-30 15:17:43 #21963> ./priithon_script
+2014-07-30 15:18:07 #21963> python
+2014-07-30 15:18:13 #21963> echo $PYTHONPATH
+2014-07-30 15:18:31 #21963> rm wx
+2014-07-30 15:18:38 #21963> ls -l
+2014-07-30 15:19:37 #3559> cd Priithon_27_mac
+2014-07-30 15:22:06 #3559> rm wx
+2014-07-30 15:22:17 #3559> ln -s wxPython-2.9.3.1 wx
+2014-07-30 15:22:28 #21963> ./priithon_script
+2014-07-30 15:22:29 #3559> ls -l
+2014-07-30 15:22:37 #3559> ls wx_bin/
+2014-07-30 15:55:58 #21963> ./priithon_script
+2014-07-30 15:55:59 #21963> bg
+2015-03-01 15:25:20 #2526> cd Priithon_27_mac
+2015-03-01 15:25:21 #2526> s
+2015-03-01 15:25:23 #2526> ls
+2015-03-01 15:25:27 #2526> ls -l wxPyLibs/
+2015-03-01 15:25:53 #23294> cd Py/Priithon_27_mac/
+2015-03-01 15:25:54 #23294> ls -l
+2015-03-01 15:26:28 #23294> echo $PYTHONPATH
+2015-03-01 15:36:48 #71014> cd Py/Priithon_27_mac
+2015-03-01 15:37:03 #71014> ./priithon_script
+2015-03-01 15:37:10 #71014> ls
+2015-03-01 15:37:26 #71014> ls wx
+2015-03-01 15:37:33 #71014> ls wx/lib/
+2015-03-01 15:37:37 #71014> ls wx/lib/wx/
+2015-03-01 15:37:41 #71014> ls wx/lib/python2.7/
+2015-03-01 15:37:43 #71014> ls wx/lib/python2.7/site-packages/
+2015-03-01 15:37:48 #71014> ls wx/lib/python2.7/site-packages/wx-2.9.3-osx_cocoa/
+2015-03-01 15:37:50 #71014> ls wx/lib/python2.7/site-packages/wx-2.9.3-osx_cocoa/wx
+2015-03-01 15:38:07 #71014> ls -l
+2015-03-01 15:38:18 #71014> ls wx
+2015-03-01 15:38:53 #71014> less wx__2012
+2015-03-01 15:39:01 #71014> ls wx_bin/
+2015-03-03 17:02:49 #70933> cd Priithon_27_mac_local
+2015-03-09 22:24:38 #21072> cd Priithon_27_mac_local/
+2015-03-09 22:24:45 #21072> ./priithon_script
+2015-03-09 22:26:04 #21072> python
+2015-03-09 22:27:04 #21072> l Image |less
+2015-03-09 22:27:13 #21072> ls -l
+2015-03-09 22:27:21 #21072> less PIL.pth
+2015-03-09 22:27:44 #21072> python
+2015-03-09 22:27:55 #21072> python
+2015-03-09 22:28:07 #21072> less priithon_script
+2015-03-09 22:28:14 #21072> ls
+2015-03-09 22:29:09 #21072> ./priithon_script -i
+2015-03-09 22:29:40 #21072> python
+2015-03-09 22:31:14 #21072> less priithon_script
+2015-03-09 22:31:18 #21072> ls
+2015-03-09 22:32:50 #21072> cd Priithon_27_mac_local/
+2015-03-09 22:33:01 #21072> ./priithon_script -i
+2015-03-09 22:56:00 #21072> file PIL/_imaging.so
+2015-03-09 23:02:49 #21072> less priithon_script
+2015-03-09 23:02:53 #21072> ls PIL
+2015-03-09 23:07:21 #21072> hh
+2015-03-09 23:08:23 #21072> l PIL |less
+2015-03-09 23:19:33 #21072> ..
+2015-03-09 23:19:38 #21072> ./priithon_script -ic 'from Priithon.all import *'
+2015-03-09 23:26:21 #21072> less ./priithon_script
+2015-03-09 23:26:26 #21072> which priithon
+2015-03-09 23:28:33 #21072> l wxPython|less
+2015-03-10 22:22:10 #21072> ./priithon_script
+2015-03-16 15:22:03 #21072> hh
+2015-11-23 22:45:44 #3910>
+2015-11-23 22:46:30 #3910>
+2015-11-23 22:47:57 #3910>
+2015-11-23 22:48:15 #3910>
+2015-11-27 17:24:43 #309> cd Priithon_27_mac_local
+2015-11-27 17:24:45 #309> ls
+2015-11-27 17:25:13 #309> ls -lrt Priithon
+2015-11-27 17:28:18 #309> sudo dtruss -f -t open sudo -u $USER priithon_script
+2015-11-27 17:28:28 #17844> cd Priithon_27_mac_local
+2015-11-27 17:28:30 #17844> ls -lrt
+2015-11-27 17:28:34 #17844> ls -lrta
+2015-11-27 17:29:02 #17844> . priithon_script
+2015-11-27 17:29:31 #17844> less priithon_script
+2015-11-27 17:33:54 #17844> sudo dtruss -f -t open sudo -u $USER python2.7
+2015-11-27 17:34:02 #17844> echo $PRI
+2015-11-27 17:34:40 #17844> less priithon_script
+2015-11-27 17:34:49 #17844> sudo dtruss -f -t open sudo -u $USER $PYW" -Qnew "${PRI}/Priithon/PriShell.py
+2015-11-27 17:35:04 #17844> echo $PYTHONPATH
+2015-11-27 17:35:27 #17844> less priithon_script
+2015-11-27 17:35:29 #17844> ls
+2015-11-27 17:35:32 #17844> ls wx
+2015-11-27 17:38:07 #309> cd Priithon_27_mac_local
+2015-11-27 17:38:08 #309> ls -lrt
+2015-11-27 17:38:24 #309> less wx/__version__.py
+2015-11-27 17:38:48 #309> python
+2015-11-27 17:39:28 #309> ls wxPyLibs/

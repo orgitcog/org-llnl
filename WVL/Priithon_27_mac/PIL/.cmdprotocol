@@ -1,0 +1,6 @@
+2015-03-09 23:10:11 #21072> cd Priithon_27_mac_local/PIL
+2015-03-09 23:10:18 #21072> python
+2015-03-09 23:18:40 #21072> ../priithon_script
+2015-03-09 23:18:47 #21072> ../priithon_script -i
+2015-03-09 23:19:24 #21072> ../priithon_script -ic 'from Priihon.all import *'
+2015-03-09 23:19:30 #21072> ../priithon_script -ic 'from Priithon.all import *'

@@ -1,0 +1,64 @@
+#!/bin/sh
+
+if [ -z "$PRI" ]; then
+  d0=`dirname "$0"`
+  ll=`ls -l "$0"`
+  case $ll in
+	  l*)  
+		  f1=`echo $ll|awk '{print $NF}'`
+		  d1=`dirname "$f1"`
+		  PRI=`(cd "$d0"; cd "$d1"; echo $PWD)`
+		  ;;
+	  *)
+		  PRI=`(cd "$d0";echo $PWD)`
+		  ;;
+  esac
+fi
+if [ -z "$PY" ]; then
+  if [ -z `which python2.7` ]; then
+	  if [ ! "${DYLD_FRAMEWORK_PATH}" ]; then
+		  export DYLD_FRAMEWORK_PATH="$PRI"
+	  else
+		  export DYLD_FRAMEWORK_PATH="$PRI":"${DYLD_FRAMEWORK_PATH}"
+	  fi
+	  PY="$PRI/Python.framework/Versions/2.7/bin/python2.7-32"
+      PYW="$PRI/Python.framework/Versions/2.7/bin/pythonw2.7-32"
+
+  else
+	 #export PATH=/usr/local/bin:${PATH}
+     PY="python2.7-32"
+     PYW="pythonw2.7-32"
+  fi
+else
+  PYW="$PY"
+fi
+
+export PYTHONPATH=${PYTHONPATH}:\
+"${PRI}/PIL":\
+"${PRI}"
+
+if [ ! "${DYLD_LIBRARY_PATH}" ]; then
+   export DYLD_LIBRARY_PATH="${PRI}/wxPyLibs"
+else
+   export DYLD_LIBRARY_PATH="${PRI}/wxPyLibs":${DYLD_LIBRARY_PATH}
+fi
+
+if   [ $# -eq 0 ]; then
+    $PYW "${PRI}/Priithon/PriShell.py" "$@"
+elif [ "$1" = "-x" ]; then
+    shift
+    $PYW "${PRI}/Priithon/PriShell.py" "$@"
+elif [ "$1" = "-xc" ]; then
+    $PYW "${PRI}/Priithon/PriShell.py" "$@"
+elif [ "$1" = "-xx" ]; then
+	shift
+    $PYW "${PRI}/Priithon/py/PyAlaMode.py" "$@"
+elif [ "$1" = "-ii" ]; then
+	shift
+    $PY -ic 'import IPython;IPython.Shell.IPShell().mainloop(1)' "$@"
+else
+	if [ -z "$PYTHONSTARTUP" ]; then
+		export PYTHONSTARTUP="${PRI}/Priithon/startupPriithon.py"
+	fi
+    $PYW "$@"
+fi

@@ -1,0 +1,194 @@
+2015-04-18 19:08:16 #338> cd Priithon_patented/
+2015-04-18 19:08:23 #338> python setup.py build
+2015-04-18 19:08:58 #338> python setup.py build
+2015-04-18 19:15:30 #338> ls
+2015-04-18 19:15:58 #338> python setup.py build
+2015-04-18 19:16:49 #338> python setup.py build
+2015-04-18 19:17:44 #338> python setup.py build
+2015-04-18 19:18:36 #338> python setup.py build
+2015-04-18 19:18:45 #338> ls -lrt build/lib/Priithon_patented/
+2015-04-18 19:19:01 #338> less build/lib/Priithon_patented/Wvl.py
+2015-04-18 19:19:07 #338> less build/lib/Priithon_patented/Wvl.py
+2015-04-18 19:20:04 #338> ls -lrt build/lib/Priithon_patented/
+2015-04-18 19:20:08 #338> python setup.py build
+2015-04-18 19:20:57 #338> python setup.py build
+2015-04-18 19:21:05 #338> python setup.py build
+2015-04-18 19:24:05 #338> ~/Priithon_27_mac_local/priithon_script -i setup.py build
+2015-04-18 19:24:37 #338> ~/Priithon_27_mac_local/priithon_script -i setup.py build
+2015-04-18 19:27:18 #338> ls ../Py/Priithon_setup/
+2015-04-18 19:27:22 #338> ls ../Py/Priithon_setup/PriCommon/
+2015-04-18 19:27:25 #338> ls
+2015-04-18 19:27:59 #338> cp -a ../Py/Priithon_setup/PriCommon .
+2015-04-18 19:28:19 #338> python setup.py build
+2015-04-18 19:29:19 #338> python setup.py install --home
+2015-04-18 19:29:26 #338> python setup.py install --user
+2015-04-18 19:29:29 #338> python setup.py install
+2015-04-18 20:39:38 #338> python setup.py --help
+2015-04-18 20:40:03 #338> python setup.py --help build
+2015-04-18 20:40:10 #338> python setup.py --help setup
+2015-04-18 20:40:24 #338> python setup.py --help install
+2015-04-18 20:41:22 #338> python setup.py install --user ~/mypy
+2015-04-18 20:41:54 #338> python setup.py install --root ~/mypy
+2015-04-18 20:42:15 #338> ls -lrt ~/mypy/
+2015-04-18 20:42:18 #338> ls -lrt ~/mypy/Library/
+2015-04-18 20:42:19 #338> ls -lrt ~/mypy/Library/Python/
+2015-04-18 20:42:20 #338> ls -lrt ~/mypy/Library/Python/2.7/
+2015-04-18 20:42:21 #338> ls -lrt ~/mypy/Library/Python/2.7/site-packages/
+2015-04-18 20:42:25 #338> ls -lrt ~/mypy/Library/Python/2.7/site-packages/Priithon_patented
+2015-04-18 20:48:59 #338> python setup.py build
+2015-04-18 20:49:08 #338> python setup.py install --root ~/mypy
+2015-04-18 20:49:31 #338> python setup.py --help install
+2015-04-18 20:49:49 #338> python setup.py install --prefix ~/mypy
+2015-04-18 20:50:01 #338> ls -lrt ~/mypy/
+2015-04-18 20:50:23 #338> python setup.py install --install-base ~/mypy
+2015-04-18 20:53:06 #338> python setup.py install --home ~/mypy
+2015-04-18 20:54:27 #338> python setup.py install --install-base ~/mypy --prefix=
+2015-04-18 20:54:35 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 20:59:59 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 20:59:59 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 20:59:59 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 20:59:59 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 21:00:00 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 21:00:00 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 21:00:00 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 21:00:00 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 21:00:00 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 21:00:01 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 21:00:01 #338> python setup.py install --user ~/mypy --prefix=
+2015-04-18 21:00:13 #338> rm -r ~/mypy
+2015-04-18 21:00:20 #338> python setup.py install --home ~/mypy
+2015-04-18 21:00:28 #338> ls -lR ~/mypy/
+2015-04-18 21:00:42 #338> ls -lR ~/mypy
+2015-04-18 21:00:51 #338> rm -r ~/mypy
+2015-04-18 21:01:09 #338> python setup.py install --root ~/mypy
+2015-04-18 21:01:12 #338> ls -lR ~/mypy
+2015-04-18 21:02:02 #338> python setup.py install --home
+2015-04-18 21:02:25 #338> python setup.py install --user
+2015-04-18 21:03:13 #338> ls -l ~/Library/Python/2.7/lib/python/site-packages/
+2015-04-18 21:03:20 #338> ls -l ~/Library/Python/2.7/lib/python/site-packages/Priithon_patented
+2015-04-18 21:03:33 #338> rm ~/Library/Python/2.7/lib/python/site-packages/_willy.so
+2015-04-18 22:50:34 #338> python setup.py build
+2015-04-18 22:50:40 #338> ls
+2015-04-18 22:50:44 #338> ls willy/
+2015-04-18 22:51:17 #338> MC
+2015-04-18 22:53:01 #338> python setup.py install --user
+2015-04-18 22:53:20 #338> ~/Priithon_27_mac_local/priithon_script
+2015-04-18 22:53:24 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:00:11 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:00:41 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:01:36 #338> CCP fastw
+2015-04-18 23:01:53 #338> CCP
+2015-04-18 23:02:08 #338> otool -TV willy/_willymodule.so |less
+2015-04-18 23:02:21 #338> nm willy/_willymodule.so |less
+2015-04-18 23:03:02 #338> cp -a willy willy_orig
+2015-04-18 23:04:36 #338> mc
+2015-04-18 23:04:37 #338> mc
+2015-04-18 23:04:37 #338> mc
+2015-04-18 23:07:33 #338> python setup.py install --user
+2015-04-18 23:07:39 #338> python setup.py install -f --user
+2015-04-18 23:07:52 #338> python setup.py clean
+2015-04-18 23:07:59 #338> python setup.py install -f --user
+2015-04-18 23:08:16 #338> rm -r build
+2015-04-18 23:08:23 #338> python setup.py install -f --user
+2015-04-18 23:08:36 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:08:58 #338> ls /Users/shaase/Library/Python/2.7/lib/python/site-packages/Priithon_patented/
+2015-04-18 23:10:09 #338> rm -r build
+2015-04-18 23:10:14 #338> python setup.py install -f --user
+2015-04-18 23:14:58 #338> rm -r build
+2015-04-18 23:15:00 #338> python setup.py install -f --user
+2015-04-18 23:15:20 #338> which swig
+2015-04-18 23:15:28 #338> swig --help
+2015-04-18 23:16:00 #338> python setup.py install -f --user
+2015-04-18 23:16:58 #338> cp -p willy/willy.py src/willy/
+2015-04-18 23:17:03 #338> python setup.py install -f --user
+2015-04-18 23:17:09 #338> python setup.py install -f --user
+2015-04-18 23:17:23 #338> python setup.py install -f --user
+2015-04-18 23:17:33 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:18:15 #338> python setup.py install -f --user
+2015-04-18 23:18:23 #338> python setup.py install --help
+2015-04-18 23:18:41 #338> python setup.py build_ext --help
+2015-04-18 23:18:58 #338> python setup.py build_ext
+2015-04-18 23:19:05 #338> python setup.py build_ext -f
+2015-04-18 23:19:08 #338> python setup.py install -f --user
+2015-04-18 23:19:14 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:20:36 #338> python setup.py build_ext -f
+2015-04-18 23:20:40 #338> python setup.py install -f --user
+2015-04-18 23:20:42 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:21:24 #338> python setup.py build_ext -f
+2015-04-18 23:21:26 #338> python setup.py install -f --user
+2015-04-18 23:21:28 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:21:50 #338> python setup.py build_ext -f
+2015-04-18 23:22:40 #338> python setup.py install -f --user
+2015-04-18 23:22:43 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:23:34 #338> python setup.py build_ext -f
+2015-04-18 23:23:36 #338> python setup.py install -f --user
+2015-04-18 23:23:38 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:25:12 #338> python setup.py build_ext -f
+2015-04-18 23:25:47 #338> python setup.py build_ext -f
+2015-04-18 23:25:51 #338> python setup.py install -f --user
+2015-04-18 23:25:55 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:28:04 #338> python setup.py build_ext -f
+2015-04-18 23:28:05 #338> python setup.py install -f --user
+2015-04-18 23:28:08 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:29:34 #338> cp -p ~/Pr_patented/willy/_willymodule.so ~/Library/Python/2.7/lib/python/site-packages/Priithon_patented/_willy.so
+2015-04-18 23:29:40 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:29:48 #338> rm -r build
+2015-04-18 23:31:05 #338> cd Priithon_patented/
+2015-04-18 23:31:20 #338> python setup.py install -f --user
+2015-04-18 23:31:26 #338> ~/Priithon_27_mac_local/priithon_script test/test1.p
+2015-04-18 23:31:42 #338> ls
+2015-04-18 23:31:49 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:32:40 #338> python setup.py install -f --user
+2015-04-18 23:32:44 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:35:11 #338> ~/Priithon_27_mac_local/priithon_script
+2015-04-18 23:35:11 #338> ~/Priithon_27_mac_local/priithon_script
+2015-04-18 23:36:32 #338> ~/Priithon_27_mac_local/priithon_script -i
+2015-04-18 23:36:38 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:37:11 #338> cp -p ~/Priithon_27_mac_local__willy_wvl_files/_willymodule.so ~/Library/Python/2.7/lib/python/site-packages/Priithon_patented/_willy.so
+2015-04-18 23:37:14 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:38:19 #338> l Wvl.py
+2015-04-18 23:38:33 #338> ls -l /Users/shaase/Pr_patented/PyToCopy/willy/Wvl.py
+2015-04-18 23:38:43 #338> ls -l /Users/shaase/Pr_patented/Wvl.py
+2015-04-18 23:40:56 #338> ls -l /Users/shaase/Pr_patented/Wvl.py
+2015-04-18 23:40:56 #338> ls -l /Users/shaase/Pr_patented/Wvl.py
+2015-04-18 23:41:13 #338> rm -r ~/Library/Python/2.7/lib/python/site-packages/Priithon_patented
+2015-04-18 23:41:38 #338> rm -r build/
+2015-04-18 23:42:00 #338> python setup.py install --user
+2015-04-18 23:42:10 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:43:53 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:45:10 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:45:44 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:16 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:19 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:19 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:19 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:19 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:21 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:33 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:34 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:46:35 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:47:22 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:47:23 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:47:23 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:47:23 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:47:24 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:48:15 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:48:47 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:48:47 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:48:51 #338> ls -l
+2015-04-18 23:49:08 #338> rm -r build
+2015-04-18 23:49:32 #338> rm -r ~/Library/Python/2.7/lib/python/site-packages/Priithon_patented
+2015-04-18 23:50:01 #338> python setup.py install --user 2>& /dev/null
+2015-04-18 23:50:21 #338> python setup.py install --user &> /dev/null
+2015-04-18 23:50:28 #338> ~/Priithon_27_mac_local/priithon_script test/test1.py
+2015-04-18 23:50:48 #338> ls -l ~/Library/Python/2.7/lib/python/site-packages/

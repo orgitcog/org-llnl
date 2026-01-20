@@ -1,0 +1,69 @@
+2003-03-07 11:52:08 #30113> cd common/
+2003-03-07 11:52:08 #30113> ls
+2004-01-16 15:53:20 #31623> cd common/
+2004-01-16 15:53:22 #31623> less Ma
+2004-01-16 17:58:45 #31623> less priithon_Linux.mak
+2004-01-20 09:05:16 #31623> vlock
+2004-01-20 10:28:00 #31623> ssh root@drill
+2005-01-10 15:39:17 #8662> cd common/
+2005-01-10 15:39:19 #8662> ls -l
+2005-01-10 15:39:35 #8662> less sebInclude.h
+2005-06-07 16:28:31 #19227> cd Pr/common/
+2005-06-07 16:28:32 #19227> ls
+2005-06-28 11:42:18 #22960> cd common/
+2005-06-28 11:45:15 #22960> cd common/
+2005-06-28 11:45:16 #22960> ls
+2005-06-28 11:46:13 #22960> less priithon_Linux.mak
+2005-06-28 11:46:46 #22960> mkdir ~/PrLin22_gcc3.4
+2006-03-03 16:31:43 #6956> cd ~/Pr/common/
+2006-03-03 16:34:16 #6956> jmacs priithon_Linux.mak
+2006-03-03 16:34:22 #6956> emacs&
+2006-03-03 16:35:00 #6956> emacs&
+2006-03-03 16:36:53 #7575> PRI=/jws30/haase/PrLin24 PY=~shao/Python-2.4.2/python priithon -i
+2006-05-18 14:29:23 #23552> cd common/
+2006-05-18 14:29:37 #23552> mv sebInclude.h* Include/
+2006-05-18 14:30:55 #23552> jmacs priithon_Linux.mak
+2006-05-18 14:30:58 #23552> ls
+2006-05-18 14:32:10 #23552> jmacs priithon__VC7.mak
+2006-05-18 14:32:12 #23552> ls -l
+2006-05-18 14:32:13 #23552> ls
+2006-05-18 14:32:38 #23552> jmacs common/priithon_Darwin.mak
+2006-05-18 14:32:54 #23552> jmacs priithon_Darwin.mak
+2006-05-18 14:36:58 #23552> less priithon_Darwin.mak
+2006-05-18 14:36:59 #23552> ls
+2006-05-18 14:37:19 #23552> less priithon_Darwin.mak
+2006-05-18 14:37:23 #23552> xterm&
+2006-05-18 14:37:26 #23552> fg
+2006-05-18 14:38:10 #25865> cd Pr/common/
+2006-05-18 14:38:11 #25865> ls
+2006-05-18 14:38:54 #23552> jmacs priithon_Darwin.mak
+2006-05-18 14:38:56 #25865> less priithon_Linux.mak
+2006-05-30 10:25:09 #13325> cd ~/Pr/common/
+2006-05-30 10:25:09 #13325> ls
+2006-05-30 10:25:44 #13325> cp -a threadNoThread.i thread_WXNoThreads.i
+2006-05-30 10:25:48 #13325> ls -l thread*
+2006-06-01 11:10:03 #22381> cd Pr/common/
+2006-06-01 11:10:24 #22381> diff -rq . /jws20/backups/20060530_11pm-Tue/haase/Pr/common/
+2006-06-01 11:10:42 #22381> diff -q . /jws20/backups/20060530_11pm-Tue/haase/Pr/common/
+2006-06-01 11:10:45 #22381> diff -q . /jws20/backups/20060530_11pm-Tue/haase/Pr/common/
+2006-06-01 11:11:03 #22381> diff -q ./Include/ /jws20/backups/20060530_11pm-Tue/haase/Pr/common/Include/
+2006-06-01 11:11:10 #22381> diff -q ./Include/ /jws20/backups/20060530_11pm-Tue/haase/Pr/common/Include/
+2006-06-01 11:11:11 #22381> diff -q ./Include/ /jws20/backups/20060530_11pm-Tue/haase/Pr/common/Include/
+2006-06-01 11:11:11 #22381> diff -q ./Include/ /jws20/backups/20060530_11pm-Tue/haase/Pr/common/Include/
+2006-06-01 11:11:11 #22381> diff -q ./Include/ /jws20/backups/20060530_11pm-Tue/haase/Pr/common/Include/
+2006-06-01 11:11:11 #22381> diff -q ./Include/ /jws20/backups/20060530_11pm-Tue/haase/Pr/common/Include/
+2006-09-22 11:58:49 #19602> cd ..
+2009-01-23 11:54:13 #4411> cd Priithon_25_PriCommon/
+2009-01-23 11:54:14 #4411> ls -l
+2009-01-23 11:54:26 #4411> file *|less
+2009-01-23 11:54:31 #4411> recode pc..latin1 *
+2009-01-23 11:54:40 #4411> file *|less
+2009-01-23 11:54:47 #4411> recode pc..latin1 sebTypemaps*
+2009-01-23 11:55:04 #4411> file *|less
+2009-01-23 12:02:04 #4411> file priithon*
+2009-01-23 12:02:17 #4411> recode pc..latin1 priithon.mak*
+2009-01-23 12:02:27 #4411> recode pc..latin1 priithon_CYGWIN_NT-5.*
+2009-01-23 12:02:32 #4411> recode pc..latin1 priithon_Darwin.mak*
+2009-01-23 12:02:41 #4411> recode pc..latin1 priithon_Linux.mak*
+2009-01-23 12:02:55 #4411> file priithon*
+2009-01-23 12:02:57 #4411> file priithon*

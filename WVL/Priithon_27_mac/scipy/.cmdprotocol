@@ -1,0 +1,3 @@
+2012-03-12 16:58:36 #61722> cd Py/Priithon_27_mac/scipy
+2012-03-12 16:58:46 #61722> L .so|less
+2012-03-12 16:58:48 #61722> f ./fftpack/convolve.so

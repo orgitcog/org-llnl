@@ -1,0 +1,21 @@
+!MESSAGE vc7 MAKEFILE - ALL CAPITAL letters
+
+# # # /I Ignores exit codes from all commands. 
+# # # To set or clear /I for part of a .mak file, use !CMDSWITCHES. 
+# # !CMDSWITCHES -I
+# # !INCLUDE GNUmakefile
+
+PRCOMMON=x:/Pr/common
+MODULE=willy
+
+OPT_FLAGS = /O2 /G7 /arch:SSE2
+
+##for iostream.h
+
+objs = $(MODULE).o \
+	grower.o medianer.o segmenter.o wave3d.o wv3dchp.o \
+	fastwv6.o \
+        discrVol.o discriminator.o 
+## fastwv66.o
+
+!INCLUDE $(PRCOMMON)/priithon__VC7.mak

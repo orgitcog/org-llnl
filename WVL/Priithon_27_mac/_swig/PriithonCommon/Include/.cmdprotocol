@@ -1,0 +1,36 @@
+2006-05-18 14:25:39 #23552> cd include/
+2006-05-18 14:26:15 #23552> cp -a ~/myCVS/numarray/Include/numarray .
+2006-09-22 11:57:39 #19602> cd PrNumpy/common/Include/
+2006-09-22 11:58:11 #19602> diff -rq numpy/ ~/qqq/lib/python/numpy/core/include/numpy/
+2006-09-22 11:58:16 #19602> diff -r numpy/ ~/qqq/lib/python/numpy/core/include/numpy/
+2006-09-22 11:58:31 #19602> diff -r numpy/ ~/qqq/lib/python/numpy/core/include/numpy/ |less
+2006-09-22 11:58:40 #19602> rm -r numpy/
+2006-09-22 11:58:47 #19602> cp -a ~/qqq/lib/python/numpy/core/include/numpy .
+2006-09-26 16:14:51 #30603> cd PrNumpy/common/Include/
+2006-09-26 16:14:59 #30603> CP
+2006-09-26 16:15:02 #30603> diff -r numpy/ ~/qqq/lib/python/numpy/core/include/numpy/ |less
+2006-09-26 16:15:05 #30603> diff -r numpy/ ~/qqq/lib/python/numpy/core/include/numpy/
+2006-12-20 09:34:47 #10113> cd common/Include/
+2006-12-20 09:34:55 #10113> CP
+2006-12-20 09:34:56 #10113> cp -a ~/qqq/lib/python/numpy/core/include/numpy .
+2007-09-16 00:19:11 #5024> cd common/Include/
+2007-09-16 00:19:23 #5024> mv numpy numpy_20070915_old
+2007-09-16 00:22:29 #5024> cp -a /cygdrive/c/Python25/lib/site-packages/numpy/core/include/numpy .
+2011-01-19 17:39:26 #18142> cd Priithon_priCommon/Include/
+2011-01-19 17:39:27 #18142> ls -l
+2011-01-19 17:39:38 #18142> ls -l >>> import dl7
+2011-01-19 17:39:55 #18142> ls -l /home/shaase/Priithon_25_lin64/numpy/core/include
+2011-01-19 17:40:03 #18142> ln -s /home/shaase/Priithon_25_lin64/numpy/core/include/numpy
+2011-03-29 15:23:20 #8097> cd Priithon_priCommon/Include/
+2011-03-29 15:23:20 #8097> ls -l
+2011-03-29 15:23:28 #8097> ls python2.5/
+2011-03-29 15:23:33 #8097> ls -l
+2011-03-29 15:24:02 #8097> less sebInclude.h
+2011-03-29 15:25:11 #8097> ls
+2011-03-29 15:25:14 #8097> rm numpy
+2011-03-29 15:25:22 #8097> rm -r numpy_old/
+2011-03-29 15:25:30 #8097> rm -r python2.5/
+2011-03-29 15:25:56 #8097> cp -a /usr/include/python2.7 .
+2011-03-29 15:26:04 #8097> cp -a /usr/include/python2.5 .
+2011-03-29 15:26:08 #8097> ls -l python2.*
+2011-03-29 15:26:10 #8097> ls python2.*
