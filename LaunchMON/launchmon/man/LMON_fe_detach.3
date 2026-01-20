@@ -1,0 +1,56 @@
+.TH LaunchMON 3 "MAY 2014" LaunchMON "LaunchMON Front-End API"
+
+.SH NAME
+LMON_fe_detach, LMON_fe_shutdownDaemons, LMON_fe_kill \- LaunchMON front-end API: job/daemon control functions
+
+.SH SYNOPSIS
+.B #include <lmon_fe.h>
+.PP
+.BI "lmon_rc_e LMON_fe_detach ( int " sessionHandle " );"
+.PP
+.BI "lmon_rc_e LMON_fe_shutdownDaemons ( int " sessionHandle " );"
+.PP
+.BI "lmon_rc_e LMON_fe_kill ( int " sessionHandle " );"
+
+.B cc ... -lmonfeapi
+
+.SH DESCRIPTION
+The \fBLMON_fe_detach()\fR function detaches from the MPI job launcher associated
+with \fIsessionHandle\fR while leaving the tool daemons to continue running. 
+.PP
+The \fBLMON_fe_shutdownDaemons()\fR detaches from the MPI job launcher associated
+with \fIsessionHandle\fR and shuts down the tool daemons. \fB[Blue Gene Note]\fR
+Because Blue Gene control systems do not offer a mechanism to shut down 
+back-end daemons, the shutdown operation is NOOP for back-end tool daemons on this platform. 
+.PP
+The \fBLMON_fe_kill()\fR function destroys all resources associated
+with \fIsessionHandle\fR including the target job and tool daemons. 
+\fB[Blue Gene Note]\fR Because the Blue Gene control system does not offer a mechanism to shut down 
+back-end daemons, the kill operatioin is NOOP for back-end tool daemons on this platform.
+
+.SH RETURN VALUE
+Those functions return \fBLMON_OK\fR on success; otherwise, an 
+LMON error code is returned as described below.
+
+.SH ERRORS
+.TP
+.B LMON_OK
+Success.
+.TP
+.B LMON_EBDARG
+\fIsessionHandle\fR is invalid.
+.TP
+.B LMON_ETOUT
+Timed out 
+.TP
+.B LMON_EINVAL
+Encountered other invalid conditions.
+
+.SH "ENVIRONMENT VARIABLES"
+.TP
+.B LMON_FE_DMONCTL_TIMEOUT
+Overwrites the timeout value: [1-600] seconds (default: 30)
+
+.SH AUTHOR
+Dong H. Ahn <ahn1@llnl.gov>
+

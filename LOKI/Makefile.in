@@ -1,0 +1,177 @@
+#########################################################################
+##
+## Copyright (c) 2018-2022, Lawrence Livermore National Security, LLC.
+## See the top-level LICENSE file for details.
+## Produced at the Lawrence Livermore National Laboratory
+##
+## SPDX-License-Identifier: MIT
+##
+## Loki top level Makefile.
+##
+#########################################################################
+CC         = @CC@
+CXX        = @CXX@
+F77        = @F77@
+CXXFLAGS   = @CXX_FLAGS@
+CFLAGS     = @C_FLAGS@
+FFLAGS     = @F77_FLAGS@
+INC_PATH   = @INC_PATH@
+LIB_PATH   = @LIB_PATH@
+LIB_NAME   = @LIB_NAME@
+
+# Here are the things we can make
+PROGRAMS = vlasovPoisson4D vp4DPostProcess testDist checkTests
+
+default: $(PROGRAMS)
+
+all: $(PROGRAMS)
+
+check: $(PROGRAMS)
+	(cd test; $(MAKE) check)
+
+.SUFFIXES:
+.SUFFIXES: .C .c .f .o
+
+.C.o :
+	$(CXX) $(INC_PATH) $(CXXFLAGS) -c $*.C
+
+.f.o:
+	$(F77) $(INC_PATH) $(FFLAGS) -c $*.f
+
+.c.o:
+	$(CC) $(INC_PATH) $(CFLAGS) -c $*.c
+
+lokiCore = Loki_Utilities.o \
+           ReaderWriterBase.o \
+           FieldReader.o \
+           FieldWriter.o \
+           RestartReaderWriterBase.o \
+           RestartReader.o \
+           RestartWriter.o \
+           TimeHistReader.o \
+           TimeHistWriter.o \
+           ParallelArray.o \
+           CurrentDriver.o \
+           CurrentDriverFactory.o \
+           ElectricFieldDriver.o \
+           ElectricFieldDriverFactory.o \
+           ElectricPotentialDriver.o \
+           ElectricPotentialDriverFactory.o \
+           EMICFactory.o \
+           EMICInterface.o \
+           VELICFactory.o \
+           VELICInterface.o \
+           CollisionOperator.o \
+           CollisionOperatorF.o \
+           CollisionOperatorFactory.o \
+           ICFactory.o \
+           ICInterface.o \
+           RestartManager.o \
+           TimerManager.o \
+           Load.o \
+           ProblemDomain.o \
+           KrookLayer.o \
+           ExternalDistKrook.o \
+           External2DIC.o \
+           External2VIC.o \
+           PerturbedMaxwellianIC.o \
+           InterpenetratingStreamIC.o \
+           ThermalBehavior.o \
+           MaxwellianThermal.o \
+           JuttnerThermal.o \
+           ShapedRampedCosineDriver.o \
+           ShapedRampedCosineDriverF.o \
+           ShapedRampedCosineCurrentDriver.o \
+           ShapedRampedCosineCurrentDriverF.o \
+           ShapedRampedCosinePotentialDriver.o \
+           ShapedRampedCosinePotentialDriverF.o \
+           GaussianCurrentDriver.o \
+           GaussianCurrentDriverF.o \
+           UnidirectionalCurrentDriver.o \
+           UnidirectionalCurrentDriverF.o \
+           SimpleEMIC.o \
+           SimpleEMICF.o \
+           SimpleVELIC.o \
+           SimpleVELICF.o \
+           TZSourceFactory.o \
+           TZSourceInterface.o \
+           TZSourceF.o \
+           TrigTZSource.o \
+           ElectronTZSourceF.o \
+           ElectronTrigTZSource.o \
+           TwoSpecies_IonTZSourceF.o \
+           TwoSpecies_IonTrigTZSource.o \
+           TwoSpecies_ElectronTZSourceF.o \
+           TwoSpecies_ElectronTrigTZSource.o \
+           PitchAngleCollisionOperator.o \
+           PitchAngleCollisionOperatorF.o \
+           RosenbluthCollisionOperator.o \
+           RosenbluthCollisionOperatorF.o \
+           OriginalRosenbluthCollisionOperator.o \
+           OriginalRosenbluthCollisionOperatorF.o \
+           ReductionSchedule.o \
+           ReductionSchedule4D.o \
+           ContractionSchedule.o \
+           ExpansionSchedule.o \
+           SummationSchedule.o \
+           centAvg_to_faceAvg4D.o \
+           KineticSpeciesF.o \
+           KineticSpeciesPtrVect.o \
+           PoissonSolverFactory.o \
+           PoissonSolver.o \
+           LokiPoissonSolveFFT.o \
+           LokiPoissonSolveSuperLU.o \
+           EMSolverBase.o \
+           Poisson.o \
+           PoissonF.o \
+           Maxwell.o \
+           MaxwellF.o \
+           Particle.o \
+           KineticSpecies.o \
+           Serializable.o \
+           LoadBalancer.o \
+           System.o \
+           VPSystem.o \
+           VMSystem.o \
+           VMState.o \
+           VPState.o \
+           Simulation.o \
+           getVelocityF.o \
+           getMomentumF.o \
+           LokiInputParser.o
+
+vlasovPoisson4D = main.o PerlPreProcessor.o LokiParser.o
+
+vp4DPostProcess = vp4DPostProcess.o
+
+testDist = testDist.o PerlPreProcessor.o LokiParser.o LokiInputParser.o Loki_Utilities.o
+
+checkTests = checkTests.o
+
+vlasovPoisson4D: $(vlasovPoisson4D) $(lokiCore)
+	cd tbox; $(MAKE); cd ..
+	$(CXX) $(CXXFLAGS) -o vlasovPoisson4D $(vlasovPoisson4D) $(lokiCore) $(LIB_PATH) $(LIB_NAME)
+
+vp4DPostProcess: $(vp4DPostProcess) $(lokiCore)
+	cd tbox; $(MAKE); cd ..
+	$(CXX) $(CXXFLAGS) -o vp4DPostProcess $(vp4DPostProcess) $(lokiCore) $(LIB_PATH) $(LIB_NAME)
+
+testDist: $(testDist)
+	$(CXX) $(CXXFLAGS) -o testDist $(testDist) $(LIB_PATH) $(LIB_NAME)
+
+checkTests: $(checkTests) $(lokiCore)
+	cd tbox; $(MAKE); cd ..
+	$(CXX) $(CXXFLAGS) -o checkTests $(checkTests) $(lokiCore) $(LIB_PATH) $(LIB_NAME)
+
+clean:
+	rm -f $(PROGRAMS) *.o
+	cd tbox; $(MAKE) $@
+	cd test; $(MAKE) $@
+
+checkclean:
+	cd test; $(MAKE) $@
+
+dox:
+	(cd docs && $(MAKE) $@)
+
+include Makefile.depend

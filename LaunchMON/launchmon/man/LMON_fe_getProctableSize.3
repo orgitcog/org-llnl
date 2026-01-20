@@ -1,0 +1,89 @@
+.TH LaunchMON 3 "MAY 2014" LaunchMON "LaunchMON Front-End API"
+
+.SH NAME
+LMON_fe_getProctable LMON_fe_getProctableSize LMON_fe_getResourceHandle \- LaunchMON front-end API: resource manager data access functions
+
+.SH SYNOPSIS
+.nf
+.B #include <lmon_fe.h>
+.PP
+.BI "lmon_rc_e LMON_fe_getProctable ( int " sessionHandle ","
+.BI "  MPIR_PROCDESC_EXT *" proctab ", unsigned int *" size ", unsigned int " maxlen " );"
+.PP
+.BI "lmon_rc_e LMON_fe_getProctableSize ( int " sessionHandle ", unsigned int *" size " );"
+.PP
+.BI "lmon_rc_e LMON_fe_getResourceHandle ( int " sessionHandle ","
+.BI "  char *" handle ", int *" size ", int " maxstring " );"
+.PP
+.B cc ... -lmonfeapi
+.fi
+
+.SH DESCRIPTION
+The \fBLMON_fe_getProctable()\fR function returns the remote
+process descriptor table of the job associated with 
+\fIsessionHandle\fR via the \fIproctab\fR argument. The number of table entries
+that this function returns is either the total number of entries in the table
+or \fImaxlen\fR whichever is smaller. In either case, however, this function returns
+the total number of entries of the table via the \fIsize\fR argument. 
+This function requires \fBMPIR_PROCDESC_EXT\fR type, a C struct
+extending \fBMPIR_PROCDESC\fR. \fImpirank\fR is the MPI rank of the
+describing process. \fIcnodeid\fR is the compute node id of the
+compute node where the process is running. It is a platform-specific
+integer identification and thus a platform may or may not
+define it. Currently, it is defined only on IBM Blue Gene /Q platform.
+
+.PP
+.nf
+.B typedef struct {
+.B "   "char *host_name;
+.B "   "char *executable_name; "
+.B "   "int pid;  " 
+.B "} MPIR_PROCDESC;
+.PP 
+.B typedef struct {
+.B "   "MPIR_PROCDESC pd;
+.B "   "int mpirank;
+.B "   "int cnodeid;
+.B } MPIR_PROCDESC_EXT;
+.fi
+.PP
+
+The \fBLMON_fe_getProctableSize()\fR function returns the total number
+of entries in the remote process descriptor table via the \fIsize\fR argument.
+
+The \fBLMON_fe_getResourceHandle()\fR function 
+returns the resource handle associated with 
+\fIsessionHandle\fR via the \fIhandle\fR argument
+when such information is available. For example,  
+for SLURM-based systems, \fIhandle\fR is the \fBjobid\fR 
+of the target job, the RM's handle for the node allocation for this job.  
+.PP
+\fBLMON_fe_getProctable()\fR, \fBLMON_fe_getProctableSize()\fR and \fBLMON_fe_getResourceHandle()\fR
+are valid only when they are called after a successful 
+\fBLMON_fe_attachAndSpawnDaemons()\fR 
+or \fBLMON_fe_launchAndSpawnDaemons()\fR call. 
+
+.SH RETURN VALUE
+Those functions return \fBLMON_OK\fR on success; otherwise, an 
+LMON error code is returned. 
+
+.SH ERRORS
+.TP
+.B LMON_OK
+Success.
+.TP
+.B LMON_EBDARG
+Invalid arguments.
+.TP
+.B LMON_EDUNAV
+The requested information is unavailable.
+.TP
+.B LMON_ETRUNC
+Returned \fIbuf\fR contains truncated remote process descriptor table.
+.TP
+.B LMON_EINVAL
+Encountered other errorenous conditions. 
+
+.SH AUTHOR
+Dong H. Ahn <ahn1@llnl.gov>
+

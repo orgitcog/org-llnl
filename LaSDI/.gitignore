@@ -1,0 +1,8 @@
+data
+model
+__pycache__
+.ipynb_checkpoints
+*.png
+*.mp4
+checkpoint*.tar
+*.pyc

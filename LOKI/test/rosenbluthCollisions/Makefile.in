@@ -1,0 +1,32 @@
+#########################################################################
+##
+## Copyright (c) 2018-2022, Lawrence Livermore National Security, LLC.
+## See the top-level LICENSE file for details.
+## Produced at the Lawrence Livermore National Laboratory
+##
+## SPDX-License-Identifier: MIT
+##
+## Makefile for running Loki rosenbluthCollision test.
+##
+#########################################################################
+CHECKTESTS = ../../checkTests
+BASELINES_NO_BR = /usr/gapps/valhalla/LOKI/BASELINES/rosenbluthCollisions_no_br
+BASELINES_W_BR = /usr/gapps/valhalla/LOKI/BASELINES/rosenbluthCollisions_w_br
+
+default: check
+
+check:
+	srun -p pdebug -n 17 ../../vlasovPoisson4D rosenbluthCollisions_no_br.pp >& log_no_br.run
+	../../vp4DPostProcess -coll -prefix=rosenbluthCollisions_no_br >& log_no_br.pp
+	@-$(CHECKTESTS) input_no_br >& diffs_no_br
+	@if [ -s diffs_no_br ]; then echo "FAILED no br"; else echo "PASSED no br"; fi
+	srun -p pdebug -n 17 ../../vlasovPoisson4D rosenbluthCollisions_w_br.pp >& log_w_br.run
+	../../vp4DPostProcess -coll -prefix=rosenbluthCollisions_w_br >& log_w_br.pp
+	@-$(CHECKTESTS) input_w_br >& diffs_w_br
+	@if [ -s diffs_w_br ]; then echo "FAILED w br"; else echo "PASSED w br"; fi
+
+checkclean:
+	rm -rf rosenbluthCollisions_no_br rosenbluthCollisions_w_br *.pp.processed *hdf* log*.* diffs_* *core*
+
+clean:
+	rm -rf rosenbluthCollisions_no_br rosenbluthCollisions_w_br *.pp.processed *hdf* log*.* diffs_* *core*
