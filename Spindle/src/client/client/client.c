@@ -1,0 +1,641 @@
+/*
+This file is part of Spindle.  For copyright information see the COPYRIGHT 
+file in the top level directory, or at 
+https://github.com/hpc/Spindle/blob/master/COPYRIGHT
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU Lesser General Public License (as published by the Free Software
+Foundation) version 2.1 dated February 1999.  This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even the IMPLIED
+WARRANTY OF MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the terms 
+and conditions of the GNU Lesser General Public License for more details.  You should 
+have received a copy of the GNU Lesser General Public License along with this 
+program; if not, write to the Free Software Foundation, Inc., 59 Temple
+Place, Suite 330, Boston, MA 02111-1307 USA
+*/
+
+#define _GNU_SOURCE
+
+#include <dirent.h>
+#include <unistd.h>
+#include <stddef.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdarg.h>
+#include <assert.h>
+#include <string.h>
+#include <unistd.h>
+#include <link.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "ldcs_api.h" 
+#include "config.h"
+#include "client.h"
+#include "client_heap.h"
+#include "client_api.h"
+#include "spindle_launch.h"
+#include "shmcache.h"
+#include "ccwarns.h"
+#include "exec_util.h"
+#include "intercept.h"
+#include "fixlocale.h"
+
+errno_location_t app_errno_location;
+
+opt_t opts;
+int ldcsid = -1;
+unsigned int shm_cachesize;
+static unsigned int shm_cache_limit;
+
+int intercept_open;
+int intercept_exec;
+int intercept_stat;
+int intercept_close;
+int intercept_fork;
+static char debugging_name[32];
+
+static char old_cwd[MAX_PATH_LEN+1];
+static int rankinfo[4]={-1,-1,-1,-1};
+
+extern char *parse_location(char *loc, number_t number);
+extern int is_in_spindle_cache(const char *pathname);
+
+/* compare the pointer top the cookie not the cookie itself, it may be changed during runtime by audit library  */
+int use_ldcs = 1;
+static const char *libc_name = NULL;
+static const char *interp_name = NULL;
+static const ElfW(Phdr) *libc_phdrs, *interp_phdrs;
+static int num_libc_phdrs, num_interp_phdrs;
+ElfW(Addr) libc_loadoffset, interp_loadoffset;
+
+/* location has the realize'd path to the local file cache. orig_location is not realized and
+ * may contain symlinks
+ */
+char *location;
+char *orig_location;
+number_t number;
+static int have_stat_patches;
+
+static char *concatStrings(const char *str1, const char *str2) 
+{
+   static char buffer[MAX_PATH_LEN+1];
+   buffer[MAX_PATH_LEN] = '\0';
+   GCC7_DISABLE_WARNING("-Wformat-truncation");
+   snprintf(buffer, MAX_PATH_LEN, "%s/%s", str1, str2);
+   GCC7_ENABLE_WARNING;
+   return buffer;
+}
+
+static int find_libs_iterator(struct dl_phdr_info *lib,
+                              size_t size, void *data)
+{
+   (void)size;
+   (void)data;
+   if (!libc_name && (strstr(lib->dlpi_name, "libc.") || strstr(lib->dlpi_name, "libc-"))) {
+      libc_name = lib->dlpi_name;
+      libc_phdrs = lib->dlpi_phdr;
+      libc_loadoffset = lib->dlpi_addr;
+      num_libc_phdrs = (int) lib->dlpi_phnum;
+   }
+   else if (!interp_name) {
+      const ElfW(Phdr) *phdrs = lib->dlpi_phdr;
+      unsigned long r_brk = _r_debug.r_brk;
+      unsigned int phdrs_size = lib->dlpi_phnum, i;
+
+      if (!phdrs) {
+         /* ld.so bug?  Seeing NULL PHDRS for dynamic linker entry. */
+         interp_name = lib->dlpi_name;
+      } 
+      else {
+         for (i = 0; i < phdrs_size; i++) {
+            if (phdrs[i].p_type == PT_LOAD) {
+               unsigned long base = phdrs[i].p_vaddr + lib->dlpi_addr;
+               if (base <= r_brk && r_brk < base + phdrs[i].p_memsz) {
+                  interp_name = lib->dlpi_name;
+                  break;
+               }
+            }
+         }
+      }
+      if (interp_name) {
+         num_interp_phdrs = phdrs_size;
+         interp_phdrs = phdrs;
+         interp_loadoffset = lib->dlpi_addr;
+      }
+   }
+
+   return 0;
+}
+
+char *find_libc_name()
+{
+   if (libc_name)
+      return (char *) libc_name;
+   dl_iterate_phdr(find_libs_iterator, NULL);
+   return (char *) libc_name;
+}
+
+const ElfW(Phdr) *find_libc_phdrs(int *num_phdrs)
+{
+   if (libc_phdrs) {
+      *num_phdrs = num_libc_phdrs;
+      return libc_phdrs;
+   }
+   dl_iterate_phdr(find_libs_iterator, NULL);
+   *num_phdrs = num_libc_phdrs;
+   return libc_phdrs;
+}
+
+ElfW(Addr) find_libc_loadoffset()
+{
+   if (libc_phdrs)
+      return libc_loadoffset;
+   dl_iterate_phdr(find_libs_iterator, NULL);
+   return libc_loadoffset;
+}
+
+char *find_interp_name()
+{
+   if (interp_name)
+      return (char *) interp_name;
+   dl_iterate_phdr(find_libs_iterator, NULL);
+   return (char *) interp_name;
+}
+
+const ElfW(Phdr) *find_interp_phdrs(int *num_phdrs)
+{
+   if (interp_name) {
+      *num_phdrs = num_interp_phdrs;
+      return interp_phdrs;
+   }
+   dl_iterate_phdr(find_libs_iterator, NULL);
+   *num_phdrs = num_interp_phdrs;
+   return interp_phdrs;
+}
+
+ElfW(Addr) find_interp_loadoffset()
+{
+   if (interp_name)
+      return interp_loadoffset;
+   dl_iterate_phdr(find_libs_iterator, NULL);
+   return interp_loadoffset;
+}
+
+void int_spindle_test_log_msg(char *buffer)
+{
+   test_printf("%s", buffer);
+}
+
+static int init_server_connection()
+{
+   char *connection, *rankinfo_s, *opts_s, *cachesize_s;
+   int old_ldcsid;
+
+   debug_printf("Initializing connection to server\n");
+
+   if (ldcsid != -1)
+      return 0;
+   if (!use_ldcs)
+      return 0;
+
+   location = getenv("LDCS_LOCATION");
+   orig_location = getenv("LDCS_ORIG_LOCATION");
+   number = (number_t) strtoul(getenv("LDCS_NUMBER"), NULL, 0);
+   connection = getenv("LDCS_CONNECTION");
+   rankinfo_s = getenv("LDCS_RANKINFO");
+   opts_s = getenv("LDCS_OPTIONS");
+   cachesize_s = getenv("LDCS_CACHESIZE");
+   opts = strtoul(opts_s, NULL, 10);
+   shm_cachesize = atoi(cachesize_s) * 1024;
+
+   if (strchr(location, '$')) {
+      location = parse_location(location, number);
+      if (!location) {
+         exit(-1);
+      }
+   }
+
+   if (!(opts & OPT_FOLLOWFORK)) {
+      debug_printf("Disabling environment variables because we're not following forks\n");
+      unsetenv("LD_AUDIT");
+      unsetenv("LDCS_LOCATION");
+      unsetenv("LDCS_ORIG_LOCATION");
+      unsetenv("LDCS_NUMBER");
+      unsetenv("LDCS_CONNECTION");
+      unsetenv("LDCS_RANKINFO");
+      unsetenv("LDCS_OPTIONS");
+   }
+
+   if (opts & OPT_SHMCACHE) {
+      assert(shm_cachesize);
+#if defined(COMM_BITER)
+      shm_cache_limit = shm_cachesize > 512*1024 ? shm_cachesize - 512*1024 : 0;
+#else
+      shm_cache_limit = shm_cachesize;
+#endif
+      shmcache_init(location, number, shm_cachesize, shm_cache_limit);
+   }
+
+   if (connection) {
+      /* boostrapper established the connection for us.  Reuse it. */
+      debug_printf("Recreating existing connection to server\n");
+      debug_printf3("location = %s, number = %lu, connection = %s, rankinfo = %s\n",
+                    location, (unsigned long) number, connection, rankinfo_s);
+      ldcsid  = client_register_connection(connection);
+      if (ldcsid == -1)
+         return -1;
+      assert(rankinfo_s);
+      sscanf(rankinfo_s, "%d %d %d %d %d", &old_ldcsid, rankinfo+0, rankinfo+1, rankinfo+2, rankinfo+3);
+      unsetenv("LDCS_CONNECTION");
+   }
+   else {
+      /* Establish a new connection */
+      debug_printf("open connection to ldcs %s %lu\n", location, (unsigned long) number);
+      ldcsid = client_open_connection(location, number);
+      if (ldcsid == -1)
+         return -1;
+
+      send_pid(ldcsid);
+      send_location(ldcsid, location);
+      send_rankinfo_query(ldcsid, rankinfo+0, rankinfo+1, rankinfo+2, rankinfo+3);
+#if defined(LIBNUMA)      
+      if (opts & OPT_NUMA)
+         send_cpu(ldcsid, get_cur_cpu());
+#endif
+   }
+   
+   snprintf(debugging_name, 32, "Client.%d", rankinfo[0]);
+   LOGGING_INIT(debugging_name);
+
+   sync_cwd();
+
+   if (opts & OPT_RELOCPY)
+      parse_python_prefixes(ldcsid);
+   return 0;
+}
+
+static void reset_server_connection()
+{
+   client_close_connection(ldcsid);
+
+   ldcsid = -1;
+   old_cwd[0] = '\0';
+
+   init_server_connection();
+}
+
+void check_for_fork()
+{
+   static int cached_pid = 0;
+   check_for_new_thread();
+   
+   int current_pid = getpid();
+   if (!cached_pid) {
+      cached_pid = current_pid;
+      return;
+   }
+   if (cached_pid == current_pid) {
+      return;
+   }
+
+   if (!(opts & OPT_FOLLOWFORK)) {
+      debug_printf("Client %d forked and is now process %d.  Not following fork.\n", cached_pid, current_pid);
+      use_ldcs = 0;
+      cached_pid = current_pid;
+      return;
+   }
+   debug_printf("Client %d forked and is now process %d.  Following.\n", cached_pid, current_pid);
+   cached_pid = current_pid;
+   reset_spindle_debugging();
+   reset_server_connection();
+}
+
+void test_log(const char *name)
+{
+   int result;
+   if (!run_tests)
+      return;
+   result = open(name, O_RDONLY);
+   if (result != -1)
+      close(result);
+   test_printf("open(\"%s\", O_RDONLY) = %d\n", name, result);
+}
+
+void sync_cwd()
+{
+}
+
+void set_errno(int newerrno)
+{
+   if (!app_errno_location) {
+      debug_printf2("app_errno_location not set.  Manually looking up value\n");
+      lookup_libc_symbols();
+      if (!app_errno_location) {
+         debug_printf("Warning: Unable to set errno because app_errno_location not set\n");
+         return;
+      }
+   }
+   *app_errno_location() = newerrno;
+}
+
+int get_errno()
+{
+   if (!app_errno_location) {
+      debug_printf2("app_errno_location not set.  Manually looking up value\n");
+      lookup_libc_symbols();
+      if (!app_errno_location) {
+         debug_printf("Warning: Unable to set errno because app_errno_location not set\n");
+         return -1;
+      }
+   }
+   return *app_errno_location();
+}
+
+int client_init()
+{
+  int result;
+  int initial_run = 0;
+  LOGGING_INIT("Client");
+  check_for_fork();
+  if (!use_ldcs)
+     return -1;
+
+  init_server_connection();
+  intercept_open = (opts & OPT_RELOCPY) ? 1 : 0;
+  intercept_stat = (opts & OPT_RELOCPY || !(opts & OPT_NOHIDE)) ? 1 : 0;
+  intercept_exec = (opts & OPT_RELOCEXEC) ? 1 : 0;
+  intercept_fork = 1;
+  intercept_close = 1;  
+
+  if (getenv("LDCS_BOOTSTRAPPED")) {
+     initial_run = 1;
+     unsetenv("LDCS_BOOTSTRAPPED");
+  }
+  
+  if ((opts & OPT_REMAPEXEC) &&
+      ((initial_run && (opts & OPT_RELOCAOUT)) ||
+       (!initial_run && (opts & OPT_RELOCEXEC))))
+  {
+     remap_executable(ldcsid);
+  }
+
+  if (opts & OPT_PATCHLDSO) {
+     result = init_intercept_ldso_stat();
+     have_stat_patches = (result == 0);
+  }
+  else {
+     have_stat_patches = 0;
+  }
+  
+  return 0;
+}
+
+int client_done()
+{
+   check_for_fork();
+   if (ldcsid == -1 || !use_ldcs)
+      return 0;
+
+   debug_printf2("Done. Closing connection %d\n", ldcsid);
+   send_end(ldcsid);
+   client_close_connection(ldcsid);
+   return 0;
+}
+
+extern int dlopen_filter(const char *name);
+
+static char patch[4096];
+static char *last_patch_location = NULL;
+static int last_patch_len;
+static const char *stat_not_found_prefix = NOT_FOUND_PREFIX "/";
+
+static void pathpatch_old_name(char *filename)
+{
+   int len;
+   if (have_stat_patches)
+      return;
+   
+   for (len = 0; filename[len] != '\0' && stat_not_found_prefix[len] != '\0'; len++);
+   if (len == 0) {
+      patch[0] = '\0';
+      last_patch_location = NULL;
+      return;
+   }
+
+   memcpy(patch, filename, len);
+   memcpy(filename, stat_not_found_prefix, len);
+   last_patch_location = filename;
+   last_patch_len = len;
+}
+
+void restore_pathpatch()
+{
+   if (have_stat_patches)
+      return;   
+   if (!last_patch_location || !last_patch_len)
+      return;
+   if (strncmp(last_patch_location, stat_not_found_prefix, last_patch_len) != 0) {
+      last_patch_location = NULL;
+      last_patch_len = 0;
+      return;
+   }      
+   memcpy(last_patch_location, patch, last_patch_len);
+   last_patch_location = NULL;
+   last_patch_len = 0;
+}
+
+char *client_library_load(const char *name)
+{
+   char *newname;
+   int errcode, direxists;
+   char fixed_name[MAX_PATH_LEN+1];
+
+   check_for_fork();
+   if (!use_ldcs || ldcsid == -1) {
+      return (char *) name;
+   }
+   if (!(opts & OPT_RELOCSO)) {
+      return (char *) name;
+   }
+   
+   /* Don't relocate a new copy of libc, it's always already loaded into the process. */
+   find_libc_name();
+   if (libc_name && strcmp(name, libc_name) == 0) {
+      debug_printf("la_objsearch not redirecting libc %s\n", name);
+      test_log(name);
+      return (char *) name;
+   }
+   
+   sync_cwd();
+
+   char *orig_file_name = (char *) name;
+   if (is_in_spindle_cache(name)) {
+      debug_printf2("Library %s is in spindle cache (%s). Translating request\n", name, location);
+      memset(fixed_name, 0, MAX_PATH_LEN+1);
+      send_orig_path_request(ldcsid, orig_file_name, fixed_name);
+      orig_file_name = fixed_name;
+      debug_printf2("Spindle cache library %s translated to original path %s\n", name, orig_file_name);
+   }
+
+   if (!dlopen_filter(orig_file_name)) {
+      debug_printf("Library %s was filtered. Not relocating\n", orig_file_name);
+      if (orig_file_name != name) {
+         //Not sure how/if this can happen. The app tried to dlopen a path
+         // that maps to the spindle cache. We unraveled that path to the
+         // original location from the shared file system, and got a path
+         // that shouldn't get relocated.
+         //We'll leak this strdup memory for a path in that case. Oh well.
+         debug_printf2("Warning. Accessing spindle cache location corresponding to non-cachable location: %s", orig_file_name);
+         return spindle_strdup(orig_file_name);
+      }
+      return (char *) name;
+   }
+   
+   get_relocated_file(ldcsid, orig_file_name, 1, &newname, &errcode, &direxists);
+ 
+   if(!newname) {
+      newname = concatStrings(NOT_FOUND_PREFIX, orig_file_name);
+      if (!direxists)
+         pathpatch_old_name(orig_file_name);
+   }
+   else {
+      patch_on_load_success(newname, orig_file_name, name);
+   }
+
+   debug_printf2("la_objsearch redirecting %s to %s\n", orig_file_name, newname);
+   test_log(newname);
+   return newname;
+}
+
+static void read_python_prefixes(int fd, char **path)
+{
+   int use_cache = (opts & OPT_SHMCACHE) && (shm_cachesize > 0);
+   int found_file = 0;
+
+   if (use_cache) {
+      debug_printf2("Looking up python prefixes in shared cache\n");
+      found_file = fetch_from_cache("*SPINDLE_PYTHON_PREFIXES", path);
+   }
+   if (!found_file) {
+      get_python_prefix(fd, path);
+      if (use_cache)
+         shmcache_update("*SPINDLE_PYTHON_PREFIXES", *path);
+   }
+}
+
+int get_local_prefixes(char ***prefixes)
+{
+   return get_dirlists(prefixes, NULL);
+}
+
+int get_exec_excludes(char ***eexcludes)
+{
+   return get_dirlists(NULL, eexcludes);
+}
+
+python_path_t *pythonprefixes = NULL;
+void parse_python_prefixes(int fd)
+{
+   char *path;
+   int i, j;
+   int num_pythonprefixes;
+
+   if (pythonprefixes)
+      return;
+
+   read_python_prefixes(fd, &path);
+   debug_printf3("Python prefixes are %s\n", path);
+
+   num_pythonprefixes = (path[0] == '\0') ? 0 : 1;
+   for (i = 0; path[i] != '\0'; i++) {
+      if (path[i] == ':')
+         num_pythonprefixes++;
+   }   
+
+   debug_printf3("num_pythonprefixes = %d in %s\n", num_pythonprefixes, path);
+   pythonprefixes = (python_path_t *) spindle_malloc(sizeof(python_path_t) * (num_pythonprefixes+1));
+   for (i = 0, j = 0; j < num_pythonprefixes; j++) {
+      char *cur = path+i;
+      char *next = strchr(cur, ':');
+      if (next != NULL)
+         *next = '\0';
+      pythonprefixes[j].path = cur;
+      pythonprefixes[j].pathsize = strlen(cur);
+      pythonprefixes[j].regexpr = parse_spindle_regex_str(cur);
+      i += pythonprefixes[j].pathsize+1;
+   }
+   pythonprefixes[num_pythonprefixes].path = NULL;
+   pythonprefixes[num_pythonprefixes].pathsize = 0;
+   pythonprefixes[num_pythonprefixes].regexpr = NULL;
+
+   for (i = 0; pythonprefixes[i].path != NULL; i++)
+      debug_printf3("Python path # %d = %s\n", i, pythonprefixes[i].path);
+}
+
+static int read_ldso_metadata(char *localname, ldso_info_t *ldsoinfo)
+{
+   return read_buffer(localname, (char *) ldsoinfo, sizeof(*ldsoinfo));
+}
+
+static ldso_info_t *load_ldso_metadata()
+{
+   static ldso_info_t info;
+   static int ldso_read = 0;
+   
+   int found_file = 0, result;
+   char cachename[MAX_PATH_LEN+1];
+   char filename[MAX_PATH_LEN+1];
+   char *ldso_info_name = NULL;
+   int use_cache = (opts & OPT_SHMCACHE) && (shm_cachesize > 0);
+
+   if (ldso_read)
+      return &info;
+   ldso_read = 1;
+   
+   find_interp_name();
+   debug_printf2("Requesting interpreter metadata for %s\n", interp_name);
+
+   if (use_cache) {
+      debug_printf2("Looking up interpreter info in shared cache\n");
+      snprintf(cachename, MAX_PATH_LEN, "LDSOINFO:%s", interp_name);
+      cachename[MAX_PATH_LEN] = '\0';
+      found_file = fetch_from_cache(cachename, &ldso_info_name);
+   }
+
+   if (!found_file) {
+      send_ldso_info_request(ldcsid, interp_name, filename);
+      if (use_cache)
+         shmcache_update(cachename, filename);
+      ldso_info_name = filename;
+   }
+
+   result = read_ldso_metadata(ldso_info_name, &info);
+   if (result == -1)
+      return NULL;
+   
+   return &info;
+}
+
+int get_ldso_metadata_bindingoffset(signed int *binding_offset)
+{
+   ldso_info_t *ldsoinfo = load_ldso_metadata();
+   if (!ldsoinfo)
+      return -1;
+   *binding_offset = ldsoinfo->binding_offset;
+   return 0;
+}
+
+int get_ldso_metadata_statdata(signed long *stat_offset, signed long *lstat_offset, signed long *errno_offset)
+{
+   ldso_info_t *ldsoinfo = load_ldso_metadata();
+   if (!ldsoinfo)
+      return -1;
+   if (!ldsoinfo->stat_offset || !ldsoinfo->lstat_offset || !ldsoinfo->errno_offset)
+      return -1;
+   *stat_offset = ldsoinfo->stat_offset;
+   *lstat_offset = ldsoinfo->lstat_offset;
+   *errno_offset = ldsoinfo->errno_offset;
+   return 0;
+}

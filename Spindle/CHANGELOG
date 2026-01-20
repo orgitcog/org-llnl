@@ -1,0 +1,55 @@
+Spindle 0.13
+-----------
+  - Fix handling of ORIGIN when it appears in .so libraries.
+  - Can now wrap IBM's jsrun (and the LLNL alias lrun) with spindle.
+  - New SLURM plugin for launching spindle with "srun --spindle ..."
+  - New spindle launch mode that starts up daemons via an rsh/ssh tree
+  - New interfaces in spindle_launch for easier RM integration.
+  - Numerous bug smaller fixes
+
+Spindle 0.12
+-----------
+  - Fixes for handling libraries with aliases, such as the same library loaded twice under two different symlink paths
+  - Fixes for working with older glibc's.
+  - Support for building Spindle with clang
+  - Fix network performance issues seen on IBM systems
+  - Fix bug causing incorrect device in some stat calls
+  - Move spindle testsuite to Python 3
+
+Spindle 0.11
+------------
+  - ppc64le support
+  - Spindle sessions feature, allowing running of multiple jobs under the same spindle session
+  - Pure slurm-based launcher mode that does not require LaunchMON
+  - Fixes around stat and execve error return values in errno when running with Spindle
+  - Remap is now default, which makes debuggers operating on Spindle jobs happier
+  - Resurrected subaudit support, which is needed to work-around ld.so bugs on ppc64le
+  - Dropped BG/Q support
+
+Spindle 0.10
+-----------
+  - New API for integrating Spindle with job-launchers
+  - Integration of BGQ branch into mainline
+  - Support for RHEL7
+  - Bug fixes
+
+Spindle 0.9
+-----------
+  - Support for OpenMPI's ORTE-based launching
+  - Support for the flux resource manager
+  - Improve support for co-existing with debuggers
+  - Reorganize source tree to separate FE/BE/CLIENT builds
+  - Support for building different spindle components with different compilers
+  - Add security models for authentication TCP/IP connections
+  - New hostbin-based startup for when LaunchMON doesn't work
+  - New spindle man page
+  - Fix a crash when dealing with size 0 libraries
+  - Fix a race-condition hang on startup
+
+Spindle 0.8
+-----------
+  - New Spindle API allows for manually requesting Spindle semantics of open and stat calls
+  - Support for running serial processes under Spindle with the --no-mpi option
+  - Support for Spindle interception of stat and lstat calls.
+  - Improved Python support, supported by --python-prefixes option
+  - Bug fixes, many focused around following processes through fork/exec

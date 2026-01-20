@@ -1,0 +1,76 @@
+data:
+  name:
+  split:
+    train:
+      - [mpro, train]
+    val:
+      - [mpro, val]
+    test:
+      - [mpro, test]
+  feature_type: pybel # [pybel, rdkit]
+  preprocessing_type: processed # [raw, processed]
+  use_docking: false
+  input_type: graph
+  max_atoms: 2000
+
+model:
+  name: fusion
+  first:
+    name: egnn
+    params:
+      in_edge_nf: 1
+      distance_cutoff: 5
+      n_layers: 6
+      residual: True
+      attention: True
+      normalize: False
+      tanh: False
+  second:
+    name: efficientse3
+    params:
+      edge_dim: 16
+      fiber_mid:
+        0: 16
+        1: 16
+        2: 16
+      out_multiplicity: 16
+      num_convs: 5
+      heads: 1
+      dropout: 0.
+      reduce_type: "edge"
+      reduce_from: "all"
+      pool_method: "add"
+      x_ij: "add"
+      pair_bias: true
+      uniform_attention: true
+      distance_cutoff: 5 # increase ? [3, 5, 7]
+  loss:
+    - name: mse
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 32
+  num_workers: 8
+  epochs: 200
+  checkpoint_step: 100
+  optimizer:
+    name: adam # [sgd, rmsprop, adam]
+    params:
+      lr: 0.001
+  scheduler:
+    name: multi_step
+    params:
+      milestones: [50, 100]
+      gamma: 0.1
+
+test:
+  batch_size: 32
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r

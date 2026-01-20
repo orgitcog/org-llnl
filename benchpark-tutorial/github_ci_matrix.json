@@ -1,0 +1,14 @@
+{
+    "tag": [
+        "riken-2026"
+    ],
+    "tutorial_dir": [
+        "2026-RIKEN"
+    ],
+    "docker_os": [
+        "linux"
+    ],
+    "docker_arch": [
+        "amd64"
+    ]
+}

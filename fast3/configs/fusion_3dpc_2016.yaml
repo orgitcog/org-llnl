@@ -1,0 +1,60 @@
+data:
+  name: pdbbind2016
+  split:
+    train:
+      - refined
+    val:
+      - core
+    test:
+      - core
+  feature_type: pybel # [pybel, rdkit]
+  preprocessing_type: processed # [raw, processed]
+  use_docking: false
+  input_type: ["3d", "point"]
+  max_atoms: 2000
+
+model:
+  name: fusion
+  params:
+    attention: true
+  first:
+    name: conv3d
+    params:
+      preprocess: true
+      num_filters: [64, 128, 256]
+      deeper: true
+  second:
+    name: pcn
+    params:
+      num_filters: 2048
+      use_feat: false
+  loss:
+    - name: mse
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 64
+  num_workers: 8
+  epochs: 200
+  checkpoint_step: 100
+  optimizer:
+    name: adam # [sgd, rmsprop, adam]
+    params:
+      lr: 0.001
+  scheduler:
+    name: multi_step
+    params:
+      milestones: [50, 100]
+      gamma: 0.1
+
+test:
+  batch_size: 32
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r

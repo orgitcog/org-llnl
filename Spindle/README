@@ -1,0 +1,71 @@
+=============================================================================
+== SPINDLE: Scalable Parallel Input Network for Dynamic Load Environments  ==
+=============================================================================
+Authors:    SPINDLE:              Matthew LeGendre (legendre1 at llnl dot gov)
+                                  W.Frings <W.Frings at fz-juelich dot de>
+            COBO:                 Adam Moody <moody20 at llnl dot gov>
+
+Version:    0.13 (Aug 2020)
+
+Summary:
+===========
+
+Spindle is a tool for improving the performance of dynamic library
+and python loading in HPC enviornments.
+
+Documentation:
+============
+https://computing.llnl.gov/projects/spindle/software
+
+Overview:
+============
+
+Using dynamically-linked libraries is common in most computational
+environments, but they can cause serious problem when used on large
+clusters and supercomputers.  Shared libraries are frequently stored
+on shared file systems, such as NFS.  When thousands of processes
+simultaneously start and attempt to search for and load libraries, it
+resembles a denial-of-service attack against the shared file system.
+This "attack" doesn't just slow down the application, but impacts
+every user on the system.  We encountered cases where it took over ten
+hours for a dynamically-linked MPI application running on 16K
+processes to reach main.
+
+Spindle presents a novel solution to this problem.  It transparently
+runs alongside your distributed application and takes over its library
+loading mechanism.  When processes start to load a new library,
+Spindle intercepts the operation, designates one process to read the
+file from the shared file system, then distributes the library's
+contents to every process with a scalable broadcast operation.
+
+Spindle is very scalable.  On a cluster at LLNL the Pynamic benchmark
+(which measures library loading performance) was unable to scale much
+past 100 nodes.  Even at that small scale it was causing significant
+performance problems that were impacting everyone on the cluster.
+When running Pynamic under Spindle, we were able to scale up to the
+max job size at 1,280 nodes without showing any signs of file-system
+stress or library-related slowdowns.
+
+Unlike competing solutions, Spindle does not require any special
+hardware, and libraries do not have to be staged into any special
+locations.  Applications can work out-of-the-box do not need any
+special compile or link flags.  Spindle is completely userspace and
+does not require kernel patches or root privileges.
+
+Spindle can trigger scalable loading of dlopened libraries, dependent
+library, executables, python modules and specified application data
+files.
+
+
+Compilation:
+============
+
+Please see INSTALL file in the Spindle source tree.
+
+Usage:
+======
+
+Put 'spindle' before your job launch command.  E.g:
+
+  spindle mpirun -n 128 mpi_hello_world
+

@@ -1,0 +1,277 @@
+import dgl
+import torch
+from torch import nn
+from torch.nn import Sequential, Linear, LeakyReLU, Dropout, LayerNorm, Identity, Softplus, Sigmoid
+from torch_geometric.nn import global_add_pool, global_mean_pool, GlobalAttention
+
+from models.base import BaseModel
+import os
+import sys
+from pdb import set_trace
+from models.efficientse3.SE3Transformer import SE3Transformer
+from models.efficientse3.equivariant_attention.fibers import Fiber
+from models.egnn import EGNNmodule
+# from models.se3_transformer.utils import assign_relative_pos
+import subprocess as sp
+from pdb import set_trace
+
+
+def get_gpu_memory(self):
+    command = "nvidia-smi --query-gpu=memory.free --format=csv"
+    memory_free_info = sp.check_output(command.split()).decode('ascii').split('\n')[:-1][1:]
+    memory_free_values = [int(x.split()[0]) for i, x in enumerate(memory_free_info)]
+    print(f'GPU 1: {memory_free_values[0]} GPU2: {memory_free_values[1]}')
+
+
+class CascadeModel(BaseModel):
+
+    def __init__(self,
+                 in_channels,
+                 out_channels,
+                 loss_fn,
+                 edge_dim,
+                 num_convs=3,
+                 fiber_mid=None,
+                 fiber_in=None,
+                 heads=1,
+                 out_multiplicity=32,
+                 dropout=0.,
+                 reduce_type='edge',
+                 reduce_from='ligand-protein',
+                 pool_method='add',
+                 uniform_attention=False,
+                 pair_bias=True,
+                 x_ij='add',
+                 grad_through_basis=False,
+                 save_params=False,
+                 share_filter=False,
+                 distance_bias=False,
+                 distance_cutoff=1e6,
+                 atom3d=False):
+        super().__init__(in_channels, out_channels, loss_fn)
+        self.edge_dim = edge_dim
+        self.num_convs = num_convs
+        self.fiber_mid = fiber_mid
+        self.fiber_in = Fiber(dictionary=fiber_in)
+        self.heads = heads
+        self.out_multiplicity = out_multiplicity
+        self.dropout = dropout
+        self.reduce_type = reduce_type
+        self.reduce_from = reduce_from
+        self.pool_method = pool_method
+        self.uniform_attention = uniform_attention
+        self.pair_bias = pair_bias
+        self.x_ij = x_ij
+        self.grad_through_basis = grad_through_basis
+        self.save_params = save_params
+        self.share_filter = share_filter
+        self.distance_bias = distance_bias
+        self.distance_cutoff = distance_cutoff
+        self.atom3d = atom3d
+        
+
+        self.define_modules()
+        self.pair_distance = torch.nn.PairwiseDistance(p=2)
+        
+
+    def define_modules(self):
+        self.interaction_linear_edge = Linear(1, self.edge_dim)
+        self.linear_node = Linear(self.in_channels, 16)
+        self.eq_gnn_0 = EGNNmodule(
+            in_channels=self.in_channels,
+            out_channels=self.out_multiplicity
+        )
+        self.eq_gnn_1 = EGNNmodule(
+            in_channels=self.in_channels,
+            out_channels=3*self.out_multiplicity
+        )
+        self.se3_interaction = SE3Transformer(
+            num_channels=16,
+            fiber_in=self.fiber_in,
+            fiber_mid=self.fiber_mid,
+            fiber_out=Fiber(dictionary={0: self.out_multiplicity}),
+            num_layers=self.num_convs,
+            atom_feature_size=16,
+            edge_dim=self.edge_dim,
+            div=2,
+            n_heads=self.heads,
+            dropout=self.dropout,
+            pair_bias=self.pair_bias,
+            uniform_attention=self.uniform_attention,
+            save_params=self.save_params,
+            share_filter=self.share_filter,
+            grad_through_basis=self.grad_through_basis,
+            x_ij=self.x_ij)
+        if self.reduce_type == 'node':
+            hidden_dim = self.se3_interaction.fibers['out'].n_features
+        else:
+            hidden_dim = self.edge_dim
+        self.pool = global_add_pool
+        if self.pool_method == 'mean':
+            self.pool = global_mean_pool
+        if self.pool_method == 'attention':
+            self.attn_nn = Sequential(LayerNorm(hidden_dim),
+                                      Dropout(self.dropout),
+                                      Linear(hidden_dim, hidden_dim),
+                                      LeakyReLU(), Dropout(self.dropout),
+                                      Linear(hidden_dim, 1))
+            self.value_nn = Sequential(LayerNorm(hidden_dim),
+                                       Dropout(self.dropout),
+                                       Linear(hidden_dim, hidden_dim),
+                                       LeakyReLU(), Dropout(self.dropout),
+                                       Linear(hidden_dim, hidden_dim))
+            self.pool = GlobalAttention(self.attn_nn, self.value_nn)
+        self.out_mlp = Sequential(Dropout(self.dropout),
+                                  Linear(hidden_dim, hidden_dim), 
+                                  LeakyReLU(),
+                                  Dropout(self.dropout),
+                                  Linear(hidden_dim, self.out_channels))
+
+    def _forward(self, data, get_feature=False):
+        # G = self.ptg_to_dgl(data, distance_cutoff=self.distance_cutoff)
+        x, edge_index = data.x, data.edge_index
+        batch = data.batch
+        coords = data.pos
+        # compute distances
+        distances = self.pair_distance(coords[edge_index[0]],
+                                       coords[edge_index[1]]) + 1e-4
+        # get rid off unexpected edges
+        edge_index = edge_index[:, distances < self.distance_cutoff]
+        if self.atom3d:
+            self.edge_attr = data.edge_attr[distances < self.distance_cutoff].view(-1, 1)
+        distances = distances[distances < self.distance_cutoff]
+        distances = distances.view(-1, 1)
+
+        #################### make DGL graph ####################
+        src = edge_index[0]
+        dst = edge_index[1]
+        
+        # Peturb during eval. 
+        G = dgl.graph((src, dst), num_nodes=x.shape[0])
+        
+        # Add node features to graph
+        G.ndata['x'] = coords  #[num_atoms,3]
+        G.ndata['f'] = x.unsqueeze(-1)  #[num_atoms,in_channels,1]
+        # Add edge features to graph
+        G.edata['d'] = coords[dst] - coords[src]  #[num_atoms,3]
+        if self.distance_bias:
+            G.edata['distance_bias'] = self.distance_bias(
+                distances)  # -2 * distances.log()
+        G.edata['distances'] = distances
+
+        # Assign relativep positions
+        # G = assign_relative_pos(G, coords=coords)
+        
+        if self.atom3d:
+            edge_feat = self.edge_attr
+        else:
+            edge_feat = 1 / distances
+        # Learnable edge features
+        G.edata['w'] = self.interaction_linear_edge(edge_feat)        
+        
+        h = {
+            # Learnable invariant node features
+            '0':self.linear_node(G.ndata['f'].squeeze(-1)).view(-1, 16, 1),
+            # Learnable equivariant node features
+            '1':self.eq_gnn_1(data, returnCoords=False).view(-1, 16, 3)
+        }
+        ########################################################
+
+        ###################Do the forward pass##################
+
+
+        h, edge_feat = self.se3_interaction(G, h)
+        h = h['0'].squeeze(-1)
+
+        
+        aff, feat = self.reduce(x, h, edge_index,
+                                        edge_feat, batch, distances)  # (B)
+        # Return feature
+        if get_feature:
+            return feat
+        
+        # Else return affinity
+        return aff
+        ########################################################
+
+        
+    '''
+    Reduction - We use this function when we are only interested in either ligand-ligand interactions/ligand protein interactions.
+    parameters:
+        x0: 
+        h:
+        self.edge_index:
+        edg_feat:
+        self.batch:
+        self.distances:
+    '''
+    def reduce(self, x0, x, edge_index, edge_attr, batch, distances=None):
+        if self.reduce_type == 'edge':
+            if self.reduce_from == 'all':
+                reduce_features = x
+                reduce_batch = batch
+            elif self.reduce_from == 'ligand':
+                ligand_index = (self.get_is_ligand(x0)).nonzero().view(-1)
+                i = edge_index[0]
+                j = edge_index[1]
+                from_ligand = (i[..., None] == ligand_index).any(-1).squeeze()
+                to_ligand = (j[..., None] == ligand_index).any(-1).squeeze()
+                reduce_mask = (from_ligand + to_ligand
+                               ) >= 1  # at least one end connects with ligand
+                # reduce_edge_attr = edge_attr[reduce_mask]
+                reduce_features = x[i[reduce_mask]]
+                reduce_batch = batch[i[reduce_mask]]
+            elif self.reduce_from == 'ligand-protein':
+                ligand_index = (self.get_is_ligand(x0)).nonzero().view(-1)
+                i = edge_index[0]
+                j = edge_index[1]
+                from_ligand = (i[..., None] == ligand_index).any(-1).squeeze()
+                to_ligand = (j[..., None] == ligand_index).any(-1).squeeze()
+                reduce_mask = (from_ligand + to_ligand) == 1
+                reduce_features = x[i[reduce_mask]]
+                reduce_batch = batch[i[reduce_mask]]
+            else:
+                print(
+                    f'Reducing over [{self.reduce_from} {self.reduce_type}] is undefiend'
+                )
+                exit(1)
+            # out = self.out_mlp(0.1 * self.pool(reduce_edge_attr, reduce_batch))
+            feat = 0.1 * self.pool(reduce_features.squeeze(-1), reduce_batch)
+            out = self.out_mlp(feat)
+            
+        elif self.reduce_type == 'node':
+            if self.reduce_from == 'all':
+                scale_factor = 100
+                reduce_x = x
+                reduce_batch = batch
+            elif self.reduce_from == 'ligand':
+                scale_factor = 10
+                ligand_index = (self.get_is_ligand(x0)).nonzero().view(-1)
+                reduce_x = x[ligand_index]
+                reduce_batch = batch[ligand_index]
+            else:
+                print(
+                    f'Reducing over [{self.reduce_from} {self.reduce_type}] is undefiend'
+                )
+                exit(1)
+            if self.extensive:
+                # TODO(june): How to define the reduced feature?
+                feat = None
+                out = self.pool(self.out_mlp(reduce_x),
+                                reduce_batch) / scale_factor
+            else:
+                # out = self.out_mlp(self.pool(reduce_x, reduce_batch))
+                feat = self.pool(reduce_x, reduce_batch)
+                out = self.out_mlp(feat)
+        else:
+            print(
+                f'Reducing over [{self.reduce_from} {self.reduce_type}] is undefiend'
+            )
+            exit(1)
+        return out, feat
+
+    def get_is_ligand(self, x):
+        if self.atom3d:
+            return x[:, 18:].sum(-1) == 1
+        else:
+            return x[:, 14] == 1

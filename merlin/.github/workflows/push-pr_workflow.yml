@@ -1,0 +1,191 @@
+name: Python CI
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  Changelog:
+    name: CHANGELOG.md updated
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Checkout the whole history, in case the target is way far behind
+
+      - name: Check if target branch has been merged
+        run: |
+          if git merge-base --is-ancestor ${{ github.event.pull_request.base.sha }} ${{ github.sha }}; then
+            echo "Target branch has been merged into the source branch."
+          else
+            echo "Target branch has not been merged into the source branch. Please merge in target first."
+            exit 1
+          fi
+
+      - name: Check that CHANGELOG has been updated
+        run: |
+          # If this step fails, this means you haven't updated the CHANGELOG.md file with notes on your contribution.
+          if git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -q '^CHANGELOG.md$'; then
+            echo "Thanks for helping keep our CHANGELOG up-to-date!"
+          else
+            echo "Please update the CHANGELOG.md file with notes on your contribution."
+            exit 1
+          fi
+
+  Lint:
+    runs-on: ubuntu-latest
+    env:
+      MAX_LINE_LENGTH: 127
+      MAX_COMPLEXITY: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-python
+        with:
+          python-version: '3.x'
+
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --max-complexity=$MAX_COMPLEXITY --statistics --max-line-length=$MAX_LINE_LENGTH
+
+      - name: Lint with isort
+        run: |
+          isort --check --line-length $MAX_LINE_LENGTH merlin tests *.py
+
+      - name: Lint with Black
+        run: |
+          black --check --line-length $MAX_LINE_LENGTH --target-version py38 merlin tests *.py
+
+      - name: Lint with PyLint
+        run: |
+          pylint merlin tests --rcfile=setup.cfg --exit-zero
+
+  Local-test-suite:
+    runs-on: ubuntu-latest
+    env:
+      GO_VERSION: 1.18.1
+      SINGULARITY_VERSION: 3.9.9
+      OS: linux
+      ARCH: amd64
+
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: ./.github/actions/setup-singularity
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          singularity-version: ${{ env.SINGULARITY_VERSION }}
+          os: ${{ env.OS }}
+          arch: ${{ env.ARCH }}
+
+      - name: Install merlin and setup
+        run: |
+          pip3 install -e .
+          merlin config create
+
+      - name: Install CLI task dependencies from 'feature_demo' workflow
+        run: |
+          merlin example feature_demo
+          pip3 install -r feature_demo/requirements.txt
+
+      - name: Run integration test suite for local tests
+        run: |
+          python3 tests/integration/run_tests.py --verbose --local
+
+  Unit-tests:
+    runs-on: ubuntu-latest
+    env:
+      GO_VERSION: 1.18.1
+      SINGULARITY_VERSION: 3.9.9
+      OS: linux
+      ARCH: amd64
+
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: ./.github/actions/setup-singularity
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          singularity-version: ${{ env.SINGULARITY_VERSION }}
+          os: ${{ env.OS }}
+          arch: ${{ env.ARCH }}
+
+      - name: Install merlin and setup
+        run: |
+          pip3 install -e .
+          merlin config create
+
+      - name: Install CLI task dependencies from 'feature_demo' workflow
+        run: |
+          merlin example feature_demo
+          pip3 install -r feature_demo/requirements.txt
+
+      - name: Run pytest over unit test suite
+        run: |
+          python3 -m pytest -v --order-scope=module tests/unit/
+
+  Integration-tests:
+    runs-on: ubuntu-latest
+    env:
+      GO_VERSION: 1.18.1
+      SINGULARITY_VERSION: 3.9.9
+      OS: linux
+      ARCH: amd64
+
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: ./.github/actions/setup-singularity
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          singularity-version: ${{ env.SINGULARITY_VERSION }}
+          os: ${{ env.OS }}
+          arch: ${{ env.ARCH }}
+
+      - name: Install merlin
+        run: |
+          pip --version
+          pip3 --version
+          pip3 install -e .
+          merlin config create
+
+      - name: Install CLI task dependencies from 'feature_demo' workflow
+        run: |
+          merlin example feature_demo
+          pip3 install -r feature_demo/requirements.txt
+
+      # TODO remove the --ignore statement once those tests are fixed
+      - name: Run integration test suite for distributed tests
+        run: |
+          python3 -m pytest -v --ignore tests/integration/test_celeryadapter.py tests/integration/

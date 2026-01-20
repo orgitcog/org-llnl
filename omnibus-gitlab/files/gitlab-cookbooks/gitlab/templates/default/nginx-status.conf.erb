@@ -1,0 +1,21 @@
+server  {
+    <% @listen_addresses.each do |listen_address| %>
+    listen <%= listen_address %>:<%= @port %>;
+    <% end %>
+    server_name <%= @fqdn %>;
+    location /nginx_status {
+      stub_status;
+    <% @options.each do |key, value| %>
+      <%= key %> <%= value %>;
+    <% end %>
+    }
+    <% if @vts_enable -%>
+    location /metrics {
+      vhost_traffic_status_display;
+      vhost_traffic_status_display_format prometheus;
+    <% @options.each do |key, value| -%>
+      <%= key %> <%= value %>;
+    <% end -%>
+    }
+    <% end -%>
+}

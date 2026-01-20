@@ -1,0 +1,58 @@
+data:
+  split:
+    train:
+      - [westnile, train]
+    val:
+      - [westnile, valid]
+    test:
+      - [westnile, test]
+  input_type: graph
+  feature_type: pybel # [pybel, rdkit]
+  preprocessing_type: processed # [raw, processed]
+  use_docking: false
+  max_atoms: 2000
+  with_zeros: true
+  type: random
+  pocket: 2fp7
+  poses: 20
+
+model:
+  name: egnn
+  params:
+    in_edge_nf: 1
+    n_layers: 4
+    residual: True
+    attention: True
+    normalize: False
+    tanh: False
+    
+  loss:
+    - name: mse
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 16
+  num_workers: 8
+  epochs: 100
+  checkpoint_step: 100
+  optimizer:
+    name: adam # [sgd, rmsprop, adam]
+    params:
+      lr: 0.001
+  scheduler:
+    name: multi_step
+    params:
+      milestones: [100, 200]
+      gamma: 0.1
+
+test:
+  batch_size: 8
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r

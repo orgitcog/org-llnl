@@ -1,0 +1,47 @@
+data:
+  split:
+    train:
+      - [mpro, train]
+      - [mpro, val]
+    val:
+      - [mpro, test]
+    test:
+      - [mpro, test]
+  input_type: 3d
+  max_atoms: 2000
+
+model:
+  name: conv3d
+  params:
+    preprocess: false
+    num_filters: [64, 128, 256]
+  loss:
+    - name: mse
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 50
+  num_workers: 0
+  epochs: 50
+  checkpoint_step: 100
+  optimizer:
+    name: rmsprop # [sgd, rmsprop, adam]
+    params:
+      lr: 0.0007
+  scheduler:
+    name: step
+    params:
+      step_size: 100
+      gamma: 0.95
+
+test:
+  batch_size: 50
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r

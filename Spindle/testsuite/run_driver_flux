@@ -1,0 +1,33 @@
+#!/bin/sh
+
+if [ "x$SPINDLE_TEST_ARGS" = "x" ] ; then
+PROCS="-N `flux resource info | tr ',' '\n' | grep Nodes | awk '{print $1}'` --tasks-per-node 16"
+else
+PROCS=$SPINDLE_TEST_ARGS
+fi
+
+FLUX_SPINDLE_OPTS="spindle"
+if [ "x$SPINDLE_OPTS" = "x--preload=preload_file_list" ] ; then
+    FLUX_SPINDLE_OPTS="spindle.preload=preload_file_list"
+fi
+if [ "x$SPINDLE_OPTS" = "x--push" ] ; then
+    FLUX_SPINDLE_OPTS="spindle.push"
+fi
+if [ "x$SPINDLE_OPTS" = "x--pull" ] ; then
+    FLUX_SPINDLE_OPTS="spindle.pull"
+fi
+if [ "x$SPINDLE_OPTS" = "x--numa" ] ; then
+    FLUX_SPINDLE_OPTS="spindle.numa"
+fi
+if [ "x$SPINDLE_OPTS" = "--run-in-session $SESSION_ID" ] ; then
+    #Currently nothing to do
+    /bin/true
+fi
+if [ "x$SPINDLE_LD_PRELOAD" != "x" ] ; then
+    export FLUX_LD_PRELOAD="--env=LD_PRELOAD=$SPINDLE_LD_PRELOAD"
+else
+    export FLUX_LD_PRELOAD=""
+fi
+
+exec flux run $FLUX_LD_PRELOAD -o userrc=spindle.rc -o spindle.level=high -o $FLUX_SPINDLE_OPTS $PROCS $*
+

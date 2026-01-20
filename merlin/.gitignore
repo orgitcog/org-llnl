@@ -1,0 +1,74 @@
+# Merlin .gitignore
+
+# Python bytecode and serialized files
+__pycache__/
+*.py[cod]
+*.pkl
+*.db
+*.npy
+*.npz
+*.hdf5
+dist/
+build/
+
+# Egg packaging
+*.egg
+*.egg-info/
+
+# virtual environments
+toss3venv/
+venv/
+chaos5-venv/
+blueos/
+venv_*
+
+# Merlin-generated output
+*_ARCHIVE/
+*_ARCHIVE_DIR/
+ARCHIVE
+ARCHIVE_DIR
+*_OUTPUT/
+*_OUTPUT_D/
+*_ensemble_*/
+studies/
+appendonlydir/
+cli_test_studies/
+
+# Scheduler logs
+flux.out
+slurm*.out
+docs/build/
+
+# Test files
+.tox/*
+.coverage
+**/setup_env.sh
+
+# Jupyter
+jupyter/.ipynb_checkpoints
+jupyter/testDistributedSamples.py
+
+# Images
+*.pdf
+
+# aspell
+*.bak
+
+# Misc file extension types
+*.swl
+*.swm
+*.swn
+*.swo
+*.swp
+*.db
+*.npy
+*.log
+
+# IDEs
+*.idea
+
+# Misc directories
+dist/
+build/
+.DS_Store
+.vscode/

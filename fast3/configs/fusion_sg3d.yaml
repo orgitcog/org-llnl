@@ -1,0 +1,58 @@
+data:
+  name: pdbbind2020
+  split:
+    train:
+      - train
+    val:
+      - val
+    test:
+      - test
+  input_type: ["graph", "3d"]
+
+model:
+  name: fusion
+  first:
+    name: sgcnn
+    params:
+      covalent_neighbor_threshold: 1.5
+      non_covalent_neighbor_threshold: 4.5
+      covalent_gather_width: 16
+      covalent_k: 2
+      non_covalent_gather_width: 12
+      non_covalent_k: 2
+  second:
+    name: conv3d
+    params:
+      preprocess: false
+      num_filters: [64, 128, 256]
+      deeper: true
+  loss:
+    - name: mse
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 16
+  num_workers: 8
+  epochs: 200
+  checkpoint_step: 100
+  optimizer:
+    name: adam # [sgd, rmsprop, adam]
+    params:
+      lr: 0.001
+  scheduler:
+    name: multi_step
+    params:
+      milestones: [50, 100]
+      gamma: 0.1
+
+test:
+  batch_size: 8
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r

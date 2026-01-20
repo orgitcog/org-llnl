@@ -1,0 +1,40 @@
+broker:
+    name: rediss
+    # The username here must remain blank
+    username: ''
+    # 1. Create a redis.pass file
+    # 2. Copy the value of database-password to it
+    # 3. Put the path to that file here     
+    # Note: this must be an absolute path
+    # e.g. password: <path>/.merlin/redis.pass
+    password: <path to redis password file>
+    # This is the value stored in service-host
+    server: <server name>
+    # This is the value stored in service-port
+    port: <server port>
+    db_num: 0
+    cert_reqs: none
+
+# This is the exact same setup as broker but we add the encryption key file
+results_backend:
+    name: rediss
+    # The username here must remain blank
+    username: ''
+    # 1. Create a redis.pass file
+    # 2. Copy the value of database-password to it
+    # 3. Put the path to that file here
+    # Note: this must be an absolute path
+    # e.g. password: <path>/.merlin/redis.pass
+    password: <path to redis password file>
+    # This is the value stored in service-host
+    server: <server name>
+    # This should be automatically generated for you with merlin config
+    encryption_key: ~/.merlin/encrypt_data_key
+    # This is the value stored in service-port
+    port: <server port>
+    db_num: 0
+    cert_reqs: none 
+
+celery:
+    overrides:
+        

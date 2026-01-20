@@ -1,0 +1,89 @@
+#!/bin/bash
+
+cd TEST_RUN_DIR
+if [ "x$LD_LIBRARY_PATH" != "x" ] ; then
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`
+else
+    export LD_LIBRARY_PATH=`pwd`
+fi
+export SPINDLE_TEST=1
+export SPINDLE=SPINDLE_EXEC
+export PATH=$PATH:.
+
+if [ $1 == --start-session ] ; then
+    export SPINDLEID=`$SPINDLE --start-session --level=high`
+    if [ x$SPINDLEID == x ]; then
+        echo ANONYMOUS_SESSION
+    else
+        echo $SPINDLEID
+    fi
+    exit 0
+fi
+if [ $1 == --end-session ] ; then
+    if [ x$2 == xANONYMOUS_SESSION ] ; then
+        $SPINDLE --end-session
+    else
+        $SPINDLE $1=$2
+    fi
+    exit 0
+fi
+
+echo Running: ./run_driver $* $SPINDLE_LAUNCH_MODE
+
+if [ $1 == --serial ] ; then
+    exec SPINDLE_EXEC --level=high --launcher=serial $2
+fi
+
+export LIBRARY_LIST="`pwd`/libcxxexceptA.so:`pwd`/libtest100.so:`pwd`/libtest2000.so:`pwd`/libtest500.so:`pwd`/libtest1000.so:`pwd`/libtest4000.so:`pwd`/libtest6000.so:`pwd`/libdepA.so:`pwd`/libtest10.so:`pwd`/libtest11.so:`pwd`/libtest12.so:`pwd`/libtest13.so:`pwd`/libtest14.so:`pwd`/libtest15.so:`pwd`/libtest16.so:`pwd`/libtest17.so:`pwd`/libtest18.so:`pwd`/libtest19.so:`pwd`/libtest20.so:`pwd`/libtest10000.so:`pwd`/libtest50.so:`pwd`/libtest8000.so:`pwd`/origin_dir/liboriginlib.so"
+
+
+if [ $1 == --dependency ] ; then
+export TEST_EXEC=./test_driver_libs
+elif [ $1 == --dlreopen ] ; then
+export TEST_EXEC=./test_driver_libs
+else
+export TEST_EXEC=./test_driver
+fi
+
+if [ $2 == --preload ] ; then 
+export SPINDLE_OPTS="--preload=preload_file_list"
+fi
+if [ $2 == --push ] ; then 
+export SPINDLE_OPTS="--push"
+fi
+if [ $2 == --pull ] ; then 
+export SPINDLE_OPTS="--pull"
+fi
+if [ $2 == --numa ] ; then
+export SPINDLE_OPTS="--numa"
+fi
+
+if [ $2 == --session ] ; then
+  if [ x$SESSION_ID == x ] ; then
+    export SESSION_ID=`$SPINDLE --start-session`
+    export STARTED_SPINDLE_SESSION=true
+  fi
+  export SPINDLE_OPTS="--run-in-session $SESSION_ID"
+fi
+
+export SPINDLE_BLUEGENE="BLUEGENE_TEST"
+if test "x$SPINDLE_BLUEGENE" == "xfalse"; then
+if [ $1 == --ldpreload ] ; then
+export SPINDLE_LD_PRELOAD="$LIBRARY_LIST"
+fi
+export SPINDLE_BGQ_LD_PRELOAD="false"
+else
+export SPINDLE_BGQ_LD_PRELOAD="true"
+fi
+
+export SPINDLE_FLAGS="--level=high"
+
+./run_driver_rm $TEST_EXEC $*
+RESULT=$?
+
+if [ x$STARTED_SPINDLE_SESSION == xtrue ]; then
+$SPINDLE --end-session $SESSION_ID
+fi
+
+exit $RESULT
+

@@ -1,0 +1,15 @@
+colorlog
+cython
+fvcore==0.1.5.post20220305
+joblib
+lie_learn
+pandas
+h5py
+matplotlib
+numpy==1.22
+pybel
+pylint
+PyYAML
+seaborn
+scikit-learn==1.2.1
+tqdm

@@ -1,0 +1,50 @@
+data:
+  split:
+    train:
+      - [pdbbind2016, general]
+      - [pdbbind2016, refined]
+    val:
+      - [pdbbind2016, core]
+    test:
+      - [pdbbind2016, core]
+  preprocessing_type: processed # [raw, processed]
+  feature_type: pybel # [pybel, rdkit]
+  use_docking: false
+  input_type: point
+  max_atoms: 2000
+
+model:
+  name: pcn
+  params:
+    num_filters: 2048
+    use_feat: false
+  loss:
+    - name: mse
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 100
+  epochs: 300
+  num_workers: 0
+  checkpoint_step: 100
+  optimizer:
+    name: adam # [sgd, rmsprop, adam]
+    params:
+      lr: 0.001
+  scheduler:
+    name: multi_step
+    params:
+      milestones: [100, 200]
+      gamma: 0.1
+
+test:
+  batch_size: 10
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r

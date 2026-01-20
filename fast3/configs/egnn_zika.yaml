@@ -1,0 +1,62 @@
+data:
+  split:
+    train:
+      - [zika, train]
+    val:
+      - [zika, valid]
+    test:
+      - [zika, test]
+  input_type: graph
+  feature_type: pybel # [pybel, rdkit]
+  preprocessing_type: processed # [raw, processed]
+  use_docking: false
+  max_atoms: 2000
+  with_zeros: true
+  type: scaffold
+  pocket: 6kk4
+  poses: 20
+
+model:
+  name: egnn
+  params:
+    in_edge_nf: 1
+    distance_cutoff: 5
+    n_layers: 4
+    residual: true
+    attention: true
+    normalize: false
+    softmax: true
+    estlabel: false
+    tanh: False
+    label_channels: 2
+    
+  loss:
+    - name: mse
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 32
+  num_workers: 1
+  epochs: 300
+  checkpoint_step: 100
+  optimizer:
+    name: adam # [sgd, rmsprop, adam]
+    params:
+      lr: 0.001
+  scheduler:
+    name: multi_step
+    params:
+      milestones: [100, 200]
+      gamma: 0.1
+
+test:
+  batch_size: 8
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r

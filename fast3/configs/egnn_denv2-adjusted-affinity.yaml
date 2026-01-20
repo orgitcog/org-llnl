@@ -1,0 +1,68 @@
+data:
+  split:
+    train:
+      - [denv2, train]
+    val:
+      - [denv2, valid]
+    test:
+      - [denv2, test]
+  input_type: graph
+  feature_type: pybel # [pybel, rdkit]
+  preprocessing_type: processed # [raw, processed]
+  use_docking: false
+  max_atoms: 2000
+  with_zeros: true
+  type: scaffold
+  pocket: 2fom
+  poses: 20
+  affinity: 0
+  threshold: 3
+  
+
+model:
+  name: egnn
+  params:
+    in_edge_nf: 1
+    distance_cutoff: 5
+    n_layers: 4
+    residual: true
+    attention: true
+    normalize: false
+    tanh: false
+    estlabel: true
+    softmax: true
+    label_channels: 2
+    freeze: false
+  loss:
+    - name: mse
+      weight: 1.0
+    - name: ce
+      weight: 1.0
+  ckpt_path: ""
+
+train:
+  batch_size: 64
+  num_workers: 28
+  epochs: 300
+  checkpoint_step: 100
+  optimizer:
+    name: adam # [sgd, rmsprop, adam]
+    params:
+      lr: 0.001
+  scheduler:
+    name: multi_step
+    params:
+      milestones: [100, 200]
+      gamma: 0.1
+
+test:
+  batch_size: 32
+  checkpoint: best # [best, last]
+  main_metric: rmse
+  metrics:
+    - rmse
+    - mae
+    - r2
+    - pearson_r
+    - spearman_r
+    - ce

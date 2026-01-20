@@ -1,0 +1,39 @@
+broker:
+    name: rabbitmq
+    # This is the value stored in rabbitmq-user
+    username: <username>
+    # 1. Create a rabbit.pass file
+    # 2. Copy the value of rabbitmq-password to it
+    # 3. Put the path to that file here
+    # e.g. password: ~/.merlin/rabbit.pass
+    password: <path to rabbitmq password file>
+    # This is the value stored in service-host
+    server: <rabbit server name>
+    # This is the value stored in service-port
+    port: <server port>
+    # This is the value stored in rabbitmq-host
+    vhost: <vhost>
+    # Leave this as none
+    cert_reqs: none
+
+results_backend:
+    name: rediss
+    # The username here must remain blank
+    username: ''
+    # 1. Create a redis.pass file
+    # 2. Copy the value of database-password to it
+    # 3. Put the path to that file here
+    # e.g. password: ~/.merlin/redis.pass
+    password: <path to redis password file>
+    # This is the value stored in service-host
+    server: <server name>
+    # This should be automatically generated for you with merlin config
+    encryption_key: ~/.merlin/encrypt_data_key
+    # This is the value stored in service-port
+    port: <server port>
+    db_num: 0
+    cert_reqs: none
+
+celery:
+    overrides:
+        

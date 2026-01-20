@@ -1,0 +1,213 @@
+/* config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Whether it is safe to patch ld.so */
+#undef BINARY_PATCH_LDSO
+
+/* Whether we are using a broken srun */
+#undef BROKEN_SRUN
+
+/* Define if were using biter for client/server communication */
+#undef COMM_BITER
+
+/* Define if were using cobo for server/server communication */
+#undef COMM_COBO
+
+/* Define if were using msocket for server/server communication */
+#undef COMM_MSOCKET
+
+/* Define if were using pipes for client/server communication */
+#undef COMM_PIPES
+
+/* Define if were using sockets for client/server communication */
+#undef COMM_SOCKET
+
+/* Default to using a dedicated process to clean data files */
+#undef DEFAULT_CLEANUP_PROC
+
+/* Defined if GLIBC has an allocation bug */
+#undef DTV_ALLOCATION_BUG
+
+/* Flux with via plugin is enabled */
+#undef ENABLE_FLUX_PLUGIN
+
+/* Enable support for jsrun */
+#undef ENABLE_JSRUN_LAUNCHER
+
+/* Enable support for lrun */
+#undef ENABLE_LRUN_LAUNCHER
+
+/* Allow NULL encryption */
+#undef ENABLE_NULL_ENCRYPTION
+
+/* Enable support for openmpi */
+#undef ENABLE_OPENMPI_LAUNCHER
+
+/* Slurm with via srun launching is enabled */
+#undef ENABLE_SLURM
+
+/* Slurm with via plugin is enabled */
+#undef ENABLE_SLURM_PLUGIN
+
+/* Enable support for srun */
+#undef ENABLE_SRUN_LAUNCHER
+
+/* Enable support for wreckrun */
+#undef ENABLE_WRECKRUN_LAUNCHER
+
+/* Enable gcrypt for authentication */
+#undef GCRYPT
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `gcrypt' library (-lgcrypt). */
+#undef HAVE_LIBGCRYPT
+
+/* Build with LaunchMON support */
+#undef HAVE_LMON
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Hostbin executable */
+#undef HOSTBIN_PATH
+
+/* Use keyfile for authentication */
+#undef KEYFILE
+
+/* Number of bytes in keys for gcrypt */
+#undef KEY_SIZE_BYTES
+
+/* The bin directory for launchmon */
+#undef LAUNCHMON_BIN_DIR
+
+/* Use libnuma for numa optimizations */
+#undef LIBNUMA
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
+
+/* Use munge for authentication */
+#undef MUNGE
+
+/* Defined if GLIBC has locale TLS bug */
+#undef NEWTHREAD_LOCALE_BUG
+
+/* Exclusions for numa optimization */
+#undef NUMA_EXCLUDES
+
+/* Number of ports for COBO to search for an open port */
+#undef NUM_COBO_PORTS
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Python installation prefixes */
+#undef PYTHON_INST_PREFIX
+
+/* RSH command */
+#undef RSHLAUNCH_CMD
+
+/* Default mode for rsh launch */
+#undef RSHLAUNCH_ENABLED
+
+/* Use LaunchMON for authentication" */
+#undef SECLMON
+
+/* Directory to store key files in */
+#undef SEC_KEYDIR
+
+/* Default mode for slurm launch */
+#undef SLURMLAUNCH_ENABLED
+
+/* The default local directory for Spindle */
+#undef SPINDLE_LOC
+
+/* The default colon-separated list of directories that Spindle will not cache
+   files out of */
+#undef SPINDLE_LOCAL_PREFIX
+
+/* The maximum port value */
+#undef SPINDLE_MAX_PORT
+
+/* The default port for Spindle */
+#undef SPINDLE_PORT
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Default recource manager */
+#undef TESTRM
+
+/* The file for storing usage logs */
+#undef USAGE_LOGGING_FILE
+
+/* Use subaudit by default */
+#undef USE_SUBAUDIT_BY_DEFAULT
+
+/* Version number of package */
+#undef VERSION
+
+/* Define if we're compiling for an aarch64 target */
+#undef arch_aarch64
+
+/* Define if we're compiling for a ppc64 target */
+#undef arch_ppc32
+
+/* Define if we're compiling for a ppc64 target */
+#undef arch_ppc64
+
+/* Define if we're compiling for a ppc64le target */
+#undef arch_ppc64le
+
+/* Define if we're compiling for an x86_64 target */
+#undef arch_x86_64
+
+/* Define if we're compiling for a BlueGene target */
+#undef os_bluegene
+
+/* Define if we're compiling for a linux target */
+#undef os_linux
