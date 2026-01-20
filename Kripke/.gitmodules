@@ -1,0 +1,23 @@
+[submodule "blt"]
+	path = blt
+	url = https://github.com/LLNL/blt.git
+[submodule "tpl/raja"]
+	path = tpl/raja
+	url = https://github.com/LLNL/RAJA.git
+	branch = develop
+[submodule "tpl/chai"]
+	path = tpl/chai
+	url = https://github.com/LLNL/CHAI.git
+	branch = develop
+[submodule "tpl/umpire"]
+	path = tpl/umpire
+	url = https://github.com/LLNL/Umpire.git
+[submodule "tpl/googletest"]
+	path = tpl/googletest
+	url = https://github.com/google/googletest.git
+[submodule "tpl/caliper"]
+	path = tpl/caliper
+	url = https://github.com/LLNL/Caliper.git
+[submodule "scripts/radiuss-spack-configs"]
+	path = scripts/radiuss-spack-configs
+	url = https://github.com/LLNL/radiuss-spack-configs.git
