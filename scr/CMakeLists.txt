@@ -1,0 +1,84 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.14.5)
+PROJECT(SCR VERSION 3.1.0)
+
+# Find Packages & Files
+LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+
+# process SCR CMake options
+INCLUDE(SCR_OPTIONS)
+
+## HEADERS
+INCLUDE(CheckIncludeFile)
+
+# check for byteswap file for kvtree
+CHECK_INCLUDE_FILE(byteswap.h HAVE_BYTESWAP_H)
+
+INCLUDE_DIRECTORIES(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/src/lwgrp
+    ${CMAKE_SOURCE_DIR}/src/dtcmp
+    ${CMAKE_SOURCE_DIR}/src/kvtree
+    ${CMAKE_SOURCE_DIR}/src/spath
+    ${CMAKE_SOURCE_DIR}/src/rankstr
+    ${CMAKE_SOURCE_DIR}/src/axl
+    ${CMAKE_SOURCE_DIR}/src/shuffile
+    ${CMAKE_SOURCE_DIR}/src/redset
+    ${CMAKE_SOURCE_DIR}/src/er
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+INCLUDE(SCR_DEPENDENCIES)
+
+INCLUDE(GNUInstallDirs)
+## Use X_ variable names for CLI scripts
+## could use CMAKE_INSTALL_FULL_ names instead
+SET(X_BINDIR ${CMAKE_INSTALL_FULL_BINDIR} CACHE INTERNAL "bin")
+SET(X_LIBEXECDIR ${CMAKE_INSTALL_FULL_LIBEXECDIR} CACHE INTERNAL "libexec")
+SET(X_DATADIR ${CMAKE_INSTALL_FULL_DATADIR} CACHE INTERNAL "share")
+SET(X_INCLUDEDIR ${CMAKE_INSTALL_FULL_INCLUDEDIR} CACHE INTERNAL "include")
+SET(X_LIBDIR ${CMAKE_INSTALL_FULL_LIBDIR} CACHE INTERNAL "lib")
+
+# Generate config.h with all our build #defs
+CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/config.h.in ${PROJECT_BINARY_DIR}/config.h)
+SET_SOURCE_FILES_PROPERTIES(${PROJECT_BINARY_DIR}/config.h PROPERTIES GENERATED TRUE)
+
+INCLUDE(SCR_ADD_TEST)
+IF(ENABLE_TESTS)
+   INCLUDE(CTest)
+ENDIF(ENABLE_TESTS)
+
+ADD_SUBDIRECTORY(man)
+ADD_SUBDIRECTORY(scripts)
+ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(python)
+IF(ENABLE_EXAMPLES)
+   ADD_SUBDIRECTORY(examples)
+ENDIF()
+
+# Special Install Files
+INSTALL(FILES README.md DESTINATION ${CMAKE_INSTALL_DATADIR}/scr)
+
+# CMake configs
+
+# Install the exports file
+INSTALL(EXPORT scrTargets FILE scrTargets.cmake NAMESPACE scr:: DESTINATION share/scr/cmake)
+
+# Export so we can use in-tree
+EXPORT(EXPORT scrTargets NAMESPACE scr:: FILE scrTargets.cmake)
+
+# Setup the package config
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(cmake/scrConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/scrConfig.cmake INSTALL_DESTINATION share/scr/cmake)
+WRITE_BASIC_PACKAGE_VERSION_FILE(${CMAKE_CURRENT_BINARY_DIR}/scrConfigVersion.cmake COMPATIBILITY SameMajorVersion)
+
+# Install package config
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/scrConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/scrConfigVersion.cmake DESTINATION share/scr/cmake)
+INSTALL(FILES cmake/FindMySQL.cmake DESTINATION share/scr/cmake)
+INSTALL(FILES cmake/FindPDSH.cmake DESTINATION share/scr/cmake)
+INSTALL(FILES cmake/FindYOGRT.cmake DESTINATION share/scr/cmake)
+
+# Package
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Scalable Checkpoint / Restart Library")
+SET(CPACK_PACKAGE_VENDOR "Lawrence Livermore National Laboratory")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${PROJECT_SOURCE_DIR}/README.md")
+SET(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.TXT")

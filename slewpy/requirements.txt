@@ -1,0 +1,12 @@
+astropy
+simpy
+tqdm 
+pyyaml
+scipy
+numpy
+pandas
+llnl_ssapy
+sphinx
+sphinx_rtd_theme
+sphinxcontrib-bibtex
+pytest

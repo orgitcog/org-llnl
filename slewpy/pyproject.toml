@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "slewpy"
+version = "0.1.0"
+description = ""
+authors = [{ name = "LLNL" }]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+dependencies = ["astropy", "simpy", "tqdm", "pyyaml", "scipy", "numpy", "pandas", "llnl_ssapy"]
+
+[project.urls]
+Homepage = "https://github.com/LLNL/slewpy/"
+Documentation = "https://slewpy.readthedocs.io/en/latest/"
+Repository = "https://github.com/LLNL/slewpy/"
+Issues = "https://github.com/LLNL/slewpy/issues/"
+Changelog = "https://github.com/LLNL/slewpy/releases/"

@@ -1,0 +1,288 @@
+diff --git a/src/ior.c b/src/ior.c
+index e9d6c20..f4400d9 100644
+--- a/src/ior.c
++++ b/src/ior.c
+@@ -81,6 +81,20 @@ static void ValidTests(IOR_param_t *);
+ static IOR_offset_t WriteOrRead(IOR_param_t *, void *, int);
+ static void WriteTimes(IOR_param_t *, double **, int, int);
+ 
++// Wemul start
++#include <dirent.h>
++static char* filepaths_with_delimiter;
++static int filepaths_len;
++static int file_count;
++static char** global_filenames;
++static void RecursiveListFiles(const char* directory);
++static void ReadSpecificFile(char* testFileName, IOR_test_t *test,
++                                int rep,
++                                double** timer,
++                                void* fd,
++                                IOR_offset_t dataMoved);
++// Wemul end
++
+ /********************************** M A I N ***********************************/
+ 
+ int main(int argc, char **argv)
+@@ -129,6 +143,16 @@ int main(int argc, char **argv)
+ 
+ 	PrintHeader(argc, argv);
+ 
++        // Wemul start
++        if (tests_head->params.filesPerProc) {
++                RecursiveListFiles(tests_head->params.inputDir);
++                // curtail the last character
++                filepaths_with_delimiter[filepaths_len - 2] = '\0';
++                int count;
++                global_filenames = ParseFileName(filepaths_with_delimiter, &count);
++        }
++        // Wemul end
++
+         /* perform each test */
+ 	for (tptr = tests_head; tptr != NULL; tptr = tptr->next) {
+                 verbose = tptr->params.verbose;
+@@ -154,6 +178,11 @@ int main(int argc, char **argv)
+ 
+ 	DestroyTests(tests_head);
+ 
++        // Wemul start
++        free(filepaths_with_delimiter);
++        free(global_filenames);
++        // Wemul end
++
+         MPI_CHECK(MPI_Finalize(), "cannot finalize MPI");
+ 
+         return (totalErrorCount);
+@@ -729,7 +758,10 @@ static void DisplayUsage(char **argv)
+                 " -X N  reorderTasksRandomSeed -- random seed for -Z option",
+                 " -Y    fsyncPerWrite -- perform fsync after each POSIX write",
+                 " -z    randomOffset -- access is to random, not sequential, offsets within a file",
+-                " -Z    reorderTasksRandom -- changes task ordering to random ordering for readback",
++                // Wemul start
++                " -$    filesPerProc -- multiple files per process",
++                " -#    inputDir -- input directory to traverse files from",
++                // Wemul end
+                 " ",
+                 "         NOTE: S is a string, N is an integer number.",
+                 " ",
+@@ -887,8 +919,15 @@ static void GetTestFileName(char *testFileName, IOR_param_t * test)
+                         strcpy(testFileNameRoot,
+                                PrependDir(test, testFileNameRoot));
+                 }
+-                sprintf(testFileName, "%s.%08d", testFileNameRoot,
+-                        (rank + rankOffset) % test->numTasks);
++                // Wemul start
++                if(!test->noFilePostfix) {
++                        sprintf(testFileName, "%s.%08d", testFileNameRoot,
++                                (rank + rankOffset) % test->numTasks);
++                } else {
++                        strcpy(testFileName, testFileNameRoot);
++                        printf("Operating on file: %s\n", testFileName);
++                }
++                // Wemul end
+         } else {
+                 strcpy(testFileName, testFileNameRoot);
+         }
+@@ -2001,6 +2040,31 @@ static void TestIoSys(IOR_test_t *test)
+                 MPI_CHECK(MPI_Bcast
+                           (&params->timeStampSignatureValue, 1, MPI_UNSIGNED, 0,
+                            testComm), "cannot broadcast start time value");
++
++                // Wemul start
++                
++                if(params->filesPerProc && !test_time_elapsed(params, startTime)) {
++                        int num_files_per_proc = ceil(file_count / (double) numTasksWorld);
++                        if (num_files_per_proc == 0) // if file_count is less than numTasksWorld
++                                num_files_per_proc = 1;
++
++                        int start_id = rank * num_files_per_proc;
++                        int end_id = start_id + num_files_per_proc - 1;
++                        end_id = (end_id >= file_count) ? file_count - 1 : end_id;
++                        int i = start_id;
++                        for (; i <= end_id; i++)
++                        {
++                                printf("RANK: %d -> %s\n", rank, global_filenames[i]);
++                                ReadSpecificFile(global_filenames[i], test,
++                                        rep, timer, fd, dataMoved);
++                        }
++                        params->errorFound = FALSE;
++                        rankOffset = 0;
++                        continue; // Do nothing else if N-M; TODO: need to fix it later
++                }
++
++                // Wemul end
++
+                 /* use repetition count for number of multiple files */
+                 if (params->multiFile)
+                         params->repCounter = rep;
+@@ -2664,3 +2728,104 @@ WriteTimes(IOR_param_t * test, double **timer, int iteration, int writeOrRead)
+                         timerName);
+         }
+ }
++
++// Wemul start
++void RecursiveListFiles(const char* directory)
++{
++    DIR *input_direntry;
++    struct dirent *output_direntry;
++    input_direntry = opendir(directory);
++    if (input_direntry != NULL) {
++        while ((output_direntry = readdir(input_direntry)) != NULL) {
++                char filepath[MAX_STR + 1]; // extra character for the delimiter in extreme case
++                int DT_DIR = 4, DT_REG = 8;
++                if(output_direntry->d_type == DT_DIR
++                        && strcmp(output_direntry->d_name, "..") != 0
++                        && strcmp(output_direntry->d_name, "." ) != 0) {
++                        sprintf(filepath, "%s/%s", directory, output_direntry->d_name);
++                        RecursiveListFiles(filepath);
++                }
++                if (output_direntry->d_type == DT_REG) {
++                        sprintf(filepath, "%s/%s", directory, output_direntry->d_name);
++                        // printf("%s\n", filepath);
++                        char delimiter[2];
++                        sprintf(filepath, "%s%c", filepath, FILENAME_DELIMITER);
++                        // printf("%s\n", filepath);
++                        int filepath_len = strlen(filepath);
++
++                        if (file_count == 0) {
++                                filepaths_with_delimiter = (char *) malloc((filepath_len + 1) * sizeof(char *));
++                                strcpy(filepaths_with_delimiter, filepath);
++                        }
++                        if (file_count > 0) {
++                                filepaths_len = strlen(filepaths_with_delimiter) + filepath_len + 1;
++                                filepaths_with_delimiter = (char *) realloc(filepaths_with_delimiter, filepaths_len);
++                                strcat(filepaths_with_delimiter, filepath);
++                        }
++                        // printf("%s\n", filepaths_with_delimiter);
++
++                        file_count++;
++                        // filepath_list.push_back(directory + output_direntry->d_name);
++
++                }
++        }
++    }
++    closedir(input_direntry);
++}
++
++void ReadSpecificFile(char* testFileName, IOR_test_t *test,
++                        int rep,
++                        double** timer,
++                        void* fd,
++                        IOR_offset_t dataMoved)
++{
++        IOR_param_t* params = &test->params;
++        IOR_results_t* results = test->results;
++
++        int operation_flag = READ;
++
++        if (verbose >= VERBOSE_3) {
++                fprintf(stdout, "task %d reading %s\n", rank,
++                        testFileName);
++        }
++        DelaySecs(params->interTestDelay);
++        MPI_CHECK(MPI_Barrier(testComm), "barrier error");
++        params->open = READ;
++        timer[0][rep] = GetTimeStamp();
++        fd = backend->open(testFileName, params);
++        timer[1][rep] = GetTimeStamp();
++        if (params->intraTestBarriers)
++                MPI_CHECK(MPI_Barrier(testComm),
++                                "barrier error");
++        if (rank == 0 && verbose >= VERBOSE_1) {
++                fprintf(stdout,
++                        "Commencing read performance test: %s",
++                        CurrentTimeString());
++        }
++        timer[2][rep] = GetTimeStamp();
++        dataMoved = WriteOrRead(params, fd, operation_flag);
++        timer[3][rep] = GetTimeStamp();
++        if (params->intraTestBarriers)
++                MPI_CHECK(MPI_Barrier(testComm),
++                                "barrier error");
++        timer[4][rep] = GetTimeStamp();
++        backend->close(fd, params);
++        timer[5][rep] = GetTimeStamp();
++
++        /* get the size of the file just read */
++        results->aggFileSizeFromStat[rep] +=
++                backend->get_file_size(params, testComm,
++                                        testFileName);
++
++        /* check if stat() of file doesn't equal expected file size,
++                use actual amount of byte moved */
++        CheckFileSize(test, dataMoved, rep);
++
++        if (verbose >= VERBOSE_3)
++                WriteTimes(params, timer, rep, READ);
++        ReduceIterResults(test, timer, rep, READ);
++        if (params->outlierThreshold) {
++                CheckForOutliers(params, timer, rep, READ);
++        }
++}
++// Wemul end
+diff --git a/src/ior.h b/src/ior.h
+index 60ae944..4b44d62 100644
+--- a/src/ior.h
++++ b/src/ior.h
+@@ -128,6 +128,12 @@ typedef struct
+ 
+     int id;                          /* test's unique ID */
+     int intraTestBarriers;           /* barriers between open/op and op/close */
++
++    // Wemul start
++    int noFilePostfix;               /* avoid adding postfix in case of multiple files */
++    int filesPerProc;                /* multiple files per process */
++    char inputDir[PATH_MAX];         /* input directory to read files from */
++    // Wemul end
+ } IOR_param_t;
+ 
+ /* each pointer is to an array, each of length equal to the number of
+diff --git a/src/parse_options.c b/src/parse_options.c
+index 452bcdb..9510861 100644
+--- a/src/parse_options.c
++++ b/src/parse_options.c
+@@ -268,7 +268,19 @@ void DecodeDirective(char *line, IOR_param_t *params)
+ 		RecalculateExpectedFileSize(params);
+         } else if (strcasecmp(option, "summaryalways") == 0) {
+                 params->summary_every_test = atoi(value);
+-        } else {
++        } 
++        // Wemul start
++        else if (strcasecmp(option, "filesPerProc") == 0)
++        {
++                params->filesPerProc = TRUE;
++                params->noFilePostfix = TRUE;
++        }
++        else if (strcasecmp(option, "inputDir"))
++        {
++                strcpy(params->inputDir, value);
++        }
++        // Wemul end
++        else {
+                 if (rank == 0)
+                         fprintf(stdout, "Unrecognized parameter \"%s\"\n",
+                                 option);
+@@ -395,7 +407,7 @@ IOR_test_t *ReadConfigScript(char *scriptName)
+ IOR_test_t *ParseCommandLine(int argc, char **argv)
+ {
+         static const char *opts =
+-          "a:A:b:BcCd:D:eEf:FgG:hHi:Ij:J:kKlmM:nN:o:O:pPqQ:rRs:St:T:uU:vVwWxX:YzZ";
++          "a:A:b:BcCd:D:eEf:FgG:hHi:Ij:J:kKlmM:nN:o:O:pPqQ:rRs:St:T:uU:vVwWxX:YzZ:#:$";
+         int c, i;
+         static IOR_test_t *tests = NULL;
+ 
+@@ -564,6 +576,15 @@ IOR_test_t *ParseCommandLine(int argc, char **argv)
+                 case 'z':
+                         initialTestParams.randomOffset = TRUE;
+                         break;
++                // Wemul start
++                case '$':
++                        initialTestParams.filesPerProc = TRUE;
++                        initialTestParams.noFilePostfix = TRUE;
++                        break;
++                case '#':
++                        strcpy(initialTestParams.inputDir, optarg);
++                        break;
++                // Wemul end
+                 default:
+                         fprintf(stdout,
+                                 "ParseCommandLine: unknown option `-%c'.\n",

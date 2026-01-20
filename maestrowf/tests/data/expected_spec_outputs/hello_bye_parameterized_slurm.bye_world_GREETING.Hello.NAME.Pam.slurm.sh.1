@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --partition=pdebug
+#SBATCH --account=guests
+#SBATCH --time=00:60
+#SBATCH --job-name="bye_world_GREETING.Hello.NAME.Pam"
+#SBATCH --output="bye_world_GREETING.Hello.NAME.Pam.out"
+#SBATCH --error="bye_world_GREETING.Hello.NAME.Pam.err"
+#SBATCH --comment "Say bye to someone!"
+#SBATCH --ntasks=1
+
+srun -n 1 echo "Bye, World!" > bye.txt
+srun -n 1 sleep 1

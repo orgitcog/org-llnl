@@ -1,0 +1,30 @@
+import importlib.metadata
+from .current_version import current_version
+import os
+# import .sampling_methods  # noqa
+kosh_cache_dir = os.path.join(os.path.expanduser("~"), ".cache", "kosh")  # noqa
+from .loaders import KoshLoader, KoshSinaLoader  # noqa
+from .utils import create_new_db, walk_dictionary_keys, version  # noqa
+from .schema import KoshSchema  # noqa
+from .operators import KoshOperator  # noqa
+from .store import KoshStore, connect  # noqa
+from .dataset import KoshDataset  # noqa
+from .transformers import typed_transformer, numpy_transformer, typed_transformer_with_format  # noqa
+from .transformers import KoshTransformer  # noqa
+from .operators import KoshOperator  # noqa
+from .operators import typed_operator_with_kwargs, typed_operator, numpy_operator  # noqa
+from .kosh_command import KoshCmd  # noqa
+
+try:
+    metadata = importlib.metadata.metadata("kosh")
+    __version__ = metadata["Version"]
+    __sha__ = None
+    for meta in metadata:
+        if "Summary:" in meta:
+            __sha__ = meta.split("(sha: ")[-1][:-1]
+            break
+    if __sha__ is not None:
+        __version__ += "."+__sha__
+except Exception:
+    __version__ = current_version
+    __sha__ = None

@@ -1,0 +1,3 @@
+target_id, time_start, time_end, target_ra, target_dec, target_type
+123, 1234.5, 123455.5, 230.0, -555.3, 'AGN'
+124, 1234.5, 123455.5, 230.0, -555.3, 'SNe'

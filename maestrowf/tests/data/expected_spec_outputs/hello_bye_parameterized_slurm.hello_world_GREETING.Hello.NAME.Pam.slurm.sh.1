@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --partition=pdebug
+#SBATCH --account=guests
+#SBATCH --time=00:60
+#SBATCH --job-name="hello_world_GREETING.Hello.NAME.Pam"
+#SBATCH --output="hello_world_GREETING.Hello.NAME.Pam.out"
+#SBATCH --error="hello_world_GREETING.Hello.NAME.Pam.err"
+#SBATCH --comment "Say hello to someone!"
+#SBATCH --ntasks=1
+#SBATCH --exclusive
+
+srun -n 1 echo "Hello, Pam!" > Hello_Pam.txt
+srun -n 1 sleep 1
