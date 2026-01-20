@@ -1,0 +1,80 @@
+[tool]
+[tool.poetry]
+name = "llnl-ibis"
+version = "1.2.0"
+description = "A tool to facilitate uncertainity quantification and sensitivity methods."
+license = "BSD 3-Clause License"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers", "Intended Audience :: Education",
+    "Intended Audience :: Science/Research", "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Programming Language :: Python :: 3",
+]
+homepage = "https://github.com/llnl/ibis"
+documentation = "https://ibis.readthedocs.io/"
+authors = [
+    "Andrew Fillmore <fillmore1@llnl.gov>", "Andrew Fillmore",
+    "Renee Olson <olson59@llnl.gov>", "Renee Olson",
+]
+maintainers = [
+    "Renee Olson <olson59@llnl.gov>", "Renee Olson",
+]
+readme = "README.md"
+packages = [
+    {include = 'ibis', from = 'src'}
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+numpy = "*"
+scikit-learn = "*"
+scipy = "*"
+matplotlib = "*"
+networkx = "*"
+trata = "*"
+kosh = "*"
+
+[tool.poetry.dev-dependencies]
+sphinx_rtd_theme = "*"
+sphinx = "*"
+pytest = "*"
+networkx = "*"
+nbconvert = "*"
+sphinx-autoapi = "*"
+nbsphinx = "*"
+six = "*"
+
+
+[tool.poetry.plugins."console_scripts"]
+"ibis" = "ibis.ibis:__init__"
+
+[build-system]
+requires = ["poetry-core>=1.0.8", "wheel"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/LLNL/ibis/issues"
+"Discussions" = "https://github.com/LLNL/ibis/discussions"
+
+[tool.black]
+line-length = 79
+
+[tool.bumpver]
+current_version = "1.2.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = [
+    'current_version = "{version}"',
+]
+"README.md" = [
+    "{version}",
+    "{pep440_version}",
+]
+

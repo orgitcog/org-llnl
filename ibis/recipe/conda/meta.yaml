@@ -1,0 +1,46 @@
+{% set name = "ibis" %}
+{% set version = "1.0.0" %}
+
+package:
+    name: {{ name }}
+    version: {{ version }}
+
+source:
+    url: https://github.com/LLNL/IBIS/archive/v{{ version }}.tar.gz
+    sha256: 
+
+build:
+  number: 0
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  entry_points:
+    - ibis = ibis:init
+
+requirements:
+  host:
+    - python
+  run:
+    - python
+    - scikit-learn
+    - scipy
+    - numpy
+    - networkx
+
+test:
+  imports:
+    - trata
+    - themis
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+    home:  https://github.com/LLNL/IBIS
+    summary: 
+    license: BSD 3-Clause
+    license_file: LICENSE
+
+extra:
+  maintainers:
+     - eljurf1

@@ -1,0 +1,93 @@
+include:
+  - project: 'lc-templates/id_tokens'
+    file: 'id_tokens.yml'
+
+stages:
+  - create_env
+  - run_tests
+    
+.create_env:
+  script:
+    - make create_env
+
+.run_tests:
+  script:
+    - make run_tests
+
+.on_cz:
+  tags:
+    - shell
+    - dane
+    
+.on_rz:
+  tags:
+    - shell
+    - rzhound
+
+.on_scf:
+  tags:
+    - shell
+    - magma
+    
+.run_on_cz:
+  rules:
+    - if: '$SOURCE_ZONE == "CZ" && $CI_PIPELINE_SOURCE != "merge_request_event" && $CI_COMMIT_TAG == null'
+
+.run_on_rz:
+  rules:
+    - if: '$SOURCE_ZONE == "RZ" && $CI_PIPELINE_SOURCE != "merge_request_event" && $CI_COMMIT_TAG == null'
+
+.run_on_scf:
+  rules:
+    - if: '$SOURCE_ZONE == "SCF" && $CI_PIPELINE_SOURCE != "merge_request_event" && $CI_COMMIT_TAG == null'
+    
+    
+.tag_on_cz:
+  rules:
+    - if: '$SOURCE_ZONE == "CZ" && $CI_COMMIT_TAG =~ "/^ibis-[0-9]+.[0-9]+.[0-9]+$/"'
+
+.tag_on_rz:
+  rules:
+    - if: '$SOURCE_ZONE == "RZ" && $CI_COMMIT_TAG =~ "/^ibis-[0-9]+.[0-9]+.[0-9]+$/"'
+    
+.tag_on_scf:
+  rules:
+    - if: '$SOURCE_ZONE == "SCF" && $CI_COMMIT_TAG =~ "/^ibis-[0-9]+.[0-9]+.[0-9]+$/"'    
+
+
+#
+# CZ
+#
+    
+create_env_on_cz:
+  stage: create_env
+  extends: [ .on_cz, .run_on_cz, .create_env ]
+  
+run_tests_on_cz:
+  stage: run_tests
+  extends: [ .on_cz, .run_on_cz, .run_tests ]
+
+
+#
+# RZ
+#
+
+create_env_on_rz:
+  stage: create_env
+  extends: [ .on_rz, .run_on_rz, .create_env ]
+  
+run_tests_on_rz:
+  stage: run_tests
+  extends: [ .on_rz, .run_on_rz, .run_tests ]
+
+#
+# SCF
+#
+
+create_env_on_scf:
+  stage: create_env
+  extends: [ .on_scf, .run_on_scf, .create_env ]
+  
+run_tests_on_scf:
+  stage: run_tests
+  extends: [ .on_scf, .run_on_scf, .run_tests ]
