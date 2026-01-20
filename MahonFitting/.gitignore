@@ -1,0 +1,12 @@
+
+*.iml
+
+.idea/modules.xml
+
+.idea/vcs.xml
+
+.idea/workspace.xml
+
+*.spec
+
+testdata_out.txt

@@ -1,0 +1,32 @@
+{
+    "description" : "MacPatch SiteConfig for MPApi and MPConsole and other components.",
+    "settings" :
+    {
+        "services":
+        {
+            "console": false,
+            "wsapi": false
+        },
+        "paths":
+        {
+            "base":"/opt/MacPatch/Server",
+            "content":"/opt/MacPatch/Content/Web"
+        },
+        "server": {
+            "isMaster" : false,
+            "autoGenServerKeys": true,
+            "pubKey": "/opt/MacPatch/Server/conf/etc/certs/server_pub.pem",
+            "priKey": "/opt/MacPatch/Server/conf/etc/certs/server_pri.pem",
+            "inventory_dir": "/opt/MacPatch/Server/Data/Inventory",
+            "apiKey": "123456"
+        },
+        "users":
+        {
+            "admin": {
+                "enabled": true,
+                "name":"mpadmin",
+                "pass":"*mpadmin*"
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This function works with version numbers with up to 4 "."s and up to 4 digits in each
+# Example: 3.2000.3000.4000
+function version {
+	#the double "at sign" below is because MacPatch uses it as a delimiter
+	echo "$@@" | awk -F. '{ printf("%d%04d%04d%06d", $1,$2,$3,$4); }';
+}
+
+patch_version="#version#"
+
+if [[ -d "/Applications/VNC Viewer.app" ]]; then
+  logger -s "Found /Applications/VNC Viewer.app"
+  installed_version="$(/usr/bin/defaults read /Applications/VNC\ Viewer.app/Contents/Info.plist CFBundleVersion)"
+  if [ $(version $installed_version) -lt $(version $patch_version) ]; then
+    logger -s "RealVNC Viewer version is older, patch is needed"
+    exit 0
+  fi
+fi
+
+logger "RealVNC Viewer update not required."
+exit 1

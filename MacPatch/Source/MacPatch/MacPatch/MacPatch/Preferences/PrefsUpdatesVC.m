@@ -1,0 +1,319 @@
+//
+//  PrefsUpdatesVC.m
+/*
+Copyright (c) 2024, Lawrence Livermore National Security, LLC.
+Produced at the Lawrence Livermore National Laboratory (cf, DISCLAIMER).
+Written by Charles Heizer <heizer1 at llnl.gov>.
+LLNL-CODE-636469 All rights reserved.
+
+This file is part of MacPatch, a program for installing and patching
+software.
+
+MacPatch is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License (as published by the Free
+Software Foundation) version 2, dated June 1991.
+
+MacPatch is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the IMPLIED WARRANTY OF MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the terms and conditions of the GNU General Public
+License for more details.
+
+You should have received a copy of the GNU General Public License along
+with MacPatch; if not, write to the Free Software Foundation, Inc.,
+59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+*/
+
+#import "PrefsUpdatesVC.h"
+#import "MPauthrestartVC.h"
+
+@interface PrefsUpdatesVC ()
+
+@property (nonatomic, readwrite, retain) NSString *windowTitle;
+@property (nonatomic, weak) IBOutlet NSTextField *authState;
+
+// XPC Connection
+
+- (void)connectToHelperTool;
+- (void)connectAndExecuteCommandBlock:(void(^)(NSError *))commandBlock;
+
+@end
+
+@implementation PrefsUpdatesVC
+
+@synthesize scanOnLaunchCheckBox;
+@synthesize preStageRebootPatchesBox;
+@synthesize showAllPatchesBox;
+@synthesize allowInstallRebootPatchesCheckBox;
+@synthesize pausePatchingCheckBox;
+@synthesize authState;
+
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	self.windowTitle = @"Fool";
+	
+	[scanOnLaunchCheckBox setState:[self scanOnLaunch]];
+	[preStageRebootPatchesBox setState:[self preStageRebootPatches]];
+	[showAllPatchesBox setState:[self showAllPatches]];
+	[allowInstallRebootPatchesCheckBox setState:[self allowInstallRebootPatches]];
+	[pausePatchingCheckBox setState:[self pausePatching]];
+	[self checkAuthrestartState];
+	
+	[[NSNotificationCenter defaultCenter] addObserverForName:@"authStateNotify" object:nil queue:nil usingBlock:^(NSNotification *note)
+	{
+		//NSDictionary *userInfo = note.userInfo;
+		dispatch_async(dispatch_get_main_queue(), ^{
+			NSLog(@"authStateNotify");
+			[self checkAuthrestartState];
+		});
+	}];
+}
+
+- (void)viewDidAppear
+{
+    [self setAuthClearButtonState];
+}
+
+#pragma mark - RHPreferencesViewControllerProtocol
+
+-(NSString*)identifier
+{
+	return NSStringFromClass(self.class);
+}
+
+-(NSImage*)toolbarItemImage
+{
+	return [NSImage imageNamed:@"UpdatesTemplate"];
+}
+
+-(NSString*)toolbarItemLabel
+{
+	return NSLocalizedString(@"Updates", @"UpdatesToolbarItemLabel");
+}
+
+-(NSView*)initialKeyView
+{
+	//return self.usernameTextField;
+	return self.view;
+}
+
+- (IBAction)changeScanOnLaunch:(id)sender
+{
+	int state = (int)[scanOnLaunchCheckBox state];
+	qlinfo(@"Scan on launch state changed %d",state);
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	[d setBool:state forKey:@"enableScanOnLaunch"];
+	[d synchronize];
+}
+
+- (IBAction)changeShowAllPatches:(id)sender
+{
+	int state = (int)[showAllPatchesBox state];
+	qlinfo(@"Show all patches state changed %d",state);
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	[d setBool:state forKey:@"showAllPatches"];
+	[d synchronize];
+}
+
+- (IBAction)changePreStageRebootPatches:(id)sender
+{
+	int state = (int)[preStageRebootPatchesBox state];
+	qlinfo(@"Pre stage reboot patches state changed %d",state);
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	[d setBool:state forKey:@"preStageRebootPatches"];
+	[d synchronize];
+}
+
+- (IBAction)changeAllowInstallOfRebootPatches:(id)sender
+{
+	int state = (int)[allowInstallRebootPatchesCheckBox state];
+	qlinfo(@"Allow Reboot Patch Installs state changed %d",state);
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	[d setBool:state forKey:@"allowRebootPatchInstalls"];
+	[d synchronize];
+}
+
+- (IBAction)changePausePatching:(id)sender
+{
+	int state = (int)[pausePatchingCheckBox state];
+	qlinfo(@"Pause patching state changed %d",state);
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	[d setBool:state forKey:@"pausePatching"];
+	[d synchronize];
+	
+	MPPatchingPausedState _state = kPatchingPausedOff;
+	if (state == 1) _state = kPatchingPausedOn;
+
+	[self connectAndExecuteCommandBlock:^(NSError * connectError) {
+		if (connectError != nil) {
+			qlerror(@"workerConnection[connectError]: %@",connectError.localizedDescription);
+		} else {
+			
+			[[self.workerConnection remoteObjectProxyWithErrorHandler:^(NSError * proxyError) {
+				qlerror(@"%@",proxyError);
+			}] setStateOnPausePatching:_state withReply:^(BOOL result) {
+				
+				if (result) {
+					qlinfo(@"Patching paused state was written sucessfully.");
+				} else {
+					qlerror(@"Patching paused state was not written sucessfully.");
+				}
+			}];
+			
+		}
+	}];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"PatchingStateChangedNotification" object:self];
+}
+
+- (BOOL)scanOnLaunch
+{
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	return [d boolForKey:@"enableScanOnLaunch"];
+}
+
+- (BOOL)preStageRebootPatches
+{
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	return [d boolForKey:@"preStageRebootPatches"];
+}
+
+- (BOOL)showAllPatches
+{
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	return [d boolForKey:@"showAllPatches"];
+}
+
+- (BOOL)debugLogging
+{
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	return [d boolForKey:@"enableDebugLogging"];
+}
+
+- (BOOL)allowInstallRebootPatches
+{
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	return [d boolForKey:@"allowRebootPatchInstalls"];
+}
+
+- (BOOL)pausePatching
+{
+	NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+	return [d boolForKey:@"pausePatching"];
+}
+
+// Run the Auth restart setup to save the user creds
+- (IBAction)setupAuthrestart:(id)sender
+{
+	NSDictionary *authPlist = [NSDictionary dictionaryWithContentsOfFile:MP_AUTHSTATUS_FILE];
+	if ([authPlist[@"enabled"] boolValue]) {
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setMessageText:@"MacPatch Authrestart Setup"];
+		[alert setInformativeText:@"There is an account already setup. If you want to change the account or reset the password, you must clear it first."];
+		[alert addButtonWithTitle:@"OK"];
+		[alert setAlertStyle:NSAlertStyleCritical];
+		[alert runModal];
+		return;
+	}
+	
+	MPauthrestartVC *authVC = [MPauthrestartVC new];
+	authVC.title = @"";
+	[self presentViewControllerAsModalWindow:authVC];
+}
+
+- (void)setAuthClearButtonState
+{
+    NSDictionary *authPlist = [NSDictionary dictionaryWithContentsOfFile:MP_AUTHSTATUS_FILE];
+    if ([authPlist[@"enabled"] boolValue]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self->_authRestartSetupButton.enabled = NO;
+            self->_authRestartClearButton.enabled = YES;
+        });
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self->_authRestartSetupButton.enabled = YES;
+            self->_authRestartClearButton.enabled = NO;
+        });
+    }
+    
+}
+
+// Will show a message if creds are setup and being used
+- (void)checkAuthrestartState
+{
+	NSString *authString = @"";
+	NSDictionary *authPlist = [NSDictionary dictionaryWithContentsOfFile:MP_AUTHSTATUS_FILE];
+	if ([authPlist[@"enabled"] boolValue]) {
+		authString = [NSString stringWithFormat:@"%@ is used to bypass filevault for patching.",authPlist[@"user"]];
+	}
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self->authState setStringValue:authString];
+	});
+    
+    [self setAuthClearButtonState];
+}
+
+// Clear the creds for auth restart
+- (IBAction)clearAuthrestart:(id)sender
+{
+	NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert setMessageText:@"Clear FileVault Authrestart"];
+    [alert setInformativeText:@"Are you sure you want to clear the authrestart data?"];
+    if([alert runModal] == NSAlertFirstButtonReturn) {
+		MPauthrestartVC *authVC = [MPauthrestartVC new];
+		[authVC clearAuthStatus];
+		[self checkAuthrestartState];
+    }
+}
+
+
+#pragma mark - Helper
+
+- (void)connectToHelperTool
+// Ensures that we're connected to our helper tool.
+{
+	//assert([NSThread isMainThread]);
+	if (self.workerConnection == nil) {
+		self.workerConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperServiceName options:NSXPCConnectionPrivileged];
+		self.workerConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(MPHelperProtocol)];
+		
+		// Register Progress Messeges From Helper
+		self.workerConnection.exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(MPHelperProgress)];
+		self.workerConnection.exportedObject = self;
+		
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+		// We can ignore the retain cycle warning because a) the retain taken by the
+		// invalidation handler block is released by us setting it to nil when the block
+		// actually runs, and b) the retain taken by the block passed to -addOperationWithBlock:
+		// will be released when that operation completes and the operation itself is deallocated
+		// (notably self does not have a reference to the NSBlockOperation).
+		self.workerConnection.invalidationHandler = ^{
+			// If the connection gets invalidated then, on the main thread, nil out our
+			// reference to it.  This ensures that we attempt to rebuild it the next time around.
+			self.workerConnection.invalidationHandler = nil;
+			[[NSOperationQueue mainQueue] addOperationWithBlock:^{
+				self.workerConnection = nil;
+				qlerror(@"connection invalidated");
+			}];
+		};
+#pragma clang diagnostic pop
+		[self.workerConnection resume];
+	}
+}
+
+- (void)connectAndExecuteCommandBlock:(void(^)(NSError *))commandBlock
+// Connects to the helper tool and then executes the supplied command block on the
+// main thread, passing it an error indicating if the connection was successful.
+{
+	//assert([NSThread isMainThread]);
+	
+	// Ensure that there's a helper tool connection in place.
+	self.workerConnection = nil;
+	[self connectToHelperTool];
+	
+	commandBlock(nil);
+}
+@end
