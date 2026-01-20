@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Installation &#8212; Fudge and GNDS 6.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="shortcut icon" href="_static/gnd-20121206-favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sub-packages" href="sub-packages.html" />
+    <link rel="prev" title="Downloading" href="downloading.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sub-packages.html" title="Sub-packages"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="downloading.html" title="Downloading"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Fudge and GNDS 6.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Installation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="installation">
+<span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
+<p>The basic use of the FUDGE package requires the following:</p>
+<ul class="simple">
+<li><p>Git</p></li>
+<li><p>Python (versions 3.7 or higher) general-purpose programming language (with the numpy package included)</p></li>
+<li><p>C and C++ compilers for the translation of the compute-intensive modules.</p></li>
+</ul>
+<p>While there are numerous options available for the installation of FUDGE, only the following are currently supported:</p>
+<ul class="simple">
+<li><p>Installation via <cite>pip install</cite> in a virtual environment or normal computing environmet that has the necessary installation privileges. This requires the following steps:</p></li>
+</ul>
+<ol class="lowerroman simple">
+<li><p>Ensure that NumPy (version 1.15 or higher) and wheels are installed in your Python environment</p></li>
+<li><p>Run the command</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">ssh</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="nd">@czgitlab</span><span class="o">.</span><span class="n">llnl</span><span class="o">.</span><span class="n">gov</span><span class="p">:</span><span class="mi">7999</span><span class="o">/</span><span class="n">nuclear</span><span class="o">/</span><span class="n">fudge</span><span class="o">/</span><span class="n">fudge</span><span class="o">.</span><span class="n">git</span><span class="nd">@fudge6</span><span class="mf">.1.0</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li><p>Installation via Makefiles which is our typical development mode for active FUDGE code maintenance and improvements. The following steps are recommended:</p></li>
+</ul>
+<ol class="lowerroman simple">
+<li><p>Ensure that NumPy (version 1.15 or higher) is installed</p></li>
+<li><p>Use the following command to clone FUDGE to the current folder:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recurse</span><span class="o">-</span><span class="n">submodules</span> <span class="n">ssh</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="nd">@czgitlab</span><span class="o">.</span><span class="n">llnl</span><span class="o">.</span><span class="n">gov</span><span class="p">:</span><span class="mi">7999</span><span class="o">/</span><span class="n">nuclear</span><span class="o">/</span><span class="n">fudge</span><span class="o">/</span><span class="n">fudge</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="lowerroman simple" start="3">
+<li><p>Build FUDGE with the following command:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">fudge</span><span class="p">;</span> <span class="n">make</span> <span class="o">-</span><span class="n">s</span>
+</pre></div>
+</div>
+</div></blockquote>
+<section id="optional-extra-python-packages">
+<h2>[Optional] Extra python packages<a class="headerlink" href="#optional-extra-python-packages" title="Permalink to this heading">¶</a></h2>
+<p>For more advanced use, Fudge depends on these additional packages:</p>
+<ul class="simple">
+<li><p>matplotlib for general plotting.</p></li>
+<li><p>PyQt5 and Qt v5 for interactive plotting. The underlying plotting is still done with matplotlib with the Qt toolkit and bindings providing the graphical
+user interface to interact and modify some of the common matplotlib plot options.</p></li>
+<li><p>scipy and h5py are required for more advance usage including procssing data libraries.</p></li>
+</ul>
+</section>
+<section id="optional-setting-environment-variables-not-required-after-installing-with-pip">
+<h2>[Optional] Setting Environment Variables (not required after installing with pip)<a class="headerlink" href="#optional-setting-environment-variables-not-required-after-installing-with-pip" title="Permalink to this heading">¶</a></h2>
+<p>For general use of the fudge package, some changes should be made to your computer’s environment. The following lines make the required change.
+Note that &lt;path_to_fudge&gt; indicates the path to root FUDGE folder:</p>
+<ul>
+<li><p>On unix with bash, ksh, etc, put this line in the .bashrc or equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PYTHONPATH=$PYTHONPATH:&lt;path_to_fudge&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>On csh, tcsh or similar, do:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>setenv PYTHONPATH $PYTHONPATH:&lt;path_to_fudge&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>On Windows, the environment variable should be added to the registry (see for example <a class="reference external" href="http://www.support.tabs3.com/main/R10463.htm">http://www.support.tabs3.com/main/R10463.htm</a>)</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">¶</a></h2>
+<p>Users on OS X may have trouble compiling Merced (the C++ code responsible for generating transfer matrices
+for deterministic transport). Merced uses OpenMP threading, which is currently not supported by the default
+clang compiler on OS X.
+This problem is associated with an error message like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">error</span><span class="p">:</span> <span class="n">unsupported</span> <span class="n">option</span> <span class="s1">&#39;-fopenmp&#39;</span>
+</pre></div>
+</div>
+<p>You may safely ignore this error message unless you wish to use the deterministic processing capabilities in Fudge.
+If you encounter this error and do need to use Merced, you will need to install a compiler with OpenMP support,
+then specify which compiler to use when building Merced.</p>
+<p>For example, the g++-mp-4.9 compiler (available from Macports) supports openmp</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">port</span> <span class="n">install</span> <span class="n">gcc</span><span class="o">-</span><span class="mi">9</span>
+<span class="c1"># then</span>
+<span class="n">make</span> <span class="n">merced</span> <span class="n">CXX</span><span class="o">=</span><span class="n">g</span><span class="o">++-</span><span class="n">mp</span><span class="o">-</span><span class="mf">4.9</span>
+</pre></div>
+</div>
+<p>Windows users may also have trouble with installing Merced. The solution here appears to be to install
+VisualStudio, and specify the ‘CL’ compiler while building Merced:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">merced</span> <span class="n">CXX</span><span class="o">=</span><span class="n">CL</span>
+</pre></div>
+</div>
+<p>If you encounter other trouble with installing, building extensions or setting environment
+variables, please let us know (email: <a class="reference external" href="mailto:mattoon1&#37;&#52;&#48;llnl&#46;gov">mattoon1<span>&#64;</span>llnl<span>&#46;</span>gov</a>).</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/gnd.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#optional-extra-python-packages">[Optional] Extra python packages</a></li>
+<li><a class="reference internal" href="#optional-setting-environment-variables-not-required-after-installing-with-pip">[Optional] Setting Environment Variables (not required after installing with pip)</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="downloading.html"
+                          title="previous chapter">Downloading</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="sub-packages.html"
+                          title="next chapter">Sub-packages</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sub-packages.html" title="Sub-packages"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="downloading.html" title="Downloading"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Fudge and GNDS 6.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Installation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012, B.Beck, D. Brown, C. Mattoon, N. Patel, N. Summers.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>

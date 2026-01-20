@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LUPY.argumentsForScripts &#8212; Fudge and GNDS 6.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="shortcut icon" href="../../_static/gnd-20121206-favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Fudge and GNDS 6.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">LUPY.argumentsForScripts</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for LUPY.argumentsForScripts</h1><div class="highlight"><pre>
+<span></span><span class="c1"># &lt;&lt;BEGIN-copyright&gt;&gt;</span>
+<span class="c1"># &lt;&lt;END-copyright&gt;&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains functions and/or classes that are used by some of the FUDGE scripts.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+
+<span class="kn">from</span> <span class="nn">PoPs</span> <span class="kn">import</span> <span class="n">IDs</span> <span class="k">as</span> <span class="n">IDsModule</span>
+
+<span class="kn">from</span> <span class="nn">fudge</span> <span class="kn">import</span> <span class="n">enums</span> <span class="k">as</span> <span class="n">enumsModule</span>
+<span class="kn">from</span> <span class="nn">fudge</span> <span class="kn">import</span> <span class="nb">map</span> <span class="k">as</span> <span class="n">mapModule</span>
+<span class="kn">from</span> <span class="nn">fudge</span> <span class="kn">import</span> <span class="n">GNDS_file</span> <span class="k">as</span> <span class="n">GNDS_fileModule</span>
+<span class="kn">from</span> <span class="nn">fudge</span> <span class="kn">import</span> <span class="n">reactionSuite</span> <span class="k">as</span> <span class="n">reactionSuiteModule</span>
+
+<div class="viewcode-block" id="SingleProtareArguments"><a class="viewcode-back" href="../../LUPY/index.html#LUPY.argumentsForScripts.SingleProtareArguments">[docs]</a><span class="k">class</span> <span class="nc">SingleProtareArguments</span> <span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class adds a positional argument and two option arguments to an :py:class:`argparse.ArgumentParser` instance </span>
+<span class="sd">    to give a common way to specify GNDS protare file to load as need by some of the FUDGE scripts.</span>
+<span class="sd">    The positional argument can be a GNDS protare (i.e., reactionSuite) or map file path.</span>
+<span class="sd">    If the positional argument is a map file path, then the optional argument &quot;--pid&quot; (&quot;--tid&quot;) is used to specified</span>
+<span class="sd">    the projectile (target) of the protare using a GNDS id.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">parser</span> <span class="p">)</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param parser:      An :py:class:`argparse.ArgumentParser` instance which will be updated with </span>
+<span class="sd">                            parameters for accessing a profile from a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__parser</span> <span class="o">=</span> <span class="n">parser</span>
+
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s1">&#39;mapOrProtareFileName&#39;</span><span class="p">,</span>                                    <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;The path to a map or protare file. If it is a map file then option &quot;--tid&quot; (and maybe &quot;--pid&quot;) is required.&#39;</span> <span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s1">&#39;--pid&#39;</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">IDsModule</span><span class="o">.</span><span class="n">neutron</span><span class="p">,</span>    <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;The PoPs id for the projectile. Only used if the argument &quot;mapOrProtareFileName&quot; is a map file; otherwise, it is ignored. Default is &quot;</span><span class="si">%s</span><span class="s1">&quot;.&#39;</span> <span class="o">%</span> <span class="n">IDsModule</span><span class="o">.</span><span class="n">neutron</span> <span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s1">&#39;--tid&#39;</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>                 <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;The PoPs id for the target. Required if the argument &quot;mapOrProtareFileName&quot; is a map file; otherwise, it is ignored.&#39;</span> <span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s1">&#39;--noLazyParse&#39;</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="s1">&#39;store_true&#39;</span><span class="p">,</span>                    <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;Disable lazy parsing (increases load time but sometimes useful).&#39;</span> <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="SingleProtareArguments.protare"><a class="viewcode-back" href="../../LUPY/index.html#LUPY.argumentsForScripts.SingleProtareArguments.protare">[docs]</a>    <span class="k">def</span> <span class="nf">protare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lazyParsing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a protare (i.e., reactionSuite) instance that has been loaded per the &quot;mapOrProtareFileName&quot;, &quot;--pid&quot; and &quot;--tid&quot; arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lazyParsing</span> <span class="o">=</span> <span class="n">lazyParsing</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">noLazyParse</span>
+
+        <span class="n">mapOrProtare</span> <span class="o">=</span> <span class="n">GNDS_fileModule</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">mapOrProtareFileName</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="n">verbosity</span><span class="p">,</span> <span class="n">lazyParsing</span><span class="o">=</span><span class="n">lazyParsing</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapOrProtare</span><span class="p">,</span> <span class="n">reactionSuiteModule</span><span class="o">.</span><span class="n">ReactionSuite</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">mapOrProtareFileName</span>
+            <span class="k">return</span> <span class="n">mapOrProtare</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapOrProtare</span><span class="p">,</span> <span class="n">mapModule</span><span class="o">.</span><span class="n">Map</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">tid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;--tid option required for the map file.&#39;</span><span class="p">)</span>
+            <span class="n">mapProtare</span> <span class="o">=</span> <span class="n">mapOrProtare</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">tid</span> <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">mapOrProtare</span><span class="o">.</span><span class="n">path</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">mapProtare</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">mapOrProtareFileName</span><span class="p">),</span> <span class="n">mapProtare</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mapProtare</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;No match in map file for pid = &quot;</span><span class="si">%s</span><span class="s1">&quot; and tid = &quot;</span><span class="si">%s</span><span class="s1">&quot;.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">tid</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">mapProtare</span><span class="o">.</span><span class="n">protare</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="n">verbosity</span><span class="p">,</span> <span class="n">lazyParsing</span><span class="o">=</span><span class="n">lazyParsing</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;File &quot;</span><span class="si">%s</span><span class="s1">&quot; is not a map or protare file.&#39;</span> <span class="o">%</span> <span class="n">mapOrProtare</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="mapFromMapOrProtarePath"><a class="viewcode-back" href="../../LUPY/index.html#LUPY.argumentsForScripts.mapFromMapOrProtarePath">[docs]</a><span class="k">def</span> <span class="nf">mapFromMapOrProtarePath</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function takes as an argument a path that must point to a map file or a protare file or a list of protare file, and returns a :py:class:`mapModule.Map` instance.</span>
+
+<span class="sd">        -) if path is a map file, it reads in the map file and returns the :py:class:`mapModule.Map` instance, or</span>
+<span class="sd">        -) if path is a protare file, creates a map file, adds the protare to it and returns the :py:class:`mapModule.Map` instance.</span>
+<span class="sd">        -) if path is a list of paths to protare files, creates a map file, adds the protares to it and returns the :py:class:`mapModule.Map` instance.</span>
+
+<span class="sd">    This function was written to aid in writing scripts that need to either loop over a map file and perform an action on each</span>
+<span class="sd">    protare in the map file, or read in a protare and perform the same action on it.</span>
+
+<span class="sd">    :param path:            Path to map or protare file, or a list of paths to protare files.</span>
+
+<span class="sd">    :return:                A :py:class:`mapModule.Map` instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>               <span class="c1"># Support path being list with one map file (i.e., [&#39;/path/to/map/file&#39;]).</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">GNDS_fileModule</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">reactionSuiteModule</span><span class="o">.</span><span class="n">ReactionSuite</span><span class="o">.</span><span class="n">moniker</span><span class="p">:</span>
+            <span class="n">map1</span> <span class="o">=</span> <span class="n">mapModule</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="s1">&#39;Dummy&#39;</span><span class="p">,</span> <span class="s1">&#39;dummy.map&#39;</span><span class="p">)</span>
+            <span class="n">interaction</span> <span class="o">=</span> <span class="n">enumsModule</span><span class="o">.</span><span class="n">Interaction</span><span class="o">.</span><span class="n">fromString</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;interaction&#39;</span><span class="p">])</span>
+            <span class="n">map1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mapModule</span><span class="o">.</span><span class="n">Protare</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;projectile&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">],</span> <span class="n">path</span><span class="p">,</span> <span class="n">interaction</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">map1</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="n">mapModule</span><span class="o">.</span><span class="n">Map</span><span class="o">.</span><span class="n">moniker</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mapModule</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;File &quot;</span><span class="si">%s</span><span class="s1">&quot; is not a map or protare file.&#39;</span> <span class="o">%</span> <span class="n">mapOrProtare</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>                               <span class="c1"># Must be a list of protare files.</span>
+        <span class="n">map1</span> <span class="o">=</span> <span class="n">mapModule</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="s1">&#39;Dummy&#39;</span><span class="p">,</span> <span class="s1">&#39;dummy.map&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">GNDS_fileModule</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">reactionSuiteModule</span><span class="o">.</span><span class="n">ReactionSuite</span><span class="o">.</span><span class="n">moniker</span><span class="p">:</span>
+                <span class="n">interaction</span> <span class="o">=</span> <span class="n">enumsModule</span><span class="o">.</span><span class="n">Interaction</span><span class="o">.</span><span class="n">fromString</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;interaction&#39;</span><span class="p">])</span>
+                <span class="n">map1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mapModule</span><span class="o">.</span><span class="n">Protare</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;projectile&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">],</span> <span class="n">file</span><span class="p">,</span> <span class="n">interaction</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Path is not a protare (i.e., reactionSuite) file: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">file</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">map1</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/gnd.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Fudge and GNDS 6.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">LUPY.argumentsForScripts</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012, B.Beck, D. Brown, C. Mattoon, N. Patel, N. Summers.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>
