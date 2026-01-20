@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dompurify": ">=2.5.4",
+    "mermaid": ">=10.9.3"
+  }
+}

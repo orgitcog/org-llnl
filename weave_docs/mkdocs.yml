@@ -1,0 +1,104 @@
+site_name: Workflow Enablement and AdVanced Environments (WEAVE)
+
+use_directory_urls: false
+site_dir: weave
+
+nav:
+  - General:
+    - Overview: index.md
+    - Tools: tools.md
+    # LLNL Specific
+  - Tutorials:
+    # Public Tutorials
+    - Public:
+      - A Typical Workflow: diagram.md
+      - Ball Bounce:
+        - Simple Simulation: tutorials/Public/bouncing_ball/README.md
+      - Ball Bounce VVUQ:
+        - Baseline: tutorials/Public/bouncing_ball_vvuq/1_baseline_simulation.md
+        - Uncertainty bounds: tutorials/Public/bouncing_ball_vvuq/2_uncertainty_bounds.md
+        - Simulation: tutorials/Public/bouncing_ball_vvuq/3_simulation_ensembles.md
+        - Data Management: tutorials/Public/bouncing_ball_vvuq/4_manage_data.md
+        - Post-Processing: tutorials/Public/bouncing_ball_vvuq/5_post-process_data.md
+        - Surrogate Model: tutorials/Public/bouncing_ball_vvuq/6_surrogate_model.md
+      - Ball Bounce LSTM RNN:
+        - LSTM RNN: tutorials/Public/bouncing_ball_lstm/README.md
+      - Ball Bounce Transformer:
+        - Transformer: tutorials/Public/bouncing_ball_transformer/README.md
+      - Ball Bounce Metadata Machine Learning:
+        - Metadata Machine Learning: tutorials/Public/bouncing_ball_metadata_machine_learning/README.md
+      - Rayleigh-Taylor UQ Study:
+        - Rayleigh Taylor Modeling using pyranda: tutorials/Public/pyranda_rayleigh_taylor/README.md
+      - Digit Classification Machine Learning:
+        - Digit Classification Machine Learning: tutorials/Public/digit_classification/README.md
+    # CZ Tutorials
+    # RZ Tutorials
+    # SCF Tutorials
+  - Communication:
+    - Newsletters:
+      - March 2025: communications/newsletters/WEAVE_Newsletter_002.pdf
+      - October 2024: communications/newsletters/WEAVE_Newsletter_001.pdf
+
+theme:
+  name: readthedocs
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - toc.integrate
+  palette:
+    - scheme: slate
+      primary: black
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+
+  # Admonition Support (notes, warnings, etc.)
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+  # Code Specific Color Highlights
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+  # LaTeX
+  - pymdownx.arithmatex:
+      generic: true
+
+  # Mermaid Diagrams
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+
+
+extra_javascript:
+  # LaTeX
+  - javascripts/mathjax/es5/tex-chtml.js
+
+  # Mermaid Diagrams
+  - javascripts/mermaid_diagrams/node_modules/mermaid/dist/mermaid.min.js
+
+  # Additional Custom JavaScript
+  - javascripts/custom_js/custom.js
+  - javascripts/clipboard/dist/clipboard.min.js
+
+extra_css:
+  # Additional Custom CSS
+  - css/custom_css/custom.css
