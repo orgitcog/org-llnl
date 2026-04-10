@@ -11,6 +11,9 @@ on:
       - '*/*/package.json'
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   update-index:
     name: Update Index Files

@@ -16,6 +16,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   # Validate repository structure and index files
   validate-structure:
@@ -139,7 +142,7 @@ jobs:
       - name: Find CMake projects
         id: find-cmake
         run: |
-          projects=$(find ${{ matrix.domain }} -maxdepth 2 -name "CMakeLists.txt" -exec dirname {} \; | head -${{ matrix.projects }})
+          projects=$(find "${{ matrix.domain }}" -maxdepth 2 -name "CMakeLists.txt" | sed 's#/CMakeLists.txt$##' | head -n "${{ matrix.projects }}")
           echo "projects<<EOF" >> $GITHUB_OUTPUT
           echo "$projects" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -147,10 +150,12 @@ jobs:
       - name: Configure CMake projects
         continue-on-error: true
         run: |
-          for project in ${{ steps.find-cmake.outputs.projects }}; do
+          projects='${{ steps.find-cmake.outputs.projects }}'
+          for project in $projects; do
             echo "=== Configuring $project ==="
             mkdir -p "$project/build" && cd "$project/build"
-            cmake .. -DCMAKE_BUILD_TYPE=Release 2>&1 | head -50 || true
+            cmake .. -DCMAKE_BUILD_TYPE=Release > cmake_configure.log 2>&1 || true
+            sed -n '1,50p' cmake_configure.log
             cd - > /dev/null
           done
 
