@@ -318,6 +318,14 @@ deps/
 06-devtools/playwright-crx-ai/playwright/
 06-devtools/playwright-tracegen/
 
+# Benchmark directories
+**/benchmarks/
+**/benchmark/
+
+# Sample/example data
+**/examples/data/
+**/samples/
+
 # -----------------------------------------------------------------------------
 # DOCUMENTATION BUILD OUTPUTS (Comprehensive)
 # -----------------------------------------------------------------------------
