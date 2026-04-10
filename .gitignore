@@ -128,8 +128,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+/lib/
+/lib64/
 parts/
 sdist/
 var/
@@ -337,9 +337,9 @@ public/
 resources/_gen/
 
 # Doxygen
-html/
-latex/
-xml/
+/html/
+/latex/
+/xml/
 doxygen_output/
 
 # -----------------------------------------------------------------------------
