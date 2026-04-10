@@ -272,9 +272,9 @@ Gemfile.lock
 Cargo.lock
 
 # Downloaded installer scripts
-get-pip.py
-install.sh
-bootstrap.sh
+/get-pip.py
+/install.sh
+/bootstrap.sh
 
 # Vendored dependencies
 vendor/
