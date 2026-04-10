@@ -318,34 +318,6 @@ deps/
 06-devtools/playwright-crx-ai/playwright/
 06-devtools/playwright-tracegen/
 
-# -----------------------------------------------------------------------------
-# TEST DIRECTORIES (All test files - 115K+ files)
-# -----------------------------------------------------------------------------
-
-# Ignore all test directories across the repo
-**/test/
-**/tests/
-**/testing/
-**/testdata/
-**/test_data/
-**/__tests__/
-**/__test__/
-**/spec/
-**/specs/
-**/__fixtures__/
-**/fixtures/
-
-# Test-related files
-**/*_test.py
-**/*_test.go
-**/*_test.js
-**/*_test.ts
-**/*.test.py
-**/*.test.js
-**/*.test.ts
-**/*.spec.js
-**/*.spec.ts
-
 # Benchmark directories
 **/benchmarks/
 **/benchmark/
